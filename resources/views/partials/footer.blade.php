@@ -53,8 +53,8 @@
                 <ul class="list-unstyled footer-links">
                     <li><a href="{{ route('register') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Create Account</a></li>
                     <li><a href="{{ route('login') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Login</a></li>
-                    <li><a href="#"><i class="bi bi-chevron-right me-2 text-warning"></i>Help Center</a></li>
-                    <li><a href="#"><i class="bi bi-chevron-right me-2 text-warning"></i>FAQs</a></li>
+                    <li><a href="{{ route('support.help') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Help Center</a></li>
+                    <li><a href="{{ route('support.faqs') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>FAQs</a></li>
                 </ul>
             </div>
 
