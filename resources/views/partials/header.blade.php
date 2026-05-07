@@ -1,14 +1,31 @@
 <!-- Top Bar -->
-<div class="top-bar bg-primary text-white py-2 shadow-sm">
+<div class="top-bar py-2 shadow-sm border-bottom">
     <div class="container d-flex justify-content-between align-items-center">
-        <div class="top-info d-flex gap-4 small">
-            <span><i class="bi bi-envelope-fill me-2"></i> info@bimacoinsurance.co.tz</span>
-            <span><i class="bi bi-telephone-fill me-2"></i> +255 746 179 849</span>
+        <div class="top-info d-flex gap-4">
+            <a href="mailto:info@bimacoinsurance.co.tz" class="text-white text-decoration-none d-flex align-items-center hover-opacity">
+                <i class="bi bi-envelope-fill me-2 text-warning"></i> 
+                <span class="d-none d-sm-inline">info@bimacoinsurance.co.tz</span>
+            </a>
+            <a href="tel:+255746179849" class="text-white text-decoration-none d-flex align-items-center hover-opacity">
+                <i class="bi bi-telephone-fill me-2 text-warning"></i> 
+                <span>+255 746 179 849</span>
+            </a>
         </div>
-        <div class="top-links d-flex align-items-center gap-3 small">
-            <a href="#" class="text-white text-decoration-none border-end pe-3">Swahili</a>
-            <a href="#" class="text-white text-decoration-none">FAQs</a>
-            <a href="#" class="btn btn-dark btn-sm ms-2 px-3 rounded-1 fw-bold" style="background-color: #2b0a3d; border: none;">Request Quote</a>
+        <div class="top-links d-flex align-items-center gap-3">
+            <div class="dropdown">
+                <a href="#" class="text-white text-decoration-none dropdown-toggle small d-flex align-items-center" data-bs-toggle="dropdown">
+                    <i class="bi bi-globe2 me-1"></i> English
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                    <li><a class="dropdown-item small" href="#">Swahili</a></li>
+                    <li><a class="dropdown-item small active" href="#">English</a></li>
+                </ul>
+            </div>
+            <span class="text-white-50">|</span>
+            <a href="#" class="text-white text-decoration-none small hover-underline">FAQs</a>
+            <a href="#" class="btn btn-warning btn-sm ms-2 px-3 rounded-pill fw-bold text-dark shadow-sm">
+                <i class="bi bi-file-earmark-text me-1"></i> Request Quote
+            </a>
         </div>
     </div>
 </div>
