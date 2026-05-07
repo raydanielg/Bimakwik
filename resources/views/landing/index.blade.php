@@ -227,7 +227,8 @@
 <section class="py-5 bg-primary text-white position-relative overflow-hidden why-comparison">
     <div class="container py-5 z-index-1">
         <div class="text-center mb-5 animate__animated animate__fadeIn">
-            <h2 class="display-5 fw-bold mb-3">Why Bimakwik</h2>
+            <h2 class="display-5 fw-bold mb-3">Why BimaKwik</h2>
+            <p class="text-white-50 mx-auto" style="max-width: 600px;">Compare our digital-first approach with traditional insurance experiences.</p>
         </div>
 
         <div class="row justify-content-center">
@@ -236,54 +237,63 @@
                     <table class="table table-borderless text-white comparison-table align-middle">
                         <thead>
                             <tr class="border-bottom border-white border-opacity-10">
-                                <th class="py-4" style="width: 20%;"></th>
-                                <th class="py-4 text-center" style="width: 60%;"></th>
+                                <th class="py-4 h4 fw-bold text-warning" style="width: 20%;">Feature</th>
+                                <th class="py-4 text-center h4 fw-bold" style="width: 60%;">Our Digital Advantage</th>
                                 <th class="py-4 text-center text-white-50 fw-normal small" style="width: 20%;">Other Companies</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Trusted Row -->
                             <tr class="border-bottom border-white border-opacity-10">
-                                <td class="py-5 fw-bold h5">Trusted</td>
-                                <td class="py-5 text-center px-4">
-                                    <p class="mb-0 small opacity-75">Recorded Lines - No Misselling - Know your Advisor, Insurance Digital Platform (IDP’s) Approved.</p>
+                                <td class="py-4 fw-bold h5">Trusted</td>
+                                <td class="py-4 text-center px-4">
+                                    <p class="mb-0 h6 fw-normal" style="line-height: 1.6;">Recorded Lines - No Misselling - Know your Advisor, Insurance Digital Platform (IDP’s) Approved.</p>
                                 </td>
-                                <td class="py-5 text-center">
-                                    <i class="bi bi-x-lg text-white-50 h4"></i>
+                                <td class="py-4 text-center">
+                                    <i class="bi bi-x-lg text-danger h4"></i>
                                 </td>
                             </tr>
                             <!-- Product Row -->
                             <tr class="border-bottom border-white border-opacity-10">
-                                <td class="py-5 fw-bold h5">Product</td>
-                                <td class="py-5 text-center px-4">
-                                    <p class="mb-0 small opacity-75">Verified Leading brands, Reputation Check, Quick Comparison Check of Features, Brand & Price, Thorough Product Research Before Launch.</p>
+                                <td class="py-4 fw-bold h5">Product</td>
+                                <td class="py-4 text-center px-4">
+                                    <p class="mb-0 h6 fw-normal" style="line-height: 1.6;">Verified Leading brands, Reputation Check, Quick Comparison Check of Features, Brand & Price, Thorough Product Research Before Launch.</p>
                                 </td>
-                                <td class="py-5 text-center">
-                                    <i class="bi bi-x-lg text-white-50 h4"></i>
+                                <td class="py-4 text-center">
+                                    <i class="bi bi-x-lg text-danger h4"></i>
                                 </td>
                             </tr>
                             <!-- Convenience Row -->
                             <tr class="border-bottom border-white border-opacity-10">
-                                <td class="py-5 fw-bold h5">Convenience</td>
-                                <td class="py-5 text-center px-4">
-                                    <p class="mb-0 small opacity-75">100% Digital-Takes 5 Mins, No Documents, Free Advise-WhatsApp, Email or Call, Quick Comparison Charts & Tables</p>
+                                <td class="py-4 fw-bold h5">Convenience</td>
+                                <td class="py-4 text-center px-4">
+                                    <p class="mb-0 h6 fw-normal" style="line-height: 1.6;">100% Digital - Takes 5 Mins, No Documents, Free Advise via WhatsApp, Email or Call, Quick Comparison Charts & Tables</p>
                                 </td>
-                                <td class="py-5 text-center">
-                                    <i class="bi bi-x-lg text-white-50 h4"></i>
+                                <td class="py-4 text-center">
+                                    <i class="bi bi-x-lg text-danger h4"></i>
                                 </td>
                             </tr>
                             <!-- Support Row -->
-                            <tr>
-                                <td class="py-5 fw-bold h5">Support</td>
-                                <td class="py-5 text-center px-4">
-                                    <p class="mb-0 small opacity-75">Dedicated Claims & Guidance Online Free Helpdesk We’re With You Always- Renewal & Support</p>
+                            <tr class="border-bottom border-white border-opacity-10">
+                                <td class="py-4 fw-bold h5">Support</td>
+                                <td class="py-4 text-center px-4">
+                                    <p class="mb-0 h6 fw-normal" style="line-height: 1.6;">Dedicated Claims & Guidance Online Free Helpdesk. We’re With You Always - Renewal & Support</p>
                                 </td>
-                                <td class="py-5 text-center">
-                                    <i class="bi bi-x-lg text-white-50 h4"></i>
+                                <td class="py-4 text-center">
+                                    <i class="bi bi-x-lg text-danger h4"></i>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="text-center mt-5">
+                    <a href="{{ route('quote.request') }}" class="btn-quote-custom">
+                        <span>Ready to Switch? Request a Quote</span>
+                        <div class="icon-circle">
+                            <i class="bi bi-chevron-right"></i>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
