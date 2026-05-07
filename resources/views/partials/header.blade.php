@@ -75,22 +75,30 @@
 
 <style>
     .top-bar {
-        background-color: #0056b3 !important; /* Blue from image */
+        background-color: #004a99 !important; /* Slightly darker premium blue */
         font-size: 0.85rem;
+        font-family: 'Nunito', sans-serif;
+    }
+    .hover-opacity:hover {
+        opacity: 0.85;
+    }
+    .hover-underline:hover {
+        text-decoration: underline !important;
     }
     .navbar .nav-link {
         color: #0056b3 !important;
         font-family: 'Nunito', sans-serif;
         font-size: 1rem;
-        transition: color 0.2s;
+        transition: all 0.3s ease;
     }
     .navbar .nav-link:hover {
-        color: #003d82 !important;
+        color: #ffc107 !important; /* Warning/Gold color on hover */
+        transform: translateY(-1px);
     }
-    .navbar .nav-link.text-dark {
-        color: #333 !important;
+    .navbar .nav-link.active {
+        border-bottom: 2px solid #0056b3;
     }
-    .bg-primary {
-        background-color: #0056b3 !important;
+    .top-bar .dropdown-item.active {
+        background-color: #004a99;
     }
 </style>
