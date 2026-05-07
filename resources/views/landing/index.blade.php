@@ -108,110 +108,172 @@
     <div class="swiper-button-prev"></div>
 </div>
 
-<section class="py-5 bg-light">
+<!-- Insurance Packages Section -->
+<section class="py-5 bg-white overflow-hidden">
     <div class="container py-5">
-        <div class="text-center mb-5 animate__animated animate__fadeIn">
-            <h6 class="text-primary fw-bold text-uppercase mb-3">Comprehensive Coverage</h6>
-            <h2 class="display-5 fw-bold">Our Insurance Products</h2>
-            <p class="text-secondary mx-auto" style="max-width: 600px;">Explore our wide range of insurance solutions designed to protect you, your family, and your business.</p>
+        <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
+            <div class="col-lg-6">
+                <h2 class="display-5 fw-bold mb-3">Insurance Packages.</h2>
+                <p class="lead text-secondary">Comprehensive Insurance Packages: Protecting What Matters Most</p>
+            </div>
+            <div class="col-lg-6 text-lg-end">
+                <p class="text-secondary">Streamline your insurance experience with our comprehensive platform. Find quotes for all your insurance needs in one convenient place.</p>
+            </div>
         </div>
 
-        <!-- Products Slider -->
-        <div class="swiper products-slider pb-5">
+        <div class="swiper packages-slider pb-5">
             <div class="swiper-wrapper">
-                <!-- Fire Insurance -->
+                <!-- Package 1: Motor -->
                 <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
-                        <div class="feature-icon bg-danger text-white mb-4">
-                            <i class="bi bi-fire"></i>
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden package-card">
+                        <div class="package-img-wrapper position-relative">
+                            <img src="https://www.bimakwik.com/wp-content/uploads/2024/03/car-in.jpg" class="card-img-top" alt="Motor Insurance" style="height: 300px; object-fit: cover;">
+                            <div class="package-overlay d-flex flex-column justify-content-end p-4">
+                                <h6 class="text-white-50 text-uppercase small mb-2">Vehicles</h6>
+                                <h3 class="text-white fw-bold mb-3">Motor Insurance</h3>
+                                <div class="package-details animate__animated">
+                                    <p class="text-white-50 small mb-4">Coverage for damages to your vehicle and liabilities arising from accidents.</p>
+                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">Learn More</a>
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="fw-bold mb-3">Fire Insurance</h4>
-                        <p class="text-secondary small">Fire insurance is insurance that protects against losses incurred by fire disasters. A fire disaster can happen at any time, and when happen, both bring losses to the building.</p>
                     </div>
                 </div>
 
-                <!-- Bond Insurance -->
+                <!-- Package 2: Home -->
                 <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
-                        <div class="feature-icon bg-info text-white mb-4">
-                            <i class="bi bi-safe2"></i>
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden package-card">
+                        <div class="package-img-wrapper position-relative">
+                            <img src="https://www.bimakwik.com/wp-content/uploads/2024/03/home-in.jpg" class="card-img-top" alt="Home Insurance" style="height: 300px; object-fit: cover;">
+                            <div class="package-overlay d-flex flex-column justify-content-end p-4">
+                                <h6 class="text-white-50 text-uppercase small mb-2">Home</h6>
+                                <h3 class="text-white fw-bold mb-3">Home Insurance</h3>
+                                <div class="package-details animate__animated">
+                                    <p class="text-white-50 small mb-4">Protection for your house and belongings against fire, theft, or natural disasters.</p>
+                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">Learn More</a>
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="fw-bold mb-3">Bond Insurance</h4>
-                        <p class="text-secondary small">Also known as "financial guaranty insurance", guarantees scheduled payments of interest and principal on a bond in the event of default by the issuer.</p>
                     </div>
                 </div>
 
-                <!-- Marine Insurance -->
+                <!-- Package 3: Health -->
                 <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
-                        <div class="feature-icon bg-primary text-white mb-4">
-                            <i class="bi bi-tsunami"></i>
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden package-card">
+                        <div class="package-img-wrapper position-relative">
+                            <img src="https://www.bimakwik.com/wp-content/uploads/2021/09/health-in.jpg" class="card-img-top" alt="Health Insurance" style="height: 300px; object-fit: cover;">
+                            <div class="package-overlay d-flex flex-column justify-content-end p-4">
+                                <h6 class="text-white-50 text-uppercase small mb-2">Healthcare</h6>
+                                <h3 class="text-white fw-bold mb-3">Health Insurance</h3>
+                                <div class="package-details animate__animated">
+                                    <p class="text-white-50 small mb-4">Comprehensive coverage for medical expenses and healthcare needs.</p>
+                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">Learn More</a>
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="fw-bold mb-3">Marine Insurance</h4>
-                        <p class="text-secondary small">Insurance of water vessels (yachts, boats, and ships) against loss or damage to hull, engines, caused by perils of navigable waters.</p>
                     </div>
                 </div>
 
-                <!-- Personal Accident Insurance -->
+                <!-- Package 4: Travel -->
                 <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
-                        <div class="feature-icon bg-success text-white mb-4">
-                            <i class="bi bi-heart-pulse"></i>
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden package-card">
+                        <div class="package-img-wrapper position-relative">
+                            <img src="https://www.bimakwik.com/wp-content/uploads/2024/03/travel-insurance.jpg" class="card-img-top" alt="Travel Insurance" style="height: 300px; object-fit: cover;">
+                            <div class="package-overlay d-flex flex-column justify-content-end p-4">
+                                <h6 class="text-white-50 text-uppercase small mb-2">Travel</h6>
+                                <h3 class="text-white fw-bold mb-3">Travel Insurance</h3>
+                                <div class="package-details animate__animated">
+                                    <p class="text-white-50 small mb-4">Insurance for unexpected events during trips, medical emergencies, or lost luggage.</p>
+                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">Learn More</a>
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="fw-bold mb-3">Personal Accident</h4>
-                        <p class="text-secondary small">Designed to protect you against accidents that are not a result of anyone's fault. Be prepared financially for unexpected events.</p>
-                    </div>
-                </div>
-
-                <!-- Motor Insurance -->
-                <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
-                        <div class="feature-icon bg-dark text-white mb-4">
-                            <i class="bi bi-car-front"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3">Motor Insurance</h4>
-                        <p class="text-secondary small">Third-party and Comprehensive motor insurance covering vehicles for loss, damage, and third-party liabilities anywhere in Tanzania.</p>
-                    </div>
-                </div>
-
-                <!-- Money Insurance -->
-                <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
-                        <div class="feature-icon bg-warning text-dark mb-4">
-                            <i class="bi bi-cash-stack"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3">Money Insurance</h4>
-                        <p class="text-secondary small">Protects against financial loss in transit and on-premises due to robbery or theft. Covers money carried or stored in a safe.</p>
-                    </div>
-                </div>
-
-                <!-- Machinery Breakdown -->
-                <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
-                        <div class="feature-icon bg-secondary text-white mb-4">
-                            <i class="bi bi-gear-wide-connected"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3">Machinery Breakdown</h4>
-                        <p class="text-secondary small">Businesses invest heavily in machinery but may experience unexpected breakdowns. We provide coverage to keep you running.</p>
-                    </div>
-                </div>
-
-                <!-- Domestic Package Insurance -->
-                <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
-                        <div class="feature-icon bg-primary text-white mb-4" style="background-color: #6610f2 !important;">
-                            <i class="bi bi-house-door"></i>
-                        </div>
-                        <h4 class="fw-bold mb-3">Domestic Package</h4>
-                        <p class="text-secondary small">Specifically for residential houses and movable personal property. It covers buildings, electronic equipment, and furniture.</p>
                     </div>
                 </div>
             </div>
-            <!-- Slider Pagination -->
             <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="text-center mt-4">
+            <p class="text-secondary">Our nearly 20+ staff members are committed and ready to help.</p>
         </div>
     </div>
 </section>
+
+<!-- Why Bimakwik Section -->
+<section class="py-5 bg-dark text-white">
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="display-5 fw-bold mb-3">Why BimaKwik</h2>
+                <p class="text-secondary">Delivering Confidence in Every Partnership</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="p-4 rounded-4 border border-secondary border-opacity-25 h-100">
+                    <h4 class="fw-bold mb-3 text-warning">Trusted</h4>
+                    <p class="text-secondary small">Recorded Lines - No Misselling - Know your Advisor, IDP's Approved.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4 rounded-4 border border-secondary border-opacity-25 h-100">
+                    <h4 class="fw-bold mb-3 text-warning">Product</h4>
+                    <p class="text-secondary small">Verified Leading brands, Reputation Check, Quick Comparison, Thorough Research.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4 rounded-4 border border-secondary border-opacity-25 h-100">
+                    <h4 class="fw-bold mb-3 text-warning">Convenience</h4>
+                    <p class="text-secondary small">100% Digital-Takes 5 Mins, No Documents, Free Advice via WhatsApp/Email/Call.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-4 rounded-4 border border-secondary border-opacity-25 h-100">
+                    <h4 class="fw-bold mb-3 text-warning">Support</h4>
+                    <p class="text-secondary small">Dedicated Claims Guidance, Online Free Helpdesk, Renewals & Always With You.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .package-card {
+        transition: all 0.3s ease;
+    }
+    .package-img-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 100%);
+        z-index: 1;
+    }
+    .package-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 2;
+        transition: all 0.3s ease;
+    }
+    .package-details {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.5s ease;
+    }
+    .package-card:hover .package-details {
+        max-height: 200px;
+        opacity: 1;
+    }
+    .package-card:hover {
+        transform: translateY(-10px);
+    }
+    .package-card:hover img {
+        transform: scale(1.1);
+        transition: transform 0.8s ease;
+    }
+    .bg-primary-soft { background-color: rgba(0, 86, 179, 0.1); }
+</style>
 
 <!-- Blog Section -->
 <section class="py-5 bg-white">
