@@ -200,43 +200,124 @@
     </div>
 </section>
 
-<!-- Why Bimakwik Section -->
-<section class="py-5 bg-dark text-white">
-    <div class="container py-5">
-        <div class="row mb-5">
-            <div class="col-12 text-center">
-                <h2 class="display-5 fw-bold mb-3">Why BimaKwik</h2>
-                <p class="text-secondary">Delivering Confidence in Every Partnership</p>
+<!-- Trusted By Section -->
+<section class="py-5 bg-white border-top">
+    <div class="container py-4">
+        <div class="text-center mb-5 animate__animated animate__fadeIn">
+            <h6 class="text-secondary fw-bold text-uppercase small letter-spacing-1 mb-4">Trusted by global companies</h6>
+        </div>
+        <div class="row align-items-center justify-content-center g-5">
+            <div class="col-6 col-md-3 col-lg-2 text-center">
+                <img src="{{ asset('myheritage.png') }}" alt="MyHeritage" class="img-fluid partner-logo grayscale">
+            </div>
+            <div class="col-6 col-md-3 col-lg-2 text-center">
+                <img src="{{ asset('rebohoth.png') }}" alt="Rebohoth" class="img-fluid partner-logo grayscale">
+            </div>
+            <div class="col-6 col-md-3 col-lg-2 text-center">
+                <img src="{{ asset('ilinklogo.png') }}" alt="iLink" class="img-fluid partner-logo grayscale">
+            </div>
+            <div class="col-6 col-md-3 col-lg-2 text-center">
+                <img src="{{ asset('ibank.png') }}" alt="iBank" class="img-fluid partner-logo grayscale">
             </div>
         </div>
-        <div class="row g-4">
-            <div class="col-md-3">
-                <div class="p-4 rounded-4 border border-secondary border-opacity-25 h-100">
-                    <h4 class="fw-bold mb-3 text-warning">Trusted</h4>
-                    <p class="text-secondary small">Recorded Lines - No Misselling - Know your Advisor, IDP's Approved.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="p-4 rounded-4 border border-secondary border-opacity-25 h-100">
-                    <h4 class="fw-bold mb-3 text-warning">Product</h4>
-                    <p class="text-secondary small">Verified Leading brands, Reputation Check, Quick Comparison, Thorough Research.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="p-4 rounded-4 border border-secondary border-opacity-25 h-100">
-                    <h4 class="fw-bold mb-3 text-warning">Convenience</h4>
-                    <p class="text-secondary small">100% Digital-Takes 5 Mins, No Documents, Free Advice via WhatsApp/Email/Call.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="p-4 rounded-4 border border-secondary border-opacity-25 h-100">
-                    <h4 class="fw-bold mb-3 text-warning">Support</h4>
-                    <p class="text-secondary small">Dedicated Claims Guidance, Online Free Helpdesk, Renewals & Always With You.</p>
+    </div>
+</section>
+
+<!-- Why Bimakwik Comparison Section -->
+<section class="py-5 bg-primary text-white position-relative overflow-hidden why-comparison">
+    <div class="container py-5 z-index-1">
+        <div class="text-center mb-5 animate__animated animate__fadeIn">
+            <h2 class="display-5 fw-bold mb-3">Why Bimakwik</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="table-responsive">
+                    <table class="table table-borderless text-white comparison-table align-middle">
+                        <thead>
+                            <tr class="border-bottom border-white border-opacity-10">
+                                <th class="py-4" style="width: 20%;"></th>
+                                <th class="py-4 text-center" style="width: 60%;"></th>
+                                <th class="py-4 text-center text-white-50 fw-normal small" style="width: 20%;">Other Companies</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Trusted Row -->
+                            <tr class="border-bottom border-white border-opacity-10">
+                                <td class="py-5 fw-bold h5">Trusted</td>
+                                <td class="py-5 text-center px-4">
+                                    <p class="mb-0 small opacity-75">Recorded Lines - No Misselling - Know your Advisor, Insurance Digital Platform (IDP’s) Approved.</p>
+                                </td>
+                                <td class="py-5 text-center">
+                                    <i class="bi bi-x-lg text-white-50 h4"></i>
+                                </td>
+                            </tr>
+                            <!-- Product Row -->
+                            <tr class="border-bottom border-white border-opacity-10">
+                                <td class="py-5 fw-bold h5">Product</td>
+                                <td class="py-5 text-center px-4">
+                                    <p class="mb-0 small opacity-75">Verified Leading brands, Reputation Check, Quick Comparison Check of Features, Brand & Price, Thorough Product Research Before Launch.</p>
+                                </td>
+                                <td class="py-5 text-center">
+                                    <i class="bi bi-x-lg text-white-50 h4"></i>
+                                </td>
+                            </tr>
+                            <!-- Convenience Row -->
+                            <tr class="border-bottom border-white border-opacity-10">
+                                <td class="py-5 fw-bold h5">Convenience</td>
+                                <td class="py-5 text-center px-4">
+                                    <p class="mb-0 small opacity-75">100% Digital-Takes 5 Mins, No Documents, Free Advise-WhatsApp, Email or Call, Quick Comparison Charts & Tables</p>
+                                </td>
+                                <td class="py-5 text-center">
+                                    <i class="bi bi-x-lg text-white-50 h4"></i>
+                                </td>
+                            </tr>
+                            <!-- Support Row -->
+                            <tr>
+                                <td class="py-5 fw-bold h5">Support</td>
+                                <td class="py-5 text-center px-4">
+                                    <p class="mb-0 small opacity-75">Dedicated Claims & Guidance Online Free Helpdesk We’re With You Always- Renewal & Support</p>
+                                </td>
+                                <td class="py-5 text-center">
+                                    <i class="bi bi-x-lg text-white-50 h4"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .partner-logo {
+        max-height: 50px;
+        transition: all 0.3s ease;
+    }
+    .grayscale {
+        filter: grayscale(100%) opacity(0.6);
+    }
+    .partner-logo:hover {
+        filter: grayscale(0%) opacity(1);
+    }
+    .why-comparison {
+        background-color: #004a99 !important; /* Premium blue */
+    }
+    .comparison-table td, .comparison-table th {
+        background: transparent;
+    }
+    .z-index-1 { z-index: 1; position: relative; }
+    .why-comparison::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0; left: 0;
+        background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        pointer-events: none;
+    }
+</style>
 
 <style>
     .package-card {
