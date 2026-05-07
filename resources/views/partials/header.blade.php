@@ -23,7 +23,7 @@
             </div>
             <span class="text-white-50">|</span>
             <a href="#" class="text-white text-decoration-none small hover-underline">FAQs</a>
-            <a href="#" class="btn btn-warning btn-sm ms-2 px-3 rounded-pill fw-bold text-dark shadow-sm">
+            <a href="{{ route('quote.request') }}" class="btn btn-warning btn-sm ms-2 px-3 rounded-pill fw-bold text-dark shadow-sm">
                 <i class="bi bi-file-earmark-text me-1"></i> Request Quote
             </a>
         </div>

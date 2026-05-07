@@ -28,3 +28,6 @@ Route::get('/privacy-policy', function () { return view('legal.privacy'); })->na
 Route::get('/terms-of-service', function () { return view('legal.terms'); })->name('terms');
 Route::get('/cookie-policy', function () { return view('legal.cookies'); })->name('cookies');
 Route::get('/data-protection', function () { return view('legal.data-protection'); })->name('data-protection');
+
+// Quote Route
+Route::get('/request-quote', function () { return view('quote'); })->name('quote.request');
