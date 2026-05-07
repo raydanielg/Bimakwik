@@ -213,6 +213,76 @@
     </div>
 </section>
 
+<!-- Blog Section -->
+<section class="py-5 bg-white">
+    <div class="container py-5">
+        <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
+            <div class="col-md-8 text-center text-md-start">
+                <h6 class="text-primary fw-bold text-uppercase mb-3">Latest Updates</h6>
+                <h2 class="display-5 fw-bold">Our News & Blogs</h2>
+                <p class="text-secondary">Stay informed with the latest insights and news from the insurance industry.</p>
+            </div>
+            <div class="col-md-4 text-center text-md-end d-none d-md-block">
+                <a href="#" class="btn btn-outline-primary px-4 rounded-pill fw-bold">View All Posts <i class="bi bi-arrow-right ms-1"></i></a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Blog 1 -->
+            <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800" class="card-img-top" alt="Blog 1" style="height: 200px; object-fit: cover;">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-primary-soft text-primary rounded-pill px-3 py-2 small" style="background-color: rgba(13, 110, 253, 0.1);">Insurance Tips</span>
+                            <span class="text-secondary small ms-3"><i class="bi bi-calendar3 me-1"></i> May 5, 2026</span>
+                        </div>
+                        <h5 class="fw-bold mb-3">Why You Need Life Insurance in 2026</h5>
+                        <p class="text-secondary small mb-4">Discover the key reasons why life insurance is more important than ever for your family's future security...</p>
+                        <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-chevron-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog 2 -->
+            <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift">
+                    <img src="https://images.unsplash.com/photo-1533134486753-c833f0ed4866?auto=format&fit=crop&q=80&w=800" class="card-img-top" alt="Blog 2" style="height: 200px; object-fit: cover;">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-success-soft text-success rounded-pill px-3 py-2 small" style="background-color: rgba(25, 135, 84, 0.1);">Digital Trends</span>
+                            <span class="text-secondary small ms-3"><i class="bi bi-calendar3 me-1"></i> May 2, 2026</span>
+                        </div>
+                        <h5 class="fw-bold mb-3">The Future of Digital Claims Processing</h5>
+                        <p class="text-secondary small mb-4">How BimaKwik is leading the way in making insurance claims faster and more efficient using AI...</p>
+                        <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-chevron-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog 3 -->
+            <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift">
+                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=80&w=800" class="card-img-top" alt="Blog 3" style="height: 200px; object-fit: cover;">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-warning-soft text-warning rounded-pill px-3 py-2 small" style="background-color: rgba(255, 193, 7, 0.1);">Safety First</span>
+                            <span class="text-secondary small ms-3"><i class="bi bi-calendar3 me-1"></i> April 28, 2026</span>
+                        </div>
+                        <h5 class="fw-bold mb-3">Protecting Your Vehicle During Floods</h5>
+                        <p class="text-secondary small mb-4">Essential steps every car owner should take to minimize damage during the heavy rainy seasons...</p>
+                        <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-chevron-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5 d-md-none">
+            <a href="#" class="btn btn-outline-primary px-5 rounded-pill fw-bold">View All Posts</a>
+        </div>
+    </div>
+</section>
+
 <style>
     .products-slider .swiper-pagination-bullet-active {
         background: #0056b3 !important;
