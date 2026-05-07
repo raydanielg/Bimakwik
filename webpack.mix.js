@@ -15,31 +15,25 @@ mix.options({
     clearConsole: false
 });
 
-process.env.NODE_ENV = 'test';
+// Disable WebpackBar to prevent ProgressPlugin schema validation errors
+mix.override((config) => {
+    config.plugins = config.plugins.filter(
+        plugin => plugin.constructor.name !== 'WebpackBarPlugin'
+    );
+});
 
-mix.webpackConfig((webpack, config) => {
-    if (!config || !config.module || !Array.isArray(config.module.rules)) {
-        return {};
+mix.webpackConfig({
+    stats: {
+        children: false,
+        warningsFilter: /Conflicting values for '.*NODE_ENV'/
     }
-
-    for (const rule of config.module.rules) {
-        const ruleUses = rule && rule.use;
-        const uses = Array.isArray(ruleUses) ? ruleUses : [];
-
-        for (const use of uses) {
-            if (!use || typeof use !== 'object') continue;
-
-            if (typeof use.loader === 'string' && use.loader.includes('sass-loader')) {
-                use.options = use.options || {};
-                use.options.sassOptions = use.options.sassOptions || {};
-                use.options.sassOptions.quietDeps = true;
-            }
-        }
-    }
-
-    return {};
 });
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css', {
+        sassOptions: {
+            quietDeps: true,
+            logger: require('sass').Logger.silent
+        }
+    })
     .sourceMaps();
