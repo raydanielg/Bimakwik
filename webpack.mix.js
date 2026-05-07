@@ -11,6 +11,19 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.webpackConfig(config => {
+    const webpack = require('webpack');
+
+    if (Array.isArray(config.plugins)) {
+        config.plugins = config.plugins.filter(
+            plugin => !(plugin && plugin.constructor && plugin.constructor.name === 'WebpackBarPlugin')
+        );
+    }
+
+    config.plugins = config.plugins || [];
+    config.plugins.push(new webpack.ProgressPlugin({ activeModules: true }));
+});
+
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();
