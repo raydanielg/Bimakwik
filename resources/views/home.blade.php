@@ -1,23 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+        <div class="col-md-10">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-body p-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                            <h6 class="text-primary fw-bold text-uppercase mb-3">Karibu Tena</h6>
+                            <h1 class="display-5 fw-bold mb-4">Habari, {{ Auth::user()->name }}!</h1>
+                            <p class="lead text-secondary mb-4">Umefanikiwa kuingia kwenye mfumo wa {{ config('app.name', 'BimaKwik') }}. Anza kusimamia bima zako sasa kwa urahisi.</p>
+                            <div class="d-grid d-md-flex gap-2">
+                                <a href="#" class="btn btn-primary btn-lg px-4 rounded-pill text-white">Angalia Bima Zangu</a>
+                                <a href="#" class="btn btn-outline-secondary btn-lg px-4 rounded-pill">Wasifu Wangu</a>
+                            </div>
                         </div>
-                    @endif
+                        <div class="col-lg-6 d-none d-lg-block animate__animated animate__fadeInRight text-center">
+                            <img src="{{ asset('logo.png') }}" alt="Dashboard" class="img-fluid" style="max-height: 250px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    {{ __('You are logged in!') }}
+            <div class="row mt-5 g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 hover-lift">
+                        <div class="card-body">
+                            <div class="icon-shape bg-primary-soft text-primary rounded-3 mb-4 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: rgba(13, 110, 253, 0.1);">
+                                <i class="bi bi-shield-check fs-4"></i>
+                            </div>
+                            <h5 class="fw-bold">Bima Hai</h5>
+                            <p class="text-secondary small">Simamia bima zako zote ambazo bado zinafanya kazi hapa.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 hover-lift">
+                        <div class="card-body">
+                            <div class="icon-shape bg-success-soft text-success rounded-3 mb-4 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: rgba(25, 135, 84, 0.1);">
+                                <i class="bi bi-plus-circle fs-4"></i>
+                            </div>
+                            <h5 class="fw-bold">Omba Bima Mpya</h5>
+                            <p class="text-secondary small">Pata bima mpya kwa urahisi na haraka zaidi kidijitali.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-3 hover-lift">
+                        <div class="card-body">
+                            <div class="icon-shape bg-warning-soft text-warning rounded-3 mb-4 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: rgba(255, 193, 7, 0.1);">
+                                <i class="bi bi-clock-history fs-4"></i>
+                            </div>
+                            <h5 class="fw-bold">Historia</h5>
+                            <p class="text-secondary small">Angalia historia ya malipo na madai yako yote ya nyuma.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .hover-lift { transition: transform 0.2s ease-in-out; }
+    .hover-lift:hover { transform: translateY(-5px); }
+</style>
 @endsection
