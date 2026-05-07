@@ -18,19 +18,23 @@
 .auth-card {
     width: 100%;
     max-width: 440px;
-    background: #f3f4f6;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
     padding: 2.5rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
     z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 
     .auth-logo {
         text-align: center;
         margin-bottom: 1.5rem;
+        animation: bounceIn 1s;
         svg {
-            width: 48px;
-            height: 48px;
-            color: #111827;
+            width: 56px;
+            height: 56px;
+            color: #10b981;
+            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.3));
         }
     }
 
