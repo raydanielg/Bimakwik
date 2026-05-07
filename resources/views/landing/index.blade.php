@@ -108,44 +108,126 @@
     <div class="swiper-button-prev"></div>
 </div>
 
-<section class="py-5 bg-white">
-    <!-- Rest of services section remains same -->
+<section class="py-5 bg-light">
     <div class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Our Services</h2>
-            <p class="text-secondary">Choose the type of insurance that suits you today.</p>
+        <div class="text-center mb-5 animate__animated animate__fadeIn">
+            <h6 class="text-primary fw-bold text-uppercase mb-3">Comprehensive Coverage</h6>
+            <h2 class="display-5 fw-bold">Our Insurance Products</h2>
+            <p class="text-secondary mx-auto" style="max-width: 600px;">Explore our wide range of insurance solutions designed to protect you, your family, and your business.</p>
         </div>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4">
-                    <div class="feature-icon bg-primary text-white">
-                        <i class="bi bi-car-front"></i>
+
+        <!-- Products Slider -->
+        <div class="swiper products-slider pb-5">
+            <div class="swiper-wrapper">
+                <!-- Fire Insurance -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
+                        <div class="feature-icon bg-danger text-white mb-4">
+                            <i class="bi bi-fire"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Fire Insurance</h4>
+                        <p class="text-secondary small">Fire insurance is insurance that protects against losses incurred by fire disasters. A fire disaster can happen at any time, and when happen, both bring losses to the building.</p>
                     </div>
-                    <h4 class="fw-bold">Motor Insurance</h4>
-                    <p class="text-secondary">Protect your vehicle against accidents, theft and other road hazards.</p>
+                </div>
+
+                <!-- Bond Insurance -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
+                        <div class="feature-icon bg-info text-white mb-4">
+                            <i class="bi bi-safe2"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Bond Insurance</h4>
+                        <p class="text-secondary small">Also known as "financial guaranty insurance", guarantees scheduled payments of interest and principal on a bond in the event of default by the issuer.</p>
+                    </div>
+                </div>
+
+                <!-- Marine Insurance -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
+                        <div class="feature-icon bg-primary text-white mb-4">
+                            <i class="bi bi-tsunami"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Marine Insurance</h4>
+                        <p class="text-secondary small">Insurance of water vessels (yachts, boats, and ships) against loss or damage to hull, engines, caused by perils of navigable waters.</p>
+                    </div>
+                </div>
+
+                <!-- Personal Accident Insurance -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
+                        <div class="feature-icon bg-success text-white mb-4">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Personal Accident</h4>
+                        <p class="text-secondary small">Designed to protect you against accidents that are not a result of anyone's fault. Be prepared financially for unexpected events.</p>
+                    </div>
+                </div>
+
+                <!-- Motor Insurance -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
+                        <div class="feature-icon bg-dark text-white mb-4">
+                            <i class="bi bi-car-front"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Motor Insurance</h4>
+                        <p class="text-secondary small">Third-party and Comprehensive motor insurance covering vehicles for loss, damage, and third-party liabilities anywhere in Tanzania.</p>
+                    </div>
+                </div>
+
+                <!-- Money Insurance -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
+                        <div class="feature-icon bg-warning text-dark mb-4">
+                            <i class="bi bi-cash-stack"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Money Insurance</h4>
+                        <p class="text-secondary small">Protects against financial loss in transit and on-premises due to robbery or theft. Covers money carried or stored in a safe.</p>
+                    </div>
+                </div>
+
+                <!-- Machinery Breakdown -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
+                        <div class="feature-icon bg-secondary text-white mb-4">
+                            <i class="bi bi-gear-wide-connected"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Machinery Breakdown</h4>
+                        <p class="text-secondary small">Businesses invest heavily in machinery but may experience unexpected breakdowns. We provide coverage to keep you running.</p>
+                    </div>
+                </div>
+
+                <!-- Domestic Package Insurance -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4 m-2">
+                        <div class="feature-icon bg-primary text-white mb-4" style="background-color: #6610f2 !important;">
+                            <i class="bi bi-house-door"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Domestic Package</h4>
+                        <p class="text-secondary small">Specifically for residential houses and movable personal property. It covers buildings, electronic equipment, and furniture.</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4">
-                    <div class="feature-icon bg-success text-white">
-                        <i class="bi bi-heart-pulse"></i>
-                    </div>
-                    <h4 class="fw-bold">Health Insurance</h4>
-                    <p class="text-secondary">We ensure you get the best medical care without fear of high costs.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 hover-lift rounded-4">
-                    <div class="feature-icon bg-warning text-white text-dark">
-                        <i class="bi bi-house-heart"></i>
-                    </div>
-                    <h4 class="fw-bold">Life Insurance</h4>
-                    <p class="text-secondary">Keep your family's future in safe hands with our insurance.</p>
-                </div>
-            </div>
+            <!-- Slider Pagination -->
+            <div class="swiper-pagination"></div>
         </div>
     </div>
 </section>
+
+<style>
+    .products-slider .swiper-pagination-bullet-active {
+        background: #0056b3 !important;
+    }
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-size: 24px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+</style>
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
