@@ -283,6 +283,98 @@
     </div>
 </section>
 
+<!-- Testimonials Section -->
+<section class="py-5 bg-light overflow-hidden">
+    <div class="container py-5">
+        <div class="text-center mb-5 animate__animated animate__fadeIn">
+            <h6 class="text-primary fw-bold text-uppercase mb-3">Testimonials</h6>
+            <h2 class="display-5 fw-bold">What Our Clients Say</h2>
+            <p class="text-secondary mx-auto" style="max-width: 600px;">Join thousands of satisfied customers who trust BimaKwik for their insurance needs.</p>
+        </div>
+
+        <div class="swiper testimonials-slider pb-5">
+            <div class="swiper-wrapper">
+                <!-- Testimonial 1 -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
+                        <div class="mb-4">
+                            <img src="https://i.pravatar.cc/150?u=1" alt="Client 1" class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                        </div>
+                        <div class="mb-3 text-warning">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="text-secondary italic mb-4">"BimaKwik made it so easy for me to get motor insurance. The digital process is seamless and very fast!"</p>
+                        <h5 class="fw-bold mb-0">James M.</h5>
+                        <p class="text-primary small">Business Owner</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
+                        <div class="mb-4">
+                            <img src="https://i.pravatar.cc/150?u=2" alt="Client 2" class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                        </div>
+                        <div class="mb-3 text-warning">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="text-secondary italic mb-4">"I highly recommend their health insurance. Their support team helped me through every step of my claim."</p>
+                        <h5 class="fw-bold mb-0">Sarah K.</h5>
+                        <p class="text-primary small">Marketing Executive</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
+                        <div class="mb-4">
+                            <img src="https://i.pravatar.cc/150?u=3" alt="Client 3" class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                        </div>
+                        <div class="mb-3 text-warning">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <p class="text-secondary italic mb-4">"Excellent service! The mobile app is very intuitive and I can manage all my policies in one place."</p>
+                        <h5 class="fw-bold mb-0">David L.</h5>
+                        <p class="text-primary small">Software Engineer</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
+                        <div class="mb-4">
+                            <img src="https://i.pravatar.cc/150?u=4" alt="Client 4" class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                        </div>
+                        <div class="mb-3 text-warning">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="text-secondary italic mb-4">"The best insurance experience in Tanzania. Professional, transparent, and always reliable."</p>
+                        <h5 class="fw-bold mb-0">Mary A.</h5>
+                        <p class="text-primary small">Teacher</p>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
 <style>
     .products-slider .swiper-pagination-bullet-active {
         background: #0056b3 !important;
