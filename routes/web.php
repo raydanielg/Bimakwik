@@ -29,5 +29,9 @@ Route::get('/terms-of-service', function () { return view('legal.terms'); })->na
 Route::get('/cookie-policy', function () { return view('legal.cookies'); })->name('cookies');
 Route::get('/data-protection', function () { return view('legal.data-protection'); })->name('data-protection');
 
+// Support Routes
+Route::get('/help-center', function () { return view('support.help-center'); })->name('support.help');
+Route::get('/faqs', function () { return view('support.faqs'); })->name('support.faqs');
+
 // Quote Route
 Route::get('/request-quote', function () { return view('quote'); })->name('quote.request');
