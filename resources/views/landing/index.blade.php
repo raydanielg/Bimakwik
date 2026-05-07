@@ -489,6 +489,28 @@
             },
         });
 
+        const packagesSwiper = new Swiper('.packages-slider', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                },
+                1200: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+
         const testimonialsSwiper = new Swiper('.testimonials-slider', {
             slidesPerView: 1,
             spaceBetween: 30,
