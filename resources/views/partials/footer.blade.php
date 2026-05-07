@@ -62,10 +62,10 @@
             <div class="col-lg-2 col-md-6">
                 <h6 class="fw-bold mb-4 text-uppercase small letter-spacing-1">Legal</h6>
                 <ul class="list-unstyled footer-links">
-                    <li><a href="#"><i class="bi bi-chevron-right me-2 text-warning"></i>Privacy Policy</a></li>
-                    <li><a href="#"><i class="bi bi-chevron-right me-2 text-warning"></i>Terms of Service</a></li>
-                    <li><a href="#"><i class="bi bi-chevron-right me-2 text-warning"></i>Cookie Policy</a></li>
-                    <li><a href="#"><i class="bi bi-chevron-right me-2 text-warning"></i>Data Protection</a></li>
+                    <li><a href="{{ route('privacy') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Privacy Policy</a></li>
+                    <li><a href="{{ route('terms') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Terms of Service</a></li>
+                    <li><a href="{{ route('cookies') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Cookie Policy</a></li>
+                    <li><a href="{{ route('data-protection') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Data Protection</a></li>
                 </ul>
             </div>
         </div>
