@@ -22,3 +22,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController::class, 'store'])->name('newsletter.subscribe');
+
+// Legal Routes
+Route::get('/privacy-policy', function () { return view('legal.privacy'); })->name('privacy');
+Route::get('/terms-of-service', function () { return view('legal.terms'); })->name('terms');
+Route::get('/cookie-policy', function () { return view('legal.cookies'); })->name('cookies');
+Route::get('/data-protection', function () { return view('legal.data-protection'); })->name('data-protection');
