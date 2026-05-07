@@ -298,7 +298,7 @@
                 <div class="swiper-slide h-auto">
                     <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
                         <div class="mb-4">
-                            <img src="https://i.pravatar.cc/150?u=1" alt="Client 1" class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                            <img src="https://i.pravatar.cc/150?u=10" alt="Abubakar M." class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
                         </div>
                         <div class="mb-3 text-warning">
                             <i class="bi bi-star-fill"></i>
@@ -307,9 +307,9 @@
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                         </div>
-                        <p class="text-secondary italic mb-4">"BimaKwik made it so easy for me to get motor insurance. The digital process is seamless and very fast!"</p>
-                        <h5 class="fw-bold mb-0">James M.</h5>
-                        <p class="text-primary small">Business Owner</p>
+                        <p class="text-secondary italic mb-4">"Nimepata bima ya gari langu ndani ya dakika tano tu. Huduma ya BimaKwik ni ya haraka sana na rahisi kutumia kwa kweli."</p>
+                        <h5 class="fw-bold mb-0">Abubakar M.</h5>
+                        <p class="text-primary small">Business Owner, Dar es Salaam</p>
                     </div>
                 </div>
 
@@ -317,7 +317,7 @@
                 <div class="swiper-slide h-auto">
                     <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
                         <div class="mb-4">
-                            <img src="https://i.pravatar.cc/150?u=2" alt="Client 2" class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                            <img src="https://i.pravatar.cc/150?u=11" alt="Neema J." class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
                         </div>
                         <div class="mb-3 text-warning">
                             <i class="bi bi-star-fill"></i>
@@ -326,9 +326,9 @@
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                         </div>
-                        <p class="text-secondary italic mb-4">"I highly recommend their health insurance. Their support team helped me through every step of my claim."</p>
-                        <h5 class="fw-bold mb-0">Sarah K.</h5>
-                        <p class="text-primary small">Marketing Executive</p>
+                        <p class="text-secondary italic mb-4">"Bima ya afya kupitia BimaKwik imekuwa msaada mkubwa kwa familia yangu. Mchakato wa madai ni muwazi na hauna usumbufu wowote."</p>
+                        <h5 class="fw-bold mb-0">Neema J.</h5>
+                        <p class="text-primary small">Teacher, Arusha</p>
                     </div>
                 </div>
 
@@ -336,7 +336,7 @@
                 <div class="swiper-slide h-auto">
                     <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
                         <div class="mb-4">
-                            <img src="https://i.pravatar.cc/150?u=3" alt="Client 3" class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                            <img src="https://i.pravatar.cc/150?u=12" alt="Kelvin S." class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
                         </div>
                         <div class="mb-3 text-warning">
                             <i class="bi bi-star-fill"></i>
@@ -345,9 +345,9 @@
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-half"></i>
                         </div>
-                        <p class="text-secondary italic mb-4">"Excellent service! The mobile app is very intuitive and I can manage all my policies in one place."</p>
-                        <h5 class="fw-bold mb-0">David L.</h5>
-                        <p class="text-primary small">Software Engineer</p>
+                        <p class="text-secondary italic mb-4">"Nilikuwa natafuta bima ya maisha kwa muda mrefu, BimaKwik wamenipa elimu ya kutosha na nikachagua iliyo bora kwangu."</p>
+                        <h5 class="fw-bold mb-0">Kelvin S.</h5>
+                        <p class="text-primary small">Entrepreneur, Mwanza</p>
                     </div>
                 </div>
 
@@ -355,7 +355,7 @@
                 <div class="swiper-slide h-auto">
                     <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
                         <div class="mb-4">
-                            <img src="https://i.pravatar.cc/150?u=4" alt="Client 4" class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                            <img src="https://i.pravatar.cc/150?u=13" alt="Aisha R." class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
                         </div>
                         <div class="mb-3 text-warning">
                             <i class="bi bi-star-fill"></i>
@@ -364,9 +364,9 @@
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
                         </div>
-                        <p class="text-secondary italic mb-4">"The best insurance experience in Tanzania. Professional, transparent, and always reliable."</p>
-                        <h5 class="fw-bold mb-0">Mary A.</h5>
-                        <p class="text-primary small">Teacher</p>
+                        <p class="text-secondary italic mb-4">"Inavutia kuona kampuni ya nyumbani ikitoa huduma za kidijitali za kiwango cha juu hivi. Hongereni sana BimaKwik."</p>
+                        <h5 class="fw-bold mb-0">Aisha R.</h5>
+                        <p class="text-primary small">Consultant, Dodoma</p>
                     </div>
                 </div>
             </div>
