@@ -38,6 +38,34 @@
         .hover-lift:hover {
             transform: translateY(-10px);
         }
+        .btn-quote-custom {
+            background-color: #d1d5db; /* Light gray base */
+            color: #15803d; /* Dark green text */
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .btn-quote-custom .icon-circle {
+            background-color: rgba(0, 0, 0, 0.05);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .btn-quote-custom:hover {
+            background-color: #c4c9d0;
+            transform: scale(1.05);
+            color: #15803d;
+        }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
