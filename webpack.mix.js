@@ -11,17 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.webpackConfig((webpack, config) => {
-    if (Array.isArray(config.plugins)) {
-        config.plugins = config.plugins.filter(
-            plugin => !(plugin && plugin.constructor && plugin.constructor.name === 'WebpackBarPlugin')
-        );
-    }
-
-    config.plugins = config.plugins || [];
-    config.plugins.push(new webpack.ProgressPlugin({ activeModules: true }));
-
-    return config;
+mix.options({
+    clearConsole: false
 });
 
 mix.js('resources/js/app.js', 'public/js')
