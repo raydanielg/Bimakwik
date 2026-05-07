@@ -4,9 +4,7 @@
 <div class="auth-page">
     <div class="auth-card animate__animated animate__fadeInDown">
         <div class="auth-logo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
+            <img src="{{ asset('logo.png') }}" alt="{{ config('app.name') }}" style="height: 64px; width: auto; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.2));">
         </div>
         
         <h1 class="auth-title">Log in</h1>
