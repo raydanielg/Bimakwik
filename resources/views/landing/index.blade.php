@@ -285,92 +285,82 @@
 
 <!-- Testimonials Section -->
 <section class="py-5 bg-light overflow-hidden">
-    <div class="container py-5">
-        <div class="text-center mb-5 animate__animated animate__fadeIn">
-            <h6 class="text-primary fw-bold text-uppercase mb-3">Testimonials</h6>
-            <h2 class="display-5 fw-bold">What Our Clients Say</h2>
-            <p class="text-secondary mx-auto" style="max-width: 600px;">Join thousands of satisfied customers who trust BimaKwik for their insurance needs.</p>
+    <div class="container py-5 text-center">
+        <div class="mb-5 animate__animated animate__fadeIn">
+            <span class="badge rounded-pill px-3 py-2 mb-3" style="background-color: rgba(0, 86, 179, 0.1); color: #0056b3; font-size: 0.75rem; letter-spacing: 1px;">
+                <i class="bi bi-quote me-1"></i> TESTIMONIALS
+            </span>
+            <h2 class="display-5 fw-bold mb-3" style="color: #1a202c;">What Our Clients Say</h2>
+            <p class="text-secondary mx-auto" style="max-width: 650px; font-size: 0.95rem;">Feedback from customers across Tanzania using BimaKwik to protect their future and manage insurance with ease.</p>
         </div>
 
         <div class="swiper testimonials-slider pb-5">
             <div class="swiper-wrapper">
                 <!-- Testimonial 1 -->
                 <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
+                    <div class="mx-auto" style="max-width: 800px;">
                         <div class="mb-4">
-                            <img src="https://i.pravatar.cc/150?u=10" alt="Abubakar M." class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                            <i class="bi bi-quote text-secondary opacity-25" style="font-size: 4rem; line-height: 1;"></i>
                         </div>
-                        <div class="mb-3 text-warning">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
+                        <h4 class="fw-bold mb-5 px-lg-5" style="color: #2d3748; line-height: 1.6;">
+                            "BimaKwik has revolutionized how I handle my motor insurance. The process is entirely digital, fast, and very professional. Highly recommended!"
+                        </h4>
+                        <div class="d-flex align-items-center justify-content-center gap-3">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white shadow-sm" style="width: 45px; height: 45px; background-color: #b91c1c; font-size: 0.9rem;">
+                                AM
+                            </div>
+                            <div class="text-start">
+                                <h6 class="fw-bold mb-0" style="color: #1a202c;">Abubakar Mwinyi</h6>
+                                <p class="text-secondary mb-0 small">Business Owner, Dar es Salaam</p>
+                            </div>
                         </div>
-                        <p class="text-secondary italic mb-4">"Nimepata bima ya gari langu ndani ya dakika tano tu. Huduma ya BimaKwik ni ya haraka sana na rahisi kutumia kwa kweli."</p>
-                        <h5 class="fw-bold mb-0">Abubakar M.</h5>
-                        <p class="text-primary small">Business Owner, Dar es Salaam</p>
                     </div>
                 </div>
 
                 <!-- Testimonial 2 -->
                 <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
+                    <div class="mx-auto" style="max-width: 800px;">
                         <div class="mb-4">
-                            <img src="https://i.pravatar.cc/150?u=11" alt="Neema J." class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                            <i class="bi bi-quote text-secondary opacity-25" style="font-size: 4rem; line-height: 1;"></i>
                         </div>
-                        <div class="mb-3 text-warning">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
+                        <h4 class="fw-bold mb-5 px-lg-5" style="color: #2d3748; line-height: 1.6;">
+                            "The health insurance support is exceptional. I managed to process my family's claims in record time without any physical office visits."
+                        </h4>
+                        <div class="d-flex align-items-center justify-content-center gap-3">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white shadow-sm" style="width: 45px; height: 45px; background-color: #0369a1; font-size: 0.9rem;">
+                                NJ
+                            </div>
+                            <div class="text-start">
+                                <h6 class="fw-bold mb-0" style="color: #1a202c;">Neema Joseph</h6>
+                                <p class="text-secondary mb-0 small">Project Manager, Arusha</p>
+                            </div>
                         </div>
-                        <p class="text-secondary italic mb-4">"Bima ya afya kupitia BimaKwik imekuwa msaada mkubwa kwa familia yangu. Mchakato wa madai ni muwazi na hauna usumbufu wowote."</p>
-                        <h5 class="fw-bold mb-0">Neema J.</h5>
-                        <p class="text-primary small">Teacher, Arusha</p>
                     </div>
                 </div>
 
                 <!-- Testimonial 3 -->
                 <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
+                    <div class="mx-auto" style="max-width: 800px;">
                         <div class="mb-4">
-                            <img src="https://i.pravatar.cc/150?u=12" alt="Kelvin S." class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
+                            <i class="bi bi-quote text-secondary opacity-25" style="font-size: 4rem; line-height: 1;"></i>
                         </div>
-                        <div class="mb-3 text-warning">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
+                        <h4 class="fw-bold mb-5 px-lg-5" style="color: #2d3748; line-height: 1.6;">
+                            "I've finally found an insurance partner that values transparency and education. BimaKwik's team is knowledgeable and very helpful."
+                        </h4>
+                        <div class="d-flex align-items-center justify-content-center gap-3">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white shadow-sm" style="width: 45px; height: 45px; background-color: #15803d; font-size: 0.9rem;">
+                                KS
+                            </div>
+                            <div class="text-start">
+                                <h6 class="fw-bold mb-0" style="color: #1a202c;">Kelvin Shayo</h6>
+                                <p class="text-secondary mb-0 small">Tech Entrepreneur, Mwanza</p>
+                            </div>
                         </div>
-                        <p class="text-secondary italic mb-4">"Nilikuwa natafuta bima ya maisha kwa muda mrefu, BimaKwik wamenipa elimu ya kutosha na nikachagua iliyo bora kwangu."</p>
-                        <h5 class="fw-bold mb-0">Kelvin S.</h5>
-                        <p class="text-primary small">Entrepreneur, Mwanza</p>
-                    </div>
-                </div>
-
-                <!-- Testimonial 4 -->
-                <div class="swiper-slide h-auto">
-                    <div class="card h-100 border-0 shadow-sm rounded-4 p-4 m-2 text-center">
-                        <div class="mb-4">
-                            <img src="https://i.pravatar.cc/150?u=13" alt="Aisha R." class="rounded-circle shadow-sm" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid white;">
-                        </div>
-                        <div class="mb-3 text-warning">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="text-secondary italic mb-4">"Inavutia kuona kampuni ya nyumbani ikitoa huduma za kidijitali za kiwango cha juu hivi. Hongereni sana BimaKwik."</p>
-                        <h5 class="fw-bold mb-0">Aisha R.</h5>
-                        <p class="text-primary small">Consultant, Dodoma</p>
                     </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
+            <!-- Slider Pagination -->
+            <div class="swiper-pagination mt-5"></div>
         </div>
     </div>
 </section>
