@@ -85,9 +85,10 @@
             <div class="col-lg-8 mt-4 mt-lg-0">
                 <h6 class="fw-bold mb-3 small text-uppercase letter-spacing-1">Stay Updated</h6>
                 <p class="text-secondary small mb-3">Subscribe for announcements, new features, and updates.</p>
-                <form class="row g-2">
+                <form action="{{ route('newsletter.subscribe') }}" method="POST" class="row g-2">
+                    @csrf
                     <div class="col-sm-8 col-md-9">
-                        <input type="email" class="form-control form-control-dark border-0 py-2 shadow-none" placeholder="Your email address" style="background-color: rgba(255, 255, 255, 0.05); color: white;">
+                        <input type="email" name="email" class="form-control form-control-dark border-0 py-2 shadow-none" placeholder="Your email address" required style="background-color: rgba(255, 255, 255, 0.05); color: white;">
                     </div>
                     <div class="col-sm-4 col-md-3">
                         <button type="submit" class="btn btn-primary w-100 py-2 fw-bold d-flex align-items-center justify-content-center">
