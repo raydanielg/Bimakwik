@@ -15,6 +15,8 @@ mix.options({
     clearConsole: false
 });
 
+process.env.NODE_ENV = 'test';
+
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();
