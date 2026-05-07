@@ -7,7 +7,7 @@
                     {{ config('app.name', 'BimaKwik') }}
                 </h5>
                 <p class="text-secondary">
-                    Tunatoa huduma bora za bima kidijitali. Rahisi, haraka, na uhakika kwa maisha yako ya kila siku.
+                    We provide top-notch digital insurance services. Simple, fast, and reliable for your everyday life.
                 </p>
             </div>
 
