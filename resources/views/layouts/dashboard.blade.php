@@ -513,6 +513,61 @@
                     <i class="bi bi-gear"></i> Settings
                 </a>
             </div>
+
+            @elseif(auth()->user()->hasRole('financing-partner'))
+            <!-- Financing Partner Menu -->
+            <div class="sidebar-heading">Core Monitoring</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('financing-partner.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('financing-partner.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Loan Management</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action text-danger">
+                    <i class="bi bi-inboxes"></i> Financing Requests
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-cash-stack"></i> Disbursements
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-collection"></i> Active Loans
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-arrow-repeat"></i> Repayment Tracker
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Financials</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-wallet2"></i> My Partner Wallet
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-box-arrow-in-down"></i> Repayments Received
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Analysis & Reports</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-file-earmark-bar-graph"></i> Financing Reports
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-exclamation-triangle"></i> Default Analysis
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Profile</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-building"></i> Company Profile
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bank"></i> Bank Details
+                </a>
+            </div>
             @endif
 
             <div class="logout-section mt-4 mb-4">
