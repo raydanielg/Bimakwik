@@ -46,5 +46,9 @@ Route::get('/branches', function () {
 Route::get('/claims', function () { return view('pages.claims'); })->name('pages.claims');
 Route::get('/contact-us', function () { return view('pages.contact'); })->name('pages.contact');
 
+// Resources Routes
+Route::get('/guidelines-materials', function () { return view('resources.guidelines'); })->name('resources.guidelines');
+Route::get('/news-research', function () { return view('resources.news'); })->name('resources.news');
+
 // Quote Route
 Route::get('/request-quote', function () { return view('quote'); })->name('quote.request');
