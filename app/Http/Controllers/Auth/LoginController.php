@@ -46,6 +46,10 @@ class LoginController extends Controller
             return route('service-provider.dashboard');
         }
 
+        if ($user->hasRole('financing-partner')) {
+            return route('financing-partner.dashboard');
+        }
+
         if ($user->hasRole('customer')) {
             return route('customer.dashboard');
         }
