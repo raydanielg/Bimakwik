@@ -14,140 +14,199 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap');
         
-        body { font-family: 'Public Sans', sans-serif; overflow-x: hidden; background-color: #f4f7fa; color: #334155; }
+        body { font-family: 'Public Sans', sans-serif; overflow-x: hidden; background-color: #eef2f6; color: #475569; }
         #wrapper { display: flex; width: 100%; align-items: stretch; }
         
-        /* Sidebar Styling like the image */
+        /* Light Sidebar Styling like the new image */
         #sidebar-wrapper { 
-            min-width: 260px; 
-            max-width: 260px; 
+            min-width: 250px; 
+            max-width: 250px; 
             min-height: 100vh; 
             transition: all 0.3s; 
-            background: #2b3448; /* Dark Navy from image */
+            background: #f8fafc; /* Very light/white sidebar */
             z-index: 1000;
-            box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+            border-right: 1px solid #e2e8f0;
         }
         
-        .sidebar-user-section {
-            padding: 30px 20px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        .sidebar-brand {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
         }
         
-        .user-avatar-lg {
-            width: 45px;
-            height: 45px;
-            border-radius: 8px;
-            margin-right: 12px;
+        .sidebar-brand .brand-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #1e293b;
         }
         
-        .user-info-text {
-            color: #fff;
-            font-size: 0.85rem;
+        .sidebar-brand .admin-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: #d946ef; /* Pinkish-purple accent from image */
+            font-weight: 700;
+            letter-spacing: 1px;
         }
-        
-        .user-info-text .name { font-weight: 600; display: block; }
-        .user-info-text .role { color: rgba(255,255,255,0.5); font-size: 0.75rem; }
 
         .sidebar-heading { 
-            padding: 20px 25px;
-            font-size: 0.7rem;
+            padding: 20px 25px 10px;
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: rgba(255,255,255,0.3);
-            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
         }
 
         .list-group-item { 
             background: transparent; 
-            color: rgba(255,255,255,0.7); 
+            color: #64748b; 
             border: none; 
-            padding: 12px 25px; 
+            padding: 10px 25px; 
             transition: all 0.2s; 
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
+            font-weight: 500;
         }
         
-        .list-group-item i { font-size: 1.1rem; margin-right: 15px; opacity: 0.7; }
-        .list-group-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .list-group-item i { font-size: 1.1rem; margin-right: 12px; opacity: 0.8; }
+        .list-group-item:hover { background: rgba(217, 70, 239, 0.05); color: #d946ef; }
+        
         .list-group-item.active { 
-            background: rgba(13, 110, 253, 0.1) !important; 
-            color: #3b82f6 !important; 
-            border-left: 4px solid #3b82f6;
-            border-radius: 0 !important;
+            background: #fdf2f8 !important; /* Soft pink background for active */
+            color: #d946ef !important; 
+            border-radius: 8px;
+            margin: 0 10px;
+            padding: 10px 15px;
         }
-        .list-group-item.active i { opacity: 1; color: #3b82f6; }
+        .list-group-item.active i { color: #d946ef; opacity: 1; }
 
-        #page-content-wrapper { width: 100%; flex-grow: 1; }
+        .logout-section {
+            padding: 20px;
+            border-top: 1px solid #f1f5f9;
+            margin-top: auto;
+        }
+        
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            color: #ef4444;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .logout-btn:hover { background: #fef2f2; }
+
+        #page-content-wrapper { width: 100%; flex-grow: 1; display: flex; flex-direction: column; }
         
         /* Navbar Styling */
         .navbar { 
-            background: #fff; 
+            background: transparent; 
             padding: 15px 30px;
-            border-bottom: 1px solid #e2e8f0;
+            border: none;
         }
         
-        .search-bar {
-            background: #f1f5f9;
-            border: none;
-            border-radius: 8px;
-            padding: 8px 15px;
-            font-size: 0.9rem;
-            width: 300px;
+        .page-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .header-profile {
+            background: #f8fafc;
+            border-radius: 50px;
+            padding: 5px 15px 5px 5px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
         }
 
         .card { 
             border: none; 
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            border-radius: 12px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            border-radius: 15px; 
             background: #fff;
+            margin-bottom: 20px;
         }
         
-        .stat-card { padding: 20px; }
-        .stat-value { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
-        .stat-label { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; }
-        .stat-trend { font-size: 0.7rem; font-weight: 600; }
+        .stat-card { padding: 15px 20px; display: flex; align-items: center; }
+        .stat-icon-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        .stat-info .value { font-size: 1.25rem; font-weight: 700; color: #1e293b; display: block; }
+        .stat-info .label { font-size: 0.75rem; color: #94a3b8; font-weight: 500; }
         
-        #sidebar-wrapper.toggled { margin-left: -260px; }
+        #sidebar-wrapper.toggled { margin-left: -250px; }
     </style>
 </head>
 <body>
     <div id="wrapper">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <div class="sidebar-user-section d-flex align-items-center">
-                <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name ?? 'User' }}&background=0D6EFD&color=fff" class="user-avatar-lg">
-                <div class="user-info-text">
-                    <span class="name">Dorice Malle</span>
-                    <span class="role">Super Admin</span>
-                </div>
+        <div id="sidebar-wrapper" class="d-flex flex-column">
+            <div class="sidebar-brand">
+                <span class="brand-name">Malkia</span>
+                <span class="admin-label">Admin Panel</span>
             </div>
 
-            <div class="sidebar-heading mt-3">Main Menu</div>
-            <div class="list-group list-group-flush px-2">
+            <div class="sidebar-heading">Main</div>
+            <div class="list-group list-group-flush">
                 <a href="#" class="list-group-item list-group-item-action active">
                     <i class="bi bi-grid-fill"></i> Dashboard
                 </a>
+            </div>
+
+            <div class="sidebar-heading">Accounting</div>
+            <div class="list-group list-group-flush">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-people-fill"></i> Manage Users
+                    <i class="bi bi-file-earmark-text"></i> Vouchers
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-shield-check"></i> Insurance Policies
+                    <i class="bi bi-book"></i> Accounts
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-file-earmark-bar-graph"></i> Claims Report
+                    <i class="bi bi-bank"></i> Banks
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-4">Settings & Tools</div>
-            <div class="list-group list-group-flush px-2">
+            <div class="sidebar-heading">Mothers & Content</div>
+            <div class="list-group list-group-flush">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-gear-fill"></i> System Settings
+                    <i class="bi bi-people"></i> Mothers Intake
                 </a>
-                <a href="#" class="list-group-item list-group-item-action text-danger">
-                    <i class="bi bi-box-arrow-right"></i> Logout
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-newspaper"></i> Articles
                 </a>
+            </div>
+
+            <div class="sidebar-heading">ERP System</div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-mortarboard"></i> ELMS Courses
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-archive"></i> Inventory
+                </a>
+            </div>
+
+            <div class="logout-section">
+                <a href="#" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="bi bi-box-arrow-left me-2"></i> Sign Out
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </div>
 
@@ -155,34 +214,27 @@
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-                    <button class="btn p-0 me-3" id="menu-toggle">
-                        <i class="bi bi-list fs-4"></i>
-                    </button>
+                    <span class="page-title">Dashboard</span>
                     
-                    <form class="d-none d-md-flex ms-2">
-                        <input class="search-bar" type="search" placeholder="Search data, reports...">
-                    </form>
-
                     <div class="ms-auto d-flex align-items-center">
-                        <div class="dropdown me-3">
-                            <a href="#" class="text-dark position-relative" data-bs-toggle="dropdown">
-                                <i class="bi bi-bell fs-5"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.5rem;">5</span>
-                            </a>
+                        <div class="bg-white rounded-circle p-2 shadow-sm me-3 border" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-bell text-secondary"></i>
                         </div>
-                        <div class="dropdown me-3">
-                            <a href="#" class="text-dark" data-bs-toggle="dropdown">
-                                <i class="bi bi-chat-dots fs-5"></i>
-                            </a>
+                        
+                        <div class="header-profile shadow-sm">
+                            <div class="bg-secondary bg-opacity-10 rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: 700; font-size: 0.8rem; color: #475569;">
+                                M
+                            </div>
+                            <div class="d-none d-md-block">
+                                <div style="font-size: 0.75rem; font-weight: 700; line-height: 1; color: #1e293b;">Malkia Admin</div>
+                                <div style="font-size: 0.65rem; color: #94a3b8; font-weight: 500;">Administrator <i class="bi bi-chevron-down ms-1"></i></div>
+                            </div>
                         </div>
-                        <div class="vr mx-3 text-secondary opacity-25" style="height: 25px;"></div>
-                        <span class="small fw-semibold me-2 d-none d-md-inline">Dorice Malle</span>
-                        <img src="https://ui-avatars.com/api/?name=Dorice+Malle" class="rounded-circle" width="35">
                     </div>
                 </div>
             </nav>
 
-            <div class="container-fluid p-4">
+            <div class="container-fluid px-4 py-2">
                 @yield('dashboard_content')
             </div>
         </div>
