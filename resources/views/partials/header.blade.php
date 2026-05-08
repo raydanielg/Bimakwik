@@ -30,9 +30,17 @@
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('logo.png') }}" alt="BUMACO INSURANCE" height="60">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        
+        <!-- Mobile Toggle Button -->
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+            <div class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </button>
+
+        <!-- Desktop Navigation -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
@@ -58,7 +66,115 @@
     </div>
 </nav>
 
+<!-- Mobile Sidebar (Offcanvas) -->
+<div class="offcanvas offcanvas-start border-0" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+    <div class="offcanvas-header border-bottom p-4">
+        <img src="{{ asset('logo.png') }}" alt="Logo" height="50">
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0 d-flex flex-column h-100">
+        <div class="p-4 flex-grow-1 overflow-auto">
+            <ul class="list-unstyled mb-5">
+                <li class="mb-3">
+                    <a href="{{ url('/') }}" class="mobile-nav-link active">Home</a>
+                </li>
+                <li class="mb-3">
+                    <a href="{{ route('pages.about') }}" class="mobile-nav-link">About Us</a>
+                </li>
+                <li class="mb-3">
+                    <a href="{{ route('pages.products') }}" class="mobile-nav-link">Products</a>
+                </li>
+                <li class="mb-3">
+                    <a href="{{ route('pages.claims') }}" class="mobile-nav-link">Claims</a>
+                </li>
+                <li class="mb-3">
+                    <a href="{{ route('pages.branches') }}" class="mobile-nav-link">Branches</a>
+                </li>
+                <li class="mb-3">
+                    <a href="{{ route('pages.contact') }}" class="mobile-nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <div class="contact-sidebar-section mb-5">
+                <h6 class="text-uppercase small fw-bold text-muted mb-4 letter-spacing-1">Get in Touch</h6>
+                <a href="tel:+255762883065" class="d-flex align-items-center text-dark text-decoration-none mb-3">
+                    <div class="sidebar-icon-circle"><i class="bi bi-telephone"></i></div>
+                    <span class="ms-3 fw-bold">+255 762 883 065</span>
+                </a>
+                <a href="mailto:info@bimakwik.com" class="d-flex align-items-center text-dark text-decoration-none mb-3">
+                    <div class="sidebar-icon-circle"><i class="bi bi-envelope"></i></div>
+                    <span class="ms-3 fw-bold">info@bimakwik.com</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="p-4 border-top bg-light">
+            <a href="{{ route('quote.request') }}" class="btn-quote-custom w-100 justify-content-between">
+                <span>Request a Quote</span>
+                <div class="icon-circle">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
 <style>
+    /* Hamburger Icon Animation */
+    .hamburger-icon {
+        width: 30px;
+        height: 20px;
+        position: relative;
+        cursor: pointer;
+    }
+    .hamburger-icon span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: #004a99;
+        border-radius: 9px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0deg);
+        transition: .25s ease-in-out;
+    }
+    .hamburger-icon span:nth-child(1) { top: 0px; }
+    .hamburger-icon span:nth-child(2) { top: 8px; }
+    .hamburger-icon span:nth-child(3) { top: 16px; }
+
+    /* Mobile Sidebar Styles */
+    .offcanvas {
+        width: 85% !important;
+        max-width: 350px !important;
+    }
+    .mobile-nav-link {
+        display: block;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #333;
+        text-decoration: none;
+        padding: 10px 0;
+        transition: all 0.3s ease;
+    }
+    .mobile-nav-link.active, .mobile-nav-link:hover {
+        color: #004a99;
+        padding-left: 10px;
+    }
+    .sidebar-icon-circle {
+        width: 40px;
+        height: 40px;
+        background: #f8f9fa;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #004a99;
+        font-size: 1.2rem;
+    }
+    .letter-spacing-1 { letter-spacing: 1px; }
+
+    /* Header CSS refinement */
     .top-bar {
         background-color: #004a99 !important; /* Slightly darker premium blue */
         font-size: 0.85rem;
