@@ -1,30 +1,24 @@
 <!-- Top Bar -->
 <div class="top-bar py-2 shadow-sm border-bottom">
     <div class="container d-flex justify-content-between align-items-center">
-        <div class="top-info d-flex gap-4">
+        <div class="top-info d-flex gap-3 gap-md-4">
             <a href="mailto:info@bimakwik.com" class="text-white text-decoration-none d-flex align-items-center hover-opacity">
-                <i class="bi bi-envelope-fill me-2 text-warning"></i> 
-                <span class="d-none d-sm-inline">info@bimakwik.com</span>
+                <i class="bi bi-envelope-fill text-warning me-1 me-md-2"></i> 
+                <span class="d-none d-sm-inline small">info@bimakwik.com</span>
             </a>
             <a href="tel:+255762883065" class="text-white text-decoration-none d-flex align-items-center hover-opacity">
-                <i class="bi bi-telephone-fill me-2 text-warning"></i> 
-                <span>+255 762 883 065</span>
+                <i class="bi bi-telephone-fill text-warning me-1 me-md-2"></i> 
+                <span class="small">+255 762 883 065</span>
             </a>
         </div>
-        <div class="top-links d-flex align-items-center gap-3">
-            <div class="dropdown">
-                <a href="#" class="text-white text-decoration-none dropdown-toggle small d-flex align-items-center" data-bs-toggle="dropdown">
-                    <i class="bi bi-globe2 me-1"></i> English
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-                    <li><a class="dropdown-item small" href="#">Swahili</a></li>
-                    <li><a class="dropdown-item small active" href="#">English</a></li>
-                </ul>
-            </div>
-            <span class="text-white-50">|</span>
-            <a href="#" class="text-white text-decoration-none small hover-underline">FAQs</a>
-            <a href="{{ route('quote.request') }}" class="btn btn-warning btn-sm ms-2 px-3 rounded-pill fw-bold text-dark shadow-sm">
-                <i class="bi bi-file-earmark-text me-1"></i> Request Quote
+        <div class="top-links d-flex align-items-center gap-2 gap-md-3">
+            <a href="{{ route('support.faqs') }}" class="text-white text-decoration-none small hover-underline d-flex align-items-center">
+                <i class="bi bi-question-circle me-1 d-md-none"></i>
+                <span class="d-none d-md-inline">FAQs</span>
+            </a>
+            <span class="text-white-50 d-none d-md-inline">|</span>
+            <a href="{{ route('quote.request') }}" class="btn btn-warning btn-sm px-2 px-md-3 rounded-pill fw-bold text-dark shadow-sm x-small-mobile">
+                <i class="bi bi-file-earmark-text me-1"></i> <span class="d-none d-sm-inline">Request Quote</span><span class="d-sm-none">Quote</span>
             </a>
         </div>
     </div>
