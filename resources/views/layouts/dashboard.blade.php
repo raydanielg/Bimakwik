@@ -154,42 +154,113 @@
 <body>
     <div id="wrapper">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper" class="d-flex flex-column">
-            <div class="sidebar-brand">
+        <div id="sidebar-wrapper" class="d-flex flex-column" style="overflow-y: auto;">
+            <div class="sidebar-brand sticky-top bg-white border-bottom">
                 <span class="brand-name"><span class="text-primary">BIMA</span>KWIK</span>
-                <span class="admin-label">Insurance Portal</span>
+                <span class="admin-label">Super Admin Portal</span>
             </div>
 
-            <div class="sidebar-heading">Main</div>
-            <div class="list-group list-group-flush">
+            <div class="sidebar-heading">Core</div>
+            <div class="list-group list-group-flush px-2">
                 <a href="{{ route('admin.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                    <i class="bi bi-grid-fill"></i> Dashboard
+                    <i class="bi bi-grid-fill"></i> Overview
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-robot"></i> AI Insights
                 </a>
             </div>
 
-            <div class="sidebar-heading">Insurance Management</div>
-            <div class="list-group list-group-flush">
+            <div class="sidebar-heading mt-3">Identity & Access</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#userSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-people-fill"></i> User Management</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse ps-3" id="userSubmenu">
+                    <a href="#" class="list-group-item list-group-item-action py-2 small">Admins & Staff</a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 small">Insurers</a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 small">Brokers / Aggregators</a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 small">Agents (SFE/Banc)</a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 small">Customers</a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 small">Service Providers</a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 small">RBAC Settings</a>
+                </div>
+            </div>
+
+            <div class="sidebar-heading mt-3">Product Engine</div>
+            <div class="list-group list-group-flush px-2">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-shield-check"></i> Policies
+                    <i class="bi bi-box-seam"></i> Product List
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-file-earmark-text"></i> Claims
+                    <i class="bi bi-hammer"></i> Low-Code Builder
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-people"></i> Customers
+                    <i class="bi bi-diagram-3"></i> Comparison Matrix
                 </a>
             </div>
 
-            <div class="sidebar-heading">System</div>
-            <div class="list-group list-group-flush">
+            <div class="sidebar-heading mt-3">Finances</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action text-nowrap">
+                    <i class="bi bi-wallet2"></i> Wallet & Balances
+                </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-gear"></i> Settings
+                    <i class="bi bi-cash-stack"></i> Premium Collections
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-percent"></i> Commissions
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bank"></i> Payout Requests
                 </a>
             </div>
 
-            <div class="logout-section">
-                <a href="#" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="bi bi-box-arrow-left me-2"></i> Sign Out
+            <div class="sidebar-heading mt-3">Operations</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-exclamation-octagon"></i> Claims Center
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-lightning-charge"></i> Workflows
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-file-earmark-pdf"></i> Document Vault
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Governance</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-check"></i> Compliance (TIRA)
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bar-chart-line"></i> Advanced Analytics
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-chat-left-dots"></i> Communications
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">System & Tech</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-gear-fill"></i> Configurations
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-code-slash"></i> Developer Portal
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-globe"></i> Multi-Country
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-journal-text"></i> Audit Logs
+                </a>
+            </div>
+
+            <div class="logout-section mt-4 mb-4">
+                <a href="#" class="logout-btn mx-2" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="bi bi-power me-2"></i> Shutdown System
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
