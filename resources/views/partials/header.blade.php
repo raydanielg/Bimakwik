@@ -64,6 +64,24 @@
         font-size: 0.85rem;
         font-family: 'Nunito', sans-serif;
     }
+    .top-bar a {
+        transition: opacity 0.2s ease;
+    }
+    .top-bar a:hover {
+        opacity: 0.8;
+    }
+    @media (max-width: 576px) {
+        .x-small-mobile {
+            font-size: 0.7rem !important;
+            padding: 4px 8px !important;
+        }
+        .top-info i {
+            font-size: 0.9rem;
+        }
+        .top-info span {
+            font-size: 0.75rem !important;
+        }
+    }
     .hover-opacity:hover {
         opacity: 0.85;
     }
