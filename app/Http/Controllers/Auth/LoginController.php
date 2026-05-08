@@ -38,6 +38,10 @@ class LoginController extends Controller
             return route('insurer.dashboard');
         }
 
+        if ($user->hasRole('broker')) {
+            return route('broker.dashboard');
+        }
+
         if ($user->hasRole('customer')) {
             return route('customer.dashboard');
         }

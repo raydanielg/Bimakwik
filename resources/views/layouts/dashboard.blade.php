@@ -326,6 +326,67 @@
                     <i class="bi bi-key"></i> API Integration
                 </a>
             </div>
+
+            @elseif(auth()->user()->hasRole('broker'))
+            <!-- Broker Menu -->
+            <div class="sidebar-heading">Sales Performance</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('broker.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Business</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-box-seam"></i> Compare Products
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-cart-plus"></i> Buy for Customer
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-people"></i> My Customers
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-check"></i> Active Policies
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Wallet & Earnings</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-wallet2"></i> My Wallet
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-graph-up-arrow"></i> Commissions
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-cash-stack"></i> Cash-out
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Customer Support</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-exclamation-octagon"></i> Submit Claim
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-clock-history"></i> Track Status
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Reports & Profile</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bar-chart-line"></i> Sales Reports
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-gear"></i> My Profile
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bank"></i> Bank Details
+                </a>
+            </div>
             @endif
 
             <div class="logout-section mt-4 mb-4">
