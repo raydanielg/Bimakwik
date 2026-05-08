@@ -247,7 +247,6 @@
                     <!-- Play Store -->
                     <div class="position-relative">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" height="60" style="filter: grayscale(1) opacity(0.5);">
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite" style="font-size: 0.65rem; z-index: 2;">Coming Soon</span>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite" style="font-size: 0.65rem; z-index: 2;">COMING SOON</span>
                     </div>
                     <!-- App Store -->
@@ -261,7 +260,7 @@
                 <div class="position-relative text-center">
                     <!-- Background Glow -->
                     <div class="position-absolute top-50 start-50 translate-middle bg-primary rounded-circle blur-3xl opacity-25" style="width: 400px; height: 400px; filter: blur(100px);"></div>
-                    <img src="https://img.freepik.com/free-psd/premium-mobile-phone-screen-mockup_53876-113350.jpg?t=st=1715168172~exp=1715171772~hmac=556942484432130e5270c56780c1097240f968987483733075c3175865662768&w=800" alt="Mobile App" class="img-fluid rounded-5 shadow-2xl position-relative" style="max-width: 300px; transform: rotate(-10deg);">
+                    <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800" alt="Bima Kwik Digital" class="img-fluid rounded-5 shadow-2xl position-relative">
                 </div>
             </div>
         </div>
