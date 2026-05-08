@@ -163,11 +163,3 @@
     }
 </style>
 @endsection
-        height: 40px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
-@endsection
