@@ -45,28 +45,19 @@
                     <a class="nav-link px-3 fw-bold text-primary active" href="{{ url('/') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 fw-bold text-primary" href="#">About</a>
+                    <a class="nav-link fw-bold px-3" href="{{ route('pages.about') }}">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 fw-bold text-primary" href="#">Products</a>
+                    <a class="nav-link fw-bold px-3" href="{{ route('pages.products') }}">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 fw-bold text-primary" href="#">Claims</a>
+                    <a class="nav-link fw-bold px-3" href="{{ route('pages.claims') }}">Claims</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 fw-bold text-primary" href="#">CSR</a>
+                    <a class="nav-link fw-bold px-3" href="{{ route('pages.branches') }}">Branches</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 fw-bold text-primary" href="#">Videos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3 fw-bold text-primary" href="#">Branches</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3 fw-bold text-dark" href="#">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link px-3 fw-bold text-primary" href="#">Blog</a>
+                    <a class="nav-link fw-bold px-3" href="{{ route('pages.contact') }}">Contact</a>
                 </li>
             </ul>
         </div>

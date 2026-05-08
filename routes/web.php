@@ -33,5 +33,18 @@ Route::get('/data-protection', function () { return view('legal.data-protection'
 Route::get('/help-center', function () { return view('support.help-center'); })->name('support.help');
 Route::get('/faqs', function () { return view('support.faqs'); })->name('support.faqs');
 
+// Professional Page Routes
+Route::get('/about-us', function () { return view('pages.about'); })->name('pages.about');
+Route::get('/products', function () { 
+    $products = \App\Models\Product::where('is_active', true)->get();
+    return view('pages.products', compact('products')); 
+})->name('pages.products');
+Route::get('/branches', function () { 
+    $branches = \App\Models\Branch::all();
+    return view('pages.branches', compact('branches')); 
+})->name('pages.branches');
+Route::get('/claims', function () { return view('pages.claims'); })->name('pages.claims');
+Route::get('/contact-us', function () { return view('pages.contact'); })->name('pages.contact');
+
 // Quote Route
 Route::get('/request-quote', function () { return view('quote'); })->name('quote.request');
