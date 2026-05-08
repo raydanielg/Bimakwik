@@ -382,74 +382,104 @@
 </style>
 
 <!-- Blog Section -->
-<section class="py-5 bg-white">
+<section class="py-5 bg-white overflow-hidden">
     <div class="container py-5">
         <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
-            <div class="col-md-8 text-center text-md-start">
-                <h6 class="text-primary fw-bold text-uppercase mb-3">Latest Updates</h6>
+            <div class="col-md-8 text-center text-md-start mb-4 mb-md-0">
+                <h6 class="text-primary fw-bold text-uppercase mb-3 small letter-spacing-1">Latest Updates</h6>
                 <h2 class="display-5 fw-bold">Our News & Blogs</h2>
-                <p class="text-secondary">Stay informed with the latest insights and news from the insurance industry.</p>
+                <p class="text-secondary mb-0">Stay informed with the latest insights and news from the insurance industry.</p>
             </div>
-            <div class="col-md-4 text-center text-md-end d-none d-md-block">
-                <a href="#" class="btn btn-outline-primary px-4 rounded-pill fw-bold">View All Posts <i class="bi bi-arrow-right ms-1"></i></a>
+            <div class="col-md-4 text-center text-md-end">
+                <a href="{{ route('resources.news') }}" class="btn-quote-custom">
+                    <span>View All Blogs</span>
+                    <div class="icon-circle">
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+                </a>
             </div>
         </div>
 
-        <div class="row g-4">
-            <!-- Blog 1 -->
-            <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
-                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift">
-                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=800" class="card-img-top" alt="Blog 1" style="height: 200px; object-fit: cover;">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <span class="badge bg-primary-soft text-primary rounded-pill px-3 py-2 small" style="background-color: rgba(13, 110, 253, 0.1);">Insurance Tips</span>
-                            <span class="text-secondary small ms-3"><i class="bi bi-calendar3 me-1"></i> May 5, 2026</span>
+        <div class="swiper blog-slider pb-5">
+            <div class="swiper-wrapper">
+                <!-- Blog 1 -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift">
+                        <div class="position-relative">
+                            <img src="https://www.bimakwik.com/wp-content/uploads/2024/07/family.webp" class="card-img-top" alt="Blog 1" style="height: 240px; object-fit: cover;">
+                            <span class="badge bg-primary position-absolute top-0 start-0 m-3 rounded-pill">Digital</span>
                         </div>
-                        <h5 class="fw-bold mb-3">Why You Need Life Insurance in 2026</h5>
-                        <p class="text-secondary small mb-4">Discover the key reasons why life insurance is more important than ever for your family's future security...</p>
-                        <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-chevron-right ms-1"></i></a>
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center gap-2 mb-3 small text-muted">
+                                <i class="bi bi-calendar3"></i> May 08, 2026
+                            </div>
+                            <h4 class="fw-bold mb-3 h5">How Digital Insurance is Changing Tanzania</h4>
+                            <p class="text-secondary small mb-4">Discover the impact of technology on making insurance more accessible to every Tanzanian...</p>
+                            <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog 2 -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift">
+                        <div class="position-relative">
+                            <img src="https://www.bimakwik.com/wp-content/uploads/2024/03/travel-insurance.jpg" class="card-img-top" alt="Blog 2" style="height: 240px; object-fit: cover;">
+                            <span class="badge bg-success position-absolute top-0 start-0 m-3 rounded-pill">Travel</span>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center gap-2 mb-3 small text-muted">
+                                <i class="bi bi-calendar3"></i> May 05, 2026
+                            </div>
+                            <h4 class="fw-bold mb-3 h5">Top 5 Reasons You Need Travel Insurance</h4>
+                            <p class="text-secondary small mb-4">Planning your next trip? Here is why having insurance should be your top priority...</p>
+                            <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog 3 -->
+                <div class="swiper-slide h-auto">
+                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift">
+                        <div class="position-relative">
+                            <img src="https://www.bimakwik.com/wp-content/uploads/2024/03/home-in.jpg" class="card-img-top" alt="Blog 3" style="height: 240px; object-fit: cover;">
+                            <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-3 rounded-pill">Security</span>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center gap-2 mb-3 small text-muted">
+                                <i class="bi bi-calendar3"></i> May 02, 2026
+                            </div>
+                            <h4 class="fw-bold mb-3 h5">Protecting Your Home: A Simple Guide</h4>
+                            <p class="text-secondary small mb-4">Learn the basics of home insurance and how it can safeguard your most valuable asset...</p>
+                            <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-arrow-right ms-1"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Blog 2 -->
-            <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
-                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift">
-                    <img src="https://images.unsplash.com/photo-1533134486753-c833f0ed4866?auto=format&fit=crop&q=80&w=800" class="card-img-top" alt="Blog 2" style="height: 200px; object-fit: cover;">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <span class="badge bg-success-soft text-success rounded-pill px-3 py-2 small" style="background-color: rgba(25, 135, 84, 0.1);">Digital Trends</span>
-                            <span class="text-secondary small ms-3"><i class="bi bi-calendar3 me-1"></i> May 2, 2026</span>
-                        </div>
-                        <h5 class="fw-bold mb-3">The Future of Digital Claims Processing</h5>
-                        <p class="text-secondary small mb-4">How BimaKwik is leading the way in making insurance claims faster and more efficient using AI...</p>
-                        <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-chevron-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Blog 3 -->
-            <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
-                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden hover-lift">
-                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=80&w=800" class="card-img-top" alt="Blog 3" style="height: 200px; object-fit: cover;">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <span class="badge bg-warning-soft text-warning rounded-pill px-3 py-2 small" style="background-color: rgba(255, 193, 7, 0.1);">Safety First</span>
-                            <span class="text-secondary small ms-3"><i class="bi bi-calendar3 me-1"></i> April 28, 2026</span>
-                        </div>
-                        <h5 class="fw-bold mb-3">Protecting Your Vehicle During Floods</h5>
-                        <p class="text-secondary small mb-4">Essential steps every car owner should take to minimize damage during the heavy rainy seasons...</p>
-                        <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-chevron-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center mt-5 d-md-none">
-            <a href="#" class="btn btn-outline-primary px-5 rounded-pill fw-bold">View All Posts</a>
+            <!-- Pagination dots -->
+            <div class="swiper-pagination blog-pagination"></div>
         </div>
     </div>
 </section>
+
+<style>
+    /* Blog Slider Custom Pagination */
+    .blog-pagination {
+        bottom: 0 !important;
+    }
+    .blog-pagination .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        background: #004a99;
+        opacity: 0.3;
+    }
+    .blog-pagination .swiper-pagination-bullet-active {
+        width: 25px;
+        border-radius: 20px;
+        background: #004a99;
+        opacity: 1;
+    }
+</style>
 
 <!-- Testimonials Section -->
 <section class="py-5 bg-light overflow-hidden">
