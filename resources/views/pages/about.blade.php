@@ -44,42 +44,42 @@
             </div>
             <div class="col-lg-6 animate__animated animate__fadeInRight">
                 <div class="position-relative">
-                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800" alt="About Bima Kwik" class="img-fluid rounded-4 shadow-lg">
-                    <div class="position-absolute bottom-0 start-0 bg-white p-4 m-4 rounded-3 shadow-sm d-none d-md-block" style="width: 200px;">
-                        <h3 class="fw-bold text-primary mb-0">100%</h3>
-                        <p class="small text-muted mb-0">Digital Solution</p>
+                    <img src="{{ asset('hero/passionate-about-what-he-does-manager-sitting-having-discussion-with-employee_590464-14320.jpg') }}" alt="About Bima Kwik" class="img-fluid rounded-4 shadow-lg">
+                    <div class="position-absolute bottom-0 start-0 bg-white p-4 m-4 rounded-3 shadow-sm d-none d-md-block" style="width: 220px; border-left: 5px solid #0d6efd;">
+                        <h3 class="fw-bold text-primary mb-0">Tanzanian</h3>
+                        <p class="small text-muted mb-0">Licensed Platform</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- The Africa Situation -->
-        <div class="row mb-5 py-5 bg-light rounded-4">
-            <div class="col-lg-12 text-center mb-5">
-                <h2 class="fw-bold">The Africa Situation</h2>
-                <div class="bg-primary mx-auto" style="width: 60px; height: 3px;"></div>
+        <div class="row mb-5 py-5 bg-light rounded-4 align-items-center">
+            <div class="col-lg-5 mb-4 mb-lg-0 px-4 animate__animated animate__zoomIn">
+                <img src="{{ asset('hero/explain-black-man-laptop-office-meeting-ideas-project-with-teamwork-collaboration-employee-discussion-boardroom-with-research-partnership-strategy-as-lawyers_590464-394339.jpg') }}" alt="Africa Strategy" class="img-fluid rounded-4 shadow">
             </div>
-            <div class="col-lg-8 mx-auto text-center">
-                <p class="lead text-muted mb-5">
+            <div class="col-lg-7 px-4 animate__animated animate__fadeInRight">
+                <h2 class="fw-bold mb-4">The Africa Situation</h2>
+                <p class="lead text-muted mb-4">
                     Insurance penetration in Africa is currently less than 3%, despite a potential market of 1.4 billion people. Bima Kwik addresses this by changing the perception of insurance from an "expense" to an "investment" or "business opportunity."
                 </p>
-                <div class="row g-4">
+                <div class="row g-3">
                     <div class="col-md-4">
-                        <div class="p-4 bg-white rounded-3 shadow-sm h-100">
-                            <h4 class="fw-bold text-primary">3%</h4>
-                            <p class="small mb-0">Current Penetration</p>
+                        <div class="p-3 bg-white rounded-3 shadow-sm border-top border-3 border-primary">
+                            <h4 class="fw-bold text-primary mb-1">3%</h4>
+                            <p class="small text-muted mb-0">Current Penetration</p>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="p-4 bg-white rounded-3 shadow-sm h-100">
-                            <h4 class="fw-bold text-primary">1.4B</h4>
-                            <p class="small mb-0">Potential Market</p>
+                        <div class="p-3 bg-white rounded-3 shadow-sm border-top border-3 border-success">
+                            <h4 class="fw-bold text-success mb-1">1.4B</h4>
+                            <p class="small text-muted mb-0">Potential Market</p>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="p-4 bg-white rounded-3 shadow-sm h-100">
-                            <h4 class="fw-bold text-primary">Core</h4>
-                            <p class="small mb-0">Intermediary System</p>
+                        <div class="p-3 bg-white rounded-3 shadow-sm border-top border-3 border-warning">
+                            <h4 class="fw-bold text-warning mb-1">API</h4>
+                            <p class="small text-muted mb-0">Core Connectivity</p>
                         </div>
                     </div>
                 </div>
@@ -88,21 +88,22 @@
 
         <!-- Financial Inclusion Section -->
         <div class="row align-items-center mb-5">
-            <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+            <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0 animate__animated animate__fadeInRight">
                 <h2 class="fw-bold mb-4 text-primary border-start border-4 border-primary ps-3">Financial Inclusion</h2>
                 <p class="text-muted lh-lg mb-4">
                     Our solution contributes to financial inclusion by providing increased social protection through customized insurance products for community groups, individuals, and businesses.
                 </p>
-                <div class="card border-0 bg-primary text-white p-4 rounded-4 shadow">
-                    <h5 class="fw-bold mb-3">Empowering Communities</h5>
+                <div class="card border-0 bg-primary text-white p-4 rounded-4 shadow-lg animate__animated animate__pulse animate__infinite animate__slower">
+                    <h5 class="fw-bold mb-3"><i class="bi bi-people-fill me-2"></i> Empowering Communities</h5>
                     <p class="mb-0">
                         We implement a revenue sharing model with engaged channels and partners, empowering disabled individuals, women, youth, and SMEs to become part of the insurance ecosystem.
                     </p>
                 </div>
             </div>
+            <div class="col-lg-6 order-lg-1 animate__animated animate__fadeInLeft">
+                <img src="{{ asset('hero/legal-women-contract-with-team-planning-documents-partnership-b2b-agreement-lawyer-financial-advisor-consulting-with-people-office-sign-compliance-deal-divorce-review_590464-152088.jpg') }}" alt="Financial Inclusion" class="img-fluid rounded-4 shadow">
+            </div>
         </div>
-    </div>
-</section>
 
         <!-- Mission, Vision, Values -->
         <div class="row g-4 mb-5">
