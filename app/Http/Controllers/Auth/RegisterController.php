@@ -64,10 +64,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // Assign default customer role
+        $customerRole = \App\Models\Role::where('slug', 'customer')->first();
+        if ($customerRole) {
+            $user->roles()->attach($customerRole->id);
+        }
+
+        return $user;
     }
 }
