@@ -24,7 +24,7 @@
             </div>
 
             <!-- Quick Links -->
-            <div class="col-lg-2 col-md-6">
+            <div class="col-lg-3 col-6 col-md-6">
                 <h6 class="fw-bold mb-4 text-uppercase small letter-spacing-1">Quick Links</h6>
                 <ul class="list-unstyled footer-links">
                     <li><a href="{{ url('/') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Home</a></li>
@@ -36,7 +36,7 @@
             </div>
 
             <!-- Resources -->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-6 col-md-6">
                 <h6 class="fw-bold mb-4 text-uppercase small letter-spacing-1">Resources</h6>
                 <ul class="list-unstyled footer-links">
                     <li><a href="{{ route('resources.guidelines') }}"><i class="bi bi-chevron-right me-2 text-success"></i>Guidelines</a></li>
@@ -48,7 +48,7 @@
             </div>
 
             <!-- Support -->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-6 col-md-6">
                 <h6 class="fw-bold mb-4 text-uppercase small letter-spacing-1">Support</h6>
                 <ul class="list-unstyled footer-links">
                     <li><a href="{{ route('register') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Create Account</a></li>
@@ -59,7 +59,7 @@
             </div>
 
             <!-- Legal -->
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-6 col-md-6">
                 <h6 class="fw-bold mb-4 text-uppercase small letter-spacing-1">Legal</h6>
                 <ul class="list-unstyled footer-links">
                     <li><a href="{{ route('privacy') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Privacy Policy</a></li>
