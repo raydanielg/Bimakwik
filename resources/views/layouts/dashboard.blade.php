@@ -12,76 +12,172 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
-        body { font-family: 'Inter', sans-serif; overflow-x: hidden; background-color: #f8f9fa; }
+        @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap');
+        
+        body { font-family: 'Public Sans', sans-serif; overflow-x: hidden; background-color: #f4f7fa; color: #334155; }
         #wrapper { display: flex; width: 100%; align-items: stretch; }
-        #sidebar-wrapper { min-width: 260px; max-width: 260px; min-height: 100vh; transition: all 0.3s; background: #1a1d20; z-index: 1000; }
-        #sidebar-wrapper.toggled { margin-left: -260px; }
-        #page-content-wrapper { width: 100%; flex-grow: 1; }
-        .sidebar-heading { background: #141619; color: #fff; }
-        .list-group-item { background: transparent; color: rgba(255,255,255,0.7); border: none; padding: 12px 25px; transition: all 0.2s; font-size: 0.95rem; }
+        
+        /* Sidebar Styling like the image */
+        #sidebar-wrapper { 
+            min-width: 260px; 
+            max-width: 260px; 
+            min-height: 100vh; 
+            transition: all 0.3s; 
+            background: #2b3448; /* Dark Navy from image */
+            z-index: 1000;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+        }
+        
+        .sidebar-user-section {
+            padding: 30px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .user-avatar-lg {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            margin-right: 12px;
+        }
+        
+        .user-info-text {
+            color: #fff;
+            font-size: 0.85rem;
+        }
+        
+        .user-info-text .name { font-weight: 600; display: block; }
+        .user-info-text .role { color: rgba(255,255,255,0.5); font-size: 0.75rem; }
+
+        .sidebar-heading { 
+            padding: 20px 25px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.3);
+            font-weight: 700;
+        }
+
+        .list-group-item { 
+            background: transparent; 
+            color: rgba(255,255,255,0.7); 
+            border: none; 
+            padding: 12px 25px; 
+            transition: all 0.2s; 
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .list-group-item i { font-size: 1.1rem; margin-right: 15px; opacity: 0.7; }
         .list-group-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
-        .list-group-item.active { background: #0d6efd !important; color: #fff !important; font-weight: 600; }
-        .navbar { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .card { border: none; box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05); border-radius: 12px; }
-        .sticky-top { top: 0; z-index: 999; }
+        .list-group-item.active { 
+            background: rgba(13, 110, 253, 0.1) !important; 
+            color: #3b82f6 !important; 
+            border-left: 4px solid #3b82f6;
+            border-radius: 0 !important;
+        }
+        .list-group-item.active i { opacity: 1; color: #3b82f6; }
+
+        #page-content-wrapper { width: 100%; flex-grow: 1; }
+        
+        /* Navbar Styling */
+        .navbar { 
+            background: #fff; 
+            padding: 15px 30px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .search-bar {
+            background: #f1f5f9;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            width: 300px;
+        }
+
+        .card { 
+            border: none; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-radius: 12px; 
+            background: #fff;
+        }
+        
+        .stat-card { padding: 20px; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+        .stat-label { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; }
+        .stat-trend { font-size: 0.7rem; font-weight: 600; }
+        
+        #sidebar-wrapper.toggled { margin-left: -260px; }
     </style>
 </head>
 <body>
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <div class="sidebar-heading p-4 fs-4 fw-bold border-bottom border-secondary shadow-sm">
-                <span class="text-primary">BIMA</span>KWIK
+            <div class="sidebar-user-section d-flex align-items-center">
+                <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name ?? 'User' }}&background=0D6EFD&color=fff" class="user-avatar-lg">
+                <div class="user-info-text">
+                    <span class="name">Dorice Malle</span>
+                    <span class="role">Super Admin</span>
+                </div>
             </div>
-            <div class="list-group list-group-flush p-2 mt-2">
-                <a href="#" class="list-group-item list-group-item-action rounded mb-1 active">
-                    <i class="bi bi-speedometer2 me-2"></i> Dashboard
+
+            <div class="sidebar-heading mt-3">Main Menu</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action active">
+                    <i class="bi bi-grid-fill"></i> Dashboard
                 </a>
-                <a href="#" class="list-group-item list-group-item-action rounded mb-1">
-                    <i class="bi bi-people me-2"></i> Users
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-people-fill"></i> Manage Users
                 </a>
-                <a href="#" class="list-group-item list-group-item-action rounded mb-1">
-                    <i class="bi bi-shield-check me-2"></i> Policies
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-check"></i> Insurance Policies
                 </a>
-                <a href="#" class="list-group-item list-group-item-action rounded mb-1">
-                    <i class="bi bi-file-earmark-text me-2"></i> Claims
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-file-earmark-bar-graph"></i> Claims Report
                 </a>
-                <a href="#" class="list-group-item list-group-item-action rounded mb-1">
-                    <i class="bi bi-gear me-2"></i> Settings
+            </div>
+
+            <div class="sidebar-heading mt-4">Settings & Tools</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-gear-fill"></i> System Settings
+                </a>
+                <a href="#" class="list-group-item list-group-item-action text-danger">
+                    <i class="bi bi-box-arrow-right"></i> Logout
                 </a>
             </div>
         </div>
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light px-4 py-3 sticky-top">
-                <button class="btn btn-link text-dark p-0 me-3" id="menu-toggle">
-                    <i class="bi bi-list fs-4"></i>
-                </button>
-                <h5 class="mb-0 fw-bold">@yield('dashboard_title', 'Dashboard')</h5>
-                
-                <div class="ms-auto d-flex align-items-center">
-                    <div class="dropdown me-3">
-                        <button class="btn btn-link text-dark position-relative p-0" data-bs-toggle="dropdown">
-                            <i class="bi bi-bell fs-5"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.5rem;">3</span>
-                        </button>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-link text-dark d-flex align-items-center text-decoration-none dropdown-toggle p-0" data-bs-toggle="dropdown">
-                            <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name ?? 'User' }}&background=0D6EFD&color=fff" class="rounded-circle me-2" width="35">
-                            <span class="d-none d-md-inline small fw-semibold text-dark">{{ auth()->user()->name ?? 'Guest' }}</span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button class="dropdown-item text-danger"><i class="bi bi-box-arrow-right me-2"></i> Logout</button>
-                                </form>
-                            </li>
-                        </ul>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <button class="btn p-0 me-3" id="menu-toggle">
+                        <i class="bi bi-list fs-4"></i>
+                    </button>
+                    
+                    <form class="d-none d-md-flex ms-2">
+                        <input class="search-bar" type="search" placeholder="Search data, reports...">
+                    </form>
+
+                    <div class="ms-auto d-flex align-items-center">
+                        <div class="dropdown me-3">
+                            <a href="#" class="text-dark position-relative" data-bs-toggle="dropdown">
+                                <i class="bi bi-bell fs-5"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.5rem;">5</span>
+                            </a>
+                        </div>
+                        <div class="dropdown me-3">
+                            <a href="#" class="text-dark" data-bs-toggle="dropdown">
+                                <i class="bi bi-chat-dots fs-5"></i>
+                            </a>
+                        </div>
+                        <div class="vr mx-3 text-secondary opacity-25" style="height: 25px;"></div>
+                        <span class="small fw-semibold me-2 d-none d-md-inline">Dorice Malle</span>
+                        <img src="https://ui-avatars.com/api/?name=Dorice+Malle" class="rounded-circle" width="35">
                     </div>
                 </div>
             </nav>
