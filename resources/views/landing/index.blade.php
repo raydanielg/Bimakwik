@@ -224,23 +224,6 @@
                 <h2 class="display-5 fw-bold mb-4">Insurance in Your Pocket</h2>
                 <p class="lead text-white-50 mb-5">Experience the future of insurance with our upcoming mobile applications. Whether you are a customer looking for protection or a referrer aiming to grow your business, Bima Kwik is coming to your phone soon.</p>
                 
-                <div class="row g-4 mb-5">
-                    <div class="col-sm-6 text-center">
-                        <div class="d-inline-flex align-items-center p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10">
-                            <div class="icon-box bg-primary p-2 rounded-3">
-                                <i class="bi bi-android2 fs-4"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 text-center">
-                        <div class="d-inline-flex align-items-center p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10">
-                            <div class="icon-box bg-white bg-opacity-20 p-2 rounded-3">
-                                <i class="bi bi-apple fs-4"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="d-flex flex-wrap gap-4 align-items-center">
                     <!-- Play Store -->
                     <div class="position-relative">
@@ -249,7 +232,7 @@
                     </div>
                     <!-- App Store -->
                     <div class="position-relative">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="App Store" height="60" style="filter: grayscale(1) opacity(0.5);">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="App Store" height="60" style="font-size: 0.65rem; filter: grayscale(1) opacity(0.5);" height="60">
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite" style="font-size: 0.65rem; z-index: 2;">COMING SOON</span>
                     </div>
                 </div>
