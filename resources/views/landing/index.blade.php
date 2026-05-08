@@ -225,20 +225,18 @@
                 <p class="lead text-white-50 mb-5">Experience the future of insurance with our upcoming mobile applications. Whether you are a customer looking for protection or a referrer aiming to grow your business, Bima Kwik is coming to your phone soon.</p>
                 
                 <div class="row g-4 mb-5">
-                    <div class="col-sm-6">
-                        <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10">
-                            <div class="icon-box bg-primary p-2 rounded-3 me-3">
+                    <div class="col-sm-6 text-center">
+                        <div class="d-inline-flex align-items-center p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10">
+                            <div class="icon-box bg-primary p-2 rounded-3">
                                 <i class="bi bi-android2 fs-4"></i>
                             </div>
-                            <h6 class="fw-bold mb-0">Android</h6>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10">
-                            <div class="icon-box bg-white bg-opacity-20 p-2 rounded-3 me-3">
+                    <div class="col-sm-6 text-center">
+                        <div class="d-inline-flex align-items-center p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10">
+                            <div class="icon-box bg-white bg-opacity-20 p-2 rounded-3">
                                 <i class="bi bi-apple fs-4"></i>
                             </div>
-                            <h6 class="fw-bold mb-0">iOS</h6>
                         </div>
                     </div>
                 </div>
