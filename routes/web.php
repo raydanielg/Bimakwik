@@ -25,9 +25,17 @@ Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController:
 
 // Dashboards
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/insurer/dashboard', [App\Http\Controllers\Insurer\DashboardController::class, 'index'])->name('insurer.dashboard');
-    Route::get('/dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('customer.dashboard');
+    Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
+        ->middleware('role:super-admin,sub-admin')
+        ->name('admin.dashboard');
+        
+    Route::get('/insurer/dashboard', [App\Http\Controllers\Insurer\DashboardController::class, 'index'])
+        ->middleware('role:insurer')
+        ->name('insurer.dashboard');
+        
+    Route::get('/dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])
+        ->middleware('role:customer')
+        ->name('customer.dashboard');
 });
 
 // Legal Routes
