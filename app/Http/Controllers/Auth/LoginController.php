@@ -50,6 +50,10 @@ class LoginController extends Controller
             return route('financing-partner.dashboard');
         }
 
+        if ($user->hasRole('developer')) {
+            return route('developer.dashboard');
+        }
+
         if ($user->hasRole('customer')) {
             return route('customer.dashboard');
         }

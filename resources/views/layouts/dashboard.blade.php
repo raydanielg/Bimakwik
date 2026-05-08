@@ -568,6 +568,57 @@
                     <i class="bi bi-bank"></i> Bank Details
                 </a>
             </div>
+
+            @elseif(auth()->user()->hasRole('developer'))
+            <!-- Developer Menu -->
+            <div class="sidebar-heading">Tech Monitoring</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('developer.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('developer.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-activity"></i> API Usage Metrics
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-heart-pulse"></i> System Health
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">API Management</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-journal-text"></i> API Documentation
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-key"></i> Get API Keys
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-link-45deg"></i> Manage Webhooks
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-terminal"></i> Test Endpoints
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-list-columns-reverse"></i> View API Logs
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">AI & Integration</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-robot"></i> Available AI Models
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-cpu"></i> Test AI Predictions
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Settings</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-gear"></i> Developer Profile
+                </a>
+            </div>
             @endif
 
             <div class="logout-section mt-4 mb-4">
