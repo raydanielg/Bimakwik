@@ -156,47 +156,34 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper" class="d-flex flex-column">
             <div class="sidebar-brand">
-                <span class="brand-name">Malkia</span>
-                <span class="admin-label">Admin Panel</span>
+                <span class="brand-name"><span class="text-primary">BIMA</span>KWIK</span>
+                <span class="admin-label">Insurance Portal</span>
             </div>
 
             <div class="sidebar-heading">Main</div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action active">
+                <a href="{{ route('admin.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-grid-fill"></i> Dashboard
                 </a>
             </div>
 
-            <div class="sidebar-heading">Accounting</div>
+            <div class="sidebar-heading">Insurance Management</div>
             <div class="list-group list-group-flush">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-file-earmark-text"></i> Vouchers
+                    <i class="bi bi-shield-check"></i> Policies
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-book"></i> Accounts
+                    <i class="bi bi-file-earmark-text"></i> Claims
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-bank"></i> Banks
+                    <i class="bi bi-people"></i> Customers
                 </a>
             </div>
 
-            <div class="sidebar-heading">Mothers & Content</div>
+            <div class="sidebar-heading">System</div>
             <div class="list-group list-group-flush">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-people"></i> Mothers Intake
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-newspaper"></i> Articles
-                </a>
-            </div>
-
-            <div class="sidebar-heading">ERP System</div>
-            <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-mortarboard"></i> ELMS Courses
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-archive"></i> Inventory
+                    <i class="bi bi-gear"></i> Settings
                 </a>
             </div>
 
@@ -221,15 +208,25 @@
                             <i class="bi bi-bell text-secondary"></i>
                         </div>
                         
-                        <div class="header-profile shadow-sm">
-                            <div class="bg-secondary bg-opacity-10 rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: 700; font-size: 0.8rem; color: #475569;">
-                                M
+                        <div class="header-profile shadow-sm" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="bg-primary bg-opacity-10 rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: 700; font-size: 0.8rem; color: #0d6efd;">
+                                {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
                             </div>
                             <div class="d-none d-md-block">
-                                <div style="font-size: 0.75rem; font-weight: 700; line-height: 1; color: #1e293b;">Malkia Admin</div>
-                                <div style="font-size: 0.65rem; color: #94a3b8; font-weight: 500;">Administrator <i class="bi bi-chevron-down ms-1"></i></div>
+                                <div style="font-size: 0.75rem; font-weight: 700; line-height: 1; color: #1e293b;">{{ auth()->user()->name ?? 'User Name' }}</div>
+                                <div style="font-size: 0.65rem; color: #94a3b8; font-weight: 500;">{{ auth()->user()->roles->first()->name ?? 'Role' }} <i class="bi bi-chevron-down ms-1"></i></div>
                             </div>
                         </div>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
+                            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item py-2 text-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="bi bi-box-arrow-left me-2"></i> Sign Out
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
