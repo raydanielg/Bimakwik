@@ -2,13 +2,13 @@
 <div class="top-bar py-2 shadow-sm border-bottom">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="top-info d-flex gap-4">
-            <a href="mailto:info@bimacoinsurance.co.tz" class="text-white text-decoration-none d-flex align-items-center hover-opacity">
+            <a href="mailto:info@bimakwik.com" class="text-white text-decoration-none d-flex align-items-center hover-opacity">
                 <i class="bi bi-envelope-fill me-2 text-warning"></i> 
-                <span class="d-none d-sm-inline">info@bimacoinsurance.co.tz</span>
+                <span class="d-none d-sm-inline">info@bimakwik.com</span>
             </a>
-            <a href="tel:+255746179849" class="text-white text-decoration-none d-flex align-items-center hover-opacity">
+            <a href="tel:+255762883065" class="text-white text-decoration-none d-flex align-items-center hover-opacity">
                 <i class="bi bi-telephone-fill me-2 text-warning"></i> 
-                <span>+255 746 179 849</span>
+                <span>+255 762 883 065</span>
             </a>
         </div>
         <div class="top-links d-flex align-items-center gap-3">
