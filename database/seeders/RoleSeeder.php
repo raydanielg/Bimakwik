@@ -34,16 +34,24 @@ class RoleSeeder extends Seeder
             $role = \App\Models\Role::updateOrCreate(['slug' => $roleData['slug']], $roleData);
             $this->command->info("Role created/updated: {$role->name}");
 
-            // Create a test user for each role
+            // Create or update a test user for each role
             $email = $roleData['slug'] . '@bimakwik.com';
-            $user = \App\Models\User::updateOrCreate(
-                ['email' => $email],
-                [
+            $user = \App\Models\User::where('email', $email)->first();
+
+            if ($user) {
+                $user->update([
+                    'password' => \Illuminate\Support\Facades\Hash::make('password'),
+                ]);
+                $this->command->comment("Password reset for existing user: {$email}");
+            } else {
+                $user = \App\Models\User::create([
                     'name' => $roleData['name'] . ' Test',
+                    'email' => $email,
                     'password' => \Illuminate\Support\Facades\Hash::make('password'),
                     'email_verified_at' => now(),
-                ]
-            );
+                ]);
+                $this->command->info("New user created: {$email}");
+            }
 
             // Assign role to user if not already assigned
             if (!$user->roles()->where('role_id', $role->id)->exists()) {
