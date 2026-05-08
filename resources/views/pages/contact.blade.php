@@ -14,33 +14,51 @@
                     <h3 class="fw-bold mb-4">Contact Information</h3>
                     <p class="mb-5 opacity-75">We are here to provide you with more information, answer any questions you may have and create an effective solution for your insurance needs.</p>
                     
-                    <div class="d-flex align-items-center mb-4 gap-3">
-                        <div class="icon-circle bg-white text-primary">
-                            <i class="bi bi-geo-alt"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">Address</h6>
-                            <p class="mb-0 small opacity-75">Bima Complex, Posta mpya, Dar es Salaam</p>
-                        </div>
-                    </div>
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                        <div class="card-body p-4 p-md-5">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="icon-box bg-primary bg-opacity-10 p-3 rounded-3 me-3">
+                                    <i class="bi bi-geo-alt text-primary fs-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Our Location</h5>
+                                    <p class="text-muted mb-0">Dar es Salaam, Tanzania</p>
+                                </div>
+                            </div>
 
-                    <div class="d-flex align-items-center mb-4 gap-3">
-                        <div class="icon-circle bg-white text-primary">
-                            <i class="bi bi-telephone"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">Phone</h6>
-                            <p class="mb-0 small opacity-75">+255 762 883 065</p>
-                        </div>
-                    </div>
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="icon-box bg-success bg-opacity-10 p-3 rounded-3 me-3">
+                                    <i class="bi bi-telephone text-success fs-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Call Us</h5>
+                                    <p class="text-muted mb-0">+255 762 883 065</p>
+                                </div>
+                            </div>
 
-                    <div class="d-flex align-items-center mb-4 gap-3">
-                        <div class="icon-circle bg-white text-primary">
-                            <i class="bi bi-envelope"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">Email</h6>
-                            <p class="mb-0 small opacity-75">info@bimakwik.com</p>
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="icon-box bg-warning bg-opacity-10 p-3 rounded-3 me-3">
+                                    <i class="bi bi-envelope text-warning fs-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Email Us</h5>
+                                    <p class="text-muted mb-0">info@bimakwik.com</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <div class="icon-box bg-info bg-opacity-10 p-3 rounded-3 me-3">
+                                    <i class="bi bi-person-badge text-info fs-3"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Contact Person</h5>
+                                    <p class="text-muted mb-0">Dorice Malle</p>
+                                </div>
+                            </div>
+
+                            <hr class="my-5">
+
+                            <h5 class="fw-bold mb-4">Follow Us</h5>
                         </div>
                     </div>
                 </div>
