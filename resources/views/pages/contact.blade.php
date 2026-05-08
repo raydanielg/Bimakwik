@@ -30,7 +30,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 fw-bold">Phone</h6>
-                            <p class="mb-0 small opacity-75">+255 746 179 849</p>
+                            <p class="mb-0 small opacity-75">+255 762 883 065</p>
                         </div>
                     </div>
 
@@ -40,7 +40,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 fw-bold">Email</h6>
-                            <p class="mb-0 small opacity-75">info@bimacoinsurance.co.tz</p>
+                            <p class="mb-0 small opacity-75">info@bimakwik.com</p>
                         </div>
                     </div>
                 </div>

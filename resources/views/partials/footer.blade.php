@@ -76,8 +76,8 @@
                 <h6 class="fw-bold mb-3 small text-uppercase letter-spacing-1">Contact</h6>
                 <div class="footer-contact">
                     <p class="mb-2"><i class="bi bi-geo-alt-fill text-warning me-2"></i> United Republic of Tanzania</p>
-                    <p class="mb-2"><i class="bi bi-envelope-fill text-warning me-2"></i> info@bimacoinsurance.co.tz</p>
-                    <p class="mb-0"><i class="bi bi-telephone-fill text-warning me-2"></i> +255 746 179 849</p>
+                    <p class="mb-2"><i class="bi bi-envelope-fill text-warning me-2"></i> info@bimakwik.com</p>
+                    <p class="mb-0"><i class="bi bi-telephone-fill text-warning me-2"></i> +255 762 883 065</p>
                 </div>
             </div>
 
