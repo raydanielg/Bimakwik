@@ -215,38 +215,39 @@
     </div>
 </section>
 
-<!-- Mobile App Section -->
-<section class="py-5 bg-dark text-white overflow-hidden position-relative" style="background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);">
-    <div class="container py-5">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-5 mb-lg-0 animate__animated animate__fadeInLeft">
-                <h6 class="text-primary fw-bold text-uppercase mb-3">Our Mobile App</h6>
-                <h2 class="display-5 fw-bold mb-4">Insurance in Your Pocket</h2>
-                <p class="lead text-white-50 mb-5">Experience the future of insurance with our upcoming mobile applications. Whether you are a customer looking for protection or a referrer aiming to grow your business, Bima Kwik is coming to your phone soon.</p>
-                
-                <div class="d-flex flex-wrap gap-4 align-items-center">
-                    <!-- Play Store -->
-                    <div class="position-relative">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" height="60" style="filter: grayscale(1) opacity(0.5);">
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite" style="font-size: 0.65rem; z-index: 2;">COMING SOON</span>
+    <!-- Mobile App Section -->
+    <section class="py-5 position-relative overflow-hidden" style="min-height: 500px;">
+        <!-- Background Image with Overlay -->
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="z-index: 1;">
+            <img src="{{ asset('business-call-center-black-woman-with-telemarketing-customer-service-mockup-space-with-employee-african-person-insurance-consultant-agent-fraud-department-help-desk-tech-support_590464-377692.jpg') }}" alt="Support" class="w-100 h-100 object-fit-cover">
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(90deg, rgba(13, 110, 253, 0.9) 0%, rgba(0, 0, 0, 0.4) 100%);"></div>
+        </div>
+
+        <div class="container position-relative py-5" style="z-index: 2;">
+            <div class="row align-items-center">
+                <div class="col-lg-7 animate__animated animate__fadeInLeft">
+                    <div class="p-4 p-md-5 rounded-4" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
+                        <h6 class="text-warning fw-bold text-uppercase mb-3 letter-spacing-2">Experience the Future</h6>
+                        <h2 class="display-4 fw-bold text-white mb-4">Insurance in Your Pocket</h2>
+                        <p class="lead text-white mb-5 opacity-90">Experience the future of insurance with our upcoming mobile applications. Bima Kwik is bringing seamless protection and claims notification directly to your phone. Stay tuned!</p>
+                        
+                        <div class="d-flex flex-wrap gap-4 align-items-center">
+                            <!-- Play Store -->
+                            <div class="position-relative">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" height="55" style="filter: grayscale(1) brightness(2) opacity(0.7);">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite shadow" style="font-size: 0.6rem; z-index: 3; white-space: nowrap;">COMING SOON</span>
+                            </div>
+                            <!-- App Store -->
+                            <div class="position-relative">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="App Store" height="55" style="filter: grayscale(1) brightness(2) opacity(0.7);">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite shadow" style="font-size: 0.6rem; z-index: 3; white-space: nowrap;">COMING SOON</span>
+                            </div>
+                        </div>
                     </div>
-                    <!-- App Store -->
-                    <div class="position-relative">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="App Store" height="60" style="font-size: 0.65rem; filter: grayscale(1) opacity(0.5);" height="60">
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite" style="font-size: 0.65rem; z-index: 2;">COMING SOON</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 animate__animated animate__fadeInRight">
-                <div class="position-relative text-center">
-                    <!-- Background Glow -->
-                    <div class="position-absolute top-50 start-50 translate-middle bg-primary rounded-circle blur-3xl opacity-25" style="width: 400px; height: 400px; filter: blur(100px);"></div>
-                    <img src="https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800" alt="Bima Kwik Digital" class="img-fluid rounded-5 shadow-2xl position-relative">
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 <!-- Trusted By Section -->
 <section class="py-5 bg-white border-top">
