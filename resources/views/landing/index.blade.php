@@ -254,7 +254,7 @@
                             <tr class="border-bottom border-white border-opacity-10">
                                 <th class="py-4 h4 fw-bold text-warning" style="width: 20%;">Feature</th>
                                 <th class="py-4 text-center h4 fw-bold" style="width: 60%;">Our Digital Advantage</th>
-                                <th class="py-4 text-center text-white-50 fw-normal small" style="width: 20%;">Other Companies</th>
+                                <th class="py-4 text-center text-white fw-normal small" style="width: 20%;">Other Companies</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -265,7 +265,7 @@
                                     <p class="mb-0 h6 fw-normal" style="line-height: 1.6;">Recorded Lines - No Misselling - Know your Advisor, Insurance Digital Platform (IDP’s) Approved.</p>
                                 </td>
                                 <td class="py-4 text-center">
-                                    <i class="bi bi-x-lg text-danger h4"></i>
+                                    <i class="bi bi-x-lg text-white h4"></i>
                                 </td>
                             </tr>
                             <!-- Product Row -->
@@ -275,7 +275,7 @@
                                     <p class="mb-0 h6 fw-normal" style="line-height: 1.6;">Verified Leading brands, Reputation Check, Quick Comparison Check of Features, Brand & Price, Thorough Product Research Before Launch.</p>
                                 </td>
                                 <td class="py-4 text-center">
-                                    <i class="bi bi-x-lg text-danger h4"></i>
+                                    <i class="bi bi-x-lg text-white h4"></i>
                                 </td>
                             </tr>
                             <!-- Convenience Row -->
@@ -285,7 +285,7 @@
                                     <p class="mb-0 h6 fw-normal" style="line-height: 1.6;">100% Digital - Takes 5 Mins, No Documents, Free Advise via WhatsApp, Email or Call, Quick Comparison Charts & Tables</p>
                                 </td>
                                 <td class="py-4 text-center">
-                                    <i class="bi bi-x-lg text-danger h4"></i>
+                                    <i class="bi bi-x-lg text-white h4"></i>
                                 </td>
                             </tr>
                             <!-- Support Row -->
@@ -295,7 +295,7 @@
                                     <p class="mb-0 h6 fw-normal" style="line-height: 1.6;">Dedicated Claims & Guidance Online Free Helpdesk. We’re With You Always - Renewal & Support</p>
                                 </td>
                                 <td class="py-4 text-center">
-                                    <i class="bi bi-x-lg text-danger h4"></i>
+                                    <i class="bi bi-x-lg text-white h4"></i>
                                 </td>
                             </tr>
                         </tbody>
