@@ -157,9 +157,11 @@
         <div id="sidebar-wrapper" class="d-flex flex-column" style="overflow-y: auto;">
             <div class="sidebar-brand sticky-top bg-white border-bottom">
                 <span class="brand-name"><span class="text-primary">BIMA</span>KWIK</span>
-                <span class="admin-label">Super Admin Portal</span>
+                <span class="admin-label">{{ auth()->user()->roles->first()->name ?? 'Portal' }}</span>
             </div>
 
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('sub-admin'))
+            <!-- Super Admin Menu -->
             <div class="sidebar-heading">Core</div>
             <div class="list-group list-group-flush px-2">
                 <a href="{{ route('admin.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
@@ -258,9 +260,77 @@
                 </a>
             </div>
 
+            @elseif(auth()->user()->hasRole('insurer'))
+            <!-- Insurer Menu -->
+            <div class="sidebar-heading">Performance</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('insurer.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('insurer.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Portfolio</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-box-seam"></i> My Products
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-hammer"></i> Create Product
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-people"></i> My Customers
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-diagram-3"></i> Channel Network
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Financials</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-wallet2"></i> Premiums Received
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-cash-stack"></i> Commission Payouts
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bank"></i> Cash-out Requests
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Claims & Providers</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-exclamation-octagon"></i> Claims Management
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-hospital"></i> Service Providers
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-receipt"></i> Provider Bills
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Reports & Tools</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bar-chart-line"></i> Analytics Reports
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-chat-left-dots"></i> Communication
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-building-gear"></i> Company Profile
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-key"></i> API Integration
+                </a>
+            </div>
+            @endif
+
             <div class="logout-section mt-4 mb-4">
                 <a href="#" class="logout-btn mx-2" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="bi bi-power me-2"></i> Shutdown System
+                    <i class="bi bi-power me-2"></i> {{ auth()->user()->hasRole('super-admin') ? 'Shutdown System' : 'Sign Out' }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
