@@ -228,17 +228,17 @@
                     <div class="col-sm-6">
                         <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10">
                             <div class="icon-box bg-primary p-2 rounded-3 me-3">
-                                <i class="bi bi-person-check fs-4"></i>
+                                <i class="bi bi-android2 fs-4"></i>
                             </div>
-                            <h6 class="fw-bold mb-0">Customer App</h6>
+                            <h6 class="fw-bold mb-0">Android</h6>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10">
-                            <div class="icon-box bg-success p-2 rounded-3 me-3">
-                                <i class="bi bi-people fs-4"></i>
+                            <div class="icon-box bg-white bg-opacity-20 p-2 rounded-3 me-3">
+                                <i class="bi bi-apple fs-4"></i>
                             </div>
-                            <h6 class="fw-bold mb-0">Referrer App</h6>
+                            <h6 class="fw-bold mb-0">iOS</h6>
                         </div>
                     </div>
                 </div>
@@ -247,6 +247,7 @@
                     <!-- Play Store -->
                     <div class="position-relative">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" height="60" style="filter: grayscale(1) opacity(0.5);">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite" style="font-size: 0.65rem; z-index: 2;">Coming Soon</span>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite" style="font-size: 0.65rem; z-index: 2;">COMING SOON</span>
                     </div>
                     <!-- App Store -->
