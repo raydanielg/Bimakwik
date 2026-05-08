@@ -23,6 +23,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController::class, 'store'])->name('newsletter.subscribe');
 
+// Dashboards
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/insurer/dashboard', [App\Http\Controllers\Insurer\DashboardController::class, 'index'])->name('insurer.dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('customer.dashboard');
+});
+
 // Legal Routes
 Route::get('/privacy-policy', function () { return view('legal.privacy'); })->name('privacy');
 Route::get('/terms-of-service', function () { return view('legal.terms'); })->name('terms');
