@@ -13,6 +13,8 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
+        $this->command->info('Starting Bima Kwik Role and User Seeding...');
+
         $roles = [
             ['name' => 'Super Administrator', 'slug' => 'super-admin', 'description' => 'System wide access'],
             ['name' => 'Sub-Administrator', 'slug' => 'sub-admin', 'description' => 'Limited administrative access'],
@@ -30,10 +32,12 @@ class RoleSeeder extends Seeder
 
         foreach ($roles as $roleData) {
             $role = \App\Models\Role::updateOrCreate(['slug' => $roleData['slug']], $roleData);
+            $this->command->info("Role created/updated: {$role->name}");
 
             // Create a test user for each role
+            $email = $roleData['slug'] . '@bimakwik.com';
             $user = \App\Models\User::updateOrCreate(
-                ['email' => $roleData['slug'] . '@bimakwik.com'],
+                ['email' => $email],
                 [
                     'name' => $roleData['name'] . ' Test',
                     'password' => \Illuminate\Support\Facades\Hash::make('password'),
@@ -44,7 +48,12 @@ class RoleSeeder extends Seeder
             // Assign role to user if not already assigned
             if (!$user->roles()->where('role_id', $role->id)->exists()) {
                 $user->roles()->attach($role->id);
+                $this->command->comment("User created and role assigned: {$email}");
+            } else {
+                $this->command->comment("User already exists with role: {$email}");
             }
         }
+
+        $this->command->info('Seeding completed successfully!');
     }
 }
