@@ -102,11 +102,26 @@
             </div>
         </div>
     </div>
-    <!-- Pagination & Navigation -->
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+    <!-- Pagination Only -->
+    <div class="swiper-pagination hero-pagination"></div>
 </div>
+
+<style>
+    /* Professional Subtle Pagination */
+    .hero-pagination .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        background: #fff;
+        opacity: 0.5;
+        transition: all 0.3s ease;
+    }
+    .hero-pagination .swiper-pagination-bullet-active {
+        width: 30px;
+        border-radius: 20px;
+        background: #ffc107; /* Warning Yellow */
+        opacity: 1;
+    }
+</style>
 
 <!-- Insurance Packages Section -->
 <section class="py-5 bg-white overflow-hidden">
@@ -538,7 +553,8 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const swiper = new Swiper('.hero-slider', {
+        const heroSwiper = new Swiper('.hero-slider', {
+            effect: 'fade',
             loop: true,
             autoplay: {
                 delay: 5000,
@@ -548,14 +564,7 @@
                 el: '.swiper-pagination',
                 clickable: true,
             },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            effect: 'fade',
-            fadeEffect: {
-                crossFade: true
-            },
+            navigation: false, 
         });
 
         const productsSwiper = new Swiper('.products-slider', {
