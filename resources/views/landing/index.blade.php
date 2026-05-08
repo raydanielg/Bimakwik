@@ -215,6 +215,58 @@
     </div>
 </section>
 
+<!-- Mobile App Section -->
+<section class="py-5 bg-dark text-white overflow-hidden position-relative" style="background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0 animate__animated animate__fadeInLeft">
+                <h6 class="text-primary fw-bold text-uppercase mb-3">Our Mobile App</h6>
+                <h2 class="display-5 fw-bold mb-4">Insurance in Your Pocket</h2>
+                <p class="lead text-white-50 mb-5">Experience the future of insurance with our upcoming mobile applications. Whether you are a customer looking for protection or a referrer aiming to grow your business, Bima Kwik is coming to your phone soon.</p>
+                
+                <div class="row g-4 mb-5">
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10">
+                            <div class="icon-box bg-primary p-2 rounded-3 me-3">
+                                <i class="bi bi-person-check fs-4"></i>
+                            </div>
+                            <h6 class="fw-bold mb-0">Customer App</h6>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded-4 border border-white border-opacity-10">
+                            <div class="icon-box bg-success p-2 rounded-3 me-3">
+                                <i class="bi bi-people fs-4"></i>
+                            </div>
+                            <h6 class="fw-bold mb-0">Referrer App</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-4 align-items-center">
+                    <!-- Play Store -->
+                    <div class="position-relative">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" height="60" style="filter: grayscale(1) opacity(0.5);">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite" style="font-size: 0.65rem; z-index: 2;">COMING SOON</span>
+                    </div>
+                    <!-- App Store -->
+                    <div class="position-relative">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="App Store" height="60" style="filter: grayscale(1) opacity(0.5);">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite" style="font-size: 0.65rem; z-index: 2;">COMING SOON</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 animate__animated animate__fadeInRight">
+                <div class="position-relative text-center">
+                    <!-- Background Glow -->
+                    <div class="position-absolute top-50 start-50 translate-middle bg-primary rounded-circle blur-3xl opacity-25" style="width: 400px; height: 400px; filter: blur(100px);"></div>
+                    <img src="https://img.freepik.com/free-psd/premium-mobile-phone-screen-mockup_53876-113350.jpg?t=st=1715168172~exp=1715171772~hmac=556942484432130e5270c56780c1097240f968987483733075c3175865662768&w=800" alt="Mobile App" class="img-fluid rounded-5 shadow-2xl position-relative" style="max-width: 300px; transform: rotate(-10deg);">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Trusted By Section -->
 <section class="py-5 bg-white border-top">
     <div class="container py-4">
