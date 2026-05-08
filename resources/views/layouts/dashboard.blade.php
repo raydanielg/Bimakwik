@@ -387,6 +387,77 @@
                     <i class="bi bi-bank"></i> Bank Details
                 </a>
             </div>
+
+            @elseif(auth()->user()->hasRole('customer'))
+            <!-- Customer Menu -->
+            <div class="sidebar-heading">My Overview</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('customer.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-robot"></i> AI Recommendations
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Marketplace</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-search"></i> Browse Products
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-arrow-left-right"></i> Compare & Calculate
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-cart-plus"></i> Buy New Policy
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">My Insurance</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-check"></i> Active Policies
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-clock-history"></i> Renewals & History
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-file-earmark-pdf"></i> Policy Documents
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Claims</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action text-danger">
+                    <i class="bi bi-exclamation-octagon"></i> Submit New Claim
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-activity"></i> Track My Claims
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Wallet</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-wallet2"></i> My Wallet Balance
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-plus-circle"></i> Add Funds
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-list-ul"></i> Transaction History
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Account & Support</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-circle"></i> My Profile & KYC
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-headset"></i> Help & Support
+                </a>
+            </div>
             @endif
 
             <div class="logout-section mt-4 mb-4">
