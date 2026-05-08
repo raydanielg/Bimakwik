@@ -1,64 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Bima Kwik - Digital Insurance Platform
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Bima Kwik is a modern, licensed digital insurance intermediary platform in Tanzania. It serves as an end-to-end solution for insurance sales and claims notifications, connecting insurers, regulators, sales channels, and customers.
 
-## About Laravel
+## 🚀 Key Features
+- **OMNI CHANNEL Access:** Seamless experience across Web, Mobile, and API integrations.
+- **TIRAMISS Integrated:** Fully compliant and connected to the Tanzania Insurance Regulatory Authority (TIRA) systems.
+- **Digital Claims:** Fast and transparent claims notification and tracking.
+- **Financial Inclusion:** Revenue-sharing models designed to empower women, youth, SMEs, and marginalized groups.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 👥 System Roles & Access Control
+The platform is built with a robust multi-role architecture, supporting **12 distinct user roles** as per the system requirements.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| # | Role Name | Slug | Description |
+|---|-----------|------|-------------|
+| 1 | **Super Administrator** | `super-admin` | Full system-wide access and management. |
+| 2 | **Sub-Administrator** | `sub-admin` | Limited administrative access for operational support. |
+| 3 | **Insurance Companies** | `insurer` | Manage products, underwrite policies, and process claims. |
+| 4 | **Brokers / Aggregators** | `broker` | Intermediaries managing multiple agents and sales. |
+| 5 | **Insurance Agents** | `agent` | Individual sellers directly engaging with customers. |
+| 6 | **Sales Force Executives** | `sfe` | Field sales teams driving ground-level adoption. |
+| 7 | **Bancassurance Agents** | `bancassurance` | Bank partners selling insurance to their clients. |
+| 8 | **Customers** | `customer` | The end-users purchasing policies and filing claims. |
+| 9 | **Service Providers** | `service-provider` | Hospitals, Garages, Pharmacies for service fulfillment. |
+| 10 | **Regulator** | `regulator` | TIRA and other bodies for compliance monitoring. |
+| 11 | **Financing Partners** | `financing-partner` | Partners providing Premium Financing (loans). |
+| 12 | **Developers / API** | `developer` | Technical partners for third-party integrations. |
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠 Tech Stack
+- **Framework:** Laravel 9+
+- **Frontend:** Bootstrap 5, Animate.css, Swiper.js, SweetAlert2
+- **Database:** SQLite (Local Dev) / MySQL (Production)
+- **Architecture:** Role-Based Access Control (RBAC) with custom Middleware.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🧪 Testing Accounts (Development)
+Use these accounts to test role-specific dashboards. All passwords are set to `password`.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- **Super Admin:** `super-admin@bimakwik.com`
+- **Insurer:** `insurer@bimakwik.com`
+- **Customer:** `customer@bimakwik.com`
+- **Agent:** `agent@bimakwik.com`
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📞 Contact Information
+- **Contact Person:** Dorice Malle
+- **Phone:** +255 762 883 065
+- **Email:** info@bimakwik.com
+- **Website:** [www.bimakwik.com](https://www.bimakwik.com)
