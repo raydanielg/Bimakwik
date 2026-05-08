@@ -28,8 +28,23 @@ class RoleSeeder extends Seeder
             ['name' => 'Developers / API Integrators', 'slug' => 'developer', 'description' => 'External technical partners'],
         ];
 
-        foreach ($roles as $role) {
-            \App\Models\Role::create($role);
+        foreach ($roles as $roleData) {
+            $role = \App\Models\Role::updateOrCreate(['slug' => $roleData['slug']], $roleData);
+
+            // Create a test user for each role
+            $user = \App\Models\User::updateOrCreate(
+                ['email' => $roleData['slug'] . '@bimakwik.com'],
+                [
+                    'name' => $roleData['name'] . ' Test',
+                    'password' => \Illuminate\Support\Facades\Hash::make('password'),
+                    'email_verified_at' => now(),
+                ]
+            );
+
+            // Assign role to user if not already assigned
+            if (!$user->roles()->where('role_id', $role->id)->exists()) {
+                $user->roles()->attach($role->id);
+            }
         }
     }
 }
