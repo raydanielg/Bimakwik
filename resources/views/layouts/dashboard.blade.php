@@ -458,6 +458,61 @@
                     <i class="bi bi-headset"></i> Help & Support
                 </a>
             </div>
+
+            @elseif(auth()->user()->hasRole('service-provider'))
+            <!-- Service Provider Menu -->
+            <div class="sidebar-heading">Overview</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('service-provider.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Verification</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-vcard"></i> Verify Customer
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-check"></i> Check Benefits
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Claims & Billing</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action text-danger">
+                    <i class="bi bi-plus-circle"></i> Submit New Bill
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-file-earmark-medical"></i> Track Submissions
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-wallet2"></i> Payment History
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Profile & SLA</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-building"></i> Company Profile
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-file-earmark-lock"></i> SLA Documents
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bank"></i> Bank Details
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Support</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-chat-dots"></i> Communications
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-gear"></i> Settings
+                </a>
+            </div>
             @endif
 
             <div class="logout-section mt-4 mb-4">
