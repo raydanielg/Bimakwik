@@ -61,6 +61,8 @@ return array(
     'App\\Models\\InsuranceProduct' => $baseDir . '/app/Models/InsuranceProduct.php',
     'App\\Models\\Insurer' => $baseDir . '/app/Models/Insurer.php',
     'App\\Models\\InsurerAdmin' => $baseDir . '/app/Models/InsurerAdmin.php',
+    'App\\Models\\InsurerBankDetail' => $baseDir . '/app/Models/InsurerBankDetail.php',
+    'App\\Models\\InsurerBranch' => $baseDir . '/app/Models/InsurerBranch.php',
     'App\\Models\\KycDocument' => $baseDir . '/app/Models/KycDocument.php',
     'App\\Models\\KycSubmission' => $baseDir . '/app/Models/KycSubmission.php',
     'App\\Models\\Newsletter' => $baseDir . '/app/Models/Newsletter.php',

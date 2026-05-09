@@ -566,6 +566,8 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\InsuranceProduct' => __DIR__ . '/../..' . '/app/Models/InsuranceProduct.php',
         'App\\Models\\Insurer' => __DIR__ . '/../..' . '/app/Models/Insurer.php',
         'App\\Models\\InsurerAdmin' => __DIR__ . '/../..' . '/app/Models/InsurerAdmin.php',
+        'App\\Models\\InsurerBankDetail' => __DIR__ . '/../..' . '/app/Models/InsurerBankDetail.php',
+        'App\\Models\\InsurerBranch' => __DIR__ . '/../..' . '/app/Models/InsurerBranch.php',
         'App\\Models\\KycDocument' => __DIR__ . '/../..' . '/app/Models/KycDocument.php',
         'App\\Models\\KycSubmission' => __DIR__ . '/../..' . '/app/Models/KycSubmission.php',
         'App\\Models\\Newsletter' => __DIR__ . '/../..' . '/app/Models/Newsletter.php',
@@ -5790,4 +5792,8 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit
+            $loader->classMap = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$classMap;
+
+        }, null, ClassLoader::class);
+    }
+}
