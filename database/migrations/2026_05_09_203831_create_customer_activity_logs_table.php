@@ -15,7 +15,14 @@ class CreateCustomerActivityLogsTable extends Migration
     {
         Schema::create('customer_activity_logs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->string('activity_type', 100);
+            $table->ipAddress('ip_address');
+            $table->text('user_agent')->nullable();
+            $table->json('details')->nullable();
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 
