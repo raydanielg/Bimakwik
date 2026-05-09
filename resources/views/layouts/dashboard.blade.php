@@ -505,7 +505,6 @@
                     <i class="bi bi-shield-lock"></i> Privacy Logs
                 </a>
             </div>
-            @endif
 
             @elseif(auth()->user()->hasRole('customer'))
             <!-- Customer Menu -->
