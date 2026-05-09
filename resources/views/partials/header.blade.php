@@ -119,6 +119,14 @@
                             <i class="bi bi-speedometer2 me-2"></i> View My Dashboard
                         </a>
                     </li>
+                    <li class="mb-3">
+                        <form action="{{ route('logout') }}" method="POST" class="d-block w-100">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger w-100 text-start px-0 border-0 mobile-nav-link" style="background: none;">
+                                <i class="bi bi-box-arrow-right me-2"></i> Logout
+                            </button>
+                        </form>
+                    </li>
                 @endauth
                 <li class="mb-3">
                     <a href="{{ route('pages.about') }}" class="mobile-nav-link">About Us</a>
