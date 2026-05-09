@@ -58,4 +58,28 @@ class User extends Authenticatable
     {
         return $this->roles->where('slug', $slug)->count() > 0;
     }
+
+    /**
+     * The customer profile that belongs to the user.
+     */
+    public function profile()
+    {
+        return $this->hasOne(CustomerProfile::class);
+    }
+
+    /**
+     * The kyc submissions that belong to the user.
+     */
+    public function kycSubmissions()
+    {
+        return $this->hasMany(KycSubmission::class);
+    }
+
+    /**
+     * The support tickets that belong to the user.
+     */
+    public function supportTickets()
+    {
+        return $this->hasMany(SupportTicket::class);
+    }
 }

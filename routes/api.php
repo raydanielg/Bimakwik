@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+use App\Http\Controllers\Api\KycController;
+use App\Http\Controllers\Api\SupportController;
+use App\Http\Controllers\Api\ProfileController;
+
+Route::middleware('auth:sanctum')->group(function () {
+    // Profile
+    Route::get('/profile', [ProfileController::class, 'getProfile']);
+    Route::post('/profile', [ProfileController::class, 'updateProfile']);
+
+    // KYC
+    Route::post('/kyc/submit', [KycController::class, 'submit']);
+    Route::get('/kyc/status', [KycController::class, 'status']);
+
+    // Support
+    Route::post('/support/tickets', [SupportController::class, 'createTicket']);
+    Route::get('/support/tickets', [SupportController::class, 'listTickets']);
+    Route::get('/support/tickets/{id}', [SupportController::class, 'getTicketDetails']);
 });
