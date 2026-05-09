@@ -83,9 +83,23 @@ Route::get('/contact-us', [App\Http\Controllers\ContactController::class, 'show'
 Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'store'])->name('pages.contact.store');
 
 // Resources Routes
-Route::get('/guidelines-materials', function () { return view('resources.guidelines'); })->name('resources.guidelines');
-Route::get('/news', [App\Http\Controllers\NewsController::class, 'index'])->name('resources.news');
-Route::get('/news/{id}', [App\Http\Controllers\NewsController::class, 'show'])->name('resources.news.detail');
+Route::get('/guidelines-materials', function () {
+    return view('resources.guidelines');
+})->name('resources.guidelines');
+
+// Guideline Detail Routes
+Route::get('/guidelines/claim-process', function () {
+    return view('resources.guideline_claim');
+})->name('guidelines.claim-process');
+Route::get('/guidelines/policy-management', function () {
+    return view('resources.guideline_policy');
+})->name('guidelines.policy-management');
+Route::get('/guidelines/kyc-verification', function () {
+    return view('resources.guideline_kyc');
+})->name('guidelines.kyc-verification');
+
+Route::get('/news-research', [App\Http\Controllers\NewsController::class, 'index'])->name('resources.news');
+Route::get('/news-research/{slug}', [App\Http\Controllers\NewsController::class, 'show'])->name('resources.news-detail');
 
 // Quote Routes
 Route::get('/request-quote', [App\Http\Controllers\QuoteController::class, 'show'])->name('quote.request');
