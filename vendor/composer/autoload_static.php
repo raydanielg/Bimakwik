@@ -556,12 +556,16 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\BackupLog' => __DIR__ . '/../..' . '/app/Models/BackupLog.php',
         'App\\Models\\Branch' => __DIR__ . '/../..' . '/app/Models/Branch.php',
         'App\\Models\\Claim' => __DIR__ . '/../..' . '/app/Models/Claim.php',
+        'App\\Models\\CountryConfig' => __DIR__ . '/../..' . '/app/Models/CountryConfig.php',
+        'App\\Models\\CountryInstance' => __DIR__ . '/../..' . '/app/Models/CountryInstance.php',
         'App\\Models\\Csr' => __DIR__ . '/../..' . '/app/Models/Csr.php',
         'App\\Models\\CustomerPolicy' => __DIR__ . '/../..' . '/app/Models/CustomerPolicy.php',
         'App\\Models\\CustomerProfile' => __DIR__ . '/../..' . '/app/Models/CustomerProfile.php',
         'App\\Models\\FaqArticle' => __DIR__ . '/../..' . '/app/Models/FaqArticle.php',
         'App\\Models\\FaqCategory' => __DIR__ . '/../..' . '/app/Models/FaqCategory.php',
         'App\\Models\\InsuranceProduct' => __DIR__ . '/../..' . '/app/Models/InsuranceProduct.php',
+        'App\\Models\\Insurer' => __DIR__ . '/../..' . '/app/Models/Insurer.php',
+        'App\\Models\\InsurerAdmin' => __DIR__ . '/../..' . '/app/Models/InsurerAdmin.php',
         'App\\Models\\KycDocument' => __DIR__ . '/../..' . '/app/Models/KycDocument.php',
         'App\\Models\\KycSubmission' => __DIR__ . '/../..' . '/app/Models/KycSubmission.php',
         'App\\Models\\Newsletter' => __DIR__ . '/../..' . '/app/Models/Newsletter.php',
@@ -5786,8 +5790,4 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$classMap;
-
-        }, null, ClassLoader::class);
-    }
-}
+            $loader->classMap = ComposerStaticInit
