@@ -84,7 +84,8 @@ Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'stor
 
 // Resources Routes
 Route::get('/guidelines-materials', function () { return view('resources.guidelines'); })->name('resources.guidelines');
-Route::get('/news-research', function () { return view('resources.news'); })->name('resources.news');
+Route::get('/news', [App\Http\Controllers\NewsController::class, 'index'])->name('resources.news');
+Route::get('/news/{id}', [App\Http\Controllers\NewsController::class, 'show'])->name('resources.news.detail');
 
 // Quote Routes
 Route::get('/request-quote', [App\Http\Controllers\QuoteController::class, 'show'])->name('quote.request');
