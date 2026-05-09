@@ -513,56 +513,56 @@
                 <a href="{{ route('customer.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.ai-recommendations') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.ai-recommendations') ? 'active' : '' }}">
                     <i class="bi bi-robot"></i> AI Recommendations
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Marketplace</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.marketplace') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.marketplace') ? 'active' : '' }}">
                     <i class="bi bi-search"></i> Browse Products
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.compare') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.compare') ? 'active' : '' }}">
                     <i class="bi bi-arrow-left-right"></i> Compare & Calculate
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.buy') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.buy') ? 'active' : '' }}">
                     <i class="bi bi-cart-plus"></i> Buy New Policy
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">My Insurance</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.policies.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.policies.index') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i> Active Policies
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.policies.renewals') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.policies.renewals') ? 'active' : '' }}">
                     <i class="bi bi-clock-history"></i> Renewals & History
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.policies.documents') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.policies.documents') ? 'active' : '' }}">
                     <i class="bi bi-file-earmark-pdf"></i> Policy Documents
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Claims</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action text-danger">
+                <a href="{{ route('customer.claims.create') }}" class="list-group-item list-group-item-action text-danger {{ request()->routeIs('customer.claims.create') ? 'active' : '' }}">
                     <i class="bi bi-exclamation-octagon"></i> Submit New Claim
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.claims.track') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.claims.track') ? 'active' : '' }}">
                     <i class="bi bi-activity"></i> Track My Claims
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Wallet</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.wallet.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.wallet.index') ? 'active' : '' }}">
                     <i class="bi bi-wallet2"></i> My Wallet Balance
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.wallet.add-funds') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.wallet.add-funds') ? 'active' : '' }}">
                     <i class="bi bi-plus-circle"></i> Add Funds
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.wallet.history') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.wallet.history') ? 'active' : '' }}">
                     <i class="bi bi-list-ul"></i> Transaction History
                 </a>
             </div>
