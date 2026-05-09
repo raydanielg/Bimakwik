@@ -1,16 +1,22 @@
 @extends('layouts.landing')
 
 @section('content')
-<section class="py-5 bg-white">
+<section class="py-5 bg-light">
     <div class="container py-5 mt-5">
         <div class="text-center mb-5 animate__animated animate__fadeIn">
-            <span class="badge rounded-pill bg-warning-soft text-dark px-3 py-2 mb-3">LATEST UPDATES</span>
             <h1 class="display-4 fw-bold">News & Research</h1>
-            <p class="text-secondary mx-auto" style="max-width: 600px;">Stay informed with the latest industry news and our in-depth insurance research.</p>
+            <p class="text-secondary mx-auto" style="max-width: 600px;">Stay updated with the latest trends, insights, and innovations in the insurance industry.</p>
         </div>
 
         <div class="row g-4">
-            <!-- News Section -->
+            @foreach($posts as $post)
+            <div class="col-lg-4 col-md-6 animate__animated animate__fadeInUp">
+                <div class="card h-100 border-0 shadow-sm hover-lift overflow-hidden rounded-4">
+                    <div class="position-relative">
+                        <img src="{{ $post['image'] }}" class="card-img-top" alt="{{ $post['title'] }}" style="height: 220px; object-fit: cover;">
+                        <span class="badge bg-primary position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm">
+                            {{ $post['category'] }}
+                        </span>
             <div class="col-lg-8">
                 <h3 class="fw-bold mb-4"><i class="bi bi-newspaper me-2 text-primary"></i> Latest News</h3>
                 <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4 hover-lift">
