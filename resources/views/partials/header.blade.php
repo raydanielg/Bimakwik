@@ -97,6 +97,23 @@
                 <li class="mb-3">
                     <a href="{{ url('/') }}" class="mobile-nav-link active">Home</a>
                 </li>
+                @auth
+                    <li class="mb-3">
+                        @php
+                            $dashboardRoute = 'customer.dashboard';
+                            if(auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('sub-admin')) $dashboardRoute = 'admin.dashboard';
+                            elseif(auth()->user()->hasRole('insurer')) $dashboardRoute = 'insurer.dashboard';
+                            elseif(auth()->user()->hasRole('broker')) $dashboardRoute = 'broker.dashboard';
+                            elseif(auth()->user()->hasRole('aggregator')) $dashboardRoute = 'aggregator.dashboard';
+                            elseif(auth()->user()->hasRole('service-provider')) $dashboardRoute = 'service-provider.dashboard';
+                            elseif(auth()->user()->hasRole('financing-partner')) $dashboardRoute = 'financing-partner.dashboard';
+                            elseif(auth()->user()->hasRole('developer')) $dashboardRoute = 'developer.dashboard';
+                        @endphp
+                        <a href="{{ route($dashboardRoute) }}" class="mobile-nav-link text-primary fw-bold">
+                            <i class="bi bi-speedometer2 me-2"></i> View My Dashboard
+                        </a>
+                    </li>
+                @endauth
                 <li class="mb-3">
                     <a href="{{ route('pages.about') }}" class="mobile-nav-link">About Us</a>
                 </li>
