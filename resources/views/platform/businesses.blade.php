@@ -3,58 +3,88 @@
 @section('content')
 <section class="py-5 bg-white" style="margin-top: 80px;">
     <div class="container py-5">
-        <div class="row justify-content-center text-center mb-5">
-            <div class="col-lg-8">
-                <h6 class="text-primary fw-bold text-uppercase letter-spacing-1 mb-3">Global Expansion</h6>
-                <h1 class="display-4 fw-bold mb-4">Scaling Across Borders</h1>
-                <p class="lead text-secondary">Born in Tanzania, Bima Kwik is built to scale. Our TIRAMIS architecture is designed for multi-country deployment.</p>
+        <!-- Hero Section -->
+        <div class="row justify-content-center text-center mb-5 animate__animated animate__fadeIn">
+            <div class="col-lg-10">
+                <h6 class="text-primary fw-bold text-uppercase letter-spacing-1 mb-3">
+                    {{ app()->getLocale() == 'sw' ? 'Upanuzi wa Kimataifa' : 'Global Expansion' }}
+                </h6>
+                <h1 class="display-4 fw-bold mb-4 text-dark">
+                    {{ app()->getLocale() == 'sw' ? 'Jukwaa Linaloweza Kukua Popote' : 'Scalable Platform for Every Market' }}
+                </h1>
+                <p class="lead text-secondary mb-0">
+                    {{ app()->getLocale() == 'sw' ? 'Bima Kwik imeundwa kukua zaidi ya mipaka. Teknolojia yetu inaweza kuanzishwa katika nchi yoyote kwa urahisi.' : 'Bima Kwik is built to scale beyond borders. Our technology can be deployed in any country with ease and speed.' }}
+                </p>
             </div>
         </div>
 
-        <div class="row align-items-center g-5 py-4">
-            <div class="col-lg-6">
-                <h2 class="fw-bold mb-4">Multi-Country Instances</h2>
-                <p class="text-muted mb-4">Our platform supports multiple currencies, languages, and regulatory frameworks, allowing for localized instances in every African market.</p>
-                <div class="d-flex align-items-center mb-4">
-                    <div class="bg-primary text-white rounded-circle p-2 me-3"><i class="bi bi-check"></i></div>
-                    <span class="fw-bold">Localized Compliance</span>
-                </div>
-                <div class="d-flex align-items-center mb-4">
-                    <div class="bg-primary text-white rounded-circle p-2 me-3"><i class="bi bi-check"></i></div>
-                    <span class="fw-bold">Multi-Currency Engine</span>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="bg-primary text-white rounded-circle p-2 me-3"><i class="bi bi-check"></i></div>
-                    <span class="fw-bold">Regional Data Centers</span>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="bg-primary bg-opacity-10 p-5 rounded-5 border-start border-5 border-primary">
-                    <h3 class="fw-bold mb-4">TIRAMIS Replicable</h3>
-                    <p class="text-dark mb-4">The core of our success is the <strong>TIRAMIS</strong> architecture—a plug-and-play insurance management system that can be replicated in new countries in record time.</p>
-                    <div class="alert alert-primary bg-white border-0 shadow-sm rounded-4 mb-0">
-                        <h6 class="fw-bold text-primary"><i class="bi bi-gear-wide-connected me-2"></i> How it works:</h6>
-                        <p class="small text-muted mb-0">We take our proven Tanzanian model and adapt the legal, tax, and regulatory parameters for the target country, ensuring a fast and compliant market entry.</p>
+        <div class="row g-5 align-items-center py-5">
+            <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                <div class="bg-light p-5 rounded-5 shadow-sm border-start border-5 border-primary">
+                    <h2 class="fw-bold mb-4">{{ app()->getLocale() == 'sw' ? 'Nchi Nyingi, Jukwaa Moja' : 'Multi-Country Instances' }}</h2>
+                    <p class="text-muted lh-lg">
+                        {{ app()->getLocale() == 'sw' ? 'Mfumo wetu unaruhusu kuanzisha nakala (instances) za jukwaa kwa nchi tofauti, huku kukiwa na uwezo wa kusimamia sarafu tofauti na kanuni za nchi husika.' : 'Our architecture allows for the deployment of dedicated platform instances for different countries, supporting multiple currencies and localized regulatory requirements.' }}
+                    </p>
+                    <div class="mt-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                            <span>{{ app()->getLocale() == 'sw' ? 'Usimamizi wa Sarafu Nyingi' : 'Multi-Currency Support' }}</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                            <span>{{ app()->getLocale() == 'sw' ? 'Lugha Nyingi' : 'Multi-Language Capabilities' }}</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                            <span>{{ app()->getLocale() == 'sw' ? 'Uzingativu wa Kanuni za Ndani' : 'Local Regulatory Compliance' }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6 animate__animated animate__fadeInRight text-center">
+                <i class="bi bi-globe-africa display-1 text-primary opacity-25"></i>
+            </div>
+        </div>
+
+        <!-- TIRAMIS Section -->
+        <div class="bg-dark text-white p-5 rounded-5 shadow-lg mt-5 overflow-hidden">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <h2 class="fw-bold mb-4 text-warning">{{ app()->getLocale() == 'sw' ? 'Teknolojia ya TIRAMIS' : 'TIRAMIS Replicability' }}</h2>
+                    <p class="lead opacity-75 mb-0">
+                        {{ app()->getLocale() == 'sw' ? 'Muundo wetu wa kuripoti kwa mdhibiti (TIRAMIS) unaweza kuigwa na kutumika na mamlaka za bima katika nchi yoyote barani Afrika.' : 'Our regulatory reporting framework (TIRAMIS) is highly replicable and can be adopted by insurance regulators across Africa to enhance market transparency.' }}
+                    </p>
+                </div>
+                <div class="col-lg-5 mt-5 mt-lg-0 text-center">
+                    <div class="bg-warning bg-opacity-10 rounded-circle p-4 d-inline-block">
+                        <i class="bi bi-shield-check text-warning display-4"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{{ route('pages.contact') }}" class="btn btn-primary btn-lg px-5 rounded-pill fw-bold shadow hover-lift-sm">
+                {{ app()->getLocale() == 'sw' ? 'Wasiliana na Timu ya Upanuzi' : 'Contact Expansion Team' }}
+            </a>
         </div>
     </div>
 </section>
 
 <section class="py-5 bg-light">
     <div class="container text-center py-5">
-        <h2 class="fw-bold mb-5">The Bima Kwik Roadmap</h2>
+        <h2 class="fw-bold mb-5">{{ app()->getLocale() == 'sw' ? 'Mpango wa Upanuzi wa Bima Kwik' : 'The Bima Kwik Roadmap' }}</h2>
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <div class="p-4 bg-white rounded-4 shadow-sm mb-4">
-                    <h5 class="fw-bold text-primary">Stage 1</h5>
-                    <p class="small text-muted">Tanzania Foundation (TIRA Integration)</p>
+                    <h5 class="fw-bold text-primary">{{ app()->getLocale() == 'sw' ? 'Hatua ya 1' : 'Stage 1' }}</h5>
+                    <p class="small text-muted">{{ app()->getLocale() == 'sw' ? 'Msingi wa Tanzania (Uunganisho wa TIRA)' : 'Tanzania Foundation (TIRA Integration)' }}</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="p-4 bg-white rounded-4 shadow-sm mb-4">
-                    <h5 class="fw-bold">Stage 2</h5>
+                    <h5 class="fw-bold">{{ app()->getLocale() == 'sw' ? 'Hatua ya 2' : 'Stage 2' }}</h5>
+                    <p class="small text-muted">{{ app()->getLocale() == 'sw' ? 'Kupanuka kwa Afrika Mashariki (Kenya, Uganda, Rwanda)' : 'East Africa Expansion (Kenya, Uganda, Rwanda)' }}</p>
                     <p class="small text-muted">East Africa Expansion (Kenya, Uganda, Rwanda)</p>
                 </div>
             </div>
