@@ -124,6 +124,7 @@ return array(
     'App\\Models\\CustomerProfile' => $baseDir . '/app/Models/CustomerProfile.php',
     'App\\Models\\CustomerSession' => $baseDir . '/app/Models/CustomerSession.php',
     'App\\Models\\CustomerVerificationToken' => $baseDir . '/app/Models/CustomerVerificationToken.php',
+    'App\\Models\\DashboardLayout' => $baseDir . '/app/Models/DashboardLayout.php',
     'App\\Models\\DashboardSummary' => $baseDir . '/app/Models/DashboardSummary.php',
     'App\\Models\\DashboardWidget' => $baseDir . '/app/Models/DashboardWidget.php',
     'App\\Models\\DataProtectionLog' => $baseDir . '/app/Models/DataProtectionLog.php',

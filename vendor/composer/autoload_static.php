@@ -629,6 +629,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\CustomerProfile' => __DIR__ . '/../..' . '/app/Models/CustomerProfile.php',
         'App\\Models\\CustomerSession' => __DIR__ . '/../..' . '/app/Models/CustomerSession.php',
         'App\\Models\\CustomerVerificationToken' => __DIR__ . '/../..' . '/app/Models/CustomerVerificationToken.php',
+        'App\\Models\\DashboardLayout' => __DIR__ . '/../..' . '/app/Models/DashboardLayout.php',
         'App\\Models\\DashboardSummary' => __DIR__ . '/../..' . '/app/Models/DashboardSummary.php',
         'App\\Models\\DashboardWidget' => __DIR__ . '/../..' . '/app/Models/DashboardWidget.php',
         'App\\Models\\DataProtectionLog' => __DIR__ . '/../..' . '/app/Models/DataProtectionLog.php',
@@ -5921,4 +5922,8 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStat
+            $loader->classMap = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$classMap;
+
+        }, null, ClassLoader::class);
+    }
+}
