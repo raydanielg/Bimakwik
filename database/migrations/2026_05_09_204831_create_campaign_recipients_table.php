@@ -15,7 +15,16 @@ class CreateCampaignRecipientsTable extends Migration
     {
         Schema::create('campaign_recipients', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('campaign_id');
+            $table->string('recipient_identifier');
+            $table->string('recipient_name')->nullable();
+            $table->string('status', 50)->default('pending');
+            $table->timestamp('delivered_at')->nullable();
+            $table->timestamp('opened_at')->nullable();
+            $table->timestamp('clicked_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
         });
     }
 
