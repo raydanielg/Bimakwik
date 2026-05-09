@@ -15,7 +15,17 @@ class CreateOfflinePaymentApprovalsTable extends Migration
     {
         Schema::create('offline_payment_approvals', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->decimal('amount', 15, 2);
+            $table->string('payment_proof_url', 500)->nullable();
+            $table->string('status', 50)->default('pending');
+            $table->unsignedBigInteger('approved_by')->nullable();
+            $table->timestamp('approved_at')->nullable();
+            $table->text('rejection_reason')->nullable();
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('approved_by')->references('id')->on('users')->onDelete('set null');
         });
     }
 

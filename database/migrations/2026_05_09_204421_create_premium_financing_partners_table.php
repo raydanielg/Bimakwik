@@ -15,6 +15,14 @@ class CreatePremiumFinancingPartnersTable extends Migration
     {
         Schema::create('premium_financing_partners', function (Blueprint $table) {
             $table->id();
+            $table->string('partner_code', 50)->unique();
+            $table->string('partner_name');
+            $table->string('contact_person')->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->string('email')->nullable();
+            $table->text('address')->nullable();
+            $table->decimal('commission_rate', 5, 2)->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
