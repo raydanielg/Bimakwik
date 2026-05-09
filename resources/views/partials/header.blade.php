@@ -57,34 +57,34 @@
                             <div class="col-md-3 border-end">
                                 <h6 class="fw-bold text-primary mb-3">Overview</h6>
                                 <ul class="list-unstyled mega-list">
-                                    <li><a href="#">What is Bima Kwik</a></li>
-                                    <li><a href="#">Our Ecosystem</a></li>
-                                    <li><a href="#">How It Works</a></li>
+                                    <li><a href="{{ route('platform.overview') }}">What is Bima Kwik</a></li>
+                                    <li><a href="{{ route('platform.overview') }}">Our Ecosystem</a></li>
+                                    <li><a href="{{ route('platform.overview') }}">How It Works</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3 border-end">
                                 <h6 class="fw-bold text-primary mb-3">For Customers</h6>
                                 <ul class="list-unstyled mega-list">
-                                    <li><a href="#">Buy Insurance</a></li>
-                                    <li><a href="#">File a Claim</a></li>
-                                    <li><a href="#">Renew Policy</a></li>
-                                    <li><a href="#">Track Status</a></li>
+                                    <li><a href="{{ route('platform.customers') }}">Buy Insurance</a></li>
+                                    <li><a href="{{ route('platform.customers') }}">File a Claim</a></li>
+                                    <li><a href="{{ route('platform.customers') }}">Renew Policy</a></li>
+                                    <li><a href="{{ route('platform.customers') }}">Track Status</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3 border-end">
                                 <h6 class="fw-bold text-primary mb-3">Technology</h6>
                                 <ul class="list-unstyled mega-list">
-                                    <li><a href="#">AI-Powered Platform</a></li>
-                                    <li><a href="#">API Integration</a></li>
-                                    <li><a href="#">Low-Code Builder</a></li>
-                                    <li><a href="#">Security</a></li>
+                                    <li><a href="{{ route('platform.technology') }}">AI-Powered Platform</a></li>
+                                    <li><a href="{{ route('platform.technology') }}">API Integration</a></li>
+                                    <li><a href="{{ route('platform.technology') }}">Low-Code Builder</a></li>
+                                    <li><a href="{{ route('platform.technology') }}">Security</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3">
                                 <h6 class="fw-bold text-primary mb-3">Expansion</h6>
                                 <ul class="list-unstyled mega-list">
-                                    <li><a href="#">Multi-Country Instances</a></li>
-                                    <li><a href="#">TIRAMIS Replicable</a></li>
+                                    <li><a href="{{ route('platform.businesses') }}">Multi-Country Instances</a></li>
+                                    <li><a href="{{ route('platform.businesses') }}">TIRAMIS Replicable</a></li>
                                 </ul>
                             </div>
                         </div>
