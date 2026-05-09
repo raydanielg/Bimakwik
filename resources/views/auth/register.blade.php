@@ -180,27 +180,6 @@
     .transition-all { transition: all 0.3s ease; }
 </style>
 @endsection
-
-<style>
-    .auth-page {
-        min-height: 100vh;
-        background: #f8f9fa;
-        display: flex;
-        align-items: center;
-    }
-    .letter-spacing-1 { letter-spacing: 0.5px; }
-    .role-option {
-        border-width: 2px;
-        transition: all 0.3s ease;
-    }
-    .btn-check:checked + .role-option {
-        background-color: rgba(13, 110, 253, 0.05);
-        border-color: #0d6efd;
-        color: #0d6efd;
-        transform: scale(1.02);
-        box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.1) !important;
-    }
-    .role-option:hover {
         border-color: #0d6efd;
         background-color: rgba(13, 110, 253, 0.02);
     }
