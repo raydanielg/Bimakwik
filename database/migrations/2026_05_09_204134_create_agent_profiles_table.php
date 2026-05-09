@@ -15,7 +15,14 @@ class CreateAgentProfilesTable extends Migration
     {
         Schema::create('agent_profiles', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('agent_id')->unique();
+            $table->integer('years_experience')->nullable();
+            $table->json('certifications')->nullable();
+            $table->decimal('sales_target_year', 15, 2)->nullable();
+            $table->decimal('sales_achieved_year', 15, 2)->nullable();
             $table->timestamps();
+
+            $table->foreign('agent_id')->references('id')->on('agents')->onDelete('cascade');
         });
     }
 
