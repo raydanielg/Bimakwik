@@ -19,12 +19,17 @@
                                 <div class="role-item mb-3">
                                     <input type="radio" class="btn-check" name="role_select" id="role-customer" value="customer" checked onchange="updateSteps('customer')">
                                     <label class="btn btn-outline-primary w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-customer">
-                                        <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3 icon-box">
-                                            <i class="bi bi-person-fill fs-3"></i>
+                                        <div class="position-relative me-3">
+                                            <div class="avatar-box bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 70px; height: 70px;">
+                                                <i class="bi bi-person-circle fs-1 text-primary"></i>
+                                            </div>
+                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
+                                                <i class="bi bi-check-circle-fill text-success" style="font-size: 0.8rem;"></i>
+                                            </div>
                                         </div>
                                         <div>
                                             <h6 class="fw-bold mb-1">Individual Customer</h6>
-                                            <p class="small mb-0 opacity-75">Buy bima, track claims, and manage policies.</p>
+                                            <p class="small mb-0 opacity-75 text-dark">Personalized insurance dashboard for you.</p>
                                         </div>
                                     </label>
                                 </div>
@@ -32,12 +37,17 @@
                                 <div class="role-item mb-3">
                                     <input type="radio" class="btn-check" name="role_select" id="role-broker" value="broker" onchange="updateSteps('broker')">
                                     <label class="btn btn-outline-primary w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-broker">
-                                        <div class="bg-info bg-opacity-10 rounded-circle p-3 me-3 icon-box">
-                                            <i class="bi bi-briefcase-fill fs-3 text-info"></i>
+                                        <div class="position-relative me-3">
+                                            <div class="avatar-box bg-info bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 70px; height: 70px;">
+                                                <i class="bi bi-briefcase-fill fs-1 text-info"></i>
+                                            </div>
+                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 0.8rem;"></i>
+                                            </div>
                                         </div>
                                         <div>
                                             <h6 class="fw-bold mb-1 text-info">Broker / Agent</h6>
-                                            <p class="small mb-0 opacity-75 text-dark">Sell insurance and earn commissions.</p>
+                                            <p class="small mb-0 opacity-75 text-dark">Grow your agency with digital tools.</p>
                                         </div>
                                     </label>
                                 </div>
@@ -45,12 +55,17 @@
                                 <div class="role-item mb-3">
                                     <input type="radio" class="btn-check" name="role_select" id="role-insurer" value="insurer" onchange="updateSteps('insurer')">
                                     <label class="btn btn-outline-primary w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-insurer">
-                                        <div class="bg-success bg-opacity-10 rounded-circle p-3 me-3 icon-box">
-                                            <i class="bi bi-building-fill-check fs-3 text-success"></i>
+                                        <div class="position-relative me-3">
+                                            <div class="avatar-box bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 70px; height: 70px;">
+                                                <i class="bi bi-building-fill-check fs-1 text-success"></i>
+                                            </div>
+                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
+                                                <i class="bi bi-shield-fill-check text-primary" style="font-size: 0.8rem;"></i>
+                                            </div>
                                         </div>
                                         <div>
                                             <h6 class="fw-bold mb-1 text-success">Insurance Company</h6>
-                                            <p class="small mb-0 opacity-75 text-dark">Digitalize products and reach more customers.</p>
+                                            <p class="small mb-0 opacity-75 text-dark">Scale your digital products across Africa.</p>
                                         </div>
                                     </label>
                                 </div>
@@ -58,12 +73,17 @@
                                 <div class="role-item">
                                     <input type="radio" class="btn-check" name="role_select" id="role-provider" value="provider" onchange="updateSteps('provider')">
                                     <label class="btn btn-outline-primary w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-provider">
-                                        <div class="bg-warning bg-opacity-10 rounded-circle p-3 me-3 icon-box">
-                                            <i class="bi bi-hospital fs-3 text-warning"></i>
+                                        <div class="position-relative me-3">
+                                            <div class="avatar-box bg-warning bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 70px; height: 70px;">
+                                                <i class="bi bi-hospital fs-1 text-warning"></i>
+                                            </div>
+                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
+                                                <i class="bi bi-plus-lg text-danger" style="font-size: 0.8rem;"></i>
+                                            </div>
                                         </div>
                                         <div>
                                             <h6 class="fw-bold mb-1 text-warning">Service Provider</h6>
-                                            <p class="small mb-0 opacity-75 text-dark">Hospitals, Garages, and Pharmacies network.</p>
+                                            <p class="small mb-0 opacity-75 text-dark">Hospitals, Garages & Pharmacies network.</p>
                                         </div>
                                     </label>
                                 </div>
