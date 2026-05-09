@@ -15,7 +15,16 @@ class CreateTirAmisReportsTable extends Migration
     {
         Schema::create('tir_amis_reports', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('claim_id');
+            $table->string('report_number')->unique();
+            $table->json('report_data');
+            $table->string('status')->default('pending');
+            $table->timestamp('sent_at')->nullable();
+            $table->string('response_code')->nullable();
+            $table->text('response_message')->nullable();
             $table->timestamps();
+
+            $table->foreign('claim_id')->references('id')->on('claims')->onDelete('cascade');
         });
     }
 
