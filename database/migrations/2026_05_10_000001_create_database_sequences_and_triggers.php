@@ -14,84 +14,62 @@ class CreateDatabaseSequencesAndTriggers extends Migration
      */
     public function up()
     {
-        // 1. Create Sequences
+        // For SQLite, we simulate sequences using a dedicated metadata table
+        Schema::create('sys_sequences', function (Blueprint $table) {
+            $table->string('name')->primary();
+            $table->bigInteger('current_value');
+        });
+
+        $sequences = [
+            'seq_customer_number' => 100000,
+            'seq_policy_number' => 1000000,
+            'seq_claim_number' => 100000,
+            'seq_ticket_number' => 100000,
+            'seq_cover_note_number' => 100000,
+            'seq_broker_number' => 10000,
+            'seq_aggregator_number' => 10000,
+            'seq_agent_number' => 10000,
+            'seq_provider_number' => 10000,
+            'seq_loan_number' => 10000,
+        ];
+
+        foreach ($sequences as $name => $start) {
+            DB::table('sys_sequences')->insert(['name' => $name, 'current_value' => $start]);
+        }
+
+        // Create triggers for SQLite
         DB::unprepared("
-            CREATE SEQUENCE IF NOT EXISTS seq_customer_number START 100000;
-            CREATE SEQUENCE IF NOT EXISTS seq_policy_number START 1000000;
-            CREATE SEQUENCE IF NOT EXISTS seq_claim_number START 100000;
-            CREATE SEQUENCE IF NOT EXISTS seq_ticket_number START 100000;
-            CREATE SEQUENCE IF NOT EXISTS seq_cover_note_number START 100000;
-            CREATE SEQUENCE IF NOT EXISTS seq_broker_number START 10000;
-            CREATE SEQUENCE IF NOT EXISTS seq_aggregator_number START 10000;
-            CREATE SEQUENCE IF NOT EXISTS seq_agent_number START 10000;
-            CREATE SEQUENCE IF NOT EXISTS seq_provider_number START 10000;
-            CREATE SEQUENCE IF NOT EXISTS seq_loan_number START 10000;
-        ");
-
-        // 2. Create Functions
-        DB::unprepared("
-            CREATE OR REPLACE FUNCTION generate_customer_number()
-            RETURNS TRIGGER AS $$
+            CREATE TRIGGER trg_gen_customer_number AFTER INSERT ON customers
             BEGIN
-                NEW.customer_number := 'CUST' || LPAD(nextval('seq_customer_number')::TEXT, 8, '0');
-                RETURN NEW;
+                UPDATE sys_sequences SET current_value = current_value + 1 WHERE name = 'seq_customer_number';
+                UPDATE customers 
+                SET customer_number = 'CUST' || printf('%08d', (SELECT current_value FROM sys_sequences WHERE name = 'seq_customer_number'))
+                WHERE id = NEW.id AND customer_number IS NULL;
             END;
-            $$ LANGUAGE plpgsql;
 
-            CREATE OR REPLACE FUNCTION generate_policy_number()
-            RETURNS TRIGGER AS $$
+            CREATE TRIGGER trg_gen_policy_number AFTER INSERT ON customer_policies
             BEGIN
-                NEW.policy_number := 'POL' || TO_CHAR(CURRENT_TIMESTAMP, 'YYYY') || LPAD(nextval('seq_policy_number')::TEXT, 8, '0');
-                RETURN NEW;
+                UPDATE sys_sequences SET current_value = current_value + 1 WHERE name = 'seq_policy_number';
+                UPDATE customer_policies 
+                SET policy_number = 'POL' || strftime('%Y', 'now') || printf('%08d', (SELECT current_value FROM sys_sequences WHERE name = 'seq_policy_number'))
+                WHERE id = NEW.id AND policy_number IS NULL;
             END;
-            $$ LANGUAGE plpgsql;
 
-            CREATE OR REPLACE FUNCTION generate_claim_number()
-            RETURNS TRIGGER AS $$
+            CREATE TRIGGER trg_gen_claim_number AFTER INSERT ON claims
             BEGIN
-                NEW.claim_number := 'CLM' || TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMMDD') || LPAD(nextval('seq_claim_number')::TEXT, 6, '0');
-                RETURN NEW;
+                UPDATE sys_sequences SET current_value = current_value + 1 WHERE name = 'seq_claim_number';
+                UPDATE claims 
+                SET claim_number = 'CLM' || strftime('%Y%m%d', 'now') || printf('%06d', (SELECT current_value FROM sys_sequences WHERE name = 'seq_claim_number'))
+                WHERE id = NEW.id AND claim_number IS NULL;
             END;
-            $$ LANGUAGE plpgsql;
 
-            CREATE OR REPLACE FUNCTION generate_ticket_number()
-            RETURNS TRIGGER AS $$
+            CREATE TRIGGER trg_gen_ticket_number AFTER INSERT ON support_tickets
             BEGIN
-                NEW.ticket_number := 'SUP' || TO_CHAR(NOW(), 'YYYY') || LPAD(nextval('seq_ticket_number')::TEXT, 6, '0');
-                RETURN NEW;
+                UPDATE sys_sequences SET current_value = current_value + 1 WHERE name = 'seq_ticket_number';
+                UPDATE support_tickets 
+                SET ticket_number = 'SUP' || strftime('%Y', 'now') || printf('%06d', (SELECT current_value FROM sys_sequences WHERE name = 'seq_ticket_number'))
+                WHERE id = NEW.id AND ticket_number IS NULL;
             END;
-            $$ LANGUAGE plpgsql;
-        ");
-
-        // 3. Attach Triggers
-        DB::unprepared("
-            DROP TRIGGER IF EXISTS trigger_generate_customer_number ON customers;
-            CREATE TRIGGER trigger_generate_customer_number
-                BEFORE INSERT ON customers
-                FOR EACH ROW
-                WHEN (NEW.customer_number IS NULL)
-                EXECUTE FUNCTION generate_customer_number();
-
-            DROP TRIGGER IF EXISTS trigger_generate_policy_number ON customer_policies;
-            CREATE TRIGGER trigger_generate_policy_number
-                BEFORE INSERT ON customer_policies
-                FOR EACH ROW
-                WHEN (NEW.policy_number IS NULL)
-                EXECUTE FUNCTION generate_policy_number();
-
-            DROP TRIGGER IF EXISTS trigger_generate_claim_number ON claims;
-            CREATE TRIGGER trigger_generate_claim_number
-                BEFORE INSERT ON claims
-                FOR EACH ROW
-                WHEN (NEW.claim_number IS NULL)
-                EXECUTE FUNCTION generate_claim_number();
-
-            DROP TRIGGER IF EXISTS trigger_generate_ticket_number ON support_tickets;
-            CREATE TRIGGER trigger_generate_ticket_number
-                BEFORE INSERT ON support_tickets
-                FOR EACH ROW
-                WHEN (NEW.ticket_number IS NULL)
-                EXECUTE FUNCTION generate_ticket_number();
         ");
     }
 
@@ -102,27 +80,10 @@ class CreateDatabaseSequencesAndTriggers extends Migration
      */
     public function down()
     {
-        DB::unprepared("
-            DROP TRIGGER IF EXISTS trigger_generate_ticket_number ON support_tickets;
-            DROP TRIGGER IF EXISTS trigger_generate_claim_number ON claims;
-            DROP TRIGGER IF EXISTS trigger_generate_policy_number ON customer_policies;
-            DROP TRIGGER IF EXISTS trigger_generate_customer_number ON customers;
-
-            DROP FUNCTION IF EXISTS generate_ticket_number();
-            DROP FUNCTION IF EXISTS generate_claim_number();
-            DROP FUNCTION IF EXISTS generate_policy_number();
-            DROP FUNCTION IF EXISTS generate_customer_number();
-
-            DROP SEQUENCE IF EXISTS seq_loan_number;
-            DROP SEQUENCE IF EXISTS seq_provider_number;
-            DROP SEQUENCE IF EXISTS seq_agent_number;
-            DROP SEQUENCE IF EXISTS seq_aggregator_number;
-            DROP SEQUENCE IF EXISTS seq_broker_number;
-            DROP SEQUENCE IF EXISTS seq_cover_note_number;
-            DROP SEQUENCE IF EXISTS seq_ticket_number;
-            DROP SEQUENCE IF EXISTS seq_claim_number;
-            DROP SEQUENCE IF EXISTS seq_policy_number;
-            DROP SEQUENCE IF EXISTS seq_customer_number;
-        ");
+        DB::unprepared("DROP TRIGGER IF EXISTS trg_gen_ticket_number;");
+        DB::unprepared("DROP TRIGGER IF EXISTS trg_gen_claim_number;");
+        DB::unprepared("DROP TRIGGER IF EXISTS trg_gen_policy_number;");
+        DB::unprepared("DROP TRIGGER IF EXISTS trg_gen_customer_number;");
+        Schema::dropIfExists('sys_sequences');
     }
 }
