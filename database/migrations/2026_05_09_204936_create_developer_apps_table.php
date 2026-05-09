@@ -15,7 +15,16 @@ class CreateDeveloperAppsTable extends Migration
     {
         Schema::create('developer_apps', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('app_name');
+            $table->text('app_description')->nullable();
+            $table->string('app_logo_url', 500)->nullable();
+            $table->string('app_website')->nullable();
+            $table->json('redirect_uris')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

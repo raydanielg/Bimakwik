@@ -15,7 +15,17 @@ class CreateDeveloperWebhookDeliveriesTable extends Migration
     {
         Schema::create('developer_webhook_deliveries', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('developer_webhook_id');
+            $table->string('event_type');
+            $table->json('payload');
+            $table->integer('response_status')->nullable();
+            $table->text('response_body')->nullable();
+            $table->integer('attempt_number')->default(1);
+            $table->boolean('success')->default(false);
+            $table->timestamp('delivered_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('developer_webhook_id', 'dwd_webhook_fk')->references('id')->on('developer_webhooks')->onDelete('cascade');
         });
     }
 
