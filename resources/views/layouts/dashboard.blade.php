@@ -441,10 +441,16 @@
             <div class="sidebar-heading">Market Monitoring</div>
             <div class="list-group list-group-flush px-2">
                 <a href="{{ route('aggregator.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.dashboard') ? 'active' : '' }}">
-                    <i class="bi bi-speedometer2"></i> Dashboard
+                    <i class="bi bi-speedometer2"></i> Overview
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-activity"></i> Traffic Metrics
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-check"></i> Lead Generation
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-robot"></i> AI Market Insights
                 </a>
             </div>
 
@@ -454,7 +460,10 @@
                     <i class="bi bi-grid-3x3-gap"></i> Comparison Matrix
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-robot"></i> AI Smart Compare
+                    <i class="bi bi-layout-split"></i> Side-by-Side View
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-magic"></i> AI Smart Compare
                 </a>
             </div>
 
@@ -464,27 +473,36 @@
                     <i class="bi bi-calculator"></i> Generate Quote
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-send-plus"></i> Send Leads
+                    <i class="bi bi-send-plus"></i> Send Lead to Broker
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-briefcase"></i> Track Lead Status
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Earnings & Reports</div>
+            <div class="sidebar-heading mt-3">Wallet & Earnings</div>
             <div class="list-group list-group-flush px-2">
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-wallet2"></i> My Wallet
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-bar-chart-steps"></i> Conversion Reports
+                    <i class="bi bi-cash-stack"></i> Referral Fees
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bank"></i> Cash-out
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Settings</div>
+            <div class="sidebar-heading mt-3">Settings & Reports</div>
             <div class="list-group list-group-flush px-2">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-person-gear"></i> Profile & Bank
+                    <i class="bi bi-bar-chart-steps"></i> Traffic & Lead Reports
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-gear"></i> Profile & Integration
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-lock"></i> Privacy Logs
                 </a>
             </div>
             @endif
