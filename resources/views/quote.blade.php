@@ -19,35 +19,35 @@
                                 <p class="text-secondary small">Experience the ease of digital insurance with BimaKwik.</p>
                             </div>
 
-                            <form action="#" method="POST">
+                            <form action="{{ route('quote.store') }}" method="POST">
                                 @csrf
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label class="form-label small fw-bold">Full Name</label>
-                                        <input type="text" class="form-control form-control-lg bg-light border-0 px-3" placeholder="John Doe" required>
+                                        <input type="text" name="name" class="form-control form-control-lg bg-light border-0 px-3" placeholder="John Doe" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label small fw-bold">Email Address</label>
-                                        <input type="email" class="form-control form-control-lg bg-light border-0 px-3" placeholder="name@example.com" required>
+                                        <input type="email" name="email" class="form-control form-control-lg bg-light border-0 px-3" placeholder="name@example.com" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label small fw-bold">Phone Number</label>
-                                        <input type="tel" class="form-control form-control-lg bg-light border-0 px-3" placeholder="+255 --- --- ---" required>
+                                        <input type="tel" name="phone" class="form-control form-control-lg bg-light border-0 px-3" placeholder="+255 --- --- ---" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label small fw-bold">Insurance Type</label>
-                                        <select class="form-select form-select-lg bg-light border-0 px-3" required>
+                                        <select name="insurance_type" class="form-select form-select-lg bg-light border-0 px-3" required>
                                             <option value="" selected disabled>Choose type...</option>
-                                            <option>Motor Insurance</option>
-                                            <option>Health Insurance</option>
-                                            <option>Life Insurance</option>
-                                            <option>Fire Insurance</option>
-                                            <option>Travel Insurance</option>
+                                            <option value="Motor">Motor Insurance</option>
+                                            <option value="Health">Health Insurance</option>
+                                            <option value="Life">Life Insurance</option>
+                                            <option value="Fire">Fire Insurance</option>
+                                            <option value="Travel">Travel Insurance</option>
                                         </select>
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label small fw-bold">Additional Message (Optional)</label>
-                                        <textarea class="form-control bg-light border-0 px-3" rows="3" placeholder="Tell us more about your needs..."></textarea>
+                                        <textarea name="message" class="form-control bg-light border-0 px-3" rows="3" placeholder="Tell us more about your needs..."></textarea>
                                     </div>
                                     <div class="col-12 mt-4 text-end">
                                         <button type="submit" class="btn-quote-custom">

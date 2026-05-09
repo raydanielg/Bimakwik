@@ -85,5 +85,6 @@ Route::get('/contact-us', function () { return view('pages.contact'); })->name('
 Route::get('/guidelines-materials', function () { return view('resources.guidelines'); })->name('resources.guidelines');
 Route::get('/news-research', function () { return view('resources.news'); })->name('resources.news');
 
-// Quote Route
-Route::get('/request-quote', function () { return view('quote'); })->name('quote.request');
+// Quote Routes
+Route::get('/request-quote', [App\Http\Controllers\QuoteController::class, 'show'])->name('quote.request');
+Route::post('/request-quote', [App\Http\Controllers\QuoteController::class, 'store'])->name('quote.store');
