@@ -24,48 +24,43 @@
             </div>
 
             <!-- Quick Links -->
-            <div class="col-lg-3 col-6 col-md-6">
+            <div class="col-lg-2 col-6 col-md-3">
                 <h6 class="fw-bold mb-4 text-uppercase small letter-spacing-1">Quick Links</h6>
                 <ul class="list-unstyled footer-links">
                     <li><a href="{{ url('/') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Home</a></li>
                     <li><a href="{{ route('pages.about') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>About Us</a></li>
-                    <li><a href="{{ url('/') }}#features"><i class="bi bi-chevron-right me-2 text-warning"></i>Core Features</a></li>
+                    <li><a href="{{ url('/') }}#features"><i class="bi bi-chevron-right me-2 text-warning"></i>Features</a></li>
                     <li><a href="{{ url('/') }}#how-it-works"><i class="bi bi-chevron-right me-2 text-warning"></i>How It Works</a></li>
-                    <li><a href="{{ url('/') }}#testimonials"><i class="bi bi-chevron-right me-2 text-warning"></i>Testimonials</a></li>
                 </ul>
             </div>
 
             <!-- Resources -->
-            <div class="col-lg-3 col-6 col-md-6">
+            <div class="col-lg-2 col-6 col-md-3">
                 <h6 class="fw-bold mb-4 text-uppercase small letter-spacing-1">Resources</h6>
                 <ul class="list-unstyled footer-links">
                     <li><a href="{{ route('resources.guidelines') }}"><i class="bi bi-chevron-right me-2 text-success"></i>Guidelines</a></li>
-                    <li><a href="{{ route('resources.guidelines') }}"><i class="bi bi-chevron-right me-2 text-success"></i>Materials</a></li>
                     <li><a href="{{ route('resources.news') }}"><i class="bi bi-chevron-right me-2 text-success"></i>News</a></li>
                     <li><a href="{{ route('resources.news') }}"><i class="bi bi-chevron-right me-2 text-success"></i>Research</a></li>
-                    <li><a href="{{ route('login') }}"><i class="bi bi-chevron-right me-2 text-success"></i>Staff Portal</a></li>
                 </ul>
             </div>
 
             <!-- Support -->
-            <div class="col-lg-3 col-6 col-md-6">
+            <div class="col-lg-2 col-6 col-md-3">
                 <h6 class="fw-bold mb-4 text-uppercase small letter-spacing-1">Support</h6>
                 <ul class="list-unstyled footer-links">
-                    <li><a href="{{ route('register') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Create Account</a></li>
-                    <li><a href="{{ route('login') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Login</a></li>
                     <li><a href="{{ route('support.help') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Help Center</a></li>
                     <li><a href="{{ route('support.faqs') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>FAQs</a></li>
+                    <li><a href="{{ route('register') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Register</a></li>
                 </ul>
             </div>
 
             <!-- Legal -->
-            <div class="col-lg-3 col-6 col-md-6">
+            <div class="col-lg-2 col-6 col-md-3">
                 <h6 class="fw-bold mb-4 text-uppercase small letter-spacing-1">Legal</h6>
                 <ul class="list-unstyled footer-links">
-                    <li><a href="{{ route('privacy') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Privacy Policy</a></li>
-                    <li><a href="{{ route('terms') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Terms of Service</a></li>
-                    <li><a href="{{ route('cookies') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Cookie Policy</a></li>
-                    <li><a href="{{ route('data-protection') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Data Protection</a></li>
+                    <li><a href="{{ route('privacy') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Privacy</a></li>
+                    <li><a href="{{ route('terms') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Terms</a></li>
+                    <li><a href="{{ route('cookies') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Cookies</a></li>
                 </ul>
             </div>
         </div>
