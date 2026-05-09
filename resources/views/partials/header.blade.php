@@ -142,81 +142,125 @@
 </nav>
 
 <!-- Mobile Sidebar (Offcanvas) -->
-<div class="offcanvas offcanvas-start border-0" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
-    <div class="offcanvas-header border-bottom p-4">
-        <img src="{{ asset('logo.png') }}" alt="Logo" height="50">
+<div class="offcanvas offcanvas-start border-0 shadow-lg" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+    <div class="offcanvas-header border-bottom p-4 bg-light">
+        <div class="d-flex align-items-center">
+            <img src="{{ asset('logo.png') }}" alt="Logo" height="45" class="me-2">
+            <span class="fw-bold text-primary h5 mb-0">{{ config('app.name') }}</span>
+        </div>
         <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body p-0 d-flex flex-column h-100">
+        <!-- Auth Section for Mobile -->
+        <div class="p-4 border-bottom">
+            @auth
+                <div class="d-flex align-items-center mb-3 p-3 bg-primary bg-opacity-10 rounded-4">
+                    <div class="flex-shrink-0">
+                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px; font-size: 1.2rem;">
+                            {{ substr(auth()->user()->name, 0, 1) }}
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h6 class="fw-bold mb-0 text-dark">{{ auth()->user()->name }}</h6>
+                        <small class="text-primary fw-bold text-uppercase" style="font-size: 0.65rem;">{{ auth()->user()->roles->first()->name ?? 'User' }}</small>
+                    </div>
+                </div>
+            @else
+                <div class="row g-2 mb-2">
+                    <div class="col-6">
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary w-100 py-2 rounded-pill fw-bold shadow-sm">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ route('register') }}" class="btn btn-primary w-100 py-2 rounded-pill fw-bold shadow-sm">
+                            <i class="bi bi-person-plus me-1"></i> Join Now
+                        </a>
+                    </div>
+                </div>
+            @endauth
+        </div>
+
         <div class="p-4 flex-grow-1 overflow-auto">
             <div class="mb-5">
-                <h6 class="text-uppercase small fw-bold text-muted mb-3 letter-spacing-1">Main Menu</h6>
+                <h6 class="text-uppercase small fw-bold text-muted mb-3 letter-spacing-1" style="font-size: 0.7rem;">Main Menu</h6>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="{{ url('/') }}" class="mobile-nav-link {{ request()->is('/') ? 'active' : '' }}"><i class="bi bi-house me-2"></i> Home</a></li>
+                    <li class="mb-2"><a href="{{ url('/') }}" class="mobile-nav-link {{ request()->is('/') ? 'active' : '' }}"><i class="bi bi-house-door me-3"></i> Home</a></li>
+                    
+                    @auth
+                        <li class="mb-2">
+                            <a href="{{ route($dashboardRoute) }}" class="mobile-nav-link text-primary fw-bold bg-primary bg-opacity-10 rounded-3 px-3">
+                                <i class="bi bi-speedometer2 me-3"></i> My Dashboard
+                            </a>
+                        </li>
+                    @endauth
+
                     <li class="mb-2">
                         <a class="mobile-nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#mobileAbout">
-                            <span><i class="bi bi-building me-2"></i> Company</span>
+                            <span><i class="bi bi-building me-3"></i> Company</span>
                             <i class="bi bi-chevron-down small"></i>
                         </a>
-                        <div class="collapse ps-3 mt-2" id="mobileAbout">
-                            <a href="{{ route('pages.about') }}" class="mobile-nav-sublink">About Us</a>
-                            <a href="{{ route('pages.branches') }}" class="mobile-nav-sublink">Branches</a>
-                            <a href="{{ route('pages.contact') }}" class="mobile-nav-sublink">Contact</a>
+                        <div class="collapse ps-4 mt-2" id="mobileAbout">
+                            <a href="{{ route('pages.about') }}" class="mobile-nav-sublink"><i class="bi bi-info-circle me-2"></i> About Us</a>
+                            <a href="{{ route('pages.branches') }}" class="mobile-nav-sublink"><i class="bi bi-geo-alt me-2"></i> Our Branches</a>
+                            <a href="{{ route('pages.contact') }}" class="mobile-nav-sublink"><i class="bi bi-telephone me-2"></i> Contact Us</a>
                         </div>
                     </li>
                     <li class="mb-2">
                         <a class="mobile-nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#mobileProducts">
-                            <span><i class="bi bi-shield-check me-2"></i> Solutions</span>
+                            <span><i class="bi bi-shield-check me-3"></i> Solutions</span>
                             <i class="bi bi-chevron-down small"></i>
                         </a>
-                        <div class="collapse ps-3 mt-2" id="mobileProducts">
-                            <a href="{{ route('pages.products') }}" class="mobile-nav-sublink">Our Products</a>
-                            <a href="{{ route('pages.claims') }}" class="mobile-nav-sublink">Digital Claims</a>
+                        <div class="collapse ps-4 mt-2" id="mobileProducts">
+                            <a href="{{ route('pages.products') }}" class="mobile-nav-sublink"><i class="bi bi-grid me-2"></i> Insurance Products</a>
+                            <a href="{{ route('pages.claims') }}" class="mobile-nav-sublink"><i class="bi bi-lightning-charge me-2"></i> Digital Claims</a>
                         </div>
                     </li>
                     <li class="mb-2">
                         <a class="mobile-nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#mobileResources">
-                            <span><i class="bi bi-collection me-2"></i> Resources</span>
+                            <span><i class="bi bi-collection me-3"></i> Resources</span>
                             <i class="bi bi-chevron-down small"></i>
                         </a>
-                        <div class="collapse ps-3 mt-2" id="mobileResources">
-                            <a href="{{ route('resources.news') }}" class="mobile-nav-sublink">News & Research</a>
-                            <a href="{{ route('resources.guidelines') }}" class="mobile-nav-sublink">Guidelines</a>
-                            <a href="{{ route('support.help') }}" class="mobile-nav-sublink">Help Center</a>
+                        <div class="collapse ps-4 mt-2" id="mobileResources">
+                            <a href="{{ route('resources.news') }}" class="mobile-nav-sublink"><i class="bi bi-newspaper me-2"></i> News & Research</a>
+                            <a href="{{ route('resources.guidelines') }}" class="mobile-nav-sublink"><i class="bi bi-journal-text me-2"></i> Guidelines</a>
+                            <a href="{{ route('support.help') }}" class="mobile-nav-sublink"><i class="bi bi-headset me-2"></i> Help Center</a>
                         </div>
                     </li>
                 </ul>
             </div>
 
             <div class="contact-sidebar-section mb-5">
-                <h6 class="text-uppercase small fw-bold text-muted mb-4 letter-spacing-1">Quick Contact</h6>
-                <a href="tel:+255762883065" class="d-flex align-items-center text-dark text-decoration-none mb-3">
-                    <div class="sidebar-icon-circle bg-primary bg-opacity-10 text-primary"><i class="bi bi-telephone"></i></div>
-                    <span class="ms-3 fw-bold small">+255 762 883 065</span>
-                </a>
-                <a href="mailto:info@bimakwik.com" class="d-flex align-items-center text-dark text-decoration-none mb-3">
-                    <div class="sidebar-icon-circle bg-primary bg-opacity-10 text-primary"><i class="bi bi-envelope"></i></div>
-                    <span class="ms-3 fw-bold small">info@bimakwik.com</span>
-                </a>
+                <h6 class="text-uppercase small fw-bold text-muted mb-4 letter-spacing-1" style="font-size: 0.7rem;">Quick Support</h6>
+                <div class="d-grid gap-3">
+                    <a href="tel:+255762883065" class="d-flex align-items-center text-dark text-decoration-none">
+                        <div class="sidebar-icon-circle bg-success bg-opacity-10 text-success"><i class="bi bi-telephone-outbound"></i></div>
+                        <div class="ms-3">
+                            <small class="text-muted d-block" style="font-size: 0.65rem;">Call Support</small>
+                            <span class="fw-bold small">+255 762 883 065</span>
+                        </div>
+                    </a>
+                    <a href="mailto:info@bimakwik.com" class="d-flex align-items-center text-dark text-decoration-none">
+                        <div class="sidebar-icon-circle bg-info bg-opacity-10 text-info"><i class="bi bi-envelope-at"></i></div>
+                        <div class="ms-3">
+                            <small class="text-muted d-block" style="font-size: 0.65rem;">Email Us</small>
+                            <span class="fw-bold small">info@bimakwik.com</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="p-4 border-top bg-light">
-            @auth
-                <div class="d-grid gap-2">
-                    <a href="{{ route($dashboardRoute) }}" class="btn btn-primary rounded-pill py-2 fw-bold shadow-sm">Dashboard</a>
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-outline-danger rounded-pill py-2 fw-bold w-100">Logout</button>
-                    </form>
-                </div>
-            @else
-                <div class="d-grid gap-2">
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary rounded-pill py-2 fw-bold">Login</a>
-                    <a href="{{ route('register') }}" class="btn btn-primary rounded-pill py-2 fw-bold shadow-sm">Register Now</a>
-                </div>
-            @endauth
-        </div>
+        @auth
+            <div class="p-4 border-top bg-light">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger w-100 rounded-pill py-2 fw-bold shadow-sm d-flex align-items-center justify-content-center">
+                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                    </button>
+                </form>
+            </div>
+        @endauth
     </div>
 </div>
 
