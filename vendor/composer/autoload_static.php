@@ -601,6 +601,8 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\ComplianceCheck' => __DIR__ . '/../..' . '/app/Models/ComplianceCheck.php',
         'App\\Models\\CountryConfig' => __DIR__ . '/../..' . '/app/Models/CountryConfig.php',
         'App\\Models\\CountryInstance' => __DIR__ . '/../..' . '/app/Models/CountryInstance.php',
+        'App\\Models\\CoverNote' => __DIR__ . '/../..' . '/app/Models/CoverNote.php',
+        'App\\Models\\CoverNoteStatus' => __DIR__ . '/../..' . '/app/Models/CoverNoteStatus.php',
         'App\\Models\\Csr' => __DIR__ . '/../..' . '/app/Models/Csr.php',
         'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
         'App\\Models\\CustomerActivityLog' => __DIR__ . '/../..' . '/app/Models/CustomerActivityLog.php',
@@ -615,6 +617,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\CustomerSession' => __DIR__ . '/../..' . '/app/Models/CustomerSession.php',
         'App\\Models\\CustomerVerificationToken' => __DIR__ . '/../..' . '/app/Models/CustomerVerificationToken.php',
         'App\\Models\\DashboardSummary' => __DIR__ . '/../..' . '/app/Models/DashboardSummary.php',
+        'App\\Models\\DataProtectionLog' => __DIR__ . '/../..' . '/app/Models/DataProtectionLog.php',
         'App\\Models\\DocumentGenerationQueue' => __DIR__ . '/../..' . '/app/Models/DocumentGenerationQueue.php',
         'App\\Models\\DynamicForm' => __DIR__ . '/../..' . '/app/Models/DynamicForm.php',
         'App\\Models\\DynamicFormField' => __DIR__ . '/../..' . '/app/Models/DynamicFormField.php',
@@ -681,6 +684,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\SupportTicket' => __DIR__ . '/../..' . '/app/Models/SupportTicket.php',
         'App\\Models\\SupportTicketReply' => __DIR__ . '/../..' . '/app/Models/SupportTicketReply.php',
         'App\\Models\\SystemSetting' => __DIR__ . '/../..' . '/app/Models/SystemSetting.php',
+        'App\\Models\\TirAmisIntegrationLog' => __DIR__ . '/../..' . '/app/Models/TirAmisIntegrationLog.php',
         'App\\Models\\TirAmisReport' => __DIR__ . '/../..' . '/app/Models/TirAmisReport.php',
         'App\\Models\\TwoFactorAuth' => __DIR__ . '/../..' . '/app/Models/TwoFactorAuth.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -5889,4 +5893,8 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixDirsPsr4;
-            $loader->classMap = Compos
+            $loader->classMap = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$classMap;
+
+        }, null, ClassLoader::class);
+    }
+}
