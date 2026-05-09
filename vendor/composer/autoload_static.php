@@ -648,7 +648,13 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\RolePermission' => __DIR__ . '/../..' . '/app/Models/RolePermission.php',
         'App\\Models\\ServiceProvider' => __DIR__ . '/../..' . '/app/Models/ServiceProvider.php',
+        'App\\Models\\ServiceProviderBankDetail' => __DIR__ . '/../..' . '/app/Models/ServiceProviderBankDetail.php',
+        'App\\Models\\ServiceProviderContract' => __DIR__ . '/../..' . '/app/Models/ServiceProviderContract.php',
+        'App\\Models\\ServiceProviderPerformanceMetric' => __DIR__ . '/../..' . '/app/Models/ServiceProviderPerformanceMetric.php',
+        'App\\Models\\ServiceProviderPermission' => __DIR__ . '/../..' . '/app/Models/ServiceProviderPermission.php',
         'App\\Models\\ServiceProviderProfile' => __DIR__ . '/../..' . '/app/Models/ServiceProviderProfile.php',
+        'App\\Models\\ServiceProviderServiceLevelAgreement' => __DIR__ . '/../..' . '/app/Models/ServiceProviderServiceLevelAgreement.php',
+        'App\\Models\\ServiceProviderStaff' => __DIR__ . '/../..' . '/app/Models/ServiceProviderStaff.php',
         'App\\Models\\ServiceProviderType' => __DIR__ . '/../..' . '/app/Models/ServiceProviderType.php',
         'App\\Models\\Session' => __DIR__ . '/../..' . '/app/Models/Session.php',
         'App\\Models\\SupportTicket' => __DIR__ . '/../..' . '/app/Models/SupportTicket.php',
@@ -5858,8 +5864,4 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$classMap;
-
-        }, null, ClassLoader::class);
-    }
-}
+          
