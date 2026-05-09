@@ -16,29 +16,33 @@ class CreateCustomerPoliciesTable extends Migration
         Schema::create('customer_policies', function (Blueprint $table) {
             $table->id();
             $table->string('policy_number')->unique();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('insurance_product_id');
-            $table->unsignedBigInteger('insurer_id')->nullable();
-            $table->enum('status', ['active', 'expired', 'cancelled', 'suspended', 'pending'])->default('pending');
+            $table->unsignedBigInteger('insurer_id');
+            $table->unsignedBigInteger('broker_id')->nullable();
+            $table->unsignedBigInteger('agent_id')->nullable();
+            $table->string('status', 50)->default('active');
             $table->date('start_date');
             $table->date('end_date');
             $table->decimal('premium_amount', 15, 2);
-            $table->enum('premium_frequency', ['one_time', 'monthly', 'quarterly', 'annual'])->default('annual');
+            $table->string('premium_frequency', 50)->default('annual');
             $table->decimal('sum_assured', 15, 2);
             $table->decimal('deductible_amount', 15, 2)->nullable();
-            $table->json('policy_details')->nullable();
+            $table->json('policy_details');
             $table->json('nominees')->nullable();
-            $table->string('payment_method')->nullable();
-            $table->string('payment_reference')->nullable();
-            $table->timestamp('purchased_at')->nullable();
+            $table->string('payment_method', 50);
+            $table->string('payment_reference', 100)->nullable();
+            $table->timestamp('purchased_at')->useCurrent();
             $table->timestamp('last_renewed_at')->nullable();
             $table->timestamp('cancelled_at')->nullable();
             $table->text('cancellation_reason')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('insurance_product_id')->references('id')->on('insurance_products')->onDelete('cascade');
-            $table->foreign('insurer_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('insurer_id')->references('id')->on('insurers')->onDelete('cascade');
+            $table->foreign('broker_id')->references('id')->on('brokers')->onDelete('set null');
+            $table->foreign('agent_id')->references('id')->on('agents')->onDelete('set null');
         });
     }
 

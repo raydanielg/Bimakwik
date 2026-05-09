@@ -15,7 +15,7 @@ class CreatePolicyVehicleDetailsTable extends Migration
     {
         Schema::create('policy_vehicle_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_policy_id');
+            $table->unsignedBigInteger('customer_policy_id')->unique();
             $table->string('registration_number', 20);
             $table->string('make', 100);
             $table->string('model', 100);

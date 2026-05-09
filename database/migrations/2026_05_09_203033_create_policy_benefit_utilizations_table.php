@@ -16,9 +16,11 @@ class CreatePolicyBenefitUtilizationsTable extends Migration
         Schema::create('policy_benefit_utilizations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_policy_id');
-            $table->string('benefit_type');
+            $table->string('benefit_type', 50);
             $table->decimal('total_limit', 15, 2);
             $table->decimal('used_amount', 15, 2)->default(0);
+            $table->decimal('remaining_amount', 15, 2)->virtualAs('total_limit - used_amount');
+            $table->timestamp('last_updated')->useCurrent();
             $table->timestamps();
 
             $table->foreign('customer_policy_id')->references('id')->on('customer_policies')->onDelete('cascade');
