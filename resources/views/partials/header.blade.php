@@ -145,9 +145,9 @@
                     <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Company</a>
                     <div class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster">
                         <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('pages.about') }}">About Us</a>
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Our Story</a>
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Leadership Team</a>
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Careers</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('company.story') }}">Our Story</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('company.leadership') }}">Leadership Team</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('company.careers') }}">Careers</a>
                         <a class="dropdown-item rounded-3 p-2" href="{{ route('pages.contact') }}">Contact Us</a>
                     </div>
                 </li>
