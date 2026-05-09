@@ -2,42 +2,67 @@
 
 @section('content')
 <!-- About Hero -->
-<section class="py-5 bg-primary text-white text-center" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); margin-top: 80px;">
-    <div class="container py-5">
-        <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown">Empowering Africa Through Digital Insurance</h1>
-        <p class="lead mb-0 animate__animated animate__fadeInUp">Bima Kwik is revolutionizing insurance penetration with innovative digital solutions.</p>
+<section class="py-5 bg-primary text-white position-relative overflow-hidden" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); margin-top: 80px;">
+    <!-- Decorative Shapes -->
+    <div class="position-absolute top-0 start-0 translate-middle bg-white opacity-5 rounded-circle" style="width: 400px; height: 400px;"></div>
+    <div class="position-absolute bottom-0 end-0 translate-middle bg-white opacity-5 rounded-circle" style="width: 300px; height: 300px;"></div>
+
+    <div class="container py-5 position-relative">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <span class="badge rounded-pill bg-white text-primary px-3 py-2 mb-3 animate__animated animate__fadeInDown">ABOUT BIMAKWIK</span>
+                <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInUp">Empowering Africa Through Digital Insurance</h1>
+                <p class="lead mb-0 animate__animated animate__fadeInUp" style="animation-delay: 0.2s">Bima Kwik is revolutionizing insurance penetration with innovative digital solutions and strategic partnerships.</p>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Main About Content -->
+<!-- Why Choose Bima Kwik -->
 <section class="py-5">
     <div class="container py-4">
         <div class="row align-items-center mb-5">
             <div class="col-lg-6 mb-4 mb-lg-0 animate__animated animate__fadeInLeft">
-                <h2 class="fw-bold mb-4 text-primary border-start border-4 border-primary ps-3">Who We Are</h2>
-                <p class="lead text-dark mb-4">I Link Limited, trading as <strong>Bima Kwik</strong>, is a licensed insurance digital platform in Tanzania.</p>
-                <p class="text-muted lh-lg mb-4">
-                    We serve as an intermediary platform for insurance sales and claims notifications, connecting insurance companies, regulators, sales channels, partner networks, and insurance customers. Our platform integrates various general, health, and life insurance products, including health, personal accident, motor, and funeral covers.
-                </p>
-                <div class="row g-3">
-                    <div class="col-6">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                            <span class="fw-semibold">TIRA Licensed</span>
+                <div class="pe-lg-5">
+                    <h6 class="text-primary fw-bold text-uppercase mb-3 letter-spacing-1">Who We Are</h6>
+                    <h2 class="display-5 fw-bold mb-4 text-dark">Your Trusted Digital Insurance Partner</h2>
+                    <p class="lead text-dark mb-4">I Link Limited, trading as <strong>Bima Kwik</strong>, is a licensed insurance digital platform in Tanzania.</p>
+                    <p class="text-muted lh-lg mb-4">
+                        We serve as an intermediary platform for insurance sales and claims notifications, connecting insurance companies, regulators, sales channels, partner networks, and insurance customers. Our platform integrates various general, health, and life insurance products into one seamless experience.
+                    </p>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                                    <i class="bi bi-patch-check-fill text-primary"></i>
+                                </div>
+                                <span class="fw-bold">TIRA Licensed</span>
+                            </div>
                         </div>
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                            <span class="fw-semibold">OMNI CHANNEL</span>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                                    <i class="bi bi-cpu-fill text-primary"></i>
+                                </div>
+                                <span class="fw-bold">API Integrated</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                            <span class="fw-semibold">API Integrated</span>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                                    <i class="bi bi-layers-fill text-primary"></i>
+                                </div>
+                                <span class="fw-bold">OMNI CHANNEL</span>
+                            </div>
                         </div>
-                        <div class="d-flex align-items-center">
-                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                            <span class="fw-semibold">Regulatory Compliant</span>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                                    <i class="bi bi-shield-lock-fill text-primary"></i>
+                                </div>
+                                <span class="fw-bold">Regulated & Secure</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,98 +70,91 @@
             <div class="col-lg-6 animate__animated animate__fadeInRight">
                 <div class="position-relative">
                     <img src="{{ asset('hero/passionate-about-what-he-does-manager-sitting-having-discussion-with-employee_590464-14320.jpg') }}" alt="About Bima Kwik" class="img-fluid rounded-4 shadow-lg">
-                    <div class="position-absolute bottom-0 start-0 bg-white p-4 m-4 rounded-3 shadow-sm d-none d-md-block" style="width: 220px; border-left: 5px solid #0d6efd;">
-                        <h3 class="fw-bold text-primary mb-0">Tanzanian</h3>
-                        <p class="small text-muted mb-0">Licensed Platform</p>
+                    <div class="position-absolute -bottom-4 -end-4 bg-white p-4 m-4 rounded-4 shadow-lg d-none d-md-block animate__animated animate__bounceIn" style="width: 240px; border-left: 8px solid #0d6efd; animation-delay: 0.8s;">
+                        <div class="d-flex align-items-center mb-2">
+                            <h2 class="fw-bold text-primary mb-0 me-2">100%</h2>
+                            <i class="bi bi-graph-up-arrow text-success fs-4"></i>
+                        </div>
+                        <p class="small text-dark fw-bold mb-0">Digital Transformation</p>
+                        <p class="small text-muted mb-0">Reliable & Transparent</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- The Africa Situation -->
-        <div class="row mb-5 py-5 bg-light rounded-4 align-items-center">
-            <div class="col-lg-5 mb-4 mb-lg-0 px-4 animate__animated animate__zoomIn">
-                <img src="{{ asset('hero/explain-black-man-laptop-office-meeting-ideas-project-with-teamwork-collaboration-employee-discussion-boardroom-with-research-partnership-strategy-as-lawyers_590464-394339.jpg') }}" alt="Africa Strategy" class="img-fluid rounded-4 shadow">
+        <!-- The Solution & Africa Situation -->
+        <div class="row mb-5 py-5 px-4 bg-dark text-white rounded-5 overflow-hidden position-relative">
+            <div class="position-absolute top-0 end-0 p-5 opacity-10">
+                <i class="bi bi-globe-africa display-1"></i>
             </div>
-            <div class="col-lg-7 px-4 animate__animated animate__fadeInRight">
-                <h2 class="fw-bold mb-4">The Africa Situation</h2>
-                <p class="lead text-muted mb-4">
-                    Insurance penetration in Africa is currently less than 3%, despite a potential market of 1.4 billion people. Bima Kwik addresses this by changing the perception of insurance from an "expense" to an "investment" or "business opportunity."
+            <div class="col-lg-7 position-relative">
+                <h6 class="text-warning fw-bold text-uppercase mb-3">The Africa Situation</h6>
+                <h2 class="display-6 fw-bold mb-4">Bridging the Insurance Gap</h2>
+                <p class="lead text-light opacity-75 mb-4">
+                    Insurance penetration in Africa is less than 3%, yet there's a potential market of 1.4 billion people. Bima Kwik addresses this by changing perceptions—turning insurance from an "expense" into a vital "investment" or "business opportunity."
                 </p>
-                <div class="row g-3">
+                <div class="row g-4">
                     <div class="col-md-4">
-                        <div class="p-3 bg-white rounded-3 shadow-sm border-top border-3 border-primary">
-                            <h4 class="fw-bold text-primary mb-1">3%</h4>
-                            <p class="small text-muted mb-0">Current Penetration</p>
+                        <div class="h-100 p-4 rounded-4" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                            <h3 class="fw-bold text-warning mb-1">< 3%</h3>
+                            <p class="small mb-0 opacity-75">Current Penetration</p>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="p-3 bg-white rounded-3 shadow-sm border-top border-3 border-success">
-                            <h4 class="fw-bold text-success mb-1">1.4B</h4>
-                            <p class="small text-muted mb-0">Potential Market</p>
+                        <div class="h-100 p-4 rounded-4" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                            <h3 class="fw-bold text-warning mb-1">1.4B</h3>
+                            <p class="small mb-0 opacity-75">Potential Market</p>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="p-3 bg-white rounded-3 shadow-sm border-top border-3 border-warning">
-                            <h4 class="fw-bold text-warning mb-1">API</h4>
-                            <p class="small text-muted mb-0">Core Connectivity</p>
+                        <div class="h-100 p-4 rounded-4" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                            <h3 class="fw-bold text-warning mb-1">24/7</h3>
+                            <p class="small mb-0 opacity-75">Cloud Access</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Financial Inclusion Section -->
-        <div class="row align-items-center mb-5">
-            <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0 animate__animated animate__fadeInRight">
-                <h2 class="fw-bold mb-4 text-primary border-start border-4 border-primary ps-3">Financial Inclusion</h2>
-                <p class="text-muted lh-lg mb-4">
-                    Our solution contributes to financial inclusion by providing increased social protection through customized insurance products for community groups, individuals, and businesses.
-                </p>
-                <div class="card border-0 bg-primary text-white p-4 rounded-4 shadow-lg animate__animated animate__pulse animate__infinite animate__slower">
-                    <h5 class="fw-bold mb-3"><i class="bi bi-people-fill me-2"></i> Empowering Communities</h5>
-                    <p class="mb-0">
-                        We implement a revenue sharing model with engaged channels and partners, empowering disabled individuals, women, youth, and SMEs to become part of the insurance ecosystem.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-6 order-lg-1 animate__animated animate__fadeInLeft">
-                <img src="{{ asset('hero/legal-women-contract-with-team-planning-documents-partnership-b2b-agreement-lawyer-financial-advisor-consulting-with-people-office-sign-compliance-deal-divorce-review_590464-152088.jpg') }}" alt="Financial Inclusion" class="img-fluid rounded-4 shadow">
+            <div class="col-lg-5 d-none d-lg-block">
+                 <img src="{{ asset('hero/explain-black-man-laptop-office-meeting-ideas-project-with-teamwork-collaboration-employee-discussion-boardroom-with-research-partnership-strategy-as-lawyers_590464-394339.jpg') }}" alt="Africa Strategy" class="img-fluid rounded-4 shadow-lg h-100 object-fit-cover">
             </div>
         </div>
 
-        <!-- Mission, Vision, Values -->
-        <div class="row g-4 mb-5">
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 hover-lift">
-                    <div class="icon-box mb-3 bg-primary bg-opacity-10 rounded-3 p-3 d-inline-block text-primary">
-                        <i class="bi bi-eye-fill fs-3"></i>
+        <!-- Core Values & Mission -->
+        <div class="row py-5">
+            <div class="col-12 text-center mb-5">
+                <h6 class="text-primary fw-bold text-uppercase mb-3">Foundations of Success</h6>
+                <h2 class="display-5 fw-bold text-dark">Our Mission & Values</h2>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm p-4 hover-lift text-center">
+                    <div class="icon-box mx-auto mb-4 bg-primary bg-opacity-10 rounded-circle p-4 d-inline-flex text-primary">
+                        <i class="bi bi-eye-fill fs-1"></i>
                     </div>
-                    <h4 class="fw-bold">Our Vision</h4>
+                    <h4 class="fw-bold mb-3">Our Vision</h4>
                     <p class="text-muted">To revolutionize insurance penetration in Africa and help all stakeholders achieve their social and financial targets.</p>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 hover-lift">
-                    <div class="icon-box mb-3 bg-success bg-opacity-10 rounded-3 p-3 d-inline-block text-success">
-                        <i class="bi bi-bullseye fs-3"></i>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm p-4 hover-lift text-center">
+                    <div class="icon-box mx-auto mb-4 bg-success bg-opacity-10 rounded-circle p-4 d-inline-flex text-success">
+                        <i class="bi bi-bullseye fs-1"></i>
                     </div>
-                    <h4 class="fw-bold">Our Mission</h4>
+                    <h4 class="fw-bold mb-3">Our Mission</h4>
                     <p class="text-muted">To provide user-friendly access to customized insurance products through a robust, regulatory-compliant OMNICHANNEL platform.</p>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 hover-lift">
-                    <div class="icon-box mb-3 bg-warning bg-opacity-10 rounded-3 p-3 d-inline-block text-warning">
-                        <i class="bi bi-heart-fill fs-3"></i>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm p-4 hover-lift text-center">
+                    <div class="icon-box mx-auto mb-4 bg-warning bg-opacity-10 rounded-circle p-4 d-inline-flex text-warning">
+                        <i class="bi bi-heart-fill fs-1"></i>
                     </div>
-                    <h4 class="fw-bold">Our Values</h4>
-                    <ul class="list-unstyled text-muted mb-0">
-                        <li><i class="bi bi-check2 text-warning me-2"></i> Transparency</li>
-                        <li><i class="bi bi-check2 text-warning me-2"></i> Innovation</li>
-                        <li><i class="bi bi-check2 text-warning me-2"></i> Financial Inclusion</li>
-                        <li><i class="bi bi-check2 text-warning me-2"></i> Customer Centricity</li>
-                    </ul>
+                    <h4 class="fw-bold mb-3">Our Values</h4>
+                    <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                        <span class="badge bg-light text-dark border p-2">Transparency</span>
+                        <span class="badge bg-light text-dark border p-2">Innovation</span>
+                        <span class="badge bg-light text-dark border p-2">Financial Inclusion</span>
+                        <span class="badge bg-light text-dark border p-2">Customer First</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,23 +162,32 @@
 </section>
 
 <!-- Call to Action -->
-<section class="py-5 bg-dark text-white">
-    <div class="container text-center py-4">
-        <h2 class="fw-bold mb-4">Ready to experience the future of insurance?</h2>
-        <p class="lead mb-5 opacity-75">Request a demo today and see how Bima Kwik can transform your business.</p>
-        <div class="d-flex justify-content-center gap-3">
-            <a href="{{ route('pages.contact') }}" class="btn btn-primary btn-lg px-5">Request a Demo</a>
-            <a href="tel:+255762883065" class="btn btn-outline-light btn-lg px-5">Call Us</a>
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center py-5 position-relative">
+        <div class="position-absolute top-50 start-50 translate-middle opacity-10">
+            <i class="bi bi-shield-check display-1" style="font-size: 15rem;"></i>
+        </div>
+        <div class="position-relative">
+            <h2 class="display-4 fw-bold mb-4">Ready to Join the Revolution?</h2>
+            <p class="lead mb-5 opacity-75 mx-auto" style="max-width: 700px;">Whether you're an insurer, broker, or customer, Bima Kwik has a tailored digital solution for you. Let's grow together.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ route('pages.contact') }}" class="btn btn-white btn-lg px-5 rounded-pill fw-bold text-primary bg-white shadow">Request a Demo</a>
+                <a href="tel:+255762883065" class="btn btn-outline-light btn-lg px-5 rounded-pill fw-bold border-2">Call Us Now</a>
+            </div>
         </div>
     </div>
 </section>
 
 <style>
+    .letter-spacing-1 { letter-spacing: 1.5px; }
     .hover-lift {
-        transition: transform 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
     .hover-lift:hover {
-        transform: translateY(-10px);
+        transform: translateY(-12px);
+        box-shadow: 0 1.5rem 4rem rgba(0,0,0,.1) !important;
     }
+    .-bottom-4 { bottom: -1.5rem; }
+    .-end-4 { right: -1.5rem; }
 </style>
 @endsection
