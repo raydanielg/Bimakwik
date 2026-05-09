@@ -15,6 +15,13 @@ class CreateScheduledJobsTable extends Migration
     {
         Schema::create('scheduled_jobs', function (Blueprint $table) {
             $table->id();
+            $table->string('job_name');
+            $table->string('job_class');
+            $table->string('schedule_cron', 100)->nullable();
+            $table->json('parameters')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->timestamp('last_run_at')->nullable();
+            $table->timestamp('next_run_at')->nullable();
             $table->timestamps();
         });
     }
