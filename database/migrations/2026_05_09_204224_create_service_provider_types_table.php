@@ -15,6 +15,11 @@ class CreateServiceProviderTypesTable extends Migration
     {
         Schema::create('service_provider_types', function (Blueprint $table) {
             $table->id();
+            $table->string('type_code', 50)->unique();
+            $table->string('type_name', 100);
+            $table->string('type_name_sw', 100)->nullable();
+            $table->text('description')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
