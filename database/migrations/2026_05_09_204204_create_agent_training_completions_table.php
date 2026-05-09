@@ -15,7 +15,16 @@ class CreateAgentTrainingCompletionsTable extends Migration
     {
         Schema::create('agent_training_completions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('agent_id');
+            $table->unsignedBigInteger('agent_training_id');
+            $table->timestamp('completed_at')->useCurrent();
+            $table->string('certificate_url', 500)->nullable();
+            $table->decimal('score', 5, 2)->nullable();
             $table->timestamps();
+
+            $table->foreign('agent_id')->references('id')->on('agents')->onDelete('cascade');
+            $table->foreign('agent_training_id', 'atc_training_fk')->references('id')->on('agent_trainings')->onDelete('cascade');
+            $table->unique(['agent_id', 'agent_training_id'], 'atc_unique');
         });
     }
 

@@ -15,6 +15,11 @@ class CreateAgentTrainingsTable extends Migration
     {
         Schema::create('agent_trainings', function (Blueprint $table) {
             $table->id();
+            $table->string('training_title');
+            $table->text('training_description')->nullable();
+            $table->string('training_material_url', 500)->nullable();
+            $table->integer('duration_hours')->nullable();
+            $table->boolean('is_mandatory')->default(false);
             $table->timestamps();
         });
     }
