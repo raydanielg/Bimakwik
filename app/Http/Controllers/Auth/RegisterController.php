@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required', 'string', 'exists:roles,slug'],
         ]);
     }
 
@@ -70,10 +71,10 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        // Assign default customer role
-        $customerRole = \App\Models\Role::where('slug', 'customer')->first();
-        if ($customerRole) {
-            $user->roles()->attach($customerRole->id);
+        // Assign selected role
+        $role = \App\Models\Role::where('slug', $data['role'])->first();
+        if ($role) {
+            $user->roles()->attach($role->id);
         }
 
         return $user;
