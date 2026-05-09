@@ -15,7 +15,16 @@ class CreateAiRiskAssessmentsTable extends Migration
     {
         Schema::create('ai_risk_assessments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->decimal('risk_score', 5, 4);
+            $table->string('risk_level', 20)->nullable();
+            $table->json('factors')->nullable();
+            $table->unsignedBigInteger('insurance_product_id')->nullable();
+            $table->timestamp('assessed_at')->useCurrent();
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('insurance_product_id')->references('id')->on('insurance_products')->onDelete('set null');
         });
     }
 
