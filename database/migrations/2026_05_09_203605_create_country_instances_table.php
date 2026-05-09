@@ -15,6 +15,12 @@ class CreateCountryInstancesTable extends Migration
     {
         Schema::create('country_instances', function (Blueprint $table) {
             $table->id();
+            $table->string('country_code')->unique();
+            $table->string('country_name');
+            $table->string('subdomain')->unique()->nullable();
+            $table->string('database_name')->nullable();
+            $table->boolean('is_active')->default(true);
+            $table->json('settings')->nullable();
             $table->timestamps();
         });
     }

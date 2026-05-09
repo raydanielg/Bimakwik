@@ -15,7 +15,17 @@ class CreateApiKeysTable extends Migration
     {
         Schema::create('api_keys', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('api_key')->unique();
+            $table->string('api_secret');
+            $table->string('name')->nullable();
+            $table->json('permissions')->nullable();
+            $table->json('allowed_ips')->nullable();
+            $table->timestamp('expires_at')->nullable();
+            $table->timestamp('last_used_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
