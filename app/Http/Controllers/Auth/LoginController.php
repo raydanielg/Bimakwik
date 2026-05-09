@@ -42,6 +42,10 @@ class LoginController extends Controller
             return route('broker.dashboard');
         }
 
+        if ($user->hasRole('aggregator')) {
+            return route('aggregator.dashboard');
+        }
+
         if ($user->hasRole('service-provider')) {
             return route('service-provider.dashboard');
         }

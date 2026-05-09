@@ -37,6 +37,10 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('role:broker')
         ->name('broker.dashboard');
 
+    Route::get('/aggregator/dashboard', [App\Http\Controllers\Aggregator\DashboardController::class, 'index'])
+        ->middleware('role:aggregator')
+        ->name('aggregator.dashboard');
+
     Route::get('/service-provider/dashboard', [App\Http\Controllers\ServiceProvider\DashboardController::class, 'index'])
         ->middleware('role:service-provider')
         ->name('service-provider.dashboard');
