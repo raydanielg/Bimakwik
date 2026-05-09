@@ -157,14 +157,15 @@
                     <a class="btn btn-outline-primary px-4 rounded-pill fw-bold dropdown-toggle" href="#" id="portalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-lock me-1"></i> Portals
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-3 mt-2 animate__animated animate__fadeInUp animate__faster" style="min-width: 220px;">
-                        <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">Secure Access</h6></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('login') }}?role=customer">Customer Portal</a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('login') }}?role=broker">Broker Portal</a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('login') }}?role=insurer">Insurer Portal</a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('login') }}?role=provider">Provider Portal</a></li>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-3 mt-2 animate__animated animate__fadeInUp animate__faster" style="min-width: 250px;">
+                        <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">Create Account</h6></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.customer') }}">Customer Registration</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.broker') }}">Broker/Agent Registration</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.insurer') }}">Insurer Registration</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.provider') }}">Provider Registration</a></li>
                         <li><div class="dropdown-divider"></div></li>
-                        <li><a class="dropdown-item rounded-3 p-2 text-danger fw-bold" href="{{ route('login') }}">Admin Login</a></li>
+                        <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">Member Login</h6></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1 fw-bold text-primary" href="{{ route('login') }}">Access All Portals</a></li>
                     </ul>
                 </li>
 
