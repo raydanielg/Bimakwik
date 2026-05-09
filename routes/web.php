@@ -59,10 +59,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Legal Routes
-Route::get('/privacy-policy', function () { return view('legal.privacy'); })->name('privacy');
-Route::get('/terms-of-service', function () { return view('legal.terms'); })->name('terms');
-Route::get('/cookie-policy', function () { return view('legal.cookies'); })->name('cookies');
-Route::get('/data-protection', function () { return view('legal.data-protection'); })->name('data-protection');
+Route::get('/privacy-policy', function () { return view('legal.privacy'); })->name('legal.privacy');
+Route::get('/terms-conditions', function () { return view('legal.terms'); })->name('legal.terms');
+Route::get('/cookies-policy', function () { return view('legal.cookies'); })->name('legal.cookies');
+Route::get('/data-protection', function () { return view('legal.data-protection'); })->name('legal.data-protection');
 
 // Support Routes
 Route::get('/help-center', function () { return view('support.help-center'); })->name('support.help');
