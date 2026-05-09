@@ -122,10 +122,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Partners</a>
                     <div class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster">
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Become a Broker</a>
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Become an Aggregator</a>
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Service Providers</a>
-                        <a class="dropdown-item rounded-3 p-2" href="#">Affiliate Program</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('partners.brokers') }}">Become a Broker</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('partners.aggregators') }}">Become an Aggregator</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('partners.providers') }}">Service Providers</a>
+                        <a class="dropdown-item rounded-3 p-2" href="{{ route('partners.affiliates') }}">Affiliate Program</a>
                     </div>
                 </li>
 
