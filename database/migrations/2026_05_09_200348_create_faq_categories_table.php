@@ -15,6 +15,11 @@ class CreateFaqCategoriesTable extends Migration
     {
         Schema::create('faq_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('name_sw')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('display_order')->default(0);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
