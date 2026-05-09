@@ -329,10 +329,16 @@
 
             @elseif(auth()->user()->hasRole('broker'))
             <!-- Broker Menu -->
-            <div class="sidebar-heading">Sales Performance</div>
+            <div class="sidebar-heading">Core Dashboard</div>
             <div class="list-group list-group-flush px-2">
                 <a href="{{ route('broker.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.dashboard') ? 'active' : '' }}">
-                    <i class="bi bi-speedometer2"></i> Dashboard
+                    <i class="bi bi-speedometer2"></i> Overview
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-pie-chart"></i> Commission Summary
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-list-ul"></i> Recent Transactions
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-robot"></i> AI Sales Insights
@@ -348,40 +354,85 @@
                     <i class="bi bi-arrow-left-right"></i> Comparison Matrix
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-cart-plus"></i> AI Recommendations
+                    <i class="bi bi-magic"></i> AI Recommendations
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Customer & Policy</div>
+            <div class="sidebar-heading mt-3">Customer Management</div>
             <div class="list-group list-group-flush px-2">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-people"></i> Manage Customers
+                    <i class="bi bi-person-plus"></i> Onboard New Customer
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-shield-check"></i> Policy Management
+                    <i class="bi bi-people"></i> Customer List
                 </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-vcard"></i> KYC Status
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Policy Management</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-cart-plus"></i> Purchase Policy
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-arrow-repeat"></i> Renew Policy
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-plus"></i> Endorsement
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bell"></i> Expiry Alerts
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Wallet & Payments</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-wallet2"></i> My Wallet Balance
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-graph-up-arrow"></i> Commission Earned
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bank"></i> Request Cash-out
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Claims Management</div>
+            <div class="list-group list-group-flush px-2">
                 <a href="#" class="list-group-item list-group-item-action text-danger">
-                    <i class="bi bi-exclamation-octagon"></i> Claims Management
+                    <i class="bi bi-exclamation-octagon"></i> Submit Claim
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-activity"></i> Track Claim Status
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-lock"></i> Fraud Alerts
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Wallet & Finances</div>
+            <div class="sidebar-heading mt-3">Reports & Communication</div>
             <div class="list-group list-group-flush px-2">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-wallet2"></i> My Wallet
+                    <i class="bi bi-bar-chart-line"></i> Sales & Claims Reports
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-graph-up-arrow"></i> Commissions
+                    <i class="bi bi-chat-left-dots"></i> Messaging & Notifications
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Settings & Reports</div>
+            <div class="sidebar-heading mt-3">Compliance & Settings</div>
             <div class="list-group list-group-flush px-2">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-bar-chart-line"></i> Sales Reports
+                    <i class="bi bi-journal-text"></i> Regulatory Filings
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-person-gear"></i> My Profile
+                    <i class="bi bi-person-gear"></i> Profile & Bank Details
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-code-square"></i> API Keys
                 </a>
             </div>
 
