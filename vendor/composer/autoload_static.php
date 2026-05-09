@@ -616,6 +616,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\CoverNote' => __DIR__ . '/../..' . '/app/Models/CoverNote.php',
         'App\\Models\\CoverNoteStatus' => __DIR__ . '/../..' . '/app/Models/CoverNoteStatus.php',
         'App\\Models\\Csr' => __DIR__ . '/../..' . '/app/Models/Csr.php',
+        'App\\Models\\CustomReport' => __DIR__ . '/../..' . '/app/Models/CustomReport.php',
         'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
         'App\\Models\\CustomerActivityLog' => __DIR__ . '/../..' . '/app/Models/CustomerActivityLog.php',
         'App\\Models\\CustomerCommunicationPreference' => __DIR__ . '/../..' . '/app/Models/CustomerCommunicationPreference.php',
@@ -629,6 +630,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\CustomerSession' => __DIR__ . '/../..' . '/app/Models/CustomerSession.php',
         'App\\Models\\CustomerVerificationToken' => __DIR__ . '/../..' . '/app/Models/CustomerVerificationToken.php',
         'App\\Models\\DashboardSummary' => __DIR__ . '/../..' . '/app/Models/DashboardSummary.php',
+        'App\\Models\\DashboardWidget' => __DIR__ . '/../..' . '/app/Models/DashboardWidget.php',
         'App\\Models\\DataProtectionLog' => __DIR__ . '/../..' . '/app/Models/DataProtectionLog.php',
         'App\\Models\\DataWarehouse' => __DIR__ . '/../..' . '/app/Models/DataWarehouse.php',
         'App\\Models\\DocumentGenerationQueue' => __DIR__ . '/../..' . '/app/Models/DocumentGenerationQueue.php',
@@ -683,6 +685,9 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\Regulator' => __DIR__ . '/../..' . '/app/Models/Regulator.php',
         'App\\Models\\RegulatorReport' => __DIR__ . '/../..' . '/app/Models/RegulatorReport.php',
         'App\\Models\\RenewalReminderLog' => __DIR__ . '/../..' . '/app/Models/RenewalReminderLog.php',
+        'App\\Models\\Report' => __DIR__ . '/../..' . '/app/Models/Report.php',
+        'App\\Models\\ReportExport' => __DIR__ . '/../..' . '/app/Models/ReportExport.php',
+        'App\\Models\\ReportSchedule' => __DIR__ . '/../..' . '/app/Models/ReportSchedule.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\RolePermission' => __DIR__ . '/../..' . '/app/Models/RolePermission.php',
         'App\\Models\\ScheduledJob' => __DIR__ . '/../..' . '/app/Models/ScheduledJob.php',
@@ -5916,8 +5921,4 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$classMap;
-
-        }, null, ClassLoader::class);
-    }
-}
+            $loader->classMap = ComposerStat
