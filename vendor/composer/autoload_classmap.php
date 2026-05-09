@@ -149,6 +149,7 @@ return array(
     'App\\Models\\ErrorLog' => $baseDir . '/app/Models/ErrorLog.php',
     'App\\Models\\FaqArticle' => $baseDir . '/app/Models/FaqArticle.php',
     'App\\Models\\FaqCategory' => $baseDir . '/app/Models/FaqCategory.php',
+    'App\\Models\\FinancingDefault' => $baseDir . '/app/Models/FinancingDefault.php',
     'App\\Models\\FinancingDisbursement' => $baseDir . '/app/Models/FinancingDisbursement.php',
     'App\\Models\\FinancingLoan' => $baseDir . '/app/Models/FinancingLoan.php',
     'App\\Models\\FinancingPartner' => $baseDir . '/app/Models/FinancingPartner.php',

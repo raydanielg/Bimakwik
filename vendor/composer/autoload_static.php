@@ -654,6 +654,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\ErrorLog' => __DIR__ . '/../..' . '/app/Models/ErrorLog.php',
         'App\\Models\\FaqArticle' => __DIR__ . '/../..' . '/app/Models/FaqArticle.php',
         'App\\Models\\FaqCategory' => __DIR__ . '/../..' . '/app/Models/FaqCategory.php',
+        'App\\Models\\FinancingDefault' => __DIR__ . '/../..' . '/app/Models/FinancingDefault.php',
         'App\\Models\\FinancingDisbursement' => __DIR__ . '/../..' . '/app/Models/FinancingDisbursement.php',
         'App\\Models\\FinancingLoan' => __DIR__ . '/../..' . '/app/Models/FinancingLoan.php',
         'App\\Models\\FinancingPartner' => __DIR__ . '/../..' . '/app/Models/FinancingPartner.php',
