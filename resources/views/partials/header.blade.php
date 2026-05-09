@@ -237,9 +237,28 @@
                     <div id="m-partners" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
                         <div class="accordion-body px-0 py-2">
                             <ul class="list-unstyled ps-3 mobile-sublist">
-                                <li><a href="#">Become a Broker</a></li>
-                                <li><a href="#">Become an Aggregator</a></li>
-                                <li><a href="#">Service Providers</a></li>
+                                <li><a href="{{ route('register.broker') }}">Become a Broker</a></li>
+                                <li><a href="{{ route('register.broker') }}">Become an Aggregator</a></li>
+                                <li><a href="{{ route('register.provider') }}">Service Providers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Company -->
+                <div class="accordion-item border-0">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold text-dark px-0" type="button" data-bs-toggle="collapse" data-bs-target="#m-company">
+                            Company
+                        </button>
+                    </h2>
+                    <div id="m-company" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
+                        <div class="accordion-body px-0 py-2">
+                            <ul class="list-unstyled ps-3 mobile-sublist">
+                                <li><a href="{{ route('pages.about') }}">About Us</a></li>
+                                <li><a href="{{ route('company.story') }}">Our Story</a></li>
+                                <li><a href="{{ route('company.leadership') }}">Leadership Team</a></li>
+                                <li><a href="{{ route('company.careers') }}">Careers</a></li>
+                                <li><a href="{{ route('pages.contact') }}">Contact Us</a></li>
                             </ul>
                         </div>
                     </div>
