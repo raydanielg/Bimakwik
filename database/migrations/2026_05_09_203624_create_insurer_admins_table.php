@@ -15,7 +15,15 @@ class CreateInsurerAdminsTable extends Migration
     {
         Schema::create('insurer_admins', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('insurer_id');
+            $table->unsignedBigInteger('user_id');
+            $table->string('role')->default('admin');
+            $table->json('permissions')->nullable();
             $table->timestamps();
+
+            $table->foreign('insurer_id')->references('id')->on('insurers')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unique(['insurer_id', 'user_id']);
         });
     }
 

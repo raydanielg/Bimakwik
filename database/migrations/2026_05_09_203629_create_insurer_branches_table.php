@@ -15,7 +15,18 @@ class CreateInsurerBranchesTable extends Migration
     {
         Schema::create('insurer_branches', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('insurer_id');
+            $table->string('branch_code');
+            $table->string('branch_name');
+            $table->text('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('manager_name')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
+
+            $table->foreign('insurer_id')->references('id')->on('insurers')->onDelete('cascade');
         });
     }
 

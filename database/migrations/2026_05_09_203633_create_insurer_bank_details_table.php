@@ -15,7 +15,16 @@ class CreateInsurerBankDetailsTable extends Migration
     {
         Schema::create('insurer_bank_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('insurer_id');
+            $table->string('bank_name');
+            $table->string('account_name');
+            $table->string('account_number');
+            $table->string('branch_name')->nullable();
+            $table->string('swift_code')->nullable();
+            $table->boolean('is_default')->default(false);
             $table->timestamps();
+
+            $table->foreign('insurer_id')->references('id')->on('insurers')->onDelete('cascade');
         });
     }
 
