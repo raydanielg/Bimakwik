@@ -33,6 +33,12 @@ Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController:
 
 // Dashboards
 Route::middleware(['auth'])->group(function () {
+    Route::middleware(['role:customer'])->prefix('customer')->name('customer.')->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/profile', function() { return view('customer.profile'); })->name('profile');
+        Route::get('/support', function() { return view('customer.support'); })->name('support');
+    });
+
     Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
         ->middleware('role:super-admin,sub-admin')
         ->name('admin.dashboard');

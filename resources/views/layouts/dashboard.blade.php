@@ -569,10 +569,10 @@
 
             <div class="sidebar-heading mt-3">Account & Support</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.profile') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.profile') ? 'active' : '' }}">
                     <i class="bi bi-person-circle"></i> My Profile & KYC
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('customer.support') }}" class="list-group-item list-group-item-action {{ request()->routeIs('customer.support') ? 'active' : '' }}">
                     <i class="bi bi-headset"></i> Help & Support
                 </a>
             </div>
