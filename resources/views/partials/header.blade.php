@@ -12,257 +12,300 @@
             </a>
         </div>
         <div class="top-links d-flex align-items-center gap-2 gap-md-3">
-            <a href="{{ route('support.faqs') }}" class="text-white text-decoration-none small hover-underline d-flex align-items-center">
-                <i class="bi bi-question-circle me-1 d-md-none"></i>
-                <span class="d-none d-md-inline">FAQs</span>
-            </a>
+            <!-- Language Switcher -->
+            <div class="dropdown me-2">
+                <a class="text-white text-decoration-none small dropdown-toggle d-flex align-items-center" href="#" role="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-globe2 me-1"></i> English
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm rounded-3 mt-2" aria-labelledby="langDropdown">
+                    <li><a class="dropdown-item small py-1" href="#">English</a></li>
+                    <li><a class="dropdown-item small py-1" href="#">Kiswahili</a></li>
+                </ul>
+            </div>
             <span class="text-white-50 d-none d-md-inline">|</span>
-            <a href="{{ route('quote.request') }}" class="btn btn-warning btn-sm px-2 px-md-3 rounded-pill fw-bold text-dark shadow-sm x-small-mobile">
-                <i class="bi bi-file-earmark-text me-1"></i> <span class="d-none d-sm-inline">Request Quote</span><span class="d-sm-none">Quote</span>
+            <a href="{{ route('support.faqs') }}" class="text-white text-decoration-none small hover-underline d-none d-md-inline">FAQs</a>
+            <span class="text-white-50 d-none d-md-inline">|</span>
+            <a href="{{ route('quote.request') }}" class="btn btn-warning btn-sm px-3 rounded-pill fw-bold text-dark shadow-sm">
+                <i class="bi bi-play-circle me-1"></i> Request Demo
             </a>
         </div>
     </div>
 </div>
 
 <!-- Main Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 sticky-top shadow-sm main-header">
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-0 sticky-top shadow-sm main-header">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('logo.png') }}" alt="BUMACO INSURANCE" height="60">
+        <a class="navbar-brand py-3" href="{{ url('/') }}">
+            <img src="{{ asset('logo.png') }}" alt="BimaKwik" height="50">
         </a>
         
-        <!-- Mobile Toggle Button -->
-        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
-            <div class="hamburger-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+            <div class="hamburger-icon"><span></span><span></span><span></span></div>
         </button>
 
-        <!-- Desktop Navigation -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link px-3 fw-bold {{ request()->is('/') ? 'active text-primary' : '' }}" href="{{ url('/') }}">Home</a>
+                    <a class="nav-link px-3 py-4 fw-bold {{ request()->is('/') ? 'active text-primary' : '' }}" href="{{ url('/') }}">Home</a>
                 </li>
                 
-                <!-- About Dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle fw-bold px-3 {{ request()->is('about*') || request()->is('branches*') ? 'active text-primary' : '' }}" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Company
-                    </a>
-                    <ul class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster" aria-labelledby="aboutDropdown">
-                        <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center mb-1" href="{{ route('pages.about') }}">
-                            <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3"><i class="bi bi-info-circle text-primary"></i></div>
-                            <div><span class="fw-bold d-block">About Us</span><small class="text-muted">Our history & mission</small></div>
-                        </a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center mb-1" href="{{ route('pages.branches') }}">
-                            <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3"><i class="bi bi-geo-alt text-primary"></i></div>
-                            <div><span class="fw-bold d-block">Branches</span><small class="text-muted">Find us near you</small></div>
-                        </a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center" href="{{ route('pages.contact') }}">
-                            <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3"><i class="bi bi-telephone text-primary"></i></div>
-                            <div><span class="fw-bold d-block">Contact Us</span><small class="text-muted">Get in touch 24/7</small></div>
-                        </a></li>
-                    </ul>
+                <!-- Platform Mega Menu -->
+                <li class="nav-item dropdown has-megamenu">
+                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Platform</a>
+                    <div class="dropdown-menu megamenu border-0 shadow-lg p-4 animate__animated animate__fadeInUp animate__faster" role="menu">
+                        <div class="row g-4">
+                            <div class="col-md-3 border-end">
+                                <h6 class="fw-bold text-primary mb-3">Overview</h6>
+                                <ul class="list-unstyled mega-list">
+                                    <li><a href="#">What is Bima Kwik</a></li>
+                                    <li><a href="#">Our Ecosystem</a></li>
+                                    <li><a href="#">How It Works</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 border-end">
+                                <h6 class="fw-bold text-primary mb-3">For Customers</h6>
+                                <ul class="list-unstyled mega-list">
+                                    <li><a href="#">Buy Insurance</a></li>
+                                    <li><a href="#">File a Claim</a></li>
+                                    <li><a href="#">Renew Policy</a></li>
+                                    <li><a href="#">Track Status</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 border-end">
+                                <h6 class="fw-bold text-primary mb-3">Technology</h6>
+                                <ul class="list-unstyled mega-list">
+                                    <li><a href="#">AI-Powered Platform</a></li>
+                                    <li><a href="#">API Integration</a></li>
+                                    <li><a href="#">Low-Code Builder</a></li>
+                                    <li><a href="#">Security</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <h6 class="fw-bold text-primary mb-3">Expansion</h6>
+                                <ul class="list-unstyled mega-list">
+                                    <li><a href="#">Multi-Country Instances</a></li>
+                                    <li><a href="#">TIRAMIS Replicable</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Products Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle fw-bold px-3 {{ request()->is('products*') || request()->is('claims*') ? 'active text-primary' : '' }}" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Solutions
-                    </a>
-                    <ul class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster" aria-labelledby="productsDropdown" style="min-width: 250px;">
-                        <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center mb-1" href="{{ route('pages.products') }}">
-                            <div class="bg-success bg-opacity-10 rounded-circle p-2 me-3"><i class="bi bi-shield-check text-success"></i></div>
-                            <div><span class="fw-bold d-block">Our Products</span><small class="text-muted">Explore insurance plans</small></div>
-                        </a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center mb-1" href="{{ route('pages.claims') }}">
-                            <div class="bg-warning bg-opacity-10 rounded-circle p-2 me-3"><i class="bi bi-lightning text-warning"></i></div>
-                            <div><span class="fw-bold d-block">Digital Claims</span><small class="text-muted">Fast processing flow</small></div>
-                        </a></li>
-                    </ul>
+                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Products</a>
+                    <div class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster">
+                        <div class="d-flex flex-column gap-1" style="min-width: 250px;">
+                            <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="{{ route('pages.products') }}">
+                                <i class="bi bi-car-front text-primary me-3 fs-5"></i>
+                                <div><span class="fw-bold d-block">Motor Insurance</span><small class="text-muted">Private & Commercial</small></div>
+                            </a>
+                            <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="#">
+                                <i class="bi bi-heart-pulse text-danger me-3 fs-5"></i>
+                                <div><span class="fw-bold d-block">Health Insurance</span><small class="text-muted">Family & Corporate</small></div>
+                            </a>
+                            <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="#">
+                                <i class="bi bi-umbrella text-info me-3 fs-5"></i>
+                                <div><span class="fw-bold d-block">Life Insurance</span><small class="text-muted">Whole Life & Plans</small></div>
+                            </a>
+                            <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="#">
+                                <i class="bi bi-box-seam text-success me-3 fs-5"></i>
+                                <div><span class="fw-bold d-block">General Insurance</span><small class="text-muted">Fire, Travel & Home</small></div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item rounded-3 text-center fw-bold text-primary" href="{{ route('pages.products') }}">View All Products</a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Partners -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Partners</a>
+                    <div class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster">
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Become a Broker</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Become an Aggregator</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Service Providers</a>
+                        <a class="dropdown-item rounded-3 p-2" href="#">Affiliate Program</a>
+                    </div>
                 </li>
 
                 <!-- Resources Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle fw-bold px-3 {{ request()->is('resources*') || request()->is('news*') || request()->is('guidelines*') ? 'active text-primary' : '' }}" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Resources
-                    </a>
-                    <ul class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster" aria-labelledby="resourcesDropdown" style="min-width: 250px;">
-                        <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center mb-1" href="{{ route('resources.news') }}">
-                            <div class="bg-info bg-opacity-10 rounded-circle p-2 me-3"><i class="bi bi-newspaper text-info"></i></div>
-                            <div><span class="fw-bold d-block">News & Research</span><small class="text-muted">Latest industry updates</small></div>
-                        </a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center mb-1" href="{{ route('resources.guidelines') }}">
-                            <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3"><i class="bi bi-book text-primary"></i></div>
-                            <div><span class="fw-bold d-block">Guidelines</span><small class="text-muted">Step-by-step materials</small></div>
-                        </a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center" href="{{ route('support.help') }}">
-                            <div class="bg-danger bg-opacity-10 rounded-circle p-2 me-3"><i class="bi bi-headset text-danger"></i></div>
-                            <div><span class="fw-bold d-block">Help Center</span><small class="text-muted">Get support & faqs</small></div>
-                        </a></li>
+                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Resources</a>
+                    <ul class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster">
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('resources.news') }}">Learning Center</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('resources.news') }}">Blog & News</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('resources.guidelines') }}">Downloads</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2" href="{{ route('support.faqs') }}">FAQs</a></li>
                     </ul>
                 </li>
-                
-                @auth
-                    <li class="nav-item ms-lg-3 d-flex align-items-center gap-2">
-                        @php
-                            $dashboardRoute = 'customer.dashboard';
-                            if(auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('sub-admin')) $dashboardRoute = 'admin.dashboard';
-                            elseif(auth()->user()->hasRole('insurer')) $dashboardRoute = 'insurer.dashboard';
-                            elseif(auth()->user()->hasRole('broker')) $dashboardRoute = 'broker.dashboard';
-                            elseif(auth()->user()->hasRole('aggregator')) $dashboardRoute = 'aggregator.dashboard';
-                            elseif(auth()->user()->hasRole('service-provider')) $dashboardRoute = 'service-provider.dashboard';
-                            elseif(auth()->user()->hasRole('financing-partner')) $dashboardRoute = 'financing-partner.dashboard';
-                            elseif(auth()->user()->hasRole('developer')) $dashboardRoute = 'developer.dashboard';
-                        @endphp
-                        <a href="{{ route($dashboardRoute) }}" class="btn btn-primary px-4 rounded-pill fw-bold shadow-sm hover-lift-sm">
-                            <i class="bi bi-speedometer2 me-1"></i> My Dashboard
-                        </a>
-                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-danger px-3 rounded-pill fw-bold border-0 shadow-none">
-                                <i class="bi bi-box-arrow-right"></i>
-                            </button>
-                        </form>
-                    </li>
-                @else
-                    <li class="nav-item ms-lg-3">
-                        <a href="{{ route('login') }}" class="btn btn-outline-primary px-4 rounded-pill fw-bold hover-lift-sm">Login</a>
-                    </li>
-                    <li class="nav-item ms-2">
-                        <a href="{{ route('register') }}" class="btn btn-primary px-4 rounded-pill fw-bold shadow-sm hover-lift-sm">Register</a>
-                    </li>
-                @endauth
+
+                <!-- Company -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Company</a>
+                    <div class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster">
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('pages.about') }}">About Us</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Our Story</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Leadership Team</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="#">Careers</a>
+                        <a class="dropdown-item rounded-3 p-2" href="{{ route('pages.contact') }}">Contact Us</a>
+                    </div>
+                </li>
+
+                <!-- Portal Access Dropdown -->
+                <li class="nav-item dropdown ms-lg-2">
+                    <a class="btn btn-outline-primary px-4 rounded-pill fw-bold dropdown-toggle" href="#" id="portalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-lock me-1"></i> Portals
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-3 mt-2 animate__animated animate__fadeInUp animate__faster" style="min-width: 220px;">
+                        <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">Secure Access</h6></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('login') }}?role=customer">Customer Portal</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('login') }}?role=broker">Broker Portal</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('login') }}?role=insurer">Insurer Portal</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('login') }}?role=provider">Provider Portal</a></li>
+                        <li><div class="dropdown-divider"></div></li>
+                        <li><a class="dropdown-item rounded-3 p-2 text-danger fw-bold" href="{{ route('login') }}">Admin Login</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item ms-lg-2">
+                    <a href="{{ route('register') }}" class="btn btn-primary px-4 rounded-pill fw-bold shadow-sm hover-lift-sm">
+                        Get Started
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
 
 <!-- Mobile Sidebar (Offcanvas) -->
-<div class="offcanvas offcanvas-start border-0 shadow-lg" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+<div class="offcanvas offcanvas-start border-0 shadow-lg" tabindex="-1" id="mobileSidebar">
     <div class="offcanvas-header border-bottom p-4 bg-light">
         <div class="d-flex align-items-center">
-            <img src="{{ asset('logo.png') }}" alt="Logo" height="45" class="me-2">
-            <span class="fw-bold text-primary h5 mb-0">{{ config('app.name') }}</span>
+            <img src="{{ asset('logo.png') }}" alt="Logo" height="40" class="me-2">
+            <span class="fw-bold text-primary h5 mb-0">BimaKwik</span>
         </div>
-        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body p-0 d-flex flex-column h-100">
-        <!-- Auth Section for Mobile -->
-        <div class="p-4 border-bottom">
-            @auth
-                <div class="d-flex align-items-center mb-3 p-3 bg-primary bg-opacity-10 rounded-4">
-                    <div class="flex-shrink-0">
-                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px; font-size: 1.2rem;">
-                            {{ substr(auth()->user()->name, 0, 1) }}
-                        </div>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h6 class="fw-bold mb-0 text-dark">{{ auth()->user()->name }}</h6>
-                        <small class="text-primary fw-bold text-uppercase" style="font-size: 0.65rem;">{{ auth()->user()->roles->first()->name ?? 'User' }}</small>
-                    </div>
-                </div>
-            @else
-                <div class="row g-2 mb-2">
-                    <div class="col-6">
-                        <a href="{{ route('login') }}" class="btn btn-outline-primary w-100 py-2 rounded-pill fw-bold shadow-sm">
-                            <i class="bi bi-box-arrow-in-right me-1"></i> Login
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <a href="{{ route('register') }}" class="btn btn-primary w-100 py-2 rounded-pill fw-bold shadow-sm">
-                            <i class="bi bi-person-plus me-1"></i> Join Now
-                        </a>
-                    </div>
-                </div>
-            @endauth
-        </div>
-
         <div class="p-4 flex-grow-1 overflow-auto">
-            <div class="mb-5">
-                <h6 class="text-uppercase small fw-bold text-muted mb-3 letter-spacing-1" style="font-size: 0.7rem;">Main Menu</h6>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="{{ url('/') }}" class="mobile-nav-link {{ request()->is('/') ? 'active' : '' }}"><i class="bi bi-house-door me-3"></i> Home</a></li>
-                    
-                    @auth
-                        <li class="mb-2">
-                            <a href="{{ route($dashboardRoute) }}" class="mobile-nav-link text-primary fw-bold bg-primary bg-opacity-10 rounded-3 px-3">
-                                <i class="bi bi-speedometer2 me-3"></i> My Dashboard
-                            </a>
-                        </li>
-                    @endauth
-
-                    <li class="mb-2">
-                        <a class="mobile-nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#mobileAbout">
-                            <span><i class="bi bi-building me-3"></i> Company</span>
-                            <i class="bi bi-chevron-down small"></i>
-                        </a>
-                        <div class="collapse ps-4 mt-2" id="mobileAbout">
-                            <a href="{{ route('pages.about') }}" class="mobile-nav-sublink"><i class="bi bi-info-circle me-2"></i> About Us</a>
-                            <a href="{{ route('pages.branches') }}" class="mobile-nav-sublink"><i class="bi bi-geo-alt me-2"></i> Our Branches</a>
-                            <a href="{{ route('pages.contact') }}" class="mobile-nav-sublink"><i class="bi bi-telephone me-2"></i> Contact Us</a>
+            <div class="accordion accordion-flush" id="mobileAccordion">
+                <!-- Platform -->
+                <div class="accordion-item border-0">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold text-dark px-0" type="button" data-bs-toggle="collapse" data-bs-target="#m-platform">
+                            Platform
+                        </button>
+                    </h2>
+                    <div id="m-platform" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
+                        <div class="accordion-body px-0 py-2">
+                            <ul class="list-unstyled ps-3 mobile-sublist">
+                                <li><a href="#">Overview</a></li>
+                                <li><a href="#">For Customers</a></li>
+                                <li><a href="#">For Businesses</a></li>
+                                <li><a href="#">Technology</a></li>
+                            </ul>
                         </div>
-                    </li>
-                    <li class="mb-2">
-                        <a class="mobile-nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#mobileProducts">
-                            <span><i class="bi bi-shield-check me-3"></i> Solutions</span>
-                            <i class="bi bi-chevron-down small"></i>
-                        </a>
-                        <div class="collapse ps-4 mt-2" id="mobileProducts">
-                            <a href="{{ route('pages.products') }}" class="mobile-nav-sublink"><i class="bi bi-grid me-2"></i> Insurance Products</a>
-                            <a href="{{ route('pages.claims') }}" class="mobile-nav-sublink"><i class="bi bi-lightning-charge me-2"></i> Digital Claims</a>
+                    </div>
+                </div>
+                <!-- Products -->
+                <div class="accordion-item border-0">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold text-dark px-0" type="button" data-bs-toggle="collapse" data-bs-target="#m-products">
+                            Products
+                        </button>
+                    </h2>
+                    <div id="m-products" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
+                        <div class="accordion-body px-0 py-2">
+                            <ul class="list-unstyled ps-3 mobile-sublist">
+                                <li><a href="{{ route('pages.products') }}">Motor Insurance</a></li>
+                                <li><a href="#">Health Insurance</a></li>
+                                <li><a href="#">Life Insurance</a></li>
+                                <li><a href="#">General Insurance</a></li>
+                            </ul>
                         </div>
-                    </li>
-                    <li class="mb-2">
-                        <a class="mobile-nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#mobileResources">
-                            <span><i class="bi bi-collection me-3"></i> Resources</span>
-                            <i class="bi bi-chevron-down small"></i>
-                        </a>
-                        <div class="collapse ps-4 mt-2" id="mobileResources">
-                            <a href="{{ route('resources.news') }}" class="mobile-nav-sublink"><i class="bi bi-newspaper me-2"></i> News & Research</a>
-                            <a href="{{ route('resources.guidelines') }}" class="mobile-nav-sublink"><i class="bi bi-journal-text me-2"></i> Guidelines</a>
-                            <a href="{{ route('support.help') }}" class="mobile-nav-sublink"><i class="bi bi-headset me-2"></i> Help Center</a>
+                    </div>
+                </div>
+                <!-- Partners -->
+                <div class="accordion-item border-0">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold text-dark px-0" type="button" data-bs-toggle="collapse" data-bs-target="#m-partners">
+                            Partners
+                        </button>
+                    </h2>
+                    <div id="m-partners" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
+                        <div class="accordion-body px-0 py-2">
+                            <ul class="list-unstyled ps-3 mobile-sublist">
+                                <li><a href="#">Become a Broker</a></li>
+                                <li><a href="#">Become an Aggregator</a></li>
+                                <li><a href="#">Service Providers</a></li>
+                            </ul>
                         </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="contact-sidebar-section mb-5">
-                <h6 class="text-uppercase small fw-bold text-muted mb-4 letter-spacing-1" style="font-size: 0.7rem;">Quick Support</h6>
-                <div class="d-grid gap-3">
-                    <a href="tel:+255762883065" class="d-flex align-items-center text-dark text-decoration-none">
-                        <div class="sidebar-icon-circle bg-success bg-opacity-10 text-success"><i class="bi bi-telephone-outbound"></i></div>
-                        <div class="ms-3">
-                            <small class="text-muted d-block" style="font-size: 0.65rem;">Call Support</small>
-                            <span class="fw-bold small">+255 762 883 065</span>
-                        </div>
-                    </a>
-                    <a href="mailto:info@bimakwik.com" class="d-flex align-items-center text-dark text-decoration-none">
-                        <div class="sidebar-icon-circle bg-info bg-opacity-10 text-info"><i class="bi bi-envelope-at"></i></div>
-                        <div class="ms-3">
-                            <small class="text-muted d-block" style="font-size: 0.65rem;">Email Us</small>
-                            <span class="fw-bold small">info@bimakwik.com</span>
-                        </div>
-                    </a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        @auth
-            <div class="p-4 border-top bg-light">
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger w-100 rounded-pill py-2 fw-bold shadow-sm d-flex align-items-center justify-content-center">
-                        <i class="bi bi-box-arrow-right me-2"></i> Logout
-                    </button>
-                </form>
+            
+            <div class="mt-4 pt-4 border-top">
+                <a href="{{ route('login') }}" class="btn btn-outline-primary w-100 mb-3 rounded-pill fw-bold">Login</a>
+                <a href="{{ route('register') }}" class="btn btn-primary w-100 rounded-pill fw-bold shadow-sm">Join BimaKwik</a>
             </div>
-        @endauth
+        </div>
     </div>
 </div>
+
+<style>
+    /* Mega Menu Styling */
+    .has-megamenu { position: static; }
+    .megamenu {
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: 100%;
+        padding: 40px !important;
+        border-radius: 0 0 1.5rem 1.5rem !important;
+    }
+    .mega-list li { margin-bottom: 8px; }
+    .mega-list li a {
+        color: #475569;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color 0.2s;
+    }
+    .mega-list li a:hover { color: #0d6efd; }
+
+    /* General Header Enhancements */
+    .main-header { transition: all 0.3s ease; }
+    .nav-link { 
+        color: #1e293b !important; 
+        position: relative;
+        font-size: 0.95rem;
+    }
+    .nav-link.active, .nav-link:hover { color: #0d6efd !important; }
+    
+    .dropdown-toggle::after { 
+        display: inline-block;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: "";
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+        transition: transform 0.3s ease;
+    }
+    .nav-item.dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+    
+    .nav-item.dropdown:hover > .dropdown-menu { display: block; margin-top: 0; }
+    
+    .dropdown-item { transition: all 0.2s; }
+    .dropdown-item:hover { background-color: rgba(13,110,253,0.05) !important; color: #0d6efd !important; }
+    
+    .mobile-sublist li { margin-bottom: 12px; }
+    .mobile-sublist li a { color: #64748b; text-decoration: none; display: block; }
+    
+    .letter-spacing-1 { letter-spacing: 1px; }
+    .hover-lift-sm:hover { transform: translateY(-2px); }
+</style>
 
 <style>
     /* Navbar Dropdowns */

@@ -64,6 +64,21 @@ Route::get('/terms-conditions', function () { return view('legal.terms'); })->na
 Route::get('/cookies-policy', function () { return view('legal.cookies'); })->name('legal.cookies');
 Route::get('/data-protection', function () { return view('legal.data-protection'); })->name('legal.data-protection');
 
+// Placeholder routes for new menu structure
+Route::prefix('platform')->name('platform.')->group(function () {
+    Route::get('/overview', function () { return view('platform.overview'); })->name('overview');
+    Route::get('/for-customers', function () { return view('platform.customers'); })->name('customers');
+    Route::get('/for-businesses', function () { return view('platform.businesses'); })->name('businesses');
+    Route::get('/technology', function () { return view('platform.technology'); })->name('technology');
+});
+
+Route::prefix('partners')->name('partners.')->group(function () {
+    Route::get('/brokers', function () { return view('partners.brokers'); })->name('brokers');
+    Route::get('/aggregators', function () { return view('partners.aggregators'); })->name('aggregators');
+    Route::get('/service-providers', function () { return view('partners.providers'); })->name('providers');
+    Route::get('/affiliates', function () { return view('partners.affiliates'); })->name('affiliates');
+});
+
 // Support Routes
 Route::get('/help-center', function () { return view('support.help-center'); })->name('support.help');
 Route::get('/faqs', function () { return view('support.faqs'); })->name('support.faqs');
