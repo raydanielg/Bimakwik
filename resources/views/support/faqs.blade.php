@@ -2,57 +2,73 @@
 
 @section('content')
 <!-- FAQ Header -->
-<section class="py-5 bg-primary text-white text-center" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); margin-top: 80px;">
-    <div class="container py-4">
-        <h1 class="display-4 fw-bold mb-3 animate__animated animate__fadeInDown">How can we help you?</h1>
-        <p class="lead mb-0 animate__animated animate__fadeInUp">Find answers to common questions about Bima Kwik's digital insurance platform.</p>
-    </div>
-</section>
+<section class="py-5 bg-white" style="margin-top: 80px;">
+    <div class="container py-5">
+        <!-- Hero Section -->
+        <div class="row justify-content-center text-center mb-5 animate__animated animate__fadeIn">
+            <div class="col-lg-10">
+                <h6 class="text-primary fw-bold text-uppercase letter-spacing-1 mb-3">
+                    {{ app()->getLocale() == 'sw' ? 'Maswali Yanayoulizwa Mara kwa Mara' : 'Frequently Asked Questions' }}
+                </h6>
+                <h1 class="display-4 fw-bold mb-4 text-dark">
+                    {{ app()->getLocale() == 'sw' ? 'Una Maswali? Tuna Majibu.' : 'Have Questions? We Have Answers.' }}
+                </h1>
+                <p class="lead text-secondary mb-0">
+                    {{ app()->getLocale() == 'sw' ? 'Pata majibu kwa maswali ya kawaida kuhusu Bima Kwik. Yamepangwa kwa kategoria kwa urahisi wako.' : 'Find answers to the most common questions about Bima Kwik. Organized by category for your convenience.' }}
+                </p>
+            </div>
+        </div>
 
-<!-- FAQ Content -->
-<section class="py-5 bg-light">
-    <div class="container">
         <div class="row">
-            <!-- Sidebar Navigation -->
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 shadow-sm sticky-top" style="top: 100px;">
                     <div class="card-body p-4">
-                        <h5 class="fw-bold mb-4">Categories</h5>
+                        <h5 class="fw-bold mb-4">{{ app()->getLocale() == 'sw' ? 'Kategoria' : 'Categories' }}</h5>
                         <div class="nav flex-column nav-pills" id="faq-tabs" role="tablist" aria-orientation="vertical">
-                            <button class="nav-link active mb-2 text-start p-3" data-bs-toggle="pill" data-bs-target="#general" type="button">
-                                <i class="bi bi-info-circle me-2"></i> General Information
+                            <button class="nav-link active mb-2 text-start p-3 fw-bold" data-bs-toggle="pill" data-bs-target="#general" type="button">
+                                <i class="bi bi-info-circle me-2"></i> {{ app()->getLocale() == 'sw' ? 'Habari za Jumla' : 'General Information' }}
                             </button>
-                            <button class="nav-link mb-2 text-start p-3" data-bs-toggle="pill" data-bs-target="#technical" type="button">
-                                <i class="bi bi-cpu me-2"></i> Technical & Integration
+                            <button class="nav-link mb-2 text-start p-3 fw-bold" data-bs-toggle="pill" data-bs-target="#customers" type="button">
+                                <i class="bi bi-person me-2"></i> {{ app()->getLocale() == 'sw' ? 'Kwa Wateja' : 'For Customers' }}
+                            </button>
+                            <button class="nav-link mb-2 text-start p-3 fw-bold" data-bs-toggle="pill" data-bs-target="#partners" type="button">
+                                <i class="bi bi-briefcase me-2"></i> {{ app()->getLocale() == 'sw' ? 'Kwa Washirika' : 'For Partners' }}
+                            </button>
+                            <button class="nav-link mb-2 text-start p-3 fw-bold" data-bs-toggle="pill" data-bs-target="#technical" type="button">
+                                <i class="bi bi-cpu me-2"></i> {{ app()->getLocale() == 'sw' ? 'Kiufundi na Msaada' : 'Technical & Support' }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-9 ps-lg-5 mt-4 mt-lg-0">
-                <div class="tab-content">
+
+            <div class="col-lg-8 ps-lg-5">
+                <div class="tab-content" id="faq-tabContent">
                     <!-- General -->
-                    <div class="tab-pane fade show active" id="general">
-                        <h4 class="fw-bold mb-4">General Questions</h4>
-                        <div class="accordion accordion-flush" id="accGeneral">
-                            <div class="accordion-item border rounded-4 mb-3 overflow-hidden shadow-sm">
+                    <div class="tab-pane fade show active" id="general" role="tabpanel">
+                        <h4 class="fw-bold mb-4 text-primary">{{ app()->getLocale() == 'sw' ? 'Habari za Jumla' : 'General Information' }}</h4>
+                        <div class="accordion accordion-flush shadow-sm rounded-4 overflow-hidden border" id="accordionGeneral">
+                            <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#g1">
-                                        What is Bima Kwik?
+                                    <button class="accordion-button fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#g1">
+                                        {{ app()->getLocale() == 'sw' ? 'Bima Kwik ni nini?' : 'What is Bima Kwik?' }}
                                     </button>
                                 </h2>
-                                <div id="g1" class="accordion-collapse collapse show" data-bs-parent="#accGeneral">
-                                    <div class="accordion-body text-muted">
-                                        Bima Kwik is a digital insurance platform that provides a single point of access for insurance products. Customers can buy, renew, and claim insurance online.
+                                <div id="g1" class="accordion-collapse collapse show" data-bs-parent="#accordionGeneral">
+                                    <div class="accordion-body text-muted lh-lg">
+                                        {{ app()->getLocale() == 'sw' ? 'Bima Kwik ni jukwaa la bima la kidijitali linalotoa mlango mmoja wa kufikia bidhaa za bima. Wateja wanaweza kununua, kufanya upya, na kudai bima mtandaoni.' : 'Bima Kwik is a digital insurance platform that provides a single point of access for insurance products. Customers can buy, renew, and claim insurance online.' }}
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item border rounded-4 mb-3 overflow-hidden shadow-sm">
+                            <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#g2">
-                                        Is Bima Kwik licensed?
+                                    <button class="accordion-button collapsed fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#g2">
+                                        {{ app()->getLocale() == 'sw' ? 'Je, Bima Kwik ina leseni?' : 'Is Bima Kwik licensed?' }}
                                     </button>
                                 </h2>
-                                <div id="g2" class="accordion-collapse collapse" data-bs-parent="#accGeneral">
-                                    <div class="accordion-body text-muted">
-                                        Yes. Bima Kwik operates under a license from the Insurance Regulator of Tanzania (TIRA) and complies with the Personal Data Protection Act.
+                                <div id="g2" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                                    <div class="accordion-body text-muted lh-lg">
+                                        {{ app()->getLocale() == 'sw' ? 'Ndiyo. Bima Kwik inafanya kazi chini ya leseni kutoka kwa Mamlaka ya Bima Tanzania (TIRA) na inafuata Sheria ya Ulinzi wa Data Binafsi.' : 'Yes. Bima Kwik operates under a license from the Insurance Regulator of Tanzania (TIRA) and complies with the Personal Data Protection Act.' }}
                                     </div>
                                 </div>
                             </div>
@@ -60,35 +76,33 @@
                     </div>
 
                     <!-- Customers -->
-                    <div class="tab-pane fade" id="customers">
-                        <h4 class="fw-bold mb-4">For Customers</h4>
-                        <div class="accordion accordion-flush" id="accCustomers">
-                            <div class="accordion-item border rounded-4 mb-3 overflow-hidden shadow-sm">
-                            <div class="accordion-item border-0 mb-3">
+                    <div class="tab-pane fade" id="customers" role="tabpanel">
+                        <h4 class="fw-bold mb-4 text-primary">{{ app()->getLocale() == 'sw' ? 'Kwa Wateja' : 'For Customers' }}</h4>
+                        <div class="accordion accordion-flush shadow-sm rounded-4 overflow-hidden border" id="accordionCustomers">
+                            <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#tech1">
-                                        What is the OMNI CHANNEL approach?
+                                    <button class="accordion-button fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
+                                        {{ app()->getLocale() == 'sw' ? 'Je, ninanunua seraje?' : 'How do I buy a policy?' }}
                                     </button>
                                 </h2>
-                                <div id="tech1" class="accordion-collapse collapse show" data-bs-parent="#accordionTechnical">
+                                <div id="c1" class="accordion-collapse collapse show" data-bs-parent="#accordionCustomers">
                                     <div class="accordion-body text-muted lh-lg">
-                                        Our OMNI CHANNEL platform allows seamless communication across multiple touchpoints, including mobile applications for referrers/customers, web portals for administrators, and API integrations for other digital platforms, payment aggregators, and utility billers.
+                                        {{ app()->getLocale() == 'sw' ? 'Ingia, nenda kwenye "Bidhaa," vinjari au linganisha sera, chagua moja, toa taarifa zinazohitajika, fanya malipo, na pakua sera yako papo hapo.' : 'Log in, go to "Products," browse or compare policies, select one, provide required information, make payment, and download your policy instantly.' }}
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item border-0 mb-3">
+                            <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#tech2">
-                                        Can Bima Kwik integrate with our existing systems?
+                                    <button class="accordion-button collapsed fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
+                                        {{ app()->getLocale() == 'sw' ? 'Njia gani za malipo zinakubaliwa?' : 'What payment methods are accepted?' }}
                                     </button>
                                 </h2>
-                                <div id="tech2" class="accordion-collapse collapse" data-bs-parent="#accordionTechnical">
+                                <div id="c2" class="accordion-collapse collapse" data-bs-parent="#accordionCustomers">
                                     <div class="accordion-body text-muted lh-lg">
-                                        Absolutely. Bima Kwik provides robust APIs for integration with insurance company core systems, regulators, payment aggregators, and other digital ecosystems. This ensures a synchronized flow of data and transactions.
+                                        {{ app()->getLocale() == 'sw' ? 'Pesa za simu (M-Pesa, Tigo Pesa, Airtel Money), kadi za benki (Visa, Mastercard), uhamisho wa benki, na pochi ya Bima Kwik.' : 'Mobile money (M-Pesa, Tigo Pesa, Airtel Money), bank cards (Visa, Mastercard), bank transfer, and Bima Kwik wallet.' }}
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item border-0 mb-3">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#tech3">
                                         How does the claims notification work?
