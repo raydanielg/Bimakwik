@@ -15,7 +15,16 @@ class CreateRenewalReminderLogsTable extends Migration
     {
         Schema::create('renewal_reminder_logs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_policy_id');
+            $table->unsignedBigInteger('customer_id');
+            $table->integer('days_before_expiry');
+            $table->date('reminder_date');
+            $table->string('channel_sent', 50);
+            $table->string('status', 50)->default('sent');
             $table->timestamps();
+
+            $table->foreign('customer_policy_id')->references('id')->on('customer_policies')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 
