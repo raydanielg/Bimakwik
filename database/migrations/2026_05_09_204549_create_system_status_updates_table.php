@@ -15,6 +15,13 @@ class CreateSystemStatusUpdatesTable extends Migration
     {
         Schema::create('system_status_updates', function (Blueprint $table) {
             $table->id();
+            $table->string('status_type', 50);
+            $table->string('title');
+            $table->text('description');
+            $table->json('affected_services');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time')->nullable();
+            $table->boolean('is_ongoing')->default(true);
             $table->timestamps();
         });
     }

@@ -15,7 +15,15 @@ class CreateLiveChatMessagesTable extends Migration
     {
         Schema::create('live_chat_messages', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('live_chat_session_id');
+            $table->string('sender_type', 20);
+            $table->unsignedBigInteger('sender_id')->nullable();
+            $table->text('message');
+            $table->boolean('is_read')->default(false);
+            $table->json('attachments')->nullable();
             $table->timestamps();
+
+            $table->foreign('live_chat_session_id', 'lcm_session_fk')->references('id')->on('live_chat_sessions')->onDelete('cascade');
         });
     }
 

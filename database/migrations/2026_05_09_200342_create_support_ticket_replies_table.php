@@ -16,16 +16,14 @@ class CreateSupportTicketRepliesTable extends Migration
         Schema::create('support_ticket_replies', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('support_ticket_id');
-            $table->unsignedBigInteger('user_id');
             $table->text('message');
-            $table->boolean('is_from_customer')->default(true);
-            $table->string('author_name');
+            $table->boolean('is_from_customer');
+            $table->string('author_name', 100);
             $table->json('attachments')->nullable();
             $table->boolean('is_internal_note')->default(false);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
 
             $table->foreign('support_ticket_id')->references('id')->on('support_tickets')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
