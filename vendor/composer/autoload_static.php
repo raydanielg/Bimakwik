@@ -598,6 +598,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\ClaimNotification' => __DIR__ . '/../..' . '/app/Models/ClaimNotification.php',
         'App\\Models\\ClaimSettlement' => __DIR__ . '/../..' . '/app/Models/ClaimSettlement.php',
         'App\\Models\\ClaimStatusHistory' => __DIR__ . '/../..' . '/app/Models/ClaimStatusHistory.php',
+        'App\\Models\\ComplianceCheck' => __DIR__ . '/../..' . '/app/Models/ComplianceCheck.php',
         'App\\Models\\CountryConfig' => __DIR__ . '/../..' . '/app/Models/CountryConfig.php',
         'App\\Models\\CountryInstance' => __DIR__ . '/../..' . '/app/Models/CountryInstance.php',
         'App\\Models\\Csr' => __DIR__ . '/../..' . '/app/Models/Csr.php',
@@ -627,6 +628,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\InsurerBankDetail' => __DIR__ . '/../..' . '/app/Models/InsurerBankDetail.php',
         'App\\Models\\InsurerBranch' => __DIR__ . '/../..' . '/app/Models/InsurerBranch.php',
         'App\\Models\\InsurerContract' => __DIR__ . '/../..' . '/app/Models/InsurerContract.php',
+        'App\\Models\\KYCVerificationLog' => __DIR__ . '/../..' . '/app/Models/KYCVerificationLog.php',
         'App\\Models\\KycDocument' => __DIR__ . '/../..' . '/app/Models/KycDocument.php',
         'App\\Models\\KycSubmission' => __DIR__ . '/../..' . '/app/Models/KycSubmission.php',
         'App\\Models\\LowCodeProductBuilder' => __DIR__ . '/../..' . '/app/Models/LowCodeProductBuilder.php',
@@ -652,12 +654,15 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\PolicyVehicleDetail' => __DIR__ . '/../..' . '/app/Models/PolicyVehicleDetail.php',
         'App\\Models\\PremiumCalculationRule' => __DIR__ . '/../..' . '/app/Models/PremiumCalculationRule.php',
         'App\\Models\\PremiumFinancingPartner' => __DIR__ . '/../..' . '/app/Models/PremiumFinancingPartner.php',
+        'App\\Models\\PremiumFinancingRepayment' => __DIR__ . '/../..' . '/app/Models/PremiumFinancingRepayment.php',
         'App\\Models\\PremiumFinancingRequest' => __DIR__ . '/../..' . '/app/Models/PremiumFinancingRequest.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\ProductBenefit' => __DIR__ . '/../..' . '/app/Models/ProductBenefit.php',
         'App\\Models\\ProductCategory' => __DIR__ . '/../..' . '/app/Models/ProductCategory.php',
         'App\\Models\\ProductDocument' => __DIR__ . '/../..' . '/app/Models/ProductDocument.php',
         'App\\Models\\ProductExclusion' => __DIR__ . '/../..' . '/app/Models/ProductExclusion.php',
+        'App\\Models\\Regulator' => __DIR__ . '/../..' . '/app/Models/Regulator.php',
+        'App\\Models\\RegulatorReport' => __DIR__ . '/../..' . '/app/Models/RegulatorReport.php',
         'App\\Models\\RenewalReminderLog' => __DIR__ . '/../..' . '/app/Models/RenewalReminderLog.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\RolePermission' => __DIR__ . '/../..' . '/app/Models/RolePermission.php',
@@ -5884,8 +5889,4 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$classMap;
-
-        }, null, ClassLoader::class);
-    }
-}
+            $loader->classMap = Compos
