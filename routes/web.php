@@ -33,10 +33,31 @@ Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController:
 
 // Dashboards
 Route::middleware(['auth'])->group(function () {
+    // Customer Dashboard
     Route::middleware(['role:customer'])->prefix('customer')->name('customer.')->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');
         Route::get('/profile', function() { return view('customer.profile'); })->name('profile');
         Route::get('/support', function() { return view('customer.support'); })->name('support');
+        
+        // AI & Marketplace
+        Route::get('/ai-recommendations', function() { return view('customer.ai-recommendations'); })->name('ai-recommendations');
+        Route::get('/marketplace', function() { return view('customer.marketplace'); })->name('marketplace');
+        Route::get('/compare', function() { return view('customer.compare'); })->name('compare');
+        Route::get('/buy', function() { return view('customer.buy'); })->name('buy');
+        
+        // Insurance
+        Route::get('/policies', function() { return view('customer.policies.index'); })->name('policies.index');
+        Route::get('/renewals', function() { return view('customer.policies.renewals'); })->name('policies.renewals');
+        Route::get('/documents', function() { return view('customer.policies.documents'); })->name('policies.documents');
+        
+        // Claims
+        Route::get('/claims/create', function() { return view('customer.claims.create'); })->name('claims.create');
+        Route::get('/claims/track', function() { return view('customer.claims.track'); })->name('claims.track');
+        
+        // Wallet
+        Route::get('/wallet', function() { return view('customer.wallet.index'); })->name('wallet.index');
+        Route::get('/wallet/add-funds', function() { return view('customer.wallet.add-funds'); })->name('wallet.add-funds');
+        Route::get('/wallet/history', function() { return view('customer.wallet.history'); })->name('wallet.history');
     });
 
     Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
