@@ -16,59 +16,19 @@
             </ol>
         </nav>
 
-        <div class="text-center mb-5 animate__animated animate__fadeIn">
-            <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary px-3 py-2 mb-3">RESOURCE CENTER</span>
-            <h1 class="display-4 fw-bold">Guidelines & Materials</h1>
-            <p class="text-secondary mx-auto" style="max-width: 600px;">Explore our comprehensive guides and download essential materials to help you navigate our services with ease.</p>
-        </div>
-
-        <!-- Guidelines Section -->
-        <div class="row g-4 mb-5">
-            <div class="col-12">
-                <h3 class="fw-bold mb-4 d-flex align-items-center animate__animated animate__fadeInLeft">
-                    <span class="bg-primary p-2 rounded-3 me-3 d-flex align-items-center justify-content-center pulse-primary" style="width: 45px; height: 45px;">
-                        <i class="bi bi-book text-white"></i>
-                    </span>
-                    Step-by-Step Guidelines
-                </h3>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 hover-lift animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
-                    <div class="icon-box bg-primary bg-opacity-10 rounded-circle p-3 d-inline-flex mb-4">
-                        <i class="bi bi-file-earmark-text text-primary fs-3"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">Claim Process Guide</h5>
-                    <p class="text-secondary small mb-4">A complete walk-through on how to file, document, and track your insurance claims efficiently.</p>
-                    <a href="{{ route('guidelines.claim-process') }}" class="btn btn-outline-primary btn-sm rounded-pill px-4 mt-auto">Learn More <i class="bi bi-arrow-right ms-1"></i></a>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 hover-lift animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
-                    <div class="icon-box bg-primary bg-opacity-10 rounded-circle p-3 d-inline-flex mb-4">
-                        <i class="bi bi-shield-check text-primary fs-3"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">Policy Management</h5>
-                    <p class="text-secondary small mb-4">Instructions on how to manage your dashboard, update your profile, and renew your policies online.</p>
-                    <a href="{{ route('guidelines.policy-management') }}" class="btn btn-outline-primary btn-sm rounded-pill px-4 mt-auto">Learn More <i class="bi bi-arrow-right ms-1"></i></a>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 hover-lift animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
-                    <div class="icon-box bg-primary bg-opacity-10 rounded-circle p-3 d-inline-flex mb-4">
-                        <i class="bi bi-person-lock text-primary fs-3"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">KYC & Verification</h5>
-                    <p class="text-secondary small mb-4">Guidelines on required documents and how to complete your KYC verification process quickly.</p>
-                    <a href="{{ route('guidelines.kyc-verification') }}" class="btn btn-outline-primary btn-sm rounded-pill px-4 mt-auto">Learn More <i class="bi bi-arrow-right ms-1"></i></a>
-                </div>
             </div>
         </div>
 
-        <!-- Materials Section -->
         <div class="row g-4">
+            <!-- For Customers -->
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm rounded-5 h-100 bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3">
+                                <i class="bi bi-people-fill text-primary fs-3"></i>
+                            </div>
+                            <h4 class="fw-bold mb-0">For Customers</h4>
             <div class="col-12">
                 <h3 class="fw-bold mb-4 d-flex align-items-center animate__animated animate__fadeInLeft">
                     <span class="bg-success p-2 rounded-3 me-3 d-flex align-items-center justify-content-center pulse-success" style="width: 45px; height: 45px;">
