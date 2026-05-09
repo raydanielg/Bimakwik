@@ -105,6 +105,7 @@
         </div>
     </div>
 </section>
+@endsection
 
 <style>
     .hover-lift {
