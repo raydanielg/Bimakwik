@@ -87,6 +87,13 @@ Route::prefix('partners')->name('partners.')->group(function () {
     Route::get('/affiliates', function () { return view('partners.affiliates'); })->name('affiliates');
 });
 
+// Company Routes
+Route::prefix('company')->name('company.')->group(function () {
+    Route::get('/our-story', function () { return view('company.story'); })->name('story');
+    Route::get('/leadership', function () { return view('company.leadership'); })->name('leadership');
+    Route::get('/careers', function () { return view('company.careers'); })->name('careers');
+});
+
 // Support Routes
 Route::get('/help-center', function () { return view('support.help-center'); })->name('support.help');
 Route::get('/faqs', function () { return view('support.faqs'); })->name('support.faqs');
