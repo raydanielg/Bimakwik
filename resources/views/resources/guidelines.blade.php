@@ -1,21 +1,20 @@
 @extends('layouts.landing')
 
 @section('content')
-<!-- Hero Section with Breadcrumbs -->
-<section class="py-5 bg-light position-relative overflow-hidden">
-    <!-- Decorative Shapes -->
-    <div class="position-absolute top-0 start-0 translate-middle bg-primary opacity-5 rounded-circle" style="width: 400px; height: 400px;"></div>
-    <div class="position-absolute bottom-0 end-0 translate-middle bg-success opacity-5 rounded-circle" style="width: 300px; height: 300px;"></div>
-
-    <div class="container py-5 mt-5 position-relative">
-        <nav aria-label="breadcrumb" class="mb-4 animate__animated animate__fadeInDown">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-decoration-none text-primary">Home</a></li>
-                <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-secondary">Resources</a></li>
-                <li class="breadcrumb-item active fw-bold" aria-current="page">Guidelines & Materials</li>
-            </ol>
-        </nav>
-
+<section class="py-5 bg-white" style="margin-top: 80px;">
+    <div class="container py-5">
+        <!-- Hero Section -->
+        <div class="row justify-content-center text-center mb-5 animate__animated animate__fadeIn">
+            <div class="col-lg-10">
+                <h6 class="text-primary fw-bold text-uppercase letter-spacing-1 mb-3">
+                    {{ app()->getLocale() == 'sw' ? 'Upakuaji' : 'Downloads' }}
+                </h6>
+                <h1 class="display-4 fw-bold mb-4 text-dark">
+                    {{ app()->getLocale() == 'sw' ? 'Nyenzo kwa Kila Mtu' : 'Resources for Everyone' }}
+                </h1>
+                <p class="lead text-secondary mb-0">
+                    {{ app()->getLocale() == 'sw' ? 'Pata nyaraka zote, miongozo, fomu, na zana unazohitaji – zinapatikana kwa upakuaji wa bure katika muundo wa PDF.' : 'Find all documents, guides, forms, and tools you need – available for free download in PDF format.' }}
+                </p>
             </div>
         </div>
 
@@ -28,23 +27,30 @@
                             <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3">
                                 <i class="bi bi-people-fill text-primary fs-3"></i>
                             </div>
-                            <h4 class="fw-bold mb-0">For Customers</h4>
-            <div class="col-12">
-                <h3 class="fw-bold mb-4 d-flex align-items-center animate__animated animate__fadeInLeft">
-                    <span class="bg-success p-2 rounded-3 me-3 d-flex align-items-center justify-content-center pulse-success" style="width: 45px; height: 45px;">
-                        <i class="bi bi-download text-white"></i>
-                    </span>
-                    Downloadable Materials
-                </h3>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card border-0 shadow-sm rounded-4 p-4 hover-lift animate__animated animate__fadeInLeft">
-                    <div class="d-flex align-items-center">
-                        <div class="icon-box bg-success bg-opacity-10 rounded-4 p-3 me-4">
-                            <i class="bi bi-file-pdf fs-1 text-success"></i>
+                            <h4 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Kwa Wateja' : 'For Customers' }}</h4>
                         </div>
-                        <div class="flex-grow-1">
+                        <div class="list-group list-group-flush bg-transparent">
+                            <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center py-3">
+                                <div>
+                                    <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Mwongozo wa Mtumiaji' : 'Customer User Guide' }}</h6>
+                                    <small class="text-muted">PDF • 2.5 MB</small>
+                                </div>
+                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center py-3">
+                                <div>
+                                    <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Orodha ya Kukagua Madai' : 'Claims Checklist' }}</h6>
+                                    <small class="text-muted">PDF • 0.9 MB</small>
+                                </div>
+                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center py-3 border-0">
+                                <div>
+                                    <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Mwongozo wa Upya' : 'Renewal Guide' }}</h6>
+                                    <small class="text-muted">PDF • 1.0 MB</small>
+                                </div>
+                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                            </div>
                             <h5 class="fw-bold mb-1">Company Brochure 2026</h5>
                             <p class="text-secondary small mb-0">Overview of all our products and services in one PDF.</p>
                         </div>
