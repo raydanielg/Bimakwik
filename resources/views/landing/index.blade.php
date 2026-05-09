@@ -71,7 +71,7 @@
                         <p class="lead mb-5 animate__animated animate__fadeInUp" style="animation-delay: 0.4s">Secure your future with BimaKwik. We provide reliable health, motor, and life insurance tailored for you.</p>
                         <div class="d-flex gap-3 animate__animated animate__fadeInUp" style="animation-delay: 0.6s">
                             <a href="{{ route('register') }}" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">Get Started</a>
-                            <a href="#" class="btn btn-outline-light btn-lg px-5 rounded-pill">Learn More</a>
+                            <a href="{{ route('pages.about') }}" class="btn btn-outline-light btn-lg px-5 rounded-pill">Learn More</a>
                         </div>
                     </div>
                 </div>
