@@ -15,7 +15,16 @@ class CreateClaimsReferenceBureausTable extends Migration
     {
         Schema::create('claims_reference_bureaus', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('claim_id');
+            $table->decimal('claim_amount', 15, 2)->nullable();
+            $table->string('claim_status', 50)->nullable();
+            $table->decimal('settled_amount', 15, 2)->nullable();
+            $table->boolean('fraud_flag')->default(false);
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('claim_id')->references('id')->on('claims')->onDelete('cascade');
         });
     }
 
