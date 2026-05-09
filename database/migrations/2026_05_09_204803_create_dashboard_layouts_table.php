@@ -15,7 +15,13 @@ class CreateDashboardLayoutsTable extends Migration
     {
         Schema::create('dashboard_layouts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('layout_name')->default('Default');
+            $table->json('widgets');
+            $table->boolean('is_default')->default(false);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
