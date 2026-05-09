@@ -590,6 +590,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\BrokerPenalty' => __DIR__ . '/../..' . '/app/Models/BrokerPenalty.php',
         'App\\Models\\BrokerProfile' => __DIR__ . '/../..' . '/app/Models/BrokerProfile.php',
         'App\\Models\\Claim' => __DIR__ . '/../..' . '/app/Models/Claim.php',
+        'App\\Models\\ClaimDocument' => __DIR__ . '/../..' . '/app/Models/ClaimDocument.php',
         'App\\Models\\CountryConfig' => __DIR__ . '/../..' . '/app/Models/CountryConfig.php',
         'App\\Models\\CountryInstance' => __DIR__ . '/../..' . '/app/Models/CountryInstance.php',
         'App\\Models\\Csr' => __DIR__ . '/../..' . '/app/Models/Csr.php',
@@ -650,6 +651,8 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\ServiceProvider' => __DIR__ . '/../..' . '/app/Models/ServiceProvider.php',
         'App\\Models\\ServiceProviderBankDetail' => __DIR__ . '/../..' . '/app/Models/ServiceProviderBankDetail.php',
         'App\\Models\\ServiceProviderContract' => __DIR__ . '/../..' . '/app/Models/ServiceProviderContract.php',
+        'App\\Models\\ServiceProviderPayment' => __DIR__ . '/../..' . '/app/Models/ServiceProviderPayment.php',
+        'App\\Models\\ServiceProviderPenalty' => __DIR__ . '/../..' . '/app/Models/ServiceProviderPenalty.php',
         'App\\Models\\ServiceProviderPerformanceMetric' => __DIR__ . '/../..' . '/app/Models/ServiceProviderPerformanceMetric.php',
         'App\\Models\\ServiceProviderPermission' => __DIR__ . '/../..' . '/app/Models/ServiceProviderPermission.php',
         'App\\Models\\ServiceProviderProfile' => __DIR__ . '/../..' . '/app/Models/ServiceProviderProfile.php',
@@ -5864,4 +5867,8 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$prefixDirsPsr4;
-          
+            $loader->classMap = ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a::$classMap;
+
+        }, null, ClassLoader::class);
+    }
+}
