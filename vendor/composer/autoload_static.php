@@ -561,6 +561,8 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
         'App\\Models\\PolicyBenefitUtilization' => __DIR__ . '/../..' . '/app/Models/PolicyBenefitUtilization.php',
         'App\\Models\\PolicyCategory' => __DIR__ . '/../..' . '/app/Models/PolicyCategory.php',
+        'App\\Models\\PolicyDocument' => __DIR__ . '/../..' . '/app/Models/PolicyDocument.php',
+        'App\\Models\\PolicyDocumentAccessLog' => __DIR__ . '/../..' . '/app/Models/PolicyDocumentAccessLog.php',
         'App\\Models\\PolicyRenewal' => __DIR__ . '/../..' . '/app/Models/PolicyRenewal.php',
         'App\\Models\\PolicyVehicleDetail' => __DIR__ . '/../..' . '/app/Models/PolicyVehicleDetail.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',

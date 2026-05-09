@@ -56,6 +56,8 @@ return array(
     'App\\Models\\Permission' => $baseDir . '/app/Models/Permission.php',
     'App\\Models\\PolicyBenefitUtilization' => $baseDir . '/app/Models/PolicyBenefitUtilization.php',
     'App\\Models\\PolicyCategory' => $baseDir . '/app/Models/PolicyCategory.php',
+    'App\\Models\\PolicyDocument' => $baseDir . '/app/Models/PolicyDocument.php',
+    'App\\Models\\PolicyDocumentAccessLog' => $baseDir . '/app/Models/PolicyDocumentAccessLog.php',
     'App\\Models\\PolicyRenewal' => $baseDir . '/app/Models/PolicyRenewal.php',
     'App\\Models\\PolicyVehicleDetail' => $baseDir . '/app/Models/PolicyVehicleDetail.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
