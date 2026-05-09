@@ -56,11 +56,30 @@
                     <a class="nav-link fw-bold px-3" href="{{ route('pages.claims') }}">Claims</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-bold px-3" href="{{ route('pages.branches') }}">Branches</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link fw-bold px-3" href="{{ route('pages.contact') }}">Contact</a>
                 </li>
+                
+                @auth
+                    <li class="nav-item ms-lg-3">
+                        @php
+                            $dashboardRoute = 'customer.dashboard';
+                            if(auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('sub-admin')) $dashboardRoute = 'admin.dashboard';
+                            elseif(auth()->user()->hasRole('insurer')) $dashboardRoute = 'insurer.dashboard';
+                            elseif(auth()->user()->hasRole('broker')) $dashboardRoute = 'broker.dashboard';
+                            elseif(auth()->user()->hasRole('aggregator')) $dashboardRoute = 'aggregator.dashboard';
+                            elseif(auth()->user()->hasRole('service-provider')) $dashboardRoute = 'service-provider.dashboard';
+                            elseif(auth()->user()->hasRole('financing-partner')) $dashboardRoute = 'financing-partner.dashboard';
+                            elseif(auth()->user()->hasRole('developer')) $dashboardRoute = 'developer.dashboard';
+                        @endphp
+                        <a href="{{ route($dashboardRoute) }}" class="btn btn-primary px-4 rounded-pill fw-bold shadow-sm">
+                            <i class="bi bi-speedometer2 me-1"></i> View My Dashboard
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item ms-lg-3">
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary px-4 rounded-pill fw-bold">Login</a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>
