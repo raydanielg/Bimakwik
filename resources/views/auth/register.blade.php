@@ -180,22 +180,3 @@
     .transition-all { transition: all 0.3s ease; }
 </style>
 @endsection
-        border-color: #0d6efd;
-        background-color: rgba(13, 110, 253, 0.02);
-    }
-    .input-group-text {
-        border-top-left-radius: 12px !important;
-        border-bottom-left-radius: 12px !important;
-    }
-    .form-control {
-        border-top-right-radius: 12px !important;
-        border-bottom-right-radius: 12px !important;
-        padding: 0.75rem 1rem;
-    }
-    .hover-lift-sm:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0.5rem 1.5rem rgba(13, 110, 253, 0.2) !important;
-    }
-    .transition-all { transition: all 0.3s ease; }
-</style>
-@endsection
