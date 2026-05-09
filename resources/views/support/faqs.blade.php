@@ -24,68 +24,46 @@
                             </button>
                             <button class="nav-link mb-2 text-start p-3" data-bs-toggle="pill" data-bs-target="#technical" type="button">
                                 <i class="bi bi-cpu me-2"></i> Technical & Integration
-                            </button>
-                            <button class="nav-link mb-2 text-start p-3" data-bs-toggle="pill" data-bs-target="#inclusion" type="button">
-                                <i class="bi bi-people me-2"></i> Financial Inclusion
-                            </button>
-                            <button class="nav-link mb-2 text-start p-3" data-bs-toggle="pill" data-bs-target="#business" type="button">
-                                <i class="bi bi-briefcase me-2"></i> Business Models
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
-
-            <!-- FAQ Accordions -->
-            <div class="col-lg-8">
-                <div class="tab-content" id="faq-tabContent">
-                    <!-- General Information -->
-                    <div class="tab-pane fade show active" id="general" role="tabpanel">
-                        <h3 class="fw-bold mb-4">General Information</h3>
-                        <div class="accordion shadow-sm" id="accordionGeneral">
-                            <div class="accordion-item border-0 mb-3">
+            <div class="col-lg-9 ps-lg-5 mt-4 mt-lg-0">
+                <div class="tab-content">
+                    <!-- General -->
+                    <div class="tab-pane fade show active" id="general">
+                        <h4 class="fw-bold mb-4">General Questions</h4>
+                        <div class="accordion accordion-flush" id="accGeneral">
+                            <div class="accordion-item border rounded-4 mb-3 overflow-hidden shadow-sm">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#gen1">
+                                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#g1">
                                         What is Bima Kwik?
                                     </button>
                                 </h2>
-                                <div id="gen1" class="accordion-collapse collapse show" data-bs-parent="#accordionGeneral">
-                                    <div class="accordion-body text-muted lh-lg">
-                                        I Link Limited, trading as Bima Kwik, is a licensed insurance digital platform in Tanzania. We act as an intermediary platform for insurance sales and claims notifications, connecting insurance companies, regulators, sales channels, partner networks, and insurance customers.
+                                <div id="g1" class="accordion-collapse collapse show" data-bs-parent="#accGeneral">
+                                    <div class="accordion-body text-muted">
+                                        Bima Kwik is a digital insurance platform that provides a single point of access for insurance products. Customers can buy, renew, and claim insurance online.
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item border-0 mb-3">
+                            <div class="accordion-item border rounded-4 mb-3 overflow-hidden shadow-sm">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#gen2">
-                                        What insurance products are available?
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#g2">
+                                        Is Bima Kwik licensed?
                                     </button>
                                 </h2>
-                                <div id="gen2" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
-                                    <div class="accordion-body text-muted lh-lg">
-                                        The platform integrates various general, health, and life insurance products. This includes health insurance, personal accident covers, motor insurance, and funeral covers specifically designed for different target markets.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item border-0 mb-3">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#gen3">
-                                        Is Bima Kwik regulatory compliant?
-                                    </button>
-                                </h2>
-                                <div id="gen3" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
-                                    <div class="accordion-body text-muted lh-lg">
-                                        Yes, we are fully licensed by the Tanzania Insurance Regulatory Authority (TIRA). Our platform is connected to TIRAMISS, allowing insurers to interact directly and ensuring all transactions meet regulatory requirements.
+                                <div id="g2" class="accordion-collapse collapse" data-bs-parent="#accGeneral">
+                                    <div class="accordion-body text-muted">
+                                        Yes. Bima Kwik operates under a license from the Insurance Regulator of Tanzania (TIRA) and complies with the Personal Data Protection Act.
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Technical & Integration -->
-                    <div class="tab-pane fade" id="technical" role="tabpanel">
-                        <h3 class="fw-bold mb-4">Technical & Integration</h3>
-                        <div class="accordion shadow-sm" id="accordionTechnical">
+                    <!-- Customers -->
+                    <div class="tab-pane fade" id="customers">
+                        <h4 class="fw-bold mb-4">For Customers</h4>
+                        <div class="accordion accordion-flush" id="accCustomers">
+                            <div class="accordion-item border rounded-4 mb-3 overflow-hidden shadow-sm">
                             <div class="accordion-item border-0 mb-3">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button fw-bold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#tech1">
