@@ -60,7 +60,7 @@
                 </li>
                 
                 @auth
-                    <li class="nav-item ms-lg-3">
+                    <li class="nav-item ms-lg-3 d-flex align-items-center gap-2">
                         @php
                             $dashboardRoute = 'customer.dashboard';
                             if(auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('sub-admin')) $dashboardRoute = 'admin.dashboard';
@@ -74,6 +74,12 @@
                         <a href="{{ route($dashboardRoute) }}" class="btn btn-primary px-4 rounded-pill fw-bold shadow-sm">
                             <i class="bi bi-speedometer2 me-1"></i> View My Dashboard
                         </a>
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger px-3 rounded-pill fw-bold">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </button>
+                        </form>
                     </li>
                 @else
                     <li class="nav-item ms-lg-3">
