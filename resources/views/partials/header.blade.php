@@ -100,15 +100,15 @@
                                 <i class="bi bi-car-front text-primary me-3 fs-5"></i>
                                 <div><span class="fw-bold d-block">Motor Insurance</span><small class="text-muted">Private & Commercial</small></div>
                             </a>
-                            <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="#">
+                            <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="{{ route('products.health') }}">
                                 <i class="bi bi-heart-pulse text-danger me-3 fs-5"></i>
                                 <div><span class="fw-bold d-block">Health Insurance</span><small class="text-muted">Family & Corporate</small></div>
                             </a>
-                            <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="#">
+                            <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="{{ route('products.life') }}">
                                 <i class="bi bi-umbrella text-info me-3 fs-5"></i>
                                 <div><span class="fw-bold d-block">Life Insurance</span><small class="text-muted">Whole Life & Plans</small></div>
                             </a>
-                            <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="#">
+                            <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="{{ route('products.general') }}">
                                 <i class="bi bi-box-seam text-success me-3 fs-5"></i>
                                 <div><span class="fw-bold d-block">General Insurance</span><small class="text-muted">Fire, Travel & Home</small></div>
                             </a>
