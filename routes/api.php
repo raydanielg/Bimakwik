@@ -18,17 +18,14 @@ use App\Http\Controllers\Api\KycController;
 use App\Http\Controllers\Api\SupportController;
 use App\Http\Controllers\Api\ProfileController;
 
+use App\Http\Controllers\Api\PolicyController;
+
 Route::middleware('auth:sanctum')->group(function () {
-    // Profile
-    Route::get('/profile', [ProfileController::class, 'getProfile']);
-    Route::post('/profile', [ProfileController::class, 'updateProfile']);
+    // ... previous routes ...
 
-    // KYC
-    Route::post('/kyc/submit', [KycController::class, 'submit']);
-    Route::get('/kyc/status', [KycController::class, 'status']);
-
-    // Support
-    Route::post('/support/tickets', [SupportController::class, 'createTicket']);
-    Route::get('/support/tickets', [SupportController::class, 'listTickets']);
-    Route::get('/support/tickets/{id}', [SupportController::class, 'getTicketDetails']);
+    // Policies
+    Route::get('/policies/summary', [PolicyController::class, 'dashboardSummary']);
+    Route::get('/policies/active', [PolicyController::class, 'activePolicies']);
+    Route::get('/policies/history', [PolicyController::class, 'policyHistory']);
+    Route::get('/policies/{id}/documents', [PolicyController::class, 'getDocuments']);
 });
