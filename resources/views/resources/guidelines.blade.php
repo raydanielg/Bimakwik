@@ -51,77 +51,76 @@
                                 </div>
                                 <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
                             </div>
-                            <h5 class="fw-bold mb-1">Company Brochure 2026</h5>
-                            <p class="text-secondary small mb-0">Overview of all our products and services in one PDF.</p>
                         </div>
-                        <a href="#" class="btn btn-light rounded-circle shadow-sm p-3 hover-rotate"><i class="bi bi-download"></i></a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="card border-0 shadow-sm rounded-4 p-4 hover-lift animate__animated animate__fadeInRight">
-                    <div class="d-flex align-items-center">
-                        <div class="icon-box bg-success bg-opacity-10 rounded-4 p-3 me-4">
-                            <i class="bi bi-file-earmark-medical fs-1 text-success"></i>
+            <!-- For Partners -->
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm rounded-5 h-100 bg-light">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-success bg-opacity-10 rounded-circle p-3 me-3">
+                                <i class="bi bi-briefcase-fill text-success fs-3"></i>
+                            </div>
+                            <h4 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Kwa Washirika' : 'For Partners' }}</h4>
                         </div>
-                        <div class="flex-grow-1">
-                            <h5 class="fw-bold mb-1">Claim Application Form</h5>
-                            <p class="text-secondary small mb-0">Standard form for filing any insurance claim.</p>
+                        <div class="list-group list-group-flush bg-transparent">
+                            <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center py-3">
+                                <div>
+                                    <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Mwongozo wa Kujiunga' : 'Broker Onboarding Guide' }}</h6>
+                                    <small class="text-muted">PDF • 3.2 MB</small>
+                                </div>
+                                <a href="#" class="btn btn-outline-success btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center py-3">
+                                <div>
+                                    <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Vifaa vya Masoko' : 'Marketing Materials Kit' }}</h6>
+                                    <small class="text-muted">ZIP • 15 MB</small>
+                                </div>
+                                <a href="#" class="btn btn-outline-success btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                            </div>
+                            <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center py-3 border-0">
+                                <div>
+                                    <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Nyaraka za API' : 'API Documentation' }}</h6>
+                                    <small class="text-muted">PDF • 4.5 MB</small>
+                                </div>
+                                <a href="#" class="btn btn-outline-success btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                            </div>
                         </div>
-                        <a href="#" class="btn btn-light rounded-circle shadow-sm p-3 hover-rotate"><i class="bi bi-download"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legal & Compliance -->
+        <div class="mt-5 bg-dark text-white p-5 rounded-5 shadow-lg">
+            <h3 class="fw-bold mb-4">{{ app()->getLocale() == 'sw' ? 'Sheria na Uzingativu' : 'Legal & Compliance' }}</h3>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary rounded-4 h-100">
+                        <h6 class="fw-bold mb-2">{{ app()->getLocale() == 'sw' ? 'Sheria na Masharti' : 'Terms of Service' }}</h6>
+                        <p class="small opacity-75">{{ app()->getLocale() == 'sw' ? 'Ilirekebishwa: Jan 2026' : 'Last updated: Jan 2026' }}</p>
+                        <a href="#" class="btn btn-link text-warning p-0 text-decoration-none fw-bold small">{{ app()->getLocale() == 'sw' ? 'Pakua PDF' : 'Download PDF' }} <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary rounded-4 h-100">
+                        <h6 class="fw-bold mb-2">{{ app()->getLocale() == 'sw' ? 'Sera ya Faragha' : 'Privacy Policy' }}</h6>
+                        <p class="small opacity-75">{{ app()->getLocale() == 'sw' ? 'Ilirekebishwa: Jan 2026' : 'Last updated: Jan 2026' }}</p>
+                        <a href="#" class="btn btn-link text-warning p-0 text-decoration-none fw-bold small">{{ app()->getLocale() == 'sw' ? 'Pakua PDF' : 'Download PDF' }} <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border border-secondary rounded-4 h-100">
+                        <h6 class="fw-bold mb-2">{{ app()->getLocale() == 'sw' ? 'Utaratibu wa Malalamiko' : 'Complaints Procedure' }}</h6>
+                        <p class="small opacity-75">{{ app()->getLocale() == 'sw' ? 'Ilirekebishwa: Jan 2026' : 'Last updated: Jan 2026' }}</p>
+                        <a href="#" class="btn btn-link text-warning p-0 text-decoration-none fw-bold small">{{ app()->getLocale() == 'sw' ? 'Pakua PDF' : 'Download PDF' }} <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<style>
-    .breadcrumb-item + .breadcrumb-item::before {
-        content: "\F138";
-        font-family: "bootstrap-icons";
-        font-size: 0.75rem;
-        color: #6c757d;
-    }
-    .hover-lift {
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-    .hover-lift:hover {
-        transform: translateY(-12px);
-        box-shadow: 0 1.5rem 4rem rgba(0,0,0,.1) !important;
-    }
-    .icon-box {
-        transition: all 0.3s ease;
-    }
-    .hover-lift:hover .icon-box {
-        transform: scale(1.1) rotate(5deg);
-    }
-    .hover-rotate:hover i {
-        display: inline-block;
-        animation: rotate 0.5s ease-in-out;
-    }
-    @keyframes rotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
-    .pulse-primary {
-        box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.4);
-        animation: pulse-primary 2s infinite;
-    }
-    @keyframes pulse-primary {
-        0% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.4); }
-        70% { box-shadow: 0 0 0 10px rgba(13, 110, 253, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0); }
-    }
-    .pulse-success {
-        box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.4);
-        animation: pulse-success 2s infinite;
-    }
-    @keyframes pulse-success {
-        0% { box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.4); }
-        70% { box-shadow: 0 0 0 10px rgba(25, 135, 84, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(25, 135, 84, 0); }
-    }
-</style>
 @endsection
