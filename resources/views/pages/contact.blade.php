@@ -67,24 +67,24 @@
             <div class="col-lg-7 animate__animated animate__fadeInRight">
                 <div class="card border-0 shadow-sm rounded-4 p-5">
                     <h3 class="fw-bold mb-4">Send us a Message</h3>
-                    <form action="#" method="POST">
+                    <form action="{{ route('pages.contact.store') }}" method="POST">
                         @csrf
                         <div class="row g-4">
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold">Your Name</label>
-                                <input type="text" class="form-control bg-light border-0 px-3" placeholder="John Doe" required>
+                                <input type="text" name="name" class="form-control bg-light border-0 px-3" placeholder="John Doe" required>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold">Your Email</label>
-                                <input type="email" class="form-control bg-light border-0 px-3" placeholder="john@example.com" required>
+                                <input type="email" name="email" class="form-control bg-light border-0 px-3" placeholder="john@example.com" required>
                             </div>
                             <div class="col-12">
                                 <label class="form-label small fw-bold">Subject</label>
-                                <input type="text" class="form-control bg-light border-0 px-3" placeholder="I have a question about..." required>
+                                <input type="text" name="subject" class="form-control bg-light border-0 px-3" placeholder="I have a question about..." required>
                             </div>
                             <div class="col-12">
                                 <label class="form-label small fw-bold">Message</label>
-                                <textarea class="form-control bg-light border-0 px-3" rows="5" placeholder="Write your message here..." required></textarea>
+                                <textarea name="message" class="form-control bg-light border-0 px-3" rows="5" placeholder="Write your message here..." required></textarea>
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary rounded-pill px-5 py-3 fw-bold w-100">Send Message</button>

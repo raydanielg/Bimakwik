@@ -79,7 +79,8 @@ Route::get('/branches', function () {
     return view('pages.branches', compact('branches')); 
 })->name('pages.branches');
 Route::get('/claims', function () { return view('pages.claims'); })->name('pages.claims');
-Route::get('/contact-us', function () { return view('pages.contact'); })->name('pages.contact');
+Route::get('/contact-us', [App\Http\Controllers\ContactController::class, 'show'])->name('pages.contact');
+Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'store'])->name('pages.contact.store');
 
 // Resources Routes
 Route::get('/guidelines-materials', function () { return view('resources.guidelines'); })->name('resources.guidelines');
