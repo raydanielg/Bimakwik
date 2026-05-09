@@ -87,6 +87,13 @@ Route::prefix('partners')->name('partners.')->group(function () {
     Route::get('/affiliates', function () { return view('partners.affiliates'); })->name('affiliates');
 });
 
+// Product Routes
+Route::prefix('products')->name('products.')->group(function () {
+    Route::get('/health', function () { return view('products.health'); })->name('health');
+    Route::get('/life', function () { return view('products.life'); })->name('life');
+    Route::get('/general', function () { return view('products.general'); })->name('general');
+});
+
 // Company Routes
 Route::prefix('company')->name('company.')->group(function () {
     Route::get('/our-story', function () { return view('company.story'); })->name('story');
