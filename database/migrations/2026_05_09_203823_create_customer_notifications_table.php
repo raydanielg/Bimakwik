@@ -15,7 +15,18 @@ class CreateCustomerNotificationsTable extends Migration
     {
         Schema::create('customer_notifications', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->string('notification_type', 50);
+            $table->string('title');
+            $table->text('message');
+            $table->json('channels')->nullable();
+            $table->boolean('is_read')->default(false);
+            $table->string('action_link')->nullable();
+            $table->timestamp('sent_at')->useCurrent();
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 

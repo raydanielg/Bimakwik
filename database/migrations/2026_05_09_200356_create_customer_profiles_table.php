@@ -15,24 +15,16 @@ class CreateCustomerProfilesTable extends Migration
     {
         Schema::create('customer_profiles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->date('date_of_birth')->nullable();
-            $table->enum('gender', ['male', 'female', 'other'])->nullable();
-            $table->string('nationality', 100)->default('Tanzanian');
-            $table->text('residential_address')->nullable();
-            $table->string('postal_address')->nullable();
-            $table->string('city', 100)->nullable();
-            $table->string('ward', 100)->nullable();
-            $table->string('district', 100)->nullable();
-            $table->string('region', 100)->nullable();
-            $table->string('occupation', 100)->nullable();
-            $table->string('employer_name')->nullable();
-            $table->string('emergency_contact_name', 100)->nullable();
-            $table->string('emergency_contact_phone', 20)->nullable();
-            $table->string('profile_photo_url', 500)->nullable();
+            $table->unsignedBigInteger('customer_id')->unique();
+            $table->string('marital_status', 50)->nullable();
+            $table->string('education_level', 100)->nullable();
+            $table->string('income_range', 100)->nullable();
+            $table->integer('dependents_count')->default(0);
+            $table->string('business_type', 100)->nullable();
+            $table->integer('years_in_business')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 

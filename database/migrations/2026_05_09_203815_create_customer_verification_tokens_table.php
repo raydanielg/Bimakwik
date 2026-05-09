@@ -15,7 +15,14 @@ class CreateCustomerVerificationTokensTable extends Migration
     {
         Schema::create('customer_verification_tokens', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id');
+            $table->string('token_type', 50);
+            $table->string('token');
+            $table->timestamp('expires_at');
+            $table->timestamp('used_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 
