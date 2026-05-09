@@ -16,6 +16,27 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
+        /* Cookie Consent Styles */
+        #cookie-consent-banner {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            z-index: 9999;
+            display: none;
+            background: #fff;
+            box-shadow: 0 1rem 3rem rgba(0,0,0,0.175);
+            border-radius: 1rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            max-width: 500px;
+        }
+        @media (max-width: 768px) {
+            #cookie-consent-banner {
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+            }
+        }
         .hero-section {
             padding: 100px 0;
             background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('/serious-expert-expressing-support-colleague.jpg');
@@ -78,6 +99,54 @@
 
         @include('partials.footer')
     </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent-banner" class="p-4 animate__animated animate__fadeInUp">
+        <div class="d-flex align-items-start">
+            <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3">
+                <i class="bi bi-cookie text-primary fs-4"></i>
+            </div>
+            <div>
+                <h5 class="fw-bold mb-2">Cookie Consent</h5>
+                <p class="text-secondary small mb-3">We use cookies to enhance your experience and analyze our traffic. Please choose your preference below.</p>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-primary btn-sm rounded-pill px-4" onclick="acceptCookies()">Accept All</button>
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-4" onclick="declineCookies()">Reject All</button>
+                    <a href="{{ route('legal.cookies') }}" class="btn btn-link btn-sm text-decoration-none text-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            hideBanner();
+            if (typeof updateStatusDisplay === 'function') updateStatusDisplay();
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookieConsent', 'declined');
+            hideBanner();
+            if (typeof updateStatusDisplay === 'function') updateStatusDisplay();
+        }
+
+        function hideBanner() {
+            const banner = document.getElementById('cookie-consent-banner');
+            banner.classList.replace('animate__fadeInUp', 'animate__fadeOutDown');
+            setTimeout(() => {
+                banner.style.display = 'none';
+            }, 500);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!localStorage.getItem('cookieConsent')) {
+                setTimeout(() => {
+                    document.getElementById('cookie-consent-banner').style.display = 'block';
+                }, 2000);
+            }
+        });
+    </script>
 
     @if(session('success'))
     <script>
