@@ -15,11 +15,11 @@
             <!-- Language Switcher -->
             <div class="dropdown me-2">
                 <a class="text-white text-decoration-none small dropdown-toggle d-flex align-items-center" href="#" role="button" id="langDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-globe2 me-1"></i> English
+                    <i class="bi bi-globe2 me-1"></i> {{ strtoupper(app()->getLocale()) == 'SW' ? 'Kiswahili' : 'English' }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm rounded-3 mt-2" aria-labelledby="langDropdown">
-                    <li><a class="dropdown-item small py-1" href="#">English</a></li>
-                    <li><a class="dropdown-item small py-1" href="#">Kiswahili</a></li>
+                    <li><a class="dropdown-item small py-1" href="{{ route('lang.switch', 'en') }}">English</a></li>
+                    <li><a class="dropdown-item small py-1" href="{{ route('lang.switch', 'sw') }}">Kiswahili</a></li>
                 </ul>
             </div>
             <span class="text-white-50 d-none d-md-inline">|</span>
