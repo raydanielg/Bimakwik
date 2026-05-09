@@ -334,25 +334,38 @@
                 <a href="{{ route('broker.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-robot"></i> AI Sales Insights
+                </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Business</div>
+            <div class="sidebar-heading mt-3">Product Management</div>
             <div class="list-group list-group-flush px-2">
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-box-seam"></i> Compare Products
+                    <i class="bi bi-box-seam"></i> View All Products
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-cart-plus"></i> Buy for Customer
+                    <i class="bi bi-arrow-left-right"></i> Comparison Matrix
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-people"></i> My Customers
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-shield-check"></i> Active Policies
+                    <i class="bi bi-cart-plus"></i> AI Recommendations
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Wallet & Earnings</div>
+            <div class="sidebar-heading mt-3">Customer & Policy</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-people"></i> Manage Customers
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-check"></i> Policy Management
+                </a>
+                <a href="#" class="list-group-item list-group-item-action text-danger">
+                    <i class="bi bi-exclamation-octagon"></i> Claims Management
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Wallet & Finances</div>
             <div class="list-group list-group-flush px-2">
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-wallet2"></i> My Wallet
@@ -360,22 +373,9 @@
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-graph-up-arrow"></i> Commissions
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-cash-stack"></i> Cash-out
-                </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Customer Support</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-exclamation-octagon"></i> Submit Claim
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-clock-history"></i> Track Status
-                </a>
-            </div>
-
-            <div class="sidebar-heading mt-3">Reports & Profile</div>
+            <div class="sidebar-heading mt-3">Settings & Reports</div>
             <div class="list-group list-group-flush px-2">
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-bar-chart-line"></i> Sales Reports
@@ -383,10 +383,60 @@
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-person-gear"></i> My Profile
                 </a>
+            </div>
+
+            @elseif(auth()->user()->hasRole('aggregator'))
+            <!-- Aggregator Menu -->
+            <div class="sidebar-heading">Market Monitoring</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('aggregator.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-bank"></i> Bank Details
+                    <i class="bi bi-activity"></i> Traffic Metrics
                 </a>
             </div>
+
+            <div class="sidebar-heading mt-3">Product Comparison</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-grid-3x3-gap"></i> Comparison Matrix
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-robot"></i> AI Smart Compare
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Lead Management</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-calculator"></i> Generate Quote
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-send-plus"></i> Send Leads
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-briefcase"></i> Track Lead Status
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Earnings & Reports</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-wallet2"></i> My Wallet
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bar-chart-steps"></i> Conversion Reports
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Settings</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-gear"></i> Profile & Bank
+                </a>
+            </div>
+            @endif
 
             @elseif(auth()->user()->hasRole('customer'))
             <!-- Customer Menu -->
