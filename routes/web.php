@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Role-specific Registration Routes
+Route::prefix('register')->name('register.')->group(function () {
+    Route::get('/customer', function () { return view('auth.register-roles.customer'); })->name('customer');
+    Route::get('/broker', function () { return view('auth.register-roles.broker'); })->name('broker');
+    Route::get('/insurer', function () { return view('auth.register-roles.insurer'); })->name('insurer');
+    Route::get('/provider', function () { return view('auth.register-roles.provider'); })->name('provider');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
