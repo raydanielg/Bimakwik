@@ -15,7 +15,14 @@ class CreateProductExclusionsTable extends Migration
     {
         Schema::create('product_exclusions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('insurance_product_id');
+            $table->string('exclusion_name');
+            $table->string('exclusion_name_sw')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('display_order')->default(0);
             $table->timestamps();
+
+            $table->foreign('insurance_product_id')->references('id')->on('insurance_products')->onDelete('cascade');
         });
     }
 

@@ -15,7 +15,13 @@ class CreateDynamicFormResponsesTable extends Migration
     {
         Schema::create('dynamic_form_responses', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('dynamic_form_id');
+            $table->unsignedBigInteger('user_id');
+            $table->json('response_data');
             $table->timestamps();
+
+            $table->foreign('dynamic_form_id')->references('id')->on('dynamic_forms')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

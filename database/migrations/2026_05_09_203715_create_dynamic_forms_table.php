@@ -15,7 +15,13 @@ class CreateDynamicFormsTable extends Migration
     {
         Schema::create('dynamic_forms', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('insurance_product_id');
+            $table->string('form_name');
+            $table->json('form_schema');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
+
+            $table->foreign('insurance_product_id')->references('id')->on('insurance_products')->onDelete('cascade');
         });
     }
 

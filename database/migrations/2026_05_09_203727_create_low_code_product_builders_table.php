@@ -15,7 +15,14 @@ class CreateLowCodeProductBuildersTable extends Migration
     {
         Schema::create('low_code_product_builders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('insurer_id');
+            $table->string('product_name');
+            $table->json('configuration');
+            $table->string('status')->default('draft');
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('insurer_id')->references('id')->on('insurers')->onDelete('cascade');
         });
     }
 
