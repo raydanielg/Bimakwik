@@ -58,9 +58,9 @@
             <div class="col-lg-2 col-6 col-md-3">
                 <h6 class="fw-bold mb-4 text-uppercase small letter-spacing-1">Legal</h6>
                 <ul class="list-unstyled footer-links">
-                    <li><a href="{{ route('privacy') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Privacy</a></li>
-                    <li><a href="{{ route('terms') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Terms</a></li>
-                    <li><a href="{{ route('cookies') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Cookies</a></li>
+                    <li><a href="{{ route('legal.privacy') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Privacy</a></li>
+                    <li><a href="{{ route('legal.terms') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Terms</a></li>
+                    <li><a href="{{ route('legal.cookies') }}"><i class="bi bi-chevron-right me-2 text-warning"></i>Cookies</a></li>
                 </ul>
             </div>
         </div>
