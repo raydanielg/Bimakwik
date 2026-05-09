@@ -15,6 +15,10 @@ class CreateBlacklistedTokensTable extends Migration
     {
         Schema::create('blacklisted_tokens', function (Blueprint $table) {
             $table->id();
+            $table->text('token');
+            $table->string('token_type', 50)->nullable();
+            $table->timestamp('expires_at');
+            $table->timestamp('blacklisted_at')->useCurrent();
             $table->timestamps();
         });
     }

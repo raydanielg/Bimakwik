@@ -15,7 +15,12 @@ class CreateIpWhitelistsTable extends Migration
     {
         Schema::create('ip_whitelists', function (Blueprint $table) {
             $table->id();
+            $table->ipAddress('ip_address')->unique();
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('added_by')->nullable();
             $table->timestamps();
+
+            $table->foreign('added_by')->references('id')->on('users')->onDelete('set null');
         });
     }
 

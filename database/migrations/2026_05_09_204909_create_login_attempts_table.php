@@ -15,6 +15,11 @@ class CreateLoginAttemptsTable extends Migration
     {
         Schema::create('login_attempts', function (Blueprint $table) {
             $table->id();
+            $table->string('identifier');
+            $table->boolean('success');
+            $table->ipAddress('ip_address');
+            $table->text('user_agent')->nullable();
+            $table->string('failure_reason')->nullable();
             $table->timestamps();
         });
     }
