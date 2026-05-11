@@ -2,7 +2,14 @@
 
 @section('content')
 <div class="auth-page">
-    <div class="auth-card animate__animated animate__fadeInDown">
+    <div class="auth-card animate__animated animate__fadeInDown" style="position: relative;">
+        <!-- Help Tooltip -->
+        <div style="position: absolute; top: 15px; right: 15px;">
+            <button type="button" class="btn btn-link p-0 text-muted" id="loginHelpBtn" style="text-decoration: none;">
+                <i class="bi bi-question-circle fs-5"></i>
+            </button>
+        </div>
+
         <div class="auth-logo">
             <img src="{{ asset('logo.png') }}" alt="{{ config('app.name') }}" style="height: 64px; width: auto; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.2));">
         </div>
@@ -53,6 +60,33 @@
                 const password = document.getElementById('password');
                 const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
                 password.setAttribute('type', type);
+            });
+
+            // Login Help Modal (English & Swahili)
+            document.getElementById('loginHelpBtn').addEventListener('click', function() {
+                Swal.fire({
+                    title: '<strong>Msaada wa Kuingia / Login Help</strong>',
+                    icon: 'info',
+                    html: `
+                        <div class="text-start" style="font-size: 14px;">
+                            <h6 class="fw-bold mb-2">Kiswahili:</h6>
+                            <ul class="mb-3">
+                                <li>Hakikisha una akaunti iliyosajiliwa.</li>
+                                <li>Tumia barua pepe na nywila sahihi.</li>
+                                <li>Ikiwa umesahau nywila, wasiliana na msimamizi.</li>
+                            </ul>
+                            <h6 class="fw-bold mb-2">English:</h6>
+                            <ul>
+                                <li>Ensure you have a registered account.</li>
+                                <li>Use your correct email and password.</li>
+                                <li>If you forgot your password, contact the administrator.</li>
+                            </ul>
+                        </div>
+                    `,
+                    showCloseButton: true,
+                    confirmButtonText: 'Nimeelewa / I Understand',
+                    confirmButtonColor: '#10b981',
+                });
             });
 
             document.getElementById('loginForm').addEventListener('submit', function(e) {
