@@ -76,9 +76,16 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('role:aggregator')
         ->name('aggregator.dashboard');
 
-    Route::get('/service-provider/dashboard', [App\Http\Controllers\ServiceProvider\DashboardController::class, 'index'])
-        ->middleware('role:service_provider')
-        ->name('service-provider.dashboard');
+    Route::prefix('service-provider')->name('service-provider.')->middleware(['auth', 'role:service_provider'])->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\ServiceProvider\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/customer/verify', [App\Http\Controllers\ServiceProvider\CustomerController::class, 'index'])->name('customer.verify');
+        Route::get('/claims', [App\Http\Controllers\ServiceProvider\ClaimController::class, 'index'])->name('claims.index');
+        Route::get('/payments', [App\Http\Controllers\ServiceProvider\PaymentController::class, 'index'])->name('payments.index');
+        Route::get('/agreements', [App\Http\Controllers\ServiceProvider\AgreementController::class, 'index'])->name('agreements.index');
+        Route::get('/performance', [App\Http\Controllers\ServiceProvider\PerformanceController::class, 'index'])->name('performance.index');
+        Route::get('/bank-details', [App\Http\Controllers\ServiceProvider\BankController::class, 'index'])->name('bank.index');
+        Route::get('/support', [App\Http\Controllers\ServiceProvider\SupportController::class, 'index'])->name('support.index');
+    });
 
     Route::get('/financing-partner/dashboard', [App\Http\Controllers\FinancingPartner\DashboardController::class, 'index'])
         ->middleware('role:financing_partner')
