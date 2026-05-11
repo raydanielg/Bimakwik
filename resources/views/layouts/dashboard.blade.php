@@ -31,17 +31,20 @@
         /* Responsive Sidebar */
         @media (max-width: 991.98px) {
             #sidebar-wrapper {
-                margin-left: -250px;
-                position: fixed;
-                height: 100vh;
-                top: 0;
+                margin-left: -250px !important;
+                position: fixed !important;
+                height: 100vh !important;
+                top: 0 !important;
+                left: 0 !important;
+                display: block !important;
             }
             #sidebar-wrapper.toggled {
-                margin-left: 0;
-                box-shadow: 0 0 20px rgba(0,0,0,0.2);
+                margin-left: 0 !important;
+                box-shadow: 0 0 20px rgba(0,0,0,0.2) !important;
             }
             #page-content-wrapper {
-                min-width: 100vw;
+                min-width: 100vw !important;
+                width: 100% !important;
             }
         }
         
@@ -993,8 +996,9 @@
     <script>
         $(document).ready(function() {
             // Universal Sidebar toggle (Works for both desktop and mobile)
-            $("#menu-toggle, #menu-toggle-mobile, #sidebar-overlay").click(function(e) {
+            $("#menu-toggle, #menu-toggle-mobile, #sidebar-overlay").on('click touchstart', function(e) {
                 e.preventDefault();
+                console.log("Menu toggled!"); // Debugging
                 $("#sidebar-wrapper").toggleClass("toggled");
                 $("#sidebar-overlay").toggleClass("active");
                 
