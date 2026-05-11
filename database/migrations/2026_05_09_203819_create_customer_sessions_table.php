@@ -24,7 +24,7 @@ class CreateCustomerSessionsTable extends Migration
             $table->string('location')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamp('last_activity')->nullable();
-            $table->timestamp('expires_at');
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
