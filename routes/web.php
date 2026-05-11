@@ -88,7 +88,18 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('role:developer')
         ->name('developer.dashboard');
         
-    Route::get('/dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
+        ->name('dashboard');
+
+    Route::get('/agent/dashboard', [App\Http\Controllers\Agent\DashboardController::class, 'index'])
+        ->middleware('role:agent,sfe,bancassurance')
+        ->name('agent.dashboard');
+
+    Route::get('/regulator/dashboard', [App\Http\Controllers\Regulator\DashboardController::class, 'index'])
+        ->middleware('role:regulator')
+        ->name('regulator.dashboard');
+        
+    Route::get('/customer/dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])
         ->middleware('role:customer')
         ->name('customer.dashboard');
 });

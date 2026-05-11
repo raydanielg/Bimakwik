@@ -39,12 +39,21 @@ The platform is built with a robust multi-role architecture, supporting **12 dis
 ---
 
 ## 🧪 Testing Accounts (Development)
-Use these accounts to test role-specific dashboards. All passwords are set to `password`.
+All passwords are set to `password`.
 
-- **Super Admin:** `super-admin@bimakwik.com`
-- **Insurer:** `insurer@bimakwik.com`
-- **Customer:** `customer@bimakwik.com`
-- **Agent:** `agent@bimakwik.com`
+| Role | Email (Username) |
+| :--- | :--- |
+| **Super Administrator** | `super-admin@bimakwik.com` |
+| **Sub-Administrator** | `sub-admin@bimakwik.com` |
+| **Insurance Company** | `insurer@bimakwik.com` |
+| **Broker / Aggregator** | `broker@bimakwik.com` |
+| **Insurance Agent** | `agent@bimakwik.com` |
+| **Sales Force (SFE)** | `sfe@bimakwik.com` |
+| **Bancassurance Agent** | `bancassurance@bimakwik.com` |
+| **Customer (Mteja)** | `customer@bimakwik.com` |
+| **Service Provider** | `service-provider@bimakwik.com` |
+| **Regulator (TIRA)** | `regulator@bimakwik.com` |
+| **Financing Partner** | `financing-partner@bimakwik.com` |
 
 ---
 

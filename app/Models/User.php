@@ -21,6 +21,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone_number',
+        'national_id',
+        'account_status',
         'password',
     ];
 
@@ -54,9 +57,9 @@ class User extends Authenticatable
     /**
      * Check if user has a specific role.
      */
-    public function hasRole($slug)
+    public function hasRole($roleName)
     {
-        return $this->roles->where('slug', $slug)->count() > 0;
+        return $this->roles->where('name', $roleName)->count() > 0;
     }
 
     /**
