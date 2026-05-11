@@ -775,7 +775,51 @@
                 </a>
             </div>
 
-            @elseif(auth()->user()->hasRole('financing-partner'))
+            @elseif(auth()->user()->hasRole('regulator'))
+            <!-- Regulator Menu -->
+            <div class="sidebar-heading">Market Oversight</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('regulator.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a href="#oversightSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-shield-shaded"></i> Oversight</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse ps-3" id="oversightSubmenu">
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Insurers</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Brokers</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Agents</a>
+                </div>
+            </div>
+
+            <div class="sidebar-heading mt-3">Monitoring</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-activity"></i> Claims Monitoring
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-check-circle"></i> Product Approvals
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-exclamation-triangle"></i> Compliance
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Intelligence</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-graph-up"></i> Market Stats
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-lock"></i> Consumer Protection
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-journal-text"></i> Audit Logs
+                </a>
+            </div>
+
+            @elseif(auth()->user()->hasRole('financing_partner'))
             <!-- Financing Partner Menu -->
             <div class="sidebar-heading">Core Monitoring</div>
             <div class="list-group list-group-flush px-2">
