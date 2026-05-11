@@ -52,7 +52,7 @@ class DashboardController extends Controller
         }
 
         if ($user->hasRole('bancassurance')) {
-            return redirect()->route('agent.dashboard'); // Temporarily reuse agent dashboard or create new if needed
+            return redirect()->route('bancassurance.dashboard');
         } 
         
         if ($user->hasRole('service_provider')) {

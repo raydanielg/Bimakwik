@@ -55,7 +55,7 @@ class LoginController extends Controller
         }
 
         if ($user->hasRole('bancassurance')) {
-            return route('agent.dashboard');
+            return route('bancassurance.dashboard');
         }
 
         if ($user->hasRole('service_provider')) {

@@ -702,7 +702,42 @@
                 </a>
             </div>
 
-            @elseif(auth()->user()->hasRole('service-provider'))
+            @elseif(auth()->user()->hasRole('bancassurance'))
+            <!-- Bancassurance Menu -->
+            <div class="sidebar-heading">Bank Operations</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('bancassurance.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('bancassurance.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a href="{{ route('bancassurance.integration.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('bancassurance.integration.*') ? 'active' : '' }}">
+                    <i class="bi bi-bank"></i> Bank Integration
+                </a>
+                <a href="{{ route('bancassurance.customers.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('bancassurance.customers.*') ? 'active' : '' }}">
+                    <i class="bi bi-people-fill"></i> Bank Customers
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Insurance Sales</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('bancassurance.policies.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('bancassurance.policies.*') ? 'active' : '' }}">
+                    <i class="bi bi-shield-check"></i> My Sales
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-cart-plus"></i> Bancassurance Products
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Compliance & Reports</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('bancassurance.compliance.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('bancassurance.compliance.*') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-check"></i> Compliance
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bar-chart-line"></i> Performance
+                </a>
+            </div>
+
+            @elseif(auth()->user()->hasRole('service_provider'))
             <!-- Service Provider Menu -->
             <div class="sidebar-heading">Overview</div>
             <div class="list-group list-group-flush px-2">
