@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/file01', function () {
+    return view('documentation.file01.doc');
+})->name('public.doc');
+
 // Role-specific Registration Routes
 Route::prefix('register')->name('register.')->group(function () {
     Route::get('/customer', function () { return view('auth.register-roles.customer'); })->name('customer');
@@ -113,10 +117,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
         ->name('dashboard');
-
-    Route::get('/file01', function () {
-        return view('documentation.file01.doc');
-    })->name('public.doc');
 
     // SFE Dashboard Routes
     Route::prefix('sfe')->name('sfe.')->middleware(['auth', 'role:sfe'])->group(function () {
