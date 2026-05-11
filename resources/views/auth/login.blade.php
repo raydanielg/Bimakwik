@@ -2,12 +2,10 @@
 
 @section('content')
 <div class="auth-page">
-    <div class="auth-card animate__animated animate__fadeInDown" style="position: relative;">
-        <!-- Help Tooltip -->
-        <div style="position: absolute; top: 15px; right: 15px;">
-            <button type="button" class="btn btn-link p-0 text-muted" id="loginHelpBtn" style="text-decoration: none;">
-                <i class="bi bi-question-circle fs-5"></i>
-            </button>
+    <div class="auth-card animate__animated animate__fadeInDown">
+        <!-- Powa Sana Help Button -->
+        <div class="help-icon-btn" id="loginHelpBtn" title="Msaada / Help">
+            <i class="bi bi-question-lg"></i>
         </div>
 
         <div class="auth-logo">
