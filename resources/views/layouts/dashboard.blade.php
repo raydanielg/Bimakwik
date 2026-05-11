@@ -268,6 +268,43 @@
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
             </div>
+            @elseif(auth()->user()->hasRole('sfe'))
+            <!-- SFE Menu -->
+            <div class="sidebar-heading">SFE Operations</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('sfe.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a href="{{ route('sfe.customers.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.customers.*') ? 'active' : '' }}">
+                    <i class="bi bi-people-fill"></i> Customers
+                </a>
+                <a href="{{ route('sfe.policies.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.policies.*') ? 'active' : '' }}">
+                    <i class="bi bi-shield-check"></i> My Sales (Policies)
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Sales & Earnings</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('sfe.commissions.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.commissions.*') ? 'active' : '' }}">
+                    <i class="bi bi-wallet2"></i> Commissions & Wallet
+                </a>
+                <a href="{{ route('sfe.performance.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.performance.*') ? 'active' : '' }}">
+                    <i class="bi bi-bar-chart-line"></i> Performance
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Resources</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('sfe.products.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.products.*') ? 'active' : '' }}">
+                    <i class="bi bi-box-seam"></i> Product Catalog
+                </a>
+                <a href="{{ route('sfe.training.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.training.*') ? 'active' : '' }}">
+                    <i class="bi bi-book"></i> Training & Guides
+                </a>
+                <a href="{{ route('sfe.support.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.support.*') ? 'active' : '' }}">
+                    <i class="bi bi-question-circle"></i> Help & Support
+                </a>
+            </div>
 
             <div class="sidebar-heading mt-3">Portfolio</div>
             <div class="list-group list-group-flush px-2">
