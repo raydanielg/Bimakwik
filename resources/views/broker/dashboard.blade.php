@@ -5,39 +5,66 @@
 @section('dashboard_content')
 <!-- Broker Stats -->
 <div class="row g-4 mb-4">
+    <!-- Total Premiums Sold -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-primary">
-            <div class="card-body">
-                <div class="stat-label">Total Premiums Sold</div>
-                <div class="stat-value">TZS 85.2M</div>
-                <div class="stat-trend text-success"><i class="bi bi-graph-up"></i> +15.5%</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-cart-check fs-4"></i>
+                    </div>
+                    <div class="text-success small fw-bold"><i class="bi bi-graph-up"></i> +15.5%</div>
+                </div>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">Total Premiums Sold</h6>
+                <h4 class="fw-bold mb-0">TZS 85.2M</h4>
             </div>
         </div>
     </div>
+
+    <!-- Commissions Earned -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-success">
-            <div class="card-body">
-                <div class="stat-label">Commissions Earned</div>
-                <div class="stat-value">TZS 12.4M</div>
-                <div class="stat-trend text-success"><i class="bi bi-arrow-up"></i> +8.2%</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="bg-success bg-opacity-10 text-success rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-cash-coin fs-4"></i>
+                    </div>
+                    <div class="text-success small fw-bold"><i class="bi bi-arrow-up"></i> +8.2%</div>
+                </div>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">Commissions Earned</h6>
+                <h4 class="fw-bold mb-0">TZS 12.4M</h4>
             </div>
         </div>
     </div>
+
+    <!-- Active Policies -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-info">
-            <div class="card-body">
-                <div class="stat-label">Active Policies</div>
-                <div class="stat-value">1,120</div>
-                <div class="stat-trend text-primary"><i class="bi bi-shield-check"></i> +45 new</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="bg-info bg-opacity-10 text-info rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-shield-check fs-4"></i>
+                    </div>
+                    <div class="text-primary small fw-bold">+45 new</div>
+                </div>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">Active Policies</h6>
+                <h4 class="fw-bold mb-0">1,120</h4>
             </div>
         </div>
     </div>
+
+    <!-- Pending Renewals -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-warning">
-            <div class="card-body">
-                <div class="stat-label">Pending Renewals</div>
-                <div class="stat-value">28</div>
-                <div class="stat-trend text-warning"><i class="bi bi-clock-history"></i> Next 7 days</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="bg-warning bg-opacity-10 text-warning rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-clock-history fs-4"></i>
+                    </div>
+                    <div class="text-warning small fw-bold">Next 7 days</div>
+                </div>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">Pending Renewals</h6>
+                <h4 class="fw-bold mb-0">28</h4>
             </div>
         </div>
     </div>
