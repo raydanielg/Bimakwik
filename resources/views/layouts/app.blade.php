@@ -30,6 +30,7 @@
             @yield('content')
         </main>
 
+        @include('partials.mobile_nav')
         @include('partials.footer')
     </div>
 </body>
