@@ -48,6 +48,6 @@ class CreatePremiumFinancingPartnersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('premium_financing_partners');
+        Schema::dropIfExists('financing_partners');
     }
 }
