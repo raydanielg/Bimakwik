@@ -861,46 +861,40 @@
                 <a href="{{ route('developer.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('developer.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-activity"></i> API Usage Metrics
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-heart-pulse"></i> System Health
+                <a href="{{ route('developer.usage.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('developer.usage.*') ? 'active' : '' }}">
+                    <i class="bi bi-activity"></i> API Usage
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">API Management</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-journal-text"></i> API Documentation
+                <a href="{{ route('developer.apps.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('developer.apps.*') ? 'active' : '' }}">
+                    <i class="bi bi-grid-3x3-gap"></i> My Applications
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-key"></i> Get API Keys
+                <a href="{{ route('developer.keys.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('developer.keys.*') ? 'active' : '' }}">
+                    <i class="bi bi-key"></i> API Keys
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-link-45deg"></i> Manage Webhooks
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-terminal"></i> Test Endpoints
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-list-columns-reverse"></i> View API Logs
+                <a href="{{ route('developer.webhooks.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('developer.webhooks.*') ? 'active' : '' }}">
+                    <i class="bi bi-link-45deg"></i> Webhooks
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">AI & Integration</div>
+            <div class="sidebar-heading mt-3">Resources & Testing</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-robot"></i> Available AI Models
+                <a href="{{ route('developer.docs.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('developer.docs.*') ? 'active' : '' }}">
+                    <i class="bi bi-book"></i> API Documentation
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-cpu"></i> Test AI Predictions
+                <a href="{{ route('developer.testing.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('developer.testing.*') ? 'active' : '' }}">
+                    <i class="bi bi-terminal"></i> API Console
+                </a>
+                <a href="{{ route('developer.sandbox.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('developer.sandbox.*') ? 'active' : '' }}">
+                    <i class="bi bi-box"></i> Sandbox
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Settings</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('developer.profile.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('developer.profile.*') ? 'active' : '' }}">
                     <i class="bi bi-person-gear"></i> Developer Profile
                 </a>
             </div>
