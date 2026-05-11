@@ -8,36 +8,66 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        ->middleware('auth');
+    }
+
+    /**
      * Redirect user to their specific dashboard based on role.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function index()
     {
-        $user = auth()->user();
+         = Auth::user();
 
-        if ($user->hasRole('super_admin') || $user->hasRole('admin') || $user->hasRole('sub_admin')) {
+        // High-level priority checks
+        if (\->hasRole('super_admin') || \->hasRole('admin') || \->hasRole('sub_admin')) {
             return redirect()->route('admin.dashboard');
-        } elseif ($user->hasRole('insurer')) {
+        } 
+        
+        if (\->hasRole('insurer')) {
             return redirect()->route('insurer.dashboard');
-        } elseif ($user->hasRole('broker')) {
+        } 
+        
+        if (\->hasRole('broker')) {
             return redirect()->route('broker.dashboard');
-        } elseif ($user->hasRole('aggregator')) {
+        } 
+        
+        if (\->hasRole('aggregator')) {
             return redirect()->route('aggregator.dashboard');
-        } elseif ($user->hasRole('agent') || $user->hasRole('sfe') || $user->hasRole('bancassurance')) {
+        } 
+        
+        if (\->hasRole('agent') || \->hasRole('sfe') || \->hasRole('bancassurance')) {
             return redirect()->route('agent.dashboard');
-        } elseif ($user->hasRole('service_provider')) {
+        } 
+        
+        if (\->hasRole('service_provider')) {
             return redirect()->route('service-provider.dashboard');
-        } elseif ($user->hasRole('regulator')) {
+        } 
+        
+        if (\->hasRole('regulator')) {
             return redirect()->route('regulator.dashboard');
-        } elseif ($user->hasRole('financing_partner')) {
+        } 
+        
+        if (\->hasRole('financing_partner')) {
             return redirect()->route('financing-partner.dashboard');
-        } elseif ($user->hasRole('developer')) {
+        } 
+        
+        if (\->hasRole('developer')) {
             return redirect()->route('developer.dashboard');
-        } elseif ($user->hasRole('customer')) {
+        } 
+        
+        if (\->hasRole('customer')) {
             return redirect()->route('customer.dashboard');
         }
 
-        abort(403, 'User role not recognized.');
+        // Final fallback if no roles match
+        abort(403, 'Unauthorized. Please contact system administrator.');
     }
 }
