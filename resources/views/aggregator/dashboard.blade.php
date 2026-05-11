@@ -5,39 +5,66 @@
 @section('dashboard_content')
 <!-- Aggregator Stats -->
 <div class="row g-4 mb-4">
+    <!-- Total Quotes Generated -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-primary">
-            <div class="card-body">
-                <div class="stat-label">Total Quotes Generated</div>
-                <div class="stat-value">4,250</div>
-                <div class="stat-trend text-success"><i class="bi bi-graph-up"></i> +24.5%</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4 d-flex align-items-center">
+                <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-3 me-3" style="width: 54px; height: 54px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-file-earmark-text fs-4"></i>
+                </div>
+                <div>
+                    <h6 class="text-uppercase small fw-bold text-muted mb-1">Total Quotes</h6>
+                    <h4 class="fw-bold mb-0">4,250</h4>
+                    <div class="text-success small fw-bold mt-1"><i class="bi bi-graph-up"></i> +24.5%</div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Leads Converted -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-success">
-            <div class="card-body">
-                <div class="stat-label">Leads Converted</div>
-                <div class="stat-value">1,120</div>
-                <div class="stat-trend text-success"><i class="bi bi-check-circle"></i> 26.3% Rate</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4 d-flex align-items-center">
+                <div class="bg-success bg-opacity-10 text-success rounded-3 p-3 me-3" style="width: 54px; height: 54px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-person-check fs-4"></i>
+                </div>
+                <div>
+                    <h6 class="text-uppercase small fw-bold text-muted mb-1">Leads Converted</h6>
+                    <h4 class="fw-bold mb-0">1,120</h4>
+                    <div class="text-success small fw-bold mt-1"><i class="bi bi-check-circle"></i> 26.3% Rate</div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Referral Fees Earned -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-info">
-            <div class="card-body">
-                <div class="stat-label">Referral Fees Earned</div>
-                <div class="stat-value">TZS 8.4M</div>
-                <div class="stat-trend text-primary"><i class="bi bi-wallet2"></i> +12% MTD</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4 d-flex align-items-center">
+                <div class="bg-info bg-opacity-10 text-info rounded-3 p-3 me-3" style="width: 54px; height: 54px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-wallet2 fs-4"></i>
+                </div>
+                <div>
+                    <h6 class="text-uppercase small fw-bold text-muted mb-1">Referral Fees</h6>
+                    <h4 class="fw-bold mb-0">TZS 8.4M</h4>
+                    <div class="text-primary small fw-bold mt-1">+12% MTD</div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Click-Through Rate -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-warning">
-            <div class="card-body">
-                <div class="stat-label">Click-Through Rate</div>
-                <div class="stat-value">15.8%</div>
-                <div class="stat-trend text-warning"><i class="bi bi-mouse2"></i> High traffic</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4 d-flex align-items-center">
+                <div class="bg-warning bg-opacity-10 text-warning rounded-3 p-3 me-3" style="width: 54px; height: 54px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-mouse2 fs-4"></i>
+                </div>
+                <div>
+                    <h6 class="text-uppercase small fw-bold text-muted mb-1">CTR Rate</h6>
+                    <h4 class="fw-bold mb-0">15.8%</h4>
+                    <div class="text-warning small fw-bold mt-1">High traffic</div>
+                </div>
             </div>
         </div>
     </div>
