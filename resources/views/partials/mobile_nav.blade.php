@@ -9,21 +9,21 @@
                 </a>
             </div>
             <div class="col">
-                <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.policies') : '#' }}" class="mobile-nav-link {{ request()->routeIs('customer.policies') ? 'active' : '' }}">
+                <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.policies.index') : '#' }}" class="mobile-nav-link {{ request()->routeIs('customer.policies.*') ? 'active' : '' }}">
                     <i class="bi bi-shield-check fs-4 d-block"></i>
                     <span class="x-small fw-bold">Policies</span>
                 </a>
             </div>
             <div class="col">
                 <div class="buy-insurance-fab-wrapper">
-                    <a href="#" class="mobile-nav-link buy-insurance-fab">
+                    <a href="{{ route('customer.buy') }}" class="mobile-nav-link buy-insurance-fab">
                         <i class="bi bi-plus-lg text-white"></i>
                     </a>
                     <span class="x-small fw-bold mt-1 d-block">Buy</span>
                 </div>
             </div>
             <div class="col">
-                <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.claims') : '#' }}" class="mobile-nav-link {{ request()->routeIs('customer.claims') ? 'active' : '' }}">
+                <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.claims.create') : '#' }}" class="mobile-nav-link {{ request()->routeIs('customer.claims.*') ? 'active' : '' }}">
                     <i class="bi bi-exclamation-octagon fs-4 d-block"></i>
                     <span class="x-small fw-bold">Claims</span>
                 </a>
