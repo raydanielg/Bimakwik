@@ -102,6 +102,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/customer/dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])
         ->middleware('role:customer')
         ->name('customer.dashboard');
+
+    // Add GET logout support to fix MethodNotAllowedHttpException
+    Route::get('/logout', function () {
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/');
+    })->name('logout.get');
 });
 
 // Legal Routes
