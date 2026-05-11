@@ -64,13 +64,13 @@
         <div class="card border-0 shadow-sm h-100" style="border-radius: 15px;">
             <div class="card-body p-3 p-md-4">
                 <div class="d-flex align-items-center mb-3">
-                    <div class="bg-success bg-opacity-10 p-2 rounded-3 text-success me-2">
-                        <i class="bi bi-wallet2 fs-4"></i>
+                    <div class="bg-info bg-opacity-10 p-2 rounded-3 text-info me-2">
+                        <i class="bi bi-graph-up-arrow"></i>
                     </div>
-                    <span class="small fw-bold text-muted">Salio la Wallet</span>
+                    <span class="small fw-bold text-muted">Traffic & Leads</span>
                 </div>
-                <h3 class="fw-bold mb-0">TZS 45,500</h3>
-                <p class="x-small text-muted mb-0 mt-1">Tayari Kwa Matumizi</p>
+                <h3 class="fw-bold mb-0">324 / 12</h3>
+                <p class="x-small text-muted mb-0 mt-1">Visitors vs Interest</p>
             </div>
         </div>
     </div>

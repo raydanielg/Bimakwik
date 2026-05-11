@@ -65,6 +65,21 @@
             </div>
         </div>
     </div>
+    <!-- Traffic & Leads -->
+    <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 15px;">
+            <div class="card-body p-3">
+                <div class="d-flex align-items-center mb-2">
+                    <div class="bg-secondary bg-opacity-10 p-2 rounded-3 text-secondary me-2">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <span class="x-small fw-bold text-muted">Traffic & Leads</span>
+                </div>
+                <h4 class="fw-bold mb-0">1.2k / 85</h4>
+                <p class="x-small text-success mb-0 mt-1"><i class="bi bi-arrow-up"></i> 7.1% leads</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Performance Charts & Insights -->
