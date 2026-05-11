@@ -63,3 +63,20 @@ All passwords are set to `password`.
 - **Phone:** +255 762 883 065
 - **Email:** info@bimakwik.com
 - **Website:** [www.bimakwik.com](https://www.bimakwik.com)
+
+
+
+
+Role	Email (Username)
+Super Administrator	super-admin@bimakwik.com
+Administrator	admin@bimakwik.com
+Sub-Administrator	sub-admin@bimakwik.com
+Insurance Company	insurer@bimakwik.com
+Broker	broker@bimakwik.com
+Aggregator	aggregator@bimakwik.com
+Agent (SFE/Banca)	agent@bimakwik.com
+Customer (Mteja)	customer@bimakwik.com
+Service Provider	service-provider@bimakwik.com
+Regulator	regulator@bimakwik.com
+Financing Partner	financing-partner@bimakwik.com
+Developer	developer@bimakwik.com
