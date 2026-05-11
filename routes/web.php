@@ -98,10 +98,19 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/settings', [App\Http\Controllers\FinancingPartner\SettingsController::class, 'index'])->name('settings.index');
     });
 
-    Route::get('/developer/dashboard', [App\Http\Controllers\Developer\DashboardController::class, 'index'])
-        ->middleware('role:developer')
-        ->name('developer.dashboard');
-        
+    // Developer Dashboard Routes
+    Route::prefix('developer')->name('developer.')->middleware(['auth', 'role:developer'])->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Developer\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/apps', [App\Http\Controllers\Developer\AppController::class, 'index'])->name('apps.index');
+        Route::get('/keys', [App\Http\Controllers\Developer\ApiKeyController::class, 'index'])->name('keys.index');
+        Route::get('/docs', [App\Http\Controllers\Developer\DocumentationController::class, 'index'])->name('docs.index');
+        Route::get('/testing', [App\Http\Controllers\Developer\TestingController::class, 'index'])->name('testing.index');
+        Route::get('/webhooks', [App\Http\Controllers\Developer\WebhookController::class, 'index'])->name('webhooks.index');
+        Route::get('/usage', [App\Http\Controllers\Developer\UsageController::class, 'index'])->name('usage.index');
+        Route::get('/sandbox', [App\Http\Controllers\Developer\SandboxController::class, 'index'])->name('sandbox.index');
+        Route::get('/profile', [App\Http\Controllers\Developer\ProfileController::class, 'index'])->name('profile.index');
+    });
+
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
         ->name('dashboard');
 
