@@ -989,17 +989,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Sidebar toggle for desktop
+            // Sidebar toggle for desktop (Normal behavior)
             $("#menu-toggle").click(function(e) {
                 e.preventDefault();
                 $("#sidebar-wrapper").toggleClass("toggled");
             });
 
-            // Sidebar toggle for mobile
+            // Sidebar toggle for mobile (Using the Hamburger icon)
             $("#menu-toggle-mobile, #sidebar-overlay").click(function(e) {
                 e.preventDefault();
                 $("#sidebar-wrapper").toggleClass("toggled");
                 $("#sidebar-overlay").toggleClass("active");
+                
+                // Kuzuia body ku-scroll wakati menu ipo wazi kwenye simu
+                if ($("#sidebar-overlay").hasClass("active")) {
+                    $("body").css("overflow", "hidden");
+                } else {
+                    $("body").css("overflow", "auto");
+                }
             });
         });
     </script>
