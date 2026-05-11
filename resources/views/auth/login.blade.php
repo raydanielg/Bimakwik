@@ -9,7 +9,7 @@
         
         <h1 class="auth-title">Log in</h1>
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" id="loginForm">
             @csrf
 
             <div class="mb-4">
@@ -40,18 +40,26 @@
                 @enderror
             </div>
 
-            <script>
-                document.getElementById('togglePassword').addEventListener('click', function (e) {
-                    const password = document.getElementById('password');
-                    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                    password.setAttribute('type', type);
-                });
-            </script>
-
-            <button type="submit" class="btn-auth-primary">
-                Continue &rarr;
+            <button type="submit" class="btn-auth-primary" id="loginSubmit">
+                <div class="spinner-border text-light" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <span class="btn-text">Log in &rarr;</span>
             </button>
         </form>
+
+        <script>
+            document.getElementById('togglePassword').addEventListener('click', function (e) {
+                const password = document.getElementById('password');
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+            });
+
+            document.getElementById('loginForm').addEventListener('submit', function() {
+                const btn = document.getElementById('loginSubmit');
+                btn.classList.add('loading');
+            });
+        </script>
 
         <div class="auth-divider">
             <span>or</span>
