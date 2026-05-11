@@ -4,25 +4,57 @@
 
 @section('dashboard_content')
 <div class="row g-4 mb-4">
+    <!-- Active Policies -->
     <div class="col-md-4">
-        <div class="card border-0 shadow-sm p-4 border-start border-4 border-primary">
-            <h6 class="text-uppercase small fw-bold text-muted">Active Policies</h6>
-            <h3 class="fw-bold mb-0">3,450</h3>
-            <div class="mt-2 small text-success"><i class="bi bi-arrow-up"></i> 8% this month</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 d-flex align-items-center">
+                <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-3 me-3" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-shield-check fs-3"></i>
+                </div>
+                <div>
+                    <h6 class="text-uppercase small fw-bold text-muted mb-1">Active Policies</h6>
+                    <h3 class="fw-bold mb-0">3,450</h3>
+                    <div class="mt-1 small text-success">
+                        <i class="bi bi-arrow-up-right me-1"></i>8% increase
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Claims for Review -->
     <div class="col-md-4">
-        <div class="card border-0 shadow-sm p-4 border-start border-4 border-danger">
-            <h6 class="text-uppercase small fw-bold text-muted">Claims for Review</h6>
-            <h3 class="fw-bold mb-0">28</h3>
-            <div class="mt-2 small text-danger"><i class="bi bi-exclamation-triangle"></i> 5 urgent</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 d-flex align-items-center">
+                <div class="bg-danger bg-opacity-10 text-danger rounded-3 p-3 me-3" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-file-earmark-medical fs-3"></i>
+                </div>
+                <div>
+                    <h6 class="text-uppercase small fw-bold text-muted mb-1">Claims for Review</h6>
+                    <h3 class="fw-bold mb-0">28</h3>
+                    <div class="mt-1 small text-danger">
+                        <i class="bi bi-exclamation-circle me-1"></i>5 urgent cases
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Monthly Premium -->
     <div class="col-md-4">
-        <div class="card border-0 shadow-sm p-4 border-start border-4 border-success">
-            <h6 class="text-uppercase small fw-bold text-muted">Monthly Premium</h6>
-            <h3 class="fw-bold mb-0">TZS 45.2M</h3>
-            <div class="mt-2 small text-success"><i class="bi bi-wallet2"></i> +12% growth</div>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 d-flex align-items-center">
+                <div class="bg-success bg-opacity-10 text-success rounded-3 p-3 me-3" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-cash-stack fs-3"></i>
+                </div>
+                <div>
+                    <h6 class="text-uppercase small fw-bold text-muted mb-1">Monthly Premium</h6>
+                    <h3 class="fw-bold mb-0">TZS 45.2M</h3>
+                    <div class="mt-1 small text-success">
+                        <i class="bi bi-graph-up-arrow me-1"></i>+12% growth
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
