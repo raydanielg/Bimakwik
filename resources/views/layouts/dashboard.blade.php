@@ -160,7 +160,7 @@
                 <span class="admin-label">{{ auth()->user()->roles->first()->name ?? 'Portal' }}</span>
             </div>
 
-            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasRole('sub-admin'))
+            @if(auth()->user()->hasRole('super_admin') || auth()->user()->hasRole('admin') || auth()->user()->hasRole('sub_admin'))
             <!-- Super Admin Menu -->
             <div class="sidebar-heading">Core</div>
             <div class="list-group list-group-flush px-2">
