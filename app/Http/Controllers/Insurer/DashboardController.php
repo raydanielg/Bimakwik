@@ -11,8 +11,4 @@ class DashboardController extends Controller
     {
         return view('insurer.dashboard');
     }
-    public function index()
-    {
-        return view('insurer.dashboard');
-    }
 }
