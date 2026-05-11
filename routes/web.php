@@ -61,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
-        ->middleware('role:super-admin,sub-admin')
+        ->middleware('role:super_admin,admin,sub_admin')
         ->name('admin.dashboard');
         
     Route::get('/insurer/dashboard', [App\Http\Controllers\Insurer\DashboardController::class, 'index'])
@@ -77,11 +77,11 @@ Route::middleware(['auth'])->group(function () {
         ->name('aggregator.dashboard');
 
     Route::get('/service-provider/dashboard', [App\Http\Controllers\ServiceProvider\DashboardController::class, 'index'])
-        ->middleware('role:service-provider')
+        ->middleware('role:service_provider')
         ->name('service-provider.dashboard');
 
     Route::get('/financing-partner/dashboard', [App\Http\Controllers\FinancingPartner\DashboardController::class, 'index'])
-        ->middleware('role:financing-partner')
+        ->middleware('role:financing_partner')
         ->name('financing-partner.dashboard');
 
     Route::get('/developer/dashboard', [App\Http\Controllers\Developer\DashboardController::class, 'index'])
