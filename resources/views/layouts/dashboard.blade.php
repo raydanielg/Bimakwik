@@ -739,56 +739,39 @@
 
             @elseif(auth()->user()->hasRole('service_provider'))
             <!-- Service Provider Menu -->
-            <div class="sidebar-heading">Overview</div>
+            <div class="sidebar-heading">Service Operations</div>
             <div class="list-group list-group-flush px-2">
                 <a href="{{ route('service-provider.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
-            </div>
-
-            <div class="sidebar-heading mt-3">Verification</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-person-vcard"></i> Verify Customer
+                <a href="{{ route('service-provider.customer.verify') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.customer.*') ? 'active' : '' }}">
+                    <i class="bi bi-person-badge"></i> Verify Customer
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-shield-check"></i> Check Benefits
+                <a href="{{ route('service-provider.claims.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.claims.*') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-medical"></i> Claims & Bills
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Claims & Billing</div>
+            <div class="sidebar-heading mt-3">Financials</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action text-danger">
-                    <i class="bi bi-plus-circle"></i> Submit New Bill
+                <a href="{{ route('service-provider.payments.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.payments.*') ? 'active' : '' }}">
+                    <i class="bi bi-cash-stack"></i> Payments
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-file-earmark-medical"></i> Track Submissions
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-wallet2"></i> Payment History
-                </a>
-            </div>
-
-            <div class="sidebar-heading mt-3">Profile & SLA</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-building"></i> Company Profile
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-file-earmark-lock"></i> SLA Documents
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('service-provider.bank.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.bank.*') ? 'active' : '' }}">
                     <i class="bi bi-bank"></i> Bank Details
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Support</div>
+            <div class="sidebar-heading mt-3">Management</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-chat-dots"></i> Communications
+                <a href="{{ route('service-provider.agreements.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.agreements.*') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-text"></i> Agreements (SLAs)
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-gear"></i> Settings
+                <a href="{{ route('service-provider.performance.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.performance.*') ? 'active' : '' }}">
+                    <i class="bi bi-bar-chart-line"></i> Performance
+                </a>
+                <a href="{{ route('service-provider.support.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.support.*') ? 'active' : '' }}">
+                    <i class="bi bi-question-circle"></i> Help & Support
                 </a>
             </div>
 
