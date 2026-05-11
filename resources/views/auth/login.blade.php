@@ -95,6 +95,18 @@
             });
         </script>
 
+        @if($errors->any())
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Umekosea! / Login Failed',
+                text: 'Barua pepe au nywila uliyoweka si sahihi. Tafadhali jaribu tena.',
+                confirmButtonColor: '#ef4444',
+                confirmButtonText: 'Jaribu Tena'
+            });
+        </script>
+        @endif
+
         <div class="auth-divider">
             <span>or</span>
         </div>
