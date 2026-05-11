@@ -25,8 +25,8 @@ class CreateAgentCommissionWithdrawalsTable extends Migration
             $table->string('reference_number', 100)->nullable();
             $table->timestamps();
 
-            $table->foreign('agent_id', 'acw_agent_fk')->references('id')->on('agents')->onDelete('cascade');
-            $table->foreign('processed_by', 'acw_admin_fk')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('agent_id', 'agent_cw_agent_fk')->references('id')->on('agents')->onDelete('cascade');
+            $table->foreign('processed_by', 'agent_cw_admin_fk')->references('id')->on('users')->onDelete('set null');
         });
     }
 
