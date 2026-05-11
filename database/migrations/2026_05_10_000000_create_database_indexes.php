@@ -166,9 +166,11 @@ class CreateDatabaseIndexes extends Migration
         });
 
         // Indexes for regulators
-        Schema::table('regulators', function (Blueprint $table) {
-            $table->index('user_id', 'idx_regulators_user_id');
-        });
+        if (Schema::hasColumn('regulators', 'user_id')) {
+            Schema::table('regulators', function (Blueprint $table) {
+                $table->index('user_id', 'idx_regulators_user_id');
+            });
+        }
 
         Schema::table('regulator_reports', function (Blueprint $table) {
             $table->index('created_at', 'idx_regulator_reports_submitted_at');
