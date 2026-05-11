@@ -44,16 +44,17 @@ All passwords are set to `password`.
 | Role | Email (Username) |
 | :--- | :--- |
 | **Super Administrator** | `super-admin@bimakwik.com` |
+| **Administrator** | `admin@bimakwik.com` |
 | **Sub-Administrator** | `sub-admin@bimakwik.com` |
 | **Insurance Company** | `insurer@bimakwik.com` |
-| **Broker / Aggregator** | `broker@bimakwik.com` |
-| **Insurance Agent** | `agent@bimakwik.com` |
-| **Sales Force (SFE)** | `sfe@bimakwik.com` |
-| **Bancassurance Agent** | `bancassurance@bimakwik.com` |
+| **Broker** | `broker@bimakwik.com` |
+| **Aggregator** | `aggregator@bimakwik.com` |
+| **Agent (SFE/Banca)** | `agent@bimakwik.com` |
 | **Customer (Mteja)** | `customer@bimakwik.com` |
 | **Service Provider** | `service-provider@bimakwik.com` |
-| **Regulator (TIRA)** | `regulator@bimakwik.com` |
+| **Regulator** | `regulator@bimakwik.com` |
 | **Financing Partner** | `financing-partner@bimakwik.com` |
+| **Developer** | `developer@bimakwik.com` |
 
 ---
 

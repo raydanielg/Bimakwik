@@ -15,17 +15,17 @@ class DefaultSystemDataSeeder extends Seeder
     {
         $roles = [
             ['name' => 'super_admin', 'display_name' => 'Super Administrator', 'description' => 'Full system access', 'is_default' => false],
+            ['name' => 'admin', 'display_name' => 'Administrator', 'description' => 'Platform administrator', 'is_default' => false],
             ['name' => 'sub_admin', 'display_name' => 'Sub-Administrator', 'description' => 'Limited system access', 'is_default' => false],
-            ['name' => 'insurer', 'display_name' => 'Insurance Company', 'description' => 'Insurance company access', 'is_default' => false],
-            ['name' => 'broker', 'display_name' => 'Broker / Aggregator', 'description' => 'Broker and Aggregator access', 'is_default' => false],
-            ['name' => 'agent', 'display_name' => 'Insurance Agent', 'description' => 'Agent access', 'is_default' => false],
-            ['name' => 'sfe', 'display_name' => 'Sales Force (SFE)', 'description' => 'Sales Force access', 'is_default' => false],
-            ['name' => 'bancassurance', 'display_name' => 'Bancassurance Agent', 'description' => 'Bank agent access', 'is_default' => false],
+            ['name' => 'insurer', 'display_name' => 'Insurance Company (Insurer)', 'description' => 'Insurance company access', 'is_default' => false],
+            ['name' => 'broker', 'display_name' => 'Broker', 'description' => 'Insurance broker access', 'is_default' => false],
+            ['name' => 'aggregator', 'display_name' => 'Aggregator', 'description' => 'Aggregator and platform partner access', 'is_default' => false],
+            ['name' => 'agent', 'display_name' => 'Agent (SFE / Bancassurance)', 'description' => 'Agent and sales force access', 'is_default' => false],
             ['name' => 'customer', 'display_name' => 'Customer', 'description' => 'Customer access', 'is_default' => true],
-            ['name' => 'service_provider', 'display_name' => 'Service Provider', 'description' => 'Hospital, pharmacy, garage', 'is_default' => false],
-            ['name' => 'regulator', 'display_name' => 'Regulator (TIRA)', 'description' => 'Regulator access', 'is_default' => false],
-            ['name' => 'financing_partner', 'display_name' => 'Financing Partner', 'description' => 'Premium financing partner', 'is_default' => false],
-            ['name' => 'developer', 'display_name' => 'Developer', 'description' => 'API developer access', 'is_default' => false],
+            ['name' => 'service_provider', 'display_name' => 'Service Provider', 'description' => 'Hospital, Pharmacy, Garage, etc.', 'is_default' => false],
+            ['name' => 'regulator', 'display_name' => 'Regulator', 'description' => 'Industry regulator (TIRA) access', 'is_default' => false],
+            ['name' => 'financing_partner', 'display_name' => 'Premium Financing Partner', 'description' => 'Premium financing partner access', 'is_default' => false],
+            ['name' => 'developer', 'display_name' => 'Developer / API Integrator', 'description' => 'API and developer portal access', 'is_default' => false],
         ];
 
         foreach ($roles as $role) {

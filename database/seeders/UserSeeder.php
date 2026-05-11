@@ -17,16 +17,17 @@ class UserSeeder extends Seeder
     {
         $users = [
             ['name' => 'Super Administrator', 'email' => 'super-admin@bimakwik.com', 'phone_number' => '0754111222', 'password' => Hash::make('password'), 'role' => 'super_admin'],
+            ['name' => 'Administrator', 'email' => 'admin@bimakwik.com', 'phone_number' => '0754111221', 'password' => Hash::make('password'), 'role' => 'admin'],
             ['name' => 'Sub-Administrator', 'email' => 'sub-admin@bimakwik.com', 'phone_number' => '0754111223', 'password' => Hash::make('password'), 'role' => 'sub_admin'],
             ['name' => 'Insurance Company', 'email' => 'insurer@bimakwik.com', 'phone_number' => '0222110000', 'password' => Hash::make('password'), 'role' => 'insurer'],
-            ['name' => 'Broker / Aggregator', 'email' => 'broker@bimakwik.com', 'phone_number' => '0784555666', 'password' => Hash::make('password'), 'role' => 'broker'],
-            ['name' => 'Insurance Agent', 'email' => 'agent@bimakwik.com', 'phone_number' => '0713888999', 'password' => Hash::make('password'), 'role' => 'agent'],
-            ['name' => 'Sales Force (SFE)', 'email' => 'sfe@bimakwik.com', 'phone_number' => '0765444333', 'password' => Hash::make('password'), 'role' => 'sfe'],
-            ['name' => 'Bancassurance Agent', 'email' => 'bancassurance@bimakwik.com', 'phone_number' => '0767123456', 'password' => Hash::make('password'), 'role' => 'bancassurance'],
+            ['name' => 'Broker', 'email' => 'broker@bimakwik.com', 'phone_number' => '0784555666', 'password' => Hash::make('password'), 'role' => 'broker'],
+            ['name' => 'Aggregator', 'email' => 'aggregator@bimakwik.com', 'phone_number' => '0784555777', 'password' => Hash::make('password'), 'role' => 'aggregator'],
+            ['name' => 'Agent (SFE/Banca)', 'email' => 'agent@bimakwik.com', 'phone_number' => '0713888999', 'password' => Hash::make('password'), 'role' => 'agent'],
             ['name' => 'Customer (Mteja)', 'email' => 'customer@bimakwik.com', 'phone_number' => '0655444333', 'password' => Hash::make('password'), 'role' => 'customer'],
             ['name' => 'Service Provider', 'email' => 'service-provider@bimakwik.com', 'phone_number' => '0222700021', 'password' => Hash::make('password'), 'role' => 'service_provider'],
-            ['name' => 'Regulator (TIRA)', 'email' => 'regulator@bimakwik.com', 'phone_number' => '0222116120', 'password' => Hash::make('password'), 'role' => 'regulator'],
+            ['name' => 'Regulator', 'email' => 'regulator@bimakwik.com', 'phone_number' => '0222116120', 'password' => Hash::make('password'), 'role' => 'regulator'],
             ['name' => 'Financing Partner', 'email' => 'financing-partner@bimakwik.com', 'phone_number' => '0752999000', 'password' => Hash::make('password'), 'role' => 'financing_partner'],
+            ['name' => 'Developer', 'email' => 'developer@bimakwik.com', 'phone_number' => '0752888000', 'password' => Hash::make('password'), 'role' => 'developer'],
         ];
 
         foreach ($users as $userData) {
