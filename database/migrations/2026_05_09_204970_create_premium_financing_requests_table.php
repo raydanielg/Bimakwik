@@ -29,7 +29,7 @@ class CreatePremiumFinancingRequestsTable extends Migration
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('customer_policy_id')->references('id')->on('customer_policies')->onDelete('cascade');
-            $table->foreign('premium_financing_partner_id', 'pfr_partner_fk')->references('id')->on('premium_financing_partners')->onDelete('set null');
+            $table->foreign('premium_financing_partner_id', 'pfr_partner_fk')->references('id')->on('financing_partners')->onDelete('set null');
         });
     }
 
