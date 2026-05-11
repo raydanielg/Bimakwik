@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Branch;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
@@ -47,7 +48,10 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($branches as $branch) {
-            Branch::create($branch);
+            Branch::updateOrCreate(
+                ['name' => $branch['name']],
+                $branch
+            );
         }
 
         // Seed Products
@@ -75,12 +79,17 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::create([
-                'name' => $product['name'],
-                'slug' => Str::slug($product['name']),
-                'description' => $product['description'],
-                'icon' => $product['icon'],
-            ]);
+            $slug = Str::slug($product['name']);
+
+            Product::updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'name' => $product['name'],
+                    'slug' => $slug,
+                    'description' => $product['description'],
+                    'icon' => $product['icon'],
+                ]
+            );
         }
     }
 }
