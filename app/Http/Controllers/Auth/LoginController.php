@@ -30,7 +30,7 @@ class LoginController extends Controller
     {
         $user = auth()->user();
         
-        if ($user->hasRole('super-admin') || $user->hasRole('sub-admin')) {
+        if ($user->hasRole('super_admin') || $user->hasRole('admin') || $user->hasRole('sub_admin')) {
             return route('admin.dashboard');
         }
         
@@ -46,11 +46,15 @@ class LoginController extends Controller
             return route('aggregator.dashboard');
         }
 
-        if ($user->hasRole('service-provider')) {
+        if ($user->hasRole('agent') || $user->hasRole('sfe') || $user->hasRole('bancassurance')) {
+            return route('agent.dashboard');
+        }
+
+        if ($user->hasRole('service_provider')) {
             return route('service-provider.dashboard');
         }
 
-        if ($user->hasRole('financing-partner')) {
+        if ($user->hasRole('financing_partner')) {
             return route('financing-partner.dashboard');
         }
 
@@ -58,11 +62,15 @@ class LoginController extends Controller
             return route('developer.dashboard');
         }
 
+        if ($user->hasRole('regulator')) {
+            return route('regulator.dashboard');
+        }
+
         if ($user->hasRole('customer')) {
             return route('customer.dashboard');
         }
 
-        return '/dashboard';
+        return route('dashboard');
     }
 
     /**
