@@ -154,19 +154,39 @@
 
                 <!-- Portal Access Dropdown -->
                 <li class="nav-item dropdown ms-lg-2">
-                    <a class="btn btn-outline-primary px-4 rounded-pill fw-bold dropdown-toggle" href="#" id="portalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-lock me-1"></i> Portals
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-3 mt-2 animate__animated animate__fadeInUp animate__faster" style="min-width: 250px;">
-                        <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">Create Account</h6></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.customer') }}">Customer Registration</a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.broker') }}">Broker/Agent Registration</a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.insurer') }}">Insurer Registration</a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.provider') }}">Provider Registration</a></li>
-                        <li><div class="dropdown-divider"></div></li>
-                        <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">Member Login</h6></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1 fw-bold text-primary" href="{{ route('login') }}">Access All Portals</a></li>
-                    </ul>
+                    @auth
+                        <a class="btn btn-outline-primary px-4 rounded-pill fw-bold dropdown-toggle" href="#" id="portalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle me-1"></i> {{ auth()->user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-3 mt-2 animate__animated animate__fadeInUp animate__faster" style="min-width: 250px;">
+                            <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">My Account</h6></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i> Go to Dashboard</a></li>
+                            @if(auth()->user()->hasRole('customer'))
+                                <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('customer.profile') }}"><i class="bi bi-person me-2"></i> View Profile</a></li>
+                                <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('customer.policies.index') }}"><i class="bi bi-shield-check me-2"></i> My Policies</a></li>
+                            @endif
+                            <li><div class="dropdown-divider"></div></li>
+                            <li>
+                                <a class="dropdown-item rounded-3 p-2 text-danger fw-bold" href="{{ route('logout.get') }}">
+                                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    @else
+                        <a class="btn btn-outline-primary px-4 rounded-pill fw-bold dropdown-toggle" href="#" id="portalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-lock me-1"></i> Portals
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-3 mt-2 animate__animated animate__fadeInUp animate__faster" style="min-width: 250px;">
+                            <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">Create Account</h6></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.customer') }}">Customer Registration</a></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.broker') }}">Broker/Agent Registration</a></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.insurer') }}">Insurer Registration</a></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.provider') }}">Provider Registration</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">Member Login</h6></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1 fw-bold text-primary" href="{{ route('login') }}">Access All Portals</a></li>
+                        </ul>
+                    @endauth
                 </li>
 
                 <li class="nav-item ms-lg-2">
