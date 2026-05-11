@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            DefaultSystemDataSeeder::class,
+            UserSeeder::class,
+        ]);
+
         // Seed Branches
         $branches = [
             [
