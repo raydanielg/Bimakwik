@@ -14,7 +14,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        ->middleware('auth');
+        \->middleware('auth');
     }
 
     /**
@@ -24,7 +24,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-         = Auth::user();
+        \ = Auth::user();
 
         // High-level priority checks
         if (\->hasRole('super_admin') || \->hasRole('admin') || \->hasRole('sub_admin')) {
