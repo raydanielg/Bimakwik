@@ -33,9 +33,12 @@
             #sidebar-wrapper {
                 margin-left: -250px;
                 position: fixed;
+                height: 100vh;
+                top: 0;
             }
             #sidebar-wrapper.toggled {
                 margin-left: 0;
+                box-shadow: 0 0 20px rgba(0,0,0,0.2);
             }
             #page-content-wrapper {
                 min-width: 100vw;
@@ -944,10 +947,10 @@
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg border-bottom bg-white sticky-top">
                 <div class="container-fluid">
-                    <button class="btn btn-link d-lg-none me-2 p-0 text-dark" id="menu-toggle-mobile">
+                    <button class="btn btn-link me-2 p-0 text-dark" id="menu-toggle-mobile">
                         <i class="bi bi-list fs-3"></i>
                     </button>
-                    <span class="page-title">Dashboard</span>
+                    <span class="page-title d-none d-sm-inline">Dashboard</span>
                     
                     <div class="ms-auto d-flex align-items-center">
                         <div class="bg-white rounded-circle p-2 shadow-sm me-3 border" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;">
@@ -989,20 +992,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Sidebar toggle for desktop (Normal behavior)
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#sidebar-wrapper").toggleClass("toggled");
-            });
-
-            // Sidebar toggle for mobile (Using the Hamburger icon)
-            $("#menu-toggle-mobile, #sidebar-overlay").click(function(e) {
+            // Universal Sidebar toggle (Works for both desktop and mobile)
+            $("#menu-toggle, #menu-toggle-mobile, #sidebar-overlay").click(function(e) {
                 e.preventDefault();
                 $("#sidebar-wrapper").toggleClass("toggled");
                 $("#sidebar-overlay").toggleClass("active");
                 
-                // Kuzuia body ku-scroll wakati menu ipo wazi kwenye simu
-                if ($("#sidebar-overlay").hasClass("active")) {
+                // Toggle body scroll
+                if ($("#sidebar-wrapper").hasClass("toggled") && window.innerWidth < 992) {
                     $("body").css("overflow", "hidden");
                 } else {
                     $("body").css("overflow", "auto");
