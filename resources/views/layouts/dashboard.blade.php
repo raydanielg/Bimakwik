@@ -614,6 +614,94 @@
                 </a>
             </div>
 
+            @elseif(auth()->user()->hasRole('agent'))
+            <!-- Agent Menu -->
+            <div class="sidebar-heading">Customer</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-people-fill"></i> All Customers
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-plus"></i> Add New Customer
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-file-earmark-person"></i> Customer KYC
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Policy</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-shield-check"></i> My Policies
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-cart-plus"></i> Buy New Policy
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-clock-history"></i> Renewals
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Product</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-box-seam"></i> Product Catalog
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-grid-3x3-gap"></i> Product Comparison
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Claims</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action text-danger">
+                    <i class="bi bi-exclamation-octagon"></i> Submit New Claim
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-activity"></i> Track Claims
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Commission</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-wallet2"></i> My Commissions
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-graph-up-arrow"></i> Commission Reports
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Performance</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-bar-chart-line"></i> Sales Reports
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-activity"></i> Activity Logs
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Training</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-book"></i> Training Materials
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-video2"></i> Video Tutorials
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Support</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-headset"></i> Help & Support
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-question-circle"></i> FAQs
+                </a>
+            </div>
+
             @elseif(auth()->user()->hasRole('service-provider'))
             <!-- Service Provider Menu -->
             <div class="sidebar-heading">Overview</div>
