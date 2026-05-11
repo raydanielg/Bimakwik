@@ -68,9 +68,25 @@
             </div>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4 d-flex align-items-center">
+                <div class="bg-info bg-opacity-10 text-info rounded-3 p-3 me-3" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-graph-up-arrow fs-3"></i>
+                </div>
+                <div>
+                    <h6 class="text-uppercase small fw-bold text-muted mb-1">Traffic & Leads</h6>
+                    <h3 class="fw-bold mb-0">450 / 18</h3>
+                    <div class="mt-1 small text-info">
+                        <i class="bi bi-activity"></i> Engagement
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row g-4">
+<div class="row g-4 mt-1">
     <!-- Quick Actions -->
     <div class="col-lg-8">
         <div class="card p-4">
