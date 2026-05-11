@@ -114,6 +114,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
         ->name('dashboard');
 
+    Route::get('/file01', function () {
+        return view('documentation.file01.doc');
+    })->name('public.doc');
+
     // SFE Dashboard Routes
     Route::prefix('sfe')->name('sfe.')->middleware(['auth', 'role:sfe'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Sfe\DashboardController::class, 'index'])->name('dashboard');
