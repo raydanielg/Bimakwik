@@ -89,66 +89,78 @@
                         <i class="bi bi-shield-lock fs-3 text-primary d-block mb-2"></i>
                         <span class="small fw-bold">Authentication</span>
                     </div>
-                        <tr>
-                            <th>Endpoint</th>
-                            <th>Method</th>
-                            <th>Avg Time</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>/api/v1/policies/calculate</code></td>
-                            <td><span class="badge bg-primary">POST</span></td>
-                            <td>150ms</td>
-                            <td><span class="badge bg-success-soft text-success">200 OK</span></td>
-                        </tr>
-                        <tr>
-                            <td><code>/api/v1/claims/notify</code></td>
-                            <td><span class="badge bg-primary">POST</span></td>
-                            <td>210ms</td>
-                            <td><span class="badge bg-success-soft text-success">200 OK</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border rounded-3 text-center">
+                        <i class="bi bi-box-seam fs-3 text-success d-block mb-2"></i>
+                        <span class="small fw-bold">Products API</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border rounded-3 text-center">
+                        <i class="bi bi-link-45deg fs-3 text-info d-block mb-2"></i>
+                        <span class="small fw-bold">Webhooks</span>
+                    </div>
+                </div>
+            </div>
+
+            <h6 class="fw-bold mb-3 small">Top Used Endpoints</h6>
+            <div class="list-group list-group-flush small border rounded-3 overflow-hidden">
+                <div class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                    <span class="fw-bold text-muted">Endpoint</span>
+                    <span class="fw-bold text-muted text-end">Volume</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <code>GET /v1/products/quotes</code>
+                    <span class="badge bg-primary rounded-pill">342K</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <code>POST /v1/policies/create</code>
+                    <span class="badge bg-primary rounded-pill">128K</span>
+                </div>
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <code>GET /v1/customers/verify</code>
+                    <span class="badge bg-primary rounded-pill">95K</span>
+                </div>
             </div>
         </div>
     </div>
-    
-    <!-- AI Integration Status -->
-    <div class="col-lg-5">
-        <div class="card p-4 h-100">
-            <h6 class="fw-bold mb-4"><i class="bi bi-robot me-2 text-primary"></i> AI Model Performance</h6>
-            <div class="mb-4">
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="small fw-bold">Fraud Detection (V2)</span>
-                    <span class="small text-success">98.5% Acc</span>
-                </div>
-                <div class="progress" style="height: 8px; border-radius: 10px;">
-                    <div class="progress-bar bg-success" style="width: 98.5%"></div>
-                </div>
+
+    <!-- Quick Actions & Sandbox -->
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm p-4 mb-4">
+            <h6 class="fw-bold mb-4">Developer Tools</h6>
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary d-flex align-items-center justify-content-center py-2">
+                    <i class="bi bi-terminal me-2"></i> Open API Console
+                </button>
+                <button class="btn btn-outline-primary d-flex align-items-center justify-content-center py-2">
+                    <i class="bi bi-plus-square me-2"></i> Create New App
+                </button>
+                <button class="btn btn-outline-info d-flex align-items-center justify-content-center py-2">
+                    <i class="bi bi-bug me-2"></i> Test Webhook
+                </button>
             </div>
-            <div class="mb-4">
-                <div class="d-flex justify-content-between mb-2">
-                    <span class="small fw-bold">Risk Prediction (V1)</span>
-                    <span class="small text-primary">94.2% Acc</span>
-                </div>
-                <div class="progress" style="height: 8px; border-radius: 10px;">
-                    <div class="progress-bar bg-primary" style="width: 94.2%"></div>
-                </div>
+        </div>
+
+        <div class="card border-0 shadow-sm p-4 bg-dark text-white">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="fw-bold mb-0 small"><i class="bi bi-box me-2 text-warning"></i>Sandbox Environment</h6>
+                <span class="badge bg-warning text-dark">Active</span>
             </div>
-            <div class="p-3 bg-light rounded-3 border">
-                <div class="small fw-bold mb-2">Recent AI Predictions</div>
-                <div class="d-flex justify-content-between small text-muted">
-                    <span>Claim #9901 Fraud Risk:</span>
-                    <span class="text-success">LOW (0.02)</span>
-                </div>
+            <div class="mb-3">
+                <label class="x-small text-muted d-block mb-1">Sandbox Base URL</label>
+                <code class="text-info">https://sandbox.bimakwik.com/api/v1</code>
+            </div>
+            <div class="d-grid">
+                <button class="btn btn-sm btn-outline-light">Go to Sandbox</button>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-    .bg-success-soft { background-color: rgba(25, 135, 84, 0.1); }
+    .x-small { font-size: 0.7rem; }
+    code { font-size: 0.8rem; background: rgba(13, 110, 253, 0.05); padding: 2px 5px; border-radius: 4px; }
 </style>
 @endsection
