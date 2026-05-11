@@ -127,6 +127,15 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [App\Http\Controllers\Sfe\ProfileController::class, 'index'])->name('profile.index');
     });
 
+    // Bancassurance Dashboard Routes
+    Route::prefix('bancassurance')->name('bancassurance.')->middleware(['auth', 'role:bancassurance'])->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Bancassurance\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/customers', [App\Http\Controllers\Bancassurance\CustomerController::class, 'index'])->name('customers.index');
+        Route::get('/policies', [App\Http\Controllers\Bancassurance\PolicyController::class, 'index'])->name('policies.index');
+        Route::get('/integration', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'index'])->name('integration.index');
+        Route::get('/compliance', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'index'])->name('compliance.index');
+    });
+
     Route::get('/agent/dashboard', [App\Http\Controllers\Agent\DashboardController::class, 'index'])
         ->middleware('role:agent,sfe,bancassurance')
         ->name('agent.dashboard');
