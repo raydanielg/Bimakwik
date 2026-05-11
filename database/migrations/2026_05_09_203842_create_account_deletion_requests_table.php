@@ -19,7 +19,7 @@ class CreateAccountDeletionRequestsTable extends Migration
             $table->timestamp('request_date')->useCurrent();
             $table->text('reason')->nullable();
             $table->string('status', 50)->default('pending');
-            $table->timestamp('grace_period_end');
+            $table->timestamp('grace_period_end')->nullable();
             $table->timestamp('deletion_date')->nullable();
             $table->timestamp('cancelled_at')->nullable();
             $table->boolean('data_export_provided')->default(false);
