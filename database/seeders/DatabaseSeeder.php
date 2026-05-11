@@ -7,6 +7,9 @@ use App\Models\Branch;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Database\Seeders\AccessControlSeeder;
+use Database\Seeders\DefaultSystemDataSeeder;
+use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DefaultSystemDataSeeder::class,
             UserSeeder::class,
+            AccessControlSeeder::class,
         ]);
 
         // Seed Branches
