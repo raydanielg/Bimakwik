@@ -91,6 +91,42 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
         ->name('dashboard');
 
+    // SFE Dashboard Routes
+    Route::prefix('sfe')->name('sfe.')->middleware(['auth', 'role:sfe'])->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Sfe\DashboardController::class, 'index'])->name('dashboard');
+        
+        // Customer Management
+        Route::get('/customers', [App\Http\Controllers\Sfe\CustomerController::class, 'index'])->name('customers.index');
+        Route::get('/customers/create', [App\Http\Controllers\Sfe\CustomerController::class, 'create'])->name('customers.create');
+        Route::get('/customers/kyc', [App\Http\Controllers\Sfe\CustomerController::class, 'kycStatus'])->name('customers.kyc');
+        
+        // Policy Management
+        Route::get('/policies', [App\Http\Controllers\Sfe\PolicyController::class, 'index'])->name('policies.index');
+        Route::get('/policies/buy', [App\Http\Controllers\Sfe\PolicyController::class, 'create'])->name('policies.buy');
+        
+        // Product Catalog
+        Route::get('/products', [App\Http\Controllers\Sfe\ProductController::class, 'index'])->name('products.index');
+        
+        // Claims
+        Route::get('/claims', [App\Http\Controllers\Sfe\ClaimController::class, 'index'])->name('claims.index');
+        Route::get('/claims/submit', [App\Http\Controllers\Sfe\ClaimController::class, 'create'])->name('claims.submit');
+        
+        // Commissions & Wallet
+        Route::get('/commissions', [App\Http\Controllers\Sfe\CommissionController::class, 'index'])->name('commissions.index');
+        
+        // Sales & Performance
+        Route::get('/performance', [App\Http\Controllers\Sfe\SalesReportController::class, 'index'])->name('performance.index');
+        
+        // Training
+        Route::get('/training', [App\Http\Controllers\Sfe\TrainingController::class, 'index'])->name('training.index');
+        
+        // Support
+        Route::get('/support', [App\Http\Controllers\Sfe\SupportController::class, 'index'])->name('support.index');
+        
+        // Profile
+        Route::get('/profile', [App\Http\Controllers\Sfe\ProfileController::class, 'index'])->name('profile.index');
+    });
+
     Route::get('/agent/dashboard', [App\Http\Controllers\Agent\DashboardController::class, 'index'])
         ->middleware('role:agent,sfe,bancassurance')
         ->name('agent.dashboard');

@@ -46,7 +46,15 @@ class LoginController extends Controller
             return route('aggregator.dashboard');
         }
 
-        if ($user->hasRole('agent') || $user->hasRole('sfe') || $user->hasRole('bancassurance')) {
+        if ($user->hasRole('agent')) {
+            return route('agent.dashboard');
+        }
+
+        if ($user->hasRole('sfe')) {
+            return route('sfe.dashboard');
+        }
+
+        if ($user->hasRole('bancassurance')) {
             return route('agent.dashboard');
         }
 

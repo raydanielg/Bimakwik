@@ -43,8 +43,16 @@ class DashboardController extends Controller
             return redirect()->route('aggregator.dashboard');
         } 
         
-        if ($user->hasRole('agent') || $user->hasRole('sfe') || $user->hasRole('bancassurance')) {
+        if ($user->hasRole('agent')) {
             return redirect()->route('agent.dashboard');
+        }
+
+        if ($user->hasRole('sfe')) {
+            return redirect()->route('sfe.dashboard');
+        }
+
+        if ($user->hasRole('bancassurance')) {
+            return redirect()->route('agent.dashboard'); // Temporarily reuse agent dashboard or create new if needed
         } 
         
         if ($user->hasRole('service_provider')) {
