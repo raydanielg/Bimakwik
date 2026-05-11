@@ -55,9 +55,27 @@
                 password.setAttribute('type', type);
             });
 
-            document.getElementById('loginForm').addEventListener('submit', function() {
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
                 const btn = document.getElementById('loginSubmit');
                 btn.classList.add('loading');
+                
+                // Powa Sana SweetAlert Toast
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                });
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Karibu Bima Kwik! Tunakupeleka kwenye Dashboard yako...'
+                });
             });
         </script>
 
