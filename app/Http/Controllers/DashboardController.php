@@ -14,7 +14,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        \->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -24,46 +24,46 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        \ = Auth::user();
+        $user = Auth::user();
 
         // High-level priority checks
-        if (\->hasRole('super_admin') || \->hasRole('admin') || \->hasRole('sub_admin')) {
+        if ($user->hasRole('super_admin') || $user->hasRole('admin') || $user->hasRole('sub_admin')) {
             return redirect()->route('admin.dashboard');
         } 
         
-        if (\->hasRole('insurer')) {
+        if ($user->hasRole('insurer')) {
             return redirect()->route('insurer.dashboard');
         } 
         
-        if (\->hasRole('broker')) {
+        if ($user->hasRole('broker')) {
             return redirect()->route('broker.dashboard');
         } 
         
-        if (\->hasRole('aggregator')) {
+        if ($user->hasRole('aggregator')) {
             return redirect()->route('aggregator.dashboard');
         } 
         
-        if (\->hasRole('agent') || \->hasRole('sfe') || \->hasRole('bancassurance')) {
+        if ($user->hasRole('agent') || $user->hasRole('sfe') || $user->hasRole('bancassurance')) {
             return redirect()->route('agent.dashboard');
         } 
         
-        if (\->hasRole('service_provider')) {
+        if ($user->hasRole('service_provider')) {
             return redirect()->route('service-provider.dashboard');
         } 
         
-        if (\->hasRole('regulator')) {
+        if ($user->hasRole('regulator')) {
             return redirect()->route('regulator.dashboard');
         } 
         
-        if (\->hasRole('financing_partner')) {
+        if ($user->hasRole('financing_partner')) {
             return redirect()->route('financing-partner.dashboard');
         } 
         
-        if (\->hasRole('developer')) {
+        if ($user->hasRole('developer')) {
             return redirect()->route('developer.dashboard');
         } 
         
-        if (\->hasRole('customer')) {
+        if ($user->hasRole('customer')) {
             return redirect()->route('customer.dashboard');
         }
 
@@ -71,3 +71,4 @@ class DashboardController extends Controller
         abort(403, 'Unauthorized. Please contact system administrator.');
     }
 }
+
