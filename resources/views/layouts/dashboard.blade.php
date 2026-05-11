@@ -297,12 +297,130 @@
             </div>
 
             @elseif(auth()->user()->hasRole('insurer'))
-            <!-- Insurer Menu -->
-            <div class="sidebar-heading">Performance</div>
+            <!-- Insurer Menu - Full Structure -->
+            <div class="sidebar-heading">Core Operations</div>
             <div class="list-group list-group-flush px-2">
                 <a href="{{ route('insurer.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('insurer.dashboard') ? 'active' : '' }}">
-                    <i class="bi bi-speedometer2"></i> Dashboard
+                    <i class="bi bi-speedometer2"></i> Main Dashboard
                 </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-robot"></i> AI Market Insights
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Product Management</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#productSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-box-seam"></i> Products</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse ps-3" id="productSubmenu">
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Products</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Create New Product</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Categories</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Pricing & Rules</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Form Builder</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Regulator Approval</a>
+                </div>
+            </div>
+
+            <div class="sidebar-heading mt-3">Policy Management</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#policySubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-shield-check"></i> Policies</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse ps-3" id="policySubmenu">
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Policies</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Active / Expired</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Endorsements</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Cancellations</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Renewals</a>
+                </div>
+            </div>
+
+            <div class="sidebar-heading mt-3">Claims Management</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#claimsSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-exclamation-octagon"></i> Claims</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse ps-3" id="claimsSubmenu">
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Claims</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Processing</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Adjuster Mgmt</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Fraud Alerts</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">TIRAMIS Export</a>
+                </div>
+            </div>
+
+            <div class="sidebar-heading mt-3">Network Partners</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#providerSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-hospital"></i> Service Providers</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse ps-3" id="providerSubmenu">
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Providers</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">SLAs & Contracts</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Bills & Payments</a>
+                </div>
+                <a href="#partnerSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center mt-1">
+                    <span><i class="bi bi-people"></i> Brokers & Agents</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse ps-3" id="partnerSubmenu">
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Brokers</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Agents (SFE/Banc)</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Commission Rates</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Performance</a>
+                </div>
+            </div>
+
+            <div class="sidebar-heading mt-3">Customers</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-lines-fill"></i> All Customers
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-vcard"></i> KYC Status
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Finance & Reports</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#financeSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-bank"></i> Financial Mgmt</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse ps-3" id="financeSubmenu">
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Premiums Report</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Commission Payable</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Tax & Statements</a>
+                </div>
+                <a href="#reportsSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center mt-1">
+                    <span><i class="bi bi-bar-chart-line"></i> Reports & Analytics</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse ps-3" id="reportsSubmenu">
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Standard Reports</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Custom Builder</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Predictive Analytics</a>
+                </div>
+            </div>
+
+            <div class="sidebar-heading mt-3">Administration</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="#settingsSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <span><i class="bi bi-gear"></i> Settings & Profile</span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <div class="collapse ps-3" id="settingsSubmenu">
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Company Profile</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Branch Mgmt</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">Staff & Roles</a>
+                    <a href="#" class="list-group-item list-group-item-action py-1 small">API & Webhooks</a>
+                </div>
             </div>
             @elseif(auth()->user()->hasRole('sfe'))
             <!-- SFE Menu -->
