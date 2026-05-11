@@ -14,18 +14,32 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap');
         
-        body { font-family: 'Public Sans', sans-serif; overflow-x: hidden; background-color: #eef2f6; color: #475569; }
+        body { font-family: 'Public Sans', sans-serif; overflow-x: hidden; background-color: #eef2f6; color: #475569; transition: padding 0.3s; }
         #wrapper { display: flex; width: 100%; align-items: stretch; }
         
-        /* Light Sidebar Styling like the new image */
+        /* Sidebar Styling */
         #sidebar-wrapper { 
             min-width: 250px; 
             max-width: 250px; 
             min-height: 100vh; 
             transition: all 0.3s; 
-            background: #f8fafc; /* Very light/white sidebar */
+            background: #f8fafc;
             z-index: 1000;
             border-right: 1px solid #e2e8f0;
+        }
+
+        /* Responsive Sidebar */
+        @media (max-width: 991.98px) {
+            #sidebar-wrapper {
+                margin-left: -250px;
+                position: fixed;
+            }
+            #sidebar-wrapper.toggled {
+                margin-left: 0;
+            }
+            #page-content-wrapper {
+                min-width: 100vw;
+            }
         }
         
         .sidebar-brand {
@@ -149,9 +163,25 @@
         .stat-info .label { font-size: 0.75rem; color: #94a3b8; font-weight: 500; }
         
         #sidebar-wrapper.toggled { margin-left: -250px; }
+
+        /* Overlay for mobile when sidebar is open */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            top: 0;
+            left: 0;
+        }
+        .sidebar-overlay.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper" class="d-flex flex-column" style="overflow-y: auto;">
@@ -912,8 +942,11 @@
 
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg">
+            <nav class="navbar navbar-expand-lg border-bottom bg-white sticky-top">
                 <div class="container-fluid">
+                    <button class="btn btn-link d-lg-none me-2 p-0 text-dark" id="menu-toggle-mobile">
+                        <i class="bi bi-list fs-3"></i>
+                    </button>
                     <span class="page-title">Dashboard</span>
                     
                     <div class="ms-auto d-flex align-items-center">
@@ -955,9 +988,19 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById("menu-toggle").addEventListener("click", function(e) {
-            e.preventDefault();
-            document.getElementById("sidebar-wrapper").classList.toggle("toggled");
+        $(document).ready(function() {
+            // Sidebar toggle for desktop
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#sidebar-wrapper").toggleClass("toggled");
+            });
+
+            // Sidebar toggle for mobile
+            $("#menu-toggle-mobile, #sidebar-overlay").click(function(e) {
+                e.preventDefault();
+                $("#sidebar-wrapper").toggleClass("toggled");
+                $("#sidebar-overlay").toggleClass("active");
+            });
         });
     </script>
 </body>
