@@ -1,60 +1,94 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', 'Developer & API Portal')
+@section('dashboard_title', 'Developer Portal')
 
 @section('dashboard_content')
-<!-- Developer Stats -->
+<!-- Developer Portal Header Stats -->
 <div class="row g-4 mb-4">
+    <!-- API Requests -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-primary">
-            <div class="card-body">
-                <div class="stat-label">API Requests (24h)</div>
-                <div class="stat-value">45,670</div>
-                <div class="stat-trend text-success"><i class="bi bi-graph-up"></i> +12%</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-activity fs-4"></i>
+                    </div>
+                    <div class="text-success small fw-bold">99.9% Success</div>
+                </div>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">API Requests</h6>
+                <h4 class="fw-bold mb-0">854.2K</h4>
+                <div class="x-small text-muted mt-2">Past 24 Hours</div>
             </div>
         </div>
     </div>
+
+    <!-- Active API Keys -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-success">
-            <div class="card-body">
-                <div class="stat-label">Avg Latency</div>
-                <div class="stat-value">124ms</div>
-                <div class="stat-trend text-success"><i class="bi bi-check-circle"></i> Stable</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="bg-success bg-opacity-10 text-success rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-key fs-4"></i>
+                    </div>
+                    <div class="text-success small fw-bold">Active</div>
+                </div>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">Active Keys</h6>
+                <h4 class="fw-bold mb-0">12</h4>
+                <div class="x-small text-muted mt-2">Across 3 Apps</div>
             </div>
         </div>
     </div>
+
+    <!-- Avg Response Time -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-info">
-            <div class="card-body">
-                <div class="stat-label">Error Rate</div>
-                <div class="stat-value">0.02%</div>
-                <div class="stat-trend text-success"><i class="bi bi-shield-check"></i> Healthy</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="bg-info bg-opacity-10 text-info rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-lightning-charge fs-4"></i>
+                    </div>
+                    <div class="text-primary small fw-bold">Optimal</div>
+                </div>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">Avg Latency</h6>
+                <h4 class="fw-bold mb-0">124ms</h4>
+                <div class="x-small text-muted mt-2">P95 Response Time</div>
             </div>
         </div>
     </div>
+
+    <!-- System Uptime -->
     <div class="col-md-3">
-        <div class="card stat-card border-start border-4 border-warning">
-            <div class="card-body">
-                <div class="stat-label">Active Keys</div>
-                <div class="stat-value">3</div>
-                <div class="stat-trend text-primary"><i class="bi bi-key"></i> Operational</div>
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="bg-warning bg-opacity-10 text-warning rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-hdd-network fs-4"></i>
+                    </div>
+                    <div class="text-warning small fw-bold">v2.1 Stable</div>
+                </div>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">System Health</h6>
+                <h4 class="fw-bold mb-0">99.98%</h4>
+                <div class="x-small text-muted mt-2">Operational</div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="row g-4">
-    <!-- API Integration Quick Start -->
-    <div class="col-lg-7">
-        <div class="card p-4 h-100">
-            <h6 class="fw-bold mb-4"><i class="bi bi-code-slash me-2 text-primary"></i> API Integration Status</h6>
-            <div class="bg-dark rounded-3 p-3 mb-4 font-monospace small text-success">
-                <div><span class="text-secondary">// Current Authentication Method</span></div>
-                <div>Bearer <span class="text-warning">bk_live_51P2u8R...</span></div>
+    <!-- Documentation & Endpoints -->
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm p-4 h-100">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h6 class="fw-bold mb-0"><i class="bi bi-book me-2 text-primary"></i>Quick Documentation</h6>
+                <a href="#" class="btn btn-sm btn-outline-primary">View Full API Docs</a>
             </div>
-            <div class="table-responsive">
-                <table class="table table-hover align-middle small">
-                    <thead class="table-light">
+            
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="p-3 border rounded-3 text-center">
+                        <i class="bi bi-shield-lock fs-3 text-primary d-block mb-2"></i>
+                        <span class="small fw-bold">Authentication</span>
+                    </div>
                         <tr>
                             <th>Endpoint</th>
                             <th>Method</th>
