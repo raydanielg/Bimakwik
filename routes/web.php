@@ -87,9 +87,16 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/support', [App\Http\Controllers\ServiceProvider\SupportController::class, 'index'])->name('support.index');
     });
 
-    Route::get('/financing-partner/dashboard', [App\Http\Controllers\FinancingPartner\DashboardController::class, 'index'])
-        ->middleware('role:financing_partner')
-        ->name('financing-partner.dashboard');
+    // Premium Financing Partner Dashboard Routes
+    Route::prefix('financing-partner')->name('financing-partner.')->middleware(['auth', 'role:financing_partner'])->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\FinancingPartner\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/requests', [App\Http\Controllers\FinancingPartner\LoanRequestController::class, 'index'])->name('requests.index');
+        Route::get('/disbursements', [App\Http\Controllers\FinancingPartner\DisbursementController::class, 'index'])->name('disbursements.index');
+        Route::get('/repayments', [App\Http\Controllers\FinancingPartner\RepaymentController::class, 'index'])->name('repayments.index');
+        Route::get('/collections', [App\Http\Controllers\FinancingPartner\CollectionController::class, 'index'])->name('collections.index');
+        Route::get('/reports', [App\Http\Controllers\FinancingPartner\ReportController::class, 'index'])->name('reports.index');
+        Route::get('/settings', [App\Http\Controllers\FinancingPartner\SettingsController::class, 'index'])->name('settings.index');
+    });
 
     Route::get('/developer/dashboard', [App\Http\Controllers\Developer\DashboardController::class, 'index'])
         ->middleware('role:developer')
