@@ -826,51 +826,31 @@
                 <a href="{{ route('financing-partner.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('financing-partner.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
+                <a href="{{ route('financing-partner.requests.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('financing-partner.requests.*') ? 'active' : '' }}">
+                    <i class="bi bi-inboxes"></i> Loan Requests
+                </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Loan Management</div>
+            <div class="sidebar-heading mt-3">Operations</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action text-danger">
-                    <i class="bi bi-inboxes"></i> Financing Requests
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('financing-partner.disbursements.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('financing-partner.disbursements.*') ? 'active' : '' }}">
                     <i class="bi bi-cash-stack"></i> Disbursements
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-collection"></i> Active Loans
+                <a href="{{ route('financing-partner.repayments.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('financing-partner.repayments.*') ? 'active' : '' }}">
+                    <i class="bi bi-arrow-repeat"></i> Repayments
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-arrow-repeat"></i> Repayment Tracker
-                </a>
-            </div>
-
-            <div class="sidebar-heading mt-3">Financials</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-wallet2"></i> My Partner Wallet
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-box-arrow-in-down"></i> Repayments Received
+                <a href="{{ route('financing-partner.collections.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('financing-partner.collections.*') ? 'active' : '' }}">
+                    <i class="bi bi-exclamation-triangle"></i> Collections
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Analysis & Reports</div>
+            <div class="sidebar-heading mt-3">Reports & Settings</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-file-earmark-bar-graph"></i> Financing Reports
+                <a href="{{ route('financing-partner.reports.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('financing-partner.reports.*') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-bar-graph"></i> Performance
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-exclamation-triangle"></i> Default Analysis
-                </a>
-            </div>
-
-            <div class="sidebar-heading mt-3">Profile</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-building"></i> Company Profile
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-bank"></i> Bank Details
+                <a href="{{ route('financing-partner.settings.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('financing-partner.settings.*') ? 'active' : '' }}">
+                    <i class="bi bi-gear"></i> Settings
                 </a>
             </div>
 
