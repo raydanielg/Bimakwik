@@ -64,9 +64,32 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/wallet/history', function() { return view('customer.wallet.history'); })->name('wallet.history');
     });
 
-    Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
-        ->middleware('role:super_admin,admin,sub_admin')
-        ->name('admin.dashboard');
+    // Admin Dashboard Routes
+    Route::prefix('admin')->name('admin.')->middleware('role:super_admin,admin,sub_admin')->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+        
+        // User Management Routes
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'create'])->name('create');
+            Route::post('/', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'store'])->name('store');
+            Route::get('/{user}/edit', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'edit'])->name('edit');
+            Route::put('/{user}', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'update'])->name('update');
+            Route::delete('/{user}', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'destroy'])->name('destroy');
+            
+            // Specific user type routes
+            Route::get('/admins', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'admins'])->name('admins');
+            Route::get('/insurers', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'insurers'])->name('insurers');
+            Route::get('/aggregators', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'aggregators'])->name('aggregators');
+            Route::get('/aggregators/create', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'createAggregator'])->name('aggregators.create');
+            Route::post('/aggregators', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'storeAggregator'])->name('aggregators.store');
+            Route::get('/brokers', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'brokers'])->name('brokers');
+            Route::get('/agents', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'agents'])->name('agents');
+            Route::get('/customers', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'customers'])->name('customers');
+            Route::get('/service-providers', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'serviceProviders'])->name('service-providers');
+            Route::get('/rbac', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'rbacSettings'])->name('rbac');
+        });
+    });
         
     Route::get('/insurer/dashboard', [App\Http\Controllers\Insurer\DashboardController::class, 'index'])
         ->middleware('role:insurer')

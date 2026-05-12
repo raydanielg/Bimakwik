@@ -210,18 +210,19 @@
 
             <div class="sidebar-heading mt-3">Identity & Access</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#userSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="#userSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                     <span><i class="bi bi-people-fill"></i> User Management</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <div class="collapse ps-3" id="userSubmenu">
-                    <a href="#" class="list-group-item list-group-item-action py-2 small">Admins & Staff</a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 small">Insurers</a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 small">Brokers / Aggregators</a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 small">Agents (SFE/Banc)</a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 small">Customers</a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 small">Service Providers</a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 small">RBAC Settings</a>
+                <div class="collapse ps-3 {{ request()->routeIs('admin.users.*') ? 'show' : '' }}" id="userSubmenu">
+                    <a href="{{ route('admin.users.admins') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.admins') ? 'active' : '' }}">Admins & Staff</a>
+                    <a href="{{ route('admin.users.insurers') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.insurers') ? 'active' : '' }}">Insurers</a>
+                    <a href="{{ route('admin.users.aggregators') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.aggregators') ? 'active' : '' }}">Aggregators</a>
+                    <a href="{{ route('admin.users.brokers') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.brokers') ? 'active' : '' }}">Brokers</a>
+                    <a href="{{ route('admin.users.agents') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.agents') ? 'active' : '' }}">Agents (SFE/Banc)</a>
+                    <a href="{{ route('admin.users.customers') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.customers') ? 'active' : '' }}">Customers</a>
+                    <a href="{{ route('admin.users.service-providers') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.service-providers') ? 'active' : '' }}">Service Providers</a>
+                    <a href="{{ route('admin.users.rbac') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.rbac') ? 'active' : '' }}">RBAC Settings</a>
                 </div>
             </div>
 
