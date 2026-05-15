@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class ApiKeyController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('developer.keys.index');
+    }
 }

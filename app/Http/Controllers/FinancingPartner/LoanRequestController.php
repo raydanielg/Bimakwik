@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class LoanRequestController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('financing_partner.requests.index');
+    }
 }

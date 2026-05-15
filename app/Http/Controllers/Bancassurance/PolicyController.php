@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class PolicyController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('bancassurance.policies.index');
+    }
 }

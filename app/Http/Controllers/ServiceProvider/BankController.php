@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class BankController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('service_provider.bank.index');
+    }
 }

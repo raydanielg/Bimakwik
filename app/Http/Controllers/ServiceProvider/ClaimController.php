@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class ClaimController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('service_provider.claims.index');
+    }
 }
