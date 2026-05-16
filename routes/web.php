@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/marketplace', function() { return view('customer.marketplace'); })->name('marketplace');
         Route::get('/compare', function() { return view('customer.compare'); })->name('compare');
         Route::get('/buy', function() { return view('customer.buy'); })->name('buy');
+        Route::get('/quote', function() { return view('customer.quote'); })->name('quote');
         
         // Insurance
         Route::get('/policies', function() { return view('customer.policies.index'); })->name('policies.index');

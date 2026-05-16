@@ -18,7 +18,7 @@
                 <i class="bi bi-shield-fill"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $admins->whereHas('roles', function($q) { $q->where('name', 'super_admin'); })->count() }}</span>
+                <span class="value">{{ $superAdminCount }}</span>
                 <span class="label">Super Admins</span>
             </div>
         </div>
@@ -29,7 +29,7 @@
                 <i class="bi bi-person-badge"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $admins->whereHas('roles', function($q) { $q->where('name', 'admin'); })->count() }}</span>
+                <span class="value">{{ $adminCount }}</span>
                 <span class="label">Admins</span>
             </div>
         </div>
@@ -40,7 +40,7 @@
                 <i class="bi bi-person-workspace"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $admins->whereHas('roles', function($q) { $q->where('name', 'sub_admin'); })->count() }}</span>
+                <span class="value">{{ $subAdminCount }}</span>
                 <span class="label">Sub Admins</span>
             </div>
         </div>

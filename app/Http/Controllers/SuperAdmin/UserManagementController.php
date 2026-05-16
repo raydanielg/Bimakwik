@@ -144,12 +144,15 @@ class UserManagementController extends Controller
     public function admins()
     {
         $admins = User::role(['super_admin', 'admin', 'sub_admin'])->paginate(20);
-        return view('admin.users.admins', compact('admins'));
+        $superAdminCount = User::role('super_admin')->count();
+        $adminCount = User::role('admin')->count();
+        $subAdminCount = User::role('sub_admin')->count();
+        return view('admin.users.admins', compact('admins', 'superAdminCount', 'adminCount', 'subAdminCount'));
     }
 
     public function insurers()
     {
-        $insurers = User::role('insurer')->with('insurerProfile')->paginate(20);
+        $insurers = User::role('insurer')->paginate(20);
         return view('admin.users.insurers', compact('insurers'));
     }
 
@@ -162,19 +165,40 @@ class UserManagementController extends Controller
     public function agents()
     {
         $agents = User::role(['sfe', 'bancassurance'])->with('agentProfile')->paginate(20);
-        return view('admin.users.agents', compact('agents'));
+        $bancassuranceCount = User::role('bancassurance')->count();
+        $sfeCount = User::role('sfe')->count();
+        return view('admin.users.agents', compact('agents', 'bancassuranceCount', 'sfeCount'));
     }
 
     public function customers()
     {
         $customers = User::role('customer')->with('customerProfile')->paginate(20);
-        return view('admin.users.customers', compact('customers'));
+        // Count verified customers by checking the customer record's kyc_status
+        $verifiedCustomerCount = User::role('customer')
+            ->whereHas('customer', function($q) { $q->where('kyc_status', 'verified'); })
+            ->count();
+        return view('admin.users.customers', compact('customers', 'verifiedCustomerCount'));
     }
 
     public function serviceProviders()
     {
         $providers = User::role('service_provider')->with('providerProfile')->paginate(20);
-        return view('admin.users.service-providers', compact('providers'));
+        // Count providers by service type - need to check service_provider_types table
+        $hospitalCount = User::role('service_provider')
+            ->whereHas('serviceProvider', function($q) { 
+                $q->whereHas('serviceProviderType', function($q2) { 
+                    $q2->where('type_code', 'hospital');
+                });
+            })
+            ->count();
+        $garageCount = User::role('service_provider')
+            ->whereHas('serviceProvider', function($q) { 
+                $q->whereHas('serviceProviderType', function($q2) { 
+                    $q2->where('type_code', 'garage');
+                });
+            })
+            ->count();
+        return view('admin.users.service-providers', compact('providers', 'hospitalCount', 'garageCount'));
     }
 
     public function rbacSettings()

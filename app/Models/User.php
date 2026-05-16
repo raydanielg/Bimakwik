@@ -11,7 +11,18 @@ use App\Models\Role;
 use App\Models\Module;
 use App\Models\Permission;
 use App\Models\UserModuleAccess;
+use App\Models\Customer;
+use App\Models\Broker;
+use App\Models\Agent;
+use App\Models\Aggregator;
+use App\Models\ServiceProvider;
+use App\Models\FinancingPartner;
 use App\Models\CustomerProfile;
+use App\Models\BrokerProfile;
+use App\Models\AgentProfile;
+use App\Models\AggregatorProfile;
+use App\Models\ServiceProviderProfile;
+use App\Models\FinancingPartnerProfile;
 use App\Models\KycSubmission;
 use App\Models\SupportTicket;
 
@@ -76,6 +87,17 @@ class User extends Authenticatable
     public function isSuperAdmin()
     {
         return $this->hasRole('super_admin');
+    }
+
+    /**
+     * Scope to filter users by role(s).
+     */
+    public function scopeRole($query, $roles)
+    {
+        $roles = is_array($roles) ? $roles : [$roles];
+        return $query->whereHas('roles', function ($q) use ($roles) {
+            $q->whereIn('name', $roles);
+        });
     }
 
     public function hasModulePermission($moduleCode, $action = 'view')
@@ -194,6 +216,51 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(CustomerProfile::class);
+    }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'user_id');
+    }
+
+    public function serviceProvider()
+    {
+        return $this->hasOne(ServiceProvider::class, 'user_id');
+    }
+
+    public function customerProfile()
+    {
+        return $this->hasOneThrough(CustomerProfile::class, Customer::class, 'user_id', 'customer_id');
+    }
+
+    public function brokerProfile()
+    {
+        return $this->hasOneThrough(BrokerProfile::class, Broker::class, 'user_id', 'broker_id');
+    }
+
+    public function agentProfile()
+    {
+        return $this->hasOneThrough(AgentProfile::class, Agent::class, 'user_id', 'agent_id');
+    }
+
+    public function aggregatorProfile()
+    {
+        return $this->hasOneThrough(AggregatorProfile::class, Aggregator::class, 'user_id', 'aggregator_id');
+    }
+
+    public function serviceProviderProfile()
+    {
+        return $this->hasOneThrough(ServiceProviderProfile::class, ServiceProvider::class, 'user_id', 'service_provider_id');
+    }
+
+    public function providerProfile()
+    {
+        return $this->hasOneThrough(ServiceProviderProfile::class, ServiceProvider::class, 'user_id', 'service_provider_id');
+    }
+
+    public function financingPartnerProfile()
+    {
+        return $this->hasOneThrough(FinancingPartnerProfile::class, FinancingPartner::class, 'user_id', 'financing_partner_id');
     }
 
     /**

@@ -40,7 +40,7 @@
                 <i class="bi bi-geo-alt"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $providers->whereHas('providerProfile', function($q) { $q->where('provider_type', 'hospital'); })->count() }}</span>
+                <span class="value">{{ $hospitalCount }}</span>
                 <span class="label">Hospitals</span>
             </div>
         </div>
@@ -51,7 +51,7 @@
                 <i class="bi bi-tools"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $providers->whereHas('providerProfile', function($q) { $q->where('provider_type', 'garage'); })->count() }}</span>
+                <span class="value">{{ $garageCount }}</span>
                 <span class="label">Garages</span>
             </div>
         </div>

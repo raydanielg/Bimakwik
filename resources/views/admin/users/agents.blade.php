@@ -29,7 +29,7 @@
                 <i class="bi bi-bank"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $agents->whereHas('roles', function($q) { $q->where('name', 'bancassurance'); })->count() }}</span>
+                <span class="value">{{ $bancassuranceCount }}</span>
                 <span class="label">Bancassurance</span>
             </div>
         </div>
@@ -40,7 +40,7 @@
                 <i class="bi bi-briefcase"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $agents->whereHas('roles', function($q) { $q->where('name', 'sfe'); })->count() }}</span>
+                <span class="value">{{ $sfeCount }}</span>
                 <span class="label">SFE Agents</span>
             </div>
         </div>

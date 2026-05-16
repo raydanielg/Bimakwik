@@ -52,7 +52,7 @@
                     <div class="text-success small fw-bold"><i class="bi bi-arrow-up"></i> Live</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">Total Commission</h6>
-                <h4 class="fw-bold mb-0">TZS {{ number_format($creditTotal, 2) }}</h4>
+                <h4 class="fw-bold mb-0">TZS {{ number_format($approvedClaimsTotal, 2) }}</h4>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
                     <div class="badge bg-warning text-dark">{{ $activePoliciesCount }} active</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">Leaderboard Rank</h6>
-                <h4 class="fw-bold mb-0">{{ $claimCount }} claims</h4>
+                <h4 class="fw-bold mb-0">{{ $openClaimsCount }} claims</h4>
             </div>
         </div>
     </div>

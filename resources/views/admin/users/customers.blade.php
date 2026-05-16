@@ -56,7 +56,7 @@
                 <i class="bi bi-shield-check"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $customers->whereHas('customerProfile', function($q) { $q->where('kyc_status', 'verified'); })->count() }}</span>
+                <span class="value">{{ $verifiedCustomerCount }}</span>
                 <span class="label">KYC Verified</span>
             </div>
         </div>
