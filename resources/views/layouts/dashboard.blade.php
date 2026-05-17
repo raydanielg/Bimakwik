@@ -234,7 +234,7 @@
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-hammer"></i> Low-Code Builder
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.products.compare') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-diagram-3"></i> Comparison Matrix
                 </a>
             </div>
@@ -542,7 +542,7 @@
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-box-seam"></i> View All Products
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.products.compare') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-arrow-left-right"></i> Comparison Matrix
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
@@ -648,7 +648,7 @@
 
             <div class="sidebar-heading mt-3">Product Comparison</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.products.compare') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-grid-3x3-gap"></i> Comparison Matrix
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">

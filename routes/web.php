@@ -90,6 +90,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/service-providers', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'serviceProviders'])->name('service-providers');
             Route::get('/rbac', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'rbacSettings'])->name('rbac');
         });
+
+        // Product Management Routes
+        Route::resource('products', App\Http\Controllers\Product\InsuranceProductController::class);
+        Route::get('/products/compare/matrix', [App\Http\Controllers\Product\InsuranceProductController::class, 'compare'])->name('products.compare');
     });
         
     Route::get('/insurer/dashboard', [App\Http\Controllers\Insurer\DashboardController::class, 'index'])
