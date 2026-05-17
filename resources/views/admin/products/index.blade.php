@@ -6,7 +6,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="mb-0">Product List</h4>
     <div class="btn-group">
-        <a href="{{ route('admin.products.builder') }}" class="btn btn-primary">
+        <a href="{{ route('admin.products.create') }}" class="btn btn-primary">
             <i class="bi bi-plus-circle me-2"></i>Create Product
         </a>
         <button class="btn btn-outline-secondary">
