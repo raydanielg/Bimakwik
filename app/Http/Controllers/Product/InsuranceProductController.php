@@ -13,14 +13,16 @@ class InsuranceProductController extends Controller
         $products = InsuranceProduct::where('is_active', true)
             ->with(['policyCategory', 'insurer'])
             ->paginate(10);
-        return view('admin.products.index', compact('products'));
+        $categories = \App\Models\PolicyCategory::all();
+        return view('admin.products.index', compact('products', 'categories'));
     }
 
     public function create()
     {
         $categories = \App\Models\PolicyCategory::all();
         $insurers = \App\Models\User::role('insurer')->get();
-        return view('admin.products.create', compact('categories', 'insurers'));
+        $currencies = ['TZS', 'USD', 'EUR', 'GBP', 'KES', 'UGX'];
+        return view('admin.products.create', compact('categories', 'insurers', 'currencies'));
     }
 
     public function store(Request $request)
@@ -51,7 +53,8 @@ class InsuranceProductController extends Controller
     {
         $categories = \App\Models\PolicyCategory::all();
         $insurers = \App\Models\User::role('insurer')->get();
-        return view('admin.products.edit', compact('product', 'categories', 'insurers'));
+        $currencies = ['TZS', 'USD', 'EUR', 'GBP', 'KES', 'UGX'];
+        return view('admin.products.edit', compact('product', 'categories', 'insurers', 'currencies'));
     }
 
     public function update(Request $request, InsuranceProduct $product)
