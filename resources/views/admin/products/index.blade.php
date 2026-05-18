@@ -131,13 +131,15 @@
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View Details</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle me-2"></i>Approve</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-diagram-3 me-2"></i>Add to Comparison</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.products.show', $product->id) }}"><i class="bi bi-eye me-2"></i>View Details</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.products.edit', $product->id) }}"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.products.compare') }}"><i class="bi bi-diagram-3 me-2"></i>Add to Comparison</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                        <li><a class="dropdown-item text-danger" href="#" onclick="if(confirm('Are you sure?')) { document.getElementById('delete-form-{{ $product->id }}').submit(); }"><i class="bi bi-trash me-2"></i>Delete</a></li>
                                     </ul>
+                                    <form id="delete-form-{{ $product->id }}" action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display:none;">
+                                        @csrf @method('DELETE')
+                                    </form>
                                 </div>
                             </td>
                         </tr>

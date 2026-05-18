@@ -316,8 +316,8 @@
                     <i class="bi bi-chevron-down small"></i>
                 </a>
                 <div class="collapse ps-3" id="productSubmenu">
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Products</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Create New Product</a>
+                    <a href="{{ route('admin.products.index') }}" class="list-group-item list-group-item-action py-1 small">All Products</a>
+                    <a href="{{ route('admin.products.create') }}" class="list-group-item list-group-item-action py-1 small">Create New Product</a>
                     <a href="#" class="list-group-item list-group-item-action py-1 small">Categories</a>
                     <a href="#" class="list-group-item list-group-item-action py-1 small">Pricing & Rules</a>
                     <a href="#" class="list-group-item list-group-item-action py-1 small">Form Builder</a>
@@ -539,7 +539,7 @@
 
             <div class="sidebar-heading mt-3">Product Management</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.products.index') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-box-seam"></i> View All Products
                 </a>
                 <a href="{{ route('admin.products.compare') }}" class="list-group-item list-group-item-action">
