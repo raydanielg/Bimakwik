@@ -228,10 +228,10 @@
 
             <div class="sidebar-heading mt-3">Product Engine</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.products.index') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-box-seam"></i> Product List
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.products.create') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-hammer"></i> Low-Code Builder
                 </a>
                 <a href="{{ route('admin.products.compare') }}" class="list-group-item list-group-item-action">
