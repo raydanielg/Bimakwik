@@ -216,20 +216,16 @@
             </table>
         </div>
     </div>
+    @if($wallets->hasPages())
     <div class="card-footer bg-white border-top py-3">
         <div class="d-flex justify-content-between align-items-center">
-            <small class="text-muted">Showing 1 to 5 of 24 wallets</small>
-            <nav>
-                <ul class="pagination pagination-sm mb-0">
-                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
+            <small class="text-muted">Showing {{ $wallets->firstItem() }} to {{ $wallets->lastItem() }} of {{ $wallets->total() }} wallets</small>
+            <div>
+                {{ $wallets->links() }}
+            </div>
         </div>
     </div>
+    @endif
 </div>
 
 <!-- Add Wallet Modal -->
