@@ -181,55 +181,65 @@
                     @forelse($collections as $premium)
                     <tr>
                         <td class="py-3">
-                            <span class="fw-semibold text-primary">{{ $premium['policy'] }}</span>
+                            <span class="fw-semibold text-primary">TXN-{{ $premium->id }}</span>
                         </td>
                         <td class="py-3">
                             <div class="d-flex align-items-center">
                                 <div class="bg-secondary bg-opacity-10 rounded-circle p-2 me-2">
                                     <i class="bi bi-person text-secondary"></i>
                                 </div>
-                                <span>{{ $premium['customer'] }}</span>
+                                <span>{{ $premium->user->name ?? 'Customer' }}</span>
                             </div>
                         </td>
                         <td class="py-3">
                             <span class="badge bg-primary bg-opacity-10 text-primary">
-                                {{ $premium['product'] }}
+                                {{ $premium->type ?? 'Premium Payment' }}
                             </span>
                         </td>
                         <td class="py-3">
-                            <span class="fw-semibold">TZS {{ $premium['amount'] }}</span>
+                            <span class="fw-semibold">TZS {{ number_format($premium->amount ?? 0, 2) }}</span>
                         </td>
                         <td class="py-3">
+                            @php
+                                $method = $premium->payment_method ?? 'M-Pesa';
+                                $methodIcon = $method == 'M-Pesa' ? 'phone' : ($method == 'Card' ? 'credit-card' : 'bank');
+                            @endphp
                             <span class="badge bg-info bg-opacity-10 text-info">
-                                <i class="bi bi-{{ $premium['method'] == 'M-Pesa' ? 'phone' : ($premium['method'] == 'Card' ? 'credit-card' : 'bank') }}"></i>
-                                {{ $premium['method'] }}
+                                <i class="bi bi-{{ $methodIcon }}"></i>
+                                {{ $method }}
                             </span>
                         </td>
                         <td class="py-3">
-                            @if($premium['status'] == 'paid')
+                            @php
+                                $status = $premium->status ?? 'completed';
+                            @endphp
+                            @if($status == 'completed' || $status == 'paid')
                                 <span class="badge bg-success bg-opacity-10 text-success">
                                     <i class="bi bi-check-circle"></i> Paid
                                 </span>
-                            @elseif($premium['status'] == 'pending')
+                            @elseif($status == 'pending')
                                 <span class="badge bg-warning bg-opacity-10 text-warning">
                                     <i class="bi bi-clock"></i> Pending
                                 </span>
                             @else
                                 <span class="badge bg-danger bg-opacity-10 text-danger">
-                                    <i class="bi bi-exclamation-circle"></i> Overdue
+                                    <i class="bi bi-exclamation-circle"></i> Failed
                                 </span>
                             @endif
                         </td>
                         <td class="py-3">
-                            <small class="text-muted">{{ $premium['date'] }}</small>
+                            <small class="text-muted">{{ $premium->created_at ? $premium->created_at->diffForHumans() : 'N/A' }}</small>
                         </td>
                         <td class="py-3 text-end">
                             <div class="btn-group btn-group-sm">
-                                <button class="btn btn-outline-primary" title="View Receipt">
+                                <button class="btn btn-outline-primary" onclick="viewReceipt({{ $premium->id }})" title="View Receipt">
                                     <i class="bi bi-receipt"></i>
                                 </button>
-                                <button class="btn btn-outline-info" title="Download">
+                                <button class="btn btn-outline-success" onclick="downloadReceipt({{ $premium->id }})" title="Download Receipt">
                                     <i class="bi bi-download"></i>
+                                </button>
+                                <button class="btn btn-outline-info" onclick="sendReceipt({{ $premium->id }})" title="Email Receipt">
+                                    <i class="bi bi-envelope"></i>
                                 </button>
                             </div>
                         </td>
