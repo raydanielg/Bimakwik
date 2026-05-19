@@ -23,10 +23,10 @@
                 </ul>
             </div>
             <span class="text-white-50 d-none d-md-inline">|</span>
-            <a href="{{ route('support.faqs') }}" class="text-white text-decoration-none small hover-underline d-none d-md-inline">FAQs</a>
+            <a href="{{ route('support.faqs') }}" class="text-white text-decoration-none small hover-underline d-none d-md-inline">{{ __('site.faqs') }}</a>
             <span class="text-white-50 d-none d-md-inline">|</span>
             <a href="{{ route('quote.request') }}" class="btn btn-warning btn-sm px-3 rounded-pill fw-bold text-dark shadow-sm">
-                <i class="bi bi-file-earmark-text me-1"></i> Request Quote
+                <i class="bi bi-file-earmark-text me-1"></i> {{ __('site.request_quote') }}
             </a>
         </div>
     </div>
@@ -46,45 +46,45 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link px-3 py-4 fw-bold {{ request()->is('/') ? 'active text-primary' : '' }}" href="{{ url('/') }}">Home</a>
+                    <a class="nav-link px-3 py-4 fw-bold {{ request()->is('/') ? 'active text-primary' : '' }}" href="{{ url('/') }}">{{ __('site.home') }}</a>
                 </li>
                 
                 <!-- Platform Mega Menu -->
                 <li class="nav-item dropdown has-megamenu">
-                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Platform</a>
+                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">{{ __('site.platform') }}</a>
                     <div class="dropdown-menu megamenu border-0 shadow-lg p-4 animate__animated animate__fadeInUp animate__faster" role="menu">
                         <div class="row g-4">
                             <div class="col-md-3 border-end">
-                                <h6 class="fw-bold text-primary mb-3">Overview</h6>
+                                <h6 class="fw-bold text-primary mb-3">{{ __('site.platform_overview') }}</h6>
                                 <ul class="list-unstyled mega-list">
-                                    <li><a href="{{ route('platform.overview') }}">What is Bima Kwik</a></li>
-                                    <li><a href="{{ route('platform.overview') }}">Our Ecosystem</a></li>
-                                    <li><a href="{{ route('platform.overview') }}">How It Works</a></li>
+                                    <li><a href="{{ route('platform.overview') }}">{{ __('site.platform_overview') }}</a></li>
+                                    <li><a href="{{ route('platform.overview') }}">{{ __('site.our_ecosystem') }}</a></li>
+                                    <li><a href="{{ route('platform.overview') }}">{{ __('site.how_it_works') }}</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3 border-end">
-                                <h6 class="fw-bold text-primary mb-3">For Customers</h6>
+                                <h6 class="fw-bold text-primary mb-3">{{ __('site.for_customers') }}</h6>
                                 <ul class="list-unstyled mega-list">
-                                    <li><a href="{{ route('platform.customers') }}">Buy Insurance</a></li>
-                                    <li><a href="{{ route('platform.customers') }}">File a Claim</a></li>
-                                    <li><a href="{{ route('platform.customers') }}">Renew Policy</a></li>
-                                    <li><a href="{{ route('platform.customers') }}">Track Status</a></li>
+                                    <li><a href="{{ route('platform.customers') }}">{{ __('site.buy_insurance') }}</a></li>
+                                    <li><a href="{{ route('platform.customers') }}">{{ __('site.file_claim') }}</a></li>
+                                    <li><a href="{{ route('platform.customers') }}">{{ __('site.renew_policy') }}</a></li>
+                                    <li><a href="{{ route('platform.customers') }}">{{ __('site.track_status') }}</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3 border-end">
-                                <h6 class="fw-bold text-primary mb-3">Technology</h6>
+                                <h6 class="fw-bold text-primary mb-3">{{ __('site.technology') }}</h6>
                                 <ul class="list-unstyled mega-list">
-                                    <li><a href="{{ route('platform.technology') }}">AI-Powered Platform</a></li>
-                                    <li><a href="{{ route('platform.technology') }}">API Integration</a></li>
-                                    <li><a href="{{ route('platform.technology') }}">Low-Code Builder</a></li>
-                                    <li><a href="{{ route('platform.technology') }}">Security</a></li>
+                                    <li><a href="{{ route('platform.technology') }}">{{ __('site.ai_powered') }}</a></li>
+                                    <li><a href="{{ route('platform.technology') }}">{{ __('site.api_integration') }}</a></li>
+                                    <li><a href="{{ route('platform.technology') }}">{{ __('site.low_code_builder') }}</a></li>
+                                    <li><a href="{{ route('platform.technology') }}">{{ __('site.security') }}</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3">
-                                <h6 class="fw-bold text-primary mb-3">Expansion</h6>
+                                <h6 class="fw-bold text-primary mb-3">{{ __('site.expansion') }}</h6>
                                 <ul class="list-unstyled mega-list">
-                                    <li><a href="{{ route('platform.businesses') }}">Multi-Country Instances</a></li>
-                                    <li><a href="{{ route('platform.businesses') }}">TIRAMIS Replicable</a></li>
+                                    <li><a href="{{ route('platform.businesses') }}">{{ __('site.multi_country') }}</a></li>
+                                    <li><a href="{{ route('platform.businesses') }}">{{ __('site.tiramis_replicable') }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -93,62 +93,62 @@
 
                 <!-- Products Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Products</a>
+                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">{{ __('site.products') }}</a>
                     <div class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster">
                         <div class="d-flex flex-column gap-1" style="min-width: 250px;">
                             <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="{{ route('pages.products') }}">
                                 <i class="bi bi-car-front text-primary me-3 fs-5"></i>
-                                <div><span class="fw-bold d-block">Motor Insurance</span><small class="text-muted">Private & Commercial</small></div>
+                                <div><span class="fw-bold d-block">{{ __('site.motor_insurance') }}</span><small class="text-muted">{{ __('site.motor_desc') }}</small></div>
                             </a>
                             <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="{{ route('products.health') }}">
                                 <i class="bi bi-heart-pulse text-danger me-3 fs-5"></i>
-                                <div><span class="fw-bold d-block">Health Insurance</span><small class="text-muted">Family & Corporate</small></div>
+                                <div><span class="fw-bold d-block">{{ __('site.health_insurance') }}</span><small class="text-muted">{{ __('site.health_desc') }}</small></div>
                             </a>
                             <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="{{ route('products.life') }}">
                                 <i class="bi bi-umbrella text-info me-3 fs-5"></i>
-                                <div><span class="fw-bold d-block">Life Insurance</span><small class="text-muted">Whole Life & Plans</small></div>
+                                <div><span class="fw-bold d-block">{{ __('site.life_insurance') }}</span><small class="text-muted">{{ __('site.life_desc') }}</small></div>
                             </a>
                             <a class="dropdown-item rounded-3 d-flex align-items-center p-2" href="{{ route('products.general') }}">
                                 <i class="bi bi-box-seam text-success me-3 fs-5"></i>
-                                <div><span class="fw-bold d-block">General Insurance</span><small class="text-muted">Fire, Travel & Home</small></div>
+                                <div><span class="fw-bold d-block">{{ __('site.general_insurance') }}</span><small class="text-muted">{{ __('site.general_desc') }}</small></div>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item rounded-3 text-center fw-bold text-primary" href="{{ route('pages.products') }}">View All Products</a>
+                            <a class="dropdown-item rounded-3 text-center fw-bold text-primary" href="{{ route('pages.products') }}">{{ __('site.view_all_products') }}</a>
                         </div>
                     </div>
                 </li>
 
                 <!-- Partners -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Partners</a>
+                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">{{ __('site.partners') }}</a>
                     <div class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster">
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('partners.brokers') }}">Become a Broker</a>
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('partners.aggregators') }}">Become an Aggregator</a>
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('partners.providers') }}">Service Providers</a>
-                        <a class="dropdown-item rounded-3 p-2" href="{{ route('partners.affiliates') }}">Affiliate Program</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('partners.brokers') }}">{{ __('site.become_broker') }}</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('partners.aggregators') }}">{{ __('site.become_aggregator') }}</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('partners.providers') }}">{{ __('site.service_providers') }}</a>
+                        <a class="dropdown-item rounded-3 p-2" href="{{ route('partners.affiliates') }}">{{ __('site.affiliate_program') }}</a>
                     </div>
                 </li>
 
                 <!-- Resources Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Resources</a>
+                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">{{ __('site.resources') }}</a>
                     <ul class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster">
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('resources.news') }}">Learning Center</a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('resources.news') }}">Blog & News</a></li>
-                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('resources.guidelines') }}">Downloads</a></li>
-                        <li><a class="dropdown-item rounded-3 p-2" href="{{ route('support.faqs') }}">FAQs</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('resources.news') }}">{{ __('site.learning_center') }}</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('resources.news') }}">{{ __('site.blog_news') }}</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('resources.guidelines') }}">{{ __('site.downloads') }}</a></li>
+                        <li><a class="dropdown-item rounded-3 p-2" href="{{ route('support.faqs') }}">{{ __('site.faqs') }}</a></li>
                     </ul>
                 </li>
 
                 <!-- Company -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">Company</a>
+                    <a class="nav-link dropdown-toggle px-3 py-4 fw-bold" href="#" data-bs-toggle="dropdown">{{ __('site.company') }}</a>
                     <div class="dropdown-menu border-0 shadow-lg rounded-4 p-3 animate__animated animate__fadeInUp animate__faster">
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('pages.about') }}">About Us</a>
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('company.story') }}">Our Story</a>
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('company.leadership') }}">Leadership Team</a>
-                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('company.careers') }}">Careers</a>
-                        <a class="dropdown-item rounded-3 p-2" href="{{ route('pages.contact') }}">Contact Us</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('pages.about') }}">{{ __('site.about_us') }}</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('company.story') }}">{{ __('site.our_story') }}</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('company.leadership') }}">{{ __('site.leadership_team') }}</a>
+                        <a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('company.careers') }}">{{ __('site.careers') }}</a>
+                        <a class="dropdown-item rounded-3 p-2" href="{{ route('pages.contact') }}">{{ __('site.contact_us') }}</a>
                     </div>
                 </li>
 
@@ -159,39 +159,39 @@
                             <i class="bi bi-person-circle me-1"></i> {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-3 mt-2 animate__animated animate__fadeInUp animate__faster" style="min-width: 250px;">
-                            <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">My Account</h6></li>
-                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i> Go to Dashboard</a></li>
+                            <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">{{ __('site.my_account') }}</h6></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('dashboard') }}"><i class="bi bi-speedometer2 me-2"></i> {{ __('site.go_to_dashboard') }}</a></li>
                             @if(auth()->user()->hasRole('customer'))
-                                <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('customer.profile') }}"><i class="bi bi-person me-2"></i> View Profile</a></li>
-                                <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('customer.policies.index') }}"><i class="bi bi-shield-check me-2"></i> My Policies</a></li>
+                                <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('customer.profile') }}"><i class="bi bi-person me-2"></i> {{ __('site.view_profile') }}</a></li>
+                                <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('customer.policies.index') }}"><i class="bi bi-shield-check me-2"></i> {{ __('site.my_policies') }}</a></li>
                             @endif
                             <li><div class="dropdown-divider"></div></li>
                             <li>
                                 <a class="dropdown-item rounded-3 p-2 text-danger fw-bold" href="{{ route('logout.get') }}">
-                                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                    <i class="bi bi-box-arrow-right me-2"></i> {{ __('site.logout') }}
                                 </a>
                             </li>
                         </ul>
                     @else
                         <a class="btn btn-outline-primary px-4 rounded-pill fw-bold dropdown-toggle" href="#" id="portalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-lock me-1"></i> Portals
+                            <i class="bi bi-person-lock me-1"></i> {{ __('site.portals') }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-4 p-3 mt-2 animate__animated animate__fadeInUp animate__faster" style="min-width: 250px;">
-                            <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">Create Account</h6></li>
-                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.customer') }}">Customer Registration</a></li>
-                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.broker') }}">Broker/Agent Registration</a></li>
-                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.insurer') }}">Insurer Registration</a></li>
-                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.provider') }}">Provider Registration</a></li>
+                            <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">{{ __('site.create_account') }}</h6></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.customer') }}">{{ __('site.customer_registration') }}</a></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.broker') }}">{{ __('site.broker_registration') }}</a></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.insurer') }}">{{ __('site.insurer_registration') }}</a></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1" href="{{ route('register.provider') }}">{{ __('site.provider_registration') }}</a></li>
                             <li><div class="dropdown-divider"></div></li>
-                            <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">Member Login</h6></li>
-                            <li><a class="dropdown-item rounded-3 p-2 mb-1 fw-bold text-primary" href="{{ route('login') }}">Access All Portals</a></li>
+                            <li><h6 class="dropdown-header text-uppercase small letter-spacing-1 fw-bold text-muted mb-2">{{ __('site.member_login') }}</h6></li>
+                            <li><a class="dropdown-item rounded-3 p-2 mb-1 fw-bold text-primary" href="{{ route('login') }}">{{ __('site.access_all_portals') }}</a></li>
                         </ul>
                     @endauth
                 </li>
 
                 <li class="nav-item ms-lg-2">
                     <a href="{{ route('register') }}" class="btn btn-primary px-4 rounded-pill fw-bold shadow-sm hover-lift-sm">
-                        Get Started
+                        {{ __('site.get_started') }}
                     </a>
                 </li>
             </ul>
@@ -293,8 +293,8 @@
                     <a href="{{ route('lang.switch', 'en') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 {{ app()->getLocale() == 'en' ? 'active' : '' }}">English</a>
                     <a href="{{ route('lang.switch', 'sw') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 {{ app()->getLocale() == 'sw' ? 'active' : '' }}">Kiswahili</a>
                 </div>
-                <a href="{{ route('login') }}" class="btn btn-outline-primary w-100 mb-3 rounded-pill fw-bold">Login</a>
-                <a href="{{ route('register') }}" class="btn btn-primary w-100 rounded-pill fw-bold shadow-sm">Join BimaKwik</a>
+                <a href="{{ route('login') }}" class="btn btn-outline-primary w-100 mb-3 rounded-pill fw-bold">{{ __('site.login') }}</a>
+                <a href="{{ route('register') }}" class="btn btn-primary w-100 rounded-pill fw-bold shadow-sm">{{ __('site.join_bimakwik') }}</a>
             </div>
         </div>
     </div>
