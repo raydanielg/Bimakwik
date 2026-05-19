@@ -355,6 +355,77 @@
 
 @push('scripts')
 <script>
+function loadDemoData() {
+    Swal.fire({
+        title: 'Load Demo Data?',
+        html: `
+            <p>This will create sample wallets with realistic data:</p>
+            <ul class="text-start">
+                <li>5 Demo Wallets (Insurers, Brokers, Agents)</li>
+                <li>Sample Transactions</li>
+                <li>Realistic Balances</li>
+            </ul>
+            <p class="text-muted small">Perfect for testing and demonstration!</p>
+        `,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: '<i class="bi bi-check-circle me-2"></i>Yes, Load Demo Data!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Creating Demo Data...',
+                html: `
+                    <div class="mb-3">
+                        <div class="spinner-border text-success" role="status"></div>
+                    </div>
+                    <p>Setting up wallets and transactions...</p>
+                `,
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    // Simulate API call to seed data
+                    $.ajax({
+                        url: '/admin/finance/wallets/seed-demo',
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Demo Data Loaded!',
+                                html: `
+                                    <p class="mb-3">Successfully created:</p>
+                                    <div class="text-start">
+                                        <p class="mb-2"><i class="bi bi-check-circle text-success me-2"></i><strong>5 Wallets</strong> with different roles</p>
+                                        <p class="mb-2"><i class="bi bi-check-circle text-success me-2"></i><strong>10 Transactions</strong> across wallets</p>
+                                        <p class="mb-2"><i class="bi bi-check-circle text-success me-2"></i><strong>TZS 26.25M</strong> total balance</p>
+                                    </div>
+                                `,
+                                showConfirmButton: true,
+                                confirmButtonText: 'View Wallets'
+                            }).then(() => {
+                                location.reload();
+                            });
+                        },
+                        error: function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Failed to Load Demo Data',
+                                text: 'Please try again or contact support.',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
+
 function submitWalletForm() {
     Swal.fire({
         title: 'Creating Wallet...',
