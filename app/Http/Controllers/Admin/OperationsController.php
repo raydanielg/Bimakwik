@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Claim;
 use App\Models\Workflow;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class OperationsController extends Controller
 {
@@ -18,7 +19,7 @@ class OperationsController extends Controller
             $processingClaims = (int)($totalClaims * 0.1); // Estimate 10% processing
             $approvedClaims = (int)($totalClaims * 0.6); // Estimate 60% approved
         } catch (\Exception $e) {
-            $claims = collect()->paginate(20);
+            $claims = new LengthAwarePaginator([], 0, 20);
             $totalClaims = 0;
             $pendingClaims = 0;
             $processingClaims = 0;
