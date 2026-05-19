@@ -77,7 +77,7 @@ class OperationsController extends Controller
         try {
             $workflows = Workflow::latest()->paginate(20);
         } catch (\Exception $e) {
-            $workflows = collect()->paginate(20);
+            $workflows = new LengthAwarePaginator([], 0, 20);
         }
         return view('admin.operations.workflows', compact('workflows'));
     }
@@ -85,10 +85,10 @@ class OperationsController extends Controller
     public function documents()
     {
         try {
-            // Use a generic approach since Document model might not exist
-            $documents = collect()->paginate(20);
+            // Use empty paginator since Document model might not exist
+            $documents = new LengthAwarePaginator([], 0, 20);
         } catch (\Exception $e) {
-            $documents = collect()->paginate(20);
+            $documents = new LengthAwarePaginator([], 0, 20);
         }
         return view('admin.operations.documents', compact('documents'));
     }

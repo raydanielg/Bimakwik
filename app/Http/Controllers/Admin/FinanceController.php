@@ -13,6 +13,7 @@ use App\Models\BrokerCommissionWithdrawal;
 use App\Models\AgentCommissionWithdrawal;
 use App\Models\AggregatorCommissionWithdrawal;
 use App\Models\Wallet;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class FinanceController extends Controller
 {
