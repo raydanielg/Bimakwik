@@ -126,6 +126,7 @@ Route::middleware(['auth'])->group(function () {
         // Governance Routes
         Route::prefix('governance')->name('governance.')->group(function () {
             Route::get('/compliance', [App\Http\Controllers\Admin\GovernanceController::class, 'compliance'])->name('compliance');
+            Route::get('/compliance/{id}/export', [App\Http\Controllers\Admin\GovernanceController::class, 'exportReport'])->name('compliance.export');
             Route::get('/analytics', [App\Http\Controllers\Admin\GovernanceController::class, 'analytics'])->name('analytics');
             Route::get('/communications', [App\Http\Controllers\Admin\GovernanceController::class, 'communications'])->name('communications');
             Route::post('/communications/send', [App\Http\Controllers\Admin\GovernanceController::class, 'sendCommunication'])->name('communications.send');
