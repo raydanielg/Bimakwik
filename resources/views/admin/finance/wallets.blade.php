@@ -5,12 +5,19 @@
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center">
             <div>
-                <h2 class="fw-bold mb-1">Wallet & Balances</h2>
+                <h2 class="fw-bold mb-1"><i class="bi bi-wallet2 me-2"></i>Wallet & Balances</h2>
                 <p class="text-muted small mb-0">Manage platform wallets and financial balances</p>
             </div>
-            <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#addWalletModal">
-                <i class="bi bi-plus-circle me-2"></i>Add Wallet
-            </button>
+            <div class="d-flex gap-2">
+                @if($wallets->isEmpty() || $wallets->count() < 3)
+                <button class="btn btn-success rounded-pill px-4" onclick="loadDemoData()">
+                    <i class="bi bi-database-add me-2"></i>Load Demo Data
+                </button>
+                @endif
+                <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#addWalletModal">
+                    <i class="bi bi-plus-circle me-2"></i>Add Wallet
+                </button>
+            </div>
         </div>
     </div>
 </div>
