@@ -276,10 +276,79 @@
     </div>
 </div>
 
+<!-- Add Funds Modal -->
+<div class="modal fade" id="addFundsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom">
+                <h5 class="modal-title fw-bold"><i class="bi bi-plus-circle me-2"></i>Add Funds</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Adding funds to: <strong id="walletOwnerName"></strong>
+                </div>
+                <form id="addFundsForm">
+                    @csrf
+                    <input type="hidden" id="walletId" name="wallet_id">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Amount (TZS)</label>
+                        <input type="number" class="form-control" id="fundAmount" name="amount" placeholder="Enter amount" step="0.01" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Description</label>
+                        <textarea class="form-control" name="description" rows="2" placeholder="Reason for adding funds"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-top">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="submitAddFunds()">
+                    <i class="bi bi-check-circle me-2"></i>Add Funds
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Transactions Modal -->
+<div class="modal fade" id="transactionsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-bottom">
+                <h5 class="modal-title fw-bold"><i class="bi bi-list-ul me-2"></i>Recent Transactions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsList">
+                            <tr>
+                                <td colspan="4" class="text-center py-3">
+                                    <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+                                    <span class="ms-2">Loading...</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('scripts')
 <script>
 function submitWalletForm() {
-    // Simulate form submission
     Swal.fire({
         title: 'Creating Wallet...',
         text: 'Please wait',
@@ -289,7 +358,6 @@ function submitWalletForm() {
         }
     });
     
-    // Simulate API call
     setTimeout(() => {
         Swal.fire({
             icon: 'success',
@@ -302,6 +370,156 @@ function submitWalletForm() {
             location.reload();
         });
     }, 1500);
+}
+
+function showAddFundsModal(walletId, ownerName) {
+    $('#walletId').val(walletId);
+    $('#walletOwnerName').text(ownerName);
+    $('#fundAmount').val('');
+    $('#addFundsModal').modal('show');
+}
+
+function submitAddFunds() {
+    const walletId = $('#walletId').val();
+    const amount = $('#fundAmount').val();
+    
+    if (!amount || amount <= 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Invalid Amount',
+            text: 'Please enter a valid amount'
+        });
+        return;
+    }
+    
+    Swal.fire({
+        title: 'Adding Funds...',
+        text: 'Please wait',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+    
+    $.ajax({
+        url: `/admin/finance/wallets/${walletId}/add-funds`,
+        method: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            amount: amount
+        },
+        success: function(response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Funds Added!',
+                text: `Successfully added TZS ${amount}`,
+                showConfirmButton: false,
+                timer: 2000
+            }).then(() => {
+                $('#addFundsModal').modal('hide');
+                location.reload();
+            });
+        },
+        error: function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed',
+                text: 'Failed to add funds. Please try again.'
+            });
+        }
+    });
+}
+
+function viewWallet(walletId) {
+    window.location.href = `/admin/finance/wallets/${walletId}`;
+}
+
+function viewTransactions(walletId) {
+    $('#transactionsModal').modal('show');
+    
+    // Simulate loading transactions
+    setTimeout(() => {
+        $('#transactionsList').html(`
+            @forelse($recentTransactions->take(5) as $tx)
+            <tr>
+                <td><small>{{ $tx->created_at ? $tx->created_at->format('M d, Y') : 'N/A' }}</small></td>
+                <td><span class="badge bg-{{ $tx->type == 'credit' ? 'success' : 'danger' }} bg-opacity-10 text-{{ $tx->type == 'credit' ? 'success' : 'danger' }}">{{ $tx->type ?? 'N/A' }}</span></td>
+                <td><strong>TZS {{ number_format($tx->amount ?? 0, 2) }}</strong></td>
+                <td><small>{{ $tx->description ?? 'No description' }}</small></td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="4" class="text-center py-3 text-muted">No transactions found</td>
+            </tr>
+            @endforelse
+        `);
+    }, 500);
+}
+
+function freezeWallet(walletId) {
+    Swal.fire({
+        title: 'Freeze Wallet?',
+        text: 'This will prevent all transactions on this wallet',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, freeze it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: `/admin/finance/wallets/${walletId}/freeze`,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Wallet Frozen!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => location.reload());
+                },
+                error: function() {
+                    Swal.fire('Error', 'Failed to freeze wallet', 'error');
+                }
+            });
+        }
+    });
+}
+
+function activateWallet(walletId) {
+    Swal.fire({
+        title: 'Activate Wallet?',
+        text: 'This will allow transactions on this wallet',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, activate it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: `/admin/finance/wallets/${walletId}/activate`,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Wallet Activated!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => location.reload());
+                },
+                error: function() {
+                    Swal.fire('Error', 'Failed to activate wallet', 'error');
+                }
+            });
+        }
+    });
 }
 </script>
 @endpush
