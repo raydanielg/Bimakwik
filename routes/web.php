@@ -94,6 +94,46 @@ Route::middleware(['auth'])->group(function () {
         // Product Management Routes
         Route::resource('products', App\Http\Controllers\Product\InsuranceProductController::class);
         Route::get('/products/compare/matrix', [App\Http\Controllers\Product\InsuranceProductController::class, 'compare'])->name('products.compare');
+        
+        // AI Insights
+        Route::get('/ai-insights', [App\Http\Controllers\Admin\DashboardController::class, 'aiInsights'])->name('ai-insights');
+        
+        // Finance Routes
+        Route::prefix('finance')->name('finance.')->group(function () {
+            Route::get('/wallets', [App\Http\Controllers\Admin\FinanceController::class, 'wallets'])->name('wallets');
+            Route::get('/premiums', [App\Http\Controllers\Admin\FinanceController::class, 'premiums'])->name('premiums');
+            Route::get('/commissions', [App\Http\Controllers\Admin\FinanceController::class, 'commissions'])->name('commissions');
+            Route::get('/payouts', [App\Http\Controllers\Admin\FinanceController::class, 'payouts'])->name('payouts');
+            Route::post('/payouts/{id}/approve', [App\Http\Controllers\Admin\FinanceController::class, 'approvePayout'])->name('payouts.approve');
+            Route::post('/payouts/{id}/reject', [App\Http\Controllers\Admin\FinanceController::class, 'rejectPayout'])->name('payouts.reject');
+        });
+        
+        // Operations Routes
+        Route::prefix('operations')->name('operations.')->group(function () {
+            Route::get('/claims', [App\Http\Controllers\Admin\OperationsController::class, 'claims'])->name('claims');
+            Route::get('/claims/{id}', [App\Http\Controllers\Admin\OperationsController::class, 'claimDetails'])->name('claims.show');
+            Route::post('/claims/{id}/approve', [App\Http\Controllers\Admin\OperationsController::class, 'approveClaim'])->name('claims.approve');
+            Route::post('/claims/{id}/reject', [App\Http\Controllers\Admin\OperationsController::class, 'rejectClaim'])->name('claims.reject');
+            Route::get('/workflows', [App\Http\Controllers\Admin\OperationsController::class, 'workflows'])->name('workflows');
+            Route::get('/documents', [App\Http\Controllers\Admin\OperationsController::class, 'documents'])->name('documents');
+        });
+        
+        // Governance Routes
+        Route::prefix('governance')->name('governance.')->group(function () {
+            Route::get('/compliance', [App\Http\Controllers\Admin\GovernanceController::class, 'compliance'])->name('compliance');
+            Route::get('/analytics', [App\Http\Controllers\Admin\GovernanceController::class, 'analytics'])->name('analytics');
+            Route::get('/communications', [App\Http\Controllers\Admin\GovernanceController::class, 'communications'])->name('communications');
+            Route::post('/communications/send', [App\Http\Controllers\Admin\GovernanceController::class, 'sendCommunication'])->name('communications.send');
+        });
+        
+        // System & Tech Routes
+        Route::prefix('system')->name('system.')->group(function () {
+            Route::get('/configurations', [App\Http\Controllers\Admin\SystemTechController::class, 'configurations'])->name('configurations');
+            Route::post('/configurations', [App\Http\Controllers\Admin\SystemTechController::class, 'saveConfigurations'])->name('configurations.save');
+            Route::get('/developer-portal', [App\Http\Controllers\Admin\SystemTechController::class, 'developerPortal'])->name('developer-portal');
+            Route::get('/multi-country', [App\Http\Controllers\Admin\SystemTechController::class, 'multiCountry'])->name('multi-country');
+            Route::get('/audit-logs', [App\Http\Controllers\Admin\SystemTechController::class, 'auditLogs'])->name('audit-logs');
+        });
     });
         
     Route::get('/insurer/dashboard', [App\Http\Controllers\Insurer\DashboardController::class, 'index'])
