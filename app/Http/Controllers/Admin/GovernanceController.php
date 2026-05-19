@@ -48,4 +48,42 @@ class GovernanceController extends Controller
         }
         return view('admin.governance.communications', compact('communications'));
     }
+    
+    public function exportReport($id)
+    {
+        try {
+            // Get report data
+            $report = AuditComplianceReport::findOrFail($id);
+            
+            // Generate PDF with comprehensive formatting
+            $pdf = \PDF::loadView('admin.governance.report-pdf', [
+                'report' => $report,
+                'generatedDate' => now()->format('F d, Y'),
+                'generatedTime' => now()->format('H:i:s'),
+                'generatedBy' => auth()->user()->name ?? 'System',
+            ]);
+            
+            // Set PDF options
+            $pdf->setPaper('A4', 'portrait');
+            $pdf->setOption('enable-local-file-access', true);
+            $pdf->setOption('enable-javascript', true);
+            $pdf->setOption('no-stop-slow-scripts', true);
+            $pdf->setOption('enable-smart-shrinking', true);
+            $pdf->setOption('margin-top', 20);
+            $pdf->setOption('margin-bottom', 20);
+            $pdf->setOption('margin-left', 15);
+            $pdf->setOption('margin-right', 15);
+            
+            // Add watermark and protection
+            $pdf->setOption('footer-html', view('admin.governance.pdf-footer')->render());
+            $pdf->setOption('header-html', view('admin.governance.pdf-header')->render());
+            
+            $filename = 'Compliance_Report_' . $report->id . '_' . now()->format('Ymd') . '.pdf';
+            
+            return $pdf->download($filename);
+            
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to generate PDF: ' . $e->getMessage());
+        }
+    }
 }
