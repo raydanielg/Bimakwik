@@ -263,14 +263,37 @@ function viewReport(id) {
 
 function downloadReport(id) {
     Swal.fire({
-        title: 'Downloading...',
-        text: 'Preparing report for download',
+        title: 'Generating PDF...',
+        html: `
+            <div class="mb-3">
+                <div class="spinner-border text-primary" role="status"></div>
+            </div>
+            <p>Creating professional PDF report with:</p>
+            <ul class="text-start small">
+                <li>✓ Company logo and branding</li>
+                <li>✓ Watermark protection</li>
+                <li>✓ Comprehensive sections</li>
+                <li>✓ Copy protection</li>
+                <li>✓ Digital signatures</li>
+            </ul>
+        `,
         allowOutsideClick: false,
-        didOpen: () => Swal.showLoading()
+        showConfirmButton: false,
+        didOpen: () => {
+            // Redirect to PDF export route
+            setTimeout(() => {
+                window.location.href = `/admin/governance/compliance/${id}/export`;
+                Swal.close();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'PDF Generated!',
+                    text: 'Your report is downloading now',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }, 2000);
+        }
     });
-    setTimeout(() => {
-        Swal.fire('Success!', 'Report downloaded successfully', 'success');
-    }, 1500);
 }
 
 function submitReport(id) {
