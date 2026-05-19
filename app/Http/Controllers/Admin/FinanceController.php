@@ -228,6 +228,86 @@ class FinanceController extends Controller
             ], 500);
         }
     }
+    
+    public function seedDemoData(Request $request)
+    {
+        try {
+            // Create demo users if they don't exist
+            $demoUsers = [
+                ['name' => 'Jubilee Insurance', 'email' => 'jubilee@demo.com', 'role' => 'insurer', 'balance' => 12450000],
+                ['name' => 'AAR Insurance', 'email' => 'aar@demo.com', 'role' => 'insurer', 'balance' => 8230000],
+                ['name' => 'Broker Network Ltd', 'email' => 'broker@demo.com', 'role' => 'broker', 'balance' => 3120000],
+                ['name' => 'Aggregator Hub', 'email' => 'aggregator@demo.com', 'role' => 'aggregator', 'balance' => 1890000],
+                ['name' => 'Service Provider Co', 'email' => 'provider@demo.com', 'role' => 'agent', 'balance' => 560000],
+            ];
+            
+            $createdWallets = 0;
+            $createdTransactions = 0;
+            
+            foreach ($demoUsers as $userData) {
+                // Create or get user
+                $user = \App\Models\User::firstOrCreate(
+                    ['email' => $userData['email']],
+                    [
+                        'name' => $userData['name'],
+                        'role' => $userData['role'],
+                        'password' => bcrypt('password123'),
+                        'email_verified_at' => now()
+                    ]
+                );
+                
+                // Create wallet for user
+                $wallet = Wallet::firstOrCreate(
+                    ['user_id' => $user->id],
+                    [
+                        'balance' => $userData['balance'],
+                        'currency' => 'TZS',
+                        'is_active' => $userData['role'] !== 'aggregator', // Aggregator frozen for demo
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ]
+                );
+                
+                if ($wallet->wasRecentlyCreated) {
+                    $createdWallets++;
+                    
+                    // Create sample transactions for each wallet
+                    WalletTransaction::create([
+                        'wallet_id' => $wallet->id,
+                        'amount' => $userData['balance'] * 0.3,
+                        'type' => 'credit',
+                        'description' => 'Initial deposit',
+                        'created_at' => now()->subDays(7)
+                    ]);
+                    
+                    WalletTransaction::create([
+                        'wallet_id' => $wallet->id,
+                        'amount' => $userData['balance'] * 0.1,
+                        'type' => 'debit',
+                        'description' => 'Commission payout',
+                        'created_at' => now()->subDays(3)
+                    ]);
+                    
+                    $createdTransactions += 2;
+                }
+            }
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Demo data created successfully',
+                'data' => [
+                    'wallets' => $createdWallets,
+                    'transactions' => $createdTransactions
+                ]
+            ]);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create demo data: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 
     public function premiums()
     {
