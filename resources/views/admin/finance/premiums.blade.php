@@ -8,8 +8,8 @@
                 <h2 class="fw-bold mb-1">Premium Collections</h2>
                 <p class="text-muted small mb-0">Track and manage insurance premium payments</p>
             </div>
-            <button class="btn btn-primary rounded-pill px-4" onclick="window.print()">
-                <i class="bi bi-printer me-2"></i>Export Report
+            <button class="btn btn-primary rounded-pill px-4" onclick="exportPDF()">
+                <i class="bi bi-file-earmark-pdf me-2"></i>Export PDF
             </button>
         </div>
     </div>
@@ -23,15 +23,15 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Total Collected</p>
-                        <h3 class="fw-bold mb-0">TZS 128.5M</h3>
+                        <h3 class="fw-bold mb-0">TZS {{ number_format($totalCollected, 2) }}</h3>
                     </div>
                     <div class="bg-success bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-cash-stack text-success fs-4"></i>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <span class="badge bg-success bg-opacity-10 text-success">
-                        <i class="bi bi-arrow-up"></i> 18.2% this month
+                    <span class="badge bg-{{ $monthlyGrowth >= 0 ? 'success' : 'danger' }} bg-opacity-10 text-{{ $monthlyGrowth >= 0 ? 'success' : 'danger' }}">
+                        <i class="bi bi-arrow-{{ $monthlyGrowth >= 0 ? 'up' : 'down' }}"></i> {{ number_format(abs($monthlyGrowth), 1) }}% this month
                     </span>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Pending Payments</p>
-                        <h3 class="fw-bold mb-0">TZS 12.3M</h3>
+                        <h3 class="fw-bold mb-0">TZS {{ number_format($pendingAmount, 2) }}</h3>
                     </div>
                     <div class="bg-warning bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-clock-history text-warning fs-4"></i>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="mt-3">
                     <span class="badge bg-warning bg-opacity-10 text-warning">
-                        45 policies overdue
+                        {{ $pendingCount }} policies overdue
                     </span>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Today's Collections</p>
-                        <h3 class="fw-bold mb-0">TZS 4.2M</h3>
+                        <h3 class="fw-bold mb-0">TZS {{ number_format($todayCollections, 2) }}</h3>
                     </div>
                     <div class="bg-primary bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-calendar-check text-primary fs-4"></i>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="mt-3">
                     <span class="badge bg-primary bg-opacity-10 text-primary">
-                        89 transactions
+                        {{ $todayCount }} transactions
                     </span>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Collection Rate</p>
-                        <h3 class="fw-bold mb-0">94.2%</h3>
+                        <h3 class="fw-bold mb-0">{{ number_format($collectionRate, 1) }}%</h3>
                     </div>
                     <div class="bg-info bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-graph-up-arrow text-info fs-4"></i>
@@ -178,13 +178,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse([
-                        ['policy' => 'POL-2024-001234', 'customer' => 'John Mwangi', 'product' => 'Motor Insurance', 'amount' => '450,000', 'method' => 'M-Pesa', 'status' => 'paid', 'date' => '2 hours ago'],
-                        ['policy' => 'POL-2024-001235', 'customer' => 'Sarah Kimani', 'product' => 'Health Insurance', 'amount' => '280,000', 'method' => 'Bank Transfer', 'status' => 'paid', 'date' => '5 hours ago'],
-                        ['policy' => 'POL-2024-001236', 'customer' => 'David Omondi', 'product' => 'Life Insurance', 'amount' => '120,000', 'method' => 'Card', 'status' => 'pending', 'date' => '1 day ago'],
-                        ['policy' => 'POL-2024-001237', 'customer' => 'Grace Muthoni', 'product' => 'Motor Insurance', 'amount' => '380,000', 'method' => 'M-Pesa', 'status' => 'paid', 'date' => '1 day ago'],
-                        ['policy' => 'POL-2024-001238', 'customer' => 'Peter Kamau', 'product' => 'General Insurance', 'amount' => '650,000', 'method' => 'Bank Transfer', 'status' => 'overdue', 'date' => '3 days ago'],
-                    ] as $premium)
+                    @forelse($collections as $premium)
                     <tr>
                         <td class="py-3">
                             <span class="fw-semibold text-primary">{{ $premium['policy'] }}</span>
