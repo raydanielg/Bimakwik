@@ -356,58 +356,27 @@ class FinanceController extends Controller
         try {
             // Get all premium data
             $collections = PaymentTransaction::latest()->get();
+            $totalCollected = PaymentTransaction::sum('amount') ?? 0;
+            $todayCollections = PaymentTransaction::whereDate('created_at', today())->sum('amount') ?? 0;
             
-            // Create CSV content
-            $filename = 'Premium_Collections_' . now()->format('Ymd_His') . '.csv';
+            // Generate PDF
+            $pdf = \PDF::loadView('admin.finance.premiums-pdf', [
+                'collections' => $collections,
+                'totalCollected' => $totalCollected,
+                'todayCollections' => $todayCollections,
+                'generatedDate' => now()->format('F d, Y'),
+                'generatedTime' => now()->format('H:i:s'),
+                'generatedBy' => auth()->user()->name ?? 'System',
+            ]);
             
-            $headers = [
-                'Content-Type' => 'text/csv',
-                'Content-Disposition' => 'attachment; filename="' . $filename . '"',
-            ];
+            $pdf->setPaper('A4', 'landscape');
             
-            $callback = function() use ($collections) {
-                $file = fopen('php://output', 'w');
-                
-                // Add CSV headers
-                fputcsv($file, [
-                    'Transaction ID',
-                    'Customer',
-                    'Type',
-                    'Amount (TZS)',
-                    'Payment Method',
-                    'Status',
-                    'Date',
-                    'Time'
-                ]);
-                
-                // Add data rows
-                foreach ($collections as $transaction) {
-                    fputcsv($file, [
-                        'TXN-' . $transaction->id,
-                        $transaction->user->name ?? 'N/A',
-                        $transaction->type ?? 'Premium Payment',
-                        number_format($transaction->amount ?? 0, 2),
-                        $transaction->payment_method ?? 'M-Pesa',
-                        $transaction->status ?? 'completed',
-                        $transaction->created_at ? $transaction->created_at->format('Y-m-d') : 'N/A',
-                        $transaction->created_at ? $transaction->created_at->format('H:i:s') : 'N/A',
-                    ]);
-                }
-                
-                // Add summary
-                fputcsv($file, []);
-                fputcsv($file, ['SUMMARY']);
-                fputcsv($file, ['Total Collections', '', '', number_format($collections->sum('amount'), 2)]);
-                fputcsv($file, ['Total Transactions', $collections->count()]);
-                fputcsv($file, ['Generated Date', now()->format('Y-m-d H:i:s')]);
-                
-                fclose($file);
-            };
+            $filename = 'Premium_Collections_' . now()->format('Ymd_His') . '.pdf';
             
-            return response()->stream($callback, 200, $headers);
+            return $pdf->download($filename);
             
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to generate export: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to generate PDF: ' . $e->getMessage());
         }
     }
 
