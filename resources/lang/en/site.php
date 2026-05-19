@@ -165,4 +165,104 @@ return [
     'expert_support_desc' => '24/7 customer support from insurance experts',
     'easy_claims' => 'Easy Claims',
     'easy_claims_desc' => 'File and track claims digitally with real-time updates',
+    
+    // About Page
+    'about_title' => 'About BimaKwik',
+    'about_subtitle' => 'Revolutionizing Insurance in Tanzania',
+    'our_mission' => 'Our Mission',
+    'our_vision' => 'Our Vision',
+    'our_values' => 'Our Values',
+    'meet_team' => 'Meet Our Team',
+    'join_journey' => 'Join Our Journey',
+    
+    // Contact Page
+    'contact_title' => 'Contact Us',
+    'contact_subtitle' => 'Get in Touch',
+    'send_message' => 'Send Message',
+    'your_name' => 'Your Name',
+    'your_email' => 'Your Email',
+    'subject' => 'Subject',
+    'message' => 'Message',
+    'submit' => 'Submit',
+    'office_location' => 'Office Location',
+    'business_hours' => 'Business Hours',
+    
+    // Products Page
+    'our_products' => 'Our Products',
+    'explore_products' => 'Explore Our Insurance Products',
+    'get_quote_now' => 'Get Quote Now',
+    'product_features' => 'Product Features',
+    'coverage_details' => 'Coverage Details',
+    
+    // Legal Pages
+    'terms_of_service' => 'Terms of Service',
+    'privacy_policy_full' => 'Privacy Policy',
+    'cookie_policy_full' => 'Cookie Policy',
+    'data_protection' => 'Data Protection',
+    'last_updated' => 'Last updated',
+    'acceptance_of_terms' => 'Acceptance of Terms',
+    'use_of_services' => 'Use of Services',
+    'user_responsibilities' => 'User Responsibilities',
+    'limitation_liability' => 'Limitation of Liability',
+    
+    // Platform Pages
+    'platform_for_businesses' => 'Platform for Businesses',
+    'platform_for_customers' => 'Platform for Customers',
+    'platform_overview_full' => 'Platform Overview',
+    'technology_stack' => 'Technology Stack',
+    'key_features' => 'Key Features',
+    'how_we_work' => 'How We Work',
+    
+    // Resources Pages
+    'guidelines' => 'Guidelines',
+    'learning_resources' => 'Learning Resources',
+    'latest_news' => 'Latest News',
+    'blog_articles' => 'Blog Articles',
+    'download_resources' => 'Download Resources',
+    'read_article' => 'Read Article',
+    'download_now' => 'Download Now',
+    'view_all' => 'View All',
+    
+    // Testimonials
+    'testimonials' => 'Testimonials',
+    'what_customers_say' => 'What Our Customers Say',
+    'customer_stories' => 'Customer Stories',
+    'verified_review' => 'Verified Review',
+    
+    // Claims
+    'file_a_claim' => 'File a Claim',
+    'claim_process' => 'Claim Process',
+    'track_claim' => 'Track Your Claim',
+    'claim_status' => 'Claim Status',
+    'upload_documents' => 'Upload Documents',
+    
+    // Quote
+    'request_quote_full' => 'Request a Quote',
+    'get_instant_quote' => 'Get Instant Quote',
+    'compare_quotes' => 'Compare Quotes',
+    'select_insurance_type' => 'Select Insurance Type',
+    'personal_details' => 'Personal Details',
+    'vehicle_details' => 'Vehicle Details',
+    'calculate_premium' => 'Calculate Premium',
+    
+    // Partners
+    'why_partner' => 'Why Partner With Us',
+    'partner_benefits' => 'Partner Benefits',
+    'become_partner' => 'Become a Partner',
+    'partner_portal' => 'Partner Portal',
+    
+    // Common Actions
+    'back' => 'Back',
+    'next' => 'Next',
+    'previous' => 'Previous',
+    'save' => 'Save',
+    'cancel' => 'Cancel',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'search' => 'Search',
+    'filter' => 'Filter',
+    'sort' => 'Sort',
+    'loading' => 'Loading...',
+    'no_results' => 'No results found',
+    'showing_results' => 'Showing results',
 ];
