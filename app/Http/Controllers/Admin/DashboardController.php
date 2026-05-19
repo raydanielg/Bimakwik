@@ -136,9 +136,23 @@ class DashboardController extends Controller
         }
         
         // Recent Activities
-        $recentUsers = User::latest()->take(5)->get();
-        $recentClaims = Claim::latest()->take(5)->get();
-        $recentTransactions = PaymentTransaction::latest()->take(5)->get();
+        try {
+            $recentUsers = User::latest()->take(5)->get();
+        } catch (\Exception $e) {
+            $recentUsers = collect();
+        }
+        
+        try {
+            $recentClaims = Claim::latest()->take(5)->get();
+        } catch (\Exception $e) {
+            $recentClaims = collect();
+        }
+        
+        try {
+            $recentTransactions = PaymentTransaction::latest()->take(5)->get();
+        } catch (\Exception $e) {
+            $recentTransactions = collect();
+        }
         
         return view('admin.dashboard', compact(
             'totalUsers', 'usersGrowth', 'totalPolicies', 'activePolicies',
