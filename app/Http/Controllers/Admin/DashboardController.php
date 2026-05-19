@@ -54,24 +54,34 @@ class DashboardController extends Controller
         $paidCommissions = $totalCommissions - $pendingCommissions;
         
         // Monthly Revenue Chart Data (Last 12 months)
-        $monthlyRevenue = PaymentTransaction::where('created_at', '>=', Carbon::now()->subMonths(12))
-            ->select(
-                DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'),
-                DB::raw('COALESCE(SUM(amount), 0) as total')
-            )
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get();
+        try {
+            $monthlyRevenue = PaymentTransaction::where('created_at', '>=', Carbon::now()->subMonths(12))
+                ->select(
+                    DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'),
+                    DB::raw('COALESCE(SUM(amount), 0) as total')
+                )
+                ->groupBy('month')
+                ->orderBy('month')
+                ->get();
+        } catch (\Exception $e) {
+            // Fallback: Empty collection if table doesn't exist
+            $monthlyRevenue = collect();
+        }
         
         // User Growth Chart Data (Last 12 months)
-        $monthlyUsers = User::where('created_at', '>=', Carbon::now()->subMonths(12))
-            ->select(
-                DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'),
-                DB::raw('COUNT(*) as total')
-            )
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get();
+        try {
+            $monthlyUsers = User::where('created_at', '>=', Carbon::now()->subMonths(12))
+                ->select(
+                    DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'),
+                    DB::raw('COUNT(*) as total')
+                )
+                ->groupBy('month')
+                ->orderBy('month')
+                ->get();
+        } catch (\Exception $e) {
+            // Fallback: Empty collection
+            $monthlyUsers = collect();
+        }
         
         // User Types Distribution (with fallback if no roles)
         try {
