@@ -21,11 +21,19 @@ class GovernanceController extends Controller
             // Merge all compliance data
             $allReports = $auditReports->merge($complianceChecks);
             
-            // Paginate manually
+            // Paginate manually using LengthAwarePaginator
             $page = request()->get('page', 1);
             $perPage = 20;
             $offset = ($page - 1) * $perPage;
-            $reports = $allReports->slice($offset, $perPage);
+            $paginatedItems = $allReports->slice($offset, $perPage)->values();
+            
+            $reports = new LengthAwarePaginator(
+                $paginatedItems,
+                $allReports->count(),
+                $perPage,
+                $page,
+                ['path' => request()->url(), 'query' => request()->query()]
+            );
             
         } catch (\Exception $e) {
             $reports = new LengthAwarePaginator([], 0, 20);
