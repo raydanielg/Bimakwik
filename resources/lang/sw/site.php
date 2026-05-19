@@ -251,6 +251,9 @@ return [
     'become_partner' => 'Kuwa Mshirika',
     'partner_portal' => 'Lango la Washirika',
     
+    // Language
+    'language' => 'Lugha',
+    
     // Common Actions
     'back' => 'Rudi',
     'next' => 'Ifuatayo',

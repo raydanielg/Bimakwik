@@ -251,6 +251,9 @@ return [
     'become_partner' => 'Become a Partner',
     'partner_portal' => 'Partner Portal',
     
+    // Language
+    'language' => 'Language',
+    
     // Common Actions
     'back' => 'Back',
     'next' => 'Next',
