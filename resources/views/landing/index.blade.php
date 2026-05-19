@@ -66,12 +66,12 @@
             <div class="container hero-content">
                 <div class="row">
                     <div class="col-lg-7">
-                        <span class="floating-badge animate__animated animate__fadeInDown">Trust & Reliability</span>
-                        <h1 class="display-2 fw-bold mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s">Insurance Protection for Every <span class="text-warning">Moment</span></h1>
-                        <p class="lead mb-5 animate__animated animate__fadeInUp" style="animation-delay: 0.4s">Secure your future with BimaKwik. We provide reliable health, motor, and life insurance tailored for you.</p>
+                        <span class="floating-badge animate__animated animate__fadeInDown">{{ __('site.hero_slide1_badge') }}</span>
+                        <h1 class="display-2 fw-bold mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s">{{ __('site.hero_slide1_title') }} <span class="text-warning">{{ __('site.hero_slide1_title_highlight') }}</span></h1>
+                        <p class="lead mb-5 animate__animated animate__fadeInUp" style="animation-delay: 0.4s">{{ __('site.hero_slide1_desc') }}</p>
                         <div class="d-flex gap-3 animate__animated animate__fadeInUp" style="animation-delay: 0.6s">
-                            <a href="{{ route('register') }}" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">Get Started</a>
-                            <a href="{{ route('pages.about') }}" class="btn btn-outline-light btn-lg px-5 rounded-pill">Learn More</a>
+                            <a href="{{ route('register') }}" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">{{ __('site.get_started') }}</a>
+                            <a href="{{ route('pages.about') }}" class="btn btn-outline-light btn-lg px-5 rounded-pill">{{ __('site.learn_more') }}</a>
                         </div>
                     </div>
                 </div>
@@ -82,9 +82,9 @@
             <div class="container hero-content text-center">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <h1 class="display-3 fw-bold mb-4">Digital Solutions for Modern <span class="text-warning">Business</span></h1>
-                        <p class="lead mb-5">Professional consulting and comprehensive coverage for your business needs.</p>
-                        <a href="#" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">View Business Plans</a>
+                        <h1 class="display-3 fw-bold mb-4">{{ __('site.hero_slide2_title') }} <span class="text-warning">{{ __('site.hero_slide2_title_highlight') }}</span></h1>
+                        <p class="lead mb-5">{{ __('site.hero_slide2_desc') }}</p>
+                        <a href="#" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">{{ __('site.view_business_plans') }}</a>
                     </div>
                 </div>
             </div>
@@ -94,9 +94,9 @@
             <div class="container hero-content text-end">
                 <div class="row justify-content-end">
                     <div class="col-lg-7">
-                        <h1 class="display-3 fw-bold mb-4">Quick & Easy <span class="text-warning">Claims</span></h1>
-                        <p class="lead mb-5">Experience seamless digital claims processing with BimaKwik.</p>
-                        <a href="#" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">Claim Now</a>
+                        <h1 class="display-3 fw-bold mb-4">{{ __('site.hero_slide3_title') }} <span class="text-warning">{{ __('site.hero_slide3_title_highlight') }}</span></h1>
+                        <p class="lead mb-5">{{ __('site.hero_slide3_desc') }}</p>
+                        <a href="#" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">{{ __('site.claim_now') }}</a>
                     </div>
                 </div>
             </div>
