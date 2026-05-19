@@ -24,7 +24,7 @@ class FinanceController extends Controller
             $totalBalance = Wallet::sum('balance') ?? 0;
             $totalPending = 0; // No status column, set to 0
         } catch (\Exception $e) {
-            $wallets = collect()->paginate(20);
+            $wallets = new LengthAwarePaginator([], 0, 20);
             $totalBalance = 0;
             $totalPending = 0;
         }
@@ -37,7 +37,7 @@ class FinanceController extends Controller
             $collections = Transaction::latest()->paginate(20);
             $totalCollected = Transaction::sum('amount') ?? 0;
         } catch (\Exception $e) {
-            $collections = collect()->paginate(20);
+            $collections = new LengthAwarePaginator([], 0, 20);
             $totalCollected = 0;
         }
         return view('admin.finance.premiums', compact('collections', 'totalCollected'));
