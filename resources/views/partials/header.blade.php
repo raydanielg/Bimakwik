@@ -434,27 +434,102 @@
     .hamburger-icon span:nth-child(2) { top: 8px; }
     .hamburger-icon span:nth-child(3) { top: 16px; }
 
-    .offcanvas { width: 85% !important; max-width: 350px !important; }
-    .mobile-nav-link {
-        display: block;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #333;
-        text-decoration: none;
-        padding: 10px 0;
-        transition: all 0.3s ease;
+    /* === Mobile Sidebar Styling - Modern & Clean === */
+    .offcanvas {
+        font-family: 'Plus Jakarta Sans', 'Nunito', sans-serif;
     }
-    .mobile-nav-link.active, .mobile-nav-link:hover { color: #0d6efd; }
     
-    .sidebar-icon-circle {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
+    /* Mobile Nav Items */
+    .mobile-nav-item {
         display: flex;
         align-items: center;
-        justify-content: center;
-        font-size: 1rem;
+        gap: 12px;
+        padding: 14px 16px;
+        margin-bottom: 4px;
+        background: white;
+        border: none;
+        border-radius: 12px;
+        color: #1e293b;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        width: 100%;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
+    
+    .mobile-nav-item:hover {
+        background: linear-gradient(135deg, #004a99 0%, #0056b3 100%);
+        color: white;
+        transform: translateX(4px);
+        box-shadow: 0 4px 12px rgba(0, 74, 153, 0.2);
+    }
+    
+    .mobile-nav-item.active {
+        background: linear-gradient(135deg, #004a99 0%, #0056b3 100%);
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 74, 153, 0.25);
+    }
+    
+    .mobile-nav-item i:first-child {
+        font-size: 1.2rem;
+        width: 24px;
+        text-align: center;
+    }
+    
+    .mobile-nav-item .accordion-icon {
+        transition: transform 0.3s ease;
+        font-size: 0.9rem;
+    }
+    
+    .mobile-nav-item[aria-expanded="true"] .accordion-icon {
+        transform: rotate(180deg);
+    }
+    
+    /* Mobile Submenu */
+    .mobile-submenu {
+        padding: 8px 0 12px 0;
+        margin-left: 12px;
+        border-left: 2px solid #e2e8f0;
+    }
+    
+    .mobile-submenu a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        color: #475569;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+    
+    .mobile-submenu a:hover {
+        background: #f1f5f9;
+        color: #004a99;
+        padding-left: 20px;
+    }
+    
+    .mobile-submenu a i {
+        font-size: 1rem;
+        color: #94a3b8;
+    }
+    
+    .mobile-submenu a:hover i {
+        color: #004a99;
+    }
+    
+    .mobile-nav-group {
+        margin-bottom: 4px;
+    }
+    
+    /* Smooth collapse animation */
+    .collapse {
+        transition: height 0.35s ease;
+    }
+    
     .letter-spacing-1 { letter-spacing: 1px; }
 
     /* === Font: Plus Jakarta Sans for all header elements === */
