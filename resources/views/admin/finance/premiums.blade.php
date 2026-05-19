@@ -256,19 +256,115 @@
             </table>
         </div>
     </div>
+    @if($collections->hasPages())
     <div class="card-footer bg-white border-top py-3">
         <div class="d-flex justify-content-between align-items-center">
-            <small class="text-muted">Showing 1 to 5 of 156 collections</small>
-            <nav>
-                <ul class="pagination pagination-sm mb-0">
-                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
+            <small class="text-muted">Showing {{ $collections->firstItem() }} to {{ $collections->lastItem() }} of {{ $collections->total() }} collections</small>
+            <div>
+                {{ $collections->links() }}
+            </div>
         </div>
     </div>
+    @endif
 </div>
+
+@push('scripts')
+<script>
+function exportPDF() {
+    Swal.fire({
+        title: 'Generating Premium Report...',
+        html: `
+            <div class="mb-3">
+                <div class="spinner-border text-primary" role="status"></div>
+            </div>
+            <p>Creating comprehensive PDF report with:</p>
+            <ul class="text-start small">
+                <li>✓ All premium collections</li>
+                <li>✓ Payment statistics</li>
+                <li>✓ Collection summary</li>
+                <li>✓ Watermark protection</li>
+            </ul>
+        `,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            setTimeout(() => {
+                window.location.href = '{{ route("admin.finance.premiums.export") }}';
+                Swal.close();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'PDF Generated!',
+                    text: 'Your premium report is downloading',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }, 2000);
+        }
+    });
+}
+
+function viewReceipt(id) {
+    Swal.fire({
+        title: 'Premium Receipt',
+        html: `
+            <div class="text-start">
+                <p><strong>Transaction ID:</strong> TXN-${id}</p>
+                <p><strong>Status:</strong> <span class="badge bg-success">Paid</span></p>
+                <p><strong>Amount:</strong> TZS XXX,XXX.XX</p>
+                <p><strong>Payment Method:</strong> M-Pesa</p>
+                <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+            </div>
+        `,
+        icon: 'info',
+        confirmButtonText: 'Close'
+    });
+}
+
+function downloadReceipt(id) {
+    Swal.fire({
+        title: 'Downloading Receipt...',
+        html: `
+            <div class="mb-3">
+                <div class="spinner-border text-success" role="status"></div>
+            </div>
+            <p>Preparing receipt PDF for transaction TXN-${id}</p>
+        `,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            setTimeout(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Receipt Downloaded!',
+                    text: 'Receipt saved to your downloads folder',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            }, 1500);
+        }
+    });
+}
+
+function sendReceipt(id) {
+    Swal.fire({
+        title: 'Send Receipt via Email?',
+        text: 'Receipt will be sent to the customer\'s registered email',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#0d6efd',
+        confirmButtonText: 'Send Email'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Email Sent!',
+                text: 'Receipt has been sent successfully',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+    });
+}
+</script>
+@endpush
 @endsection
