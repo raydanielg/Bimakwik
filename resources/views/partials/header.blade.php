@@ -26,7 +26,7 @@
             <a href="{{ route('support.faqs') }}" class="text-white text-decoration-none small hover-underline d-none d-md-inline">FAQs</a>
             <span class="text-white-50 d-none d-md-inline">|</span>
             <a href="{{ route('quote.request') }}" class="btn btn-warning btn-sm px-3 rounded-pill fw-bold text-dark shadow-sm">
-                <i class="bi bi-play-circle me-1"></i> Request Demo
+                <i class="bi bi-file-earmark-text me-1"></i> Request Quote
             </a>
         </div>
     </div>
@@ -286,6 +286,13 @@
             </div>
             
             <div class="mt-4 pt-4 border-top">
+                <!-- Mobile Language Switcher -->
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <i class="bi bi-globe2 text-primary"></i>
+                    <span class="small fw-bold text-muted">Language:</span>
+                    <a href="{{ route('lang.switch', 'en') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 {{ app()->getLocale() == 'en' ? 'active' : '' }}">English</a>
+                    <a href="{{ route('lang.switch', 'sw') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 {{ app()->getLocale() == 'sw' ? 'active' : '' }}">Kiswahili</a>
+                </div>
                 <a href="{{ route('login') }}" class="btn btn-outline-primary w-100 mb-3 rounded-pill fw-bold">Login</a>
                 <a href="{{ route('register') }}" class="btn btn-primary w-100 rounded-pill fw-bold shadow-sm">Join BimaKwik</a>
             </div>
@@ -419,10 +426,67 @@
     }
     .letter-spacing-1 { letter-spacing: 1px; }
 
-    .top-bar { background-color: #004a99 !important; font-size: 0.85rem; font-family: 'Nunito', sans-serif; }
-    .navbar .nav-link { color: #334155 !important; font-family: 'Nunito', sans-serif; font-size: 0.95rem; transition: all 0.2s ease; }
+    /* === Font: Plus Jakarta Sans for all header elements === */
+    .top-bar,
+    .top-bar a,
+    .top-bar .dropdown-menu,
+    .main-header,
+    .main-header .nav-link,
+    .main-header .navbar-brand,
+    .main-header .btn,
+    .main-header .dropdown-menu {
+        font-family: 'Plus Jakarta Sans', 'Nunito', sans-serif;
+    }
+
+    /* === Top bar base === */
+    .top-bar {
+        background-color: #004a99 !important;
+        font-size: 0.85rem;
+        /* Critical: create stacking context ABOVE the sticky navbar (z-index 1020) */
+        position: relative;
+        z-index: 1030;
+        overflow: visible !important;
+    }
+
+    /* === Language dropdown z-index fix === */
+    .top-bar .dropdown {
+        position: relative;
+        z-index: 1031;
+    }
+    .top-bar .dropdown-menu {
+        z-index: 1032 !important;
+        overflow: visible !important;
+        /* Smooth entry */
+        animation: fadeDropIn 0.18s ease;
+    }
+    @keyframes fadeDropIn {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === Mobile: language dropdown full-width fix === */
+    @media (max-width: 767.98px) {
+        .top-bar .dropdown-menu {
+            position: fixed !important;
+            top: auto !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            min-width: 180px;
+            z-index: 9999 !important;
+            margin-top: 0 !important;
+        }
+    }
+
+    .navbar .nav-link { color: #334155 !important; font-family: 'Plus Jakarta Sans', 'Nunito', sans-serif; font-size: 0.95rem; font-weight: 600; transition: all 0.2s ease; }
     .navbar .nav-link:hover { color: #0d6efd !important; }
     .navbar .nav-link.active { color: #0d6efd !important; }
+
+    /* === Navbar brand stronger === */
+    .navbar-brand {
+        font-family: 'Plus Jakarta Sans', 'Nunito', sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
     
     .hover-lift-sm:hover { transform: translateY(-2px); transition: transform 0.2s; }
 </style>
