@@ -165,4 +165,104 @@ return [
     'expert_support_desc' => 'Msaada wa wateja 24/7 kutoka kwa wataalam wa bima',
     'easy_claims' => 'Madai Rahisi',
     'easy_claims_desc' => 'Wasilisha na fuatilia madai kwa njia ya kidijitali na masasisho ya wakati halisi',
+    
+    // About Page
+    'about_title' => 'Kuhusu BimaKwik',
+    'about_subtitle' => 'Kubadilisha Bima Tanzania',
+    'our_mission' => 'Dhamira Yetu',
+    'our_vision' => 'Dira Yetu',
+    'our_values' => 'Maadili Yetu',
+    'meet_team' => 'Kutana na Timu Yetu',
+    'join_journey' => 'Jiunge na Safari Yetu',
+    
+    // Contact Page
+    'contact_title' => 'Wasiliana Nasi',
+    'contact_subtitle' => 'Tuweke Mawasiliano',
+    'send_message' => 'Tuma Ujumbe',
+    'your_name' => 'Jina Lako',
+    'your_email' => 'Barua Pepe Yako',
+    'subject' => 'Mada',
+    'message' => 'Ujumbe',
+    'submit' => 'Wasilisha',
+    'office_location' => 'Mahali pa Ofisi',
+    'business_hours' => 'Masaa ya Kazi',
+    
+    // Products Page
+    'our_products' => 'Bidhaa Zetu',
+    'explore_products' => 'Gundua Bidhaa Zetu za Bima',
+    'get_quote_now' => 'Pata Nukuu Sasa',
+    'product_features' => 'Vipengele vya Bidhaa',
+    'coverage_details' => 'Maelezo ya Bima',
+    
+    // Legal Pages
+    'terms_of_service' => 'Masharti ya Huduma',
+    'privacy_policy_full' => 'Sera ya Faragha',
+    'cookie_policy_full' => 'Sera ya Vidakuzi',
+    'data_protection' => 'Ulinzi wa Data',
+    'last_updated' => 'Imesasishwa mwisho',
+    'acceptance_of_terms' => 'Kukubali Masharti',
+    'use_of_services' => 'Matumizi ya Huduma',
+    'user_responsibilities' => 'Majukumu ya Mtumiaji',
+    'limitation_liability' => 'Kikomo cha Dhima',
+    
+    // Platform Pages
+    'platform_for_businesses' => 'Jukwaa kwa Biashara',
+    'platform_for_customers' => 'Jukwaa kwa Wateja',
+    'platform_overview_full' => 'Muhtasari wa Jukwaa',
+    'technology_stack' => 'Teknolojia Yetu',
+    'key_features' => 'Vipengele Muhimu',
+    'how_we_work' => 'Jinsi Tunavyofanya Kazi',
+    
+    // Resources Pages
+    'guidelines' => 'Miongozo',
+    'learning_resources' => 'Rasilimali za Kujifunza',
+    'latest_news' => 'Habari za Hivi Karibuni',
+    'blog_articles' => 'Makala za Blogu',
+    'download_resources' => 'Pakua Rasilimali',
+    'read_article' => 'Soma Makala',
+    'download_now' => 'Pakua Sasa',
+    'view_all' => 'Tazama Zote',
+    
+    // Testimonials
+    'testimonials' => 'Ushuhuda',
+    'what_customers_say' => 'Wateja Wetu Wanasema Nini',
+    'customer_stories' => 'Hadithi za Wateja',
+    'verified_review' => 'Ukaguzi Uliothibitishwa',
+    
+    // Claims
+    'file_a_claim' => 'Wasilisha Dai',
+    'claim_process' => 'Mchakato wa Madai',
+    'track_claim' => 'Fuatilia Dai Lako',
+    'claim_status' => 'Hali ya Dai',
+    'upload_documents' => 'Pakia Hati',
+    
+    // Quote
+    'request_quote_full' => 'Omba Nukuu',
+    'get_instant_quote' => 'Pata Nukuu ya Haraka',
+    'compare_quotes' => 'Linganisha Nukuu',
+    'select_insurance_type' => 'Chagua Aina ya Bima',
+    'personal_details' => 'Maelezo Binafsi',
+    'vehicle_details' => 'Maelezo ya Gari',
+    'calculate_premium' => 'Kokotoa Malipo',
+    
+    // Partners
+    'why_partner' => 'Kwa Nini Ushirikiane Nasi',
+    'partner_benefits' => 'Faida za Ushirikiano',
+    'become_partner' => 'Kuwa Mshirika',
+    'partner_portal' => 'Lango la Washirika',
+    
+    // Common Actions
+    'back' => 'Rudi',
+    'next' => 'Ifuatayo',
+    'previous' => 'Iliyotangulia',
+    'save' => 'Hifadhi',
+    'cancel' => 'Ghairi',
+    'edit' => 'Hariri',
+    'delete' => 'Futa',
+    'search' => 'Tafuta',
+    'filter' => 'Chuja',
+    'sort' => 'Panga',
+    'loading' => 'Inapakia...',
+    'no_results' => 'Hakuna matokeo',
+    'showing_results' => 'Inaonyesha matokeo',
 ];
