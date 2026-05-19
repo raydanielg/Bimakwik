@@ -133,58 +133,73 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse([
-                        ['name' => 'Jubilee Insurance', 'type' => 'Insurer', 'balance' => '12,450,000', 'status' => 'active', 'last_tx' => '2 hours ago'],
-                        ['name' => 'AAR Insurance', 'type' => 'Insurer', 'balance' => '8,230,000', 'status' => 'active', 'last_tx' => '5 hours ago'],
-                        ['name' => 'Broker Network Ltd', 'type' => 'Broker', 'balance' => '3,120,000', 'status' => 'active', 'last_tx' => '1 day ago'],
-                        ['name' => 'Aggregator Hub', 'type' => 'Aggregator', 'balance' => '1,890,000', 'status' => 'pending', 'last_tx' => '3 days ago'],
-                        ['name' => 'Service Provider Co', 'type' => 'Provider', 'balance' => '560,000', 'status' => 'active', 'last_tx' => '12 hours ago'],
-                    ] as $wallet)
+                    @forelse($wallets as $wallet)
                     <tr>
                         <td class="py-3">
                             <div class="d-flex align-items-center">
                                 <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
-                                    <i class="bi bi-building text-primary"></i>
+                                    <i class="bi bi-wallet2 text-primary"></i>
                                 </div>
                                 <div>
-                                    <div class="fw-semibold">{{ $wallet['name'] }}</div>
-                                    <small class="text-muted">ID: WAL-{{ rand(1000, 9999) }}</small>
+                                    <div class="fw-semibold">{{ $wallet->user->name ?? 'System Wallet' }}</div>
+                                    <small class="text-muted">ID: #{{ $wallet->id }}</small>
                                 </div>
                             </div>
                         </td>
                         <td class="py-3">
-                            <span class="badge bg-{{ $wallet['type'] == 'Insurer' ? 'primary' : ($wallet['type'] == 'Broker' ? 'success' : 'info') }} bg-opacity-10 text-{{ $wallet['type'] == 'Insurer' ? 'primary' : ($wallet['type'] == 'Broker' ? 'success' : 'info') }}">
-                                {{ $wallet['type'] }}
+                            @php
+                                $userRole = $wallet->user->role ?? 'system';
+                                $roleColors = [
+                                    'insurer' => 'primary',
+                                    'broker' => 'success',
+                                    'aggregator' => 'info',
+                                    'agent' => 'warning',
+                                    'customer' => 'secondary',
+                                    'system' => 'dark'
+                                ];
+                                $color = $roleColors[$userRole] ?? 'secondary';
+                            @endphp
+                            <span class="badge bg-{{ $color }} bg-opacity-10 text-{{ $color }} text-capitalize">
+                                {{ $userRole }}
                             </span>
                         </td>
                         <td class="py-3">
-                            <span class="fw-semibold">TZS {{ $wallet['balance'] }}</span>
+                            <span class="fw-semibold">TZS {{ number_format($wallet->balance ?? 0, 2) }}</span>
                         </td>
                         <td class="py-3">
-                            @if($wallet['status'] == 'active')
+                            @if(($wallet->is_active ?? true))
                                 <span class="badge bg-success bg-opacity-10 text-success">
                                     <i class="bi bi-check-circle"></i> Active
                                 </span>
                             @else
-                                <span class="badge bg-warning bg-opacity-10 text-warning">
-                                    <i class="bi bi-clock"></i> Pending
+                                <span class="badge bg-danger bg-opacity-10 text-danger">
+                                    <i class="bi bi-x-circle"></i> Frozen
                                 </span>
                             @endif
                         </td>
                         <td class="py-3">
-                            <small class="text-muted">{{ $wallet['last_tx'] }}</small>
+                            <small class="text-muted">{{ $wallet->updated_at ? $wallet->updated_at->diffForHumans() : 'N/A' }}</small>
                         </td>
                         <td class="py-3 text-end">
                             <div class="btn-group btn-group-sm">
-                                <button class="btn btn-outline-primary" title="View Details">
+                                <button class="btn btn-outline-primary" onclick="viewWallet({{ $wallet->id }})" title="View Details">
                                     <i class="bi bi-eye"></i>
                                 </button>
-                                <button class="btn btn-outline-success" title="Add Funds">
+                                <button class="btn btn-outline-success" onclick="showAddFundsModal({{ $wallet->id }}, '{{ $wallet->user->name ?? 'Wallet' }}')" title="Add Funds">
                                     <i class="bi bi-plus-circle"></i>
                                 </button>
-                                <button class="btn btn-outline-info" title="Transactions">
+                                <button class="btn btn-outline-info" onclick="viewTransactions({{ $wallet->id }})" title="Transactions">
                                     <i class="bi bi-list-ul"></i>
                                 </button>
+                                @if(($wallet->is_active ?? true))
+                                <button class="btn btn-outline-danger" onclick="freezeWallet({{ $wallet->id }})" title="Freeze Wallet">
+                                    <i class="bi bi-snow"></i>
+                                </button>
+                                @else
+                                <button class="btn btn-outline-success" onclick="activateWallet({{ $wallet->id }})" title="Activate Wallet">
+                                    <i class="bi bi-check-circle"></i>
+                                </button>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -192,7 +207,8 @@
                     <tr>
                         <td colspan="6" class="text-center py-5">
                             <i class="bi bi-inbox fs-1 text-muted d-block mb-3"></i>
-                            <p class="text-muted">No wallets found</p>
+                            <p class="text-muted mb-0">No wallets found</p>
+                            <small class="text-muted">Wallets will appear here</small>
                         </td>
                     </tr>
                     @endforelse
