@@ -9,7 +9,7 @@
                 <p class="text-muted small mb-0">Track and manage insurance premium payments</p>
             </div>
             <button class="btn btn-primary rounded-pill px-4" onclick="exportPDF()">
-                <i class="bi bi-file-earmark-pdf me-2"></i>Export PDF
+                <i class="bi bi-file-earmark-spreadsheet me-2"></i>Export Report
             </button>
         </div>
     </div>
@@ -277,12 +277,12 @@ function exportPDF() {
             <div class="mb-3">
                 <div class="spinner-border text-primary" role="status"></div>
             </div>
-            <p>Creating comprehensive PDF report with:</p>
+            <p>Creating comprehensive CSV report with:</p>
             <ul class="text-start small">
                 <li>✓ All premium collections</li>
                 <li>✓ Payment statistics</li>
                 <li>✓ Collection summary</li>
-                <li>✓ Watermark protection</li>
+                <li>✓ Excel compatible format</li>
             </ul>
         `,
         allowOutsideClick: false,
@@ -293,12 +293,12 @@ function exportPDF() {
                 Swal.close();
                 Swal.fire({
                     icon: 'success',
-                    title: 'PDF Generated!',
+                    title: 'Report Generated!',
                     text: 'Your premium report is downloading',
                     timer: 2000,
                     showConfirmButton: false
                 });
-            }, 2000);
+            }, 1500);
         }
     });
 }
