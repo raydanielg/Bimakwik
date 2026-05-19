@@ -203,7 +203,7 @@
                 <a href="{{ route('admin.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-grid-fill"></i> Overview
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.ai-insights') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.ai-insights') ? 'active' : '' }}">
                     <i class="bi bi-robot"></i> AI Insights
                 </a>
             </div>
@@ -241,58 +241,58 @@
 
             <div class="sidebar-heading mt-3">Finances</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action text-nowrap">
+                <a href="{{ route('admin.finance.wallets') }}" class="list-group-item list-group-item-action text-nowrap {{ request()->routeIs('admin.finance.wallets') ? 'active' : '' }}">
                     <i class="bi bi-wallet2"></i> Wallet & Balances
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.finance.premiums') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.finance.premiums') ? 'active' : '' }}">
                     <i class="bi bi-cash-stack"></i> Premium Collections
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.finance.commissions') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.finance.commissions') ? 'active' : '' }}">
                     <i class="bi bi-percent"></i> Commissions
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.finance.payouts') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.finance.payouts') ? 'active' : '' }}">
                     <i class="bi bi-bank"></i> Payout Requests
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Operations</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.operations.claims') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.operations.claims*') ? 'active' : '' }}">
                     <i class="bi bi-exclamation-octagon"></i> Claims Center
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.operations.workflows') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.operations.workflows') ? 'active' : '' }}">
                     <i class="bi bi-lightning-charge"></i> Workflows
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.operations.documents') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.operations.documents') ? 'active' : '' }}">
                     <i class="bi bi-file-earmark-pdf"></i> Document Vault
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Governance</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.governance.compliance') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.governance.compliance') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i> Compliance (TIRA)
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.governance.analytics') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.governance.analytics') ? 'active' : '' }}">
                     <i class="bi bi-bar-chart-line"></i> Advanced Analytics
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.governance.communications') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.governance.communications') ? 'active' : '' }}">
                     <i class="bi bi-chat-left-dots"></i> Communications
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">System & Tech</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.system.configurations') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.system.configurations') ? 'active' : '' }}">
                     <i class="bi bi-gear-fill"></i> Configurations
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.system.developer-portal') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.system.developer-portal') ? 'active' : '' }}">
                     <i class="bi bi-code-slash"></i> Developer Portal
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.system.multi-country') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.system.multi-country') ? 'active' : '' }}">
                     <i class="bi bi-globe"></i> Multi-Country
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.system.audit-logs') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.system.audit-logs') ? 'active' : '' }}">
                     <i class="bi bi-journal-text"></i> Audit Logs
                 </a>
             </div>
