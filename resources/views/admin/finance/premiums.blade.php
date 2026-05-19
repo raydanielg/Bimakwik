@@ -9,7 +9,7 @@
                 <p class="text-muted small mb-0">Track and manage insurance premium payments</p>
             </div>
             <button class="btn btn-primary rounded-pill px-4" onclick="exportPDF()">
-                <i class="bi bi-file-earmark-spreadsheet me-2"></i>Export Report
+                <i class="bi bi-file-earmark-pdf me-2"></i>Export PDF
             </button>
         </div>
     </div>
