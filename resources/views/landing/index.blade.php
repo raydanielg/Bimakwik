@@ -128,11 +128,11 @@
     <div class="container py-5">
         <div class="row align-items-center mb-5 animate__animated animate__fadeIn">
             <div class="col-lg-6">
-                <h2 class="display-5 fw-bold mb-3">Insurance Packages.</h2>
-                <p class="lead text-secondary">Comprehensive Insurance Packages: Protecting What Matters Most</p>
+                <h2 class="display-5 fw-bold mb-3">{{ __('site.insurance_packages') }}.</h2>
+                <p class="lead text-secondary">{{ __('site.insurance_packages_subtitle') }}</p>
             </div>
             <div class="col-lg-6 text-lg-end">
-                <p class="text-secondary">Streamline your insurance experience with our comprehensive platform. Find quotes for all your insurance needs in one convenient place.</p>
+                <p class="text-secondary">{{ __('site.insurance_packages_desc') }}</p>
             </div>
         </div>
 
@@ -144,11 +144,11 @@
                         <div class="package-img-wrapper position-relative">
                             <img src="https://www.bimakwik.com/wp-content/uploads/2024/03/car-in.jpg" class="card-img-top" alt="Motor Insurance" style="height: 300px; object-fit: cover;">
                             <div class="package-overlay d-flex flex-column justify-content-end p-4">
-                                <h6 class="text-white-50 text-uppercase small mb-2">Vehicles</h6>
-                                <h3 class="text-white fw-bold mb-3">Motor Insurance</h3>
+                                <h6 class="text-white-50 text-uppercase small mb-2">{{ __('site.vehicles') }}</h6>
+                                <h3 class="text-white fw-bold mb-3">{{ __('site.motor_insurance') }}</h3>
                                 <div class="package-details animate__animated">
-                                    <p class="text-white-50 small mb-4">Coverage for damages to your vehicle and liabilities arising from accidents.</p>
-                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">Learn More</a>
+                                    <p class="text-white-50 small mb-4">{{ __('site.motor_coverage_desc') }}</p>
+                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -161,11 +161,11 @@
                         <div class="package-img-wrapper position-relative">
                             <img src="https://www.bimakwik.com/wp-content/uploads/2024/03/home-in.jpg" class="card-img-top" alt="Home Insurance" style="height: 300px; object-fit: cover;">
                             <div class="package-overlay d-flex flex-column justify-content-end p-4">
-                                <h6 class="text-white-50 text-uppercase small mb-2">Home</h6>
-                                <h3 class="text-white fw-bold mb-3">Home Insurance</h3>
+                                <h6 class="text-white-50 text-uppercase small mb-2">{{ __('site.property') }}</h6>
+                                <h3 class="text-white fw-bold mb-3">{{ __('site.general_insurance') }}</h3>
                                 <div class="package-details animate__animated">
-                                    <p class="text-white-50 small mb-4">Protection for your house and belongings against fire, theft, or natural disasters.</p>
-                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">Learn More</a>
+                                    <p class="text-white-50 small mb-4">{{ __('site.property_coverage_desc') }}</p>
+                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -178,11 +178,11 @@
                         <div class="package-img-wrapper position-relative">
                             <img src="https://www.bimakwik.com/wp-content/uploads/2021/09/health-in.jpg" class="card-img-top" alt="Health Insurance" style="height: 300px; object-fit: cover;">
                             <div class="package-overlay d-flex flex-column justify-content-end p-4">
-                                <h6 class="text-white-50 text-uppercase small mb-2">Healthcare</h6>
-                                <h3 class="text-white fw-bold mb-3">Health Insurance</h3>
+                                <h6 class="text-white-50 text-uppercase small mb-2">{{ __('site.health') }}</h6>
+                                <h3 class="text-white fw-bold mb-3">{{ __('site.health_insurance') }}</h3>
                                 <div class="package-details animate__animated">
-                                    <p class="text-white-50 small mb-4">Comprehensive coverage for medical expenses and healthcare needs.</p>
-                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">Learn More</a>
+                                    <p class="text-white-50 small mb-4">{{ __('site.health_coverage_desc') }}</p>
+                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -195,11 +195,11 @@
                         <div class="package-img-wrapper position-relative">
                             <img src="https://www.bimakwik.com/wp-content/uploads/2024/03/travel-insurance.jpg" class="card-img-top" alt="Travel Insurance" style="height: 300px; object-fit: cover;">
                             <div class="package-overlay d-flex flex-column justify-content-end p-4">
-                                <h6 class="text-white-50 text-uppercase small mb-2">Travel</h6>
-                                <h3 class="text-white fw-bold mb-3">Travel Insurance</h3>
+                                <h6 class="text-white-50 text-uppercase small mb-2">{{ __('site.travel') }}</h6>
+                                <h3 class="text-white fw-bold mb-3">{{ __('site.general_insurance') }}</h3>
                                 <div class="package-details animate__animated">
-                                    <p class="text-white-50 small mb-4">Insurance for unexpected events during trips, medical emergencies, or lost luggage.</p>
-                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">Learn More</a>
+                                    <p class="text-white-50 small mb-4">{{ __('site.travel_coverage_desc') }}</p>
+                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
                                 </div>
                             </div>
                         </div>
