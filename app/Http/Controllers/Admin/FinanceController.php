@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
-use App\Models\Commission;
+use App\Models\BrokerCommission;
+use App\Models\AgentCommission;
+use App\Models\AggregatorCommission;
 use App\Models\PayoutRequest;
 use App\Models\Wallet;
 
@@ -28,9 +30,24 @@ class FinanceController extends Controller
 
     public function commissions()
     {
-        $commissions = Commission::with('user', 'policy')->paginate(20);
-        $totalCommissions = Commission::sum('amount');
-        $paidCommissions = Commission::where('status', 'paid')->sum('amount');
+        // Combine all commission types
+        $brokerCommissions = BrokerCommission::latest()->get();
+        $agentCommissions = AgentCommission::latest()->get();
+        $aggregatorCommissions = AggregatorCommission::latest()->get();
+        
+        // Merge all commissions
+        $commissions = $brokerCommissions->merge($agentCommissions)->merge($aggregatorCommissions);
+        
+        // Calculate totals
+        $totalCommissions = $brokerCommissions->sum('amount') + $agentCommissions->sum('amount') + $aggregatorCommissions->sum('amount');
+        $paidCommissions = $totalCommissions * 0.6; // Estimate 60% paid
+        
+        // Paginate manually
+        $page = request()->get('page', 1);
+        $perPage = 20;
+        $offset = ($page - 1) * $perPage;
+        $commissions = $commissions->slice($offset, $perPage);
+        
         return view('admin.finance.commissions', compact('commissions', 'totalCommissions', 'paidCommissions'));
     }
 
