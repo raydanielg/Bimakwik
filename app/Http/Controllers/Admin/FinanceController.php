@@ -20,15 +20,127 @@ class FinanceController extends Controller
     public function wallets()
     {
         try {
-            $wallets = Wallet::paginate(20);
+            // Get wallets with user relationship
+            $wallets = Wallet::latest()->paginate(20);
+            
+            // Calculate statistics
             $totalBalance = Wallet::sum('balance') ?? 0;
-            $totalPending = 0; // No status column, set to 0
+            $activeWallets = Wallet::count();
+            
+            // Get today's transactions
+            $todayTransactions = Transaction::whereDate('created_at', today())->count();
+            $todayVolume = Transaction::whereDate('created_at', today())->sum('amount') ?? 0;
+            
+            // Get pending withdrawals
+            $pendingWithdrawals = WalletWithdrawal::count();
+            $pendingAmount = WalletWithdrawal::sum('amount') ?? 0;
+            
+            // Get recent transactions for each wallet
+            $recentTransactions = Transaction::latest()->limit(10)->get();
+            
+            // Calculate growth (compare with last month)
+            $lastMonthBalance = Wallet::sum('balance') ?? 0; // Simplified
+            $balanceGrowth = $lastMonthBalance > 0 ? (($totalBalance - $lastMonthBalance) / $lastMonthBalance) * 100 : 0;
+            
         } catch (\Exception $e) {
             $wallets = new LengthAwarePaginator([], 0, 20);
             $totalBalance = 0;
-            $totalPending = 0;
+            $activeWallets = 0;
+            $todayTransactions = 0;
+            $todayVolume = 0;
+            $pendingWithdrawals = 0;
+            $pendingAmount = 0;
+            $recentTransactions = collect();
+            $balanceGrowth = 0;
         }
-        return view('admin.finance.wallets', compact('wallets', 'totalBalance', 'totalPending'));
+        
+        return view('admin.finance.wallets', compact(
+            'wallets', 'totalBalance', 'activeWallets', 
+            'todayTransactions', 'todayVolume', 
+            'pendingWithdrawals', 'pendingAmount',
+            'recentTransactions', 'balanceGrowth'
+        ));
+    }
+    
+    public function viewWallet($id)
+    {
+        try {
+            $wallet = Wallet::findOrFail($id);
+            $transactions = Transaction::where('wallet_id', $id)->latest()->paginate(20);
+            $withdrawals = WalletWithdrawal::where('wallet_id', $id)->latest()->get();
+            
+            return view('admin.finance.wallet-details', compact('wallet', 'transactions', 'withdrawals'));
+        } catch (\Exception $e) {
+            return redirect()->route('admin.finance.wallets')->with('error', 'Wallet not found');
+        }
+    }
+    
+    public function addFunds(Request $request, $id)
+    {
+        try {
+            $wallet = Wallet::findOrFail($id);
+            $amount = $request->input('amount');
+            
+            // Update wallet balance
+            $wallet->balance += $amount;
+            $wallet->save();
+            
+            // Create transaction record
+            Transaction::create([
+                'wallet_id' => $id,
+                'amount' => $amount,
+                'type' => 'credit',
+                'description' => 'Funds added by admin',
+                'created_at' => now()
+            ]);
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Funds added successfully',
+                'new_balance' => $wallet->balance
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to add funds'
+            ], 500);
+        }
+    }
+    
+    public function freezeWallet(Request $request, $id)
+    {
+        try {
+            $wallet = Wallet::findOrFail($id);
+            $wallet->update(['is_active' => false]);
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Wallet frozen successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to freeze wallet'
+            ], 500);
+        }
+    }
+    
+    public function activateWallet(Request $request, $id)
+    {
+        try {
+            $wallet = Wallet::findOrFail($id);
+            $wallet->update(['is_active' => true]);
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Wallet activated successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to activate wallet'
+            ], 500);
+        }
     }
 
     public function premiums()
