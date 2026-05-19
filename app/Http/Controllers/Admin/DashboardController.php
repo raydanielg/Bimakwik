@@ -9,7 +9,9 @@ use App\Models\InsuranceProduct;
 use App\Models\Claim;
 use App\Models\PaymentTransaction;
 use App\Models\Wallet;
-use App\Models\Commission;
+use App\Models\BrokerCommission;
+use App\Models\AgentCommission;
+use App\Models\AggregatorCommission;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
