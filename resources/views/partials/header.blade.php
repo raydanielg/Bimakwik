@@ -199,103 +199,134 @@
     </div>
 </nav>
 
-<!-- Mobile Sidebar (Offcanvas) -->
-<div class="offcanvas offcanvas-start border-0 shadow-lg" tabindex="-1" id="mobileSidebar">
-    <div class="offcanvas-header border-bottom p-4 bg-light">
+<!-- Mobile Sidebar (Offcanvas) - Modern Clean Design -->
+<div class="offcanvas offcanvas-start border-0" tabindex="-1" id="mobileSidebar" style="width: 85%; max-width: 380px;">
+    <!-- Header -->
+    <div class="offcanvas-header p-4" style="background: linear-gradient(135deg, #004a99 0%, #0056b3 100%);">
         <div class="d-flex align-items-center">
-            <img src="{{ asset('logo.png') }}" alt="Logo" height="40" class="me-2">
-            <span class="fw-bold text-primary h5 mb-0">BimaKwik</span>
+            <div class="bg-white rounded-3 p-2 me-3 shadow-sm">
+                <img src="{{ asset('logo.png') }}" alt="Logo" height="32">
+            </div>
+            <div>
+                <h5 class="text-white fw-bold mb-0" style="font-family: 'Plus Jakarta Sans', sans-serif;">BimaKwik</h5>
+                <small class="text-white-50">{{ app()->getLocale() == 'sw' ? 'Bima Rahisi' : 'Insurance Made Easy' }}</small>
+            </div>
         </div>
-        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas"></button>
+        <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas"></button>
     </div>
-    <div class="offcanvas-body p-0 d-flex flex-column h-100">
-        <div class="p-4 flex-grow-1 overflow-auto">
-            <div class="accordion accordion-flush" id="mobileAccordion">
-                <!-- Platform -->
-                <div class="accordion-item border-0">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed fw-bold text-dark px-0" type="button" data-bs-toggle="collapse" data-bs-target="#m-platform">
-                            Platform
-                        </button>
-                    </h2>
-                    <div id="m-platform" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
-                        <div class="accordion-body px-0 py-2">
-                            <ul class="list-unstyled ps-3 mobile-sublist">
-                                <li><a href="#">Overview</a></li>
-                                <li><a href="#">For Customers</a></li>
-                                <li><a href="#">For Businesses</a></li>
-                                <li><a href="#">Technology</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Products -->
-                <div class="accordion-item border-0">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed fw-bold text-dark px-0" type="button" data-bs-toggle="collapse" data-bs-target="#m-products">
-                            Products
-                        </button>
-                    </h2>
-                    <div id="m-products" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
-                        <div class="accordion-body px-0 py-2">
-                            <ul class="list-unstyled ps-3 mobile-sublist">
-                                <li><a href="{{ route('pages.products') }}">Motor Insurance</a></li>
-                                <li><a href="#">Health Insurance</a></li>
-                                <li><a href="#">Life Insurance</a></li>
-                                <li><a href="#">General Insurance</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Partners -->
-                <div class="accordion-item border-0">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed fw-bold text-dark px-0" type="button" data-bs-toggle="collapse" data-bs-target="#m-partners">
-                            Partners
-                        </button>
-                    </h2>
-                    <div id="m-partners" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
-                        <div class="accordion-body px-0 py-2">
-                            <ul class="list-unstyled ps-3 mobile-sublist">
-                                <li><a href="{{ route('register.broker') }}">Become a Broker</a></li>
-                                <li><a href="{{ route('register.broker') }}">Become an Aggregator</a></li>
-                                <li><a href="{{ route('register.provider') }}">Service Providers</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Company -->
-                <div class="accordion-item border-0">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed fw-bold text-dark px-0" type="button" data-bs-toggle="collapse" data-bs-target="#m-company">
-                            Company
-                        </button>
-                    </h2>
-                    <div id="m-company" class="accordion-collapse collapse" data-bs-parent="#mobileAccordion">
-                        <div class="accordion-body px-0 py-2">
-                            <ul class="list-unstyled ps-3 mobile-sublist">
-                                <li><a href="{{ route('pages.about') }}">About Us</a></li>
-                                <li><a href="{{ route('company.story') }}">Our Story</a></li>
-                                <li><a href="{{ route('company.leadership') }}">Leadership Team</a></li>
-                                <li><a href="{{ route('company.careers') }}">Careers</a></li>
-                                <li><a href="{{ route('pages.contact') }}">Contact Us</a></li>
-                            </ul>
-                        </div>
-                    </div>
+
+    <!-- Body -->
+    <div class="offcanvas-body p-0 bg-light">
+        <!-- Quick Actions -->
+        <div class="p-3 bg-white border-bottom">
+            <a href="{{ route('quote.request') }}" class="btn btn-warning w-100 rounded-pill fw-bold shadow-sm mb-2">
+                <i class="bi bi-file-earmark-text me-2"></i>{{ __('site.request_quote') }}
+            </a>
+        </div>
+
+        <!-- Navigation Menu -->
+        <div class="p-3">
+            <!-- Home -->
+            <a href="{{ url('/') }}" class="mobile-nav-item {{ request()->is('/') ? 'active' : '' }}">
+                <i class="bi bi-house-door"></i>
+                <span>{{ __('site.home') }}</span>
+                <i class="bi bi-chevron-right ms-auto"></i>
+            </a>
+
+            <!-- Platform -->
+            <div class="mobile-nav-group">
+                <button class="mobile-nav-item" type="button" data-bs-toggle="collapse" data-bs-target="#m-platform">
+                    <i class="bi bi-grid"></i>
+                    <span>{{ __('site.platform') }}</span>
+                    <i class="bi bi-chevron-down ms-auto accordion-icon"></i>
+                </button>
+                <div id="m-platform" class="collapse mobile-submenu">
+                    <a href="{{ route('platform.overview') }}"><i class="bi bi-dot"></i>{{ __('site.platform_overview') }}</a>
+                    <a href="{{ route('platform.customers') }}"><i class="bi bi-dot"></i>{{ __('site.for_customers') }}</a>
+                    <a href="{{ route('platform.businesses') }}"><i class="bi bi-dot"></i>{{ __('site.platform_for_businesses') }}</a>
+                    <a href="{{ route('platform.technology') }}"><i class="bi bi-dot"></i>{{ __('site.technology') }}</a>
                 </div>
             </div>
-            
-            <div class="mt-4 pt-4 border-top">
-                <!-- Mobile Language Switcher -->
-                <div class="d-flex align-items-center gap-2 mb-3">
-                    <i class="bi bi-globe2 text-primary"></i>
-                    <span class="small fw-bold text-muted">Language:</span>
-                    <a href="{{ route('lang.switch', 'en') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 {{ app()->getLocale() == 'en' ? 'active' : '' }}">English</a>
-                    <a href="{{ route('lang.switch', 'sw') }}" class="btn btn-sm btn-outline-secondary rounded-pill px-3 {{ app()->getLocale() == 'sw' ? 'active' : '' }}">Kiswahili</a>
+
+            <!-- Products -->
+            <div class="mobile-nav-group">
+                <button class="mobile-nav-item" type="button" data-bs-toggle="collapse" data-bs-target="#m-products">
+                    <i class="bi bi-shield-check"></i>
+                    <span>{{ __('site.products') }}</span>
+                    <i class="bi bi-chevron-down ms-auto accordion-icon"></i>
+                </button>
+                <div id="m-products" class="collapse mobile-submenu">
+                    <a href="{{ route('pages.products') }}"><i class="bi bi-car-front"></i>{{ __('site.motor_insurance') }}</a>
+                    <a href="{{ route('products.health') }}"><i class="bi bi-heart-pulse"></i>{{ __('site.health_insurance') }}</a>
+                    <a href="{{ route('products.life') }}"><i class="bi bi-umbrella"></i>{{ __('site.life_insurance') }}</a>
+                    <a href="{{ route('products.general') }}"><i class="bi bi-box-seam"></i>{{ __('site.general_insurance') }}</a>
                 </div>
-                <a href="{{ route('login') }}" class="btn btn-outline-primary w-100 mb-3 rounded-pill fw-bold">{{ __('site.login') }}</a>
-                <a href="{{ route('register') }}" class="btn btn-primary w-100 rounded-pill fw-bold shadow-sm">{{ __('site.join_bimakwik') }}</a>
             </div>
+
+            <!-- Partners -->
+            <div class="mobile-nav-group">
+                <button class="mobile-nav-item" type="button" data-bs-toggle="collapse" data-bs-target="#m-partners">
+                    <i class="bi bi-people"></i>
+                    <span>{{ __('site.partners') }}</span>
+                    <i class="bi bi-chevron-down ms-auto accordion-icon"></i>
+                </button>
+                <div id="m-partners" class="collapse mobile-submenu">
+                    <a href="{{ route('partners.brokers') }}"><i class="bi bi-dot"></i>{{ __('site.become_broker') }}</a>
+                    <a href="{{ route('partners.aggregators') }}"><i class="bi bi-dot"></i>{{ __('site.become_aggregator') }}</a>
+                    <a href="{{ route('partners.providers') }}"><i class="bi bi-dot"></i>{{ __('site.service_providers') }}</a>
+                </div>
+            </div>
+
+            <!-- Resources -->
+            <div class="mobile-nav-group">
+                <button class="mobile-nav-item" type="button" data-bs-toggle="collapse" data-bs-target="#m-resources">
+                    <i class="bi bi-book"></i>
+                    <span>{{ __('site.resources') }}</span>
+                    <i class="bi bi-chevron-down ms-auto accordion-icon"></i>
+                </button>
+                <div id="m-resources" class="collapse mobile-submenu">
+                    <a href="{{ route('resources.news') }}"><i class="bi bi-dot"></i>{{ __('site.blog_news') }}</a>
+                    <a href="{{ route('resources.guidelines') }}"><i class="bi bi-dot"></i>{{ __('site.downloads') }}</a>
+                    <a href="{{ route('support.faqs') }}"><i class="bi bi-dot"></i>{{ __('site.faqs') }}</a>
+                </div>
+            </div>
+
+            <!-- Company -->
+            <div class="mobile-nav-group">
+                <button class="mobile-nav-item" type="button" data-bs-toggle="collapse" data-bs-target="#m-company">
+                    <i class="bi bi-building"></i>
+                    <span>{{ __('site.company') }}</span>
+                    <i class="bi bi-chevron-down ms-auto accordion-icon"></i>
+                </button>
+                <div id="m-company" class="collapse mobile-submenu">
+                    <a href="{{ route('pages.about') }}"><i class="bi bi-dot"></i>{{ __('site.about_us') }}</a>
+                    <a href="{{ route('company.story') }}"><i class="bi bi-dot"></i>{{ __('site.our_story') }}</a>
+                    <a href="{{ route('company.careers') }}"><i class="bi bi-dot"></i>{{ __('site.careers') }}</a>
+                    <a href="{{ route('pages.contact') }}"><i class="bi bi-dot"></i>{{ __('site.contact_us') }}</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="mt-auto p-3 bg-white border-top">
+            <!-- Language Switcher -->
+            <div class="mb-3">
+                <label class="small fw-bold text-muted mb-2 d-flex align-items-center">
+                    <i class="bi bi-globe2 me-2"></i>{{ __('site.language') }}
+                </label>
+                <div class="btn-group w-100" role="group">
+                    <a href="{{ route('lang.switch', 'en') }}" class="btn btn-outline-primary {{ app()->getLocale() == 'en' ? 'active' : '' }}">English</a>
+                    <a href="{{ route('lang.switch', 'sw') }}" class="btn btn-outline-primary {{ app()->getLocale() == 'sw' ? 'active' : '' }}">Kiswahili</a>
+                </div>
+            </div>
+
+            <!-- Auth Buttons -->
+            <a href="{{ route('login') }}" class="btn btn-outline-primary w-100 mb-2 rounded-pill">
+                <i class="bi bi-box-arrow-in-right me-2"></i>{{ __('site.login') }}
+            </a>
+            <a href="{{ route('register') }}" class="btn btn-primary w-100 rounded-pill shadow-sm">
+                <i class="bi bi-person-plus me-2"></i>{{ __('site.get_started') }}
+            </a>
         </div>
     </div>
 </div>
