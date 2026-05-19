@@ -23,15 +23,15 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Total Balance</p>
-                        <h3 class="fw-bold mb-0">TZS 45.2M</h3>
+                        <h3 class="fw-bold mb-0">TZS {{ number_format($totalBalance, 2) }}</h3>
                     </div>
                     <div class="bg-primary bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-wallet2 text-primary fs-4"></i>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <span class="badge bg-success bg-opacity-10 text-success">
-                        <i class="bi bi-arrow-up"></i> 12.5% from last month
+                    <span class="badge bg-{{ $balanceGrowth >= 0 ? 'success' : 'danger' }} bg-opacity-10 text-{{ $balanceGrowth >= 0 ? 'success' : 'danger' }}">
+                        <i class="bi bi-arrow-{{ $balanceGrowth >= 0 ? 'up' : 'down' }}"></i> {{ number_format(abs($balanceGrowth), 1) }}% from last month
                     </span>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Active Wallets</p>
-                        <h3 class="fw-bold mb-0">24</h3>
+                        <h3 class="fw-bold mb-0">{{ number_format($activeWallets) }}</h3>
                     </div>
                     <div class="bg-success bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-check-circle text-success fs-4"></i>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="mt-3">
                     <span class="badge bg-info bg-opacity-10 text-info">
-                        8 Insurers, 16 Partners
+                        All wallet types
                     </span>
                 </div>
             </div>
@@ -64,8 +64,8 @@
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
-                        <p class="text-muted small mb-1">Pending Transfers</p>
-                        <h3 class="fw-bold mb-0">TZS 2.1M</h3>
+                        <p class="text-muted small mb-1">Pending Withdrawals</p>
+                        <h3 class="fw-bold mb-0">TZS {{ number_format($pendingAmount, 2) }}</h3>
                     </div>
                     <div class="bg-warning bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-clock-history text-warning fs-4"></i>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="mt-3">
                     <span class="badge bg-warning bg-opacity-10 text-warning">
-                        12 transactions pending
+                        {{ $pendingWithdrawals }} requests pending
                     </span>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Today's Transactions</p>
-                        <h3 class="fw-bold mb-0">156</h3>
+                        <h3 class="fw-bold mb-0">{{ number_format($todayTransactions) }}</h3>
                     </div>
                     <div class="bg-info bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-arrow-left-right text-info fs-4"></i>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="mt-3">
                     <span class="badge bg-primary bg-opacity-10 text-primary">
-                        TZS 8.4M volume
+                        TZS {{ number_format($todayVolume, 2) }} volume
                     </span>
                 </div>
             </div>
