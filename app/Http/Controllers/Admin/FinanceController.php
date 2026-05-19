@@ -153,8 +153,8 @@ class FinanceController extends Controller
     public function premiums()
     {
         try {
-            $collections = Transaction::latest()->paginate(20);
-            $totalCollected = Transaction::sum('amount') ?? 0;
+            $collections = PaymentTransaction::latest()->paginate(20);
+            $totalCollected = PaymentTransaction::sum('amount') ?? 0;
         } catch (\Exception $e) {
             $collections = new LengthAwarePaginator([], 0, 20);
             $totalCollected = 0;
