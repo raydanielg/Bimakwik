@@ -272,17 +272,18 @@
 <script>
 function exportPDF() {
     Swal.fire({
-        title: 'Generating Premium Report...',
+        title: 'Generating PDF Report...',
         html: `
             <div class="mb-3">
                 <div class="spinner-border text-primary" role="status"></div>
             </div>
-            <p>Creating comprehensive CSV report with:</p>
+            <p>Creating professional PDF report with:</p>
             <ul class="text-start small">
                 <li>✓ All premium collections</li>
                 <li>✓ Payment statistics</li>
                 <li>✓ Collection summary</li>
-                <li>✓ Excel compatible format</li>
+                <li>✓ Watermark protection</li>
+                <li>✓ Professional formatting</li>
             </ul>
         `,
         allowOutsideClick: false,
@@ -293,12 +294,12 @@ function exportPDF() {
                 Swal.close();
                 Swal.fire({
                     icon: 'success',
-                    title: 'Report Generated!',
+                    title: 'PDF Generated!',
                     text: 'Your premium report is downloading',
                     timer: 2000,
                     showConfirmButton: false
                 });
-            }, 1500);
+            }, 2000);
         }
     });
 }
