@@ -31,29 +31,62 @@ class DashboardController extends Controller
         $usersGrowth = $usersLastMonth > 0 ? (($usersThisMonth - $usersLastMonth) / $usersLastMonth) * 100 : 0;
         
         // Total Policies
-        $totalPolicies = InsuranceProduct::count();
-        $activePolicies = InsuranceProduct::count(); // All policies considered active
+        try {
+            $totalPolicies = InsuranceProduct::count();
+            $activePolicies = InsuranceProduct::count(); // All policies considered active
+        } catch (\Exception $e) {
+            $totalPolicies = 0;
+            $activePolicies = 0;
+        }
         
         // Total Revenue (use amount field if exists, otherwise 0)
-        $totalRevenue = PaymentTransaction::sum('amount') ?? 0;
-        $revenueThisMonth = PaymentTransaction::where('created_at', '>=', $lastMonth)->sum('amount') ?? 0;
-        $revenueLastMonth = PaymentTransaction::whereBetween('created_at', [$lastYear, $lastMonth])->sum('amount') ?? 0;
-        $revenueGrowth = $revenueLastMonth > 0 ? (($revenueThisMonth - $revenueLastMonth) / $revenueLastMonth) * 100 : 0;
+        try {
+            $totalRevenue = PaymentTransaction::sum('amount') ?? 0;
+            $revenueThisMonth = PaymentTransaction::where('created_at', '>=', $lastMonth)->sum('amount') ?? 0;
+            $revenueLastMonth = PaymentTransaction::whereBetween('created_at', [$lastYear, $lastMonth])->sum('amount') ?? 0;
+            $revenueGrowth = $revenueLastMonth > 0 ? (($revenueThisMonth - $revenueLastMonth) / $revenueLastMonth) * 100 : 0;
+        } catch (\Exception $e) {
+            $totalRevenue = 0;
+            $revenueThisMonth = 0;
+            $revenueLastMonth = 0;
+            $revenueGrowth = 0;
+        }
         
         // Claims Stats
-        $totalClaims = Claim::count();
-        $pendingClaims = Claim::count() > 0 ? (int)($totalClaims * 0.3) : 0; // Estimate 30% pending
-        $approvedClaims = Claim::count() > 0 ? (int)($totalClaims * 0.6) : 0; // Estimate 60% approved
-        $rejectedClaims = $totalClaims - $pendingClaims - $approvedClaims; // Rest rejected
+        try {
+            $totalClaims = Claim::count();
+            $pendingClaims = $totalClaims > 0 ? (int)($totalClaims * 0.3) : 0; // Estimate 30% pending
+            $approvedClaims = $totalClaims > 0 ? (int)($totalClaims * 0.6) : 0; // Estimate 60% approved
+            $rejectedClaims = $totalClaims - $pendingClaims - $approvedClaims; // Rest rejected
+        } catch (\Exception $e) {
+            $totalClaims = 0;
+            $pendingClaims = 0;
+            $approvedClaims = 0;
+            $rejectedClaims = 0;
+        }
         
         // Wallet Stats
-        $totalWalletBalance = Wallet::sum('balance') ?? 0;
-        $activeWallets = Wallet::count();
+        try {
+            $totalWalletBalance = Wallet::sum('balance') ?? 0;
+            $activeWallets = Wallet::count();
+        } catch (\Exception $e) {
+            $totalWalletBalance = 0;
+            $activeWallets = 0;
+        }
         
-        // Commission Stats
-        $totalCommissions = Commission::sum('amount') ?? 0;
-        $pendingCommissions = $totalCommissions > 0 ? $totalCommissions * 0.4 : 0; // Estimate 40% pending
-        $paidCommissions = $totalCommissions - $pendingCommissions;
+        // Commission Stats (combine all commission types)
+        try {
+            $brokerCommissions = BrokerCommission::sum('amount') ?? 0;
+            $agentCommissions = AgentCommission::sum('amount') ?? 0;
+            $aggregatorCommissions = AggregatorCommission::sum('amount') ?? 0;
+            $totalCommissions = $brokerCommissions + $agentCommissions + $aggregatorCommissions;
+            $pendingCommissions = $totalCommissions > 0 ? $totalCommissions * 0.4 : 0; // Estimate 40% pending
+            $paidCommissions = $totalCommissions - $pendingCommissions;
+        } catch (\Exception $e) {
+            $totalCommissions = 0;
+            $pendingCommissions = 0;
+            $paidCommissions = 0;
+        }
         
         // Monthly Revenue Chart Data (Last 12 months)
         try {
