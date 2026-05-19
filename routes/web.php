@@ -101,6 +101,10 @@ Route::middleware(['auth'])->group(function () {
         // Finance Routes
         Route::prefix('finance')->name('finance.')->group(function () {
             Route::get('/wallets', [App\Http\Controllers\Admin\FinanceController::class, 'wallets'])->name('wallets');
+            Route::get('/wallets/{id}', [App\Http\Controllers\Admin\FinanceController::class, 'viewWallet'])->name('wallets.view');
+            Route::post('/wallets/{id}/add-funds', [App\Http\Controllers\Admin\FinanceController::class, 'addFunds'])->name('wallets.add-funds');
+            Route::post('/wallets/{id}/freeze', [App\Http\Controllers\Admin\FinanceController::class, 'freezeWallet'])->name('wallets.freeze');
+            Route::post('/wallets/{id}/activate', [App\Http\Controllers\Admin\FinanceController::class, 'activateWallet'])->name('wallets.activate');
             Route::get('/premiums', [App\Http\Controllers\Admin\FinanceController::class, 'premiums'])->name('premiums');
             Route::get('/commissions', [App\Http\Controllers\Admin\FinanceController::class, 'commissions'])->name('commissions');
             Route::get('/payouts', [App\Http\Controllers\Admin\FinanceController::class, 'payouts'])->name('payouts');
