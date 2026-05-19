@@ -8,7 +8,10 @@ use App\Models\Transaction;
 use App\Models\BrokerCommission;
 use App\Models\AgentCommission;
 use App\Models\AggregatorCommission;
-use App\Models\PayoutRequest;
+use App\Models\WalletWithdrawal;
+use App\Models\BrokerCommissionWithdrawal;
+use App\Models\AgentCommissionWithdrawal;
+use App\Models\AggregatorCommissionWithdrawal;
 use App\Models\Wallet;
 
 class FinanceController extends Controller
