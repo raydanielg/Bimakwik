@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'dashboard_title' => 'Dashibodi ya Mdhibiti (Uangalizi wa TIRA)',
+    'total_premiums_written' => 'Jumla ya Malipo Yaliyoandikwa',
+    'market_growth' => 'Ukuaji wa Soko',
+    'active_policies' => 'Sera Hai',
+    'market_wide' => 'Kote Sokoni',
+    'compliance_alerts' => 'Arifa za Ufuataji',
+    'action_required' => 'Hatua Inahitajika',
+    'fraud_investigations' => 'Uchunguzi wa Udanganyifu',
+    'under_review' => 'Chini ya Ukaguzi',
+    'market_share_by_insurer' => 'Sehemu ya Soko kwa Bima (5 Bora)',
+    'market_intelligence' => 'Ujasusi wa Soko',
+    'insurer_name' => 'Jina la Bima',
+    'policies' => 'Sera',
+    'premium' => 'Ada (TZS)',
+    'market_share' => 'Sehemu ya Soko',
+    'status' => 'Hali',
+    'compliant' => 'Inafuata',
+    'regulatory_oversight' => 'Uangalizi wa Kisheria',
+    'registered_insurers' => 'Bima Zilizosajiliwa',
+    'registered_brokers' => 'Mabroker Yaliyosajiliwa',
+    'registered_agents' => 'Wakala Waliosajiliwa',
+    'system_integrity' => 'Uadilifu wa Mfumo (TIRAMIS)',
+    'sync_active' => 'Usawazishaji Unafanya Kazi',
+    'last_synced' => 'Mwisho kusawazishwa: dakika 2 zilizopita',
+];

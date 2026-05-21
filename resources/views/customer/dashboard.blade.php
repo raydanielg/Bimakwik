@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', 'My Insurance Dashboard')
+@section('dashboard_title', __('customer.my_insurance_dashboard'))
 
 @section('dashboard_content')
 <!-- Customer Welcome Banner -->
@@ -10,14 +10,14 @@
             <div class="card-body p-4 p-md-5 text-white">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h2 class="fw-bold mb-2">Habari, {{ explode(' ', auth()->user()->name)[0] }}! 👋</h2>
-                        <p class="opacity-75 mb-4">Karibu kwenye Bima Kwik. Una bima 2 zinazofanya kazi kwa sasa. Kila kitu kiko salama.</p>
+                        <h2 class="fw-bold mb-2">{{ __('customer.welcome_back') }}, {{ explode(' ', auth()->user()->name)[0] }}! 👋</h2>
+                        <p class="opacity-75 mb-4">{{ __('customer.dashboard_banner_subtitle') }}</p>
                         <div class="d-flex flex-wrap gap-2">
                             <a href="{{ route('customer.buy') }}" class="btn btn-primary px-4 py-2" style="border-radius: 10px;">
-                                <i class="bi bi-cart-plus me-2"></i> Nunua Bima Mpya
+                                <i class="bi bi-cart-plus me-2"></i> {{ __('customer.buy_new_insurance') }}
                             </a>
                             <a href="{{ route('customer.claims.create') }}" class="btn btn-outline-light px-4 py-2" style="border-radius: 10px;">
-                                <i class="bi bi-exclamation-octagon me-2"></i> Ripoti Tatizo
+                                <i class="bi bi-exclamation-octagon me-2"></i> {{ __('customer.report_issue') }}
                             </a>
                         </div>
                     </div>
@@ -39,10 +39,10 @@
                     <div class="bg-primary bg-opacity-10 p-2 rounded-3 text-primary me-2">
                         <i class="bi bi-shield-fill fs-4"></i>
                     </div>
-                    <span class="small fw-bold text-muted d-none d-md-inline">Bima Zangu</span>
+                    <span class="small fw-bold text-muted d-none d-md-inline">{{ __('customer.stat_my_policies') }}</span>
                 </div>
                 <h3 class="fw-bold mb-0">2</h3>
-                <p class="x-small text-muted mb-0 mt-1">Bima Zilizo Hai</p>
+                <p class="x-small text-muted mb-0 mt-1">{{ __('customer.stat_active_policies') }}</p>
             </div>
         </div>
     </div>
@@ -53,10 +53,10 @@
                     <div class="bg-warning bg-opacity-10 p-2 rounded-3 text-warning me-2">
                         <i class="bi bi-clock-history fs-4"></i>
                     </div>
-                    <span class="small fw-bold text-muted d-none d-md-inline">Muda Unaoisha</span>
+                    <span class="small fw-bold text-muted d-none d-md-inline">{{ __('customer.stat_expiry_window') }}</span>
                 </div>
                 <h3 class="fw-bold mb-0">12</h3>
-                <p class="x-small text-muted mb-0 mt-1">Siku Zilizobaki</p>
+                <p class="x-small text-muted mb-0 mt-1">{{ __('customer.stat_days_left') }}</p>
             </div>
         </div>
     </div>
@@ -67,10 +67,10 @@
                     <div class="bg-info bg-opacity-10 p-2 rounded-3 text-info me-2">
                         <i class="bi bi-graph-up-arrow"></i>
                     </div>
-                    <span class="small fw-bold text-muted">Traffic & Leads</span>
+                    <span class="small fw-bold text-muted">{{ __('customer.stat_traffic_leads') }}</span>
                 </div>
                 <h3 class="fw-bold mb-0">324 / 12</h3>
-                <p class="x-small text-muted mb-0 mt-1">Visitors vs Interest</p>
+                <p class="x-small text-muted mb-0 mt-1">{{ __('customer.stat_visitors_interest') }}</p>
             </div>
         </div>
     </div>
@@ -82,8 +82,8 @@
         <div class="card border-0 shadow-sm mb-4" style="border-radius: 20px;">
             <div class="card-header bg-white border-0 p-4">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="fw-bold mb-0">Bima Zangu Zilizo Hai</h5>
-                    <a href="{{ route('customer.policies.index') }}" class="small text-decoration-none">Zote</a>
+                    <h5 class="fw-bold mb-0">{{ __('customer.active_policies_title') }}</h5>
+                    <a href="{{ route('customer.policies.index') }}" class="small text-decoration-none">{{ __('customer.all_link') }}</a>
                 </div>
             </div>
             <div class="card-body p-0">
@@ -91,10 +91,10 @@
                     <table class="table table-hover align-middle mb-0">
                         <thead class="bg-light">
                             <tr>
-                                <th class="border-0 px-4 py-3 small text-muted text-uppercase">Bima</th>
-                                <th class="border-0 py-3 small text-muted text-uppercase d-none d-md-table-cell">No. Ya Policy</th>
-                                <th class="border-0 py-3 small text-muted text-uppercase">Hali</th>
-                                <th class="border-0 py-3 small text-muted text-uppercase">Mwisho</th>
+                                <th class="border-0 px-4 py-3 small text-muted text-uppercase">{{ __('customer.table_policy') }}</th>
+                                <th class="border-0 py-3 small text-muted text-uppercase d-none d-md-table-cell">{{ __('customer.table_policy_number') }}</th>
+                                <th class="border-0 py-3 small text-muted text-uppercase">{{ __('customer.status') }}</th>
+                                <th class="border-0 py-3 small text-muted text-uppercase">{{ __('customer.table_expiry') }}</th>
                                 <th class="border-0 px-4 py-3"></th>
                             </tr>
                         </thead>
@@ -115,7 +115,7 @@
                                     <span class="x-small">BK-MOT-2024-001</span>
                                 </td>
                                 <td class="py-3">
-                                    <span class="badge bg-success-subtle text-success px-2 py-1" style="font-size: 0.65rem;">Hai</span>
+                                    <span class="badge bg-success-subtle text-success px-2 py-1" style="font-size: 0.65rem;">{{ __('customer.status_active') }}</span>
                                 </td>
                                 <td class="py-3 text-danger fw-bold small">15 Jun</td>
                                 <td class="px-4 py-3 text-end">
@@ -138,7 +138,7 @@
                                     <span class="x-small">BK-HEA-2024-052</span>
                                 </td>
                                 <td class="py-3 border-0">
-                                    <span class="badge bg-success-subtle text-success px-2 py-1" style="font-size: 0.65rem;">Hai</span>
+                                    <span class="badge bg-success-subtle text-success px-2 py-1" style="font-size: 0.65rem;">{{ __('customer.status_active') }}</span>
                                 </td>
                                 <td class="py-3 border-0 small text-muted">10 Jan</td>
                                 <td class="px-4 py-3 border-0 text-end">
@@ -160,28 +160,28 @@
                 <div class="bg-white rounded-circle shadow-sm mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
                     <i class="bi bi-robot fs-2 text-primary"></i>
                 </div>
-                <h6 class="fw-bold mb-2">Ushauri wa AI</h6>
-                <p class="x-small text-muted mb-3">Tumeona unamiliki gari lakini huna bima ya nyumba. Kinga makazi yako sasa!</p>
-                <button class="btn btn-sm btn-primary w-100 rounded-pill py-2 small">Angalia Ofa</button>
+                <h6 class="fw-bold mb-2">{{ __('customer.ai_recommendation_title') }}</h6>
+                <p class="x-small text-muted mb-3">{{ __('customer.ai_recommendation_text') }}</p>
+                <button class="btn btn-sm btn-primary w-100 rounded-pill py-2 small">{{ __('customer.view_offer') }}</button>
             </div>
         </div>
 
         <!-- Quick Links -->
         <div class="card border-0 shadow-sm mb-4" style="border-radius: 20px;">
             <div class="card-body p-4">
-                <h6 class="fw-bold mb-4">Msaada wa Haraka</h6>
+                <h6 class="fw-bold mb-4">{{ __('customer.quick_help_title') }}</h6>
                 <div class="d-grid gap-2">
                     <a href="{{ route('customer.support') }}" class="btn btn-light text-start border-0 py-3 px-3 d-flex align-items-center">
                         <i class="bi bi-chat-dots me-3 text-primary"></i>
-                        <span class="small fw-bold">Ongea Nasi (Live Chat)</span>
+                        <span class="small fw-bold">{{ __('customer.talk_to_us_live_chat') }}</span>
                     </a>
                     <a href="{{ route('customer.policies.documents') }}" class="btn btn-light text-start border-0 py-3 px-3 d-flex align-items-center">
                         <i class="bi bi-download me-3 text-success"></i>
-                        <span class="small fw-bold">Pakua Vitambulisho</span>
+                        <span class="small fw-bold">{{ __('customer.download_certificates') }}</span>
                     </a>
                     <a href="#" class="btn btn-light text-start border-0 py-3 px-3 d-flex align-items-center">
                         <i class="bi bi-geo-alt me-3 text-danger"></i>
-                        <span class="small fw-bold">Hospitali Zilizo Karibu</span>
+                        <span class="small fw-bold">{{ __('customer.nearby_hospitals') }}</span>
                     </a>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', 'Broker Dashboard')
+@section('dashboard_title', __('broker.dashboard_title'))
 
 @section('dashboard_content')
 <!-- Broker Stats -->
@@ -15,7 +15,7 @@
                     </div>
                     <div class="text-success small fw-bold"><i class="bi bi-graph-up"></i> +15.5%</div>
                 </div>
-                <h6 class="text-uppercase small fw-bold text-muted mb-1">Total Premiums Sold</h6>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('broker.total_premiums_sold') }}</h6>
                 <h4 class="fw-bold mb-0">TZS 85.2M</h4>
             </div>
         </div>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="text-success small fw-bold"><i class="bi bi-arrow-up"></i> +8.2%</div>
                 </div>
-                <h6 class="text-uppercase small fw-bold text-muted mb-1">Commissions Earned</h6>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('broker.commissions_earned') }}</h6>
                 <h4 class="fw-bold mb-0">TZS 12.4M</h4>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="text-primary small fw-bold">+45 new</div>
                 </div>
-                <h6 class="text-uppercase small fw-bold text-muted mb-1">Active Policies</h6>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('broker.active_policies') }}</h6>
                 <h4 class="fw-bold mb-0">1,120</h4>
             </div>
         </div>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="text-warning small fw-bold">Next 7 days</div>
                 </div>
-                <h6 class="text-uppercase small fw-bold text-muted mb-1">Pending Renewals</h6>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('broker.pending_renewals') }}</h6>
                 <h4 class="fw-bold mb-0">28</h4>
             </div>
         </div>
@@ -75,10 +75,10 @@
                     <i class="bi bi-graph-up-arrow fs-3"></i>
                 </div>
                 <div>
-                    <h6 class="text-uppercase small fw-bold text-muted mb-1">Traffic & Leads</h6>
+                    <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('broker.traffic_and_leads') }}</h6>
                     <h3 class="fw-bold mb-0">450 / 18</h3>
                     <div class="mt-1 small text-info">
-                        <i class="bi bi-activity"></i> Engagement
+                        <i class="bi bi-activity"></i> {{ __('broker.engagement') }}
                     </div>
                 </div>
             </div>
@@ -90,16 +90,16 @@
     <!-- Quick Actions -->
     <div class="col-lg-8">
         <div class="card p-4">
-            <h6 class="fw-bold mb-4">Recent Sales</h6>
+            <h6 class="fw-bold mb-4">{{ __('broker.recent_sales') }}</h6>
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>Customer</th>
-                            <th>Policy Type</th>
-                            <th>Insurer</th>
-                            <th>Premium</th>
-                            <th>Status</th>
+                            <th>{{ __('broker.customer') }}</th>
+                            <th>{{ __('broker.policy_type') }}</th>
+                            <th>{{ __('broker.insurer') }}</th>
+                            <th>{{ __('broker.premium') }}</th>
+                            <th>{{ __('broker.status') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -108,14 +108,14 @@
                             <td>Motor Comprehensive</td>
                             <td>Alliance Insurance</td>
                             <td>TZS 450,000</td>
-                            <td><span class="badge bg-success-soft text-success">Active</span></td>
+                            <td><span class="badge bg-success-soft text-success">{{ __('broker.active') }}</span></td>
                         </tr>
                         <tr>
                             <td>Sarah Peter</td>
                             <td>Health Silver</td>
                             <td>Jubilee Insurance</td>
                             <td>TZS 850,000</td>
-                            <td><span class="badge bg-success-soft text-success">Active</span></td>
+                            <td><span class="badge bg-success-soft text-success">{{ __('broker.active') }}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -126,14 +126,14 @@
     <!-- Wallet Summary -->
     <div class="col-lg-4">
         <div class="card p-4 h-100 bg-primary text-white">
-            <h6 class="fw-bold mb-4 opacity-75">My Wallet Balance</h6>
+            <h6 class="fw-bold mb-4 opacity-75">{{ __('broker.my_wallet_balance') }}</h6>
             <div class="mb-4 text-center">
                 <h2 class="fw-bold">TZS 4,250,000</h2>
-                <span class="small opacity-75">Available for Cash-out</span>
+                <span class="small opacity-75">{{ __('broker.available_for_cash_out') }}</span>
             </div>
             <div class="d-grid gap-2">
-                <button class="btn btn-light fw-bold py-2">Request Cash-out</button>
-                <button class="btn btn-outline-light py-2">Transaction History</button>
+                <button class="btn btn-light fw-bold py-2">{{ __('broker.request_cash_out') }}</button>
+                <button class="btn btn-outline-light py-2">{{ __('broker.transaction_history') }}</button>
             </div>
         </div>
     </div>

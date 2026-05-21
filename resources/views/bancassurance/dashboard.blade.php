@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', 'Bancassurance Dashboard')
+@section('dashboard_title', __('bancassurance.dashboard_title'))
 
 @section('dashboard_content')
 <!-- Bancassurance Header Stats -->
@@ -15,7 +15,7 @@
                     </div>
                     <div class="text-success small fw-bold">92% Target</div>
                 </div>
-                <h6 class="text-uppercase small fw-bold text-muted mb-1">Branch Achievement</h6>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('bancassurance.branch_achievement') }}</h6>
                 <h4 class="fw-bold mb-0">TZS 45.8M</h4>
                 <div class="progress mt-3" style="height: 6px;">
                     <div class="progress-bar bg-primary" role="progressbar" style="width: 92%"></div>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="text-success small fw-bold"><i class="bi bi-arrow-up"></i> +15%</div>
                 </div>
-                <h6 class="text-uppercase small fw-bold text-muted mb-1">My Commission</h6>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('bancassurance.my_commission') }}</h6>
                 <h4 class="fw-bold mb-0">TZS 3.2M</h4>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="badge bg-warning text-dark">18 Pending</div>
                 </div>
-                <h6 class="text-uppercase small fw-bold text-muted mb-1">Bank Renewals</h6>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('bancassurance.bank_renewals') }}</h6>
                 <h4 class="fw-bold mb-0">18</h4>
             </div>
         </div>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="text-primary small fw-bold">Top 3</div>
                 </div>
-                <h6 class="text-uppercase small fw-bold text-muted mb-1">Branch Rank</h6>
+                <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('bancassurance.branch_rank') }}</h6>
                 <h4 class="fw-bold mb-0">#2</h4>
             </div>
         </div>
@@ -78,17 +78,17 @@
     <div class="col-lg-8">
         <div class="card border-0 shadow-sm p-4 h-100">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h6 class="fw-bold mb-0">Bank Customer Referrals</h6>
-                <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                <h6 class="fw-bold mb-0">{{ __('bancassurance.bank_customer_referrals') }}</h6>
+                <a href="#" class="btn btn-sm btn-outline-primary">{{ __('bancassurance.view_all') }}</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>Customer Account</th>
-                            <th>Referral Date</th>
-                            <th>Interest</th>
-                            <th>Status</th>
+                            <th>{{ __('bancassurance.customer_account') }}</th>
+                            <th>{{ __('bancassurance.referral_date') }}</th>
+                            <th>{{ __('bancassurance.interest') }}</th>
+                            <th>{{ __('bancassurance.status') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,13 +96,13 @@
                             <td>Hamis Juma (A/C ...8821)</td>
                             <td>Today, 09:15 AM</td>
                             <td>Motor Insurance</td>
-                            <td><span class="badge bg-warning-soft text-warning">Pending Contact</span></td>
+                            <td><span class="badge bg-warning-soft text-warning">{{ __('bancassurance.pending_contact') }}</span></td>
                         </tr>
                         <tr>
                             <td>Sarah Peter (A/C ...4432)</td>
                             <td>Yesterday</td>
                             <td>Life Insurance</td>
-                            <td><span class="badge bg-info-soft text-info">In Discussion</span></td>
+                            <td><span class="badge bg-info-soft text-info">{{ __('bancassurance.in_discussion') }}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -113,27 +113,27 @@
     <!-- Bank Quick Integration -->
     <div class="col-lg-4">
         <div class="card border-0 shadow-sm p-4 h-100">
-            <h6 class="fw-bold mb-4">Bank Systems Integration</h6>
+            <h6 class="fw-bold mb-4">{{ __('bancassurance.bank_systems_integration') }}</h6>
             <div class="d-grid gap-3">
                 <button class="btn btn-primary d-flex align-items-center justify-content-center py-2">
-                    <i class="bi bi-search me-2"></i> Verify Bank Account
+                    <i class="bi bi-search me-2"></i> {{ __('bancassurance.verify_bank_account') }}
                 </button>
                 <button class="btn btn-outline-primary d-flex align-items-center justify-content-center py-2">
-                    <i class="bi bi-credit-card me-2"></i> Setup Direct Debit
+                    <i class="bi bi-credit-card me-2"></i> {{ __('bancassurance.setup_direct_debit') }}
                 </button>
                 <button class="btn btn-outline-info d-flex align-items-center justify-content-center py-2">
-                    <i class="bi bi-file-earmark-spreadsheet me-2"></i> Import Lead List
+                    <i class="bi bi-file-earmark-spreadsheet me-2"></i> {{ __('bancassurance.import_lead_list') }}
                 </button>
             </div>
             <div class="mt-4 p-3 bg-light rounded-3">
                 <div class="d-flex align-items-center mb-2">
                     <i class="bi bi-shield-check text-success me-2"></i>
-                    <span class="small fw-bold">Compliance Status</span>
+                    <span class="small fw-bold">{{ __('bancassurance.compliance_status') }}</span>
                 </div>
                 <div class="progress" style="height: 5px;">
                     <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
                 </div>
-                <div class="x-small text-muted mt-1 text-center">AML & KYC Certified</div>
+                <div class="x-small text-muted mt-1 text-center">{{ __('bancassurance.aml_kyc_certified') }}</div>
             </div>
         </div>
     </div>

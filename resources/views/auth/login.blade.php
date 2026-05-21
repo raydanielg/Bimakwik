@@ -18,8 +18,8 @@
             @csrf
 
             <div class="mb-4">
-                <label for="email" class="form-label">Email Address</label>
-                <input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="name@example.com">
+                <label for="email" class="form-label">Email Address (mfano: insurer@bimakwik.com)</label>
+                <input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="insurer@bimakwik.com">
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -97,10 +97,12 @@
 
         @if($errors->any())
         <script>
+            const firstError = @json($errors->first());
+            const loginHint = 'Tumia email kamili (mfano insurer@bimakwik.com) na nywila sahihi.';
             Swal.fire({
                 icon: 'error',
                 title: 'Umekosea! / Login Failed',
-                text: 'Barua pepe au nywila uliyoweka si sahihi. Tafadhali jaribu tena.',
+                text: firstError ? `${firstError} ${loginHint}` : `Barua pepe au nywila uliyoweka si sahihi. ${loginHint}`,
                 confirmButtonColor: '#ef4444',
                 confirmButtonText: 'Jaribu Tena'
             });

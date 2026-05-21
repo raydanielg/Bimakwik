@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', 'Add Funds to Wallet')
+@section('dashboard_title', __('customer.add_funds_title'))
 
 @section('dashboard_content')
 <!-- Page Header -->
@@ -8,9 +8,9 @@
     <div class="col-12">
         <h2 class="fw-bold mb-2">
             <i class="bi bi-wallet-plus me-2"></i>
-            Ongeza Pesa katika Mkoba
+            {{ __('customer.add_funds_header') }}
         </h2>
-        <p class="text-muted">Ongeza safu nyingi kwa mkoba wako ili kulipa bima</p>
+        <p class="text-muted">{{ __('customer.add_funds_subtitle') }}</p>
     </div>
 </div>
 
@@ -23,12 +23,12 @@
                     @csrf
 
                     <!-- Amount Selection -->
-                    <h5 class="fw-bold mb-3">Chagua Kiasi</h5>
+                    <h5 class="fw-bold mb-3">{{ __('customer.choose_amount') }}</h5>
 
                     <div class="mb-4">
                         <!-- Quick Amount Buttons -->
                         <div class="mb-3">
-                            <label class="fw-bold mb-2">Kiasi cha Haraka:</label>
+                            <label class="fw-bold mb-2">{{ __('customer.quick_amount') }}</label>
                             <div class="btn-group w-100" role="group">
                                 <input type="radio" class="btn-check" name="quick-amount" id="amount-50k" value="50000">
                                 <label class="btn btn-outline-primary" for="amount-50k">
@@ -54,20 +54,20 @@
 
                         <!-- Custom Amount -->
                         <div class="mt-4 pt-3 border-top">
-                            <label class="form-label fw-bold">Au Ingiza Kiasi Maalum:</label>
+                            <label class="form-label fw-bold">{{ __('customer.or_enter_custom_amount') }}</label>
                             <div class="input-group input-group-lg">
                                 <span class="input-group-text">TZS</span>
                                 <input type="number" class="form-control" id="customAmount" name="custom_amount" placeholder="0.00" step="1000" min="10000">
                                 <span class="input-group-text">.00</span>
                             </div>
-                            <small class="text-muted d-block mt-2">Kiasi cha chini: TZS 10,000 | Kiasi cha juu: TZS 5,000,000</small>
+                            <small class="text-muted d-block mt-2">{{ __('customer.min_max_amount') }}</small>
                         </div>
                     </div>
 
                     <hr class="my-4">
 
                     <!-- Payment Method -->
-                    <h5 class="fw-bold mb-3">Chagua Mbinu ya Kulipa</h5>
+                    <h5 class="fw-bold mb-3">{{ __('customer.choose_payment_method') }}</h5>
 
                     <div class="mb-4">
                         <div class="list-group">
@@ -79,7 +79,7 @@
                                         <h6 class="mb-1 fw-bold">
                                             <i class="bi bi-phone me-2" style="color: #28a745;"></i> M-Pesa
                                         </h6>
-                                        <span class="badge bg-success">Haraka</span>
+                                        <span class="badge bg-success">{{ __('customer.fast') }}</span>
                                     </div>
                                     <p class="text-muted small mb-0">Kulipa kupitia M-Pesa - Haraka na salama</p>
                                 </div>
@@ -91,11 +91,11 @@
                                 <div class="w-100">
                                     <div class="d-flex gap-2 align-items-center">
                                         <h6 class="mb-1 fw-bold">
-                                            <i class="bi bi-bank me-2" style="color: #0066cc;"></i> Uhamisho wa Benki
+                                            <i class="bi bi-bank me-2" style="color: #0066cc;"></i> {{ __('customer.bank_transfer') }}
                                         </h6>
-                                        <span class="badge bg-info">2-5 Saa</span>
+                                        <span class="badge bg-info">{{ __('customer.hours_2_5') }}</span>
                                     </div>
-                                    <p class="text-muted small mb-0">Huduma ya benki kwa kiasi kikubwa</p>
+                                    <p class="text-muted small mb-0">{{ __('customer.bank_service_large') }}</p>
                                 </div>
                             </label>
 
@@ -107,7 +107,7 @@
                                         <h6 class="mb-1 fw-bold">
                                             <i class="bi bi-phone me-2" style="color: #ff6600;"></i> Airtel Money
                                         </h6>
-                                        <span class="badge bg-warning text-dark">Haraka</span>
+                                        <span class="badge bg-warning text-dark">{{ __('customer.fast') }}</span>
                                     </div>
                                     <p class="text-muted small mb-0">Kulipa kupitia Airtel Money</p>
                                 </div>
@@ -121,7 +121,7 @@
                                         <h6 class="mb-1 fw-bold">
                                             <i class="bi bi-phone me-2" style="color: #662d91;"></i> Tigo Pesa
                                         </h6>
-                                        <span class="badge bg-secondary">Haraka</span>
+                                        <span class="badge bg-secondary">{{ __('customer.fast') }}</span>
                                     </div>
                                     <p class="text-muted small mb-0">Kulipa kupitia Tigo Pesa</p>
                                 </div>
@@ -134,16 +134,16 @@
                     <!-- Terms -->
                     <div class="alert alert-info small mb-4">
                         <i class="bi bi-info-circle me-2"></i>
-                        <strong>Habari:</strong> Pesa yako itapokelewa ndani ya dakika 1-5. Huwezi kusasauliza baada ya 30 dakika.
+                        <strong>{{ __('customer.notice') }}:</strong> {{ __('customer.funds_notice') }}
                     </div>
 
                     <!-- Submit Button -->
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="bi bi-wallet-plus me-2"></i> Endelea na Kulipa
+                            <i class="bi bi-wallet-plus me-2"></i> {{ __('customer.continue_to_pay') }}
                         </button>
                         <a href="{{ route('customer.wallet.index') }}" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-2"></i> Rudi
+                            <i class="bi bi-arrow-left me-2"></i> {{ __('customer.back') }}
                         </a>
                     </div>
                 </form>
@@ -156,7 +156,7 @@
         <div class="card border-0 shadow-sm sticky-top" style="top: 20px;">
             <div class="card-header bg-light border-0 p-4">
                 <h5 class="fw-bold mb-0">
-                    <i class="bi bi-calculator me-2"></i> Muhtasari
+                    <i class="bi bi-calculator me-2"></i> {{ __('customer.summary') }}
                 </h5>
             </div>
             <div class="card-body p-4">
@@ -166,12 +166,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <small class="text-muted">Mbinu ya Kulipa</small>
+                    <small class="text-muted">{{ __('customer.payment_method') }}</small>
                     <div class="fw-bold" id="summaryMethod">M-Pesa</div>
                 </div>
 
                 <div class="mb-4 p-3 bg-light rounded">
-                    <small class="text-muted">Kodi / Ada</small>
+                    <small class="text-muted">{{ __('customer.fees') }}</small>
                     <div class="fw-bold" id="summaryFee">TZS 0.00</div>
                 </div>
 
@@ -179,19 +179,19 @@
 
                 <div class="mb-4">
                     <div class="d-flex justify-content-between">
-                        <strong>Jumla ya Kulipa:</strong>
+                        <strong>{{ __('customer.total_to_pay') }}</strong>
                         <strong class="fs-5 text-success" id="summaryTotal">TZS 0.00</strong>
                     </div>
                 </div>
 
                 <div class="alert alert-success small">
                     <i class="bi bi-check-circle me-1"></i>
-                    <strong>Salama:</strong> Imefungwa na SSL encryption
+                    <strong>{{ __('customer.secure') }}:</strong> {{ __('customer.ssl_encrypted') }}
                 </div>
 
                 <div class="alert alert-warning small">
                     <i class="bi bi-exclamation-triangle me-1"></i>
-                    Hakikisha kuwa simu yako na kwa njia ya kulipa inazotumiwa ni ya jina lako.
+                    {{ __('customer.payment_warning') }}
                 </div>
             </div>
         </div>
@@ -255,7 +255,7 @@
         const selectedMethod = document.querySelector('input[name="payment_method"]:checked').value;
         const methodLabels = {
             'mpesa': 'M-Pesa',
-            'bank': 'Uhamisho wa Benki',
+            'bank': '{{ __('customer.bank_transfer') }}',
             'airtel': 'Airtel Money',
             'tigo': 'Tigo Pesa'
         };
@@ -288,11 +288,11 @@
         const method = document.querySelector('input[name="payment_method"]:checked').value;
         
         if (!amount || parseFloat(amount) <= 0) {
-            alert('Tafadhali ingiza kiasi salama');
+            alert('{{ __('customer.enter_valid_amount') }}');
             return;
         }
         
-        alert(`Utakamatia maelezo ya kulipa kwa njia ya ${method}. Shirikio!`);
+        alert(`{{ __('customer.payment_instructions_alert') }} ${method}.`);
     });
 
     // Initialize summary

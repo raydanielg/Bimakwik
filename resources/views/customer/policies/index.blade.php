@@ -1,11 +1,22 @@
 @extends('layouts.dashboard')
 
 @section('dashboard_content')
+@php
+    $policies = collect($customerPolicies ?? []);
+    $pick = function ($row, $keys, $default = '-') {
+        foreach ($keys as $key) {
+            if (isset($row[$key]) && $row[$key] !== null && $row[$key] !== '') {
+                return $row[$key];
+            }
+        }
+        return $default;
+    };
+@endphp
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12">
-            <h4 class="fw-bold">{{ app()->getLocale() == 'sw' ? 'Bima Zangu' : 'My Active Policies' }}</h4>
-            <p class="text-muted small">{{ app()->getLocale() == 'sw' ? 'Orodha ya bima zako zinazofanya kazi sasa.' : 'List of your currently active insurance policies.' }}</p>
+            <h4 class="fw-bold">{{ __('customer.policies_title') }}</h4>
+            <p class="text-muted small">{{ __('customer.policies_subtitle') }}</p>
         </div>
     </div>
 
@@ -24,38 +35,39 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="px-4 py-3">
-                                    <div class="d-flex align-items-center">
-                                        <div class="bg-success bg-opacity-10 rounded-circle p-2 me-3">
-                                            <i class="bi bi-car-front text-success"></i>
+                            @forelse($policies as $policy)
+                                @php
+                                    $status = strtolower((string) $pick($policy, ['status', 'policy_status'], 'active'));
+                                    $expiryRaw = $pick($policy, ['expiry_date', 'end_date', 'valid_to'], null);
+                                    $expiry = $expiryRaw;
+                                    try {
+                                        $expiry = $expiryRaw ? \Carbon\Carbon::parse($expiryRaw)->format('d M Y') : '-';
+                                    } catch (\Throwable $e) {
+                                        $expiry = $expiryRaw ?: '-';
+                                    }
+                                    $badgeClass = $status === 'active' ? 'success' : ($status === 'expired' ? 'danger' : 'warning');
+                                @endphp
+                                <tr>
+                                    <td class="px-4 py-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="bg-success bg-opacity-10 rounded-circle p-2 me-3">
+                                                <i class="bi bi-shield-check text-success"></i>
+                                            </div>
+                                            <span class="fw-bold">{{ $pick($policy, ['policy_name', 'name', 'title', 'product_name']) }}</span>
                                         </div>
-                                        <span class="fw-bold">Motor Comprehensive</span>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-3">Alliance Insurance</td>
-                                <td class="px-4 py-3"><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Active</span></td>
-                                <td class="px-4 py-3">12 Dec 2026</td>
-                                <td class="px-4 py-3">
-                                    <a href="#" class="btn btn-sm btn-light rounded-pill px-3">View Details</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-4 py-3">
-                                    <div class="d-flex align-items-center">
-                                        <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
-                                            <i class="bi bi-heart-pulse text-primary"></i>
-                                        </div>
-                                        <span class="fw-bold">Health Smart Pro</span>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-3">Jubilee Insurance</td>
-                                <td class="px-4 py-3"><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Active</span></td>
-                                <td class="px-4 py-3">20 Jan 2027</td>
-                                <td class="px-4 py-3">
-                                    <a href="#" class="btn btn-sm btn-light rounded-pill px-3">View Details</a>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="px-4 py-3">{{ $pick($policy, ['provider_name', 'insurer_name', 'company_name']) }}</td>
+                                    <td class="px-4 py-3"><span class="badge bg-{{ $badgeClass }} bg-opacity-10 text-{{ $badgeClass }} rounded-pill px-3">{{ ucfirst($status) }}</span></td>
+                                    <td class="px-4 py-3">{{ $expiry }}</td>
+                                    <td class="px-4 py-3">
+                                        <a href="{{ route('customer.policies.documents') }}" class="btn btn-sm btn-light rounded-pill px-3">{{ __('customer.view_details') }}</a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                        <td colspan="5" class="px-4 py-4 text-center text-muted">{{ __('customer.no_policies') }}</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

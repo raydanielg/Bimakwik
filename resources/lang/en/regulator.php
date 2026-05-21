@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'dashboard_title' => 'Regulator Dashboard (TIRA Oversight)',
+    'total_premiums_written' => 'Total Premiums Written',
+    'market_growth' => 'Market Growth',
+    'active_policies' => 'Active Policies',
+    'market_wide' => 'Market-wide',
+    'compliance_alerts' => 'Compliance Alerts',
+    'action_required' => 'Action Required',
+    'fraud_investigations' => 'Fraud Investigations',
+    'under_review' => 'Under Review',
+    'market_share_by_insurer' => 'Market Share by Insurer (Top 5)',
+    'market_intelligence' => 'Market Intelligence',
+    'insurer_name' => 'Insurer Name',
+    'policies' => 'Policies',
+    'premium' => 'Premium (TZS)',
+    'market_share' => 'Market Share',
+    'status' => 'Status',
+    'compliant' => 'Compliant',
+    'regulatory_oversight' => 'Regulatory Oversight',
+    'registered_insurers' => 'Registered Insurers',
+    'registered_brokers' => 'Registered Brokers',
+    'registered_agents' => 'Registered Agents',
+    'system_integrity' => 'System Integrity (TIRAMIS)',
+    'sync_active' => 'Sync Active',
+    'last_synced' => 'Last synced: 2 mins ago',
+];

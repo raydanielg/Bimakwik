@@ -1,24 +1,24 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', 'Commissions')
+@section('dashboard_title', __('sfe.commissions_title'))
 
 @section('dashboard_content')
 <div class="row g-4 mb-4">
     <div class="col-md-4">
         <div class="card border-0 shadow-sm p-4 h-100">
-            <div class="text-muted small text-uppercase">Wallet Balance</div>
+            <div class="text-muted small text-uppercase">{{ __('sfe.wallet_balance') }}</div>
             <div class="fs-3 fw-bold">TZS {{ number_format($wallet->balance ?? 0, 2) }}</div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card border-0 shadow-sm p-4 h-100">
-            <div class="text-muted small text-uppercase">Credits</div>
+            <div class="text-muted small text-uppercase">{{ __('sfe.credits') }}</div>
             <div class="fs-3 fw-bold">TZS {{ number_format($creditTotal, 2) }}</div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card border-0 shadow-sm p-4 h-100">
-            <div class="text-muted small text-uppercase">Debits</div>
+            <div class="text-muted small text-uppercase">{{ __('sfe.debits') }}</div>
             <div class="fs-3 fw-bold">TZS {{ number_format($debitTotal, 2) }}</div>
         </div>
     </div>
@@ -26,17 +26,17 @@
 
 <div class="card border-0 shadow-sm p-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h6 class="fw-bold mb-0">Commissions and Wallet</h6>
+        <h6 class="fw-bold mb-0">{{ __('sfe.commissions_wallet') }}</h6>
     </div>
     <div class="table-responsive">
         <table class="table table-hover align-middle small">
             <thead class="table-light">
                 <tr>
-                    <th>Reference</th>
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Date</th>
+                    <th>{{ __('sfe.reference') }}</th>
+                    <th>{{ __('sfe.type') }}</th>
+                    <th>{{ __('sfe.amount') }}</th>
+                    <th>{{ __('sfe.status') }}</th>
+                    <th>{{ __('sfe.date') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,7 +50,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-muted">No wallet transactions found yet.</td>
+                        <td colspan="5" class="text-muted">{{ __('sfe.no_wallet_transactions_found') }}</td>
                     </tr>
                 @endforelse
             </tbody>

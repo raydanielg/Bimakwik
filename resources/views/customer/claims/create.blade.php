@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', 'File a Claim')
+@section('dashboard_title', __('customer.create_claim_title'))
 
 @section('dashboard_content')
 <!-- Page Header -->
@@ -8,9 +8,9 @@
     <div class="col-12">
         <h2 class="fw-bold mb-2">
             <i class="bi bi-file-earmark-plus me-2"></i>
-            Juta Madai Mpya
+            {{ __('customer.create_claim_header') }}
         </h2>
-        <p class="text-muted">Juta madai kwa ajili ya gharama za ziada au uharibifu</p>
+        <p class="text-muted">{{ __('customer.create_claim_subtitle') }}</p>
     </div>
 </div>
 
@@ -24,13 +24,13 @@
 
                     <!-- Policy Selection -->
                     <h5 class="fw-bold mb-3">
-                        <i class="bi bi-1-circle me-2"></i> Chagua Sera
+                        <i class="bi bi-1-circle me-2"></i> {{ __('customer.select_policy') }}
                     </h5>
 
                     <div class="mb-4">
-                        <label class="form-label">Sera ya Bima</label>
+                        <label class="form-label">{{ __('customer.insurance_policy') }}</label>
                         <select class="form-select" name="policy_id" required>
-                            <option value="">Chagua sera...</option>
+                            <option value="">{{ __('customer.choose_policy') }}</option>
                             <option value="1">
                                 Policy #POL-2024-001 - Motor Insurance (Active)
                             </option>
@@ -47,43 +47,43 @@
 
                     <!-- Claim Details -->
                     <h5 class="fw-bold mb-3">
-                        <i class="bi bi-2-circle me-2"></i> Maelezo ya Madai
+                        <i class="bi bi-2-circle me-2"></i> {{ __('customer.claim_details') }}
                     </h5>
 
                     <div class="mb-3">
-                        <label class="form-label">Aina ya Madai</label>
+                        <label class="form-label">{{ __('customer.claim_type_label') }}</label>
                         <select class="form-select" name="claim_type" required>
-                            <option value="">Chagua aina...</option>
-                            <option value="accident">Ajali au Mgogoro</option>
-                            <option value="theft">Wizi au Mhasara</option>
-                            <option value="damage">Uharibifu</option>
-                            <option value="medical">Gharama za Usada</option>
-                            <option value="other">Nyingine</option>
+                            <option value="">{{ __('customer.choose_type') }}</option>
+                            <option value="accident">{{ __('customer.accident_or_collision') }}</option>
+                            <option value="theft">{{ __('customer.theft_or_loss') }}</option>
+                            <option value="damage">{{ __('customer.damage') }}</option>
+                            <option value="medical">{{ __('customer.medical_expenses') }}</option>
+                            <option value="other">{{ __('customer.other') }}</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Tarehe ya Wakati (When it happened)</label>
+                        <label class="form-label">{{ __('customer.incident_date_label') }}</label>
                         <input type="date" class="form-control" name="incident_date" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Maelezo ya Hadharani</label>
-                        <textarea class="form-control" name="description" rows="5" placeholder="Eleza kwa undani ni nini kilichotokea..." required></textarea>
-                        <small class="text-muted">Toa maelezo ya kina kuhusu kilichotokea</small>
+                        <label class="form-label">{{ __('customer.incident_description') }}</label>
+                        <textarea class="form-control" name="description" rows="5" placeholder="{{ __('customer.incident_description_ph') }}" required></textarea>
+                        <small class="text-muted">{{ __('customer.incident_description_hint') }}</small>
                     </div>
 
                     <div class="row g-3 mb-4">
                         <div class="col-md-6">
-                            <label class="form-label">Kiasi cha Madai</label>
+                            <label class="form-label">{{ __('customer.claim_amount_label') }}</label>
                             <div class="input-group">
                                 <span class="input-group-text">TZS</span>
                                 <input type="number" class="form-control" name="claim_amount" placeholder="0.00" required>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Mahali pa Hadharani</label>
-                            <input type="text" class="form-control" name="incident_location" placeholder="Mfano: Dar es Salaam" required>
+                            <label class="form-label">{{ __('customer.incident_location') }}</label>
+                            <input type="text" class="form-control" name="incident_location" placeholder="{{ __('customer.incident_location_ph') }}" required>
                         </div>
                     </div>
 
@@ -91,15 +91,15 @@
 
                     <!-- Supporting Documents -->
                     <h5 class="fw-bold mb-3">
-                        <i class="bi bi-3-circle me-2"></i> Nyaraka za Ushahidi
+                        <i class="bi bi-3-circle me-2"></i> {{ __('customer.supporting_documents') }}
                     </h5>
 
                     <div class="mb-3">
-                        <label class="form-label">Sambaza Nyaraka (Optional)</label>
+                        <label class="form-label">{{ __('customer.upload_documents_optional') }}</label>
                         <div class="border-2 border-dashed rounded p-4 text-center" style="border-color: #dee2e6; cursor: pointer;" id="dropZone">
                             <i class="bi bi-cloud-arrow-up" style="font-size: 2rem; color: #6c757d;"></i>
                             <p class="mt-2 mb-0">
-                                <strong>Dobeza mafaili au bonyeza kuteua</strong>
+                                <strong>{{ __('customer.drag_files_prompt') }}</strong>
                             </p>
                             <small class="text-muted">PNG, JPG, PDF (Max 5MB)</small>
                             <input type="file" id="fileInput" name="documents[]" multiple accept=".png,.jpg,.jpeg,.pdf" style="display: none;">
@@ -111,28 +111,28 @@
 
                     <!-- Additional Information -->
                     <h5 class="fw-bold mb-3">
-                        <i class="bi bi-4-circle me-2"></i> Taarifa za Ziada
+                        <i class="bi bi-4-circle me-2"></i> {{ __('customer.additional_info') }}
                     </h5>
 
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="third_party" id="thirdParty">
                             <label class="form-check-label" for="thirdParty">
-                                Kuna upande wa tatu uliyohusika?
+                                {{ __('customer.third_party_involved') }}
                             </label>
                         </div>
                     </div>
 
                     <div id="thirdPartyInfo" style="display: none;" class="mb-3 p-3 bg-light rounded">
-                        <input type="text" class="form-control" name="third_party_name" placeholder="Jina la upande wa tatu">
-                        <input type="text" class="form-control mt-2" name="third_party_contact" placeholder="Simu au barua pepe">
+                        <input type="text" class="form-control" name="third_party_name" placeholder="{{ __('customer.third_party_name') }}">
+                        <input type="text" class="form-control mt-2" name="third_party_contact" placeholder="{{ __('customer.third_party_contact') }}">
                     </div>
 
                     <div class="mb-4">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="police_report" id="policeReport">
                             <label class="form-check-label" for="policeReport">
-                                Ripoti ilifanywa kwa polisi?
+                                {{ __('customer.police_report_question') }}
                             </label>
                         </div>
                     </div>
@@ -140,15 +140,15 @@
                     <!-- Terms and Submit -->
                     <div class="alert alert-info small">
                         <i class="bi bi-info-circle me-2"></i>
-                        Nakubali kuwa taarifa zote nzilizo kwenye fomu hii ni za ukweli na nzima.
+                        {{ __('customer.claim_terms_agree') }}
                     </div>
 
                     <div class="d-flex gap-2 pt-3">
                         <a href="{{ route('customer.claims.track') }}" class="btn btn-secondary">
-                            <i class="bi bi-arrow-left me-2"></i> Rudi
+                            <i class="bi bi-arrow-left me-2"></i> {{ __('customer.back') }}
                         </a>
                         <button type="submit" class="btn btn-primary ms-auto">
-                            <i class="bi bi-send me-2"></i> Tuma Madai
+                            <i class="bi bi-send me-2"></i> {{ __('customer.submit_claim_form') }}
                         </button>
                     </div>
                 </form>
@@ -161,12 +161,12 @@
         <div class="card border-0 shadow-sm sticky-top" style="top: 20px;">
             <div class="card-header bg-light border-0 p-4">
                 <h5 class="fw-bold mb-0">
-                    <i class="bi bi-info-circle me-2"></i> Habari Muhimu
+                    <i class="bi bi-info-circle me-2"></i> {{ __('customer.important_info') }}
                 </h5>
             </div>
             <div class="card-body p-4">
                 <div class="mb-4">
-                    <h6 class="fw-bold mb-2">Kile unachohitaji:</h6>
+                    <h6 class="fw-bold mb-2">{{ __('customer.what_you_need') }}</h6>
                     <ul class="small list-unstyled">
                         <li class="mb-2">
                             <i class="bi bi-check-circle text-success me-2"></i>
@@ -174,15 +174,15 @@
                         </li>
                         <li class="mb-2">
                             <i class="bi bi-check-circle text-success me-2"></i>
-                            Maelezo ya hadharani
+                            {{ __('customer.incident_details_item') }}
                         </li>
                         <li class="mb-2">
                             <i class="bi bi-check-circle text-success me-2"></i>
-                            Kiasi cha madai
+                            {{ __('customer.claim_amount_item') }}
                         </li>
                         <li class="mb-2">
                             <i class="bi bi-check-circle text-success me-2"></i>
-                            Picha au nyaraka
+                            {{ __('customer.photos_or_docs') }}
                         </li>
                     </ul>
                 </div>
@@ -190,7 +190,7 @@
                 <hr>
 
                 <div class="mb-4">
-                    <h6 class="fw-bold mb-2">Nyaraka Zinazokubali:</h6>
+                    <h6 class="fw-bold mb-2">{{ __('customer.accepted_documents') }}</h6>
                     <ul class="small list-unstyled">
                         <li class="mb-1">
                             <i class="bi bi-file-image me-2"></i> Picha (PNG, JPG)
@@ -207,9 +207,9 @@
                 <hr>
 
                 <div>
-                    <h6 class="fw-bold mb-2">Muda wa Kujibu:</h6>
+                    <h6 class="fw-bold mb-2">{{ __('customer.response_time') }}</h6>
                     <p class="small mb-0">
-                        Tunajibu madai ndani ya <strong>5-10 siku za kazi</strong>. Utakamatia habari kwa njia ya SMS na barua pepe.
+                        {{ __('customer.response_time_text') }}
                     </p>
                 </div>
             </div>
@@ -315,7 +315,7 @@
     // Form submission
     document.getElementById('claimForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('Madai yako yamekubali! Unatakamatia namba ya kurekebisha kwa barua pepe.');
+        alert('{{ __('customer.claim_submitted_alert') }}');
     });
 </script>
 @endsection

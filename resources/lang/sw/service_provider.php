@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'dashboard_title' => 'Dashibodi ya Mtoa Huduma',
+    'bills_submitted' => 'Ankara Zilizowasilishwa',
+    'total_this_month' => 'Jumla ya mwezi huu',
+    'pending_approval' => 'Inasubiri Idhini',
+    'needs_review' => 'Inahitaji Ukaguzi',
+    'paid_amount' => 'Kiasi Kilicholipwa',
+    'successfully_paid' => 'Imelipwa kikamilifu',
+    'rejected_bills' => 'Ankara Zilizokataliwa',
+    'view_reasons' => 'Tazama sababu',
+    'quick_customer_verification' => 'Uthibitishaji wa Haraka wa Mteja',
+    'policy_number_label' => 'Namba ya Sera / Kitambulisho / Simu',
+    'verify' => 'Thibitisha',
+    'verification_placeholder' => 'Ingiza taarifa za kuthibitisha...',
+    'verification_note' => 'Matokeo ya uthibitishaji yataonekana hapa baada ya kutafuta.',
+    'recent_bill_submissions' => 'Ankara za Hivi Karibuni',
+    'view_all' => 'Tazama Zote',
+    'patient_motor' => 'Mgonjwa/Gari',
+    'bill_no' => 'Namba ya Ankara',
+    'amount' => 'Kiasi',
+    'status' => 'Hali',
+    'pending' => 'Inasubiri',
+    'approved' => 'Imeidhinishwa',
+];

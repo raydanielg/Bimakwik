@@ -1,16 +1,27 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', 'Wallet History')
+@section('dashboard_title', __('customer.dashboard_title_wallet_history'))
 
 @section('dashboard_content')
+@php
+    $transactions = collect($walletTransactions ?? []);
+    $pick = function ($row, $keys, $default = null) {
+        foreach ($keys as $key) {
+            if (isset($row[$key]) && $row[$key] !== null && $row[$key] !== '') {
+                return $row[$key];
+            }
+        }
+        return $default;
+    };
+@endphp
 <!-- Page Header -->
 <div class="row mb-4">
     <div class="col-12">
         <h2 class="fw-bold mb-2">
             <i class="bi bi-clock-history me-2"></i>
-            Historia ya Mkoba
+            {{ __('customer.wallet_history_title') }}
         </h2>
-        <p class="text-muted">Tazama kila kitu kilicho hatua kwenye mkoba wako</p>
+        <p class="text-muted">{{ __('customer.wallet_history_subtitle') }}</p>
     </div>
 </div>
 
@@ -19,13 +30,13 @@
     <div class="col-md-4">
         <div class="card border-0 shadow-sm">
             <div class="card-body p-3">
-                <label class="fw-bold mb-2 small">Kwa Aina</label>
+                <label class="fw-bold mb-2 small">{{ __('customer.by_type') }}</label>
                 <select class="form-select form-select-sm" id="typeFilter">
-                    <option value="">Zote</option>
-                    <option value="deposit">Kumweka (Deposit)</option>
-                    <option value="payment">Kulipa</option>
-                    <option value="refund">Kurudi Pesa</option>
-                    <option value="bonus">Zawadi</option>
+                    <option value="">{{ __('customer.all') }}</option>
+                    <option value="deposit">{{ __('customer.type_deposit') }}</option>
+                    <option value="payment">{{ __('customer.type_payment') }}</option>
+                    <option value="refund">{{ __('customer.type_refund') }}</option>
+                    <option value="bonus">{{ __('customer.type_bonus') }}</option>
                 </select>
             </div>
         </div>
@@ -34,12 +45,12 @@
     <div class="col-md-4">
         <div class="card border-0 shadow-sm">
             <div class="card-body p-3">
-                <label class="fw-bold mb-2 small">Kwa Hali</label>
+                <label class="fw-bold mb-2 small">{{ __('customer.by_status') }}</label>
                 <select class="form-select form-select-sm" id="statusFilter">
-                    <option value="">Zote</option>
-                    <option value="completed">Imekamilika</option>
-                    <option value="pending">Inasubiri</option>
-                    <option value="failed">Imeshindwa</option>
+                    <option value="">{{ __('customer.all') }}</option>
+                    <option value="completed">{{ __('customer.status_completed') }}</option>
+                    <option value="pending">{{ __('customer.status_pending') }}</option>
+                    <option value="failed">{{ __('customer.status_failed') }}</option>
                 </select>
             </div>
         </div>
@@ -48,7 +59,7 @@
     <div class="col-md-4">
         <div class="card border-0 shadow-sm">
             <div class="card-body p-3">
-                <label class="fw-bold mb-2 small">Tarehe</label>
+                <label class="fw-bold mb-2 small">{{ __('customer.filter_date') }}</label>
                 <input type="date" class="form-control form-control-sm" id="dateFilter">
             </div>
         </div>
@@ -64,238 +75,67 @@
                     <table class="table table-hover mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th class="fw-bold py-3">Tarehe & Saa</th>
-                                <th class="fw-bold py-3">Aina</th>
-                                <th class="fw-bold py-3">Maelezo</th>
-                                <th class="fw-bold py-3">Kiasi</th>
-                                <th class="fw-bold py-3">Hali</th>
-                                <th class="fw-bold py-3">Hatua</th>
+                                <th class="fw-bold py-3">{{ __('customer.date_time') }}</th>
+                                <th class="fw-bold py-3">{{ __('customer.type') }}</th>
+                                <th class="fw-bold py-3">{{ __('customer.description') }}</th>
+                                <th class="fw-bold py-3">{{ __('customer.amount') }}</th>
+                                <th class="fw-bold py-3">{{ __('customer.status') }}</th>
+                                <th class="fw-bold py-3">{{ __('customer.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Deposit -->
-                            <tr class="transaction-row" data-type="deposit" data-status="completed">
-                                <td class="py-3">
-                                    <small class="fw-bold">16 Mei 2024</small>
-                                    <br>
-                                    <small class="text-muted">14:30</small>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">
-                                        <i class="bi bi-plus-circle me-1"></i> Kumweka
-                                    </span>
-                                </td>
-                                <td>
-                                    <small><strong>M-Pesa Deposit</strong></small>
-                                    <br>
-                                    <small class="text-muted">TRX ID: TRX-2024-0001</small>
-                                </td>
-                                <td>
-                                    <strong class="text-success">+TZS 100,000</strong>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">
-                                        <i class="bi bi-check-circle me-1"></i> Imekamilika
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#detailModal">
-                                        Tazama
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <!-- Payment -->
-                            <tr class="transaction-row" data-type="payment" data-status="completed">
-                                <td class="py-3">
-                                    <small class="fw-bold">14 Mei 2024</small>
-                                    <br>
-                                    <small class="text-muted">09:15</small>
-                                </td>
-                                <td>
-                                    <span class="badge bg-danger">
-                                        <i class="bi bi-dash-circle me-1"></i> Kulipa
-                                    </span>
-                                </td>
-                                <td>
-                                    <small><strong>Bima Premium - Motor</strong></small>
-                                    <br>
-                                    <small class="text-muted">Policy #POL-2024-001</small>
-                                </td>
-                                <td>
-                                    <strong class="text-danger">-TZS 50,000</strong>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">
-                                        <i class="bi bi-check-circle me-1"></i> Imekamilika
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#detailModal">
-                                        Tazama
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <!-- Refund -->
-                            <tr class="transaction-row" data-type="refund" data-status="completed">
-                                <td class="py-3">
-                                    <small class="fw-bold">10 Mei 2024</small>
-                                    <br>
-                                    <small class="text-muted">11:42</small>
-                                </td>
-                                <td>
-                                    <span class="badge bg-info">
-                                        <i class="bi bi-arrow-counterclockwise me-1"></i> Kurudi
-                                    </span>
-                                </td>
-                                <td>
-                                    <small><strong>Kurudi Madai - CLM-2024-001</strong></small>
-                                    <br>
-                                    <small class="text-muted">Madai iliyoidhinishwa</small>
-                                </td>
-                                <td>
-                                    <strong class="text-info">+TZS 250,000</strong>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">
-                                        <i class="bi bi-check-circle me-1"></i> Imekamilika
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#detailModal">
-                                        Tazama
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <!-- Payment Pending -->
-                            <tr class="transaction-row" data-type="payment" data-status="pending">
-                                <td class="py-3">
-                                    <small class="fw-bold">16 Mei 2024</small>
-                                    <br>
-                                    <small class="text-muted">16:05</small>
-                                </td>
-                                <td>
-                                    <span class="badge bg-warning text-dark">
-                                        <i class="bi bi-dash-circle me-1"></i> Kulipa
-                                    </span>
-                                </td>
-                                <td>
-                                    <small><strong>Bima Annual - Property</strong></small>
-                                    <br>
-                                    <small class="text-muted">Policy #POL-2024-003</small>
-                                </td>
-                                <td>
-                                    <strong>-TZS 150,000</strong>
-                                </td>
-                                <td>
-                                    <span class="badge bg-warning text-dark">
-                                        <i class="bi bi-clock me-1"></i> Inasubiri
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">
-                                        Tazama
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <!-- Bonus -->
-                            <tr class="transaction-row" data-type="bonus" data-status="completed">
-                                <td class="py-3">
-                                    <small class="fw-bold">08 Mei 2024</small>
-                                    <br>
-                                    <small class="text-muted">08:20</small>
-                                </td>
-                                <td>
-                                    <span class="badge bg-secondary">
-                                        <i class="bi bi-gift me-1"></i> Zawadi
-                                    </span>
-                                </td>
-                                <td>
-                                    <small><strong>Bonasi ya Referral</strong></small>
-                                    <br>
-                                    <small class="text-muted">Friend Sign-up Reward</small>
-                                </td>
-                                <td>
-                                    <strong class="text-success">+TZS 10,000</strong>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">
-                                        <i class="bi bi-check-circle me-1"></i> Imekamilika
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">
-                                        Tazama
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <!-- Payment Failed -->
-                            <tr class="transaction-row" data-type="payment" data-status="failed">
-                                <td class="py-3">
-                                    <small class="fw-bold">05 Mei 2024</small>
-                                    <br>
-                                    <small class="text-muted">13:50</small>
-                                </td>
-                                <td>
-                                    <span class="badge bg-danger">
-                                        <i class="bi bi-dash-circle me-1"></i> Kulipa
-                                    </span>
-                                </td>
-                                <td>
-                                    <small><strong>Bima Renewal</strong></small>
-                                    <br>
-                                    <small class="text-muted">Policy #POL-2024-002</small>
-                                </td>
-                                <td>
-                                    <strong>-TZS 75,000</strong>
-                                </td>
-                                <td>
-                                    <span class="badge bg-danger">
-                                        <i class="bi bi-x-circle me-1"></i> Imeshindwa
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-danger">
-                                        Jaribu Tena
-                                    </button>
-                                </td>
-                            </tr>
-
-                            <!-- Deposit -->
-                            <tr class="transaction-row" data-type="deposit" data-status="completed">
-                                <td class="py-3">
-                                    <small class="fw-bold">01 Mei 2024</small>
-                                    <br>
-                                    <small class="text-muted">10:00</small>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">
-                                        <i class="bi bi-plus-circle me-1"></i> Kumweka
-                                    </span>
-                                </td>
-                                <td>
-                                    <small><strong>Bank Transfer</strong></small>
-                                    <br>
-                                    <small class="text-muted">TRX ID: TRX-2024-0000</small>
-                                </td>
-                                <td>
-                                    <strong class="text-success">+TZS 500,000</strong>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">
-                                        <i class="bi bi-check-circle me-1"></i> Imekamilika
-                                    </span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary">
-                                        Tazama
-                                    </button>
-                                </td>
-                            </tr>
+                            @forelse($transactions as $transaction)
+                                @php
+                                    $amount = (float) $pick($transaction, ['amount', 'transaction_amount', 'value'], 0);
+                                    $type = strtolower((string) $pick($transaction, ['type', 'transaction_type'], 'transaction'));
+                                    $status = strtolower((string) $pick($transaction, ['status', 'transaction_status'], 'completed'));
+                                    $direction = strtolower((string) $pick($transaction, ['direction', 'entry_type'], ''));
+                                    $isCredit = in_array($direction, ['credit', 'in'], true)
+                                        || str_contains($type, 'deposit')
+                                        || str_contains($type, 'refund')
+                                        || str_contains($type, 'bonus')
+                                        || str_contains($type, 'credit');
+                                    $signed = ($isCredit ? '+' : '-') . 'TZS ' . number_format($amount, 0);
+                                    $amountClass = $isCredit ? 'text-success' : 'text-danger';
+                                    $statusClass = $status === 'completed' ? 'success' : ($status === 'pending' ? 'warning text-dark' : 'danger');
+                                    $dateRaw = $pick($transaction, ['created_at', 'updated_at', 'transaction_date'], null);
+                                    try {
+                                        $dateMain = $dateRaw ? \Carbon\Carbon::parse($dateRaw)->format('d M Y') : '-';
+                                        $dateTime = $dateRaw ? \Carbon\Carbon::parse($dateRaw)->format('H:i') : '-';
+                                    } catch (\Throwable $e) {
+                                        $dateMain = $dateRaw ?: '-';
+                                        $dateTime = '-';
+                                    }
+                                @endphp
+                                <tr class="transaction-row" data-type="{{ $type }}" data-status="{{ $status }}">
+                                    <td class="py-3">
+                                        <small class="fw-bold">{{ $dateMain }}</small>
+                                        <br>
+                                        <small class="text-muted">{{ $dateTime }}</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-secondary text-capitalize">{{ str_replace('_', ' ', $type) }}</span>
+                                    </td>
+                                    <td>
+                                        <small><strong>{{ $pick($transaction, ['description', 'narration', 'reference', 'title'], __('customer.wallet_transaction')) }}</strong></small>
+                                        <br>
+                                        <small class="text-muted">ID: {{ $pick($transaction, ['reference', 'transaction_reference', 'id'], '-') }}</small>
+                                    </td>
+                                    <td>
+                                        <strong class="{{ $amountClass }}">{{ $signed }}</strong>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-{{ $statusClass }} text-capitalize">{{ $status }}</span>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">{{ __('customer.view') }}</button>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center py-4 text-muted">{{ __('customer.no_transactions') }}</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -308,10 +148,10 @@
 <div class="row mt-4">
     <div class="col-12">
         <a href="{{ route('customer.wallet.add-funds') }}" class="btn btn-primary">
-            <i class="bi bi-wallet-plus me-2"></i> Ongeza Pesa
+            <i class="bi bi-wallet-plus me-2"></i> {{ __('customer.add_funds') }}
         </a>
         <a href="{{ route('customer.wallet.index') }}" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left me-2"></i> Rudi kwenye Mkoba
+            <i class="bi bi-arrow-left me-2"></i> {{ __('customer.back_to_wallet') }}
         </a>
     </div>
 </div>

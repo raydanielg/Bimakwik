@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'dashboard_title' => 'Service Provider Dashboard',
+    'bills_submitted' => 'Bills Submitted',
+    'total_this_month' => 'Total this month',
+    'pending_approval' => 'Pending Approval',
+    'needs_review' => 'Needs Review',
+    'paid_amount' => 'Paid Amount',
+    'successfully_paid' => 'Successfully paid',
+    'rejected_bills' => 'Rejected Bills',
+    'view_reasons' => 'View reasons',
+    'quick_customer_verification' => 'Quick Customer Verification',
+    'policy_number_label' => 'Policy Number / ID / Phone',
+    'verify' => 'Verify',
+    'verification_placeholder' => 'Enter details to verify...',
+    'verification_note' => 'Verification results will appear here after searching.',
+    'recent_bill_submissions' => 'Recent Bill Submissions',
+    'view_all' => 'View All',
+    'patient_motor' => 'Patient/Motor',
+    'bill_no' => 'Bill No.',
+    'amount' => 'Amount',
+    'status' => 'Status',
+    'pending' => 'Pending',
+    'approved' => 'Approved',
+];

@@ -39,30 +39,30 @@ Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController:
 Route::middleware(['auth'])->group(function () {
     // Customer Dashboard
     Route::middleware(['role:customer'])->prefix('customer')->name('customer.')->group(function () {
-        Route::get('/dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/profile', function() { return view('customer.profile'); })->name('profile');
-        Route::get('/support', function() { return view('customer.support'); })->name('support');
+        Route::get('/dashboard', [App\Http\Controllers\Customer\PortalController::class, 'dashboard'])->name('dashboard');
+        Route::get('/profile', [App\Http\Controllers\Customer\PortalController::class, 'profile'])->name('profile');
+        Route::get('/support', [App\Http\Controllers\Customer\PortalController::class, 'support'])->name('support');
         
         // AI & Marketplace
-        Route::get('/ai-recommendations', function() { return view('customer.ai-recommendations'); })->name('ai-recommendations');
-        Route::get('/marketplace', function() { return view('customer.marketplace'); })->name('marketplace');
-        Route::get('/compare', function() { return view('customer.compare'); })->name('compare');
-        Route::get('/buy', function() { return view('customer.buy'); })->name('buy');
-        Route::get('/quote', function() { return view('customer.quote'); })->name('quote');
+        Route::get('/ai-recommendations', [App\Http\Controllers\Customer\PortalController::class, 'aiRecommendations'])->name('ai-recommendations');
+        Route::get('/marketplace', [App\Http\Controllers\Customer\PortalController::class, 'marketplace'])->name('marketplace');
+        Route::get('/compare', [App\Http\Controllers\Customer\PortalController::class, 'compare'])->name('compare');
+        Route::get('/buy', [App\Http\Controllers\Customer\PortalController::class, 'buy'])->name('buy');
+        Route::get('/quote', [App\Http\Controllers\Customer\PortalController::class, 'quote'])->name('quote');
         
         // Insurance
-        Route::get('/policies', function() { return view('customer.policies.index'); })->name('policies.index');
-        Route::get('/renewals', function() { return view('customer.policies.renewals'); })->name('policies.renewals');
-        Route::get('/documents', function() { return view('customer.policies.documents'); })->name('policies.documents');
+        Route::get('/policies', [App\Http\Controllers\Customer\PortalController::class, 'policies'])->name('policies.index');
+        Route::get('/renewals', [App\Http\Controllers\Customer\PortalController::class, 'renewals'])->name('policies.renewals');
+        Route::get('/documents', [App\Http\Controllers\Customer\PortalController::class, 'documents'])->name('policies.documents');
         
         // Claims
-        Route::get('/claims/create', function() { return view('customer.claims.create'); })->name('claims.create');
-        Route::get('/claims/track', function() { return view('customer.claims.track'); })->name('claims.track');
+        Route::get('/claims/create', [App\Http\Controllers\Customer\PortalController::class, 'claimsCreate'])->name('claims.create');
+        Route::get('/claims/track', [App\Http\Controllers\Customer\PortalController::class, 'claimsTrack'])->name('claims.track');
         
         // Wallet
-        Route::get('/wallet', function() { return view('customer.wallet.index'); })->name('wallet.index');
-        Route::get('/wallet/add-funds', function() { return view('customer.wallet.add-funds'); })->name('wallet.add-funds');
-        Route::get('/wallet/history', function() { return view('customer.wallet.history'); })->name('wallet.history');
+        Route::get('/wallet', [App\Http\Controllers\Customer\PortalController::class, 'wallet'])->name('wallet.index');
+        Route::get('/wallet/add-funds', [App\Http\Controllers\Customer\PortalController::class, 'walletAddFunds'])->name('wallet.add-funds');
+        Route::get('/wallet/history', [App\Http\Controllers\Customer\PortalController::class, 'walletHistory'])->name('wallet.history');
     });
 
     // Admin Dashboard Routes
@@ -246,7 +246,7 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('role:regulator')
         ->name('regulator.dashboard');
         
-    Route::get('/customer/dashboard', [App\Http\Controllers\Customer\DashboardController::class, 'index'])
+    Route::get('/customer/dashboard', [App\Http\Controllers\Customer\PortalController::class, 'dashboard'])
         ->middleware('role:customer')
         ->name('customer.dashboard');
 
