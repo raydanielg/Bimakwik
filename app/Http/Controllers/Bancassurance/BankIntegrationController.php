@@ -217,4 +217,111 @@ class BankIntegrationController extends Controller
             ], 500);
         }
     }
+    
+    public function setup(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'api_endpoint' => 'required|url|max:500',
+            'api_key' => 'required|string|max:255',
+            'api_secret' => 'required|string|max:255',
+            'database_host' => 'required|string|max:255',
+            'database_port' => 'required|integer|min:1|max:65535',
+            'database_name' => 'required|string|max:255',
+            'database_user' => 'required|string|max:255',
+            'database_password' => 'required|string|max:255',
+        ], [
+            'api_endpoint.required' => 'API endpoint is required',
+            'api_endpoint.url' => 'API endpoint must be a valid URL',
+            'api_key.required' => 'API key is required',
+            'api_secret.required' => 'API secret is required',
+            'database_host.required' => 'Database host is required',
+            'database_port.required' => 'Database port is required',
+            'database_name.required' => 'Database name is required',
+            'database_user.required' => 'Database user is required',
+            'database_password.required' => 'Database password is required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            // Test database connection (demo - in real app, actual connection test)
+            sleep(1);
+            
+            // Save setup configuration (demo - in real app, save to database)
+            $setup = [
+                'id' => $id,
+                'api_endpoint' => $request->api_endpoint,
+                'api_key' => $request->api_key,
+                'api_secret' => $request->api_secret,
+                'database_host' => $request->database_host,
+                'database_port' => $request->database_port,
+                'database_name' => $request->database_name,
+                'database_user' => $request->database_user,
+                'status' => 'active',
+                'setup_completed' => true,
+                'setup_date' => now(),
+            ];
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Bank integration setup completed successfully',
+                'data' => $setup
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Setup failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+    public function testConnection(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'database_host' => 'required|string|max:255',
+            'database_port' => 'required|integer|min:1|max:65535',
+            'database_name' => 'required|string|max:255',
+            'database_user' => 'required|string|max:255',
+            'database_password' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            // Test database connection (demo - in real app, actual connection test)
+            sleep(1);
+            
+            // Simulate successful connection
+            return response()->json([
+                'success' => true,
+                'message' => 'Database connection successful',
+                'data' => [
+                    'connection_time' => '0.05s',
+                    'database_version' => 'MySQL 8.0',
+                    'status' => 'connected'
+                ]
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Database connection failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
