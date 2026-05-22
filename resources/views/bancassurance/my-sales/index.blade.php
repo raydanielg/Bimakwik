@@ -650,20 +650,180 @@ function viewMySale(saleId, policyNumber) {
 }
 
 function editMySale() {
+    // This function is called from View Sale modal
+    // For now, show a message
     Swal.fire({
         icon: 'info',
-        title: 'Edit Sale',
-        text: 'Edit functionality coming soon',
+        title: 'Edit from View',
+        text: 'Please use the edit button in the table to edit this sale',
         confirmButtonColor: '#0d6efd'
     });
 }
 
-function updateMySale() {
+function openEditMySaleModal(saleId, policyNumber) {
     Swal.fire({
-        icon: 'info',
-        title: 'Update Sale',
-        text: 'Update functionality coming soon',
-        confirmButtonColor: '#0d6efd'
+        title: 'Loading...',
+        text: 'Fetching sale details for editing',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`/bancassurance/sales/${saleId}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const sale = data.data;
+            
+            // Populate edit form
+            document.getElementById('editMySaleId').value = sale.id;
+            document.getElementById('editMyCustomerName').value = sale.customer_name;
+            document.getElementById('editMyCustomerEmail').value = sale.customer_email;
+            document.getElementById('editMyCustomerPhone').value = sale.customer_phone;
+            document.getElementById('editMyProduct').value = sale.product;
+            document.getElementById('editMyPremium').value = sale.premium;
+            document.getElementById('editMyBranch').value = sale.branch;
+            document.getElementById('editMyPolicyStartDate').value = sale.policy_start_date;
+            document.getElementById('editMyPolicyEndDate').value = sale.policy_end_date;
+
+            Swal.close();
+            
+            // Close view modal if open
+            const viewModal = bootstrap.Modal.getInstance(document.getElementById('viewMySaleModal'));
+            if (viewModal) {
+                viewModal.hide();
+            }
+
+            // Open edit modal
+            const editModal = new bootstrap.Modal(document.getElementById('editMySaleModal'));
+            editModal.show();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while fetching sale details',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function updateMySale() {
+    const saleId = document.getElementById('editMySaleId').value;
+    const customerName = document.getElementById('editMyCustomerName').value;
+    const customerEmail = document.getElementById('editMyCustomerEmail').value;
+    const customerPhone = document.getElementById('editMyCustomerPhone').value;
+    const product = document.getElementById('editMyProduct').value;
+    const premium = document.getElementById('editMyPremium').value;
+    const branch = document.getElementById('editMyBranch').value;
+    const policyStartDate = document.getElementById('editMyPolicyStartDate').value;
+    const policyEndDate = document.getElementById('editMyPolicyEndDate').value;
+
+    // Validation
+    if (!customerName || !customerEmail || !customerPhone || !product || !premium || !branch || !policyStartDate || !policyEndDate) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all required fields',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+
+    // Show loading
+    Swal.fire({
+        title: 'Updating Sale...',
+        text: 'Please wait while we update the sale',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // AJAX call
+    const formData = new FormData();
+    formData.append('customer_name', customerName);
+    formData.append('customer_email', customerEmail);
+    formData.append('customer_phone', customerPhone);
+    formData.append('product', product);
+    formData.append('premium', premium);
+    formData.append('branch', branch);
+    formData.append('sold_by', 'Current User');
+    formData.append('policy_start_date', policyStartDate);
+    formData.append('policy_end_date', policyEndDate);
+
+    fetch(`/bancassurance/sales/${saleId}`, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('editMySaleModal'));
+            modal.hide();
+
+            // Reset form
+            document.getElementById('editMySaleForm').reset();
+
+            // Update table row (simplified - in real app, update specific row)
+            const commission = Math.round(parseInt(data.data.premium) * 0.1);
+            Swal.fire({
+                icon: 'success',
+                title: 'Sale Updated Successfully!',
+                html: `
+                    <p><strong>Customer:</strong> ${data.data.customer_name}</p>
+                    <p><strong>Product:</strong> ${data.data.product}</p>
+                    <p><strong>Premium:</strong> TZS ${parseInt(data.data.premium).toLocaleString()}</p>
+                    <p><strong>Commission:</strong> TZS ${commission.toLocaleString()}</p>
+                `,
+                confirmButtonColor: '#0d6efd'
+            }).then(() => {
+                // Reload page to show updated data
+                location.reload();
+            });
+        } else {
+            let errorMessage = data.message;
+            if (data.errors) {
+                const errorList = Object.values(data.errors).flat().join('<br>');
+                errorMessage = data.message + '<br><br>' + errorList;
+            }
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: errorMessage,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while updating sale',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
     });
 }
 
