@@ -235,6 +235,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/integration', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'index'])->name('integration');
         Route::post('/integration', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'store']);
         Route::post('/integration/sync/{id}', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'sync'])->name('integration.sync');
+        Route::post('/integration/status/{id}', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'updateStatus']);
+        Route::get('/integration/settings/{id}', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'getSettings']);
+        Route::post('/integration/settings/{id}', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'updateSettings']);
         Route::get('/customers', [App\Http\Controllers\Bancassurance\CustomerController::class, 'index'])->name('customers');
         Route::get('/sales', [App\Http\Controllers\Bancassurance\PolicyController::class, 'sales'])->name('sales');
         Route::get('/my-sales', [App\Http\Controllers\Bancassurance\PolicyController::class, 'mySales'])->name('my-sales');

@@ -138,7 +138,7 @@
                         <td>2 mins ago</td>
                         <td>
                             <button class="btn btn-sm btn-outline-primary sync-btn" data-id="1">Sync</button>
-                            <button class="btn btn-sm btn-outline-secondary">Settings</button>
+                            <button class="btn btn-sm btn-outline-secondary settings-btn" data-id="1" data-bank="CRDB Bank" data-status="active">Settings</button>
                         </td>
                     </tr>
                     <tr>
@@ -158,7 +158,7 @@
                         <td>5 mins ago</td>
                         <td>
                             <button class="btn btn-sm btn-outline-primary sync-btn" data-id="2">Sync</button>
-                            <button class="btn btn-sm btn-outline-secondary">Settings</button>
+                            <button class="btn btn-sm btn-outline-secondary settings-btn" data-id="2" data-bank="NMB Bank" data-status="active">Settings</button>
                         </td>
                     </tr>
                     <tr>
