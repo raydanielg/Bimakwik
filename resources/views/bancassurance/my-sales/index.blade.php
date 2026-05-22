@@ -874,7 +874,7 @@ function handleEditMySaleClick(e) {
     const btn = e.target.closest('.edit-my-sale-btn');
     const saleId = btn.getAttribute('data-id');
     const policyNumber = btn.getAttribute('data-policy');
-    editMySale();
+    openEditMySaleModal(saleId, policyNumber);
 }
 
 function handleReportMySaleClick(e) {
