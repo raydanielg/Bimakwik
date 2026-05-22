@@ -252,6 +252,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/sales/{id}', [App\Http\Controllers\Bancassurance\PolicyController::class, 'updateSale']);
         Route::get('/my-sales', [App\Http\Controllers\Bancassurance\PolicyController::class, 'mySales'])->name('my-sales');
         Route::get('/products', [App\Http\Controllers\Bancassurance\ProductController::class, 'index'])->name('products');
+        Route::post('/products', [App\Http\Controllers\Bancassurance\ProductController::class, 'store']);
+        Route::get('/products/{id}', [App\Http\Controllers\Bancassurance\ProductController::class, 'show']);
+        Route::post('/products/{id}', [App\Http\Controllers\Bancassurance\ProductController::class, 'update']);
+        Route::delete('/products/{id}', [App\Http\Controllers\Bancassurance\ProductController::class, 'destroy']);
         Route::get('/reports', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'reports'])->name('reports');
         Route::get('/compliance', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'index'])->name('compliance');
         Route::get('/performance', [App\Http\Controllers\Bancassurance\PerformanceController::class, 'index'])->name('performance');

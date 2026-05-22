@@ -2,6 +2,44 @@
 
 @section('dashboard_title', 'Bancassurance Products')
 
+@push('styles')
+<style>
+    .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-content {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    .modal-header {
+        border-bottom: 1px solid #e9ecef;
+        padding: 1.5rem;
+    }
+    .modal-body {
+        padding: 1.5rem;
+    }
+    .modal-footer {
+        border-top: 1px solid #e9ecef;
+        padding: 1.5rem;
+    }
+    .form-label {
+        font-weight: 500;
+        color: #495057;
+        margin-bottom: 0.5rem;
+    }
+    .form-control, .form-select, .form-check-input {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem;
+        border-radius: 8px;
+    }
+    .form-control:focus, .form-select:focus, .form-check-input:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    }
+</style>
+@endpush
+
 @section('dashboard_content')
 <!-- Header -->
 <div class="row mb-4">
@@ -11,7 +49,7 @@
                 <h5 class="fw-bold mb-1"><i class="bi bi-box-seam me-2"></i>Bancassurance Products</h5>
                 <p class="text-muted small mb-0">Manage insurance products for bank customers</p>
             </div>
-            <button class="btn btn-primary btn-sm">
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addProductModal">
                 <i class="bi bi-plus-lg me-2"></i>Add Product
             </button>
         </div>
@@ -97,7 +135,17 @@
                 <p class="text-muted small mb-3">Comprehensive motor insurance for bank customers</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <small class="text-muted">From TZS 150,000</small>
-                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary view-product-btn" data-id="1" data-name="Motor Insurance" title="View">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary edit-product-btn" data-id="1" data-name="Motor Insurance" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-outline-danger delete-product-btn" data-id="1" data-name="Motor Insurance" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
