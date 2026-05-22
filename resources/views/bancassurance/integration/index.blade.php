@@ -1,36 +1,150 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', __('bancassurance.integration_title'))
+@section('dashboard_title', 'Bank Integration')
 
 @section('dashboard_content')
-<div class="card border-0 shadow-sm p-4 mb-4">
-    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3">
-        <div>
-            <h5 class="fw-bold mb-2">{{ __('bancassurance.integration_header') }}</h5>
-            <p class="text-muted mb-0">{{ __('bancassurance.integration_subtitle') }}</p>
-        </div>
-        <div class="d-flex gap-2">
-            <button class="btn btn-primary btn-sm" type="button">{{ __('bancassurance.create_new') }}</button>
-            <button class="btn btn-outline-secondary btn-sm" type="button">{{ __('bancassurance.export') }}</button>
+<!-- Header -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="fw-bold mb-1"><i class="bi bi-link-45deg me-2"></i>Bank Integration</h5>
+                <p class="text-muted small mb-0">Connect and manage bank system integrations</p>
+            </div>
+            <button class="btn btn-primary btn-sm">
+                <i class="bi bi-plus-lg me-2"></i>Add Integration
+            </button>
         </div>
     </div>
 </div>
 
-<div class="row g-4">
-    <div class="col-lg-8">
-        <div class="card border-0 shadow-sm p-4 h-100">
-            <h6 class="fw-bold mb-3">{{ __('bancassurance.overview') }}</h6>
-            <p class="text-muted mb-0">{{ __('bancassurance.overview_body') }}</p>
+<!-- Integration Status -->
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <small class="text-muted">Active Integrations</small>
+                        <h5 class="fw-bold mb-0">3</h5>
+                    </div>
+                    <div class="bg-success bg-opacity-10 rounded-circle p-2">
+                        <i class="bi bi-check-circle text-success"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="card border-0 shadow-sm p-4 h-100">
-            <h6 class="fw-bold mb-3">{{ __('bancassurance.next_steps') }}</h6>
-            <ul class="mb-0 ps-3 text-muted">
-                <li>{{ __('bancassurance.wire_models') }}</li>
-                <li>{{ __('bancassurance.add_validation') }}</li>
-                <li>{{ __('bancassurance.attach_permissions') }}</li>
-            </ul>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <small class="text-muted">Pending Setup</small>
+                        <h5 class="fw-bold mb-0">1</h5>
+                    </div>
+                    <div class="bg-warning bg-opacity-10 rounded-circle p-2">
+                        <i class="bi bi-clock text-warning"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <small class="text-muted">API Calls Today</small>
+                        <h5 class="fw-bold mb-0">1,245</h5>
+                    </div>
+                    <div class="bg-info bg-opacity-10 rounded-circle p-2">
+                        <i class="bi bi-activity text-info"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bank Integrations List -->
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <h6 class="fw-bold mb-3">Connected Banks</h6>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Bank Name</th>
+                        <th>Integration Type</th>
+                        <th>Status</th>
+                        <th>Last Sync</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-2">
+                                    <i class="bi bi-bank text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold">CRDB Bank</div>
+                                    <small class="text-muted">Tanzania</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>API Integration</td>
+                        <td><span class="badge bg-success">Active</span></td>
+                        <td>2 mins ago</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">Sync</button>
+                            <button class="btn btn-sm btn-outline-secondary">Settings</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-success bg-opacity-10 rounded-circle p-2 me-2">
+                                    <i class="bi bi-bank text-success"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold">NMB Bank</div>
+                                    <small class="text-muted">Tanzania</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>API Integration</td>
+                        <td><span class="badge bg-success">Active</span></td>
+                        <td>5 mins ago</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">Sync</button>
+                            <button class="btn btn-sm btn-outline-secondary">Settings</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-warning bg-opacity-10 rounded-circle p-2 me-2">
+                                    <i class="bi bi-bank text-warning"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold">NBC Bank</div>
+                                    <small class="text-muted">Tanzania</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>API Integration</td>
+                        <td><span class="badge bg-warning">Pending</span></td>
+                        <td>Never</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">Setup</button>
+                            <button class="btn btn-sm btn-outline-secondary">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
