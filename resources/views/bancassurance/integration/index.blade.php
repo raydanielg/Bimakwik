@@ -650,7 +650,205 @@ function handleSyncClick(e) {
 document.addEventListener('DOMContentLoaded', function() {
     attachSyncListeners();
     attachSettingsListeners();
+    attachSetupListeners();
 });
+
+// Setup button functionality
+function attachSetupListeners() {
+    document.querySelectorAll('.setup-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const bankId = this.getAttribute('data-id');
+            const bankName = this.getAttribute('data-bank');
+            openSetupModal(bankId, bankName);
+        });
+    });
+}
+
+function openSetupModal(bankId, bankName) {
+    document.getElementById('setupBankId').value = bankId;
+    document.getElementById('setupBankName').textContent = bankName;
+    
+    // Clear form
+    document.getElementById('setupForm').reset();
+    document.getElementById('connectionStatus').innerHTML = '';
+    
+    // Open modal
+    const modal = new bootstrap.Modal(document.getElementById('setupModal'));
+    modal.show();
+}
+
+function testDatabaseConnection() {
+    const dbHost = document.getElementById('dbHost').value;
+    const dbPort = document.getElementById('dbPort').value;
+    const dbName = document.getElementById('dbName').value;
+    const dbUser = document.getElementById('dbUser').value;
+    const dbPassword = document.getElementById('dbPassword').value;
+    
+    // Validation
+    if (!dbHost || !dbPort || !dbName || !dbUser || !dbPassword) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all database fields',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+    
+    // Show testing status
+    const connectionStatus = document.getElementById('connectionStatus');
+    connectionStatus.innerHTML = '<div class="alert alert-warning"><i class="bi bi-hourglass-split me-2"></i>Testing connection...</div>';
+    
+    // AJAX call to test connection
+    const formData = new FormData();
+    formData.append('database_host', dbHost);
+    formData.append('database_port', dbPort);
+    formData.append('database_name', dbName);
+    formData.append('database_user', dbUser);
+    formData.append('database_password', dbPassword);
+    
+    fetch('/bancassurance/integration/test-connection', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            connectionStatus.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="bi bi-check-circle me-2"></i>
+                    <strong>Connection Successful!</strong><br>
+                    <small>Connection time: ${data.data.connection_time} | Database: ${data.data.database_version}</small>
+                </div>
+            `;
+        } else {
+            connectionStatus.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="bi bi-x-circle me-2"></i>
+                    <strong>Connection Failed!</strong><br>
+                    <small>${data.message}</small>
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        connectionStatus.innerHTML = `
+            <div class="alert alert-danger">
+                <i class="bi bi-x-circle me-2"></i>
+                <strong>Connection Failed!</strong><br>
+                <small>An error occurred while testing connection</small>
+            </div>
+        `;
+        console.error('Error:', error);
+    });
+}
+
+function completeSetup() {
+    const bankId = document.getElementById('setupBankId').value;
+    const apiEndpoint = document.getElementById('setupApiEndpoint').value;
+    const apiKey = document.getElementById('setupApiKey').value;
+    const apiSecret = document.getElementById('setupApiSecret').value;
+    const dbHost = document.getElementById('dbHost').value;
+    const dbPort = document.getElementById('dbPort').value;
+    const dbName = document.getElementById('dbName').value;
+    const dbUser = document.getElementById('dbUser').value;
+    const dbPassword = document.getElementById('dbPassword').value;
+    
+    // Validation
+    if (!apiEndpoint || !apiKey || !apiSecret || !dbHost || !dbPort || !dbName || !dbUser || !dbPassword) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all required fields',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+    
+    // Show loading
+    Swal.fire({
+        title: 'Completing Setup...',
+        text: 'Please wait while we complete the bank integration setup',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+    
+    // AJAX call to complete setup
+    const formData = new FormData();
+    formData.append('api_endpoint', apiEndpoint);
+    formData.append('api_key', apiKey);
+    formData.append('api_secret', apiSecret);
+    formData.append('database_host', dbHost);
+    formData.append('database_port', dbPort);
+    formData.append('database_name', dbName);
+    formData.append('database_user', dbUser);
+    formData.append('database_password', dbPassword);
+    
+    fetch(`/bancassurance/integration/setup/${bankId}`, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('setupModal'));
+            modal.hide();
+            
+            // Update table row
+            const row = document.querySelector(`.setup-btn[data-id="${bankId}"]`).closest('tr');
+            const statusBadge = row.querySelector('.badge');
+            statusBadge.textContent = 'Active';
+            statusBadge.className = 'badge bg-success';
+            
+            // Change Setup button to Sync and Settings
+            const actionsCell = row.querySelector('td:last-child');
+            actionsCell.innerHTML = `
+                <button class="btn btn-sm btn-outline-primary sync-btn" data-id="${bankId}">Sync</button>
+                <button class="btn btn-sm btn-outline-secondary settings-btn" data-id="${bankId}" data-bank="${document.getElementById('setupBankName').textContent}" data-status="active">Settings</button>
+            `;
+            
+            // Re-attach listeners
+            attachSyncListeners();
+            attachSettingsListeners();
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Setup Completed Successfully!',
+                html: `
+                    <p>Bank integration has been set up and activated</p>
+                    <p><strong>Status:</strong> <span class="badge bg-success">Active</span></p>
+                `,
+                confirmButtonColor: '#0d6efd'
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Setup Failed',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while completing setup',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
 
 // Settings button functionality
 function attachSettingsListeners() {
