@@ -133,17 +133,6 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/communications/send', [App\Http\Controllers\Admin\GovernanceController::class, 'sendCommunication'])->name('communications.send');
         });
         
-        // Bancassurance Routes
-        Route::prefix('bancassurance')->name('bancassurance.')->group(function () {
-            Route::get('/bank-integration', [App\Http\Controllers\Admin\BancassuranceController::class, 'bankIntegration'])->name('bank-integration');
-            Route::get('/bank-customers', [App\Http\Controllers\Admin\BancassuranceController::class, 'bankCustomers'])->name('bank-customers');
-            Route::get('/insurance-sales', [App\Http\Controllers\Admin\BancassuranceController::class, 'insuranceSales'])->name('insurance-sales');
-            Route::get('/my-sales', [App\Http\Controllers\Admin\BancassuranceController::class, 'mySales'])->name('my-sales');
-            Route::get('/products', [App\Http\Controllers\Admin\BancassuranceController::class, 'bancassuranceProducts'])->name('products');
-            Route::get('/compliance-reports', [App\Http\Controllers\Admin\BancassuranceController::class, 'complianceReports'])->name('compliance-reports');
-            Route::get('/performance', [App\Http\Controllers\Admin\BancassuranceController::class, 'performance'])->name('performance');
-        });
-        
         // System & Tech Routes
         Route::prefix('system')->name('system.')->group(function () {
             Route::get('/configurations', [App\Http\Controllers\Admin\SystemTechController::class, 'configurations'])->name('configurations');

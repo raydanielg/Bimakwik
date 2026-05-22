@@ -268,37 +268,6 @@
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Bancassurance</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="#bancassuranceSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->routeIs('admin.bancassurance.*') ? 'active' : '' }}">
-                    <span><i class="bi bi-bank2"></i> Bank Assurance</span>
-                    <i class="bi bi-chevron-down small"></i>
-                </a>
-                <div class="collapse ps-3 {{ request()->routeIs('admin.bancassurance.*') ? 'show' : '' }}" id="bancassuranceSubmenu">
-                    <a href="{{ route('admin.bancassurance.bank-integration') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.bancassurance.bank-integration') ? 'active' : '' }}">
-                        <i class="bi bi-link-45deg me-2"></i>Bank Integration
-                    </a>
-                    <a href="{{ route('admin.bancassurance.bank-customers') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.bancassurance.bank-customers') ? 'active' : '' }}">
-                        <i class="bi bi-people me-2"></i>Bank Customers
-                    </a>
-                    <a href="{{ route('admin.bancassurance.insurance-sales') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.bancassurance.insurance-sales') ? 'active' : '' }}">
-                        <i class="bi bi-receipt me-2"></i>Insurance Sales
-                    </a>
-                    <a href="{{ route('admin.bancassurance.my-sales') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.bancassurance.my-sales') ? 'active' : '' }}">
-                        <i class="bi bi-cart3 me-2"></i>My Sales
-                    </a>
-                    <a href="{{ route('admin.bancassurance.products') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.bancassurance.products') ? 'active' : '' }}">
-                        <i class="bi bi-box-seam me-2"></i>Bancassurance Products
-                    </a>
-                    <a href="{{ route('admin.bancassurance.compliance-reports') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.bancassurance.compliance-reports') ? 'active' : '' }}">
-                        <i class="bi bi-file-earmark-text me-2"></i>Compliance & Reports
-                    </a>
-                    <a href="{{ route('admin.bancassurance.performance') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.bancassurance.performance') ? 'active' : '' }}">
-                        <i class="bi bi-graph-up me-2"></i>Performance
-                    </a>
-                </div>
-            </div>
-
             <div class="sidebar-heading mt-3">Governance</div>
             <div class="list-group list-group-flush px-2">
                 <a href="{{ route('admin.governance.compliance') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.governance.compliance') ? 'active' : '' }}">
