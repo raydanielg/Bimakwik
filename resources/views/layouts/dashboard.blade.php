@@ -896,10 +896,6 @@
                 <a href="/bancassurance/performance" class="list-group-item list-group-item-action {{ request()->is('bancassurance/performance*') ? 'active' : '' }}">
                     <i class="bi bi-graph-up"></i> Performance
                 </a>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-bar-chart-line"></i> Performance
-                </a>
             </div>
 
             @elseif(auth()->user()->hasRole('service_provider'))
