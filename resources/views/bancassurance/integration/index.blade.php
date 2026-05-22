@@ -177,7 +177,7 @@
                         <td><span class="badge bg-warning">Pending</span></td>
                         <td>Never</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">Setup</button>
+                            <button class="btn btn-sm btn-outline-primary setup-btn" data-id="3" data-bank="NBC Bank">Setup</button>
                             <button class="btn btn-sm btn-outline-secondary">Remove</button>
                         </td>
                     </tr>
@@ -361,6 +361,91 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" onclick="saveSettings()">
                     <i class="bi bi-save me-2"></i>Save Settings
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Setup Modal -->
+<div class="modal fade" id="setupModal" tabindex="-1" aria-labelledby="setupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="setupModalLabel">
+                    <i class="bi bi-gear-fill me-2"></i>Complete Bank Integration Setup
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="setupForm">
+                    <input type="hidden" id="setupBankId">
+                    
+                    <!-- Bank Info -->
+                    <div class="alert alert-info mb-3">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>Bank:</strong> <span id="setupBankName">NBC Bank</span>
+                    </div>
+
+                    <!-- API Configuration -->
+                    <div class="card border-0 bg-light mb-3">
+                        <div class="card-body p-3">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-code-slash me-2"></i>API Configuration</h6>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="setupApiEndpoint" class="form-label">API Endpoint *</label>
+                                    <input type="url" class="form-control" id="setupApiEndpoint" required placeholder="https://api.bank.com/v1">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="setupApiKey" class="form-label">API Key *</label>
+                                    <input type="text" class="form-control" id="setupApiKey" required placeholder="Enter API Key">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="setupApiSecret" class="form-label">API Secret *</label>
+                                    <input type="password" class="form-control" id="setupApiSecret" required placeholder="Enter API Secret">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Database Configuration -->
+                    <div class="card border-0 bg-light mb-3">
+                        <div class="card-body p-3">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-database me-2"></i>Database Configuration</h6>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="dbHost" class="form-label">Database Host *</label>
+                                    <input type="text" class="form-control" id="dbHost" required placeholder="localhost">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="dbPort" class="form-label">Database Port *</label>
+                                    <input type="number" class="form-control" id="dbPort" required placeholder="3306" min="1" max="65535">
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="dbName" class="form-label">Database Name *</label>
+                                    <input type="text" class="form-control" id="dbName" required placeholder="bank_integration_db">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="dbUser" class="form-label">Database User *</label>
+                                    <input type="text" class="form-control" id="dbUser" required placeholder="db_user">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="dbPassword" class="form-label">Database Password *</label>
+                                    <input type="password" class="form-control" id="dbPassword" required placeholder="Enter password">
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary btn-sm mt-2" onclick="testDatabaseConnection()">
+                                <i class="bi bi-plug me-2"></i>Test Connection
+                            </button>
+                            <div id="connectionStatus" class="mt-2"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="completeSetup()">
+                    <i class="bi bi-check-circle me-2"></i>Complete Setup
                 </button>
             </div>
         </div>
