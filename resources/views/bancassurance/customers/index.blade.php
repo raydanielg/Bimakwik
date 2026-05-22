@@ -1,36 +1,183 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', __('bancassurance.customers_title'))
+@section('dashboard_title', 'Bank Customers')
 
 @section('dashboard_content')
-<div class="card border-0 shadow-sm p-4 mb-4">
-    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3">
-        <div>
-            <h5 class="fw-bold mb-2">{{ __('bancassurance.customer_management') }}</h5>
-            <p class="text-muted mb-0">{{ __('bancassurance.customer_management_subtitle') }}</p>
-        </div>
-        <div class="d-flex gap-2">
-            <button class="btn btn-primary btn-sm" type="button">{{ __('bancassurance.create_new') }}</button>
-            <button class="btn btn-outline-secondary btn-sm" type="button">{{ __('bancassurance.export') }}</button>
+<!-- Header -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="fw-bold mb-1"><i class="bi bi-people me-2"></i>Bank Customers</h5>
+                <p class="text-muted small mb-0">Manage bank customer referrals and conversions</p>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary btn-sm">
+                    <i class="bi bi-download me-2"></i>Export
+                </button>
+                <button class="btn btn-primary btn-sm">
+                    <i class="bi bi-plus-lg me-2"></i>Add Customer
+                </button>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="row g-4">
-    <div class="col-lg-8">
-        <div class="card border-0 shadow-sm p-4 h-100">
-            <h6 class="fw-bold mb-3">{{ __('bancassurance.overview') }}</h6>
-            <p class="text-muted mb-0">{{ __('bancassurance.overview_body') }}</p>
+<!-- Customer Stats -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <small class="text-muted">Total Customers</small>
+                        <h5 class="fw-bold mb-0">1,245</h5>
+                    </div>
+                    <div class="bg-primary bg-opacity-10 rounded-circle p-2">
+                        <i class="bi bi-people text-primary"></i>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="card border-0 shadow-sm p-4 h-100">
-            <h6 class="fw-bold mb-3">{{ __('bancassurance.next_steps') }}</h6>
-            <ul class="mb-0 ps-3 text-muted">
-                <li>{{ __('bancassurance.wire_models') }}</li>
-                <li>{{ __('bancassurance.add_validation') }}</li>
-                <li>{{ __('bancassurance.attach_permissions') }}</li>
-            </ul>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <small class="text-muted">Converted</small>
+                        <h5 class="fw-bold mb-0">856</h5>
+                    </div>
+                    <div class="bg-success bg-opacity-10 rounded-circle p-2">
+                        <i class="bi bi-check-circle text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <small class="text-muted">Pending</small>
+                        <h5 class="fw-bold mb-0">389</h5>
+                    </div>
+                    <div class="bg-warning bg-opacity-10 rounded-circle p-2">
+                        <i class="bi bi-clock text-warning"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body p-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <small class="text-muted">Conversion Rate</small>
+                        <h5 class="fw-bold mb-0">68.7%</h5>
+                    </div>
+                    <div class="bg-info bg-opacity-10 rounded-circle p-2">
+                        <i class="bi bi-graph-up text-info"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Customers Table -->
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="fw-bold mb-0">Customer List</h6>
+            <div class="input-group" style="width: 250px;">
+                <span class="input-group-text bg-light border-0">
+                    <i class="bi bi-search"></i>
+                </span>
+                <input type="text" class="form-control border-0 bg-light" placeholder="Search customers...">
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Bank Account</th>
+                        <th>Interest</th>
+                        <th>Status</th>
+                        <th>Referred By</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-secondary bg-opacity-10 rounded-circle p-2 me-2">
+                                    <i class="bi bi-person text-secondary"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold">Hamis Juma</div>
+                                    <small class="text-muted">hamis@email.com</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>CRDB ...8821</td>
+                        <td>Motor Insurance</td>
+                        <td><span class="badge bg-success">Converted</span></td>
+                        <td>Branch A</td>
+                        <td>Today</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-secondary bg-opacity-10 rounded-circle p-2 me-2">
+                                    <i class="bi bi-person text-secondary"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold">Sarah Peter</div>
+                                    <small class="text-muted">sarah@email.com</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>NMB ...4432</td>
+                        <td>Life Insurance</td>
+                        <td><span class="badge bg-warning">Pending</span></td>
+                        <td>Branch B</td>
+                        <td>Yesterday</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">View</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-secondary bg-opacity-10 rounded-circle p-2 me-2">
+                                    <i class="bi bi-person text-secondary"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-semibold">David Omondi</div>
+                                    <small class="text-muted">david@email.com</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>NBC ...9912</td>
+                        <td>Health Insurance</td>
+                        <td><span class="badge bg-success">Converted</span></td>
+                        <td>Branch A</td>
+                        <td>2 days ago</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary">View</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
