@@ -11,4 +11,9 @@ class ComplianceController extends Controller
     {
         return view('bancassurance.compliance.index');
     }
+    
+    public function reports()
+    {
+        return view('bancassurance.reports.index');
+    }
 }
