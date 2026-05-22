@@ -232,10 +232,15 @@ Route::middleware(['auth'])->group(function () {
     // Bancassurance Dashboard Routes
     Route::prefix('bancassurance')->name('bancassurance.')->middleware(['auth', 'role:bancassurance'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Bancassurance\DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/customers', [App\Http\Controllers\Bancassurance\CustomerController::class, 'index'])->name('customers.index');
+        Route::get('/integration', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'index'])->name('integration');
+        Route::get('/customers', [App\Http\Controllers\Bancassurance\CustomerController::class, 'index'])->name('customers');
+        Route::get('/sales', [App\Http\Controllers\Bancassurance\PolicyController::class, 'sales'])->name('sales');
+        Route::get('/my-sales', [App\Http\Controllers\Bancassurance\PolicyController::class, 'mySales'])->name('my-sales');
+        Route::get('/products', [App\Http\Controllers\Bancassurance\ProductController::class, 'index'])->name('products');
+        Route::get('/reports', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'reports'])->name('reports');
+        Route::get('/compliance', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'index'])->name('compliance');
+        Route::get('/performance', [App\Http\Controllers\Bancassurance\PerformanceController::class, 'index'])->name('performance');
         Route::get('/policies', [App\Http\Controllers\Bancassurance\PolicyController::class, 'index'])->name('policies.index');
-        Route::get('/integration', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'index'])->name('integration.index');
-        Route::get('/compliance', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'index'])->name('compliance.index');
     });
 
     Route::get('/agent/dashboard', [App\Http\Controllers\Agent\DashboardController::class, 'index'])
