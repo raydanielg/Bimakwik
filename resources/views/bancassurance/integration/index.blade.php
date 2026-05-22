@@ -938,8 +938,8 @@ function completeSetup() {
             // Update table row
             const row = document.querySelector(`.setup-btn[data-id="${bankId}"]`).closest('tr');
             const statusBadge = row.querySelector('.badge');
-            statusBadge.textContent = 'Active';
-            statusBadge.className = 'badge bg-success';
+            statusBadge.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i>Active';
+            statusBadge.className = 'badge bg-success d-inline-flex align-items-center';
             
             // Change Setup button to Sync and Settings
             const actionsCell = row.querySelector('td:last-child');
@@ -960,6 +960,7 @@ function completeSetup() {
             // Re-attach listeners
             attachSyncListeners();
             attachSettingsListeners();
+            attachReportListeners();
             
             Swal.fire({
                 icon: 'success',
