@@ -11,7 +11,7 @@
                 <h5 class="fw-bold mb-3"><i class="bi bi-bank me-2"></i>Bancassurance Portal</h5>
                 <div class="row g-3">
                     <div class="col-md-6 col-lg-4">
-                        <a href="{{ route('bancassurance.integration') }}" class="text-decoration-none">
+                        <a href="/bancassurance/integration" class="text-decoration-none">
                             <div class="card border-0 bg-light h-100 hover-shadow transition-all">
                                 <div class="card-body p-3 d-flex align-items-center">
                                     <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3">
@@ -26,7 +26,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <a href="{{ route('bancassurance.customers') }}" class="text-decoration-none">
+                        <a href="/bancassurance/customers" class="text-decoration-none">
                             <div class="card border-0 bg-light h-100 hover-shadow transition-all">
                                 <div class="card-body p-3 d-flex align-items-center">
                                     <div class="bg-success bg-opacity-10 rounded-circle p-3 me-3">
@@ -41,7 +41,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <a href="{{ route('bancassurance.sales') }}" class="text-decoration-none">
+                        <a href="/bancassurance/sales" class="text-decoration-none">
                             <div class="card border-0 bg-light h-100 hover-shadow transition-all">
                                 <div class="card-body p-3 d-flex align-items-center">
                                     <div class="bg-info bg-opacity-10 rounded-circle p-3 me-3">
@@ -56,7 +56,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <a href="{{ route('bancassurance.my-sales') }}" class="text-decoration-none">
+                        <a href="/bancassurance/my-sales" class="text-decoration-none">
                             <div class="card border-0 bg-light h-100 hover-shadow transition-all">
                                 <div class="card-body p-3 d-flex align-items-center">
                                     <div class="bg-warning bg-opacity-10 rounded-circle p-3 me-3">
@@ -71,7 +71,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <a href="{{ route('bancassurance.products') }}" class="text-decoration-none">
+                        <a href="/bancassurance/products" class="text-decoration-none">
                             <div class="card border-0 bg-light h-100 hover-shadow transition-all">
                                 <div class="card-body p-3 d-flex align-items-center">
                                     <div class="bg-danger bg-opacity-10 rounded-circle p-3 me-3">
@@ -86,7 +86,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <a href="{{ route('bancassurance.reports') }}" class="text-decoration-none">
+                        <a href="/bancassurance/reports" class="text-decoration-none">
                             <div class="card border-0 bg-light h-100 hover-shadow transition-all">
                                 <div class="card-body p-3 d-flex align-items-center">
                                     <div class="bg-secondary bg-opacity-10 rounded-circle p-3 me-3">
@@ -101,7 +101,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <a href="{{ route('bancassurance.compliance') }}" class="text-decoration-none">
+                        <a href="/bancassurance/compliance" class="text-decoration-none">
                             <div class="card border-0 bg-light h-100 hover-shadow transition-all">
                                 <div class="card-body p-3 d-flex align-items-center">
                                     <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3">
@@ -116,7 +116,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-lg-4">
-                        <a href="{{ route('bancassurance.performance') }}" class="text-decoration-none">
+                        <a href="/bancassurance/performance" class="text-decoration-none">
                             <div class="card border-0 bg-light h-100 hover-shadow transition-all">
                                 <div class="card-body p-3 d-flex align-items-center">
                                     <div class="bg-success bg-opacity-10 rounded-circle p-3 me-3">
