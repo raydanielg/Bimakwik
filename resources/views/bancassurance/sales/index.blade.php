@@ -171,7 +171,7 @@
                                 <button class="btn btn-outline-primary view-sale-btn" data-id="1" data-policy="POL-2024-001234" title="View">
                                     <i class="bi bi-eye"></i>
                                 </button>
-                                <button class="btn btn-outline-secondary" title="Edit">
+                                <button class="btn btn-outline-secondary edit-sale-btn" data-id="1" data-policy="POL-2024-001234" title="Edit">
                                     <i class="bi bi-pencil"></i>
                                 </button>
                             </div>
@@ -195,7 +195,7 @@
                                 <button class="btn btn-outline-primary view-sale-btn" data-id="2" data-policy="POL-2024-001235" title="View">
                                     <i class="bi bi-eye"></i>
                                 </button>
-                                <button class="btn btn-outline-secondary" title="Edit">
+                                <button class="btn btn-outline-secondary edit-sale-btn" data-id="2" data-policy="POL-2024-001235" title="Edit">
                                     <i class="bi bi-pencil"></i>
                                 </button>
                             </div>
@@ -219,7 +219,7 @@
                                 <button class="btn btn-outline-primary view-sale-btn" data-id="3" data-policy="POL-2024-001236" title="View">
                                     <i class="bi bi-eye"></i>
                                 </button>
-                                <button class="btn btn-outline-secondary" title="Edit">
+                                <button class="btn btn-outline-secondary edit-sale-btn" data-id="3" data-policy="POL-2024-001236" title="Edit">
                                     <i class="bi bi-pencil"></i>
                                 </button>
                             </div>
