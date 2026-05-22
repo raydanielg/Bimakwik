@@ -165,11 +165,22 @@
                         </td>
                         <td>CRDB ...8821</td>
                         <td>Motor Insurance</td>
-                        <td><span class="badge bg-success">Converted</span></td>
+                        <td>
+                            <span class="badge bg-success d-inline-flex align-items-center">
+                                <i class="bi bi-check-circle-fill me-1"></i>Converted
+                            </span>
+                        </td>
                         <td>Branch A</td>
                         <td>Today</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">View</button>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary view-btn" data-id="1" data-name="Hamis Juma" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -186,11 +197,22 @@
                         </td>
                         <td>NMB ...4432</td>
                         <td>Life Insurance</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
+                        <td>
+                            <span class="badge bg-warning d-inline-flex align-items-center">
+                                <i class="bi bi-clock-fill me-1"></i>Pending
+                            </span>
+                        </td>
                         <td>Branch B</td>
                         <td>Yesterday</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">View</button>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary view-btn" data-id="2" data-name="Sarah Peter" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -207,11 +229,22 @@
                         </td>
                         <td>NBC ...9912</td>
                         <td>Health Insurance</td>
-                        <td><span class="badge bg-success">Converted</span></td>
+                        <td>
+                            <span class="badge bg-success d-inline-flex align-items-center">
+                                <i class="bi bi-check-circle-fill me-1"></i>Converted
+                            </span>
+                        </td>
                         <td>Branch A</td>
                         <td>2 days ago</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">View</button>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary view-btn" data-id="3" data-name="David Omondi" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
