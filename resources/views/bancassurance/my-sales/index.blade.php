@@ -2,6 +2,44 @@
 
 @section('dashboard_title', 'My Sales')
 
+@push('styles')
+<style>
+    .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-content {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    .modal-header {
+        border-bottom: 1px solid #e9ecef;
+        padding: 1.5rem;
+    }
+    .modal-body {
+        padding: 1.5rem;
+    }
+    .modal-footer {
+        border-top: 1px solid #e9ecef;
+        padding: 1.5rem;
+    }
+    .form-label {
+        font-weight: 500;
+        color: #495057;
+        margin-bottom: 0.5rem;
+    }
+    .form-control, .form-select {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem;
+        border-radius: 8px;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    }
+</style>
+@endpush
+
 @section('dashboard_content')
 <!-- Header -->
 <div class="row mb-4">
@@ -12,10 +50,10 @@
                 <p class="text-muted small mb-0">Track your personal sales performance</p>
             </div>
             <div class="d-flex gap-2">
-                <button class="btn btn-outline-primary btn-sm">
-                    <i class="bi bi-download me-2"></i>Export
+                <button class="btn btn-outline-primary btn-sm" onclick="exportMySales()">
+                    <i class="bi bi-file-earmark-pdf me-2"></i>Export Report
                 </button>
-                <button class="btn btn-primary btn-sm">
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addMySaleModal">
                     <i class="bi bi-plus-lg me-2"></i>New Sale
                 </button>
             </div>
