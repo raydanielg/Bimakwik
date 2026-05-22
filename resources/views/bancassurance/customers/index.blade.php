@@ -369,10 +369,10 @@
                     <div class="text-center mb-4 border-bottom pb-3">
                         <div class="d-flex align-items-center justify-content-center mb-2">
                             <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3">
-                                <i class="bi bi-shield-check text-primary fs-2"></i>
+                                <i class="bi bi-bank2 text-primary fs-2"></i>
                             </div>
                             <div>
-                                <h4 class="fw-bold mb-0 text-primary">BIMAKWIK BANCASSURANCE</h4>
+                                <h4 class="fw-bold mb-0 text-primary">BIMAKWIK</h4>
                                 <p class="text-muted small mb-0">Bank Customer Referrals Report</p>
                             </div>
                         </div>
@@ -810,7 +810,7 @@ function printPDF() {
     Swal.fire({
         icon: 'info',
         title: 'Preparing Print...',
-        text: 'Opening print dialog',
+        text: 'Opening print dialog for A4 report',
         allowOutsideClick: false,
         didOpen: () => {
             Swal.showLoading();
@@ -819,7 +819,17 @@ function printPDF() {
 
     setTimeout(() => {
         Swal.close();
+        
+        // Print only the A4 page
+        const a4Page = document.querySelector('.a4-page');
+        const originalContent = document.body.innerHTML;
+        
+        document.body.innerHTML = a4Page.outerHTML;
         window.print();
+        document.body.innerHTML = originalContent;
+        
+        // Re-attach listeners after restoring content
+        location.reload();
     }, 1000);
 }
 
