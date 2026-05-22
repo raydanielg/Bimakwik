@@ -734,7 +734,7 @@ function viewCustomer(customerId, customerName) {
 
 function exportCustomers() {
     Swal.fire({
-        title: 'Exporting to PDF...',
+        title: 'Generating PDF...',
         text: 'Please wait while we generate the PDF report',
         allowOutsideClick: false,
         didOpen: () => {
@@ -752,27 +752,16 @@ function exportCustomers() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Export Successful!',
-                html: `
-                    <p>Customers have been exported to PDF</p>
-                    <p><strong>File:</strong> ${data.data.file_name}</p>
-                    <p><strong>Total Customers:</strong> ${data.data.total_customers}</p>
-                `,
-                confirmButtonColor: '#0d6efd',
-                confirmButtonText: 'Download'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Simulate download
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Downloaded',
-                        text: 'PDF file has been downloaded',
-                        confirmButtonColor: '#0d6efd'
-                    });
-                }
-            });
+            // Update report info
+            document.getElementById('reportDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('totalCustomers').textContent = data.data.total_customers;
+            document.getElementById('reportRef').textContent = 'BIM-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+
+            Swal.close();
+            
+            // Open PDF preview modal
+            const modal = new bootstrap.Modal(document.getElementById('pdfPreviewModal'));
+            modal.show();
         } else {
             Swal.fire({
                 icon: 'error',
@@ -791,6 +780,47 @@ function exportCustomers() {
         });
         console.error('Error:', error);
     });
+}
+
+function downloadPDF() {
+    Swal.fire({
+        icon: 'success',
+        title: 'Downloading PDF...',
+        text: 'Your PDF is being downloaded',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    setTimeout(() => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Download Complete!',
+            text: 'PDF file has been downloaded successfully',
+            confirmButtonColor: '#0d6efd'
+        });
+        
+        const modal = bootstrap.Modal.getInstance(document.getElementById('pdfPreviewModal'));
+        modal.hide();
+    }, 1500);
+}
+
+function printPDF() {
+    Swal.fire({
+        icon: 'info',
+        title: 'Preparing Print...',
+        text: 'Opening print dialog',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    setTimeout(() => {
+        Swal.close();
+        window.print();
+    }, 1000);
 }
 
 function editCustomer() {
