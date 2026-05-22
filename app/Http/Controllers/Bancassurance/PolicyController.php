@@ -11,4 +11,14 @@ class PolicyController extends Controller
     {
         return view('bancassurance.policies.index');
     }
+    
+    public function sales()
+    {
+        return view('bancassurance.sales.index');
+    }
+    
+    public function mySales()
+    {
+        return view('bancassurance.my-sales.index');
+    }
 }
