@@ -159,9 +159,23 @@
                         <td>TZS 450,000</td>
                         <td>TZS 45,000</td>
                         <td>Today</td>
-                        <td><span class="badge bg-success">Active</span></td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">View</button>
+                            <span class="badge bg-success d-inline-flex align-items-center">
+                                <i class="bi bi-check-circle-fill me-1"></i>Active
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary view-my-sale-btn" data-id="1" data-policy="POL-2024-001234" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary edit-my-sale-btn" data-id="1" data-policy="POL-2024-001234" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-outline-info report-my-sale-btn" data-id="1" data-policy="POL-2024-001234" title="Report">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -171,9 +185,23 @@
                         <td>TZS 280,000</td>
                         <td>TZS 28,000</td>
                         <td>Yesterday</td>
-                        <td><span class="badge bg-success">Active</span></td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">View</button>
+                            <span class="badge bg-success d-inline-flex align-items-center">
+                                <i class="bi bi-check-circle-fill me-1"></i>Active
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary view-my-sale-btn" data-id="2" data-policy="POL-2024-001235" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary edit-my-sale-btn" data-id="2" data-policy="POL-2024-001235" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-outline-info report-my-sale-btn" data-id="2" data-policy="POL-2024-001235" title="Report">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -183,9 +211,23 @@
                         <td>TZS 120,000</td>
                         <td>TZS 12,000</td>
                         <td>2 days ago</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">View</button>
+                            <span class="badge bg-warning d-inline-flex align-items-center">
+                                <i class="bi bi-clock-fill me-1"></i>Pending
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary view-my-sale-btn" data-id="3" data-policy="POL-2024-001236" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary edit-my-sale-btn" data-id="3" data-policy="POL-2024-001236" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-outline-info report-my-sale-btn" data-id="3" data-policy="POL-2024-001236" title="Report">
+                                    <i class="bi bi-file-earmark-text"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
