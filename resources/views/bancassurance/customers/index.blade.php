@@ -905,10 +905,27 @@ function exportCustomers() {
 }
 
 function downloadPDF() {
+    // Update clean report info
+    document.getElementById('cleanReportDate').textContent = new Date().toLocaleDateString();
+    document.getElementById('cleanTotalCustomers').textContent = document.getElementById('totalCustomers').textContent;
+    document.getElementById('cleanReportRef').textContent = document.getElementById('reportRef').textContent;
+
+    // Close current modal
+    const currentModal = bootstrap.Modal.getInstance(document.getElementById('pdfPreviewModal'));
+    currentModal.hide();
+
+    // Open clean PDF preview modal
+    setTimeout(() => {
+        const cleanModal = new bootstrap.Modal(document.getElementById('cleanPdfPreviewModal'));
+        cleanModal.show();
+    }, 300);
+}
+
+function downloadCleanPDF() {
     Swal.fire({
         icon: 'success',
         title: 'Downloading PDF...',
-        text: 'Your PDF is being downloaded',
+        text: 'Your clean PDF is being downloaded',
         allowOutsideClick: false,
         didOpen: () => {
             Swal.showLoading();
@@ -919,13 +936,40 @@ function downloadPDF() {
         Swal.fire({
             icon: 'success',
             title: 'Download Complete!',
-            text: 'PDF file has been downloaded successfully',
+            text: 'Clean PDF file has been downloaded successfully',
             confirmButtonColor: '#0d6efd'
         });
         
-        const modal = bootstrap.Modal.getInstance(document.getElementById('pdfPreviewModal'));
+        const modal = bootstrap.Modal.getInstance(document.getElementById('cleanPdfPreviewModal'));
         modal.hide();
     }, 1500);
+}
+
+function printCleanPDF() {
+    Swal.fire({
+        icon: 'info',
+        title: 'Preparing Print...',
+        text: 'Opening print dialog for clean A4 report',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    setTimeout(() => {
+        Swal.close();
+        
+        // Print only the clean A4 page
+        const a4Page = document.querySelector('#cleanPdfPreviewModal .a4-page');
+        const originalContent = document.body.innerHTML;
+        
+        document.body.innerHTML = a4Page.outerHTML;
+        window.print();
+        document.body.innerHTML = originalContent;
+        
+        // Re-attach listeners after restoring content
+        location.reload();
+    }, 1000);
 }
 
 function printPDF() {
