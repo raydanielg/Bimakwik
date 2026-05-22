@@ -242,6 +242,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/integration/test-connection', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'testConnection']);
         Route::get('/integration/report/{id}', [App\Http\Controllers\Bancassurance\BankIntegrationController::class, 'generateReport']);
         Route::get('/customers', [App\Http\Controllers\Bancassurance\CustomerController::class, 'index'])->name('customers');
+        Route::post('/customers', [App\Http\Controllers\Bancassurance\CustomerController::class, 'store']);
+        Route::get('/customers/{id}', [App\Http\Controllers\Bancassurance\CustomerController::class, 'show']);
+        Route::post('/customers/export', [App\Http\Controllers\Bancassurance\CustomerController::class, 'export']);
         Route::get('/sales', [App\Http\Controllers\Bancassurance\PolicyController::class, 'sales'])->name('sales');
         Route::get('/my-sales', [App\Http\Controllers\Bancassurance\PolicyController::class, 'mySales'])->name('my-sales');
         Route::get('/products', [App\Http\Controllers\Bancassurance\ProductController::class, 'index'])->name('products');
