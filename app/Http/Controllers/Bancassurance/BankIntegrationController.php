@@ -108,4 +108,113 @@ class BankIntegrationController extends Controller
             ], 500);
         }
     }
+    
+    public function updateStatus(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|in:active,disabled',
+        ], [
+            'status.required' => 'Status is required',
+            'status.in' => 'Invalid status value',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            // Update status (demo - in real app, update database)
+            $status = $request->status;
+            
+            return response()->json([
+                'success' => true,
+                'message' => "Bank integration status updated to {$status}",
+                'data' => [
+                    'id' => $id,
+                    'status' => $status,
+                    'updated_at' => now()
+                ]
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while updating status',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+    public function getSettings($id)
+    {
+        try {
+            // Get bank integration settings (demo)
+            $settings = [
+                'id' => $id,
+                'bank_name' => $id == 1 ? 'CRDB Bank' : ($id == 2 ? 'NMB Bank' : 'NBC Bank'),
+                'status' => 'active',
+                'auto_sync' => true,
+                'sync_interval' => '5',
+                'api_timeout' => '30',
+                'retry_attempts' => '3',
+                'notification_enabled' => true,
+                'log_level' => 'info',
+            ];
+            
+            return response()->json([
+                'success' => true,
+                'data' => $settings
+            ], 200);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch settings',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+    public function updateSettings(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'auto_sync' => 'boolean',
+            'sync_interval' => 'integer|min:1|max:60',
+            'api_timeout' => 'integer|min:5|max:120',
+            'retry_attempts' => 'integer|min:1|max:10',
+            'notification_enabled' => 'boolean',
+            'log_level' => 'string|in:debug,info,warning,error',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            // Update settings (demo - in real app, update database)
+            return response()->json([
+                'success' => true,
+                'message' => 'Settings updated successfully',
+                'data' => [
+                    'id' => $id,
+                    'updated_at' => now()
+                ]
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while updating settings',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
