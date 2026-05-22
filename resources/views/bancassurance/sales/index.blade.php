@@ -230,4 +230,388 @@
         </div>
     </div>
 </div>
+
+<!-- Add Sale Modal -->
+<div class="modal fade" id="addSaleModal" tabindex="-1" aria-labelledby="addSaleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="addSaleModalLabel">
+                    <i class="bi bi-cart-plus me-2"></i>New Insurance Sale
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addSaleForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="customerName" class="form-label">Customer Name *</label>
+                            <input type="text" class="form-control" id="customerName" required placeholder="Enter customer name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="customerEmail" class="form-label">Customer Email *</label>
+                            <input type="email" class="form-control" id="customerEmail" required placeholder="Enter email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="customerPhone" class="form-label">Customer Phone *</label>
+                            <input type="text" class="form-control" id="customerPhone" required placeholder="Enter phone number">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="product" class="form-label">Insurance Product *</label>
+                            <select class="form-select" id="product" required>
+                                <option value="">Select Product</option>
+                                <option value="Motor Insurance">Motor Insurance</option>
+                                <option value="Life Insurance">Life Insurance</option>
+                                <option value="Health Insurance">Health Insurance</option>
+                                <option value="Travel Insurance">Travel Insurance</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="premium" class="form-label">Premium Amount (TZS) *</label>
+                            <input type="number" class="form-control" id="premium" required placeholder="Enter premium amount" min="0">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="branch" class="form-label">Branch *</label>
+                            <select class="form-select" id="branch" required>
+                                <option value="">Select Branch</option>
+                                <option value="Branch A">Branch A</option>
+                                <option value="Branch B">Branch B</option>
+                                <option value="Branch C">Branch C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="soldBy" class="form-label">Sold By *</label>
+                            <input type="text" class="form-control" id="soldBy" required placeholder="Agent name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="policyStartDate" class="form-label">Policy Start Date *</label>
+                            <input type="date" class="form-control" id="policyStartDate" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="policyEndDate" class="form-label">Policy End Date *</label>
+                            <input type="date" class="form-control" id="policyEndDate" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="addSale()">
+                    <i class="bi bi-save me-2"></i>Record Sale
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Sale Modal -->
+<div class="modal fade" id="viewSaleModal" tabindex="-1" aria-labelledby="viewSaleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="viewSaleModalLabel">
+                    <i class="bi bi-cart me-2"></i>Sale Details
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="saleDetails">
+                    <!-- Sale details will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="editSale()">
+                    <i class="bi bi-pencil me-2"></i>Edit Sale
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function addSale() {
+    const customerName = document.getElementById('customerName').value;
+    const customerEmail = document.getElementById('customerEmail').value;
+    const customerPhone = document.getElementById('customerPhone').value;
+    const product = document.getElementById('product').value;
+    const premium = document.getElementById('premium').value;
+    const branch = document.getElementById('branch').value;
+    const soldBy = document.getElementById('soldBy').value;
+    const policyStartDate = document.getElementById('policyStartDate').value;
+    const policyEndDate = document.getElementById('policyEndDate').value;
+
+    // Validation
+    if (!customerName || !customerEmail || !customerPhone || !product || !premium || !branch || !soldBy || !policyStartDate || !policyEndDate) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all required fields',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+
+    // Show loading
+    Swal.fire({
+        title: 'Recording Sale...',
+        text: 'Please wait while we record the sale',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // AJAX call
+    const formData = new FormData();
+    formData.append('customer_name', customerName);
+    formData.append('customer_email', customerEmail);
+    formData.append('customer_phone', customerPhone);
+    formData.append('product', product);
+    formData.append('premium', premium);
+    formData.append('branch', branch);
+    formData.append('sold_by', soldBy);
+    formData.append('policy_start_date', policyStartDate);
+    formData.append('policy_end_date', policyEndDate);
+
+    fetch('/bancassurance/sales', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addSaleModal'));
+            modal.hide();
+
+            // Reset form
+            document.getElementById('addSaleForm').reset();
+
+            // Add new row to table
+            const tableBody = document.querySelector('tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><span class="fw-semibold text-primary">${data.data.policy_number}</span></td>
+                <td>${data.data.customer_name}</td>
+                <td>${data.data.product}</td>
+                <td>TZS ${parseInt(data.data.premium).toLocaleString()}</td>
+                <td>${data.data.branch}</td>
+                <td>${data.data.sold_by}</td>
+                <td>Just now</td>
+                <td>
+                    <span class="badge bg-warning d-inline-flex align-items-center">
+                        <i class="bi bi-clock-fill me-1"></i>Pending
+                    </span>
+                </td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary view-sale-btn" data-id="${data.data.id}" data-policy="${data.data.policy_number}" title="View">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            tableBody.insertBefore(newRow, tableBody.firstChild);
+
+            // Re-attach listeners
+            attachViewSaleListeners();
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Sale Recorded Successfully!',
+                html: `
+                    <p><strong>Policy No:</strong> ${data.data.policy_number}</p>
+                    <p><strong>Customer:</strong> ${data.data.customer_name}</p>
+                    <p><strong>Premium:</strong> TZS ${parseInt(data.data.premium).toLocaleString()}</p>
+                    <p><strong>Status:</strong> <span class="badge bg-warning">Pending</span></p>
+                `,
+                confirmButtonColor: '#0d6efd'
+            });
+        } else {
+            let errorMessage = data.message;
+            if (data.errors) {
+                const errorList = Object.values(data.errors).flat().join('<br>');
+                errorMessage = data.message + '<br><br>' + errorList;
+            }
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: errorMessage,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while recording sale',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function viewSale(saleId, policyNumber) {
+    Swal.fire({
+        title: 'Loading...',
+        text: 'Fetching sale details',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`/bancassurance/sales/${saleId}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const sale = data.data;
+            const statusBadge = sale.status === 'Active' 
+                ? '<span class="badge bg-success d-inline-flex align-items-center"><i class="bi bi-check-circle-fill me-1"></i>Active</span>'
+                : '<span class="badge bg-warning d-inline-flex align-items-center"><i class="bi bi-clock-fill me-1"></i>Pending</span>';
+
+            document.getElementById('saleDetails').innerHTML = `
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Policy Number</label>
+                        <div class="fw-semibold text-primary">${sale.policy_number}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Status</label>
+                        <div>${statusBadge}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Customer Name</label>
+                        <div>${sale.customer_name}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Customer Email</label>
+                        <div>${sale.customer_email}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Customer Phone</label>
+                        <div>${sale.customer_phone}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Product</label>
+                        <div>${sale.product}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Premium</label>
+                        <div>TZS ${parseInt(sale.premium).toLocaleString()}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Branch</label>
+                        <div>${sale.branch}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Sold By</label>
+                        <div>${sale.sold_by}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Policy Start Date</label>
+                        <div>${sale.policy_start_date}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Policy End Date</label>
+                        <div>${sale.policy_end_date}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Created At</label>
+                        <div>${sale.created_at}</div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="text-muted small">Notes</label>
+                        <div>${sale.notes || 'No notes'}</div>
+                    </div>
+                </div>
+            `;
+
+            Swal.close();
+            const modal = new bootstrap.Modal(document.getElementById('viewSaleModal'));
+            modal.show();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while fetching sale details',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function exportSales() {
+    Swal.fire({
+        icon: 'info',
+        title: 'Export to PDF',
+        text: 'Export functionality coming soon',
+        confirmButtonColor: '#0d6efd'
+    });
+}
+
+function editSale() {
+    Swal.fire({
+        icon: 'info',
+        title: 'Edit Sale',
+        text: 'Edit functionality coming soon',
+        confirmButtonColor: '#0d6efd'
+    });
+}
+
+// Attach view button listeners
+function attachViewSaleListeners() {
+    document.querySelectorAll('.view-sale-btn').forEach(btn => {
+        btn.removeEventListener('click', handleViewSaleClick);
+        btn.addEventListener('click', handleViewSaleClick);
+    });
+}
+
+function handleViewSaleClick(e) {
+    const btn = e.target.closest('.view-sale-btn');
+    const saleId = btn.getAttribute('data-id');
+    const policyNumber = btn.getAttribute('data-policy');
+    viewSale(saleId, policyNumber);
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    attachViewSaleListeners();
+});
+</script>
+@endpush
 @endsection
