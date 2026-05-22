@@ -324,4 +324,37 @@ class BankIntegrationController extends Controller
             ], 500);
         }
     }
+    
+    public function generateReport($id)
+    {
+        try {
+            // Generate report (demo - in real app, generate actual report)
+            sleep(1);
+            
+            $bankName = $id == 1 ? 'CRDB Bank' : ($id == 2 ? 'NMB Bank' : 'NBC Bank');
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Report generated successfully',
+                'data' => [
+                    'id' => $id,
+                    'bank_name' => $bankName,
+                    'report_type' => 'Integration Report',
+                    'generated_at' => now()->format('Y-m-d H:i:s'),
+                    'total_syncs' => rand(50, 200),
+                    'successful_syncs' => rand(45, 195),
+                    'failed_syncs' => rand(0, 5),
+                    'last_sync' => now()->subMinutes(rand(1, 30))->format('H:i A'),
+                    'status' => 'active'
+                ]
+            ], 200);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to generate report',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
