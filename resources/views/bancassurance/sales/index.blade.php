@@ -337,6 +337,88 @@
     </div>
 </div>
 
+<!-- Edit Sale Modal -->
+<div class="modal fade" id="editSaleModal" tabindex="-1" aria-labelledby="editSaleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="editSaleModalLabel">
+                    <i class="bi bi-pencil me-2"></i>Edit Insurance Sale
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editSaleForm">
+                    <input type="hidden" id="editSaleId">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="editCustomerName" class="form-label">Customer Name *</label>
+                            <input type="text" class="form-control" id="editCustomerName" required placeholder="Enter customer name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="editCustomerEmail" class="form-label">Customer Email *</label>
+                            <input type="email" class="form-control" id="editCustomerEmail" required placeholder="Enter email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="editCustomerPhone" class="form-label">Customer Phone *</label>
+                            <input type="text" class="form-control" id="editCustomerPhone" required placeholder="Enter phone number">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="editProduct" class="form-label">Insurance Product *</label>
+                            <select class="form-select" id="editProduct" required>
+                                <option value="">Select Product</option>
+                                <option value="Motor Insurance">Motor Insurance</option>
+                                <option value="Life Insurance">Life Insurance</option>
+                                <option value="Health Insurance">Health Insurance</option>
+                                <option value="Travel Insurance">Travel Insurance</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="editPremium" class="form-label">Premium Amount (TZS) *</label>
+                            <input type="number" class="form-control" id="editPremium" required placeholder="Enter premium amount" min="0">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="editBranch" class="form-label">Branch *</label>
+                            <select class="form-select" id="editBranch" required>
+                                <option value="">Select Branch</option>
+                                <option value="Branch A">Branch A</option>
+                                <option value="Branch B">Branch B</option>
+                                <option value="Branch C">Branch C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="editSoldBy" class="form-label">Sold By *</label>
+                            <input type="text" class="form-control" id="editSoldBy" required placeholder="Agent name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="editPolicyStartDate" class="form-label">Policy Start Date *</label>
+                            <input type="date" class="form-control" id="editPolicyStartDate" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="editPolicyEndDate" class="form-label">Policy End Date *</label>
+                            <input type="date" class="form-control" id="editPolicyEndDate" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="updateSale()">
+                    <i class="bi bi-save me-2"></i>Update Sale
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -585,11 +667,180 @@ function exportSales() {
 }
 
 function editSale() {
+    // This function is called from View Sale modal
+    // For now, show a message
     Swal.fire({
         icon: 'info',
-        title: 'Edit Sale',
-        text: 'Edit functionality coming soon',
+        title: 'Edit from View',
+        text: 'Please use the edit button in the table to edit this sale',
         confirmButtonColor: '#0d6efd'
+    });
+}
+
+function openEditSaleModal(saleId, policyNumber) {
+    Swal.fire({
+        title: 'Loading...',
+        text: 'Fetching sale details for editing',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`/bancassurance/sales/${saleId}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const sale = data.data;
+            
+            // Populate edit form
+            document.getElementById('editSaleId').value = sale.id;
+            document.getElementById('editCustomerName').value = sale.customer_name;
+            document.getElementById('editCustomerEmail').value = sale.customer_email;
+            document.getElementById('editCustomerPhone').value = sale.customer_phone;
+            document.getElementById('editProduct').value = sale.product;
+            document.getElementById('editPremium').value = sale.premium;
+            document.getElementById('editBranch').value = sale.branch;
+            document.getElementById('editSoldBy').value = sale.sold_by;
+            document.getElementById('editPolicyStartDate').value = sale.policy_start_date;
+            document.getElementById('editPolicyEndDate').value = sale.policy_end_date;
+
+            Swal.close();
+            
+            // Close view modal if open
+            const viewModal = bootstrap.Modal.getInstance(document.getElementById('viewSaleModal'));
+            if (viewModal) {
+                viewModal.hide();
+            }
+
+            // Open edit modal
+            const editModal = new bootstrap.Modal(document.getElementById('editSaleModal'));
+            editModal.show();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while fetching sale details',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function updateSale() {
+    const saleId = document.getElementById('editSaleId').value;
+    const customerName = document.getElementById('editCustomerName').value;
+    const customerEmail = document.getElementById('editCustomerEmail').value;
+    const customerPhone = document.getElementById('editCustomerPhone').value;
+    const product = document.getElementById('editProduct').value;
+    const premium = document.getElementById('editPremium').value;
+    const branch = document.getElementById('editBranch').value;
+    const soldBy = document.getElementById('editSoldBy').value;
+    const policyStartDate = document.getElementById('editPolicyStartDate').value;
+    const policyEndDate = document.getElementById('editPolicyEndDate').value;
+
+    // Validation
+    if (!customerName || !customerEmail || !customerPhone || !product || !premium || !branch || !soldBy || !policyStartDate || !policyEndDate) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all required fields',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+
+    // Show loading
+    Swal.fire({
+        title: 'Updating Sale...',
+        text: 'Please wait while we update the sale',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // AJAX call
+    const formData = new FormData();
+    formData.append('customer_name', customerName);
+    formData.append('customer_email', customerEmail);
+    formData.append('customer_phone', customerPhone);
+    formData.append('product', product);
+    formData.append('premium', premium);
+    formData.append('branch', branch);
+    formData.append('sold_by', soldBy);
+    formData.append('policy_start_date', policyStartDate);
+    formData.append('policy_end_date', policyEndDate);
+
+    fetch(`/bancassurance/sales/${saleId}`, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('editSaleModal'));
+            modal.hide();
+
+            // Reset form
+            document.getElementById('editSaleForm').reset();
+
+            // Update table row (simplified - in real app, update specific row)
+            Swal.fire({
+                icon: 'success',
+                title: 'Sale Updated Successfully!',
+                html: `
+                    <p><strong>Customer:</strong> ${data.data.customer_name}</p>
+                    <p><strong>Product:</strong> ${data.data.product}</p>
+                    <p><strong>Premium:</strong> TZS ${parseInt(data.data.premium).toLocaleString()}</p>
+                `,
+                confirmButtonColor: '#0d6efd'
+            }).then(() => {
+                // Reload page to show updated data
+                location.reload();
+            });
+        } else {
+            let errorMessage = data.message;
+            if (data.errors) {
+                const errorList = Object.values(data.errors).flat().join('<br>');
+                errorMessage = data.message + '<br><br>' + errorList;
+            }
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: errorMessage,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while updating sale',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
     });
 }
 
