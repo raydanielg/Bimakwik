@@ -291,4 +291,636 @@
         </div>
     </div>
 </div>
+
+<!-- Add Product Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="addProductModalLabel">
+                    <i class="bi bi-plus-lg me-2"></i>Add New Product
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addProductForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="productName" class="form-label">Product Name *</label>
+                            <input type="text" class="form-control" id="productName" required placeholder="Enter product name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="productCategory" class="form-label">Category *</label>
+                            <select class="form-select" id="productCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="Motor">Motor</option>
+                                <option value="Life">Life</option>
+                                <option value="Health">Health</option>
+                                <option value="Home">Home</option>
+                                <option value="Travel">Travel</option>
+                                <option value="Business">Business</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="minPremium" class="form-label">Minimum Premium (TZS) *</label>
+                            <input type="number" class="form-control" id="minPremium" required placeholder="Enter minimum premium" min="0">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="commissionRate" class="form-label">Commission Rate (%) *</label>
+                            <input type="number" class="form-control" id="commissionRate" required placeholder="Enter commission rate" min="0" max="100">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productDescription" class="form-label">Description *</label>
+                        <textarea class="form-control" id="productDescription" rows="4" required placeholder="Enter product description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status *</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="productStatus" id="statusActive" value="active" checked>
+                                <label class="form-check-label" for="statusActive">Active</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="productStatus" id="statusInactive" value="inactive">
+                                <label class="form-check-label" for="statusInactive">Inactive</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="addProduct()">
+                    <i class="bi bi-save me-2"></i>Add Product
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Product Modal -->
+<div class="modal fade" id="viewProductModal" tabindex="-1" aria-labelledby="viewProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="viewProductModalLabel">
+                    <i class="bi bi-box-seam me-2"></i>Product Details
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="productDetails">
+                    <!-- Product details will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="editProduct()">
+                    <i class="bi bi-pencil me-2"></i>Edit Product
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Product Modal -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="editProductModalLabel">
+                    <i class="bi bi-pencil me-2"></i>Edit Product
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editProductForm">
+                    <input type="hidden" id="editProductId">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="editProductName" class="form-label">Product Name *</label>
+                            <input type="text" class="form-control" id="editProductName" required placeholder="Enter product name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="editProductCategory" class="form-label">Category *</label>
+                            <select class="form-select" id="editProductCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="Motor">Motor</option>
+                                <option value="Life">Life</option>
+                                <option value="Health">Health</option>
+                                <option value="Home">Home</option>
+                                <option value="Travel">Travel</option>
+                                <option value="Business">Business</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="editMinPremium" class="form-label">Minimum Premium (TZS) *</label>
+                            <input type="number" class="form-control" id="editMinPremium" required placeholder="Enter minimum premium" min="0">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="editCommissionRate" class="form-label">Commission Rate (%) *</label>
+                            <input type="number" class="form-control" id="editCommissionRate" required placeholder="Enter commission rate" min="0" max="100">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProductDescription" class="form-label">Description *</label>
+                        <textarea class="form-control" id="editProductDescription" rows="4" required placeholder="Enter product description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status *</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="editProductStatus" id="editStatusActive" value="active">
+                                <label class="form-check-label" for="editStatusActive">Active</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="editProductStatus" id="editStatusInactive" value="inactive">
+                                <label class="form-check-label" for="editStatusInactive">Inactive</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="updateProduct()">
+                    <i class="bi bi-save me-2"></i>Update Product
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function addProduct() {
+    const name = document.getElementById('productName').value;
+    const category = document.getElementById('productCategory').value;
+    const minPremium = document.getElementById('minPremium').value;
+    const commissionRate = document.getElementById('commissionRate').value;
+    const description = document.getElementById('productDescription').value;
+    const status = document.querySelector('input[name="productStatus"]:checked').value;
+
+    // Validation
+    if (!name || !category || !minPremium || !commissionRate || !description) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all required fields',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+
+    // Show loading
+    Swal.fire({
+        title: 'Adding Product...',
+        text: 'Please wait while we add the product',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // AJAX call
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('category', category);
+    formData.append('min_premium', minPremium);
+    formData.append('commission_rate', commissionRate);
+    formData.append('description', description);
+    formData.append('status', status);
+
+    fetch('/bancassurance/products', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
+            modal.hide();
+
+            // Reset form
+            document.getElementById('addProductForm').reset();
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Product Added Successfully!',
+                html: `
+                    <p><strong>Product:</strong> ${data.data.name}</p>
+                    <p><strong>Category:</strong> ${data.data.category}</p>
+                    <p><strong>Min Premium:</strong> TZS ${parseInt(data.data.min_premium).toLocaleString()}</p>
+                    <p><strong>Commission:</strong> ${data.data.commission_rate}%</p>
+                `,
+                confirmButtonColor: '#0d6efd'
+            }).then(() => {
+                // Reload page to show new product
+                location.reload();
+            });
+        } else {
+            let errorMessage = data.message;
+            if (data.errors) {
+                const errorList = Object.values(data.errors).flat().join('<br>');
+                errorMessage = data.message + '<br><br>' + errorList;
+            }
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: errorMessage,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while adding product',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function viewProduct(productId, productName) {
+    Swal.fire({
+        title: 'Loading...',
+        text: 'Fetching product details',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`/bancassurance/products/${productId}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const product = data.data;
+            const statusBadge = product.status === 'active' 
+                ? '<span class="badge bg-success d-inline-flex align-items-center"><i class="bi bi-check-circle-fill me-1"></i>Active</span>'
+                : '<span class="badge bg-warning d-inline-flex align-items-center"><i class="bi bi-clock-fill me-1"></i>Inactive</span>';
+
+            const featuresHtml = product.features ? product.features.map(f => `<li>${f}</li>`).join('') : '';
+
+            document.getElementById('productDetails').innerHTML = `
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Product Name</label>
+                        <div class="fw-semibold">${product.name}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Status</label>
+                        <div>${statusBadge}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Category</label>
+                        <div>${product.category}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Minimum Premium</label>
+                        <div>TZS ${parseInt(product.min_premium).toLocaleString()}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Commission Rate</label>
+                        <div class="fw-bold text-success">${product.commission_rate}%</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Created At</label>
+                        <div>${product.created_at}</div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="text-muted small">Description</label>
+                        <div>${product.description}</div>
+                    </div>
+                    ${featuresHtml ? `
+                    <div class="col-12 mb-3">
+                        <label class="text-muted small">Features</label>
+                        <ul>${featuresHtml}</ul>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            Swal.close();
+            const modal = new bootstrap.Modal(document.getElementById('viewProductModal'));
+            modal.show();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while fetching product details',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function editProduct() {
+    Swal.fire({
+        icon: 'info',
+        title: 'Edit from View',
+        text: 'Please use the edit button in the product card to edit this product',
+        confirmButtonColor: '#0d6efd'
+    });
+}
+
+function openEditProductModal(productId, productName) {
+    Swal.fire({
+        title: 'Loading...',
+        text: 'Fetching product details for editing',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`/bancassurance/products/${productId}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const product = data.data;
+            
+            // Populate edit form
+            document.getElementById('editProductId').value = product.id;
+            document.getElementById('editProductName').value = product.name;
+            document.getElementById('editProductCategory').value = product.category;
+            document.getElementById('editMinPremium').value = product.min_premium;
+            document.getElementById('editCommissionRate').value = product.commission_rate;
+            document.getElementById('editProductDescription').value = product.description;
+            
+            // Set status radio
+            if (product.status === 'active') {
+                document.getElementById('editStatusActive').checked = true;
+            } else {
+                document.getElementById('editStatusInactive').checked = true;
+            }
+
+            Swal.close();
+            
+            // Close view modal if open
+            const viewModal = bootstrap.Modal.getInstance(document.getElementById('viewProductModal'));
+            if (viewModal) {
+                viewModal.hide();
+            }
+
+            // Open edit modal
+            const editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
+            editModal.show();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while fetching product details',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function updateProduct() {
+    const productId = document.getElementById('editProductId').value;
+    const name = document.getElementById('editProductName').value;
+    const category = document.getElementById('editProductCategory').value;
+    const minPremium = document.getElementById('editMinPremium').value;
+    const commissionRate = document.getElementById('editCommissionRate').value;
+    const description = document.getElementById('editProductDescription').value;
+    const status = document.querySelector('input[name="editProductStatus"]:checked').value;
+
+    // Validation
+    if (!name || !category || !minPremium || !commissionRate || !description) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all required fields',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+
+    // Show loading
+    Swal.fire({
+        title: 'Updating Product...',
+        text: 'Please wait while we update the product',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // AJAX call
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('category', category);
+    formData.append('min_premium', minPremium);
+    formData.append('commission_rate', commissionRate);
+    formData.append('description', description);
+    formData.append('status', status);
+
+    fetch(`/bancassurance/products/${productId}`, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('editProductModal'));
+            modal.hide();
+
+            // Reset form
+            document.getElementById('editProductForm').reset();
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Product Updated Successfully!',
+                html: `
+                    <p><strong>Product:</strong> ${data.data.name}</p>
+                    <p><strong>Category:</strong> ${data.data.category}</p>
+                    <p><strong>Min Premium:</strong> TZS ${parseInt(data.data.min_premium).toLocaleString()}</p>
+                    <p><strong>Commission:</strong> ${data.data.commission_rate}%</p>
+                `,
+                confirmButtonColor: '#0d6efd'
+            }).then(() => {
+                // Reload page to show updated data
+                location.reload();
+            });
+        } else {
+            let errorMessage = data.message;
+            if (data.errors) {
+                const errorList = Object.values(data.errors).flat().join('<br>');
+                errorMessage = data.message + '<br><br>' + errorList;
+            }
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: errorMessage,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while updating product',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function deleteProduct(productId, productName) {
+    Swal.fire({
+        title: 'Delete Product',
+        text: `Are you sure you want to delete "${productName}"?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Deleting...',
+                text: 'Please wait while we delete the product',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            fetch(`/bancassurance/products/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: 'Product has been deleted successfully',
+                        confirmButtonColor: '#0d6efd'
+                    }).then(() => {
+                        // Reload page to show updated data
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message,
+                        confirmButtonColor: '#dc3545'
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred while deleting product',
+                    confirmButtonColor: '#dc3545'
+                });
+                console.error('Error:', error);
+            });
+        }
+    });
+}
+
+// Attach all button listeners
+function attachProductListeners() {
+    document.querySelectorAll('.view-product-btn').forEach(btn => {
+        btn.removeEventListener('click', handleViewProductClick);
+        btn.addEventListener('click', handleViewProductClick);
+    });
+    
+    document.querySelectorAll('.edit-product-btn').forEach(btn => {
+        btn.removeEventListener('click', handleEditProductClick);
+        btn.addEventListener('click', handleEditProductClick);
+    });
+    
+    document.querySelectorAll('.delete-product-btn').forEach(btn => {
+        btn.removeEventListener('click', handleDeleteProductClick);
+        btn.addEventListener('click', handleDeleteProductClick);
+    });
+}
+
+function handleViewProductClick(e) {
+    const btn = e.target.closest('.view-product-btn');
+    const productId = btn.getAttribute('data-id');
+    const productName = btn.getAttribute('data-name');
+    viewProduct(productId, productName);
+}
+
+function handleEditProductClick(e) {
+    const btn = e.target.closest('.edit-product-btn');
+    const productId = btn.getAttribute('data-id');
+    const productName = btn.getAttribute('data-name');
+    openEditProductModal(productId, productName);
+}
+
+function handleDeleteProductClick(e) {
+    const btn = e.target.closest('.delete-product-btn');
+    const productId = btn.getAttribute('data-id');
+    const productName = btn.getAttribute('data-name');
+    deleteProduct(productId, productName);
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    attachProductListeners();
+});
+</script>
+@endpush
 @endsection
