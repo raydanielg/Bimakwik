@@ -134,11 +134,24 @@
                             </div>
                         </td>
                         <td>API Integration</td>
-                        <td><span class="badge bg-success">Active</span></td>
+                        <td>
+                            <span class="badge bg-success d-inline-flex align-items-center">
+                                <i class="bi bi-check-circle-fill me-1"></i>Active
+                            </span>
+                        </td>
                         <td>2 mins ago</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary sync-btn" data-id="1">Sync</button>
-                            <button class="btn btn-sm btn-outline-secondary settings-btn" data-id="1" data-bank="CRDB Bank" data-status="active">Settings</button>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary sync-btn" data-id="1" title="Sync">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                </button>
+                                <button class="btn btn-outline-info report-btn" data-id="1" data-bank="CRDB Bank" title="Generate Report">
+                                    <i class="bi bi-file-earmark-bar-graph"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary settings-btn" data-id="1" data-bank="CRDB Bank" data-status="active" title="Settings">
+                                    <i class="bi bi-gear"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -154,11 +167,24 @@
                             </div>
                         </td>
                         <td>API Integration</td>
-                        <td><span class="badge bg-success">Active</span></td>
+                        <td>
+                            <span class="badge bg-success d-inline-flex align-items-center">
+                                <i class="bi bi-check-circle-fill me-1"></i>Active
+                            </span>
+                        </td>
                         <td>5 mins ago</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary sync-btn" data-id="2">Sync</button>
-                            <button class="btn btn-sm btn-outline-secondary settings-btn" data-id="2" data-bank="NMB Bank" data-status="active">Settings</button>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary sync-btn" data-id="2" title="Sync">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                </button>
+                                <button class="btn btn-outline-info report-btn" data-id="2" data-bank="NMB Bank" title="Generate Report">
+                                    <i class="bi bi-file-earmark-bar-graph"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary settings-btn" data-id="2" data-bank="NMB Bank" data-status="active" title="Settings">
+                                    <i class="bi bi-gear"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -174,11 +200,21 @@
                             </div>
                         </td>
                         <td>API Integration</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
+                        <td>
+                            <span class="badge bg-warning d-inline-flex align-items-center">
+                                <i class="bi bi-clock-fill me-1"></i>Pending
+                            </span>
+                        </td>
                         <td>Never</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary setup-btn" data-id="3" data-bank="NBC Bank">Setup</button>
-                            <button class="btn btn-sm btn-outline-secondary">Remove</button>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary setup-btn" data-id="3" data-bank="NBC Bank" title="Setup">
+                                    <i class="bi bi-gear-fill"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Remove">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
