@@ -137,7 +137,7 @@
                         <td><span class="badge bg-success">Active</span></td>
                         <td>2 mins ago</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary sync-btn">Sync</button>
+                            <button class="btn btn-sm btn-outline-primary sync-btn" data-id="1">Sync</button>
                             <button class="btn btn-sm btn-outline-secondary">Settings</button>
                         </td>
                     </tr>
@@ -157,7 +157,7 @@
                         <td><span class="badge bg-success">Active</span></td>
                         <td>5 mins ago</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary sync-btn">Sync</button>
+                            <button class="btn btn-sm btn-outline-primary sync-btn" data-id="2">Sync</button>
                             <button class="btn btn-sm btn-outline-secondary">Settings</button>
                         </td>
                     </tr>
