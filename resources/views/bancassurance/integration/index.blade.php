@@ -275,7 +275,7 @@ function saveIntegration() {
     const description = document.getElementById('description').value;
     const testConnection = document.getElementById('testConnection').checked;
 
-    // Validation
+    // Client-side validation
     if (!bankName || !bankCountry || !integrationType) {
         Swal.fire({
             icon: 'error',
@@ -296,77 +296,169 @@ function saveIntegration() {
         }
     });
 
-    // Simulate API call
-    setTimeout(() => {
-        const modal = bootstrap.Modal.getInstance(document.getElementById('addIntegrationModal'));
-        modal.hide();
+    // AJAX call to backend
+    const formData = new FormData();
+    formData.append('bank_name', bankName);
+    formData.append('bank_country', bankCountry);
+    formData.append('integration_type', integrationType);
+    formData.append('api_endpoint', apiEndpoint);
+    formData.append('api_key', apiKey);
+    formData.append('api_secret', apiSecret);
+    formData.append('description', description);
+    formData.append('test_connection', testConnection ? '1' : '0');
 
-        // Reset form
-        document.getElementById('addIntegrationForm').reset();
+    fetch('/bancassurance/integration', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addIntegrationModal'));
+            modal.hide();
 
-        // Show success message
-        Swal.fire({
-            icon: 'success',
-            title: 'Integration Added Successfully!',
-            html: `
-                <div class="text-start">
-                    <p><strong>Bank:</strong> ${bankName}</p>
-                    <p><strong>Country:</strong> ${bankCountry}</p>
-                    <p><strong>Type:</strong> ${integrationType}</p>
-                    <p><strong>Status:</strong> <span class="badge bg-warning">Pending Setup</span></p>
-                </div>
-            `,
-            confirmButtonColor: '#0d6efd',
-            confirmButtonText: 'Done'
-        }).then(() => {
-            // Add new row to table (demo)
-            const tableBody = document.querySelector('tbody');
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="bg-warning bg-opacity-10 rounded-circle p-2 me-2">
-                            <i class="bi bi-bank text-warning"></i>
-                        </div>
-                        <div>
-                            <div class="fw-semibold">${bankName}</div>
-                            <small class="text-muted">${bankCountry}</small>
-                        </div>
+            // Reset form
+            document.getElementById('addIntegrationForm').reset();
+
+            // Show success message
+            Swal.fire({
+                icon: 'success',
+                title: 'Integration Added Successfully!',
+                html: `
+                    <div class="text-start">
+                        <p><strong>Bank:</strong> ${data.data.bank_name}</p>
+                        <p><strong>Country:</strong> ${data.data.bank_country}</p>
+                        <p><strong>Type:</strong> ${data.data.integration_type}</p>
+                        <p><strong>Status:</strong> <span class="badge bg-warning">Pending Setup</span></p>
+                        ${data.data.connection_test ? '<p><strong>Connection Test:</strong> <span class="badge bg-success">Passed</span></p>' : ''}
                     </div>
-                </td>
-                <td>${integrationType}</td>
-                <td><span class="badge bg-warning">Pending</span></td>
-                <td>Never</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-primary">Setup</button>
-                    <button class="btn btn-sm btn-outline-secondary">Remove</button>
-                </td>
-            `;
-            tableBody.insertBefore(newRow, tableBody.firstChild);
+                `,
+                confirmButtonColor: '#0d6efd',
+                confirmButtonText: 'Done'
+            }).then(() => {
+                // Add new row to table
+                const tableBody = document.querySelector('tbody');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-warning bg-opacity-10 rounded-circle p-2 me-2">
+                                <i class="bi bi-bank text-warning"></i>
+                            </div>
+                            <div>
+                                <div class="fw-semibold">${data.data.bank_name}</div>
+                                <small class="text-muted">${data.data.bank_country}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${data.data.integration_type}</td>
+                    <td><span class="badge bg-warning">Pending</span></td>
+                    <td>Never</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary sync-btn" data-id="${data.data.id}">Sync</button>
+                        <button class="btn btn-sm btn-outline-secondary">Settings</button>
+                    </td>
+                `;
+                tableBody.insertBefore(newRow, tableBody.firstChild);
+                
+                // Re-attach sync button event listener
+                attachSyncListeners();
+            });
+        } else {
+            // Show validation errors
+            let errorMessage = data.message;
+            if (data.errors) {
+                const errorList = Object.values(data.errors).flat().join('<br>');
+                errorMessage = data.message + '<br><br>' + errorList;
+            }
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: errorMessage,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while saving the integration',
+            confirmButtonColor: '#dc3545'
         });
-    }, 1500);
+        console.error('Error:', error);
+    });
 }
 
 // Sync button functionality
-document.querySelectorAll('.sync-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        Swal.fire({
-            title: 'Syncing...',
-            text: 'Syncing bank data...',
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
-        setTimeout(() => {
+function attachSyncListeners() {
+    document.querySelectorAll('.sync-btn').forEach(btn => {
+        btn.removeEventListener('click', handleSyncClick);
+        btn.addEventListener('click', handleSyncClick);
+    });
+}
+
+function handleSyncClick(e) {
+    const btn = e.target;
+    const bankId = btn.getAttribute('data-id') || '1';
+    
+    Swal.fire({
+        title: 'Syncing...',
+        text: 'Syncing bank data...',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`/bancassurance/integration/sync/${bankId}`, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
             Swal.fire({
                 icon: 'success',
                 title: 'Sync Complete',
-                text: 'Bank data has been synced successfully',
+                html: `
+                    <p>Bank data has been synced successfully</p>
+                    <p><strong>Last Sync:</strong> ${data.data.last_sync}</p>
+                    <p><strong>Records Synced:</strong> ${data.data.records_synced}</p>
+                `,
                 confirmButtonColor: '#0d6efd'
             });
-        }, 1500);
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Sync Failed',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred during sync',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
     });
+}
+
+// Initialize sync listeners on page load
+document.addEventListener('DOMContentLoaded', function() {
+    attachSyncListeners();
 });
 </script>
 @endpush
