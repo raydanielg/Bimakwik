@@ -582,17 +582,30 @@ function saveIntegration() {
                         </div>
                     </td>
                     <td>${data.data.integration_type}</td>
-                    <td><span class="badge bg-warning">Pending</span></td>
+                    <td>
+                        <span class="badge bg-warning d-inline-flex align-items-center">
+                            <i class="bi bi-clock-fill me-1"></i>Pending
+                        </span>
+                    </td>
                     <td>Never</td>
                     <td>
-                        <button class="btn btn-sm btn-outline-primary sync-btn" data-id="${data.data.id}">Sync</button>
-                        <button class="btn btn-sm btn-outline-secondary">Settings</button>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-sm btn-outline-primary setup-btn" data-id="${data.data.id}" data-bank="${data.data.bank_name}" title="Setup">
+                                <i class="bi bi-gear-fill"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" title="Remove">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
                     </td>
                 `;
                 tableBody.insertBefore(newRow, tableBody.firstChild);
                 
-                // Re-attach sync button event listener
+                // Re-attach event listeners
                 attachSyncListeners();
+                attachSettingsListeners();
+                attachSetupListeners();
+                attachReportListeners();
             });
         } else {
             // Show validation errors
@@ -931,8 +944,17 @@ function completeSetup() {
             // Change Setup button to Sync and Settings
             const actionsCell = row.querySelector('td:last-child');
             actionsCell.innerHTML = `
-                <button class="btn btn-sm btn-outline-primary sync-btn" data-id="${bankId}">Sync</button>
-                <button class="btn btn-sm btn-outline-secondary settings-btn" data-id="${bankId}" data-bank="${document.getElementById('setupBankName').textContent}" data-status="active">Settings</button>
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-outline-primary sync-btn" data-id="${bankId}" title="Sync">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </button>
+                    <button class="btn btn-outline-info report-btn" data-id="${bankId}" data-bank="${document.getElementById('setupBankName').textContent}" title="Generate Report">
+                        <i class="bi bi-file-earmark-bar-graph"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary settings-btn" data-id="${bankId}" data-bank="${document.getElementById('setupBankName').textContent}" data-status="active" title="Settings">
+                        <i class="bi bi-gear"></i>
+                    </button>
+                </div>
             `;
             
             // Re-attach listeners
