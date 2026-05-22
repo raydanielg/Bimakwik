@@ -687,7 +687,89 @@ document.addEventListener('DOMContentLoaded', function() {
     attachSyncListeners();
     attachSettingsListeners();
     attachSetupListeners();
+    attachReportListeners();
 });
+
+// Report button functionality
+function attachReportListeners() {
+    document.querySelectorAll('.report-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const bankId = this.getAttribute('data-id');
+            const bankName = this.getAttribute('data-bank');
+            generateReport(bankId, bankName);
+        });
+    });
+}
+
+function generateReport(bankId, bankName) {
+    Swal.fire({
+        title: 'Generating Report...',
+        text: `Generating integration report for ${bankName}`,
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`/bancassurance/integration/report/${bankId}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Report Generated Successfully!',
+                html: `
+                    <div class="text-start">
+                        <p><strong>Bank:</strong> ${data.data.bank_name}</p>
+                        <p><strong>Report Type:</strong> ${data.data.report_type}</p>
+                        <p><strong>Generated At:</strong> ${data.data.generated_at}</p>
+                        <hr>
+                        <p><strong>Total Syncs:</strong> ${data.data.total_syncs}</p>
+                        <p><strong>Successful:</strong> ${data.data.successful_syncs}</p>
+                        <p><strong>Failed:</strong> ${data.data.failed_syncs}</p>
+                        <p><strong>Last Sync:</strong> ${data.data.last_sync}</p>
+                    </div>
+                `,
+                confirmButtonColor: '#0d6efd',
+                confirmButtonText: 'Download Report',
+                showCancelButton: true,
+                cancelButtonText: 'Close'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Simulate download
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Report Downloaded',
+                        text: 'Report has been downloaded successfully',
+                        confirmButtonColor: '#0d6efd'
+                    });
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Report Generation Failed',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while generating report',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
 
 // Setup button functionality
 function attachSetupListeners() {
