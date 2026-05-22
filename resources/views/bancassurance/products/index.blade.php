@@ -247,7 +247,17 @@
                 <p class="text-muted small mb-3">Travel protection for domestic and international trips</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <small class="text-muted">From TZS 25,000</small>
-                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary view-product-btn" data-id="5" data-name="Travel Insurance" title="View">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary edit-product-btn" data-id="5" data-name="Travel Insurance" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-outline-danger delete-product-btn" data-id="5" data-name="Travel Insurance" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -265,7 +275,17 @@
                 <p class="text-muted small mb-3">Commercial insurance for SMEs and businesses</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <small class="text-muted">From TZS 200,000</small>
-                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary view-product-btn" data-id="6" data-name="Business Insurance" title="View">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary edit-product-btn" data-id="6" data-name="Business Insurance" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-outline-danger delete-product-btn" data-id="6" data-name="Business Insurance" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
