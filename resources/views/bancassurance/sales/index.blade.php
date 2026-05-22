@@ -504,7 +504,7 @@ function addSale() {
                         <button class="btn btn-outline-primary view-sale-btn" data-id="${data.data.id}" data-policy="${data.data.policy_number}" title="View">
                             <i class="bi bi-eye"></i>
                         </button>
-                        <button class="btn btn-outline-secondary" title="Edit">
+                        <button class="btn btn-outline-secondary edit-sale-btn" data-id="${data.data.id}" data-policy="${data.data.policy_number}" title="Edit">
                             <i class="bi bi-pencil"></i>
                         </button>
                     </div>
@@ -514,6 +514,7 @@ function addSale() {
 
             // Re-attach listeners
             attachViewSaleListeners();
+            attachEditSaleListeners();
 
             Swal.fire({
                 icon: 'success',
@@ -859,9 +860,25 @@ function handleViewSaleClick(e) {
     viewSale(saleId, policyNumber);
 }
 
+// Attach edit button listeners
+function attachEditSaleListeners() {
+    document.querySelectorAll('.edit-sale-btn').forEach(btn => {
+        btn.removeEventListener('click', handleEditSaleClick);
+        btn.addEventListener('click', handleEditSaleClick);
+    });
+}
+
+function handleEditSaleClick(e) {
+    const btn = e.target.closest('.edit-sale-btn');
+    const saleId = btn.getAttribute('data-id');
+    const policyNumber = btn.getAttribute('data-policy');
+    openEditSaleModal(saleId, policyNumber);
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     attachViewSaleListeners();
+    attachEditSaleListeners();
 });
 </script>
 @endpush
