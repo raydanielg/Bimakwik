@@ -861,31 +861,41 @@
             <!-- Bancassurance Menu -->
             <div class="sidebar-heading">Bank Operations</div>
             <div class="list-group list-group-flush px-2">
-                <a href="{{ route('bancassurance.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('bancassurance.dashboard') ? 'active' : '' }}">
+                <a href="/bancassurance/dashboard" class="list-group-item list-group-item-action {{ request()->is('bancassurance/dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
-                <a href="{{ route('bancassurance.integration.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('bancassurance.integration.*') ? 'active' : '' }}">
+                <a href="/bancassurance/integration" class="list-group-item list-group-item-action {{ request()->is('bancassurance/integration*') ? 'active' : '' }}">
                     <i class="bi bi-bank"></i> Bank Integration
                 </a>
-                <a href="{{ route('bancassurance.customers.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('bancassurance.customers.*') ? 'active' : '' }}">
+                <a href="/bancassurance/customers" class="list-group-item list-group-item-action {{ request()->is('bancassurance/customers*') ? 'active' : '' }}">
                     <i class="bi bi-people-fill"></i> Bank Customers
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Insurance Sales</div>
             <div class="list-group list-group-flush px-2">
-                <a href="{{ route('bancassurance.policies.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('bancassurance.policies.*') ? 'active' : '' }}">
+                <a href="/bancassurance/sales" class="list-group-item list-group-item-action {{ request()->is('bancassurance/sales*') ? 'active' : '' }}">
+                    <i class="bi bi-cart-plus"></i> Insurance Sales
+                </a>
+                <a href="/bancassurance/my-sales" class="list-group-item list-group-item-action {{ request()->is('bancassurance/my-sales*') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i> My Sales
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-cart-plus"></i> Bancassurance Products
+                <a href="/bancassurance/products" class="list-group-item list-group-item-action {{ request()->is('bancassurance/products*') ? 'active' : '' }}">
+                    <i class="bi bi-box-seam"></i> Bancassurance Products
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Compliance & Reports</div>
             <div class="list-group list-group-flush px-2">
-                <a href="{{ route('bancassurance.compliance.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('bancassurance.compliance.*') ? 'active' : '' }}">
-                    <i class="bi bi-file-earmark-check"></i> Compliance
+                <a href="/bancassurance/reports" class="list-group-item list-group-item-action {{ request()->is('bancassurance/reports*') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-bar-graph"></i> Compliance & Reports
+                </a>
+                <a href="/bancassurance/compliance" class="list-group-item list-group-item-action {{ request()->is('bancassurance/compliance*') ? 'active' : '' }}">
+                    <i class="bi bi-shield-check"></i> Compliance
+                </a>
+                <a href="/bancassurance/performance" class="list-group-item list-group-item-action {{ request()->is('bancassurance/performance*') ? 'active' : '' }}">
+                    <i class="bi bi-graph-up"></i> Performance
+                </a>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-bar-chart-line"></i> Performance
