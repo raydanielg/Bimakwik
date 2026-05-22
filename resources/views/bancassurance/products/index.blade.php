@@ -163,7 +163,17 @@
                 <p class="text-muted small mb-3">Life protection and savings plans</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <small class="text-muted">From TZS 50,000</small>
-                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary view-product-btn" data-id="2" data-name="Life Insurance" title="View">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary edit-product-btn" data-id="2" data-name="Life Insurance" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-outline-danger delete-product-btn" data-id="2" data-name="Life Insurance" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -181,7 +191,17 @@
                 <p class="text-muted small mb-3">Medical cover for individuals and families</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <small class="text-muted">From TZS 80,000</small>
-                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary view-product-btn" data-id="3" data-name="Health Insurance" title="View">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary edit-product-btn" data-id="3" data-name="Health Insurance" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-outline-danger delete-product-btn" data-id="3" data-name="Health Insurance" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -199,7 +219,17 @@
                 <p class="text-muted small mb-3">Property and home contents protection</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <small class="text-muted">From TZS 100,000</small>
-                    <button class="btn btn-sm btn-outline-primary">View Details</button>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary view-product-btn" data-id="4" data-name="Home Insurance" title="View">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary edit-product-btn" data-id="4" data-name="Home Insurance" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <button class="btn btn-outline-danger delete-product-btn" data-id="4" data-name="Home Insurance" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
