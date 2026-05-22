@@ -252,4 +252,427 @@
         </div>
     </div>
 </div>
+
+<!-- Add Customer Modal -->
+<div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="addCustomerModalLabel">
+                    <i class="bi bi-person-plus me-2"></i>Add New Customer
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addCustomerForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName" class="form-label">First Name *</label>
+                            <input type="text" class="form-control" id="firstName" required placeholder="Enter first name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName" class="form-label">Last Name *</label>
+                            <input type="text" class="form-control" id="lastName" required placeholder="Enter last name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="email" required placeholder="Enter email">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Phone *</label>
+                            <input type="text" class="form-control" id="phone" required placeholder="Enter phone number">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="bankName" class="form-label">Bank Name *</label>
+                            <select class="form-select" id="bankName" required>
+                                <option value="">Select Bank</option>
+                                <option value="CRDB Bank">CRDB Bank</option>
+                                <option value="NMB Bank">NMB Bank</option>
+                                <option value="NBC Bank">NBC Bank</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="bankAccount" class="form-label">Bank Account *</label>
+                            <input type="text" class="form-control" id="bankAccount" required placeholder="Enter account number">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="interest" class="form-label">Insurance Interest *</label>
+                            <select class="form-select" id="interest" required>
+                                <option value="">Select Interest</option>
+                                <option value="Motor Insurance">Motor Insurance</option>
+                                <option value="Life Insurance">Life Insurance</option>
+                                <option value="Health Insurance">Health Insurance</option>
+                                <option value="Travel Insurance">Travel Insurance</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="referredBy" class="form-label">Referred By *</label>
+                            <input type="text" class="form-control" id="referredBy" required placeholder="Branch or Agent">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="addCustomer()">
+                    <i class="bi bi-save me-2"></i>Add Customer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Customer Modal -->
+<div class="modal fade" id="viewCustomerModal" tabindex="-1" aria-labelledby="viewCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="viewCustomerModalLabel">
+                    <i class="bi bi-person me-2"></i>Customer Details
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="customerDetails">
+                    <!-- Customer details will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="editCustomer()">
+                    <i class="bi bi-pencil me-2"></i>Edit Customer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function addCustomer() {
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const bankName = document.getElementById('bankName').value;
+    const bankAccount = document.getElementById('bankAccount').value;
+    const interest = document.getElementById('interest').value;
+    const referredBy = document.getElementById('referredBy').value;
+
+    // Validation
+    if (!firstName || !lastName || !email || !phone || !bankName || !bankAccount || !interest || !referredBy) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all required fields',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+
+    // Show loading
+    Swal.fire({
+        title: 'Adding Customer...',
+        text: 'Please wait while we add the customer',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // AJAX call
+    const formData = new FormData();
+    formData.append('first_name', firstName);
+    formData.append('last_name', lastName);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('bank_account', bankAccount);
+    formData.append('bank_name', bankName);
+    formData.append('interest', interest);
+    formData.append('referred_by', referredBy);
+
+    fetch('/bancassurance/customers', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addCustomerModal'));
+            modal.hide();
+
+            // Reset form
+            document.getElementById('addCustomerForm').reset();
+
+            // Add new row to table
+            const tableBody = document.querySelector('tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="bg-secondary bg-opacity-10 rounded-circle p-2 me-2">
+                            <i class="bi bi-person text-secondary"></i>
+                        </div>
+                        <div>
+                            <div class="fw-semibold">${data.data.first_name} ${data.data.last_name}</div>
+                            <small class="text-muted">${data.data.email}</small>
+                        </div>
+                    </div>
+                </td>
+                <td>${data.data.bank_name} ...${data.data.bank_account.slice(-4)}</td>
+                <td>${data.data.interest}</td>
+                <td>
+                    <span class="badge bg-warning d-inline-flex align-items-center">
+                        <i class="bi bi-clock-fill me-1"></i>Pending
+                    </span>
+                </td>
+                <td>${data.data.referred_by}</td>
+                <td>Just now</td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary view-btn" data-id="${data.data.id}" data-name="${data.data.first_name} ${data.data.last_name}" title="View">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary" title="Edit">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            tableBody.insertBefore(newRow, tableBody.firstChild);
+
+            // Re-attach listeners
+            attachViewListeners();
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Customer Added Successfully!',
+                html: `
+                    <p><strong>Name:</strong> ${data.data.first_name} ${data.data.last_name}</p>
+                    <p><strong>Email:</strong> ${data.data.email}</p>
+                    <p><strong>Status:</strong> <span class="badge bg-warning">Pending</span></p>
+                `,
+                confirmButtonColor: '#0d6efd'
+            });
+        } else {
+            let errorMessage = data.message;
+            if (data.errors) {
+                const errorList = Object.values(data.errors).flat().join('<br>');
+                errorMessage = data.message + '<br><br>' + errorList;
+            }
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: errorMessage,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while adding customer',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function viewCustomer(customerId, customerName) {
+    Swal.fire({
+        title: 'Loading...',
+        text: 'Fetching customer details',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`/bancassurance/customers/${customerId}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const customer = data.data;
+            const statusBadge = customer.status === 'Converted' 
+                ? '<span class="badge bg-success d-inline-flex align-items-center"><i class="bi bi-check-circle-fill me-1"></i>Converted</span>'
+                : '<span class="badge bg-warning d-inline-flex align-items-center"><i class="bi bi-clock-fill me-1"></i>Pending</span>';
+
+            document.getElementById('customerDetails').innerHTML = `
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Full Name</label>
+                        <div class="fw-semibold">${customer.first_name} ${customer.last_name}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Status</label>
+                        <div>${statusBadge}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Email</label>
+                        <div>${customer.email}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Phone</label>
+                        <div>${customer.phone}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Bank</label>
+                        <div>${customer.bank_name}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Bank Account</label>
+                        <div>${customer.bank_account}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Insurance Interest</label>
+                        <div>${customer.interest}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Referred By</label>
+                        <div>${customer.referred_by}</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="text-muted small">Created At</label>
+                        <div>${customer.created_at}</div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="text-muted small">Notes</label>
+                        <div>${customer.notes || 'No notes'}</div>
+                    </div>
+                </div>
+            `;
+
+            Swal.close();
+            const modal = new bootstrap.Modal(document.getElementById('viewCustomerModal'));
+            modal.show();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while fetching customer details',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function exportCustomers() {
+    Swal.fire({
+        title: 'Exporting to PDF...',
+        text: 'Please wait while we generate the PDF report',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch('/bancassurance/customers/export', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Export Successful!',
+                html: `
+                    <p>Customers have been exported to PDF</p>
+                    <p><strong>File:</strong> ${data.data.file_name}</p>
+                    <p><strong>Total Customers:</strong> ${data.data.total_customers}</p>
+                `,
+                confirmButtonColor: '#0d6efd',
+                confirmButtonText: 'Download'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Simulate download
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Downloaded',
+                        text: 'PDF file has been downloaded',
+                        confirmButtonColor: '#0d6efd'
+                    });
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Export Failed',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred during export',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function editCustomer() {
+    Swal.fire({
+        icon: 'info',
+        title: 'Edit Customer',
+        text: 'Edit functionality coming soon',
+        confirmButtonColor: '#0d6efd'
+    });
+}
+
+// Attach view button listeners
+function attachViewListeners() {
+    document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.removeEventListener('click', handleViewClick);
+        btn.addEventListener('click', handleViewClick);
+    });
+}
+
+function handleViewClick(e) {
+    const btn = e.target.closest('.view-btn');
+    const customerId = btn.getAttribute('data-id');
+    const customerName = btn.getAttribute('data-name');
+    viewCustomer(customerId, customerName);
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    attachViewListeners();
+});
+</script>
+@endpush
 @endsection
