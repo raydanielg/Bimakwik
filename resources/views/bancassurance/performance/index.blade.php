@@ -166,6 +166,75 @@
     </div>
 </div>
 
+<!-- Charts Section -->
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <h6 class="fw-bold mb-3">Sales by Product Type</h6>
+                <div class="chart-container">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <h6 class="fw-bold mb-3">Revenue Distribution</h6>
+                <div class="chart-container">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Progress Bars Section -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body p-4">
+        <h6 class="fw-bold mb-3">Target Achievement by Branch</h6>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                    <span class="fw-semibold">Branch A</span>
+                    <span class="text-primary fw-bold">95%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 95%">95%</div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                    <span class="fw-semibold">Branch B</span>
+                    <span class="text-primary fw-bold">90%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 90%">90%</div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                    <span class="fw-semibold">Branch C</span>
+                    <span class="text-primary fw-bold">88%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 88%">88%</div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="d-flex justify-content-between mb-1">
+                    <span class="fw-semibold">Branch D</span>
+                    <span class="text-primary fw-bold">82%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 82%">82%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Performance Table -->
 <div class="card border-0 shadow-sm">
     <div class="card-body p-4">
@@ -189,6 +258,7 @@
                         <th>Conversion</th>
                         <th>Target</th>
                         <th>Rank</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -200,6 +270,11 @@
                         <td>72.3%</td>
                         <td><span class="badge bg-success">95%</span></td>
                         <td><span class="badge bg-primary">#1</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary edit-branch-btn" data-branch="Branch A" data-sales="18.5" data-policies="62" data-commission="1.85" data-conversion="72.3" data-target="95" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td><strong>Branch B</strong></td>
@@ -209,6 +284,11 @@
                         <td>68.5%</td>
                         <td><span class="badge bg-success">90%</span></td>
                         <td><span class="badge bg-secondary">#2</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary edit-branch-btn" data-branch="Branch B" data-sales="15.2" data-policies="48" data-commission="1.52" data-conversion="68.5" data-target="90" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td><strong>Branch C</strong></td>
@@ -218,6 +298,11 @@
                         <td>65.2%</td>
                         <td><span class="badge bg-warning">88%</span></td>
                         <td><span class="badge bg-secondary">#3</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary edit-branch-btn" data-branch="Branch C" data-sales="12.1" data-policies="46" data-commission="1.21" data-conversion="65.2" data-target="88" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
