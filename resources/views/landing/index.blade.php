@@ -239,7 +239,7 @@
                             </div>
                             <!-- App Store -->
                             <div class="position-relative">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg" alt="App Store" height="50" style="filter: brightness(1.2); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;">
+                                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" height="50" style="filter: brightness(1.2); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;">
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark px-3 py-2 fw-bold animate__animated animate__pulse animate__infinite shadow" style="font-size: 0.6rem; z-index: 3; white-space: nowrap; border: 2px solid #fff;">COMING SOON</span>
                             </div>
                         </div>
