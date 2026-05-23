@@ -192,6 +192,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
         ->name('dashboard');
+    
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])
+        ->name('profile');
 
     // SFE Dashboard Routes
     Route::prefix('sfe')->name('sfe.')->middleware(['auth', 'role:sfe'])->group(function () {
