@@ -238,8 +238,11 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <button class="btn btn-outline-primary btn-sm" onclick="openChangePasswordModal()">
+                    <button class="btn btn-outline-primary btn-sm me-2" onclick="openChangePasswordModal()">
                         <i class="bi bi-key me-1"></i>Change Password
+                    </button>
+                    <button class="btn btn-outline-info btn-sm" onclick="toggle2FA()">
+                        <i class="bi bi-shield-lock me-1"></i>Toggle 2FA
                     </button>
                 </div>
             </div>
@@ -450,6 +453,68 @@ function resetAvatar() {
     document.getElementById('avatarUpload').value = '';
     const avatarDisplay = document.getElementById('avatarDisplay');
     avatarDisplay.innerHTML = `{{ substr(auth()->user()->name ?? 'U', 0, 1) }}`;
+}
+
+function toggle2FA() {
+    Swal.fire({
+        title: 'Toggle 2FA',
+        text: 'Are you sure you want to toggle Two-Factor Authentication?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Toggle',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: '#0d6efd',
+        cancelButtonColor: '#6c757d'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Updating...',
+                text: 'Please wait while we update your 2FA status',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            fetch('/profile/2fa', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const statusElement = document.getElementById('twoFactorStatus');
+                    statusElement.textContent = data.data.two_factor_enabled ? 'Enabled' : 'Disabled';
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: '2FA Updated!',
+                        text: data.message,
+                        confirmButtonColor: '#0d6efd'
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message,
+                        confirmButtonColor: '#dc3545'
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred while updating 2FA status',
+                    confirmButtonColor: '#dc3545'
+                });
+                console.error('Error:', error);
+            });
+        }
+    });
 }
 
 function openEditProfileModal() {
