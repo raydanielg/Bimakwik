@@ -27,7 +27,7 @@
     .profile-avatar {
         width: 120px;
         height: 120px;
-        border-radius: 50%;
+        border-radius: 12px;
         border: 4px solid white;
         background: white;
         display: flex;
@@ -44,7 +44,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 50%;
+        border-radius: 8px;
     }
     
     .stat-card {
