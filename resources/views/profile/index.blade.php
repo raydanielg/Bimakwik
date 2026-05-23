@@ -257,16 +257,16 @@
                     <i class="bi bi-lightning me-2"></i>Quick Actions
                 </h5>
                 <div class="d-grid gap-2">
-                    <button class="btn btn-outline-primary text-start">
+                    <button class="btn btn-outline-primary text-start" onclick="downloadMyData()">
                         <i class="bi bi-download me-2"></i>Download My Data
                     </button>
-                    <button class="btn btn-outline-primary text-start">
+                    <button class="btn btn-outline-primary text-start" onclick="viewActivityLog()">
                         <i class="bi bi-shield-check me-2"></i>View Activity Log
                     </button>
-                    <button class="btn btn-outline-primary text-start">
+                    <button class="btn btn-outline-primary text-start" onclick="notificationSettings()">
                         <i class="bi bi-gear me-2"></i>Notification Settings
                     </button>
-                    <button class="btn btn-outline-danger text-start">
+                    <button class="btn btn-outline-danger text-start" onclick="deleteAccount()">
                         <i class="bi bi-trash me-2"></i>Delete Account
                     </button>
                 </div>
