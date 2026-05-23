@@ -1120,6 +1120,34 @@
                     <span class="page-title d-none d-sm-inline">Dashboard</span>
                     
                     <div class="ms-auto d-flex align-items-center">
+                        <!-- Bancassurance Quick Action Button -->
+                        <div class="dropdown me-3">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-lightning-charge me-2"></i>Bancassurance Portal
+                            </button>
+                            <ul class="dropdown-menu shadow border-0" style="min-width: 280px;">
+                                <li class="dropdown-header fw-bold" style="background: #f8fafc; padding: 10px 15px;">
+                                    <i class="bi bi-bank me-2"></i>Bank Operations
+                                </li>
+                                <li><a class="dropdown-item py-2" href="/bancassurance/integration"><i class="bi bi-bank me-2 text-primary"></i>Bank Integration<span class="text-muted small d-block ms-4">Connect bank systems</span></a></li>
+                                <li><a class="dropdown-item py-2" href="/bancassurance/customers"><i class="bi bi-people-fill me-2 text-primary"></i>Bank Customers<span class="text-muted small d-block ms-4">Manage customers</span></a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="dropdown-header fw-bold" style="background: #f8fafc; padding: 10px 15px;">
+                                    <i class="bi bi-cart-plus me-2"></i>Insurance Sales
+                                </li>
+                                <li><a class="dropdown-item py-2" href="/bancassurance/sales"><i class="bi bi-cart-plus me-2 text-success"></i>Insurance Sales<span class="text-muted small d-block ms-4">Track all sales</span></a></li>
+                                <li><a class="dropdown-item py-2" href="/bancassurance/my-sales"><i class="bi bi-shield-check me-2 text-success"></i>My Sales<span class="text-muted small d-block ms-4">My performance</span></a></li>
+                                <li><a class="dropdown-item py-2" href="/bancassurance/products"><i class="bi bi-box-seam me-2 text-success"></i>Bancassurance Products<span class="text-muted small d-block ms-4">Product catalog</span></a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="dropdown-header fw-bold" style="background: #f8fafc; padding: 10px 15px;">
+                                    <i class="bi bi-file-earmark-bar-graph me-2"></i>Compliance & Reports
+                                </li>
+                                <li><a class="dropdown-item py-2" href="/bancassurance/reports"><i class="bi bi-file-earmark-bar-graph me-2 text-warning"></i>Compliance & Reports<span class="text-muted small d-block ms-4">Reports & compliance</span></a></li>
+                                <li><a class="dropdown-item py-2" href="/bancassurance/compliance"><i class="bi bi-shield-check me-2 text-warning"></i>Compliance<span class="text-muted small d-block ms-4">Compliance management</span></a></li>
+                                <li><a class="dropdown-item py-2" href="/bancassurance/performance"><i class="bi bi-graph-up me-2 text-warning"></i>Performance<span class="text-muted small d-block ms-4">Analytics & metrics</span></a></li>
+                            </ul>
+                        </div>
+                        
                         <div class="bg-white rounded-circle p-2 shadow-sm me-3 border" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;">
                             <i class="bi bi-bell text-secondary"></i>
                         </div>
