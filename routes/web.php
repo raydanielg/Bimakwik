@@ -198,6 +198,8 @@ Route::middleware(['auth'])->group(function () {
     
     Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update']);
     Route::post('/profile/password', [App\Http\Controllers\ProfileController::class, 'updatePassword']);
+    Route::post('/profile/avatar', [App\Http\Controllers\ProfileController::class, 'uploadAvatar']);
+    Route::post('/profile/2fa', [App\Http\Controllers\ProfileController::class, 'toggle2FA']);
 
     // SFE Dashboard Routes
     Route::prefix('sfe')->name('sfe.')->middleware(['auth', 'role:sfe'])->group(function () {

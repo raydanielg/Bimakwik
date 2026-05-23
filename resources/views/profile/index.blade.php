@@ -166,7 +166,7 @@
                 </div>
                 <div>
                     <small class="text-muted">2FA Status</small>
-                    <h5 class="fw-bold mb-0">Enabled</h5>
+                    <h5 class="fw-bold mb-0" id="twoFactorStatus">{{ auth()->user()->two_factor_enabled ?? false ? 'Enabled' : 'Disabled' }}</h5>
                 </div>
             </div>
         </div>
