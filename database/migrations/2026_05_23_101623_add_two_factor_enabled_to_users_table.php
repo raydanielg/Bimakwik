@@ -14,7 +14,7 @@ class AddTwoFactorEnabledToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->boolean('two_factor_enabled')->default(false)->after('avatar');
         });
     }
 
@@ -26,7 +26,7 @@ class AddTwoFactorEnabledToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('two_factor_enabled');
         });
     }
 }
