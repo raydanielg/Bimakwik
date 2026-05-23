@@ -619,44 +619,39 @@ function downloadReport(reportId) {
     }
 
     Swal.fire({
-        title: 'Downloading...',
-        text: 'Please wait while we download the report',
+        title: 'Generating PDF...',
+        text: 'Please wait while we generate the PDF',
         allowOutsideClick: false,
         didOpen: () => {
             Swal.showLoading();
         }
     });
 
-    fetch(`/bancassurance/reports/${idToDownload}/download`, {
-        method: 'GET',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Downloaded!',
-                text: `Report "${data.data.file_name}" has been downloaded successfully`,
-                confirmButtonColor: '#0d6efd'
-            });
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: data.message,
-                confirmButtonColor: '#dc3545'
-            });
-        }
-    })
-    .catch(error => {
+    // Get the report preview element
+    const element = document.getElementById('reportPreview');
+    
+    // Configure html2pdf options
+    const opt = {
+        margin: 10,
+        filename: `report_${idToDownload}_${new Date().toISOString().slice(0,10)}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Generate and download PDF
+    html2pdf().set(opt).from(element).save().then(() => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Downloaded!',
+            text: `Report has been downloaded successfully as PDF`,
+            confirmButtonColor: '#0d6efd'
+        });
+    }).catch(error => {
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'An error occurred while downloading report',
+            text: 'An error occurred while generating PDF',
             confirmButtonColor: '#dc3545'
         });
         console.error('Error:', error);

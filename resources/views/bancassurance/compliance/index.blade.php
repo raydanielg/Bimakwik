@@ -377,7 +377,10 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
+let currentCheckId = null;
+
 function addCheck() {
     const checkItem = document.getElementById('checkItem').value;
     const checkCategory = document.getElementById('checkCategory').value;
@@ -493,6 +496,8 @@ function addCheck() {
 }
 
 function viewCheck(checkId, checkItem) {
+    currentCheckId = checkId;
+    
     Swal.fire({
         title: 'Loading...',
         text: 'Fetching check details',
@@ -600,7 +605,10 @@ function viewCheck(checkId, checkItem) {
 }
 
 function downloadCheck(checkId) {
-    if (!checkId) {
+    // If checkId is not provided, use currentCheckId
+    const idToDownload = checkId || currentCheckId;
+    
+    if (!idToDownload) {
         Swal.fire({
             icon: 'info',
             title: 'Download Check',
@@ -611,23 +619,43 @@ function downloadCheck(checkId) {
     }
 
     Swal.fire({
-        title: 'Downloading...',
-        text: 'Please wait while we download the check',
+        title: 'Generating PDF...',
+        text: 'Please wait while we generate the PDF',
         allowOutsideClick: false,
         didOpen: () => {
             Swal.showLoading();
         }
     });
 
-    // Simulate download
-    setTimeout(() => {
+    // Get the check preview element
+    const element = document.getElementById('checkPreview');
+    
+    // Configure html2pdf options
+    const opt = {
+        margin: 10,
+        filename: `compliance_check_${idToDownload}_${new Date().toISOString().slice(0,10)}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Generate and download PDF
+    html2pdf().set(opt).from(element).save().then(() => {
         Swal.fire({
             icon: 'success',
             title: 'Downloaded!',
-            text: 'Compliance check has been downloaded successfully',
+            text: `Compliance check has been downloaded successfully as PDF`,
             confirmButtonColor: '#0d6efd'
         });
-    }, 1500);
+    }).catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while generating PDF',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
 }
 
 // Attach all button listeners
