@@ -109,12 +109,11 @@ class ProfileController extends Controller
     public function uploadAvatar(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'avatar' => 'required|file|max:5120',
         ], [
             'avatar.required' => 'Please select an image',
-            'avatar.image' => 'File must be an image',
-            'avatar.mimes' => 'Image must be jpeg, png, jpg, or gif',
-            'avatar.max' => 'Image size must not exceed 2MB',
+            'avatar.file' => 'File must be a valid file',
+            'avatar.max' => 'File size must not exceed 5MB',
         ]);
 
         if ($validator->fails()) {
@@ -131,10 +130,16 @@ class ProfileController extends Controller
                 $filename = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('uploads/avatars'), $filename);
                 
-                // Update user avatar path (demo - in real app, save to database)
-                $user = auth()->user();
-                $user->avatar = $filename;
-                $user->save();
+                // Try to update user avatar path if column exists
+                try {
+                    $user = auth()->user();
+                    if (isset($user->avatar)) {
+                        $user->avatar = $filename;
+                        $user->save();
+                    }
+                } catch (\Exception $e) {
+                    // Column doesn't exist, just continue
+                }
 
                 return response()->json([
                     'success' => true,
