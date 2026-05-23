@@ -162,10 +162,10 @@
 </section>
 
 <!-- Call to Action -->
-<section class="py-5 bg-primary text-white">
-    <div class="container text-center py-5 position-relative">
-        <div class="position-absolute top-50 start-50 translate-middle opacity-10">
-            <i class="bi bi-shield-check display-1" style="font-size: 15rem;"></i>
+<section class="py-5 bg-primary text-white position-relative overflow-hidden">
+    <div class="container text-center py-5 position-relative" style="z-index: 1;">
+        <div class="position-absolute top-50 start-50 translate-middle opacity-10" style="z-index: 0;">
+            <i class="bi bi-shield-check" style="font-size: 15rem;"></i>
         </div>
         <div class="position-relative">
             <h2 class="display-4 fw-bold mb-4">Ready to Join the Revolution?</h2>
