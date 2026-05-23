@@ -1,89 +1,102 @@
 @extends('layouts.auth')
 
 @section('content')
-<div class="auth-page py-5">
-    <div class="container">
+<div class="auth-page py-5 position-relative overflow-hidden">
+    <!-- Decorative Background -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); z-index: 0;"></div>
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1440 320\"><path fill=\"rgba(255,255,255,0.1)\" fill-opacity=\"1\" d=\"M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z\"></path></svg>') no-repeat bottom; background-size: cover; z-index: 0;"></div>
+    
+    <!-- Floating Shapes -->
+    <div class="position-absolute top-20 start-10 bg-white opacity-10 rounded-circle" style="width: 300px; height: 300px; transform: translate(-50%, -50%); z-index: 0;"></div>
+    <div class="position-absolute bottom-20 end-10 bg-white opacity-10 rounded-circle" style="width: 200px; height: 200px; transform: translate(50%, 50%); z-index: 0;"></div>
+    <div class="position-absolute top-1/2 start-1/2 bg-white opacity-5 rounded-circle" style="width: 400px; height: 400px; transform: translate(-50%, -50%); z-index: 0;"></div>
+
+    <div class="container position-relative" style="z-index: 1;">
         <div class="row justify-content-center">
             <div class="col-lg-11 col-xl-10">
-                <div class="card border-0 shadow-lg overflow-hidden rounded-4 animate__animated animate__fadeInUp">
+                <div class="card border-0 shadow-2xl overflow-hidden rounded-5 animate__animated animate__fadeInUp" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);">
                     <div class="row g-0">
                         <!-- Column 1: Role Selection -->
-                        <div class="col-lg-6 p-4 p-md-5 bg-white border-end">
-                            <div class="mb-4">
-                                <img src="{{ asset('logo.png') }}" alt="{{ config('app.name') }}" style="height: 50px;" class="mb-3">
-                                <h3 class="fw-bold text-dark">Join Bima Kwik</h3>
-                                <p class="text-secondary">Select your account type to see the registration process.</p>
+                        <div class="col-lg-6 p-5 p-md-6 bg-white">
+                            <div class="mb-5">
+                                <div class="d-flex align-items-center mb-4">
+                                    <img src="{{ asset('logo.png') }}" alt="{{ config('app.name') }}" style="height: 60px;" class="me-3">
+                                    <div>
+                                        <h3 class="fw-bold text-dark mb-0">Join Bima Kwik</h3>
+                                        <p class="text-secondary small mb-0">Select your account type to get started</p>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="role-selector">
-                                <div class="role-item mb-3">
+                                <div class="role-item mb-4">
                                     <input type="radio" class="btn-check" name="role_select" id="role-customer" value="customer" checked onchange="updateSteps('customer')">
-                                    <label class="btn btn-outline-primary w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-customer">
-                                        <div class="position-relative me-3">
-                                            <div class="avatar-box bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 70px; height: 70px;">
-                                                <i class="bi bi-person-circle fs-1 text-primary"></i>
+                                    <label class="btn w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-customer">
+                                        <div class="position-relative me-4">
+                                            <div class="avatar-box rounded-circle d-flex align-items-center justify-content-center shadow-lg" style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                                <i class="bi bi-person-fill fs-1 text-white"></i>
                                             </div>
-                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
-                                                <i class="bi bi-check-circle-fill text-success" style="font-size: 0.8rem;"></i>
+                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                                                <i class="bi bi-check-circle-fill text-success" style="font-size: 1rem;"></i>
                                             </div>
                                         </div>
                                         <div>
-                                            <h6 class="fw-bold mb-1">Individual Customer</h6>
-                                            <p class="small mb-0 opacity-75 text-dark">Personalized insurance dashboard for you.</p>
+                                            <h6 class="fw-bold mb-1 text-dark">Individual Customer</h6>
+                                            <p class="small mb-0 opacity-75">Personalized insurance dashboard for you</p>
                                         </div>
                                     </label>
                                 </div>
 
-                                <div class="role-item mb-3">
+                                <div class="role-item mb-4">
                                     <input type="radio" class="btn-check" name="role_select" id="role-broker" value="broker" onchange="updateSteps('broker')">
-                                    <label class="btn btn-outline-primary w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-broker">
-                                        <div class="position-relative me-3">
-                                            <div class="avatar-box bg-info bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 70px; height: 70px;">
-                                                <i class="bi bi-briefcase-fill fs-1 text-info"></i>
+                                    <label class="btn w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-broker">
+                                        <div class="position-relative me-4">
+                                            <div class="avatar-box rounded-circle d-flex align-items-center justify-content-center shadow-lg" style="width: 80px; height: 80px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                                <i class="bi bi-briefcase-fill fs-1 text-white"></i>
                                             </div>
-                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
-                                                <i class="bi bi-star-fill text-warning" style="font-size: 0.8rem;"></i>
+                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                                                <i class="bi bi-star-fill text-warning" style="font-size: 1rem;"></i>
                                             </div>
                                         </div>
                                         <div>
-                                            <h6 class="fw-bold mb-1 text-info">Broker / Agent</h6>
-                                            <p class="small mb-0 opacity-75 text-dark">Grow your agency with digital tools.</p>
+                                            <h6 class="fw-bold mb-1 text-dark">Broker / Agent</h6>
+                                            <p class="small mb-0 opacity-75">Grow your agency with digital tools</p>
                                         </div>
                                     </label>
                                 </div>
 
-                                <div class="role-item mb-3">
+                                <div class="role-item mb-4">
                                     <input type="radio" class="btn-check" name="role_select" id="role-insurer" value="insurer" onchange="updateSteps('insurer')">
-                                    <label class="btn btn-outline-primary w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-insurer">
-                                        <div class="position-relative me-3">
-                                            <div class="avatar-box bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 70px; height: 70px;">
-                                                <i class="bi bi-building-fill-check fs-1 text-success"></i>
+                                    <label class="btn w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-insurer">
+                                        <div class="position-relative me-4">
+                                            <div class="avatar-box rounded-circle d-flex align-items-center justify-content-center shadow-lg" style="width: 80px; height: 80px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                                <i class="bi bi-building-fill fs-1 text-white"></i>
                                             </div>
-                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
-                                                <i class="bi bi-shield-fill-check text-primary" style="font-size: 0.8rem;"></i>
+                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                                                <i class="bi bi-shield-fill-check text-primary" style="font-size: 1rem;"></i>
                                             </div>
                                         </div>
                                         <div>
-                                            <h6 class="fw-bold mb-1 text-success">Insurance Company</h6>
-                                            <p class="small mb-0 opacity-75 text-dark">Scale your digital products across Africa.</p>
+                                            <h6 class="fw-bold mb-1 text-dark">Insurance Company</h6>
+                                            <p class="small mb-0 opacity-75">Scale your digital products across Africa</p>
                                         </div>
                                     </label>
                                 </div>
 
                                 <div class="role-item">
                                     <input type="radio" class="btn-check" name="role_select" id="role-provider" value="provider" onchange="updateSteps('provider')">
-                                    <label class="btn btn-outline-primary w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-provider">
-                                        <div class="position-relative me-3">
-                                            <div class="avatar-box bg-warning bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 70px; height: 70px;">
-                                                <i class="bi bi-hospital fs-1 text-warning"></i>
+                                    <label class="btn w-100 p-4 rounded-4 text-start d-flex align-items-center role-card" for="role-provider">
+                                        <div class="position-relative me-4">
+                                            <div class="avatar-box rounded-circle d-flex align-items-center justify-content-center shadow-lg" style="width: 80px; height: 80px; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                                <i class="bi bi-hospital-fill fs-1 text-white"></i>
                                             </div>
-                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 24px; height: 24px;">
-                                                <i class="bi bi-plus-lg text-danger" style="font-size: 0.8rem;"></i>
+                                            <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                                                <i class="bi bi-plus-circle-fill text-danger" style="font-size: 1rem;"></i>
                                             </div>
                                         </div>
                                         <div>
-                                            <h6 class="fw-bold mb-1 text-warning">Service Provider</h6>
-                                            <p class="small mb-0 opacity-75 text-dark">Hospitals, Garages & Pharmacies network.</p>
+                                            <h6 class="fw-bold mb-1 text-dark">Service Provider</h6>
+                                            <p class="small mb-0 opacity-75">Hospitals, Garages & Pharmacies network</p>
                                         </div>
                                     </label>
                                 </div>
@@ -91,9 +104,9 @@
                         </div>
 
                         <!-- Column 2: Registration Steps -->
-                        <div class="col-lg-6 p-4 p-md-5 bg-light d-flex flex-column justify-content-between">
+                        <div class="col-lg-6 p-5 p-md-6 d-flex flex-column justify-content-between" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
                             <div id="steps-container" class="animate__animated animate__fadeIn">
-                                <h5 class="fw-bold mb-4 text-uppercase small letter-spacing-1 text-primary">Registration Process</h5>
+                                <h5 class="fw-bold mb-4 text-uppercase small letter-spacing-1" style="color: #667eea;">Registration Process</h5>
                                 
                                 <div id="role-steps">
                                     <!-- Steps will be injected here by JS -->
@@ -101,10 +114,10 @@
                             </div>
 
                             <div class="mt-5">
-                                <a href="#" id="continue-btn" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-sm transition-all hover-lift-sm">
+                                <a href="#" id="continue-btn" class="btn w-100 py-3 rounded-pill fw-bold shadow-lg transition-all hover-lift-sm text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                                     Continue to Registration <i class="bi bi-arrow-right ms-2"></i>
                                 </a>
-                                <p class="text-center mt-3 small text-muted">Already have an account? <a href="{{ route('login') }}" class="text-primary fw-bold text-decoration-none">Log in</a></p>
+                                <p class="text-center mt-3 small text-muted">Already have an account? <a href="{{ route('login') }}" class="fw-bold text-decoration-none" style="color: #667eea;">Log in</a></p>
                             </div>
                         </div>
                     </div>
