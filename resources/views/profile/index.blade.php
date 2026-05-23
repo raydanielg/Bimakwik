@@ -456,7 +456,11 @@ function resetAvatar() {
     selectedAvatarFile = null;
     document.getElementById('avatarUpload').value = '';
     const avatarDisplay = document.getElementById('avatarDisplay');
-    avatarDisplay.innerHTML = `{{ substr(auth()->user()->name ?? 'U', 0, 1) }}`;
+    @if(auth()->user()->avatar && file_exists(public_path('uploads/avatars/' . auth()->user()->avatar)))
+        avatarDisplay.innerHTML = `<img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+    @else
+        avatarDisplay.innerHTML = `{{ substr(auth()->user()->name ?? 'U', 0, 1) }}`;
+    @endif
 }
 
 function toggle2FA() {

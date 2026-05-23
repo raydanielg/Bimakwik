@@ -1153,9 +1153,13 @@
                         </div>
                         
                         <div class="header-profile shadow-sm" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="bg-primary bg-opacity-10 rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: 700; font-size: 0.8rem; color: #0d6efd;">
-                                {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
-                            </div>
+                            @if(auth()->user()->avatar && file_exists(public_path('uploads/avatars/' . auth()->user()->avatar)))
+                                <img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;">
+                            @else
+                                <div class="bg-primary bg-opacity-10 rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: 700; font-size: 0.8rem; color: #0d6efd;">
+                                    {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                                </div>
+                            @endif
                             <div class="d-none d-md-block">
                                 <div style="font-size: 0.75rem; font-weight: 700; line-height: 1; color: #1e293b;">{{ auth()->user()->name ?? 'User Name' }}</div>
                                 <div style="font-size: 0.65rem; color: #94a3b8; font-weight: 500;">{{ auth()->user()->roles->first()->name ?? 'Role' }} <i class="bi bi-chevron-down ms-1"></i></div>
