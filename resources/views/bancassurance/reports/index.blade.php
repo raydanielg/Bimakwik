@@ -2,6 +2,111 @@
 
 @section('dashboard_title', 'Compliance & Reports')
 
+@push('styles')
+<style>
+    .modal-backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-content {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    .modal-header {
+        border-bottom: 1px solid #e9ecef;
+        padding: 1.5rem;
+    }
+    .modal-body {
+        padding: 1.5rem;
+    }
+    .modal-footer {
+        border-top: 1px solid #e9ecef;
+        padding: 1.5rem;
+    }
+    .form-label {
+        font-weight: 500;
+        color: #495057;
+        margin-bottom: 0.5rem;
+    }
+    .form-control, .form-select {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem;
+        border-radius: 8px;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+    }
+    
+    /* PDF Preview Modal Styles */
+    .pdf-preview-container {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 2rem;
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    
+    .pdf-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #0d6efd;
+    }
+    
+    .pdf-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #0d6efd;
+        margin-bottom: 0.5rem;
+    }
+    
+    .pdf-subtitle {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+    
+    .pdf-section {
+        margin-bottom: 1.5rem;
+    }
+    
+    .pdf-section-title {
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .pdf-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+    
+    .pdf-table th,
+    .pdf-table td {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem;
+        text-align: left;
+    }
+    
+    .pdf-table th {
+        background: #e9ecef;
+        font-weight: bold;
+    }
+    
+    .pdf-footer {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid #dee2e6;
+        text-align: center;
+        color: #6c757d;
+        font-size: 0.85rem;
+    }
+</style>
+@endpush
+
 @section('dashboard_content')
 <!-- Header -->
 <div class="row mb-4">
@@ -11,7 +116,7 @@
                 <h5 class="fw-bold mb-1"><i class="bi bi-file-earmark-bar-graph me-2"></i>Compliance & Reports</h5>
                 <p class="text-muted small mb-0">Generate and manage compliance reports</p>
             </div>
-            <button class="btn btn-primary btn-sm">
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#generateReportModal">
                 <i class="bi bi-plus-lg me-2"></i>Generate Report
             </button>
         </div>
@@ -114,10 +219,20 @@
                         <td>May 2024</td>
                         <td>John Doe</td>
                         <td>Today</td>
-                        <td><span class="badge bg-success">Approved</span></td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">View</button>
-                            <button class="btn btn-sm btn-outline-success">Download</button>
+                            <span class="badge bg-success d-inline-flex align-items-center">
+                                <i class="bi bi-check-circle-fill me-1"></i>Approved
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary view-report-btn" data-id="RPT-2024-001" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-success download-report-btn" data-id="RPT-2024-001" title="Download">
+                                    <i class="bi bi-download"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -126,10 +241,20 @@
                         <td>Q2 2024</td>
                         <td>Jane Smith</td>
                         <td>Yesterday</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">View</button>
-                            <button class="btn btn-sm btn-outline-success">Download</button>
+                            <span class="badge bg-warning d-inline-flex align-items-center">
+                                <i class="bi bi-clock-fill me-1"></i>Pending
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary view-report-btn" data-id="RPT-2024-002" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-success download-report-btn" data-id="RPT-2024-002" title="Download">
+                                    <i class="bi bi-download"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                     <tr>
@@ -138,10 +263,20 @@
                         <td>May 2024</td>
                         <td>John Doe</td>
                         <td>2 days ago</td>
-                        <td><span class="badge bg-success">Approved</span></td>
                         <td>
-                            <button class="btn btn-sm btn-outline-primary">View</button>
-                            <button class="btn btn-sm btn-outline-success">Download</button>
+                            <span class="badge bg-success d-inline-flex align-items-center">
+                                <i class="bi bi-check-circle-fill me-1"></i>Approved
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary view-report-btn" data-id="RPT-2024-003" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-success download-report-btn" data-id="RPT-2024-003" title="Download">
+                                    <i class="bi bi-download"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
