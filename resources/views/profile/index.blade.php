@@ -428,6 +428,8 @@ function uploadAvatar() {
                 title: 'Avatar Updated!',
                 text: 'Your profile picture has been updated successfully',
                 confirmButtonColor: '#0d6efd'
+            }).then(() => {
+                location.reload();
             });
             selectedAvatarFile = null;
         } else {
