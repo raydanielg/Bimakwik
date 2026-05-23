@@ -256,10 +256,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/products/{id}', [App\Http\Controllers\Bancassurance\ProductController::class, 'show']);
         Route::post('/products/{id}', [App\Http\Controllers\Bancassurance\ProductController::class, 'update']);
         Route::delete('/products/{id}', [App\Http\Controllers\Bancassurance\ProductController::class, 'destroy']);
-        Route::get('/reports', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'reports'])->name('reports');
         Route::post('/reports/generate', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'generateReport']);
-        Route::get('/reports/{id}', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'showReport']);
         Route::get('/reports/{id}/download', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'downloadReport']);
+        Route::get('/reports/{id}', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'showReport']);
+        Route::get('/reports', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'reports'])->name('reports');
         Route::get('/compliance', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'index'])->name('compliance');
         Route::post('/compliance/checks', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'storeCheck']);
         Route::get('/compliance/checks/{id}', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'showCheck']);
