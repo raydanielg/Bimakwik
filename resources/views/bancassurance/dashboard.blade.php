@@ -73,14 +73,17 @@
         <div class="card border-0 shadow-sm">
             <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h6 class="fw-bold mb-0">Sales Trend</h6>
+                    <div>
+                        <h6 class="fw-bold mb-0">Sales Trend</h6>
+                        <small class="text-muted">Track your sales performance over time</small>
+                    </div>
                     <div class="btn-group btn-group-sm">
-                        <button class="btn btn-outline-primary active">Weekly</button>
-                        <button class="btn btn-outline-primary">Monthly</button>
-                        <button class="btn btn-outline-primary">Yearly</button>
+                        <button class="btn btn-outline-primary active" onclick="updateChartPeriod('weekly')">Weekly</button>
+                        <button class="btn btn-outline-primary" onclick="updateChartPeriod('monthly')">Monthly</button>
+                        <button class="btn btn-outline-primary" onclick="updateChartPeriod('yearly')">Yearly</button>
                     </div>
                 </div>
-                <div style="height: 300px;">
+                <div style="height: 350px; position: relative;">
                     <canvas id="salesTrendChart"></canvas>
                 </div>
             </div>
