@@ -309,4 +309,353 @@
         </div>
     </div>
 </div>
+
+<!-- Edit Branch Performance Modal -->
+<div class="modal fade" id="editBranchModal" tabindex="-1" aria-labelledby="editBranchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="editBranchModalLabel">
+                    <i class="bi bi-pencil me-2"></i>Edit Branch Performance
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editBranchForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="branchName" class="form-label">Branch Name</label>
+                            <input type="text" class="form-control" id="branchName" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="branchSales" class="form-label">Sales (Millions TZS)</label>
+                            <input type="number" class="form-control" id="branchSales" step="0.1" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="branchPolicies" class="form-label">Policies</label>
+                            <input type="number" class="form-control" id="branchPolicies" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="branchCommission" class="form-label">Commission (Millions TZS)</label>
+                            <input type="number" class="form-control" id="branchCommission" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="branchConversion" class="form-label">Conversion Rate (%)</label>
+                            <input type="number" class="form-control" id="branchConversion" step="0.1" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="branchTarget" class="form-label">Target Achievement (%)</label>
+                            <input type="number" class="form-control" id="branchTarget" step="1" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveBranchPerformance()">
+                    <i class="bi bi-check-lg me-2"></i>Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Date Range Modal -->
+<div class="modal fade" id="customDateRangeModal" tabindex="-1" aria-labelledby="customDateRangeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="customDateRangeModalLabel">
+                    <i class="bi bi-calendar-range me-2"></i>Custom Date Range
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="customDateRangeForm">
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="endDate" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="endDate" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="applyCustomRange()">
+                    <i class="bi bi-check-lg me-2"></i>Apply
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+let pieChart, doughnutChart;
+let currentEditingBranch = null;
+
+// Initialize Charts
+function initCharts() {
+    // Pie Chart - Sales by Product Type
+    const pieCtx = document.getElementById('pieChart').getContext('2d');
+    pieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Motor', 'Life', 'Health', 'Home', 'Travel', 'Business'],
+            datasets: [{
+                data: [35, 25, 20, 10, 5, 5],
+                backgroundColor: [
+                    '#0d6efd',
+                    '#198754',
+                    '#0dcaf0',
+                    '#ffc107',
+                    '#dc3545',
+                    '#6c757d'
+                ],
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        usePointStyle: true
+                    }
+                }
+            }
+        }
+    });
+
+    // Doughnut Chart - Revenue Distribution
+    const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+    doughnutChart = new Chart(doughnutCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Branch A', 'Branch B', 'Branch C', 'Branch D'],
+            datasets: [{
+                data: [40, 30, 20, 10],
+                backgroundColor: [
+                    '#0d6efd',
+                    '#198754',
+                    '#ffc107',
+                    '#0dcaf0'
+                ],
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        usePointStyle: true
+                    }
+                }
+            },
+            cutout: '60%'
+        }
+    });
+}
+
+// Change Period Filter
+function changePeriod(period) {
+    document.getElementById('currentPeriod').textContent = period;
+    
+    if (period === 'Custom Range') {
+        const modal = new bootstrap.Modal(document.getElementById('customDateRangeModal'));
+        modal.show();
+    } else {
+        // Update charts with new data based on period
+        updateChartsForPeriod(period);
+        
+        Swal.fire({
+            icon: 'success',
+            title: 'Period Updated',
+            text: `Showing data for ${period}`,
+            timer: 1500,
+            showConfirmButton: false,
+            confirmButtonColor: '#0d6efd'
+        });
+    }
+}
+
+// Update Charts for Period
+function updateChartsForPeriod(period) {
+    // Simulate data changes based on period
+    const multiplier = period === 'Last Month' ? 0.9 : 
+                      period === 'Last 3 Months' ? 0.85 :
+                      period === 'Last 6 Months' ? 0.8 :
+                      period === 'This Year' ? 0.75 : 1;
+    
+    pieChart.data.datasets[0].data = pieChart.data.datasets[0].data.map(v => v * multiplier);
+    pieChart.update();
+    
+    doughnutChart.data.datasets[0].data = doughnutChart.data.datasets[0].data.map(v => v * multiplier);
+    doughnutChart.update();
+}
+
+// Apply Custom Date Range
+function applyCustomRange() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    
+    if (!startDate || !endDate) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please select both start and end dates',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+    
+    const modal = bootstrap.Modal.getInstance(document.getElementById('customDateRangeModal'));
+    modal.hide();
+    
+    document.getElementById('currentPeriod').textContent = `${startDate} to ${endDate}`;
+    
+    updateChartsForPeriod('Custom Range');
+    
+    Swal.fire({
+        icon: 'success',
+        title: 'Date Range Applied',
+        text: `Showing data from ${startDate} to ${endDate}`,
+        timer: 1500,
+        showConfirmButton: false,
+        confirmButtonColor: '#0d6efd'
+    });
+}
+
+// Export Data
+function exportData() {
+    Swal.fire({
+        title: 'Exporting...',
+        text: 'Please wait while we export the data',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+    
+    setTimeout(() => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Exported!',
+            text: 'Performance data has been exported successfully',
+            confirmButtonColor: '#0d6efd'
+        });
+    }, 1500);
+}
+
+// Edit Branch Performance
+function editBranch(branch) {
+    currentEditingBranch = branch;
+    
+    const btn = document.querySelector(`[data-branch="${branch}"]`);
+    document.getElementById('branchName').value = branch;
+    document.getElementById('branchSales').value = btn.getAttribute('data-sales');
+    document.getElementById('branchPolicies').value = btn.getAttribute('data-policies');
+    document.getElementById('branchCommission').value = btn.getAttribute('data-commission');
+    document.getElementById('branchConversion').value = btn.getAttribute('data-conversion');
+    document.getElementById('branchTarget').value = btn.getAttribute('data-target');
+    
+    const modal = new bootstrap.Modal(document.getElementById('editBranchModal'));
+    modal.show();
+}
+
+// Save Branch Performance
+function saveBranchPerformance() {
+    const sales = document.getElementById('branchSales').value;
+    const policies = document.getElementById('branchPolicies').value;
+    const commission = document.getElementById('branchCommission').value;
+    const conversion = document.getElementById('branchConversion').value;
+    const target = document.getElementById('branchTarget').value;
+    
+    if (!sales || !policies || !commission || !conversion || !target) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all fields',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+    
+    Swal.fire({
+        title: 'Saving...',
+        text: 'Please wait while we save the changes',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+    
+    setTimeout(() => {
+        const modal = bootstrap.Modal.getInstance(document.getElementById('editBranchModal'));
+        modal.hide();
+        
+        // Update table row
+        const btn = document.querySelector(`[data-branch="${currentEditingBranch}"]`);
+        const row = btn.closest('tr');
+        row.children[1].textContent = `TZS ${sales}M`;
+        row.children[2].textContent = policies;
+        row.children[3].textContent = `TZS ${commission}M`;
+        row.children[4].textContent = `${conversion}%`;
+        
+        // Update target badge
+        const targetBadge = row.children[5].querySelector('.badge');
+        targetBadge.textContent = `${target}%`;
+        targetBadge.className = `badge ${target >= 90 ? 'bg-success' : target >= 80 ? 'bg-warning' : 'bg-danger'}`;
+        
+        // Update button data attributes
+        btn.setAttribute('data-sales', sales);
+        btn.setAttribute('data-policies', policies);
+        btn.setAttribute('data-commission', commission);
+        btn.setAttribute('data-conversion', conversion);
+        btn.setAttribute('data-target', target);
+        
+        Swal.fire({
+            icon: 'success',
+            title: 'Saved!',
+            text: `${currentEditingBranch} performance has been updated successfully`,
+            confirmButtonColor: '#0d6efd'
+        });
+    }, 1500);
+}
+
+// Attach Event Listeners
+function attachEventListeners() {
+    document.querySelectorAll('.edit-branch-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const branch = this.getAttribute('data-branch');
+            editBranch(branch);
+        });
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initCharts();
+    attachEventListeners();
+});
+</script>
+@endpush
 @endsection
