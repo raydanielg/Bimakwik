@@ -28,6 +28,17 @@
             -moz-osx-font-smoothing: grayscale;
         }
         
+        /* Fix icon containers */
+        .rounded-circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .rounded-circle .bi {
+            font-size: 1.5rem;
+        }
+        
         body { font-family: 'Public Sans', sans-serif; overflow-x: hidden; background-color: #eef2f6; color: #475569; transition: padding 0.3s; }
         #wrapper { display: flex; width: 100%; align-items: stretch; }
         
