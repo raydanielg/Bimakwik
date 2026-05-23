@@ -1154,14 +1154,10 @@
                         
                         <div class="header-profile shadow-sm" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             @if(auth()->user()->avatar && file_exists(public_path('uploads/avatars/' . auth()->user()->avatar)))
-                                <div class="rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; padding: 2px; border: 2px solid #e5e7eb;">
-                                    <img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                                </div>
+                                <img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}" class="rounded-circle me-2" style="width: 32px; height: 32px; object-fit: cover;">
                             @else
-                                <div class="bg-primary bg-opacity-10 rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-weight: 700; font-size: 0.8rem; color: #0d6efd; border: 2px solid #e5e7eb; padding: 2px;">
-                                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: white;">
-                                        {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
-                                    </div>
+                                <div class="bg-primary bg-opacity-10 rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-weight: 700; font-size: 0.8rem; color: #0d6efd;">
+                                    {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
                                 </div>
                             @endif
                             <div class="d-none d-md-block">

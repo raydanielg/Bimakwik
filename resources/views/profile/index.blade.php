@@ -28,7 +28,7 @@
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        padding: 4px;
+        border: 4px solid white;
         background: white;
         display: flex;
         align-items: center;
@@ -37,15 +37,6 @@
         font-weight: bold;
         color: #0d6efd;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-        border: 2px solid #e5e7eb;
-    }
-    
-    .profile-avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
     }
     
     .stat-card {
@@ -120,7 +111,7 @@
                     <div class="position-relative d-inline-block">
                         <div class="profile-avatar mx-auto" id="avatarDisplay">
                             @if(auth()->user()->avatar && file_exists(public_path('uploads/avatars/' . auth()->user()->avatar)))
-                                <img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}">
+                                <img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                             @else
                                 {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
                             @endif
@@ -373,7 +364,7 @@ function previewAvatar(event) {
         const reader = new FileReader();
         reader.onload = function(e) {
             const avatarDisplay = document.getElementById('avatarDisplay');
-            avatarDisplay.innerHTML = `<img src="${e.target.result}">`;
+            avatarDisplay.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
         }
         reader.readAsDataURL(file);
         
@@ -468,7 +459,7 @@ function resetAvatar() {
     document.getElementById('avatarUpload').value = '';
     const avatarDisplay = document.getElementById('avatarDisplay');
     @if(auth()->user()->avatar && file_exists(public_path('uploads/avatars/' . auth()->user()->avatar)))
-        avatarDisplay.innerHTML = `<img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}">`;
+        avatarDisplay.innerHTML = `<img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
     @else
         avatarDisplay.innerHTML = `{{ substr(auth()->user()->name ?? 'U', 0, 1) }}`;
     @endif
