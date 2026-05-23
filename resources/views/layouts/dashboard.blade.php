@@ -33,10 +33,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 60px;
+            height: 60px;
         }
         
         .rounded-circle .bi {
             font-size: 1.5rem;
+            line-height: 1;
+        }
+        
+        /* Ensure all icon containers work properly */
+        [class*="bg-opacity-10"] {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        [class*="bg-opacity-10"] .bi {
+            line-height: 1;
         }
         
         body { font-family: 'Public Sans', sans-serif; overflow-x: hidden; background-color: #eef2f6; color: #475569; transition: padding 0.3s; }
