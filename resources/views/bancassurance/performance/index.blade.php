@@ -43,6 +43,14 @@
         position: relative;
         height: 300px;
         margin-bottom: 1rem;
+        background: #fff;
+        border-radius: 8px;
+        padding: 10px;
+    }
+    
+    .chart-container canvas {
+        max-height: 100%;
+        max-width: 100%;
     }
     
     /* Progress Bar Styles */
@@ -397,7 +405,7 @@
 </div>
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 let pieChart, doughnutChart;
@@ -405,74 +413,109 @@ let currentEditingBranch = null;
 
 // Initialize Charts
 function initCharts() {
+    // Check if Chart.js is loaded
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js is not loaded');
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Chart library failed to load. Please refresh the page.',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+
+    // Check if canvas elements exist
+    const pieCanvas = document.getElementById('pieChart');
+    const doughnutCanvas = document.getElementById('doughnutChart');
+    
+    if (!pieCanvas || !doughnutCanvas) {
+        console.error('Canvas elements not found');
+        return;
+    }
+
     // Pie Chart - Sales by Product Type
-    const pieCtx = document.getElementById('pieChart').getContext('2d');
-    pieChart = new Chart(pieCtx, {
-        type: 'pie',
-        data: {
-            labels: ['Motor', 'Life', 'Health', 'Home', 'Travel', 'Business'],
-            datasets: [{
-                data: [35, 25, 20, 10, 5, 5],
-                backgroundColor: [
-                    '#0d6efd',
-                    '#198754',
-                    '#0dcaf0',
-                    '#ffc107',
-                    '#dc3545',
-                    '#6c757d'
-                ],
-                borderWidth: 2,
-                borderColor: '#fff'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        padding: 20,
-                        usePointStyle: true
+    try {
+        const pieCtx = pieCanvas.getContext('2d');
+        pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Motor', 'Life', 'Health', 'Home', 'Travel', 'Business'],
+                datasets: [{
+                    data: [35, 25, 20, 10, 5, 5],
+                    backgroundColor: [
+                        '#0d6efd',
+                        '#198754',
+                        '#0dcaf0',
+                        '#ffc107',
+                        '#dc3545',
+                        '#6c757d'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            font: {
+                                size: 12
+                            }
+                        }
                     }
                 }
             }
-        }
-    });
+        });
+    } catch (error) {
+        console.error('Error creating pie chart:', error);
+    }
 
     // Doughnut Chart - Revenue Distribution
-    const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
-    doughnutChart = new Chart(doughnutCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Branch A', 'Branch B', 'Branch C', 'Branch D'],
-            datasets: [{
-                data: [40, 30, 20, 10],
-                backgroundColor: [
-                    '#0d6efd',
-                    '#198754',
-                    '#ffc107',
-                    '#0dcaf0'
-                ],
-                borderWidth: 2,
-                borderColor: '#fff'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        padding: 20,
-                        usePointStyle: true
-                    }
-                }
+    try {
+        const doughnutCtx = doughnutCanvas.getContext('2d');
+        doughnutChart = new Chart(doughnutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Branch A', 'Branch B', 'Branch C', 'Branch D'],
+                datasets: [{
+                    data: [40, 30, 20, 10],
+                    backgroundColor: [
+                        '#0d6efd',
+                        '#198754',
+                        '#ffc107',
+                        '#0dcaf0'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
             },
-            cutout: '60%'
-        }
-    });
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+    } catch (error) {
+        console.error('Error creating doughnut chart:', error);
+    }
 }
 
 // Change Period Filter
@@ -652,9 +695,12 @@ function attachEventListeners() {
 }
 
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    initCharts();
-    attachEventListeners();
+window.addEventListener('load', function() {
+    // Small delay to ensure Chart.js is fully loaded
+    setTimeout(function() {
+        initCharts();
+        attachEventListeners();
+    }, 500);
 });
 </script>
 @endpush
