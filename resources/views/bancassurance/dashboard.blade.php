@@ -67,6 +67,27 @@
     </div>
 </div>
 
+<!-- Sales Trend Chart -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="fw-bold mb-0">Sales Trend</h6>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary active">Weekly</button>
+                        <button class="btn btn-outline-primary">Monthly</button>
+                        <button class="btn btn-outline-primary">Yearly</button>
+                    </div>
+                </div>
+                <div style="height: 300px;">
+                    <canvas id="salesTrendChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Recent Activity -->
 <div class="row">
     <div class="col-12">
@@ -113,4 +134,84 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+// Initialize Sales Trend Chart
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        if (typeof Chart === 'undefined') {
+            console.error('Chart.js is not loaded');
+            return;
+        }
+
+        const canvas = document.getElementById('salesTrendChart');
+        if (!canvas) {
+            console.error('Canvas element not found');
+            return;
+        }
+
+        try {
+            const ctx = canvas.getContext('2d');
+            const salesTrendChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Sales (Millions TZS)',
+                        data: [12, 19, 15, 25, 22, 30, 28],
+                        borderColor: '#0d6efd',
+                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#0d6efd',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return 'TZS ' + value + 'M';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error creating line chart:', error);
+        }
+    }, 500);
+});
+</script>
+@endpush
 @endsection
