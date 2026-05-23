@@ -68,9 +68,9 @@
                 </div>
             </div>
             <div class="col-lg-6 animate__animated animate__fadeInRight">
-                <div class="position-relative">
+                <div class="position-relative" style="min-height: 400px;">
                     <img src="{{ asset('hero/passionate-about-what-he-does-manager-sitting-having-discussion-with-employee_590464-14320.jpg') }}" alt="About Bima Kwik" class="img-fluid rounded-4 shadow-lg">
-                    <div class="position-absolute -bottom-4 -end-4 bg-white p-4 m-4 rounded-4 shadow-lg d-none d-md-block animate__animated animate__bounceIn" style="width: 240px; border-left: 8px solid #0d6efd; animation-delay: 0.8s;">
+                    <div class="position-absolute bg-white p-4 rounded-4 shadow-lg d-none d-md-block animate__animated animate__bounceIn" style="width: 240px; border-left: 8px solid #0d6efd; animation-delay: 0.8s; bottom: 20px; right: 20px; z-index: 10;">
                         <div class="d-flex align-items-center mb-2">
                             <h2 class="fw-bold text-primary mb-0 me-2">100%</h2>
                             <i class="bi bi-graph-up-arrow text-success fs-4"></i>
@@ -84,10 +84,10 @@
 
         <!-- The Solution & Africa Situation -->
         <div class="row mb-5 py-5 px-4 bg-dark text-white rounded-5 overflow-hidden position-relative">
-            <div class="position-absolute top-0 end-0 p-5 opacity-10">
+            <div class="position-absolute top-0 end-0 p-5 opacity-10" style="z-index: 0;">
                 <i class="bi bi-globe-africa display-1"></i>
             </div>
-            <div class="col-lg-7 position-relative">
+            <div class="col-lg-7 position-relative" style="z-index: 1;">
                 <h6 class="text-warning fw-bold text-uppercase mb-3">The Africa Situation</h6>
                 <h2 class="display-6 fw-bold mb-4">Bridging the Insurance Gap</h2>
                 <p class="lead text-light opacity-75 mb-4">
@@ -114,7 +114,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 d-none d-lg-block">
+            <div class="col-lg-5 d-none d-lg-block position-relative" style="z-index: 1;">
                  <img src="{{ asset('hero/explain-black-man-laptop-office-meeting-ideas-project-with-teamwork-collaboration-employee-discussion-boardroom-with-research-partnership-strategy-as-lawyers_590464-394339.jpg') }}" alt="Africa Strategy" class="img-fluid rounded-4 shadow-lg h-100 object-fit-cover">
             </div>
         </div>
