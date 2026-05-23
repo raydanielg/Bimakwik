@@ -3,11 +3,6 @@
 @section('content')
 <div class="auth-page">
     <div class="auth-card animate__animated animate__fadeInDown">
-        <!-- Powa Sana Help Button -->
-        <div class="help-icon-btn" id="loginHelpBtn" title="Msaada / Help">
-            <i class="bi bi-question-lg"></i>
-        </div>
-
         <div class="auth-logo">
             <img src="{{ asset('logo.png') }}" alt="{{ config('app.name') }}" style="height: 64px; width: auto; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.2));">
         </div>
@@ -18,7 +13,7 @@
             @csrf
 
             <div class="mb-4">
-                <label for="email" class="form-label">Email Address (mfano: insurer@bimakwik.com)</label>
+                <label for="email" class="form-label">Email Address</label>
                 <input id="email" type="email" class="form-control form-control-lg @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="insurer@bimakwik.com">
                 @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -60,51 +55,21 @@
                 password.setAttribute('type', type);
             });
 
-            // Login Help Modal (English & Swahili)
-            document.getElementById('loginHelpBtn').addEventListener('click', function() {
-                Swal.fire({
-                    title: '<strong>Msaada wa Kuingia / Login Help</strong>',
-                    icon: 'info',
-                    html: `
-                        <div class="text-start" style="font-size: 14px;">
-                            <h6 class="fw-bold mb-2">Kiswahili:</h6>
-                            <ul class="mb-3">
-                                <li>Hakikisha una akaunti iliyosajiliwa.</li>
-                                <li>Tumia barua pepe na nywila sahihi.</li>
-                                <li>Ikiwa umesahau nywila, wasiliana na msimamizi.</li>
-                            </ul>
-                            <h6 class="fw-bold mb-2">English:</h6>
-                            <ul>
-                                <li>Ensure you have a registered account.</li>
-                                <li>Use your correct email and password.</li>
-                                <li>If you forgot your password, contact the administrator.</li>
-                            </ul>
-                        </div>
-                    `,
-                    showCloseButton: true,
-                    confirmButtonText: 'Nimeelewa / I Understand',
-                    confirmButtonColor: '#10b981',
-                });
-            });
-
             document.getElementById('loginForm').addEventListener('submit', function(e) {
                 const btn = document.getElementById('loginSubmit');
                 btn.classList.add('loading');
-                
-                // Tunatuma form kawaida, Laravel itashughulikia makosa
             });
         </script>
 
         @if($errors->any())
         <script>
             const firstError = @json($errors->first());
-            const loginHint = 'Tumia email kamili (mfano insurer@bimakwik.com) na nywila sahihi.';
             Swal.fire({
                 icon: 'error',
-                title: 'Umekosea! / Login Failed',
-                text: firstError ? `${firstError} ${loginHint}` : `Barua pepe au nywila uliyoweka si sahihi. ${loginHint}`,
+                title: 'Login Failed',
+                text: firstError || 'Invalid email or password',
                 confirmButtonColor: '#ef4444',
-                confirmButtonText: 'Jaribu Tena'
+                confirmButtonText: 'Try Again'
             });
         </script>
         @endif
