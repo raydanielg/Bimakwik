@@ -696,6 +696,151 @@ function changePassword() {
         console.error('Error:', error);
     });
 }
+
+function downloadMyData() {
+    Swal.fire({
+        title: 'Download My Data',
+        text: 'Your data is being prepared for download. This may take a few moments.',
+        icon: 'info',
+        confirmButtonColor: '#0d6efd'
+    }).then(() => {
+        Swal.fire({
+            title: 'Preparing Download...',
+            text: 'Please wait while we prepare your data',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        setTimeout(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Download Ready!',
+                text: 'Your data has been prepared for download',
+                confirmButtonColor: '#0d6efd'
+            });
+        }, 2000);
+    });
+}
+
+function viewActivityLog() {
+    Swal.fire({
+        title: 'Activity Log',
+        html: `
+            <div style="text-align: left; max-height: 300px; overflow-y: auto;">
+                <div class="mb-2">
+                    <small class="text-muted">Today, 10:30 AM</small><br>
+                    <strong>Profile Updated</strong>
+                </div>
+                <div class="mb-2">
+                    <small class="text-muted">Yesterday, 3:45 PM</small><br>
+                    <strong>Password Changed</strong>
+                </div>
+                <div class="mb-2">
+                    <small class="text-muted">2 days ago, 9:15 AM</small><br>
+                    <strong>Login from IP: 192.168.1.1</strong>
+                </div>
+                <div class="mb-2">
+                    <small class="text-muted">3 days ago, 2:20 PM</small><br>
+                    <strong>2FA Enabled</strong>
+                </div>
+            </div>
+        `,
+        confirmButtonColor: '#0d6efd',
+        width: '500px'
+    });
+}
+
+function notificationSettings() {
+    Swal.fire({
+        title: 'Notification Settings',
+        html: `
+            <div style="text-align: left;">
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" checked id="emailNotif">
+                    <label class="form-check-label" for="emailNotif">Email Notifications</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" checked id="smsNotif">
+                    <label class="form-check-label" for="smsNotif">SMS Notifications</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="pushNotif">
+                    <label class="form-check-label" for="pushNotif">Push Notifications</label>
+                </div>
+            </div>
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Save Settings',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: '#0d6efd',
+        cancelButtonColor: '#6c757d'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Settings Saved!',
+                text: 'Your notification preferences have been updated',
+                confirmButtonColor: '#0d6efd'
+            });
+        }
+    });
+}
+
+function deleteAccount() {
+    Swal.fire({
+        title: 'Delete Account',
+        text: 'Are you sure you want to delete your account? This action cannot be undone.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Delete',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Confirm Deletion',
+                text: 'Please type "DELETE" to confirm account deletion',
+                input: 'text',
+                inputPlaceholder: 'Type DELETE',
+                showCancelButton: true,
+                confirmButtonText: 'Confirm',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                preConfirm: (input) => {
+                    if (input !== 'DELETE') {
+                        Swal.showValidationMessage('Please type DELETE to confirm');
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Deleting Account...',
+                        text: 'Please wait while we delete your account',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    setTimeout(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Account Deleted',
+                            text: 'Your account has been deleted successfully',
+                            confirmButtonColor: '#0d6efd'
+                        }).then(() => {
+                            window.location.href = '/logout';
+                        });
+                    }, 2000);
+                }
+            });
+        }
+    });
+}
 </script>
 @endpush
 @endsection
