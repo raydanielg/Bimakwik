@@ -348,6 +348,110 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+let selectedAvatarFile = null;
+
+function previewAvatar(event) {
+    const file = event.target.files[0];
+    if (file) {
+        selectedAvatarFile = file;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const avatarDisplay = document.getElementById('avatarDisplay');
+            avatarDisplay.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+        }
+        reader.readAsDataURL(file);
+        
+        // Show save option
+        Swal.fire({
+            icon: 'success',
+            title: 'Image Selected',
+            text: 'Click "Save Avatar" to upload your new profile picture',
+            showCancelButton: true,
+            confirmButtonText: 'Save Avatar',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#0d6efd',
+            cancelButtonColor: '#6c757d'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                uploadAvatar();
+            } else {
+                // Reset avatar
+                resetAvatar();
+            }
+        });
+    }
+}
+
+function uploadAvatar() {
+    if (!selectedAvatarFile) {
+        Swal.fire({
+            icon: 'error',
+            title: 'No Image Selected',
+            text: 'Please select an image to upload',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('avatar', selectedAvatarFile);
+
+    Swal.fire({
+        title: 'Uploading...',
+        text: 'Please wait while we upload your avatar',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch('/profile/avatar', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Avatar Updated!',
+                text: 'Your profile picture has been updated successfully',
+                confirmButtonColor: '#0d6efd'
+            });
+            selectedAvatarFile = null;
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+            resetAvatar();
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while uploading avatar',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+        resetAvatar();
+    });
+}
+
+function resetAvatar() {
+    selectedAvatarFile = null;
+    document.getElementById('avatarUpload').value = '';
+    const avatarDisplay = document.getElementById('avatarDisplay');
+    avatarDisplay.innerHTML = `{{ substr(auth()->user()->name ?? 'U', 0, 1) }}`;
+}
+
 function openEditProfileModal() {
     const modal = new bootstrap.Modal(document.getElementById('editProfileModal'));
     modal.show();

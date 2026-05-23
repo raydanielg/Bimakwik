@@ -105,4 +105,81 @@ class ProfileController extends Controller
             ], 500);
         }
     }
+    
+    public function uploadAvatar(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'avatar.required' => 'Please select an image',
+            'avatar.image' => 'File must be an image',
+            'avatar.mimes' => 'Image must be jpeg, png, jpg, or gif',
+            'avatar.max' => 'Image size must not exceed 2MB',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            if ($request->hasFile('avatar')) {
+                $file = $request->file('avatar');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('uploads/avatars'), $filename);
+                
+                // Update user avatar path (demo - in real app, save to database)
+                $user = auth()->user();
+                $user->avatar = $filename;
+                $user->save();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Avatar uploaded successfully',
+                    'data' => [
+                        'avatar_url' => asset('uploads/avatars/' . $filename)
+                    ]
+                ], 200);
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => 'No file uploaded'
+            ], 422);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while uploading avatar',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+    public function toggle2FA(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            $user->two_factor_enabled = !$user->two_factor_enabled;
+            $user->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => $user->two_factor_enabled ? '2FA enabled successfully' : '2FA disabled successfully',
+                'data' => [
+                    'two_factor_enabled' => $user->two_factor_enabled
+                ]
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while updating 2FA status',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
