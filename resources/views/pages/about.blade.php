@@ -4,10 +4,10 @@
 <!-- About Hero -->
 <section class="py-5 bg-primary text-white position-relative overflow-hidden" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); margin-top: 80px;">
     <!-- Decorative Shapes -->
-    <div class="position-absolute top-0 start-0 translate-middle bg-white opacity-5 rounded-circle" style="width: 400px; height: 400px;"></div>
-    <div class="position-absolute bottom-0 end-0 translate-middle bg-white opacity-5 rounded-circle" style="width: 300px; height: 300px;"></div>
+    <div class="position-absolute top-0 start-0 bg-white opacity-5 rounded-circle" style="width: 400px; height: 400px; transform: translate(-50%, -50%); z-index: 0;"></div>
+    <div class="position-absolute bottom-0 end-0 bg-white opacity-5 rounded-circle" style="width: 300px; height: 300px; transform: translate(50%, 50%); z-index: 0;"></div>
 
-    <div class="container py-5 position-relative">
+    <div class="container py-5 position-relative" style="z-index: 1;">
         <div class="row justify-content-center text-center">
             <div class="col-lg-8">
                 <span class="badge rounded-pill bg-white text-primary px-3 py-2 mb-3 animate__animated animate__fadeInDown">ABOUT BIMAKWIK</span>
