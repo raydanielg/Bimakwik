@@ -27,8 +27,8 @@
     .profile-avatar {
         width: 120px;
         height: 120px;
-        border-radius: 12px;
-        border: 4px solid white;
+        border-radius: 50%;
+        padding: 4px;
         background: white;
         display: flex;
         align-items: center;
@@ -38,13 +38,14 @@
         color: #0d6efd;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         overflow: hidden;
+        border: 2px solid #e5e7eb;
     }
     
     .profile-avatar img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 8px;
+        border-radius: 50%;
     }
     
     .stat-card {
