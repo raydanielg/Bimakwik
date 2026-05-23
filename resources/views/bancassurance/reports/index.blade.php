@@ -284,4 +284,407 @@
         </div>
     </div>
 </div>
+
+<!-- Generate Report Modal -->
+<div class="modal fade" id="generateReportModal" tabindex="-1" aria-labelledby="generateReportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="generateReportModalLabel">
+                    <i class="bi bi-file-earmark-plus me-2"></i>Generate New Report
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="generateReportForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="reportType" class="form-label">Report Type *</label>
+                            <select class="form-select" id="reportType" required>
+                                <option value="">Select Report Type</option>
+                                <option value="Monthly Sales Report">Monthly Sales Report</option>
+                                <option value="Compliance Report">Compliance Report</option>
+                                <option value="Performance Report">Performance Report</option>
+                                <option value="Claims Report">Claims Report</option>
+                                <option value="Commission Report">Commission Report</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="reportPeriod" class="form-label">Period *</label>
+                            <select class="form-select" id="reportPeriod" required>
+                                <option value="">Select Period</option>
+                                <option value="January 2024">January 2024</option>
+                                <option value="February 2024">February 2024</option>
+                                <option value="March 2024">March 2024</option>
+                                <option value="April 2024">April 2024</option>
+                                <option value="May 2024">May 2024</option>
+                                <option value="Q1 2024">Q1 2024</option>
+                                <option value="Q2 2024">Q2 2024</option>
+                                <option value="YTD 2024">YTD 2024</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reportDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="reportDescription" rows="3" placeholder="Enter report description (optional)"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="generateReport()">
+                    <i class="bi bi-file-earmark-plus me-2"></i>Generate Report
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Report Modal (PDF Preview) -->
+<div class="modal fade" id="viewReportModal" tabindex="-1" aria-labelledby="viewReportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="viewReportModalLabel">
+                    <i class="bi bi-file-earmark-pdf me-2"></i>Report Preview
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="reportPreview" class="pdf-preview-container">
+                    <!-- Report preview will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" onclick="downloadReport()">
+                    <i class="bi bi-download me-2"></i>Download PDF
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function generateReport() {
+    const reportType = document.getElementById('reportType').value;
+    const reportPeriod = document.getElementById('reportPeriod').value;
+    const reportDescription = document.getElementById('reportDescription').value;
+
+    // Validation
+    if (!reportType || !reportPeriod) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all required fields',
+            confirmButtonColor: '#dc3545'
+        });
+        return;
+    }
+
+    // Show loading
+    Swal.fire({
+        title: 'Generating Report...',
+        text: 'Please wait while we generate the report',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // AJAX call
+    const formData = new FormData();
+    formData.append('report_type', reportType);
+    formData.append('period', reportPeriod);
+    formData.append('description', reportDescription);
+
+    fetch('/bancassurance/reports/generate', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('generateReportModal'));
+            modal.hide();
+
+            // Reset form
+            document.getElementById('generateReportForm').reset();
+
+            // Add new row to table
+            const tableBody = document.querySelector('tbody');
+            const newRow = document.createElement('tr');
+            const statusBadge = '<span class="badge bg-warning d-inline-flex align-items-center"><i class="bi bi-clock-fill me-1"></i>Pending</span>';
+            newRow.innerHTML = `
+                <td><span class="fw-semibold text-primary">${data.data.id}</span></td>
+                <td>${data.data.report_type}</td>
+                <td>${data.data.period}</td>
+                <td>${data.data.generated_by}</td>
+                <td>Just now</td>
+                <td>${statusBadge}</td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary view-report-btn" data-id="${data.data.id}" title="View">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-success download-report-btn" data-id="${data.data.id}" title="Download">
+                            <i class="bi bi-download"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            tableBody.insertBefore(newRow, tableBody.firstChild);
+
+            // Re-attach listeners
+            attachReportListeners();
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Report Generated Successfully!',
+                html: `
+                    <p><strong>Report ID:</strong> ${data.data.id}</p>
+                    <p><strong>Type:</strong> ${data.data.report_type}</p>
+                    <p><strong>Period:</strong> ${data.data.period}</p>
+                    <p><strong>Status:</strong> ${statusBadge}</p>
+                `,
+                confirmButtonColor: '#0d6efd'
+            });
+        } else {
+            let errorMessage = data.message;
+            if (data.errors) {
+                const errorList = Object.values(data.errors).flat().join('<br>');
+                errorMessage = data.message + '<br><br>' + errorList;
+            }
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                html: errorMessage,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while generating report',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function viewReport(reportId) {
+    Swal.fire({
+        title: 'Loading...',
+        text: 'Fetching report details',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`/bancassurance/reports/${reportId}`, {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const report = data.data;
+            const statusBadge = report.status === 'Approved' 
+                ? '<span class="badge bg-success d-inline-flex align-items-center"><i class="bi bi-check-circle-fill me-1"></i>Approved</span>'
+                : '<span class="badge bg-warning d-inline-flex align-items-center"><i class="bi bi-clock-fill me-1"></i>Pending</span>';
+
+            document.getElementById('reportPreview').innerHTML = `
+                <div class="pdf-header">
+                    <div class="pdf-title">BIMAKWIK BANCASSURANCE</div>
+                    <div class="pdf-subtitle">${report.report_type}</div>
+                    <div class="pdf-subtitle">Report ID: ${report.id}</div>
+                </div>
+                
+                <div class="pdf-section">
+                    <div class="pdf-section-title">Report Information</div>
+                    <table class="pdf-table">
+                        <tr>
+                            <th>Report Type</th>
+                            <td>${report.report_type}</td>
+                        </tr>
+                        <tr>
+                            <th>Period</th>
+                            <td>${report.period}</td>
+                        </tr>
+                        <tr>
+                            <th>Generated By</th>
+                            <td>${report.generated_by}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>${statusBadge}</td>
+                        </tr>
+                        <tr>
+                            <th>Generated Date</th>
+                            <td>${report.created_at}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="pdf-section">
+                    <div class="pdf-section-title">Description</div>
+                    <p>${report.description || 'No description provided.'}</p>
+                </div>
+                
+                <div class="pdf-section">
+                    <div class="pdf-section-title">Report Data</div>
+                    <table class="pdf-table">
+                        <tr>
+                            <th>Total Sales</th>
+                            <td>${report.data.total_sales}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Premium</th>
+                            <td>${report.data.total_premium}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Commission</th>
+                            <td>${report.data.total_commission}</td>
+                        </tr>
+                        <tr>
+                            <th>Active Policies</th>
+                            <td>${report.data.active_policies}</td>
+                        </tr>
+                        <tr>
+                            <th>Pending Policies</th>
+                            <td>${report.data.pending_policies}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="pdf-footer">
+                    <p>This report was generated by Bimakwik Bancassurance System</p>
+                    <p>Generated on: ${report.created_at}</p>
+                </div>
+            `;
+
+            Swal.close();
+            const modal = new bootstrap.Modal(document.getElementById('viewReportModal'));
+            modal.show();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while fetching report details',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+function downloadReport(reportId) {
+    if (!reportId) {
+        // Get from current view modal
+        Swal.fire({
+            icon: 'info',
+            title: 'Download Report',
+            text: 'Please select a report to download',
+            confirmButtonColor: '#0d6efd'
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: 'Downloading...',
+        text: 'Please wait while we download the report',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(`/bancassurance/reports/${reportId}/download`, {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Downloaded!',
+                text: `Report "${data.data.file_name}" has been downloaded successfully`,
+                confirmButtonColor: '#0d6efd'
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while downloading report',
+            confirmButtonColor: '#dc3545'
+        });
+        console.error('Error:', error);
+    });
+}
+
+// Attach all button listeners
+function attachReportListeners() {
+    document.querySelectorAll('.view-report-btn').forEach(btn => {
+        btn.removeEventListener('click', handleViewReportClick);
+        btn.addEventListener('click', handleViewReportClick);
+    });
+    
+    document.querySelectorAll('.download-report-btn').forEach(btn => {
+        btn.removeEventListener('click', handleDownloadReportClick);
+        btn.addEventListener('click', handleDownloadReportClick);
+    });
+}
+
+function handleViewReportClick(e) {
+    const btn = e.target.closest('.view-report-btn');
+    const reportId = btn.getAttribute('data-id');
+    viewReport(reportId);
+}
+
+function handleDownloadReportClick(e) {
+    const btn = e.target.closest('.download-report-btn');
+    const reportId = btn.getAttribute('data-id');
+    downloadReport(reportId);
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    attachReportListeners();
+});
+</script>
+@endpush
 @endsection
