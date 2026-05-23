@@ -368,6 +368,8 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+let currentReportId = null;
+
 function generateReport() {
     const reportType = document.getElementById('reportType').value;
     const reportPeriod = document.getElementById('reportPeriod').value;
@@ -482,6 +484,8 @@ function generateReport() {
 }
 
 function viewReport(reportId) {
+    currentReportId = reportId;
+    
     Swal.fire({
         title: 'Loading...',
         text: 'Fetching report details',
@@ -600,8 +604,10 @@ function viewReport(reportId) {
 }
 
 function downloadReport(reportId) {
-    if (!reportId) {
-        // Get from current view modal
+    // If reportId is not provided, use currentReportId
+    const idToDownload = reportId || currentReportId;
+    
+    if (!idToDownload) {
         Swal.fire({
             icon: 'info',
             title: 'Download Report',
@@ -620,7 +626,7 @@ function downloadReport(reportId) {
         }
     });
 
-    fetch(`/bancassurance/reports/${reportId}/download`, {
+    fetch(`/bancassurance/reports/${idToDownload}/download`, {
         method: 'GET',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
