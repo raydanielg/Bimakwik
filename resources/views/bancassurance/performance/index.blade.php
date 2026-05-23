@@ -560,6 +560,26 @@ function updateChartsForPeriod(period) {
     doughnutChart.update();
 }
 
+// Switch between charts
+function switchChart(chartType) {
+    const pieContainer = document.getElementById('pieChartContainer');
+    const doughnutContainer = document.getElementById('doughnutChartContainer');
+    const buttons = document.querySelectorAll('.btn-group .btn');
+    
+    // Update active button
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Show/hide charts
+    if (chartType === 'pie') {
+        pieContainer.style.display = 'block';
+        doughnutContainer.style.display = 'none';
+    } else if (chartType === 'doughnut') {
+        pieContainer.style.display = 'none';
+        doughnutContainer.style.display = 'block';
+    }
+}
+
 // Apply Custom Date Range
 function applyCustomRange() {
     const startDate = document.getElementById('startDate').value;
