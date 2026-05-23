@@ -176,21 +176,26 @@
 
 <!-- Charts Section -->
 <div class="row g-3 mb-4">
-    <div class="col-md-6">
+    <div class="col-12">
         <div class="card border-0 shadow-sm">
             <div class="card-body p-4">
-                <h6 class="fw-bold mb-3">Sales by Product Type</h6>
-                <div class="chart-container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="fw-bold mb-0">Analytics Charts</h6>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary active" onclick="switchChart('pie')">
+                            <i class="bi bi-pie-chart me-1"></i>Sales by Product
+                        </button>
+                        <button class="btn btn-outline-primary" onclick="switchChart('doughnut')">
+                            <i class="bi bi-pie-chart-fill me-1"></i>Revenue Distribution
+                        </button>
+                    </div>
+                </div>
+                <div class="chart-container" id="pieChartContainer">
+                    <h6 class="fw-bold mb-3 text-center">Sales by Product Type</h6>
                     <canvas id="pieChart"></canvas>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card border-0 shadow-sm">
-            <div class="card-body p-4">
-                <h6 class="fw-bold mb-3">Revenue Distribution</h6>
-                <div class="chart-container">
+                <div class="chart-container" id="doughnutChartContainer" style="display: none;">
+                    <h6 class="fw-bold mb-3 text-center">Revenue Distribution</h6>
                     <canvas id="doughnutChart"></canvas>
                 </div>
             </div>
