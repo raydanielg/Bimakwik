@@ -119,7 +119,7 @@
                     <div class="position-relative d-inline-block">
                         <div class="profile-avatar mx-auto" id="avatarDisplay">
                             @if(auth()->user()->avatar && file_exists(public_path('uploads/avatars/' . auth()->user()->avatar)))
-                                <img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                                <img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}">
                             @else
                                 {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
                             @endif
@@ -372,7 +372,7 @@ function previewAvatar(event) {
         const reader = new FileReader();
         reader.onload = function(e) {
             const avatarDisplay = document.getElementById('avatarDisplay');
-            avatarDisplay.innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+            avatarDisplay.innerHTML = `<img src="${e.target.result}">`;
         }
         reader.readAsDataURL(file);
         
@@ -467,7 +467,7 @@ function resetAvatar() {
     document.getElementById('avatarUpload').value = '';
     const avatarDisplay = document.getElementById('avatarDisplay');
     @if(auth()->user()->avatar && file_exists(public_path('uploads/avatars/' . auth()->user()->avatar)))
-        avatarDisplay.innerHTML = `<img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+        avatarDisplay.innerHTML = `<img src="{{ asset('uploads/avatars/' . auth()->user()->avatar) }}">`;
     @else
         avatarDisplay.innerHTML = `{{ substr(auth()->user()->name ?? 'U', 0, 1) }}`;
     @endif
