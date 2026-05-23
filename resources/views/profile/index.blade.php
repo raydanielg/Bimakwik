@@ -108,8 +108,14 @@
         <div class="profile-header">
             <div class="row align-items-center">
                 <div class="col-md-2 text-center">
-                    <div class="profile-avatar mx-auto">
-                        {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                    <div class="position-relative d-inline-block">
+                        <div class="profile-avatar mx-auto" id="avatarDisplay">
+                            {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                        </div>
+                        <label for="avatarUpload" class="position-absolute bottom-0 end-0 bg-white rounded-circle p-2 cursor-pointer" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                            <i class="bi bi-camera text-primary"></i>
+                        </label>
+                        <input type="file" id="avatarUpload" accept="image/*" style="display: none;" onchange="previewAvatar(event)">
                     </div>
                 </div>
                 <div class="col-md-10">
