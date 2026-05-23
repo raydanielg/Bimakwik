@@ -141,6 +141,8 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
+let salesTrendChart;
+
 // Initialize Sales Trend Chart
 window.addEventListener('load', function() {
     setTimeout(function() {
@@ -157,7 +159,13 @@ window.addEventListener('load', function() {
 
         try {
             const ctx = canvas.getContext('2d');
-            const salesTrendChart = new Chart(ctx, {
+            
+            // Create gradient fill
+            const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+            gradient.addColorStop(0, 'rgba(13, 110, 253, 0.3)');
+            gradient.addColorStop(1, 'rgba(13, 110, 253, 0.0)');
+
+            salesTrendChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -165,27 +173,56 @@ window.addEventListener('load', function() {
                         label: 'Sales (Millions TZS)',
                         data: [12, 19, 15, 25, 22, 30, 28],
                         borderColor: '#0d6efd',
-                        backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                        backgroundColor: gradient,
                         borderWidth: 3,
                         fill: true,
                         tension: 0.4,
                         pointBackgroundColor: '#0d6efd',
                         pointBorderColor: '#fff',
-                        pointBorderWidth: 2,
-                        pointRadius: 5,
-                        pointHoverRadius: 7
+                        pointBorderWidth: 3,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointHoverBackgroundColor: '#0d6efd',
+                        pointHoverBorderColor: '#fff',
+                        pointHoverBorderWidth: 3
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
                     plugins: {
                         legend: {
                             display: true,
                             position: 'top',
+                            align: 'end',
                             labels: {
                                 font: {
-                                    size: 12
+                                    size: 13,
+                                    weight: '500'
+                                },
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleFont: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 13
+                            },
+                            padding: 12,
+                            cornerRadius: 8,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Sales: TZS ' + context.parsed.y + 'M';
                                 }
                             }
                         }
@@ -194,16 +231,35 @@ window.addEventListener('load', function() {
                         y: {
                             beginAtZero: true,
                             grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
+                                color: 'rgba(0, 0, 0, 0.05)',
+                                drawBorder: false
                             },
                             ticks: {
+                                font: {
+                                    size: 12
+                                },
                                 callback: function(value) {
                                     return 'TZS ' + value + 'M';
-                                }
+                                },
+                                padding: 10
+                            },
+                            border: {
+                                display: false
                             }
                         },
                         x: {
                             grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: {
+                                    size: 12,
+                                    weight: '500'
+                                },
+                                padding: 10
+                            },
+                            border: {
                                 display: false
                             }
                         }
@@ -215,6 +271,32 @@ window.addEventListener('load', function() {
         }
     }, 500);
 });
+
+// Update chart based on period
+function updateChartPeriod(period) {
+    // Update active button
+    const buttons = document.querySelectorAll('.btn-group .btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Update chart data based on period
+    let labels, data;
+    
+    if (period === 'weekly') {
+        labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        data = [12, 19, 15, 25, 22, 30, 28];
+    } else if (period === 'monthly') {
+        labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+        data = [85, 92, 78, 105];
+    } else if (period === 'yearly') {
+        labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        data = [320, 350, 380, 420, 450, 480, 510, 490, 520, 550, 580, 600];
+    }
+
+    salesTrendChart.data.labels = labels;
+    salesTrendChart.data.datasets[0].data = data;
+    salesTrendChart.update('active');
+}
 </script>
 @endpush
 @endsection
