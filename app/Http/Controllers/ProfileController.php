@@ -130,16 +130,10 @@ class ProfileController extends Controller
                 $filename = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('uploads/avatars'), $filename);
                 
-                // Try to update user avatar path if column exists
-                try {
-                    $user = auth()->user();
-                    if (isset($user->avatar)) {
-                        $user->avatar = $filename;
-                        $user->save();
-                    }
-                } catch (\Exception $e) {
-                    // Column doesn't exist, just continue
-                }
+                // Update user avatar path
+                $user = auth()->user();
+                $user->avatar = $filename;
+                $user->save();
 
                 return response()->json([
                     'success' => true,
