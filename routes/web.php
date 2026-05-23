@@ -261,6 +261,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reports/{id}', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'showReport']);
         Route::get('/reports/{id}/download', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'downloadReport']);
         Route::get('/compliance', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'index'])->name('compliance');
+        Route::post('/compliance/checks', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'storeCheck']);
+        Route::get('/compliance/checks/{id}', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'showCheck']);
+        Route::post('/compliance/checks/{id}', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'updateCheck']);
         Route::get('/performance', [App\Http\Controllers\Bancassurance\PerformanceController::class, 'index'])->name('performance');
         Route::get('/policies', [App\Http\Controllers\Bancassurance\PolicyController::class, 'index'])->name('policies.index');
     });
