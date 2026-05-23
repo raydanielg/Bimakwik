@@ -193,23 +193,40 @@
 </script>
 
 <style>
-    .auth-page { min-height: 100vh; background: #f0f2f5; display: flex; align-items: center; }
+    .auth-page { min-height: 100vh; display: flex; align-items: center; }
     .letter-spacing-1 { letter-spacing: 1.5px; }
+    .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
     .role-card { 
         border: 2px solid #e9ecef; 
-        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); 
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
         background: #fff;
     }
-    .role-card:hover { border-color: #0d6efd; background: rgba(13, 110, 253, 0.02); }
-    .btn-check:checked + .role-card { 
-        border-color: #0d6efd; 
-        background-color: rgba(13, 110, 253, 0.05);
-        transform: scale(1.02);
-        box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.1) !important;
+    .role-card:hover { 
+        border-color: #667eea; 
+        background: rgba(102, 126, 234, 0.05);
+        transform: translateY(-4px);
+        box-shadow: 0 1rem 2rem rgba(102, 126, 234, 0.15) !important;
     }
-    .icon-box { transition: transform 0.3s ease; }
-    .role-card:hover .icon-box { transform: scale(1.1) rotate(5deg); }
-    .hover-lift-sm:hover { transform: translateY(-2px); box-shadow: 0 0.5rem 1.5rem rgba(13, 110, 253, 0.2) !important; }
-    .transition-all { transition: all 0.3s ease; }
+    .btn-check:checked + .role-card { 
+        border-color: #667eea; 
+        background-color: rgba(102, 126, 234, 0.08);
+        transform: scale(1.02);
+        box-shadow: 0 0.5rem 1.5rem rgba(102, 126, 234, 0.2) !important;
+    }
+    .avatar-box { transition: transform 0.4s ease; }
+    .role-card:hover .avatar-box { transform: scale(1.1) rotate(5deg); }
+    .hover-lift-sm:hover { 
+        transform: translateY(-4px); 
+        box-shadow: 0 1rem 2rem rgba(102, 126, 234, 0.3) !important;
+    }
+    .transition-all { transition: all 0.4s ease; }
+    .step-num {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transition: all 0.3s ease;
+    }
+    .step-num:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0.5rem 1rem rgba(102, 126, 234, 0.3);
+    }
 </style>
 @endsection
