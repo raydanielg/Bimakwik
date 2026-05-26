@@ -259,6 +259,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/support', [App\Http\Controllers\ServiceProvider\SupportController::class, 'index'])->name('support.index');
     });
 
+    // Regulator Routes
+    Route::prefix('regulator')->name('regulator.')->middleware(['auth', 'role:regulator'])->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Regulator\RegulatorDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/insurers', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'insurers'])->name('insurers');
+        Route::get('/brokers', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'brokers'])->name('brokers');
+        Route::get('/agents', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'agents'])->name('agents');
+        Route::get('/compliance', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'compliance'])->name('compliance');
+        Route::get('/oversight', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'oversight'])->name('oversight');
+        Route::get('/reports', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'reports'])->name('reports');
+        Route::get('/analytics', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'analytics'])->name('analytics');
+    });
+
     // Premium Financing Partner Dashboard Routes
     Route::prefix('financing-partner')->name('financing-partner.')->middleware(['auth', 'role:financing_partner'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\FinancingPartner\DashboardController::class, 'index'])->name('dashboard');
