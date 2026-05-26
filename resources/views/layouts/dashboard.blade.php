@@ -641,42 +641,43 @@
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Lead Management</div>
+            <div class="sidebar-heading mt-3">Marketplace</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-calculator"></i> Generate Quote
+                <a href="{{ route('aggregator.policies') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.policies') ? 'active' : '' }}">
+                    <i class="bi bi-shield-check"></i> All Policies
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-send-plus"></i> Send Lead to Broker
+                <a href="{{ route('aggregator.customers') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.customers') ? 'active' : '' }}">
+                    <i class="bi bi-people"></i> All Customers
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-briefcase"></i> Track Lead Status
+                <a href="{{ route('aggregator.products') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.products') ? 'active' : '' }}">
+                    <i class="bi bi-box-seam"></i> Products
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Wallet & Earnings</div>
+            <div class="sidebar-heading mt-3">Partners</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-wallet2"></i> My Wallet
+                <a href="{{ route('aggregator.brokers') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.brokers') ? 'active' : '' }}">
+                    <i class="bi bi-briefcase"></i> Brokers
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-cash-stack"></i> Referral Fees
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-bank"></i> Cash-out
+                <a href="{{ route('aggregator.agents') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.agents') ? 'active' : '' }}">
+                    <i class="bi bi-person-badge"></i> Agents
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Settings & Reports</div>
+            <div class="sidebar-heading mt-3">Finance</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-bar-chart-steps"></i> Traffic & Lead Reports
+                <a href="{{ route('aggregator.commissions') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.commissions') ? 'active' : '' }}">
+                    <i class="bi bi-cash-stack"></i> Commissions
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-person-gear"></i> Profile & Integration
+                    <i class="bi bi-wallet2"></i> Wallet
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-shield-lock"></i> Privacy Logs
+            </div>
+
+            <div class="sidebar-heading mt-3">Reports</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('aggregator.reports') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.reports') ? 'active' : '' }}">
+                    <i class="bi bi-bar-chart-steps"></i> Reports
                 </a>
             </div>
 
@@ -753,9 +754,19 @@
 
             @elseif(auth()->user()->hasRole('agent'))
             <!-- Agent Menu -->
-            <div class="sidebar-heading">Customer</div>
+            <div class="sidebar-heading">Core Dashboard</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('agent.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a href="{{ route('agent.commissions') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.commissions') ? 'active' : '' }}">
+                    <i class="bi bi-wallet2"></i> Commissions
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Customer</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('agent.customers') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.customers') ? 'active' : '' }}">
                     <i class="bi bi-people-fill"></i> All Customers
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
@@ -768,7 +779,7 @@
 
             <div class="sidebar-heading mt-3">Policy</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('agent.policies') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.policies') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i> My Policies
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
@@ -781,21 +792,27 @@
 
             <div class="sidebar-heading mt-3">Product</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('agent.products') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.products') ? 'active' : '' }}">
                     <i class="bi bi-box-seam"></i> Product Catalog
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.products.compare') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-grid-3x3-gap"></i> Product Comparison
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Claims</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action text-danger">
-                    <i class="bi bi-exclamation-octagon"></i> Submit New Claim
+                <a href="{{ route('agent.claims') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.claims') ? 'active' : '' }}">
+                    <i class="bi bi-exclamation-octagon"></i> Track Claims
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-activity"></i> Track Claims
+            </div>
+
+            <div class="sidebar-heading mt-3">Reports</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('agent.reports') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.reports') ? 'active' : '' }}">
+                    <i class="bi bi-bar-chart-line"></i> Reports
+                </a>
+            </div>
                 </a>
             </div>
 
