@@ -15,7 +15,7 @@
                 <div class="card-body p-4 text-center">
                     <i class="bi bi-bank fs-1 mb-2 opacity-75"></i>
                     <h6 class="text-uppercase small fw-bold opacity-75 mb-1">Total Premiums Written</h6>
-                    <h3 class="fw-bold mb-0">TZS {{ number_format($totalPremiums, 0) }}</h3>
+                    <h3 class="fw-bold mb-0">TZS {{ number_format($totalPremiums ?? 0, 0) }}</h3>
                     <div class="mt-2 small"><i class="bi bi-graph-up"></i> Market Total</div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         <i class="bi bi-shield-check fs-3"></i>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Active Policies</h6>
-                    <h3 class="fw-bold mb-0">{{ $activePolicies }}</h3>
+                    <h3 class="fw-bold mb-0">{{ $activePolicies ?? 0 ?? 0 }}</h3>
                     <div class="mt-1 small text-success">Market Wide</div>
                 </div>
             </div>
@@ -86,9 +86,9 @@
                                         <td>{{ $insurer->policies_count ?? 0 }}</td>
                                         <td>
                                             <div class="progress" style="height: 5px; width: 100px;">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ min(($insurer->policies_count / $activePolicies) * 100, 100) }}%"></div>
+                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ min(($insurer->policies_count ?? 0) / ($activePolicies ?? 1) * 100, 100) }}%"></div>
                                             </div>
-                                            <span class="x-small">{{ number_format(($insurer->policies_count / $activePolicies) * 100, 1) }}%</span>
+                                            <span class="x-small">{{ number_format(($insurer->policies_count ?? 0) / ($activePolicies ?? 1) * 100, 1) }}%</span>
                                         </td>
                                         <td><span class="badge bg-success">Compliant</span></td>
                                     </tr>
@@ -118,7 +118,7 @@
                     </a>
                     <a href="{{ route('regulator.agents') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
                         <span><i class="bi bi-people me-2 text-primary"></i> Registered Agents</span>
-                        <span class="badge bg-primary rounded-pill">{{ $totalAgents }}</span>
+                        <span class="badge bg-primary rounded-pill">{{ $totalAgentsspan>
                     </a>
                 </div>
                 
