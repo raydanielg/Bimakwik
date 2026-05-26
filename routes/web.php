@@ -271,6 +271,64 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/analytics', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'analytics'])->name('analytics');
     });
 
+    // Payment Management Routes (Admin)
+    Route::prefix('payment')->name('payment.')->middleware(['auth', 'role:super_admin,admin'])->group(function () {
+        // Payment Gateways
+        Route::prefix('gateways')->name('gateways.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Payment\PaymentGatewayController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Payment\PaymentGatewayController::class, 'create'])->name('create');
+            Route::post('/', [App\Http\Controllers\Payment\PaymentGatewayController::class, 'store'])->name('store');
+            Route::get('/{gateway}', [App\Http\Controllers\Payment\PaymentGatewayController::class, 'show'])->name('show');
+            Route::get('/{gateway}/edit', [App\Http\Controllers\Payment\PaymentGatewayController::class, 'edit'])->name('edit');
+            Route::put('/{gateway}', [App\Http\Controllers\Payment\PaymentGatewayController::class, 'update'])->name('update');
+            Route::post('/{gateway}/toggle', [App\Http\Controllers\Payment\PaymentGatewayController::class, 'toggleStatus'])->name('toggle');
+            Route::delete('/{gateway}', [App\Http\Controllers\Payment\PaymentGatewayController::class, 'destroy'])->name('destroy');
+            Route::post('/initiate', [App\Http\Controllers\Payment\PaymentGatewayController::class, 'initiatePayment'])->name('initiate');
+        });
+
+        // Payment Transactions
+        Route::prefix('transactions')->name('transactions.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'create'])->name('create');
+            Route::post('/', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'store'])->name('store');
+            Route::get('/{transaction}', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'show'])->name('show');
+            Route::post('/{transaction}/status', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'updateStatus'])->name('update-status');
+            Route::post('/{transaction}/refund', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'refund'])->name('refund');
+            Route::delete('/{transaction}', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'destroy'])->name('destroy');
+            Route::get('/my', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'myTransactions'])->name('my');
+        });
+
+        // Payment Webhooks
+        Route::prefix('webhooks')->name('webhooks.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Payment\PaymentWebhookController::class, 'index'])->name('index');
+            Route::get('/{webhook}', [App\Http\Controllers\Payment\PaymentWebhookController::class, 'show'])->name('show');
+            Route::post('/{webhook}/retry', [App\Http\Controllers\Payment\PaymentWebhookController::class, 'retry'])->name('retry');
+            Route::delete('/{webhook}', [App\Http\Controllers\Payment\PaymentWebhookController::class, 'destroy'])->name('destroy');
+            Route::post('/handle/{gatewayCode}', [App\Http\Controllers\Payment\PaymentWebhookController::class, 'handle'])->name('handle');
+        });
+
+        // Offline Payments
+        Route::prefix('offline')->name('offline.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Payment\OfflinePaymentController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Payment\OfflinePaymentController::class, 'create'])->name('create');
+            Route::post('/', [App\Http\Controllers\Payment\OfflinePaymentController::class, 'store'])->name('store');
+            Route::get('/{transaction}', [App\Http\Controllers\Payment\OfflinePaymentController::class, 'show'])->name('show');
+            Route::post('/{transaction}/approve', [App\Http\Controllers\Payment\OfflinePaymentController::class, 'approve'])->name('approve');
+            Route::post('/{transaction}/reject', [App\Http\Controllers\Payment\OfflinePaymentController::class, 'reject'])->name('reject');
+        });
+
+        // Premium Financing
+        Route::prefix('financing')->name('financing.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Payment\PremiumFinancingController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Payment\PremiumFinancingController::class, 'create'])->name('create');
+            Route::post('/', [App\Http\Controllers\Payment\PremiumFinancingController::class, 'store'])->name('store');
+            Route::get('/{transaction}', [App\Http\Controllers\Payment\PremiumFinancingController::class, 'show'])->name('show');
+            Route::post('/{transaction}/approve', [App\Http\Controllers\Payment\PremiumFinancingController::class, 'approve'])->name('approve');
+            Route::post('/{transaction}/reject', [App\Http\Controllers\Payment\PremiumFinancingController::class, 'reject'])->name('reject');
+            Route::get('/{transaction}/schedule', [App\Http\Controllers\Payment\PremiumFinancingController::class, 'schedule'])->name('schedule');
+        });
+    });
+
     // Premium Financing Partner Dashboard Routes
     Route::prefix('financing-partner')->name('financing-partner.')->middleware(['auth', 'role:financing_partner'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\FinancingPartner\DashboardController::class, 'index'])->name('dashboard');
