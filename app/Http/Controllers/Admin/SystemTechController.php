@@ -48,42 +48,42 @@ class SystemTechController extends Controller
 
     public function developerPortal()
     {
+        $apiKeys = collect();
+        $totalKeys = 0;
+        $apiCallsToday = 0;
+        $successRate = 0;
+        $totalApps = 0;
         try {
-            // Combine both API key types
-            $apiKeys = ApiKey::latest()->get();
-            $developerKeys = DeveloperApiKey::latest()->get();
-            $allKeys = $apiKeys->merge($developerKeys);
+            $apiKeys = DeveloperApiKey::latest()->limit(20)->get();
+            $totalKeys = DeveloperApiKey::count();
+            $totalApps = \App\Models\DeveloperApp::count();
             
-            // Paginate manually
-            $page = request()->get('page', 1);
-            $perPage = 20;
-            $offset = ($page - 1) * $perPage;
-            $paginatedKeys = $allKeys->slice($offset, $perPage);
-            
-        } catch (\Exception $e) {
-            $paginatedKeys = collect();
-        }
-        return view('admin.system.developer-portal', compact('paginatedKeys'));
+            // API stats today
+            if (class_exists(\App\Models\ApiLog::class)) {
+                $apiCallsToday = \App\Models\ApiLog::whereDate('created_at', today())->count();
+                $successCalls = \App\Models\ApiLog::whereDate('created_at', today())
+                    ->where('status_code', '<', 400)->count();
+                $successRate = $apiCallsToday > 0 ? round(($successCalls / $apiCallsToday) * 100, 1) : 100;
+            }
+        } catch (\Exception $e) {}
+        return view('admin.system.developer-portal', compact(
+            'apiKeys', 'totalKeys', 'apiCallsToday', 'successRate', 'totalApps'
+        ));
     }
 
     public function multiCountry()
     {
+        $countries = collect();
+        $totalCountries = 0;
+        $activeCountries = 0;
         try {
-            // Combine country-related models
-            $countryConfigs = CountryConfig::latest()->get();
-            $countryInstances = CountryInstance::latest()->get();
-            $countries = $countryConfigs->merge($countryInstances);
-            
-            // Paginate manually
-            $page = request()->get('page', 1);
-            $perPage = 20;
-            $offset = ($page - 1) * $perPage;
-            $paginatedCountries = $countries->slice($offset, $perPage);
-            
-        } catch (\Exception $e) {
-            $paginatedCountries = collect();
-        }
-        return view('admin.system.multi-country', compact('paginatedCountries'));
+            $countries = CountryInstance::latest()->get();
+            $totalCountries = $countries->count();
+            $activeCountries = $countries->where('status', 'active')->count();
+        } catch (\Exception $e) {}
+        return view('admin.system.multi-country', compact(
+            'countries', 'totalCountries', 'activeCountries'
+        ));
     }
     
     public function auditLogs()
