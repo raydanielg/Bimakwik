@@ -514,7 +514,7 @@
                 <a href="{{ route('broker.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Overview
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.commissions') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.commissions') ? 'active' : '' }}">
                     <i class="bi bi-pie-chart"></i> Commission Summary
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
@@ -527,7 +527,7 @@
 
             <div class="sidebar-heading mt-3">Product Management</div>
             <div class="list-group list-group-flush px-2">
-                <a href="{{ route('admin.products.index') }}" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.products') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.products') ? 'active' : '' }}">
                     <i class="bi bi-box-seam"></i> View All Products
                 </a>
                 <a href="{{ route('admin.products.compare') }}" class="list-group-item list-group-item-action">
@@ -540,10 +540,7 @@
 
             <div class="sidebar-heading mt-3">Customer Management</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-person-plus"></i> Onboard New Customer
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.customers') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.customers') ? 'active' : '' }}">
                     <i class="bi bi-people"></i> Customer List
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
@@ -553,8 +550,8 @@
 
             <div class="sidebar-heading mt-3">Policy Management</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-cart-plus"></i> Purchase Policy
+                <a href="{{ route('broker.policies') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.policies') ? 'active' : '' }}">
+                    <i class="bi bi-shield-check"></i> All Policies
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-arrow-repeat"></i> Renew Policy
@@ -572,7 +569,7 @@
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-wallet2"></i> My Wallet Balance
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.commissions') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.commissions') ? 'active' : '' }}">
                     <i class="bi bi-graph-up-arrow"></i> Commission Earned
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
@@ -582,11 +579,8 @@
 
             <div class="sidebar-heading mt-3">Claims Management</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action text-danger">
-                    <i class="bi bi-exclamation-octagon"></i> Submit Claim
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-activity"></i> Track Claim Status
+                <a href="{{ route('broker.claims') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.claims') ? 'active' : '' }}">
+                    <i class="bi bi-exclamation-octagon"></i> Track Claim Status
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-shield-lock"></i> Fraud Alerts
@@ -595,7 +589,7 @@
 
             <div class="sidebar-heading mt-3">Reports & Communication</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.reports') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.reports') ? 'active' : '' }}">
                     <i class="bi bi-bar-chart-line"></i> Sales & Claims Reports
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
