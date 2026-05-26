@@ -466,95 +466,44 @@
             <!-- SFE Menu -->
             <div class="sidebar-heading">SFE Operations</div>
             <div class="list-group list-group-flush px-2">
-                <a href="{{ route('sfe.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.dashboard') ? 'active' : '' }}">
+                <a href="{{ route('agent.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
-                <a href="{{ route('sfe.customers.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.customers.*') ? 'active' : '' }}">
+                <a href="{{ route('agent.customers') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.customers') ? 'active' : '' }}">
                     <i class="bi bi-people-fill"></i> Customers
                 </a>
-                <a href="{{ route('sfe.policies.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.policies.*') ? 'active' : '' }}">
+                <a href="{{ route('agent.policies') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.policies') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i> My Sales (Policies)
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Sales & Earnings</div>
             <div class="list-group list-group-flush px-2">
-                <a href="{{ route('sfe.commissions.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.commissions.*') ? 'active' : '' }}">
+                <a href="{{ route('agent.commissions') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.commissions') ? 'active' : '' }}">
                     <i class="bi bi-wallet2"></i> Commissions & Wallet
                 </a>
-                <a href="{{ route('sfe.performance.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.performance.*') ? 'active' : '' }}">
+                <a href="{{ route('agent.reports') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.reports') ? 'active' : '' }}">
                     <i class="bi bi-bar-chart-line"></i> Performance
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Resources</div>
             <div class="list-group list-group-flush px-2">
-                <a href="{{ route('sfe.products.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.products.*') ? 'active' : '' }}">
+                <a href="{{ route('agent.products') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.products') ? 'active' : '' }}">
                     <i class="bi bi-box-seam"></i> Product Catalog
                 </a>
-                <a href="{{ route('sfe.training.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.training.*') ? 'active' : '' }}">
+                <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-book"></i> Training & Guides
                 </a>
-                <a href="{{ route('sfe.support.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.support.*') ? 'active' : '' }}">
+                <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-question-circle"></i> Help & Support
                 </a>
             </div>
 
-            <div class="sidebar-heading mt-3">Portfolio</div>
+            <div class="sidebar-heading mt-3">Claims</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-box-seam"></i> My Products
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-hammer"></i> Create Product
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-people"></i> My Customers
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-diagram-3"></i> Channel Network
-                </a>
-            </div>
-
-            <div class="sidebar-heading mt-3">Financials</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-wallet2"></i> Premiums Received
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-cash-stack"></i> Commission Payouts
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-bank"></i> Cash-out Requests
-                </a>
-            </div>
-
-            <div class="sidebar-heading mt-3">Claims & Providers</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('agent.claims') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.claims') ? 'active' : '' }}">
                     <i class="bi bi-exclamation-octagon"></i> Claims Management
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-hospital"></i> Service Providers
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-receipt"></i> Provider Bills
-                </a>
-            </div>
-
-            <div class="sidebar-heading mt-3">Reports & Tools</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-bar-chart-line"></i> Analytics Reports
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-chat-left-dots"></i> Communication
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-building-gear"></i> Company Profile
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <i class="bi bi-key"></i> API Integration
                 </a>
             </div>
 
