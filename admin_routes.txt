@@ -1,0 +1,273 @@
+﻿
+|        | GET|HEAD  | admin/ai-insights                         | admin.ai-insights                     | 
+App\Http\Controllers\Admin\DashboardController@aiInsights                   | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/dashboard                           | admin.dashboard                       | 
+App\Http\Controllers\Admin\DashboardController@index                        | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/finance/commissions                 | admin.finance.commissions             | 
+App\Http\Controllers\Admin\FinanceController@commissions                    | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/finance/payouts                     | admin.finance.payouts                 | 
+App\Http\Controllers\Admin\FinanceController@payouts                        | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/finance/payouts/{id}/approve        | admin.finance.payouts.approve         | 
+App\Http\Controllers\Admin\FinanceController@approvePayout                  | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/finance/payouts/{id}/reject         | admin.finance.payouts.reject          | 
+App\Http\Controllers\Admin\FinanceController@rejectPayout                   | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/finance/premiums                    | admin.finance.premiums                | 
+App\Http\Controllers\Admin\FinanceController@premiums                       | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/finance/premiums/export             | admin.finance.premiums.export         | 
+App\Http\Controllers\Admin\FinanceController@exportPremiums                 | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/finance/wallets                     | admin.finance.wallets                 | 
+App\Http\Controllers\Admin\FinanceController@wallets                        | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/finance/wallets/seed-demo           | admin.finance.wallets.seed-demo       | 
+App\Http\Controllers\Admin\FinanceController@seedDemoData                   | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/finance/wallets/{id}                | admin.finance.wallets.view            | 
+App\Http\Controllers\Admin\FinanceController@viewWallet                     | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/finance/wallets/{id}/activate       | admin.finance.wallets.activate        | 
+App\Http\Controllers\Admin\FinanceController@activateWallet                 | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/finance/wallets/{id}/add-funds      | admin.finance.wallets.add-funds       | 
+App\Http\Controllers\Admin\FinanceController@addFunds                       | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/finance/wallets/{id}/freeze         | admin.finance.wallets.freeze          | 
+App\Http\Controllers\Admin\FinanceController@freezeWallet                   | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/governance/analytics                | admin.governance.analytics            | 
+App\Http\Controllers\Admin\GovernanceController@analytics                   | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/governance/communications           | admin.governance.communications       | 
+App\Http\Controllers\Admin\GovernanceController@communications              | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/governance/communications/send      | admin.governance.communications.send  | 
+App\Http\Controllers\Admin\GovernanceController@sendCommunication           | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/governance/compliance               | admin.governance.compliance           | 
+App\Http\Controllers\Admin\GovernanceController@compliance                  | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/governance/compliance/{id}/export   | admin.governance.compliance.export    | 
+App\Http\Controllers\Admin\GovernanceController@exportReport                | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/operations/claims                   | admin.operations.claims               | 
+App\Http\Controllers\Admin\OperationsController@claims                      | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/operations/claims/{id}              | admin.operations.claims.show          | 
+App\Http\Controllers\Admin\OperationsController@claimDetails                | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/operations/claims/{id}/approve      | admin.operations.claims.approve       | 
+App\Http\Controllers\Admin\OperationsController@approveClaim                | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/operations/claims/{id}/reject       | admin.operations.claims.reject        | 
+App\Http\Controllers\Admin\OperationsController@rejectClaim                 | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/operations/documents                | admin.operations.documents            | 
+App\Http\Controllers\Admin\OperationsController@documents                   | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/operations/workflows                | admin.operations.workflows            | 
+App\Http\Controllers\Admin\OperationsController@workflows                   | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/products                            | admin.products.index                  | 
+App\Http\Controllers\Product\InsuranceProductController@index               | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/products                            | admin.products.store                  | 
+App\Http\Controllers\Product\InsuranceProductController@store               | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/products/compare/matrix             | admin.products.compare                | 
+App\Http\Controllers\Product\InsuranceProductController@compare             | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/products/create                     | admin.products.create                 | 
+App\Http\Controllers\Product\InsuranceProductController@create              | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/products/{product}                  | admin.products.show                   | 
+App\Http\Controllers\Product\InsuranceProductController@show                | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | PUT|PATCH | admin/products/{product}                  | admin.products.update                 | 
+App\Http\Controllers\Product\InsuranceProductController@update              | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | DELETE    | admin/products/{product}                  | admin.products.destroy                | 
+App\Http\Controllers\Product\InsuranceProductController@destroy             | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/products/{product}/edit             | admin.products.edit                   | 
+App\Http\Controllers\Product\InsuranceProductController@edit                | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/system/audit-logs                   | admin.system.audit-logs               | 
+App\Http\Controllers\Admin\SystemTechController@auditLogs                   | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/system/configurations               | admin.system.configurations           | 
+App\Http\Controllers\Admin\SystemTechController@configurations              | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/system/configurations               | admin.system.configurations.save      | 
+App\Http\Controllers\Admin\SystemTechController@saveConfigurations          | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/system/developer-portal             | admin.system.developer-portal         | 
+App\Http\Controllers\Admin\SystemTechController@developerPortal             | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/system/multi-country                | admin.system.multi-country            | 
+App\Http\Controllers\Admin\SystemTechController@multiCountry                | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users                               | admin.users.index                     | 
+App\Http\Controllers\SuperAdmin\UserManagementController@index              | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/users                               | admin.users.store                     | 
+App\Http\Controllers\SuperAdmin\UserManagementController@store              | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/admins                        | admin.users.admins                    | 
+App\Http\Controllers\SuperAdmin\UserManagementController@admins             | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/agents                        | admin.users.agents                    | 
+App\Http\Controllers\SuperAdmin\UserManagementController@agents             | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/aggregators                   | admin.users.aggregators               | 
+App\Http\Controllers\SuperAdmin\UserManagementController@aggregators        | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | POST      | admin/users/aggregators                   | admin.users.aggregators.store         | 
+App\Http\Controllers\SuperAdmin\UserManagementController@storeAggregator    | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/aggregators/create            | admin.users.aggregators.create        | 
+App\Http\Controllers\SuperAdmin\UserManagementController@createAggregator   | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/brokers                       | admin.users.brokers                   | 
+App\Http\Controllers\SuperAdmin\UserManagementController@brokers            | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/create                        | admin.users.create                    | 
+App\Http\Controllers\SuperAdmin\UserManagementController@create             | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/customers                     | admin.users.customers                 | 
+App\Http\Controllers\SuperAdmin\UserManagementController@customers          | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/insurers                      | admin.users.insurers                  | 
+App\Http\Controllers\SuperAdmin\UserManagementController@insurers           | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/rbac                          | admin.users.rbac                      | 
+App\Http\Controllers\SuperAdmin\UserManagementController@rbacSettings       | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/service-providers             | admin.users.service-providers         | 
+App\Http\Controllers\SuperAdmin\UserManagementController@serviceProviders   | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | PUT       | admin/users/{user}                        | admin.users.update                    | 
+App\Http\Controllers\SuperAdmin\UserManagementController@update             | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | DELETE    | admin/users/{user}                        | admin.users.destroy                   | 
+App\Http\Controllers\SuperAdmin\UserManagementController@destroy            | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+|        | GET|HEAD  | admin/users/{user}/edit                   | admin.users.edit                      | 
+App\Http\Controllers\SuperAdmin\UserManagementController@edit               | web                                                    
+        |
+|        |           |                                           |                                       |                           
+                                                  | App\Http\Middleware\RoleMiddleware:super_admin,admin,sub_admin |
+
+
