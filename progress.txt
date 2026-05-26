@@ -1,0 +1,35 @@
+# BIMAKWIK FULL MODULE SWEEP - PROGRESS TRACKER
+## Reference: Bima Kwik Insurance Platform System Architecture Document
+
+## Order of Modules (Full Sweep)
+1. [ ] Super Admin / Admin     - User management, system settings, audit logs, modules
+2. [ ] Insurer                  - Products, branches, agreements, contracts, dashboard
+3. [ ] Broker                   - Customers, commissions, agreements, licenses
+4. [ ] Aggregator               - Referral links, commissions, agreements
+5. [ ] Agent                    - Customers, commissions, training, licenses
+6. [ ] SFE Executive            - Sales force enablement
+7. [ ] Bancassurance            - Already partially done
+8. [ ] Customer (Mteja)         - Policies, claims, KYC, payments
+9. [ ] Service Provider         - Services, payments, performance
+10.[ ] Regulator                - Compliance, reports, audits, TIRA
+11.[ ] Financing Partner        - Premium financing, loans
+12.[ ] Developer                - API keys, webhooks, apps
+13.[ ] Common (Profile, Auth)   - Already done
+
+## Per-Module Checklist
+For each module, verify:
+- [ ] Controller exists & methods are real (no dummy returns)
+- [ ] Routes registered in web.php
+- [ ] Sidebar navigation links exist & active state works
+- [ ] Views exist (no "view not found" errors)
+- [ ] Forms POST to working endpoints
+- [ ] DataTables / lists query DB models
+- [ ] Charts use real data
+- [ ] CRUD: Create/Read/Update/Delete all working
+- [ ] SweetAlert feedback on actions
+- [ ] Validation in controllers
+- [ ] Models have proper relations
+- [ ] Demo data for empty states
+
+## Current Session Focus
+- Module 1: SUPER ADMIN / ADMIN
