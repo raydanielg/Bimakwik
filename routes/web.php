@@ -143,9 +143,76 @@ Route::middleware(['auth'])->group(function () {
         });
     });
         
-    Route::get('/insurer/dashboard', [App\Http\Controllers\Insurer\DashboardController::class, 'index'])
-        ->middleware('role:insurer')
-        ->name('insurer.dashboard');
+    // Insurer Dashboard & Hub Routes
+    Route::prefix('insurer')->name('insurer.')->middleware('role:insurer,super_admin,admin')->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Insurer\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/ai-insights', [App\Http\Controllers\Insurer\InsurerHubController::class, 'aiInsights'])->name('ai-insights');
+
+        // Products
+        Route::prefix('products')->name('products.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Insurer\InsurerHubController::class, 'products'])->name('index');
+            Route::get('/categories', [App\Http\Controllers\Insurer\InsurerHubController::class, 'categories'])->name('categories');
+            Route::get('/pricing', [App\Http\Controllers\Insurer\InsurerHubController::class, 'pricingRules'])->name('pricing');
+            Route::get('/form-builder', [App\Http\Controllers\Insurer\InsurerHubController::class, 'formBuilder'])->name('form-builder');
+            Route::get('/regulator-approval', [App\Http\Controllers\Insurer\InsurerHubController::class, 'regulatorApproval'])->name('regulator-approval');
+        });
+
+        // Policies
+        Route::prefix('policies')->name('policies.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Insurer\InsurerHubController::class, 'policies'])->name('index');
+            Route::get('/endorsements', [App\Http\Controllers\Insurer\InsurerHubController::class, 'endorsements'])->name('endorsements');
+            Route::get('/cancellations', [App\Http\Controllers\Insurer\InsurerHubController::class, 'cancellations'])->name('cancellations');
+            Route::get('/renewals', [App\Http\Controllers\Insurer\InsurerHubController::class, 'renewals'])->name('renewals');
+        });
+
+        // Claims
+        Route::prefix('claims')->name('claims.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Insurer\InsurerHubController::class, 'claims'])->name('index');
+            Route::get('/processing', [App\Http\Controllers\Insurer\InsurerHubController::class, 'claimsProcessing'])->name('processing');
+            Route::get('/adjusters', [App\Http\Controllers\Insurer\InsurerHubController::class, 'adjusters'])->name('adjusters');
+            Route::get('/fraud-alerts', [App\Http\Controllers\Insurer\InsurerHubController::class, 'fraudAlerts'])->name('fraud-alerts');
+            Route::get('/tiramis', [App\Http\Controllers\Insurer\InsurerHubController::class, 'tiramis'])->name('tiramis');
+        });
+
+        // Network (Providers, Brokers, Agents)
+        Route::prefix('network')->name('network.')->group(function () {
+            Route::get('/providers', [App\Http\Controllers\Insurer\InsurerHubController::class, 'providers'])->name('providers');
+            Route::get('/provider-slas', [App\Http\Controllers\Insurer\InsurerHubController::class, 'providerSlas'])->name('provider-slas');
+            Route::get('/provider-bills', [App\Http\Controllers\Insurer\InsurerHubController::class, 'providerBills'])->name('provider-bills');
+            Route::get('/brokers', [App\Http\Controllers\Insurer\InsurerHubController::class, 'brokers'])->name('brokers');
+            Route::get('/agents', [App\Http\Controllers\Insurer\InsurerHubController::class, 'agents'])->name('agents');
+            Route::get('/commission-rates', [App\Http\Controllers\Insurer\InsurerHubController::class, 'commissionRates'])->name('commission-rates');
+            Route::get('/performance', [App\Http\Controllers\Insurer\InsurerHubController::class, 'partnerPerformance'])->name('performance');
+        });
+
+        // Customers
+        Route::prefix('customers')->name('customers.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Insurer\InsurerHubController::class, 'customers'])->name('index');
+            Route::get('/kyc', [App\Http\Controllers\Insurer\InsurerHubController::class, 'kycStatus'])->name('kyc');
+        });
+
+        // Finance
+        Route::prefix('finance')->name('finance.')->group(function () {
+            Route::get('/premiums', [App\Http\Controllers\Insurer\InsurerHubController::class, 'premiumsReport'])->name('premiums');
+            Route::get('/commissions', [App\Http\Controllers\Insurer\InsurerHubController::class, 'commissionPayable'])->name('commissions');
+            Route::get('/tax', [App\Http\Controllers\Insurer\InsurerHubController::class, 'taxStatements'])->name('tax');
+        });
+
+        // Reports
+        Route::prefix('reports')->name('reports.')->group(function () {
+            Route::get('/standard', [App\Http\Controllers\Insurer\InsurerHubController::class, 'reportsStandard'])->name('standard');
+            Route::get('/custom', [App\Http\Controllers\Insurer\InsurerHubController::class, 'reportsCustom'])->name('custom');
+            Route::get('/predictive', [App\Http\Controllers\Insurer\InsurerHubController::class, 'reportsPredictive'])->name('predictive');
+        });
+
+        // Settings
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::get('/company', [App\Http\Controllers\Insurer\InsurerHubController::class, 'companyProfile'])->name('company');
+            Route::get('/branches', [App\Http\Controllers\Insurer\InsurerHubController::class, 'branches'])->name('branches');
+            Route::get('/staff', [App\Http\Controllers\Insurer\InsurerHubController::class, 'staffRoles'])->name('staff');
+            Route::get('/api', [App\Http\Controllers\Insurer\InsurerHubController::class, 'apiWebhooks'])->name('api');
+        });
+    });
 
     Route::get('/broker/dashboard', [App\Http\Controllers\Broker\DashboardController::class, 'index'])
         ->middleware('role:broker')
