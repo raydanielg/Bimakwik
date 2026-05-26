@@ -225,9 +225,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/claims', [App\Http\Controllers\Broker\BrokerHubController::class, 'claims'])->name('claims');
     });
 
-    Route::get('/aggregator/dashboard', [App\Http\Controllers\Aggregator\DashboardController::class, 'index'])
-        ->middleware('role:aggregator')
-        ->name('aggregator.dashboard');
+    // Aggregator Routes
+    Route::prefix('aggregator')->name('aggregator.')->middleware('role:aggregator')->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Aggregator\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/policies', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'policies'])->name('policies');
+        Route::get('/customers', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'customers'])->name('customers');
+        Route::get('/commissions', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'commissions'])->name('commissions');
+        Route::get('/reports', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'reports'])->name('reports');
+        Route::get('/brokers', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'brokers'])->name('brokers');
+        Route::get('/agents', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'agents'])->name('agents');
+        Route::get('/products', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'products'])->name('products');
+    });
 
     Route::prefix('service-provider')->name('service-provider.')->middleware(['auth', 'role:service_provider'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\ServiceProvider\DashboardController::class, 'index'])->name('dashboard');
