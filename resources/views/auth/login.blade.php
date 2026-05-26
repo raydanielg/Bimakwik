@@ -9,6 +9,20 @@
         
         <h1 class="auth-title">Log in</h1>
 
+        <!-- Demo Accounts Quick Login Section -->
+        <div class="mb-4 p-3 bg-light rounded-3 border border-dashed text-center">
+            <div class="small text-muted fw-bold mb-2">⚡ DEMO QUICK LOGIN</div>
+            <div class="d-flex flex-wrap justify-content-center gap-2">
+                <button type="button" class="btn btn-sm btn-outline-primary px-3 py-1 text-xs fw-semibold" onclick="quickLogin('super-admin@bimakwik.com')">Super Admin</button>
+                <button type="button" class="btn btn-sm btn-outline-primary px-3 py-1 text-xs fw-semibold" onclick="quickLogin('admin@bimakwik.com')">Admin</button>
+                <button type="button" class="btn btn-sm btn-outline-success px-3 py-1 text-xs fw-semibold" onclick="quickLogin('insurer@bimakwik.com')">Insurer</button>
+                <button type="button" class="btn btn-sm btn-outline-info px-3 py-1 text-xs fw-semibold" onclick="quickLogin('broker@bimakwik.com')">Broker</button>
+                <button type="button" class="btn btn-sm btn-outline-warning text-dark px-3 py-1 text-xs fw-semibold" onclick="quickLogin('bancassurance@bimakwik.com')">Bancassurance</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary px-3 py-1 text-xs fw-semibold" onclick="quickLogin('customer@bimakwik.com')">Customer</button>
+                <button type="button" class="btn btn-sm btn-outline-dark px-3 py-1 text-xs fw-semibold" onclick="quickLogin('developer@bimakwik.com')">Developer</button>
+            </div>
+        </div>
+
         <form method="POST" action="{{ route('login') }}" id="loginForm">
             @csrf
 
@@ -54,6 +68,19 @@
                 const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
                 password.setAttribute('type', type);
             });
+
+            function quickLogin(email) {
+                document.getElementById('email').value = email;
+                document.getElementById('password').value = 'password';
+                
+                // Trigger submit loading state & submit form
+                const btn = document.getElementById('loginSubmit');
+                btn.classList.add('loading');
+                
+                setTimeout(() => {
+                    document.getElementById('loginForm').submit();
+                }, 300);
+            }
 
             document.getElementById('loginForm').addEventListener('submit', function(e) {
                 const btn = document.getElementById('loginSubmit');
