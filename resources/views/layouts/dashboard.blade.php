@@ -350,116 +350,116 @@
 
             <div class="sidebar-heading mt-3">Product Management</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#productSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="#productSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->routeIs('insurer.products.*') ? 'active' : '' }}">
                     <span><i class="bi bi-box-seam"></i> Products</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <div class="collapse ps-3" id="productSubmenu">
-                    <a href="{{ route('admin.products.index') }}" class="list-group-item list-group-item-action py-1 small">All Products</a>
+                <div class="collapse ps-3 {{ request()->routeIs('insurer.products.*') ? 'show' : '' }}" id="productSubmenu">
+                    <a href="{{ route('insurer.products.index') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.products.index') ? 'active' : '' }}">All Products</a>
                     <a href="{{ route('admin.products.create') }}" class="list-group-item list-group-item-action py-1 small">Create New Product</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Categories</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Pricing & Rules</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Form Builder</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Regulator Approval</a>
+                    <a href="{{ route('insurer.products.categories') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.products.categories') ? 'active' : '' }}">Categories</a>
+                    <a href="{{ route('insurer.products.pricing') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.products.pricing') ? 'active' : '' }}">Pricing & Rules</a>
+                    <a href="{{ route('insurer.products.form-builder') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.products.form-builder') ? 'active' : '' }}">Form Builder</a>
+                    <a href="{{ route('insurer.products.regulator-approval') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.products.regulator-approval') ? 'active' : '' }}">Regulator Approval</a>
                 </div>
             </div>
 
             <div class="sidebar-heading mt-3">Policy Management</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#policySubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="#policySubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->routeIs('insurer.policies.*') ? 'active' : '' }}">
                     <span><i class="bi bi-shield-check"></i> Policies</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <div class="collapse ps-3" id="policySubmenu">
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Policies</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Active / Expired</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Endorsements</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Cancellations</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Renewals</a>
+                <div class="collapse ps-3 {{ request()->routeIs('insurer.policies.*') ? 'show' : '' }}" id="policySubmenu">
+                    <a href="{{ route('insurer.policies.index') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.policies.index') ? 'active' : '' }}">All Policies</a>
+                    <a href="{{ route('insurer.policies.index') }}" class="list-group-item list-group-item-action py-1 small">Active / Expired</a>
+                    <a href="{{ route('insurer.policies.endorsements') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.policies.endorsements') ? 'active' : '' }}">Endorsements</a>
+                    <a href="{{ route('insurer.policies.cancellations') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.policies.cancellations') ? 'active' : '' }}">Cancellations</a>
+                    <a href="{{ route('insurer.policies.renewals') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.policies.renewals') ? 'active' : '' }}">Renewals</a>
                 </div>
             </div>
 
             <div class="sidebar-heading mt-3">Claims Management</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#claimsSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="#claimsSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->routeIs('insurer.claims.*') ? 'active' : '' }}">
                     <span><i class="bi bi-exclamation-octagon"></i> Claims</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <div class="collapse ps-3" id="claimsSubmenu">
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Claims</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Processing</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Adjuster Mgmt</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Fraud Alerts</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">TIRAMIS Export</a>
+                <div class="collapse ps-3 {{ request()->routeIs('insurer.claims.*') ? 'show' : '' }}" id="claimsSubmenu">
+                    <a href="{{ route('insurer.claims.index') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.claims.index') ? 'active' : '' }}">All Claims</a>
+                    <a href="{{ route('insurer.claims.processing') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.claims.processing') ? 'active' : '' }}">Processing</a>
+                    <a href="{{ route('insurer.claims.adjusters') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.claims.adjusters') ? 'active' : '' }}">Adjuster Mgmt</a>
+                    <a href="{{ route('insurer.claims.fraud-alerts') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.claims.fraud-alerts') ? 'active' : '' }}">Fraud Alerts</a>
+                    <a href="{{ route('insurer.claims.tiramis') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.claims.tiramis') ? 'active' : '' }}">TIRAMIS Export</a>
                 </div>
             </div>
 
             <div class="sidebar-heading mt-3">Network Partners</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#providerSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="#providerSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->routeIs('insurer.network.providers') ? 'active' : '' }}">
                     <span><i class="bi bi-hospital"></i> Service Providers</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <div class="collapse ps-3" id="providerSubmenu">
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Providers</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">SLAs & Contracts</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Bills & Payments</a>
+                <div class="collapse ps-3 {{ request()->routeIs('insurer.network.*') ? 'show' : '' }}" id="providerSubmenu">
+                    <a href="{{ route('insurer.network.providers') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.network.providers') ? 'active' : '' }}">All Providers</a>
+                    <a href="{{ route('insurer.network.provider-slas') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.network.provider-slas') ? 'active' : '' }}">SLAs & Contracts</a>
+                    <a href="{{ route('insurer.network.provider-bills') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.network.provider-bills') ? 'active' : '' }}">Bills & Payments</a>
                 </div>
-                <a href="#partnerSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center mt-1">
+                <a href="#partnerSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center mt-1 {{ request()->routeIs('insurer.network.brokers') ? 'active' : '' }}">
                     <span><i class="bi bi-people"></i> Brokers & Agents</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <div class="collapse ps-3" id="partnerSubmenu">
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Brokers</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">All Agents (SFE/Banc)</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Commission Rates</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Performance</a>
+                <div class="collapse ps-3 {{ request()->routeIs('insurer.network.*') ? 'show' : '' }}" id="partnerSubmenu">
+                    <a href="{{ route('insurer.network.brokers') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.network.brokers') ? 'active' : '' }}">All Brokers</a>
+                    <a href="{{ route('insurer.network.agents') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.network.agents') ? 'active' : '' }}">All Agents (SFE/Banc)</a>
+                    <a href="{{ route('insurer.network.commission-rates') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.network.commission-rates') ? 'active' : '' }}">Commission Rates</a>
+                    <a href="{{ route('insurer.network.performance') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.network.performance') ? 'active' : '' }}">Performance</a>
                 </div>
             </div>
 
             <div class="sidebar-heading mt-3">Customers</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('insurer.customers.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('insurer.customers.index') ? 'active' : '' }}">
                     <i class="bi bi-person-lines-fill"></i> All Customers
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('insurer.customers.kyc') }}" class="list-group-item list-group-item-action {{ request()->routeIs('insurer.customers.kyc') ? 'active' : '' }}">
                     <i class="bi bi-person-vcard"></i> KYC Status
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Finance & Reports</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#financeSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="#financeSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->routeIs('insurer.finance.*') ? 'active' : '' }}">
                     <span><i class="bi bi-bank"></i> Financial Mgmt</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <div class="collapse ps-3" id="financeSubmenu">
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Premiums Report</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Commission Payable</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Tax & Statements</a>
+                <div class="collapse ps-3 {{ request()->routeIs('insurer.finance.*') ? 'show' : '' }}" id="financeSubmenu">
+                    <a href="{{ route('insurer.finance.premiums') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.finance.premiums') ? 'active' : '' }}">Premiums Report</a>
+                    <a href="{{ route('insurer.finance.commissions') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.finance.commissions') ? 'active' : '' }}">Commission Payable</a>
+                    <a href="{{ route('insurer.finance.tax') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.finance.tax') ? 'active' : '' }}">Tax & Statements</a>
                 </div>
-                <a href="#reportsSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center mt-1">
+                <a href="#reportsSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center mt-1 {{ request()->routeIs('insurer.reports.*') ? 'active' : '' }}">
                     <span><i class="bi bi-bar-chart-line"></i> Reports & Analytics</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <div class="collapse ps-3" id="reportsSubmenu">
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Standard Reports</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Custom Builder</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Predictive Analytics</a>
+                <div class="collapse ps-3 {{ request()->routeIs('insurer.reports.*') ? 'show' : '' }}" id="reportsSubmenu">
+                    <a href="{{ route('insurer.reports.standard') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.reports.standard') ? 'active' : '' }}">Standard Reports</a>
+                    <a href="{{ route('insurer.reports.custom') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.reports.custom') ? 'active' : '' }}">Custom Builder</a>
+                    <a href="{{ route('insurer.reports.predictive') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.reports.predictive') ? 'active' : '' }}">Predictive Analytics</a>
                 </div>
             </div>
 
             <div class="sidebar-heading mt-3">Administration</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#settingsSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="#settingsSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->routeIs('insurer.settings.*') ? 'active' : '' }}">
                     <span><i class="bi bi-gear"></i> Settings & Profile</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <div class="collapse ps-3" id="settingsSubmenu">
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Company Profile</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Branch Mgmt</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Staff & Roles</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">API & Webhooks</a>
+                <div class="collapse ps-3 {{ request()->routeIs('insurer.settings.*') ? 'show' : '' }}" id="settingsSubmenu">
+                    <a href="{{ route('insurer.settings.company') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.settings.company') ? 'active' : '' }}">Company Profile</a>
+                    <a href="{{ route('insurer.settings.branches') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.settings.branches') ? 'active' : '' }}">Branch Mgmt</a>
+                    <a href="{{ route('insurer.settings.staff') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.settings.staff') ? 'active' : '' }}">Staff & Roles</a>
+                    <a href="{{ route('insurer.settings.api') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('insurer.settings.api') ? 'active' : '' }}">API & Webhooks</a>
                 </div>
             </div>
             @elseif(auth()->user()->hasRole('sfe'))
