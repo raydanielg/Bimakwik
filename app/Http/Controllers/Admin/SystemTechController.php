@@ -17,11 +17,33 @@ class SystemTechController extends Controller
     public function configurations()
     {
         try {
-            $configs = SystemSetting::all();
+            $configs = SystemSetting::all()->keyBy('key');
         } catch (\Exception $e) {
             $configs = collect();
         }
         return view('admin.system.configurations', compact('configs'));
+    }
+
+    public function saveConfigurations(Request $request)
+    {
+        try {
+            $settings = $request->except('_token');
+            foreach ($settings as $key => $value) {
+                SystemSetting::updateOrCreate(
+                    ['key' => $key],
+                    ['value' => $value, 'updated_at' => now()]
+                );
+            }
+            return response()->json([
+                'success' => true,
+                'message' => 'Settings saved successfully',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to save: ' . $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function developerPortal()
