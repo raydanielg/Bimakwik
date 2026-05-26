@@ -110,15 +110,15 @@
                 <div class="list-group list-group-flush small">
                     <a href="{{ route('regulator.insurers') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
                         <span><i class="bi bi-building me-2 text-primary"></i> Registered Insurers</span>
-                        <span class="badge bg-primary rounded-pill">{{ $totalInsurers }}</span>
+                        <span class="badge bg-primary rounded-pill">{{ $totalInsurers ?? 0 }}</span>
                     </a>
                     <a href="{{ route('regulator.brokers') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
                         <span><i class="bi bi-briefcase me-2 text-primary"></i> Registered Brokers</span>
-                        <span class="badge bg-primary rounded-pill">{{ $totalBrokers }}</span>
+                        <span class="badge bg-primary rounded-pill">{{ $totalBrokers ?? 0 }}</span>
                     </a>
                     <a href="{{ route('regulator.agents') }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3">
                         <span><i class="bi bi-people me-2 text-primary"></i> Registered Agents</span>
-                        <span class="badge bg-primary rounded-pill">{{ $totalAgentsspan>
+                        <span class="badge bg-primary rounded-pill">{{ $totalAgents ?? 0 }}</span>
                     </a>
                 </div>
                 
