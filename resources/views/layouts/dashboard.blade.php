@@ -938,14 +938,14 @@
                 <a href="{{ route('regulator.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Dashboard
                 </a>
-                <a href="#oversightSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <a href="#oversightSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {{ request()->routeIs('regulator.insurers', 'regulator.brokers', 'regulator.agents') ? 'active' : '' }}">
                     <span><i class="bi bi-shield-shaded"></i> Oversight</span>
                     <i class="bi bi-chevron-down small"></i>
                 </a>
-                <div class="collapse ps-3" id="oversightSubmenu">
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Insurers</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Brokers</a>
-                    <a href="#" class="list-group-item list-group-item-action py-1 small">Agents</a>
+                <div class="collapse ps-3 {{ request()->routeIs('regulator.insurers', 'regulator.brokers', 'regulator.agents') ? 'show' : '' }}" id="oversightSubmenu">
+                    <a href="{{ route('regulator.insurers') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('regulator.insurers') ? 'active' : '' }}">Insurers</a>
+                    <a href="{{ route('regulator.brokers') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('regulator.brokers') ? 'active' : '' }}">Brokers</a>
+                    <a href="{{ route('regulator.agents') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('regulator.agents') ? 'active' : '' }}">Agents</a>
                 </div>
             </div>
 
@@ -957,21 +957,28 @@
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-check-circle"></i> Product Approvals
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('regulator.compliance') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.compliance') ? 'active' : '' }}">
                     <i class="bi bi-exclamation-triangle"></i> Compliance
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Intelligence</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('regulator.analytics') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.analytics') ? 'active' : '' }}">
                     <i class="bi bi-graph-up"></i> Market Stats
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <i class="bi bi-shield-lock"></i> Consumer Protection
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('regulator.oversight') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.oversight') ? 'active' : '' }}">
                     <i class="bi bi-journal-text"></i> Audit Logs
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">Reports</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('regulator.reports') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.reports') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-bar-graph"></i> Regulatory Reports
                 </a>
             </div>
 
