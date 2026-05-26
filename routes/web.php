@@ -214,9 +214,16 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    Route::get('/broker/dashboard', [App\Http\Controllers\Broker\DashboardController::class, 'index'])
-        ->middleware('role:broker')
-        ->name('broker.dashboard');
+    // Broker Routes
+    Route::prefix('broker')->name('broker.')->middleware('role:broker')->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Broker\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/policies', [App\Http\Controllers\Broker\BrokerHubController::class, 'policies'])->name('policies');
+        Route::get('/customers', [App\Http\Controllers\Broker\BrokerHubController::class, 'customers'])->name('customers');
+        Route::get('/commissions', [App\Http\Controllers\Broker\BrokerHubController::class, 'commissions'])->name('commissions');
+        Route::get('/reports', [App\Http\Controllers\Broker\BrokerHubController::class, 'reports'])->name('reports');
+        Route::get('/products', [App\Http\Controllers\Broker\BrokerHubController::class, 'products'])->name('products');
+        Route::get('/claims', [App\Http\Controllers\Broker\BrokerHubController::class, 'claims'])->name('claims');
+    });
 
     Route::get('/aggregator/dashboard', [App\Http\Controllers\Aggregator\DashboardController::class, 'index'])
         ->middleware('role:aggregator')
