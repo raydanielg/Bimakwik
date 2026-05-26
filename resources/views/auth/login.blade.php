@@ -1,8 +1,46 @@
 @extends('layouts.auth')
 
 @section('content')
+<style>
+    /* Tailwind/Custom Button Classes mapping to plain CSS */
+    .bg-brand { background-color: #10b981 !important; color: #ffffff !important; }
+    .bg-brand:hover { background-color: #059669 !important; }
+    
+    .bg-neutral-secondary-medium { background-color: #e2e8f0 !important; color: #1e293b !important; }
+    .bg-neutral-secondary-medium:hover { background-color: #cbd5e1 !important; color: #0f172a !important; }
+    
+    .bg-neutral-primary-soft { background-color: #f1f5f9 !important; color: #334155 !important; border-color: #cbd5e1 !important; }
+    .bg-neutral-primary-soft:hover { background-color: #e2e8f0 !important; color: #0f172a !important; }
+    
+    .bg-success { background-color: #10b981 !important; color: #ffffff !important; }
+    .bg-success:hover { background-color: #059669 !important; }
+    
+    .bg-danger { background-color: #ef4444 !important; color: #ffffff !important; }
+    .bg-danger:hover { background-color: #dc2626 !important; }
+    
+    .bg-warning { background-color: #f59e0b !important; color: #ffffff !important; }
+    .bg-warning:hover { background-color: #d97706 !important; }
+    
+    .bg-dark { background-color: #1e293b !important; color: #ffffff !important; }
+    .bg-dark:hover { background-color: #0f172a !important; }
+    
+    .box-border { box-sizing: border-box; }
+    .rounded-base { border-radius: 8px !important; }
+    .shadow-xs { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important; }
+    .leading-5 { line-height: 1.25rem !important; }
+    
+    /* Responsive sizing adjustment for the demo buttons */
+    .demo-btn {
+        padding: 6px 12px !important;
+        font-size: 0.8rem !important;
+        font-weight: 500 !important;
+        border: 1px solid transparent;
+        transition: all 0.2s ease-in-out;
+    }
+</style>
+
 <div class="auth-page">
-    <div class="auth-card animate__animated animate__fadeInDown">
+    <div class="auth-card animate__animated animate__fadeInDown" style="max-width: 550px;">
         <div class="auth-logo">
             <img src="{{ asset('logo.png') }}" alt="{{ config('app.name') }}" style="height: 64px; width: auto; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.2));">
         </div>
@@ -13,20 +51,20 @@
         <div class="mb-4 p-3 bg-light rounded-3 border text-center">
             <div class="small text-muted fw-bold mb-2"><i class="bi bi-lightning-charge-fill text-warning me-1"></i>DEMO QUICK LOGIN</div>
             <div class="d-flex flex-wrap justify-content-center gap-2">
-                <button type="button" class="btn btn-sm btn-outline-primary px-2 py-1" onclick="quickLogin('super-admin@bimakwik.com')">Super Admin</button>
-                <button type="button" class="btn btn-sm btn-outline-primary px-2 py-1" onclick="quickLogin('admin@bimakwik.com')">Admin</button>
-                <button type="button" class="btn btn-sm btn-outline-primary px-2 py-1" onclick="quickLogin('sub-admin@bimakwik.com')">Sub Admin</button>
-                <button type="button" class="btn btn-sm btn-outline-success px-2 py-1" onclick="quickLogin('insurer@bimakwik.com')">Insurer</button>
-                <button type="button" class="btn btn-sm btn-outline-info px-2 py-1" onclick="quickLogin('broker@bimakwik.com')">Broker</button>
-                <button type="button" class="btn btn-sm btn-outline-info px-2 py-1" onclick="quickLogin('aggregator@bimakwik.com')">Aggregator</button>
-                <button type="button" class="btn btn-sm btn-outline-info px-2 py-1" onclick="quickLogin('agent@bimakwik.com')">Agent</button>
-                <button type="button" class="btn btn-sm btn-outline-warning text-dark px-2 py-1" onclick="quickLogin('sfe@bimakwik.com')">SFE</button>
-                <button type="button" class="btn btn-sm btn-outline-warning text-dark px-2 py-1" onclick="quickLogin('bancassurance@bimakwik.com')">Bancassurance</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary px-2 py-1" onclick="quickLogin('customer@bimakwik.com')">Customer</button>
-                <button type="button" class="btn btn-sm btn-outline-success px-2 py-1" onclick="quickLogin('service-provider@bimakwik.com')">Service Provider</button>
-                <button type="button" class="btn btn-sm btn-outline-danger px-2 py-1" onclick="quickLogin('regulator@bimakwik.com')">Regulator</button>
-                <button type="button" class="btn btn-sm btn-outline-primary px-2 py-1" onclick="quickLogin('financing-partner@bimakwik.com')">Financing Partner</button>
-                <button type="button" class="btn btn-sm btn-outline-dark px-2 py-1" onclick="quickLogin('developer@bimakwik.com')">Developer</button>
+                <button type="button" class="text-white bg-brand box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('super-admin@bimakwik.com')">Super Admin</button>
+                <button type="button" class="text-white bg-brand box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('admin@bimakwik.com')">Admin</button>
+                <button type="button" class="text-white bg-brand box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('sub-admin@bimakwik.com')">Sub Admin</button>
+                <button type="button" class="text-white bg-success box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('insurer@bimakwik.com')">Insurer</button>
+                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('broker@bimakwik.com')">Broker</button>
+                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('aggregator@bimakwik.com')">Aggregator</button>
+                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('agent@bimakwik.com')">Agent</button>
+                <button type="button" class="text-white bg-warning box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('sfe@bimakwik.com')">SFE</button>
+                <button type="button" class="text-white bg-warning box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('bancassurance@bimakwik.com')">Bancassurance</button>
+                <button type="button" class="text-body bg-neutral-secondary-medium box-border border shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('customer@bimakwik.com')">Customer</button>
+                <button type="button" class="text-white bg-success box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('service-provider@bimakwik.com')">Service Provider</button>
+                <button type="button" class="text-white bg-danger box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('regulator@bimakwik.com')">Regulator</button>
+                <button type="button" class="text-body bg-neutral-primary-soft border shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('financing-partner@bimakwik.com')">Financing Partner</button>
+                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('developer@bimakwik.com')">Developer</button>
             </div>
         </div>
 
