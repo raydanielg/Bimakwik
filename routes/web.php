@@ -237,6 +237,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/products', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'products'])->name('products');
     });
 
+    // Agent Routes
+    Route::prefix('agent')->name('agent.')->middleware('role:sfe,bancassurance')->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\Agent\AgentDashboardController::class, 'index'])->name('dashboard');
+        Route::get('/policies', [App\Http\Controllers\Agent\AgentHubController::class, 'policies'])->name('policies');
+        Route::get('/customers', [App\Http\Controllers\Agent\AgentHubController::class, 'customers'])->name('customers');
+        Route::get('/commissions', [App\Http\Controllers\Agent\AgentHubController::class, 'commissions'])->name('commissions');
+        Route::get('/reports', [App\Http\Controllers\Agent\AgentHubController::class, 'reports'])->name('reports');
+        Route::get('/products', [App\Http\Controllers\Agent\AgentHubController::class, 'products'])->name('products');
+        Route::get('/claims', [App\Http\Controllers\Agent\AgentHubController::class, 'claims'])->name('claims');
+    });
+
     Route::prefix('service-provider')->name('service-provider.')->middleware(['auth', 'role:service_provider'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\ServiceProvider\DashboardController::class, 'index'])->name('dashboard');
         Route::get('/customer/verify', [App\Http\Controllers\ServiceProvider\CustomerController::class, 'index'])->name('customer.verify');
