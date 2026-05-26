@@ -15,8 +15,8 @@
                     </div>
                     <span class="x-small fw-bold text-muted">Total Premiums</span>
                 </div>
-                <h4 class="fw-bold mb-0">TZS 1.2B</h4>
-                <p class="x-small text-success mb-0 mt-1"><i class="bi bi-arrow-up"></i> 12.5%</p>
+                <h4 class="fw-bold mb-0">TZS {{ number_format($totalPremiums / 1000000, 1) }}M</h4>
+                <p class="x-small text-success mb-0 mt-1"><i class="bi bi-arrow-up"></i> {{ number_format($premiumGrowth, 1) }}%</p>
             </div>
         </div>
     </div>
@@ -30,8 +30,8 @@
                     </div>
                     <span class="x-small fw-bold text-muted">Active Policies</span>
                 </div>
-                <h4 class="fw-bold mb-0">8,450</h4>
-                <p class="x-small text-success mb-0 mt-1"><i class="bi bi-arrow-up"></i> 5.2%</p>
+                <h4 class="fw-bold mb-0">{{ number_format($activePolicies) }}</h4>
+                <p class="x-small text-success mb-0 mt-1"><i class="bi bi-arrow-up"></i> {{ number_format($policiesGrowth, 1) }}%</p>
             </div>
         </div>
     </div>
@@ -45,8 +45,8 @@
                     </div>
                     <span class="x-small fw-bold text-muted">Pending Claims</span>
                 </div>
-                <h4 class="fw-bold mb-0">124</h4>
-                <p class="x-small text-danger mb-0 mt-1"><i class="bi bi-clock"></i> Action Needed</p>
+                <h4 class="fw-bold mb-0">{{ number_format($pendingClaims) }}</h4>
+                <p class="x-small text-danger mb-0 mt-1"><i class="bi bi-clock"></i> {{ $pendingClaims > 0 ? 'Action Needed' : 'All Clear' }}</p>
             </div>
         </div>
     </div>
@@ -60,8 +60,8 @@
                     </div>
                     <span class="x-small fw-bold text-muted">Settlement Ratio</span>
                 </div>
-                <h4 class="fw-bold mb-0">94.2%</h4>
-                <p class="x-small text-primary mb-0 mt-1">Excellent Performance</p>
+                <h4 class="fw-bold mb-0">{{ $settlementRatio }}%</h4>
+                <p class="x-small text-primary mb-0 mt-1">{{ $settlementRatio >= 90 ? 'Excellent' : ($settlementRatio >= 75 ? 'Good' : 'Needs Improvement') }}</p>
             </div>
         </div>
     </div>
@@ -75,8 +75,8 @@
                     </div>
                     <span class="x-small fw-bold text-muted">Traffic & Leads</span>
                 </div>
-                <h4 class="fw-bold mb-0">1.2k / 85</h4>
-                <p class="x-small text-success mb-0 mt-1"><i class="bi bi-arrow-up"></i> 7.1% leads</p>
+                <h4 class="fw-bold mb-0">{{ number_format($totalCustomers) }} / {{ number_format($newCustomersMonth) }}</h4>
+                <p class="x-small text-success mb-0 mt-1"><i class="bi bi-arrow-up"></i> {{ $newCustomersMonth }} new this month</p>
             </div>
         </div>
     </div>
@@ -131,14 +131,14 @@
                 <h6 class="fw-bold mb-3">Commission Summary</h6>
                 <div class="d-flex justify-content-between mb-2">
                     <span class="small text-muted">Payable Summary</span>
-                    <span class="small fw-bold">TZS 12.4M</span>
+                    <span class="small fw-bold">TZS {{ number_format($pendingCommissions / 1000000, 1) }}M</span>
                 </div>
                 <div class="progress mb-3" style="height: 6px;">
                     <div class="progress-bar bg-primary" style="width: 75%;"></div>
                 </div>
                 <div class="d-flex justify-content-between mb-2">
                     <span class="small text-muted">Paid Summary</span>
-                    <span class="small fw-bold">TZS 45.8M</span>
+                    <span class="small fw-bold">TZS {{ number_format($paidCommissions / 1000000, 1) }}M</span>
                 </div>
                 <div class="progress" style="height: 6px;">
                     <div class="progress-bar bg-success" style="width: 90%;"></div>
