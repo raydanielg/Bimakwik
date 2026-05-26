@@ -28,7 +28,7 @@
                         <i class="bi bi-shield-check fs-3"></i>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Active Policies</h6>
-                    <h3 class="fw-bold mb-0">{{ $activePolicies ?? 0 ?? 0 }}</h3>
+                    <h3 class="fw-bold mb-0">{{ $activePolicies ?? 0 }}</h3>
                     <div class="mt-1 small text-success">Market Wide</div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                         <i class="bi bi-exclamation-triangle fs-3"></i>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Compliance Alerts</h6>
-                    <h3 class="fw-bold mb-0">{{ $complianceAlerts }}</h3>
+                    <h3 class="fw-bold mb-0">{{ $complianceAlerts ?? 0 }}</h3>
                     <div class="mt-1 small text-danger">Action Required</div>
                 </div>
             </div>
