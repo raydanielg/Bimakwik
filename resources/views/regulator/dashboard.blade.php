@@ -54,7 +54,7 @@
                         <i class="bi bi-search fs-3"></i>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Fraud Investigations</h6>
-                    <h3 class="fw-bold mb-0">{{ $fraudCases }}</h3>
+                    <h3 class="fw-bold mb-0">{{ $fraudCases ?? 0 }}</h3>
                     <div class="mt-1 small text-warning">Under Review</div>
                 </div>
             </div>
