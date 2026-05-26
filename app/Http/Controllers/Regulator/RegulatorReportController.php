@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\CustomerPolicy;
 use App\Models\Claim;
 use App\Models\InsuranceProduct;
-use App\Models\ComplianceAlert;
 
 class RegulatorReportController extends Controller
 {
@@ -36,7 +35,7 @@ class RegulatorReportController extends Controller
     public function compliance()
     {
         $alerts = collect();
-        try { $alerts = ComplianceAlert::latest()->paginate(15); } catch (\Exception $e) {}
+        try { $alerts = \App\Models\ComplianceAlert::latest()->paginate(15); } catch (\Exception $e) {}
         return view('regulator.compliance.index', compact('alerts'));
     }
 
