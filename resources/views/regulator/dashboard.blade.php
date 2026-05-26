@@ -79,7 +79,7 @@
                             </tr>
                         </thead>
                         <tbody class="small">
-                            @if($marketShare->count() > 0)
+                            @if(($marketShare ?? collect())->count() > 0)
                                 @foreach($marketShare as $insurer)
                                     <tr>
                                         <td>{{ $insurer->name ?? 'N/A' }}</td>
