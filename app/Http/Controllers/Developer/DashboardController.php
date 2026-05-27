@@ -26,9 +26,9 @@ class DashboardController extends Controller
             ->where('is_active', true)
             ->count();
 
-        // API requests in past 24 hours
-        $apiRequestsToday = ApiUsageStatistic::whereIn('developer_app_id', $appIds)
-            ->where('created_at', '>=', Carbon::now()->subDay())
+        // API requests in past 24 hours (via api keys belonging to user's apps)
+        $apiRequestsToday = ApiUsageStatistic::whereIn('developer_api_key_id', DeveloperApiKey::whereIn('developer_app_id', $appIds)->pluck('id'))
+            ->where('date', '>=', Carbon::now()->subDay()->toDateString())
             ->sum('request_count');
 
         // Success rate from API logs
