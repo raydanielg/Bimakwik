@@ -11,7 +11,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <small class="text-muted">Total Sales</small>
-                        <h5 class="fw-bold mb-0">TZS 45.8M</h5>
+                        <h5 class="fw-bold mb-0">TZS {{ number_format($totalSales / 1000000, 1) }}M</h5>
                     </div>
                     <div class="bg-primary bg-opacity-10 rounded-circle p-2">
                         <i class="bi bi-cash-stack text-primary"></i>

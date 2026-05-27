@@ -33,7 +33,7 @@
                     <div class="text-success small fw-bold">{{ __('developer.active') }}</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('developer.active_keys') }}</h6>
-                <h4 class="fw-bold mb-0">12</h4>
+                <h4 class="fw-bold mb-0">{{ $activeKeysCount }}</h4>
                 <div class="x-small text-muted mt-2">{{ __('developer.across_apps') }}</div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     <div class="text-primary small fw-bold">{{ __('developer.optimal') }}</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('developer.avg_latency') }}</h6>
-                <h4 class="fw-bold mb-0">124ms</h4>
+                <h4 class="fw-bold mb-0">{{ $avgResponseTime > 0 ? $avgResponseTime . 'ms' : 'N/A' }}</h4>
                 <div class="x-small text-muted mt-2">{{ __('developer.p95_response') }}</div>
             </div>
         </div>
