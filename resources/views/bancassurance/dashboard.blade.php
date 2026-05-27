@@ -56,7 +56,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <small class="text-muted">Pending Renewals</small>
-                        <h5 class="fw-bold mb-0">18</h5>
+                        <h5 class="fw-bold mb-0">{{ $pendingRenewals }}</h5>
                     </div>
                     <div class="bg-warning bg-opacity-10 rounded-circle p-2">
                         <i class="bi bi-clock-history text-warning"></i>
@@ -168,10 +168,10 @@ window.addEventListener('load', function() {
             salesTrendChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    labels: {!! json_encode($weeklyLabels) !!},
                     datasets: [{
                         label: 'Sales (Millions TZS)',
-                        data: [12, 19, 15, 25, 22, 30, 28],
+                        data: {!! json_encode($weeklySales) !!},
                         borderColor: '#0d6efd',
                         backgroundColor: gradient,
                         borderWidth: 3,
@@ -283,14 +283,14 @@ function updateChartPeriod(period) {
     let labels, data;
     
     if (period === 'weekly') {
-        labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        data = [12, 19, 15, 25, 22, 30, 28];
+        labels = {!! json_encode($weeklyLabels) !!};
+        data = {!! json_encode($weeklySales) !!};
     } else if (period === 'monthly') {
-        labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-        data = [85, 92, 78, 105];
+        labels = {!! json_encode($monthlyLabels) !!};
+        data = {!! json_encode($monthlySales) !!};
     } else if (period === 'yearly') {
         labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        data = [320, 350, 380, 420, 450, 480, 510, 490, 520, 550, 580, 600];
+        data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     }
 
     salesTrendChart.data.labels = labels;
