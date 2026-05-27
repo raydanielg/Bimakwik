@@ -64,10 +64,10 @@
                     <div class="bg-danger bg-opacity-10 text-danger rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
                         <i class="bi bi-exclamation-triangle fs-4"></i>
                     </div>
-                    <div class="text-danger small fw-bold">8.2% PAR</div>
+                    <div class="text-danger small fw-bold">{{ $defaultRate }}% PAR</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('financing_partner.outstanding') }}</h6>
-                <h4 class="fw-bold mb-0">TZS 12.8M</h4>
+                <h4 class="fw-bold mb-0">TZS {{ number_format($repaymentsThisMonth / 1000000, 1) }}M</h4>
             </div>
         </div>
     </div>
@@ -97,22 +97,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse($recentRequests as $req)
                         <tr>
-                            <td>Hamis Juma</td>
-                            <td>Motor Comprehensive</td>
-                            <td>TZS 850K</td>
-                            <td><span class="text-success fw-bold">840 (A)</span></td>
-                            <td><span class="badge bg-info-soft text-info">{{ __('financing_partner.verifying') }}</span></td>
+                            <td>{{ optional(optional(optional($req->customer)->user)->name) ?? 'N/A' }}</td>
+                            <td>{{ optional(optional($req->customerPolicy)->insuranceProduct)->product_name ?? '-' }}</td>
+                            <td>TZS {{ number_format($req->financing_amount) }}</td>
+                            <td><span class="text-muted fw-bold">-</span></td>
+                            <td>
+                                @php
+                                    $sc = match($req->status) { 'approved'=>'bg-success', 'pending'=>'bg-warning-soft text-warning', 'rejected'=>'bg-danger', default=>'bg-secondary' };
+                                @endphp
+                                <span class="badge {{ $sc }}">{{ ucfirst($req->status) }}</span>
+                            </td>
                             <td><button class="btn btn-sm btn-primary py-0">{{ __('financing_partner.review') }}</button></td>
                         </tr>
+                        @empty
                         <tr>
-                            <td>Sarah Peter</td>
-                            <td>Health Silver</td>
-                            <td>TZS 1.2M</td>
-                            <td><span class="text-warning fw-bold">620 (C)</span></td>
-                            <td><span class="badge bg-warning-soft text-warning">{{ __('financing_partner.pending') }}</span></td>
-                            <td><button class="btn btn-sm btn-primary py-0">{{ __('financing_partner.review') }}</button></td>
+                            <td colspan="6" class="text-center text-muted py-3">No requests found</td>
                         </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
