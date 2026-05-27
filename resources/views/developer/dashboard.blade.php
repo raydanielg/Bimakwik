@@ -13,10 +13,10 @@
                     <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
                         <i class="bi bi-activity fs-4"></i>
                     </div>
-                    <div class="text-success small fw-bold">99.9% {{ __('developer.success_rate') }}</div>
+                    <div class="text-success small fw-bold">{{ $successRate }}% {{ __('developer.success_rate') }}</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('developer.api_requests') }}</h6>
-                <h4 class="fw-bold mb-0">854.2K</h4>
+                <h4 class="fw-bold mb-0">{{ $apiRequestsToday > 0 ? number_format($apiRequestsToday / 1000, 1) . 'K' : '0' }}</h4>
                 <div class="x-small text-muted mt-2">{{ __('developer.past_24_hours') }}</div>
             </div>
         </div>
