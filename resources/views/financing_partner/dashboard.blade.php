@@ -16,9 +16,9 @@
                     <div class="text-success small fw-bold">{{ __('financing_partner.active') }}</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('financing_partner.active_loans') }}</h6>
-                <h4 class="fw-bold mb-0">1,245</h4>
+                <h4 class="fw-bold mb-0">{{ $activeLoans }}</h4>
                 <div class="progress mt-2" style="height: 4px;">
-                    <div class="progress-bar bg-primary" style="width: 75%"></div>
+                    <div class="progress-bar bg-primary" style="width: {{ $totalLoans > 0 ? round(($activeLoans/$totalLoans)*100) : 0 }}%"></div>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                     <div class="text-success small fw-bold">+15% mo</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('financing_partner.total_disbursed') }}</h6>
-                <h4 class="fw-bold mb-0">TZS 85.4M</h4>
+                <h4 class="fw-bold mb-0">TZS {{ number_format($totalDisbursed / 1000000, 1) }}M</h4>
             </div>
         </div>
     </div>
@@ -48,10 +48,10 @@
                     <div class="bg-warning bg-opacity-10 text-warning rounded-3 p-3" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
                         <i class="bi bi-clock-history fs-4"></i>
                     </div>
-                    <div class="badge bg-warning text-dark">28 {{ __('financing_partner.new_short') }}</div>
+                    <div class="badge bg-warning text-dark">{{ $pendingRequests }} {{ __('financing_partner.new_short') }}</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('financing_partner.pending_approvals') }}</h6>
-                <h4 class="fw-bold mb-0">28</h4>
+                <h4 class="fw-bold mb-0">{{ $pendingRequests }}</h4>
             </div>
         </div>
     </div>
