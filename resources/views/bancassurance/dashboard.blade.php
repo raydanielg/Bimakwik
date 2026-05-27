@@ -109,27 +109,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($recentPolicies as $sale)
                             <tr>
-                                <td>Motor Insurance Sale</td>
-                                <td>Hamis Juma</td>
-                                <td>TZS 450,000</td>
-                                <td>Today, 09:15 AM</td>
-                                <td><span class="badge bg-success">Completed</span></td>
+                                <td>{{ optional(optional($sale->insuranceProduct)->product_name) ?? 'Insurance Sale' }}</td>
+                                <td>{{ optional(optional(optional($sale->customerPolicy)->customer)->user)->name ?? 'N/A' }}</td>
+                                <td>TZS {{ number_format($sale->premium_amount) }}</td>
+                                <td>{{ $sale->created_at->diffForHumans() }}</td>
+                                <td>
+                                    @php $sc = match($sale->status) { 'paid'=>'bg-success', 'pending'=>'bg-warning', 'rejected'=>'bg-danger', default=>'bg-secondary' }; @endphp
+                                    <span class="badge {{ $sc }}">{{ ucfirst($sale->status) }}</span>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>Life Insurance Sale</td>
-                                <td>Sarah Peter</td>
-                                <td>TZS 280,000</td>
-                                <td>Yesterday</td>
-                                <td><span class="badge bg-warning">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>Health Insurance Sale</td>
-                                <td>David Omondi</td>
-                                <td>TZS 120,000</td>
-                                <td>2 days ago</td>
-                                <td><span class="badge bg-success">Completed</span></td>
-                            </tr>
+                            @empty
+                            <tr><td colspan="5" class="text-center text-muted py-3">No recent activity</td></tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
