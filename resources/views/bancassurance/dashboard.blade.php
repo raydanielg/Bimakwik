@@ -26,7 +26,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <small class="text-muted">My Commission</small>
-                        <h5 class="fw-bold mb-0">TZS 3.2M</h5>
+                        <h5 class="fw-bold mb-0">TZS {{ number_format($totalCommission / 1000000, 1) }}M</h5>
                     </div>
                     <div class="bg-success bg-opacity-10 rounded-circle p-2">
                         <i class="bi bi-wallet text-success"></i>
@@ -41,7 +41,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <small class="text-muted">Policies Sold</small>
-                        <h5 class="fw-bold mb-0">156</h5>
+                        <h5 class="fw-bold mb-0">{{ $policiesSold }}</h5>
                     </div>
                     <div class="bg-info bg-opacity-10 rounded-circle p-2">
                         <i class="bi bi-file-earmark-text text-info"></i>
