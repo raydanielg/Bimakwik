@@ -553,26 +553,26 @@
                 <a href="{{ route('broker.policies') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.policies') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i> All Policies
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.policies.renewals') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.policies.renewals') ? 'active' : '' }}">
                     <i class="bi bi-arrow-repeat"></i> Renew Policy
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.policies.endorsements') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.policies.endorsements') ? 'active' : '' }}">
                     <i class="bi bi-shield-plus"></i> Endorsement
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.policies.expiry') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.policies.expiry') ? 'active' : '' }}">
                     <i class="bi bi-bell"></i> Expiry Alerts
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Wallet & Payments</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.wallet') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.wallet') ? 'active' : '' }}">
                     <i class="bi bi-wallet2"></i> My Wallet Balance
                 </a>
                 <a href="{{ route('broker.commissions') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.commissions') ? 'active' : '' }}">
                     <i class="bi bi-graph-up-arrow"></i> Commission Earned
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.wallet.cashout') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.wallet.cashout') ? 'active' : '' }}">
                     <i class="bi bi-bank"></i> Request Cash-out
                 </a>
             </div>
@@ -582,7 +582,7 @@
                 <a href="{{ route('broker.claims') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.claims') ? 'active' : '' }}">
                     <i class="bi bi-exclamation-octagon"></i> Track Claim Status
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.claims.fraud') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.claims.fraud') ? 'active' : '' }}">
                     <i class="bi bi-shield-lock"></i> Fraud Alerts
                 </a>
             </div>
