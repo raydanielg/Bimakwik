@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('agent.dashboard');
+        return app(AgentDashboardController::class)->index($request);
     }
 }
