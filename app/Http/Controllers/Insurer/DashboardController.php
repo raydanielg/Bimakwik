@@ -30,11 +30,12 @@ class DashboardController extends Controller
 
         // Policies
         try {
-            $activePolicies = InsuranceProduct::count();
-            $policiesGrowth = 5.2;
+            $activePolicies = \App\Models\CustomerPolicy::where('status', 'active')->count();
+            $totalPolicies = \App\Models\CustomerPolicy::count();
+            $policiesGrowth = $totalPolicies > 0 ? round((\App\Models\CustomerPolicy::whereMonth('created_at', now()->month)->count() / max($totalPolicies, 1)) * 100, 1) : 0;
         } catch (\Exception $e) {
-            $activePolicies = 8450;
-            $policiesGrowth = 5.2;
+            $activePolicies = 0;
+            $policiesGrowth = 0;
         }
 
         // Claims
@@ -63,9 +64,9 @@ class DashboardController extends Controller
 
         // Commissions
         try {
-            $totalCommissions = (BrokerCommission::sum('amount') ?? 0) + (AgentCommission::sum('amount') ?? 0);
-            $pendingCommissions = $totalCommissions * 0.4;
-            $paidCommissions = $totalCommissions * 0.6;
+            $totalCommissions = (BrokerCommission::sum('commission_amount') ?? 0) + (AgentCommission::sum('commission_amount') ?? 0);
+            $pendingCommissions = (BrokerCommission::where('status', 'pending')->sum('commission_amount') ?? 0) + (AgentCommission::where('status', 'pending')->sum('commission_amount') ?? 0);
+            $paidCommissions = $totalCommissions - $pendingCommissions;
         } catch (\Exception $e) {
             $totalCommissions = 58200000;
             $pendingCommissions = 12400000;

@@ -4,47 +4,50 @@ namespace App\Http\Controllers\ServiceProvider;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ServiceProviderBill;
+use App\Models\ServiceProviderPayment;
+use App\Models\ServiceProvider;
 use App\Models\Claim;
-use App\Models\PaymentTransaction;
-use App\Models\CustomerPolicy;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $totalBills = 0;
-        $pendingBills = 0;
+        $userId = Auth::id();
+        $serviceProvider = ServiceProvider::where('user_id', $userId)->first();
+
+        $totalPayments = 0;
+        $pendingPayments = 0;
         $paidAmount = 0;
-        $rejectedBills = 0;
         $totalClaims = 0;
         $pendingClaims = 0;
-        $recentBills = collect();
+        $recentPayments = collect();
 
         try {
-            $totalBills = ServiceProviderBill::count() ?? 0;
-            $pendingBills = ServiceProviderBill::where('status', 'pending')->count() ?? 0;
-            $paidAmount = ServiceProviderBill::where('status', 'paid')->sum('amount') ?? 0;
-            $rejectedBills = ServiceProviderBill::where('status', 'rejected')->count() ?? 0;
+            if ($serviceProvider) {
+                $spId = $serviceProvider->id;
+                $totalPayments = ServiceProviderPayment::where('service_provider_id', $spId)->count();
+                $pendingPayments = ServiceProviderPayment::where('service_provider_id', $spId)->where('status', 'pending')->count();
+                $paidAmount = ServiceProviderPayment::where('service_provider_id', $spId)->where('status', 'paid')->sum('amount');
+                $recentPayments = ServiceProviderPayment::where('service_provider_id', $spId)->with('claim')->latest()->limit(5)->get();
+            }
 
-            $totalClaims = Claim::count() ?? 0;
-            $pendingClaims = Claim::where('status', 'pending')->count() ?? 0;
-
-            $recentBills = ServiceProviderBill::with('customer')->latest()->limit(5)->get() ?? collect();
+            $totalClaims = Claim::count();
+            $pendingClaims = Claim::where('status', 'pending')->count();
 
         } catch (\Exception $e) {
             // Fallback to defaults if queries fail
         }
 
         return view('service_provider.dashboard', compact(
-            'totalBills',
-            'pendingBills',
+            'totalPayments',
+            'pendingPayments',
             'paidAmount',
-            'rejectedBills',
             'totalClaims',
             'pendingClaims',
-            'recentBills'
+            'recentPayments',
+            'serviceProvider'
         ));
     }
 }
