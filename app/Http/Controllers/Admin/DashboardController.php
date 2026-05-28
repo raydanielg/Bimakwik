@@ -32,8 +32,8 @@ class DashboardController extends Controller
         
         // Total Policies
         try {
-            $totalPolicies = InsuranceProduct::count();
-            $activePolicies = InsuranceProduct::count(); // All policies considered active
+            $totalPolicies = \App\Models\CustomerPolicy::count();
+            $activePolicies = \App\Models\CustomerPolicy::where('status', 'active')->count();
         } catch (\Exception $e) {
             $totalPolicies = 0;
             $activePolicies = 0;
