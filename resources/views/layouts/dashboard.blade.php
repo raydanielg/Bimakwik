@@ -669,7 +669,7 @@
                 <a href="{{ route('aggregator.commissions') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.commissions') ? 'active' : '' }}">
                     <i class="bi bi-cash-stack"></i> Commissions
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('aggregator.wallet') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.wallet') ? 'active' : '' }}">
                     <i class="bi bi-wallet2"></i> Wallet
                 </a>
             </div>

@@ -53,8 +53,8 @@ class AggregatorHubController extends Controller
         try {
             $brokerComm = BrokerCommission::latest()->paginate(15);
             $agentComm = AgentCommission::latest()->paginate(15);
-            $totalEarned = BrokerCommission::where('status', 'paid')->sum('amount') + AgentCommission::where('status', 'paid')->sum('amount') ?? 0;
-            $pendingAmount = BrokerCommission::where('status', 'pending')->sum('amount') + AgentCommission::where('status', 'pending')->sum('amount') ?? 0;
+            $totalEarned = BrokerCommission::where('status', 'paid')->sum('commission_amount') + AgentCommission::where('status', 'paid')->sum('commission_amount') ?? 0;
+            $pendingAmount = BrokerCommission::where('status', 'pending')->sum('commission_amount') + AgentCommission::where('status', 'pending')->sum('commission_amount') ?? 0;
         } catch (\Exception $e) {}
         return view('aggregator.commissions.index', compact('brokerComm', 'agentComm', 'totalEarned', 'pendingAmount'));
     }

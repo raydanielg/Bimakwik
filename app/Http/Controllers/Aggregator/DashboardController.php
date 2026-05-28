@@ -34,8 +34,8 @@ class DashboardController extends Controller
             $totalBrokers = User::role('broker')->count() ?? 0;
             $totalAgents = User::role(['sfe', 'bancassurance'])->count() ?? 0;
 
-            $totalCommission = BrokerCommission::where('status', 'paid')->sum('amount') + AgentCommission::where('status', 'paid')->sum('amount') ?? 0;
-            $pendingCommission = BrokerCommission::where('status', 'pending')->sum('amount') + AgentCommission::where('status', 'pending')->sum('amount') ?? 0;
+            $totalCommission = BrokerCommission::where('status', 'paid')->sum('commission_amount') + AgentCommission::where('status', 'paid')->sum('commission_amount') ?? 0;
+            $pendingCommission = BrokerCommission::where('status', 'pending')->sum('commission_amount') + AgentCommission::where('status', 'pending')->sum('commission_amount') ?? 0;
 
             $totalClaims = Claim::count() ?? 0;
 
