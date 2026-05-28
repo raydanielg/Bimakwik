@@ -617,26 +617,26 @@
                 <a href="{{ route('aggregator.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Overview
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('aggregator.market.traffic') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.market.traffic') ? 'active' : '' }}">
                     <i class="bi bi-activity"></i> Traffic Metrics
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('aggregator.market.leads') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.market.leads') ? 'active' : '' }}">
                     <i class="bi bi-person-check"></i> Lead Generation
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('aggregator.market.ai-insights') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.market.ai-insights') ? 'active' : '' }}">
                     <i class="bi bi-robot"></i> AI Market Insights
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Product Comparison</div>
             <div class="list-group list-group-flush px-2">
-                <a href="{{ route('admin.products.compare') }}" class="list-group-item list-group-item-action">
+                <a href="{{ route('aggregator.products.compare') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.products.compare') ? 'active' : '' }}">
                     <i class="bi bi-grid-3x3-gap"></i> Comparison Matrix
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('aggregator.products.side-by-side') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.products.side-by-side') ? 'active' : '' }}">
                     <i class="bi bi-layout-split"></i> Side-by-Side View
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('aggregator.products.ai-compare') }}" class="list-group-item list-group-item-action {{ request()->routeIs('aggregator.products.ai-compare') ? 'active' : '' }}">
                     <i class="bi bi-magic"></i> AI Smart Compare
                 </a>
             </div>
