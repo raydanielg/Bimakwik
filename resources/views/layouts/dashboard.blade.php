@@ -592,20 +592,20 @@
                 <a href="{{ route('broker.reports') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.reports') ? 'active' : '' }}">
                     <i class="bi bi-bar-chart-line"></i> Sales & Claims Reports
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.messaging') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.messaging') ? 'active' : '' }}">
                     <i class="bi bi-chat-left-dots"></i> Messaging & Notifications
                 </a>
             </div>
 
             <div class="sidebar-heading mt-3">Compliance & Settings</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.compliance') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.compliance') ? 'active' : '' }}">
                     <i class="bi bi-journal-text"></i> Regulatory Filings
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.profile') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.profile') ? 'active' : '' }}">
                     <i class="bi bi-person-gear"></i> Profile & Bank Details
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.api-keys') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.api-keys') ? 'active' : '' }}">
                     <i class="bi bi-code-square"></i> API Keys
                 </a>
             </div>
