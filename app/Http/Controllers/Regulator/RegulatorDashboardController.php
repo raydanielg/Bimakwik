@@ -36,7 +36,7 @@ class RegulatorDashboardController extends Controller
             $totalBrokers = User::role('broker')->count() ?? 0;
             $totalAgents = User::role(['sfe', 'bancassurance'])->count() ?? 0;
 
-            $marketShare = User::role('insurer')->withCount('policies')->get() ?? collect();
+            $marketShare = User::role('insurer')->take(10)->get() ?? collect();
             $recentClaims = Claim::with('customer')->latest()->limit(5)->get() ?? collect();
 
         } catch (\Exception $e) {
