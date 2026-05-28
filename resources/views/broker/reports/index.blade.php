@@ -1,6 +1,6 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
-@section('content')
+@section('dashboard_content')
 <div class="container-fluid py-4">
     @include('broker._partials.page-header', [
         'title' => 'Reports',
@@ -181,3 +181,4 @@
     </div>
 </div>
 @endsection
+
