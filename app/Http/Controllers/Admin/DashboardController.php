@@ -78,11 +78,11 @@ class DashboardController extends Controller
         try {
             $brokerCommissions = BrokerCommission::sum('commission_amount') ?? 0;
             $agentCommissions = AgentCommission::sum('commission_amount') ?? 0;
-            $aggregatorCommissions = AggregatorCommission::sum('commission_amount') ?? 0;
+            $aggregatorCommissions = AggregatorCommission::sum('amount') ?? 0;
             $totalCommissions = $brokerCommissions + $agentCommissions + $aggregatorCommissions;
             $pendingCommissions = BrokerCommission::where('status', 'pending')->sum('commission_amount')
                 + AgentCommission::where('status', 'pending')->sum('commission_amount')
-                + AggregatorCommission::where('status', 'pending')->sum('commission_amount');
+                + AggregatorCommission::where('status', 'pending')->sum('amount');
             $paidCommissions = $totalCommissions - $pendingCommissions;
         } catch (\Exception $e) {
             $totalCommissions = 0;
