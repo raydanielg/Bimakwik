@@ -217,12 +217,45 @@ Route::middleware(['auth'])->group(function () {
     // Broker Routes
     Route::prefix('broker')->name('broker.')->middleware('role:broker')->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Broker\DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/policies', [App\Http\Controllers\Broker\BrokerHubController::class, 'policies'])->name('policies');
-        Route::get('/customers', [App\Http\Controllers\Broker\BrokerHubController::class, 'customers'])->name('customers');
-        Route::get('/commissions', [App\Http\Controllers\Broker\BrokerHubController::class, 'commissions'])->name('commissions');
-        Route::get('/reports', [App\Http\Controllers\Broker\BrokerHubController::class, 'reports'])->name('reports');
+
+        // Core Dashboard extras
+        Route::get('/transactions', [App\Http\Controllers\Broker\BrokerHubController::class, 'transactions'])->name('transactions');
+        Route::get('/ai-insights', [App\Http\Controllers\Broker\BrokerHubController::class, 'aiInsights'])->name('ai-insights');
+
+        // Products
         Route::get('/products', [App\Http\Controllers\Broker\BrokerHubController::class, 'products'])->name('products');
+        Route::get('/products/compare', [App\Http\Controllers\Broker\BrokerHubController::class, 'productCompare'])->name('products.compare');
+        Route::get('/products/recommendations', [App\Http\Controllers\Broker\BrokerHubController::class, 'productRecommendations'])->name('products.recommendations');
+
+        // Customers
+        Route::get('/customers', [App\Http\Controllers\Broker\BrokerHubController::class, 'customers'])->name('customers');
+        Route::get('/customers/kyc', [App\Http\Controllers\Broker\BrokerHubController::class, 'customersKyc'])->name('customers.kyc');
+
+        // Policies
+        Route::get('/policies', [App\Http\Controllers\Broker\BrokerHubController::class, 'policies'])->name('policies');
+        Route::get('/policies/renewals', [App\Http\Controllers\Broker\BrokerHubController::class, 'policyRenewals'])->name('policies.renewals');
+        Route::get('/policies/endorsements', [App\Http\Controllers\Broker\BrokerHubController::class, 'policyEndorsements'])->name('policies.endorsements');
+        Route::get('/policies/expiry', [App\Http\Controllers\Broker\BrokerHubController::class, 'policyExpiry'])->name('policies.expiry');
+
+        // Wallet & Payments
+        Route::get('/wallet', [App\Http\Controllers\Broker\BrokerHubController::class, 'wallet'])->name('wallet');
+        Route::get('/commissions', [App\Http\Controllers\Broker\BrokerHubController::class, 'commissions'])->name('commissions');
+        Route::get('/wallet/cashout', [App\Http\Controllers\Broker\BrokerHubController::class, 'walletCashout'])->name('wallet.cashout');
+        Route::post('/wallet/cashout', [App\Http\Controllers\Broker\BrokerHubController::class, 'walletCashoutSubmit'])->name('wallet.cashout.submit');
+
+        // Claims
         Route::get('/claims', [App\Http\Controllers\Broker\BrokerHubController::class, 'claims'])->name('claims');
+        Route::get('/claims/fraud', [App\Http\Controllers\Broker\BrokerHubController::class, 'claimsFraud'])->name('claims.fraud');
+
+        // Reports & Communication
+        Route::get('/reports', [App\Http\Controllers\Broker\BrokerHubController::class, 'reports'])->name('reports');
+        Route::get('/messaging', [App\Http\Controllers\Broker\BrokerHubController::class, 'messaging'])->name('messaging');
+
+        // Compliance & Settings
+        Route::get('/compliance', [App\Http\Controllers\Broker\BrokerHubController::class, 'compliance'])->name('compliance');
+        Route::get('/profile', [App\Http\Controllers\Broker\BrokerHubController::class, 'profile'])->name('profile');
+        Route::post('/profile', [App\Http\Controllers\Broker\BrokerHubController::class, 'profileUpdate'])->name('profile.update');
+        Route::get('/api-keys', [App\Http\Controllers\Broker\BrokerHubController::class, 'apiKeys'])->name('api-keys');
     });
 
     // Aggregator Routes
