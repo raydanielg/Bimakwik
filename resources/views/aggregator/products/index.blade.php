@@ -1,6 +1,6 @@
-@extends('layouts.dashboard')
+﻿@extends('layouts.dashboard')
 
-@section('content')
+@section('dashboard_content')
 <div class="container-fluid py-4">
     @include('aggregator._partials.page-header', [
         'title' => 'Products',
@@ -142,3 +142,4 @@
     </div>
 </div>
 @endsection
+

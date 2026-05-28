@@ -10,9 +10,24 @@ use App\Models\BrokerCommission;
 use App\Models\AgentCommission;
 use App\Models\Claim;
 use App\Models\InsuranceProduct;
+use App\Models\Aggregator;
+use App\Models\AggregatorCommission;
+use App\Models\AggregatorCommissionWithdrawal;
+use App\Models\AggregatorReferralLink;
+use App\Models\AggregatorReferralClick;
+use App\Models\AggregatorReferralSale;
+use App\Models\Wallet;
+use App\Models\WalletTransaction;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AggregatorHubController extends Controller
 {
+    private function getAggregator()
+    {
+        return Aggregator::where('user_id', Auth::id())->first();
+    }
+
     public function policies()
     {
         $policies = collect(); $totalCount = 0; $activeCount = 0; $expiredCount = 0;
