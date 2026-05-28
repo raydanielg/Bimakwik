@@ -268,6 +268,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/brokers', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'brokers'])->name('brokers');
         Route::get('/agents', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'agents'])->name('agents');
         Route::get('/products', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'products'])->name('products');
+        Route::get('/market/traffic', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'trafficMetrics'])->name('market.traffic');
+        Route::get('/market/leads', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'leadGeneration'])->name('market.leads');
+        Route::get('/market/ai-insights', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'aiMarketInsights'])->name('market.ai-insights');
+        Route::get('/products/compare', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'productCompare'])->name('products.compare');
+        Route::get('/products/side-by-side', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'productSideBySide'])->name('products.side-by-side');
+        Route::get('/products/ai-compare', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'productAiCompare'])->name('products.ai-compare');
+        Route::get('/wallet', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'wallet'])->name('wallet');
     });
 
     // Agent Routes
