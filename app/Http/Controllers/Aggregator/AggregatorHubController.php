@@ -86,4 +86,104 @@ class AggregatorHubController extends Controller
         try { $products = InsuranceProduct::where('status', 'active')->latest()->paginate(15); } catch (\Exception $e) {}
         return view('aggregator.products.index', compact('products'));
     }
+
+    // ─── Market Monitoring ────────────────────────────────────────────────────
+
+    public function trafficMetrics()
+    {
+        $totalClicks = 0; $totalLinks = 0; $clicksThisMonth = 0; $recentClicks = collect(); $dailyData = []; $labels = [];
+        try {
+            $aggregator = $this->getAggregator();
+            if ($aggregator) {
+                $links = AggregatorReferralLink::where('aggregator_id', $aggregator->id)->pluck('id');
+                $totalLinks = $links->count();
+                $totalClicks = AggregatorReferralClick::whereIn('referral_link_id', $links)->count();
+                $clicksThisMonth = AggregatorReferralClick::whereIn('referral_link_id', $links)
+                    ->where('created_at', '>=', Carbon::now()->startOfMonth())->count();
+                $recentClicks = AggregatorReferralClick::whereIn('referral_link_id', $links)->latest()->take(20)->get();
+                $daily = AggregatorReferralClick::whereIn('referral_link_id', $links)
+                    ->where('created_at', '>=', Carbon::now()->subDays(14))
+                    ->selectRaw('DATE(created_at) as day, COUNT(*) as total')
+                    ->groupBy('day')->orderBy('day')->get();
+                $labels = $daily->pluck('day')->toArray();
+                $dailyData = $daily->pluck('total')->toArray();
+            }
+        } catch (\Exception $e) {}
+        return view('aggregator.market.traffic', compact('totalClicks', 'totalLinks', 'clicksThisMonth', 'recentClicks', 'labels', 'dailyData'));
+    }
+
+    public function leadGeneration()
+    {
+        $totalLeads = 0; $convertedLeads = 0; $conversionRate = 0; $recentSales = collect();
+        try {
+            $aggregator = $this->getAggregator();
+            if ($aggregator) {
+                $links = AggregatorReferralLink::where('aggregator_id', $aggregator->id)->pluck('id');
+                $totalLeads = AggregatorReferralClick::whereIn('referral_link_id', $links)->count();
+                $convertedLeads = AggregatorReferralSale::whereIn('referral_link_id', $links)->count();
+                $conversionRate = $totalLeads > 0 ? round(($convertedLeads / $totalLeads) * 100, 1) : 0;
+                $recentSales = AggregatorReferralSale::whereIn('referral_link_id', $links)->latest()->paginate(15);
+            }
+        } catch (\Exception $e) {}
+        return view('aggregator.market.leads', compact('totalLeads', 'convertedLeads', 'conversionRate', 'recentSales'));
+    }
+
+    public function aiMarketInsights()
+    {
+        $topProducts = collect(); $labels = []; $monthlyData = []; $totalPolicies = 0; $totalBrokers = 0;
+        try {
+            $topProducts = InsuranceProduct::withCount(['customerPolicies as policies_count'])->orderByDesc('policies_count')->take(6)->get();
+            $totalPolicies = \App\Models\CustomerPolicy::count();
+            $totalBrokers = \App\Models\User::role('broker')->count();
+            $monthly = AggregatorCommission::where('created_at', '>=', Carbon::now()->subMonths(6))
+                ->selectRaw('DATE_FORMAT(created_at, "%b %Y") as month, SUM(amount) as total')
+                ->groupByRaw('DATE_FORMAT(created_at, "%b %Y")')
+                ->orderBy('created_at')->get();
+            $labels = $monthly->pluck('month')->toArray();
+            $monthlyData = $monthly->pluck('total')->toArray();
+        } catch (\Exception $e) {}
+        return view('aggregator.market.ai-insights', compact('topProducts', 'labels', 'monthlyData', 'totalPolicies', 'totalBrokers'));
+    }
+
+    // ─── Product Comparison ───────────────────────────────────────────────────
+
+    public function productCompare()
+    {
+        $products = collect();
+        try { $products = InsuranceProduct::where('status', 'active')->with(['productBenefits', 'productCategory'])->get(); } catch (\Exception $e) {}
+        return view('aggregator.products.compare', compact('products'));
+    }
+
+    public function productSideBySide()
+    {
+        $products = collect();
+        try { $products = InsuranceProduct::where('status', 'active')->with(['productBenefits', 'productCategory'])->get(); } catch (\Exception $e) {}
+        return view('aggregator.products.side-by-side', compact('products'));
+    }
+
+    public function productAiCompare()
+    {
+        $products = collect();
+        try { $products = InsuranceProduct::where('status', 'active')->with(['productBenefits'])->get(); } catch (\Exception $e) {}
+        return view('aggregator.products.ai-compare', compact('products'));
+    }
+
+    // ─── Finance / Wallet ─────────────────────────────────────────────────────
+
+    public function wallet()
+    {
+        $wallet = null; $recentTransactions = collect(); $totalCommission = 0; $pendingWithdrawals = collect();
+        try {
+            $wallet = Wallet::where('user_id', Auth::id())->first();
+            if ($wallet) {
+                $recentTransactions = WalletTransaction::where('wallet_id', $wallet->id)->latest()->take(10)->get();
+            }
+            $aggregator = $this->getAggregator();
+            if ($aggregator) {
+                $totalCommission = AggregatorCommission::where('aggregator_id', $aggregator->id)->sum('amount');
+                $pendingWithdrawals = AggregatorCommissionWithdrawal::where('aggregator_id', $aggregator->id)->latest()->paginate(10);
+            }
+        } catch (\Exception $e) {}
+        return view('aggregator.wallet.index', compact('wallet', 'recentTransactions', 'totalCommission', 'pendingWithdrawals'));
+    }
 }
