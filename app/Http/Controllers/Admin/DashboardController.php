@@ -55,9 +55,9 @@ class DashboardController extends Controller
         // Claims Stats
         try {
             $totalClaims = Claim::count();
-            $pendingClaims = $totalClaims > 0 ? (int)($totalClaims * 0.3) : 0; // Estimate 30% pending
-            $approvedClaims = $totalClaims > 0 ? (int)($totalClaims * 0.6) : 0; // Estimate 60% approved
-            $rejectedClaims = $totalClaims - $pendingClaims - $approvedClaims; // Rest rejected
+            $pendingClaims = Claim::where('status', 'pending')->count();
+            $approvedClaims = Claim::where('status', 'approved')->count();
+            $rejectedClaims = Claim::where('status', 'rejected')->count();
         } catch (\Exception $e) {
             $totalClaims = 0;
             $pendingClaims = 0;
@@ -76,11 +76,13 @@ class DashboardController extends Controller
         
         // Commission Stats (combine all commission types)
         try {
-            $brokerCommissions = BrokerCommission::sum('amount') ?? 0;
-            $agentCommissions = AgentCommission::sum('amount') ?? 0;
-            $aggregatorCommissions = AggregatorCommission::sum('amount') ?? 0;
+            $brokerCommissions = BrokerCommission::sum('commission_amount') ?? 0;
+            $agentCommissions = AgentCommission::sum('commission_amount') ?? 0;
+            $aggregatorCommissions = AggregatorCommission::sum('commission_amount') ?? 0;
             $totalCommissions = $brokerCommissions + $agentCommissions + $aggregatorCommissions;
-            $pendingCommissions = $totalCommissions > 0 ? $totalCommissions * 0.4 : 0; // Estimate 40% pending
+            $pendingCommissions = BrokerCommission::where('status', 'pending')->sum('commission_amount')
+                + AgentCommission::where('status', 'pending')->sum('commission_amount')
+                + AggregatorCommission::where('status', 'pending')->sum('commission_amount');
             $paidCommissions = $totalCommissions - $pendingCommissions;
         } catch (\Exception $e) {
             $totalCommissions = 0;
