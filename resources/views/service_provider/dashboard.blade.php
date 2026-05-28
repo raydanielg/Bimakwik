@@ -16,8 +16,8 @@
                     <div class="text-success small fw-bold">+12%</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">Bills Submitted</h6>
-                <h4 class="fw-bold mb-0">145</h4>
-                <div class="x-small text-muted mt-2">This Month</div>
+                <h4 class="fw-bold mb-0">{{ $totalPayments }}</h4>
+                <div class="x-small text-muted mt-2">Total Payments</div>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
                     <div class="text-success small fw-bold">94% Rate</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">Approved Amount</h6>
-                <h4 class="fw-bold mb-0">TZS 8.2M</h4>
+                <h4 class="fw-bold mb-0">{{ $pendingPayments }} Pending</h4>
                 <div class="x-small text-muted mt-2">Verified & Ready</div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     <div class="text-primary small fw-bold">Settled</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">Total Paid</h6>
-                <h4 class="fw-bold mb-0">TZS 5.4M</h4>
+                <h4 class="fw-bold mb-0">TZS {{ number_format($paidAmount / 1000000, 1) }}M</h4>
                 <div class="x-small text-muted mt-2">Paid this month</div>
             </div>
         </div>
