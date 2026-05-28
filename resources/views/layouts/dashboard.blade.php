@@ -517,10 +517,10 @@
                 <a href="{{ route('broker.commissions') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.commissions') ? 'active' : '' }}">
                     <i class="bi bi-pie-chart"></i> Commission Summary
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.transactions') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.transactions') ? 'active' : '' }}">
                     <i class="bi bi-list-ul"></i> Recent Transactions
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.ai-insights') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.ai-insights') ? 'active' : '' }}">
                     <i class="bi bi-robot"></i> AI Sales Insights
                 </a>
             </div>
@@ -530,10 +530,10 @@
                 <a href="{{ route('broker.products') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.products') ? 'active' : '' }}">
                     <i class="bi bi-box-seam"></i> View All Products
                 </a>
-                <a href="{{ route('admin.products.compare') }}" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.products.compare') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.products.compare') ? 'active' : '' }}">
                     <i class="bi bi-arrow-left-right"></i> Comparison Matrix
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.products.recommendations') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.products.recommendations') ? 'active' : '' }}">
                     <i class="bi bi-magic"></i> AI Recommendations
                 </a>
             </div>
@@ -543,7 +543,7 @@
                 <a href="{{ route('broker.customers') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.customers') ? 'active' : '' }}">
                     <i class="bi bi-people"></i> Customer List
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('broker.customers.kyc') }}" class="list-group-item list-group-item-action {{ request()->routeIs('broker.customers.kyc') ? 'active' : '' }}">
                     <i class="bi bi-person-vcard"></i> KYC Status
                 </a>
             </div>
