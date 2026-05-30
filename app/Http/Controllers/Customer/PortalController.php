@@ -73,13 +73,38 @@ class PortalController extends Controller
                 ]);
             }
 
-            // Get a default insurer (first one)
-            $insurerId = DB::table('insurers')->value('id') ?? 1;
+            // Get or create default insurer
+            $insurerId = DB::table('insurers')->value('id');
+            if (!$insurerId) {
+                $insurerId = DB::table('insurers')->insertGetId([
+                    'name' => 'Default Insurer',
+                    'code' => 'DEF001',
+                    'email' => 'default@insurer.com',
+                    'phone' => '+255000000000',
+                    'address' => 'Default Address',
+                    'status' => 'active',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
             
-            // Get insurance product ID based on product type
+            // Get or create insurance product
             $productId = DB::table('insurance_products')
                 ->where('name', 'like', '%' . $validated['product'] . '%')
-                ->value('id') ?? 1;
+                ->value('id');
+            
+            if (!$productId) {
+                $productId = DB::table('insurance_products')->insertGetId([
+                    'name' => ucfirst($validated['product']) . ' Insurance',
+                    'code' => strtoupper(substr($validated['product'], 0, 3)) . '001',
+                    'category' => $validated['product'],
+                    'description' => ucfirst($validated['product']) . ' insurance coverage',
+                    'premium' => $validated['price'],
+                    'status' => 'active',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
 
             // Create new policy
             $policy = CustomerPolicy::create([
