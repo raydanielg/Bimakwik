@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use App\Models\CustomerPolicy;
+use App\Models\Wallet;
+use App\Models\WalletTransaction;
 
 class PortalController extends Controller
 {

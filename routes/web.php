@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/marketplace', [App\Http\Controllers\Customer\PortalController::class, 'marketplace'])->name('marketplace');
         Route::get('/compare', [App\Http\Controllers\Customer\PortalController::class, 'compare'])->name('compare');
         Route::get('/buy', [App\Http\Controllers\Customer\PortalController::class, 'buy'])->name('buy');
+        Route::post('/buy', [App\Http\Controllers\Customer\PortalController::class, 'buySubmit'])->name('buy.submit');
         Route::get('/quote', [App\Http\Controllers\Customer\PortalController::class, 'quote'])->name('quote');
         Route::post('/quote', [App\Http\Controllers\Customer\PortalController::class, 'quoteSubmit'])->name('quote.submit');
         
