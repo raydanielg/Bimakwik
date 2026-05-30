@@ -77,12 +77,12 @@ class PortalController extends Controller
             $insurerId = DB::table('insurers')->value('id');
             if (!$insurerId) {
                 $insurerId = DB::table('insurers')->insertGetId([
-                    'name' => 'Default Insurer',
-                    'code' => 'DEF001',
+                    'insurer_name' => 'Default Insurer',
+                    'insurer_code' => 'DEF001',
                     'email' => 'default@insurer.com',
                     'phone' => '+255000000000',
                     'address' => 'Default Address',
-                    'status' => 'active',
+                    'is_active' => true,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
