@@ -49,6 +49,25 @@ class PortalController extends Controller
         return view('customer.quote', $this->buildViewData());
     }
 
+    public function quoteSubmit(Request $request)
+    {
+        $validated = $request->validate([
+            'product_id' => 'required|exists:insurance_products,id',
+            'coverage_amount' => 'required|numeric',
+            'duration' => 'required|integer',
+        ]);
+
+        try {
+            // Calculate quote based on product and coverage
+            $product = DB::table('insurance_products')->where('id', $validated['product_id'])->first();
+            $quoteAmount = $product ? ($product->premium * $validated['coverage_amount'] / 100000) : 0;
+            
+            return back()->with('success', 'Quote generated: TZS ' . number_format($quoteAmount, 0))->withInput();
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to generate quote');
+        }
+    }
+
     public function policies()
     {
         return view('customer.policies.index', $this->buildViewData());
