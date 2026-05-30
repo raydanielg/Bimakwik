@@ -104,21 +104,21 @@
                                     <td>TZS {{ number_format($claim->amount ?? 0, 0) }}</td>
                                     <td>{{ $claim->claim_date?->format('M d, Y') ?? 'N/A' }}</td>
                                     <td>
-                                        @if($claim->status === 'approved')
+                                        @if(($claim->status ?? '') === 'approved')
                                             <span class="badge bg-success">Approved</span>
-                                        @elseif($claim->status === 'pending')
+                                        @elseif(($claim->status ?? '') === 'pending')
                                             <span class="badge bg-warning">Pending</span>
-                                        @elseif($claim->status === 'rejected')
+                                        @elseif(($claim->status ?? '') === 'rejected')
                                             <span class="badge bg-danger">Rejected</span>
-                                        @elseif($claim->status === 'processing')
+                                        @elseif(($claim->status ?? '') === 'processing')
                                             <span class="badge bg-info">Processing</span>
                                         @else
-                                            <span class="badge bg-secondary">{{ $claim->status }}</span>
+                                            <span class="badge bg-secondary">{{ $claim->status ?? 'N/A' }}</span>
                                         @endif
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <a href="{{ route('service-provider.claims.show', $claim->id) }}" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
+                                            <a href="{{ route('service-provider.claims.show', $claim->id ?? 0) }}" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
                                         </div>
                                     </td>
                                 </tr>

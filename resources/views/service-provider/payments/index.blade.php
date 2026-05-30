@@ -100,19 +100,19 @@
                                     <td>{{ $payment->currency ?? 'TZS' }} {{ number_format($payment->amount ?? 0, 2) }}</td>
                                     <td>{{ $payment->payment_date?->format('M d, Y') ?? 'N/A' }}</td>
                                     <td>
-                                        @if($payment->status === 'completed')
+                                        @if(($payment->status ?? '') === 'completed')
                                             <span class="badge bg-success">Completed</span>
-                                        @elseif($payment->status === 'pending')
+                                        @elseif(($payment->status ?? '') === 'pending')
                                             <span class="badge bg-warning">Pending</span>
-                                        @elseif($payment->status === 'failed')
+                                        @elseif(($payment->status ?? '') === 'failed')
                                             <span class="badge bg-danger">Failed</span>
                                         @else
-                                            <span class="badge bg-secondary">{{ $payment->status }}</span>
+                                            <span class="badge bg-secondary">{{ $payment->status ?? 'N/A' }}</span>
                                         @endif
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <a href="{{ route('service-provider.payments.show', $payment->id) }}" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
+                                            <a href="{{ route('service-provider.payments.show', $payment->id ?? 0) }}" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
                                         </div>
                                     </td>
                                 </tr>
