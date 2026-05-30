@@ -316,8 +316,7 @@
 
     // Form submission
     document.getElementById('claimForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('{{ __('customer.claim_submitted_alert') }}');
+        // Let the form submit normally to the server
     });
 </script>
 @endsection
