@@ -838,16 +838,16 @@
 
             <div class="sidebar-heading mt-3">Settings</div>
             <div class="list-group list-group-flush px-2">
-                <a href="{{ route('service-provider.agreements.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.agreements.index') ? 'active' : '' }}">
+                <a href="{{ route('service-provider.agreements.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.agreements.*') ? 'active' : '' }}">
                     <i class="bi bi-file-earmark-text"></i> Agreements
                 </a>
-                <a href="{{ route('service-provider.performance.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.performance.index') ? 'active' : '' }}">
+                <a href="{{ route('service-provider.performance.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.performance.*') ? 'active' : '' }}">
                     <i class="bi bi-graph-up-arrow"></i> Performance
                 </a>
-                <a href="{{ route('service-provider.bank.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.bank.index') ? 'active' : '' }}">
+                <a href="{{ route('service-provider.bank.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.bank.*') ? 'active' : '' }}">
                     <i class="bi bi-bank"></i> Bank Details
                 </a>
-                <a href="{{ route('service-provider.support.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.support.index') ? 'active' : '' }}">
+                <a href="{{ route('service-provider.support.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.support.*') ? 'active' : '' }}">
                     <i class="bi bi-headset"></i> Support
                 </a>
             </div>

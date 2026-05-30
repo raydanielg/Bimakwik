@@ -313,10 +313,25 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/', [App\Http\Controllers\ServiceProvider\PaymentController::class, 'store'])->name('store');
             Route::get('/{id}', [App\Http\Controllers\ServiceProvider\PaymentController::class, 'show'])->name('show');
         });
-        Route::get('/agreements', [App\Http\Controllers\ServiceProvider\AgreementController::class, 'index'])->name('agreements.index');
-        Route::get('/performance', [App\Http\Controllers\ServiceProvider\PerformanceController::class, 'index'])->name('performance.index');
-        Route::get('/bank-details', [App\Http\Controllers\ServiceProvider\BankController::class, 'index'])->name('bank.index');
-        Route::get('/support', [App\Http\Controllers\ServiceProvider\SupportController::class, 'index'])->name('support.index');
+        Route::prefix('agreements')->name('agreements.')->group(function () {
+            Route::get('/', [App\Http\Controllers\ServiceProvider\AgreementController::class, 'index'])->name('index');
+            Route::get('/{id}', [App\Http\Controllers\ServiceProvider\AgreementController::class, 'show'])->name('show');
+        });
+        
+        Route::prefix('performance')->name('performance.')->group(function () {
+            Route::get('/', [App\Http\Controllers\ServiceProvider\PerformanceController::class, 'index'])->name('index');
+        });
+        
+        Route::prefix('bank-details')->name('bank.')->group(function () {
+            Route::get('/', [App\Http\Controllers\ServiceProvider\BankController::class, 'index'])->name('index');
+            Route::post('/', [App\Http\Controllers\ServiceProvider\BankController::class, 'update'])->name('update');
+        });
+        
+        Route::prefix('support')->name('support.')->group(function () {
+            Route::get('/', [App\Http\Controllers\ServiceProvider\SupportController::class, 'index'])->name('index');
+            Route::post('/', [App\Http\Controllers\ServiceProvider\SupportController::class, 'store'])->name('store');
+            Route::get('/{id}', [App\Http\Controllers\ServiceProvider\SupportController::class, 'show'])->name('show');
+        });
     });
 
     // Regulator Routes
