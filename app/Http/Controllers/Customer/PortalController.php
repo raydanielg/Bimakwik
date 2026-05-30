@@ -58,16 +58,31 @@ class PortalController extends Controller
         ]);
 
         try {
+            // Get a default insurer (first one)
+            $insurerId = DB::table('insurers')->value('id') ?? 1;
+            
+            // Get insurance product ID based on product type
+            $productId = DB::table('insurance_products')
+                ->where('name', 'like', '%' . $validated['product'] . '%')
+                ->value('id') ?? 1;
+
             // Create new policy
             $policy = CustomerPolicy::create([
                 'customer_id' => auth()->id(),
-                'product_id' => 1, // Default product ID - should be fetched from DB
+                'insurance_product_id' => $productId,
+                'insurer_id' => $insurerId,
                 'policy_number' => 'POL-' . strtoupper(substr(uniqid(), -8)),
-                'premium' => $validated['price'],
+                'premium_amount' => $validated['price'],
+                'premium_frequency' => $validated['period'],
+                'sum_assured' => $this->getCoverageAmount($validated['coverage']),
                 'start_date' => now(),
                 'end_date' => now()->addMonths($this->getMonthsFromPeriod($validated['period'])),
                 'status' => 'active',
-                'coverage_amount' => $this->getCoverageAmount($validated['coverage']),
+                'payment_method' => 'wallet',
+                'policy_details' => [
+                    'coverage_level' => $validated['coverage'],
+                    'product_type' => $validated['product'],
+                ],
             ]);
 
             // Deduct from wallet if balance exists
