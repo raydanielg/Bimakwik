@@ -4,35 +4,35 @@
 <div class="container-fluid py-4">
     @include('service-provider._partials.page-header', [
         'title' => 'Support',
-        'subtitle' => 'Get help and support',
-        'icon' => 'bi-headset'
+        'subtitle' => 'Get help and support'
     ])
 
     <div class="row">
         <div class="col-lg-6 mb-4">
             <div class="card border-0 shadow-sm p-4 h-100">
                 <h6 class="fw-bold mb-4">Submit a Support Request</h6>
-                <form>
+                <form action="{{ route('service-provider.support.store') }}" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Subject</label>
-                        <input type="text" class="form-control" placeholder="Enter subject">
+                        <input type="text" name="subject" class="form-control" placeholder="Enter subject" value="{{ old('subject') }}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Category</label>
-                        <select class="form-select">
-                            <option>Billing Issue</option>
-                            <option>Technical Issue</option>
-                            <option>Policy Verification</option>
-                            <option>Other</option>
+                        <select name="category" class="form-select">
+                            <option value="billing" {{ old('category') === 'billing' ? 'selected' : '' }}>Billing Issue</option>
+                            <option value="technical" {{ old('category') === 'technical' ? 'selected' : '' }}>Technical Issue</option>
+                            <option value="policy" {{ old('category') === 'policy' ? 'selected' : '' }}>Policy Verification</option>
+                            <option value="other" {{ old('category') === 'other' ? 'selected' : '' }}>Other</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Description</label>
-                        <textarea class="form-control" rows="4" placeholder="Describe your issue"></textarea>
+                        <textarea name="description" class="form-control" rows="4" placeholder="Describe your issue">{{ old('description') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Attachments</label>
-                        <input type="file" class="form-control" multiple>
+                        <input type="file" name="attachments" class="form-control" multiple>
                     </div>
                     <button type="submit" class="btn btn-primary">
                         <i class="bi bi-send me-1"></i> Submit Request
@@ -82,11 +82,53 @@
             <h5 class="mb-0">Recent Support Requests</h5>
         </div>
         <div class="card-body">
-            @include('service-provider._partials.empty-state', [
-                'icon' => 'bi-headset',
-                'title' => 'No Support Requests',
-                'text' => 'You have not submitted any support requests yet.'
-            ])
+            @if($tickets->count() > 0)
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Subject</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($tickets as $ticket)
+                                <tr>
+                                    <td class="fw-bold">{{ $ticket->subject ?? 'N/A' }}</td>
+                                    <td>{{ $ticket->category ?? 'N/A' }}</td>
+                                    <td>
+                                        @if(($ticket->status ?? '') === 'open')
+                                            <span class="badge bg-warning">Open</span>
+                                        @elseif(($ticket->status ?? '') === 'in_progress')
+                                            <span class="badge bg-info">In Progress</span>
+                                        @elseif(($ticket->status ?? '') === 'resolved')
+                                            <span class="badge bg-success">Resolved</span>
+                                        @else
+                                            <span class="badge bg-secondary">{{ $ticket->status ?? 'N/A' }}</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $ticket->created_at?->format('M d, Y') ?? 'N/A' }}</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{{ route('service-provider.support.show', $ticket->id ?? 0) }}" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                {{ $tickets->links() }}
+            @else
+                @include('service-provider._partials.empty-state', [
+                    'icon' => 'bi-headset',
+                    'title' => 'No Support Requests',
+                    'text' => 'You have not submitted any support requests yet.'
+                ])
+            @endif
         </div>
     </div>
 </div>
