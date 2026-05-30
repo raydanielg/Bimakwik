@@ -12,7 +12,11 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        return view('service-provider.customer.verify');
+        return view('service-provider.customer.verify', [
+            'customer' => null,
+            'policy' => null,
+            'kycDocuments' => collect()
+        ]);
     }
 
     public function verify(Request $request)
