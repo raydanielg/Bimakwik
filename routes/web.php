@@ -290,7 +290,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('service-provider')->name('service-provider.')->middleware(['auth', 'role:service_provider'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\ServiceProvider\DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/customer/verify', [App\Http\Controllers\ServiceProvider\CustomerController::class, 'index'])->name('customer.verify');
+        
+        // Customer Routes
+        Route::prefix('customer')->name('customer.')->group(function () {
+            Route::get('/verify', [App\Http\Controllers\ServiceProvider\CustomerController::class, 'index'])->name('verify');
+            Route::post('/verify', [App\Http\Controllers\ServiceProvider\CustomerController::class, 'verify'])->name('verify.submit');
+            Route::get('/list', [App\Http\Controllers\ServiceProvider\CustomerController::class, 'list'])->name('list');
+            Route::get('/{id}', [App\Http\Controllers\ServiceProvider\CustomerController::class, 'show'])->name('show');
+            Route::get('/{id}/kyc', [App\Http\Controllers\ServiceProvider\CustomerController::class, 'kycDocuments'])->name('kyc');
+            Route::get('/{id}/history', [App\Http\Controllers\ServiceProvider\CustomerController::class, 'verificationHistory'])->name('history');
+        });
+        
         Route::get('/claims', [App\Http\Controllers\ServiceProvider\ClaimController::class, 'index'])->name('claims.index');
         Route::get('/payments', [App\Http\Controllers\ServiceProvider\PaymentController::class, 'index'])->name('payments.index');
         Route::get('/agreements', [App\Http\Controllers\ServiceProvider\AgreementController::class, 'index'])->name('agreements.index');
