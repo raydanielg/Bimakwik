@@ -5,7 +5,7 @@
     @include('service-provider._partials.page-header', [
         'title' => 'Customer Verification',
         'subtitle' => 'Verify customer policy coverage and eligibility',
-        'action' => '<a href="{{ route('service-provider.customer.list') }}" class="btn btn-outline-primary"><i class="bi bi-list-ul me-1"></i> All Customers</a>'
+        'action' => "<a href=\"{{ route('service-provider.customer.list') }}\" class=\"btn btn-outline-primary\"><i class=\"bi bi-list-ul me-1\"></i> All Customers</a>"
     ])
 
     <div class="row">
