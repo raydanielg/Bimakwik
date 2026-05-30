@@ -69,8 +69,8 @@
                     </div>
                     <span class="small fw-bold text-muted">{{ __('customer.stat_traffic_leads') }}</span>
                 </div>
-                <h3 class="fw-bold mb-0">324 / 12</h3>
-                <p class="x-small text-muted mb-0 mt-1">{{ __('customer.stat_visitors_interest') }}</p>
+                <h3 class="fw-bold mb-0">{{ $stats['total_claims'] ?? 0 }}</h3>
+                <p class="x-small text-muted mb-0 mt-1">{{ __('customer.stat_total_claims') }}</p>
             </div>
         </div>
     </div>
