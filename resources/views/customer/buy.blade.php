@@ -3,6 +3,12 @@
 @section('dashboard_title', __('customer.buy_new_insurance'))
 
 @section('content')
+@php
+    $quoteProduct = request('product');
+    $quoteCoverage = request('coverage');
+    $quotePeriod = request('period');
+    $quotePrice = request('price');
+@endphp
 <!-- Page Header -->
 <div class="row mb-4">
     <div class="col-12">
@@ -13,6 +19,53 @@
         <p class="text-muted">{{ __('customer.buy_subtitle') }}</p>
     </div>
 </div>
+
+@if($quoteProduct && $quotePrice)
+<!-- Quote Summary Card -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm bg-primary text-white">
+            <div class="card-body p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h5 class="fw-bold mb-2">Your Selected Quote</h5>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <small class="opacity-75">Product:</small>
+                                <div class="fw-bold">{{ ucfirst($quoteProduct) }} Insurance</div>
+                            </div>
+                            <div class="col-6">
+                                <small class="opacity-75">Coverage:</small>
+                                <div class="fw-bold">{{ ucfirst($quoteCoverage) }}</div>
+                            </div>
+                            <div class="col-6">
+                                <small class="opacity-75">Period:</small>
+                                <div class="fw-bold">{{ ucfirst(str_replace('_', ' ', $quotePeriod)) }}</div>
+                            </div>
+                            <div class="col-6">
+                                <small class="opacity-75">Total Price:</small>
+                                <div class="fw-bold fs-5">TZS {{ number_format($quotePrice, 0) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <form action="{{ route('customer.buy.submit') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product" value="{{ $quoteProduct }}">
+                            <input type="hidden" name="coverage" value="{{ $quoteCoverage }}">
+                            <input type="hidden" name="period" value="{{ $quotePeriod }}">
+                            <input type="hidden" name="price" value="{{ $quotePrice }}">
+                            <button type="submit" class="btn btn-light btn-lg fw-bold">
+                                <i class="bi bi-cart-check me-2"></i> Buy Now
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 
 <!-- Available Insurance Products -->
 <div class="row g-4">

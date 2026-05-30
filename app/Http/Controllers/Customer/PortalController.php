@@ -45,6 +45,72 @@ class PortalController extends Controller
         return view('customer.buy', $this->buildViewData());
     }
 
+    public function buySubmit(Request $request)
+    {
+        $validated = $request->validate([
+            'product' => 'required|string',
+            'coverage' => 'required|string',
+            'period' => 'required|string',
+            'price' => 'required|numeric',
+        ]);
+
+        try {
+            // Create new policy
+            $policy = CustomerPolicy::create([
+                'customer_id' => auth()->id(),
+                'product_id' => 1, // Default product ID - should be fetched from DB
+                'policy_number' => 'POL-' . strtoupper(substr(uniqid(), -8)),
+                'premium' => $validated['price'],
+                'start_date' => now(),
+                'end_date' => now()->addMonths($this->getMonthsFromPeriod($validated['period'])),
+                'status' => 'active',
+                'coverage_amount' => $this->getCoverageAmount($validated['coverage']),
+            ]);
+
+            // Deduct from wallet if balance exists
+            $wallet = Wallet::where('user_id', auth()->id())->first();
+            if ($wallet && $wallet->balance >= $validated['price']) {
+                $wallet->balance -= $validated['price'];
+                $wallet->save();
+
+                WalletTransaction::create([
+                    'wallet_id' => $wallet->id,
+                    'type' => 'debit',
+                    'amount' => $validated['price'],
+                    'description' => 'Policy purchase: ' . $validated['product'] . ' insurance',
+                    'status' => 'completed',
+                    'reference' => 'POL-' . $policy->policy_number,
+                ]);
+            }
+
+            return redirect()->route('customer.policies.index')->with('success', 'Policy purchased successfully! Policy Number: ' . $policy->policy_number);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to purchase policy: ' . $e->getMessage());
+        }
+    }
+
+    private function getMonthsFromPeriod($period)
+    {
+        $periods = [
+            'monthly' => 1,
+            'quarterly' => 3,
+            'semi_annual' => 6,
+            'annual' => 12,
+        ];
+        return $periods[$period] ?? 12;
+    }
+
+    private function getCoverageAmount($coverage)
+    {
+        $coverages = [
+            'basic' => 500000,
+            'standard' => 1000000,
+            'premium' => 2000000,
+            'elite' => 5000000,
+        ];
+        return $coverages[$coverage] ?? 500000;
+    }
+
     public function quote()
     {
         return view('customer.quote', $this->buildViewData());
