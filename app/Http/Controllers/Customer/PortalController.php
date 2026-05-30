@@ -88,19 +88,37 @@ class PortalController extends Controller
                 ]);
             }
             
+            // Get or create policy category
+            $categoryId = DB::table('policy_categories')
+                ->where('category_name', 'like', '%' . $validated['product'] . '%')
+                ->value('id');
+            
+            if (!$categoryId) {
+                $categoryId = DB::table('policy_categories')->insertGetId([
+                    'category_code' => strtoupper(substr($validated['product'], 0, 3)) . 'CAT',
+                    'category_name' => ucfirst($validated['product']),
+                    'description' => ucfirst($validated['product']) . ' insurance category',
+                    'is_active' => true,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+            
             // Get or create insurance product
             $productId = DB::table('insurance_products')
-                ->where('name', 'like', '%' . $validated['product'] . '%')
+                ->where('product_name', 'like', '%' . $validated['product'] . '%')
                 ->value('id');
             
             if (!$productId) {
                 $productId = DB::table('insurance_products')->insertGetId([
-                    'name' => ucfirst($validated['product']) . ' Insurance',
-                    'code' => strtoupper(substr($validated['product'], 0, 3)) . '001',
-                    'category' => $validated['product'],
+                    'policy_category_id' => $categoryId,
+                    'insurer_id' => $insurerId,
+                    'product_name' => ucfirst($validated['product']) . ' Insurance',
+                    'product_code' => strtoupper(substr($validated['product'], 0, 3)) . '001',
                     'description' => ucfirst($validated['product']) . ' insurance coverage',
-                    'premium' => $validated['price'],
-                    'status' => 'active',
+                    'base_premium' => $validated['price'],
+                    'currency' => 'TZS',
+                    'is_active' => true,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
