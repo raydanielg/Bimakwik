@@ -61,8 +61,16 @@ class PortalController extends Controller
             // Get customer_id from customers table using user_id
             $customerId = DB::table('customers')->where('user_id', auth()->id())->value('id');
             
+            // Auto-create customer record if not exists
             if (!$customerId) {
-                return back()->with('error', 'Customer record not found. Please complete your profile first.');
+                $customerId = DB::table('customers')->insertGetId([
+                    'user_id' => auth()->id(),
+                    'customer_number' => 'CUST-' . strtoupper(substr(uniqid(), -8)),
+                    'nationality' => 'Tanzanian',
+                    'kyc_status' => 'pending',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             }
 
             // Get a default insurer (first one)
