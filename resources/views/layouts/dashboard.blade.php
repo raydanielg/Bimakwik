@@ -1078,7 +1078,7 @@
             </nav>
 
             <div class="container-fluid px-4 py-2">
-                @yield('dashboard_content')
+                @yield('content')
             </div>
         </div>
     </div>
