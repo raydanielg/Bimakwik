@@ -58,6 +58,13 @@ class PortalController extends Controller
         ]);
 
         try {
+            // Get customer_id from customers table using user_id
+            $customerId = DB::table('customers')->where('user_id', auth()->id())->value('id');
+            
+            if (!$customerId) {
+                return back()->with('error', 'Customer record not found. Please complete your profile first.');
+            }
+
             // Get a default insurer (first one)
             $insurerId = DB::table('insurers')->value('id') ?? 1;
             
@@ -68,7 +75,7 @@ class PortalController extends Controller
 
             // Create new policy
             $policy = CustomerPolicy::create([
-                'customer_id' => auth()->id(),
+                'customer_id' => $customerId,
                 'insurance_product_id' => $productId,
                 'insurer_id' => $insurerId,
                 'policy_number' => 'POL-' . strtoupper(substr(uniqid(), -8)),
