@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/compare', [App\Http\Controllers\Customer\PortalController::class, 'compare'])->name('compare');
         Route::get('/buy', [App\Http\Controllers\Customer\PortalController::class, 'buy'])->name('buy');
         Route::get('/quote', [App\Http\Controllers\Customer\PortalController::class, 'quote'])->name('quote');
+        Route::post('/quote', [App\Http\Controllers\Customer\PortalController::class, 'quoteSubmit'])->name('quote.submit');
         
         // Insurance
         Route::get('/policies', [App\Http\Controllers\Customer\PortalController::class, 'policies'])->name('policies.index');
