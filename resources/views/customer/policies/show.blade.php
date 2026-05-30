@@ -13,8 +13,27 @@
             <a href="{{ route('customer.policies.index') }}" class="btn btn-link text-decoration-none mb-2">
                 <i class="bi bi-arrow-left me-1"></i> {{ __('customer.back_to_policies') }}
             </a>
-            <h4 class="fw-bold mb-2">{{ __('customer.policy_details') }}</h4>
-            <p class="text-muted small">{{ $policy->policy_number ?? 'N/A' }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="fw-bold mb-1">{{ __('customer.policy_details') }}</h4>
+                    <p class="text-muted small mb-0">{{ $policy->policy_number ?? 'N/A' }}</p>
+                </div>
+                <div>
+                    @if(($policy->status ?? '') === 'active')
+                        <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-4 py-2 fs-6">
+                            <i class="bi bi-check-circle me-1"></i> Active
+                        </span>
+                    @elseif(($policy->status ?? '') === 'expired')
+                        <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-4 py-2 fs-6">
+                            <i class="bi bi-x-circle me-1"></i> Expired
+                        </span>
+                    @else
+                        <span class="badge bg-warning bg-opacity-10 text-warning rounded-pill px-4 py-2 fs-6">
+                            <i class="bi bi-exclamation-circle me-1"></i> {{ ucfirst($policy->status ?? 'Unknown') }}
+                        </span>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 
@@ -23,41 +42,35 @@
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white border-0 p-4">
-                    <h5 class="fw-bold mb-0">{{ __('customer.policy_information') }}</h5>
+                    <h5 class="fw-bold mb-0"><i class="bi bi-shield-check me-2"></i>{{ __('customer.policy_information') }}</h5>
                 </div>
                 <div class="card-body p-4">
-                    <div class="row g-3">
+                    <div class="row g-4">
                         <div class="col-md-6">
-                            <label class="small text-muted">{{ __('customer.policy_name') }}</label>
-                            <div class="fw-bold">{{ $policy->product->product_name ?? 'N/A' }}</div>
+                            <label class="small text-muted fw-bold">{{ __('customer.policy_name') }}</label>
+                            <div class="fs-5 fw-bold text-primary">{{ $policy->product->product_name ?? 'N/A' }}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small text-muted">{{ __('customer.policy_number') }}</label>
-                            <div class="fw-bold">{{ $policy->policy_number ?? 'N/A' }}</div>
+                            <label class="small text-muted fw-bold">{{ __('customer.policy_number') }}</label>
+                            <div class="fs-5 fw-bold">{{ $policy->policy_number ?? 'N/A' }}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small text-muted">{{ __('customer.provider') }}</label>
-                            <div class="fw-bold">{{ $policy->insurer->insurer_name ?? 'N/A' }}</div>
+                            <label class="small text-muted fw-bold">{{ __('customer.provider') }}</label>
+                            <div class="fs-5 fw-bold">{{ $policy->insurer->insurer_name ?? 'N/A' }}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small text-muted">{{ __('customer.status') }}</label>
-                            <div class="fw-bold">
-                                @if(($policy->status ?? '') === 'active')
-                                    <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Active</span>
-                                @elseif(($policy->status ?? '') === 'expired')
-                                    <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3">Expired</span>
-                                @else
-                                    <span class="badge bg-warning bg-opacity-10 text-warning rounded-pill px-3">{{ ucfirst($policy->status ?? 'Unknown') }}</span>
-                                @endif
+                            <label class="small text-muted fw-bold">{{ __('customer.payment_method') }}</label>
+                            <div class="fs-5 fw-bold">
+                                <i class="bi bi-wallet2 me-1"></i> {{ ucfirst($policy->payment_method ?? 'N/A') }}
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small text-muted">{{ __('customer.start_date') }}</label>
-                            <div class="fw-bold">{{ $policy->start_date ? $policy->start_date->format('d M Y') : 'N/A' }}</div>
+                            <label class="small text-muted fw-bold">{{ __('customer.start_date') }}</label>
+                            <div class="fs-5 fw-bold">{{ $policy->start_date ? $policy->start_date->format('d M Y') : 'N/A' }}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small text-muted">{{ __('customer.end_date') }}</label>
-                            <div class="fw-bold">{{ $policy->end_date ? $policy->end_date->format('d M Y') : 'N/A' }}</div>
+                            <label class="small text-muted fw-bold">{{ __('customer.end_date') }}</label>
+                            <div class="fs-5 fw-bold text-danger">{{ $policy->end_date ? $policy->end_date->format('d M Y') : 'N/A' }}</div>
                         </div>
                     </div>
                 </div>
@@ -66,25 +79,40 @@
             <!-- Coverage Details -->
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white border-0 p-4">
-                    <h5 class="fw-bold mb-0">{{ __('customer.coverage_details') }}</h5>
+                    <h5 class="fw-bold mb-0"><i class="bi bi-cash-coin me-2"></i>{{ __('customer.coverage_details') }}</h5>
                 </div>
                 <div class="card-body p-4">
-                    <div class="row g-3">
+                    <div class="row g-4">
                         <div class="col-md-6">
-                            <label class="small text-muted">{{ __('customer.premium_amount') }}</label>
-                            <div class="fw-bold fs-5">TZS {{ number_format($policy->premium_amount ?? 0, 0) }}</div>
+                            <label class="small text-muted fw-bold">{{ __('customer.premium_amount') }}</label>
+                            <div class="fs-4 fw-bold text-success">TZS {{ number_format($policy->premium_amount ?? 0, 0) }}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small text-muted">{{ __('customer.premium_frequency') }}</label>
-                            <div class="fw-bold">{{ ucfirst($policy->premium_frequency ?? 'N/A') }}</div>
+                            <label class="small text-muted fw-bold">{{ __('customer.premium_frequency') }}</label>
+                            <div class="fs-4 fw-bold">{{ ucfirst($policy->premium_frequency ?? 'N/A') }}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small text-muted">{{ __('customer.sum_assured') }}</label>
-                            <div class="fw-bold">TZS {{ number_format($policy->sum_assured ?? 0, 0) }}</div>
+                            <label class="small text-muted fw-bold">{{ __('customer.sum_assured') }}</label>
+                            <div class="fs-4 fw-bold text-primary">TZS {{ number_format($policy->sum_assured ?? 0, 0) }}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="small text-muted">{{ __('customer.payment_method') }}</label>
-                            <div class="fw-bold">{{ ucfirst($policy->payment_method ?? 'N/A') }}</div>
+                            <label class="small text-muted fw-bold">{{ __('customer.days_remaining') }}</label>
+                            <div class="fs-4 fw-bold">
+                                @if($policy->end_date)
+                                    @php
+                                        $daysRemaining = $policy->end_date->diffInDays(now(), false);
+                                    @endphp
+                                    @if($daysRemaining > 0)
+                                        <span class="text-success">{{ $daysRemaining }} days</span>
+                                    @elseif($daysRemaining == 0)
+                                        <span class="text-warning">Today</span>
+                                    @else
+                                        <span class="text-danger">{{ abs($daysRemaining) }} days ago</span>
+                                    @endif
+                                @else
+                                    N/A
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,15 +122,17 @@
             @if($policy->policy_details)
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white border-0 p-4">
-                    <h5 class="fw-bold mb-0">{{ __('customer.additional_details') }}</h5>
+                    <h5 class="fw-bold mb-0"><i class="bi bi-info-circle me-2"></i>{{ __('customer.additional_details') }}</h5>
                 </div>
                 <div class="card-body p-4">
-                    @foreach($policy->policy_details as $key => $value)
-                    <div class="mb-2">
-                        <label class="small text-muted">{{ ucfirst(str_replace('_', ' ', $key)) }}</label>
-                        <div class="fw-bold">{{ is_array($value) ? json_encode($value) : $value }}</div>
+                    <div class="row g-3">
+                        @foreach($policy->policy_details as $key => $value)
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold">{{ ucfirst(str_replace('_', ' ', $key)) }}</label>
+                            <div class="fw-bold">{{ is_array($value) ? json_encode($value) : $value }}</div>
+                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
             </div>
             @endif
@@ -111,19 +141,23 @@
         <!-- Actions Card -->
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm sticky-top" style="top: 20px;">
-                <div class="card-header bg-light border-0 p-4">
-                    <h5 class="fw-bold mb-0">{{ __('customer.quick_actions') }}</h5>
+                <div class="card-header bg-primary text-white border-0 p-4">
+                    <h5 class="fw-bold mb-0"><i class="bi bi-lightning me-2"></i>{{ __('customer.quick_actions') }}</h5>
                 </div>
                 <div class="card-body p-4">
-                    <div class="d-grid gap-2">
-                        <a href="{{ route('customer.policies.documents') }}" class="btn btn-primary">
+                    <div class="d-grid gap-3">
+                        <a href="{{ route('customer.policies.documents') }}" class="btn btn-primary btn-lg">
                             <i class="bi bi-file-earmark-text me-2"></i> {{ __('customer.view_documents') }}
                         </a>
-                        <a href="{{ route('customer.claims.create') }}" class="btn btn-outline-primary">
+                        <a href="{{ route('customer.claims.create', ['policy_id' => $policy->id]) }}" class="btn btn-outline-primary btn-lg">
                             <i class="bi bi-exclamation-octagon me-2"></i> {{ __('customer.file_claim') }}
                         </a>
-                        <a href="{{ route('customer.policies.renewals') }}" class="btn btn-outline-secondary">
+                        <a href="{{ route('customer.policies.renewals') }}" class="btn btn-outline-secondary btn-lg">
                             <i class="bi bi-arrow-clockwise me-2"></i> {{ __('customer.renew_policy') }}
+                        </a>
+                        <hr>
+                        <a href="{{ route('customer.support') }}" class="btn btn-outline-info">
+                            <i class="bi bi-headset me-2"></i> {{ __('customer.contact_support') }}
                         </a>
                     </div>
                 </div>

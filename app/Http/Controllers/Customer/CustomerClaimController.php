@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Claim;
+use App\Models\CustomerPolicy;
+use Illuminate\Support\Facades\DB;
 
 class CustomerClaimController extends Controller
 {
@@ -20,16 +22,28 @@ class CustomerClaimController extends Controller
         return view('customer.claims.track', compact('claims'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $policies = collect();
+        $selectedPolicyId = $request->query('policy_id');
+        
         try {
-            $policies = CustomerPolicy::where('customer_id', auth()->id())
-                ->where('status', 'active')
-                ->with('product')
-                ->get();
+            $userId = auth()->id();
+            $customerId = DB::table('customers')->where('user_id', $userId)->value('id');
+            
+            if ($customerId) {
+                $query = CustomerPolicy::where('customer_id', $customerId)
+                    ->where('status', 'active')
+                    ->with('product');
+                
+                if ($selectedPolicyId) {
+                    $query->where('id', $selectedPolicyId);
+                }
+                
+                $policies = $query->get();
+            }
         } catch (\Exception $e) {}
-        return view('customer.claims.create', compact('policies'));
+        return view('customer.claims.create', compact('policies', 'selectedPolicyId'));
     }
 
     public function store(Request $request)

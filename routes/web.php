@@ -59,8 +59,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/documents', [App\Http\Controllers\Customer\CustomerDocumentController::class, 'index'])->name('policies.documents');
         
         // Claims
-        Route::get('/claims/create', [App\Http\Controllers\Customer\PortalController::class, 'claimsCreate'])->name('claims.create');
-        Route::get('/claims/track', [App\Http\Controllers\Customer\PortalController::class, 'claimsTrack'])->name('claims.track');
+        Route::get('/claims/create', [App\Http\Controllers\Customer\CustomerClaimController::class, 'create'])->name('claims.create');
+        Route::post('/claims', [App\Http\Controllers\Customer\CustomerClaimController::class, 'store'])->name('claims.store');
+        Route::get('/claims/track', [App\Http\Controllers\Customer\CustomerClaimController::class, 'index'])->name('claims.track');
         
         // Wallet
         Route::get('/wallet', [App\Http\Controllers\Customer\PortalController::class, 'wallet'])->name('wallet.index');
