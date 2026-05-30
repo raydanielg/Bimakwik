@@ -12,7 +12,7 @@
         <div class="col-lg-5">
             <div class="card border-0 shadow-sm p-4 h-100">
                 <h6 class="fw-bold mb-4">Verify Policy</h6>
-                <form action="{{ route('service-provider.customer.verify') }}" method="POST">
+                <form action="{{ route('service-provider.customer.verify.submit') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Policy Number</label>
