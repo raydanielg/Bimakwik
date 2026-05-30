@@ -301,8 +301,18 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/history', [App\Http\Controllers\ServiceProvider\CustomerController::class, 'verificationHistory'])->name('history');
         });
         
-        Route::get('/claims', [App\Http\Controllers\ServiceProvider\ClaimController::class, 'index'])->name('claims.index');
-        Route::get('/payments', [App\Http\Controllers\ServiceProvider\PaymentController::class, 'index'])->name('payments.index');
+        Route::prefix('claims')->name('claims.')->group(function () {
+            Route::get('/', [App\Http\Controllers\ServiceProvider\ClaimController::class, 'index'])->name('index');
+            Route::get('/{id}', [App\Http\Controllers\ServiceProvider\ClaimController::class, 'show'])->name('show');
+            Route::post('/{id}/status', [App\Http\Controllers\ServiceProvider\ClaimController::class, 'updateStatus'])->name('update-status');
+        });
+        
+        Route::prefix('payments')->name('payments.')->group(function () {
+            Route::get('/', [App\Http\Controllers\ServiceProvider\PaymentController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\ServiceProvider\PaymentController::class, 'create'])->name('create');
+            Route::post('/', [App\Http\Controllers\ServiceProvider\PaymentController::class, 'store'])->name('store');
+            Route::get('/{id}', [App\Http\Controllers\ServiceProvider\PaymentController::class, 'show'])->name('show');
+        });
         Route::get('/agreements', [App\Http\Controllers\ServiceProvider\AgreementController::class, 'index'])->name('agreements.index');
         Route::get('/performance', [App\Http\Controllers\ServiceProvider\PerformanceController::class, 'index'])->name('performance.index');
         Route::get('/bank-details', [App\Http\Controllers\ServiceProvider\BankController::class, 'index'])->name('bank.index');

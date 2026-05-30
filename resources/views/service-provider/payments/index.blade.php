@@ -4,8 +4,7 @@
 <div class="container-fluid py-4">
     @include('service-provider._partials.page-header', [
         'title' => 'Payments',
-        'subtitle' => 'View payment history and status',
-        'icon' => 'bi-cash-coin'
+        'subtitle' => 'View payment history and status'
     ])
 
     <div class="row mb-4">
@@ -18,7 +17,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 text-muted">Total Paid</h6>
-                            <h4 class="mb-0 fw-bold">TZS 0</h4>
+                            <h4 class="mb-0 fw-bold">TZS {{ number_format($stats['total_paid'] ?? 0, 0) }}</h4>
                         </div>
                     </div>
                 </div>
@@ -33,7 +32,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 text-muted">Pending</h6>
-                            <h4 class="mb-0 fw-bold">TZS 0</h4>
+                            <h4 class="mb-0 fw-bold">TZS {{ number_format($stats['pending'] ?? 0, 0) }}</h4>
                         </div>
                     </div>
                 </div>
@@ -48,7 +47,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 text-muted">This Month</h6>
-                            <h4 class="mb-0 fw-bold">TZS 0</h4>
+                            <h4 class="mb-0 fw-bold">TZS {{ number_format($stats['this_month'] ?? 0, 0) }}</h4>
                         </div>
                     </div>
                 </div>
@@ -63,7 +62,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 text-muted">Growth</h6>
-                            <h4 class="mb-0 fw-bold">0%</h4>
+                            <h4 class="mb-0 fw-bold">{{ $stats['growth'] ?? 0 }}%</h4>
                         </div>
                     </div>
                 </div>
@@ -82,11 +81,53 @@
             </div>
         </div>
         <div class="card-body">
-            @include('service-provider._partials.empty-state', [
-                'icon' => 'bi-cash-coin',
-                'title' => 'No Payments Found',
-                'text' => 'No payments have been recorded yet.'
-            ])
+            @if($payments->count() > 0)
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Reference</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($payments as $payment)
+                                <tr>
+                                    <td><span class="fw-bold">{{ $payment->reference ?? 'N/A' }}</span></td>
+                                    <td>{{ $payment->currency ?? 'TZS' }} {{ number_format($payment->amount ?? 0, 2) }}</td>
+                                    <td>{{ $payment->payment_date?->format('M d, Y') ?? 'N/A' }}</td>
+                                    <td>
+                                        @if($payment->status === 'completed')
+                                            <span class="badge bg-success">Completed</span>
+                                        @elseif($payment->status === 'pending')
+                                            <span class="badge bg-warning">Pending</span>
+                                        @elseif($payment->status === 'failed')
+                                            <span class="badge bg-danger">Failed</span>
+                                        @else
+                                            <span class="badge bg-secondary">{{ $payment->status }}</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{{ route('service-provider.payments.show', $payment->id) }}" class="btn btn-outline-primary"><i class="bi bi-eye"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                {{ $payments->links() }}
+            @else
+                @include('service-provider._partials.empty-state', [
+                    'icon' => 'bi-cash-coin',
+                    'title' => 'No Payments Found',
+                    'text' => 'No payments have been recorded yet.'
+                ])
+            @endif
         </div>
     </div>
 </div>
