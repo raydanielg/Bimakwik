@@ -142,7 +142,7 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm sticky-top" style="top: 20px;">
                 <div class="card-header bg-primary text-white border-0 p-4">
-                    <h5 class="fw-bold mb-0"><i class="bi bi-lightning me-2"></i>{{ __('customer.quick_actions') }}</h5>
+                    <h5 class="fw-bold mb-0"><i class="bi bi-lightning me-2"></i>Quick Actions</h5>
                 </div>
                 <div class="card-body p-4">
                     <div class="d-grid gap-3">
