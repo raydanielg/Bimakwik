@@ -828,10 +828,10 @@
                 <a href="{{ route('service-provider.customer.verify') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.customer.verify') ? 'active' : '' }}">
                     <i class="bi bi-person-vcard"></i> Customer Verification
                 </a>
-                <a href="{{ route('service-provider.claims.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.claims.index') ? 'active' : '' }}">
+                <a href="{{ route('service-provider.claims.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.claims.*') ? 'active' : '' }}">
                     <i class="bi bi-exclamation-octagon"></i> Claims
                 </a>
-                <a href="{{ route('service-provider.payments.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.payments.index') ? 'active' : '' }}">
+                <a href="{{ route('service-provider.payments.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.payments.*') ? 'active' : '' }}">
                     <i class="bi bi-cash-coin"></i> Payments
                 </a>
             </div>
