@@ -147,17 +147,17 @@
                 <div class="card-body p-4">
                     <div class="d-grid gap-3">
                         <a href="{{ route('customer.policies.documents') }}" class="btn btn-primary btn-lg">
-                            <i class="bi bi-file-earmark-text me-2"></i> {{ __('customer.view_documents') }}
+                            <i class="bi bi-file-earmark-text me-2"></i> View Documents
                         </a>
                         <a href="{{ route('customer.claims.create', ['policy_id' => $policy->id]) }}" class="btn btn-outline-primary btn-lg">
-                            <i class="bi bi-exclamation-octagon me-2"></i> {{ __('customer.file_claim') }}
+                            <i class="bi bi-exclamation-octagon me-2"></i> File Claim
                         </a>
                         <a href="{{ route('customer.policies.renewals') }}" class="btn btn-outline-secondary btn-lg">
-                            <i class="bi bi-arrow-clockwise me-2"></i> {{ __('customer.renew_policy') }}
+                            <i class="bi bi-arrow-clockwise me-2"></i> Renew Policy
                         </a>
                         <hr>
                         <a href="{{ route('customer.support') }}" class="btn btn-outline-info">
-                            <i class="bi bi-headset me-2"></i> {{ __('customer.contact_support') }}
+                            <i class="bi bi-headset me-2"></i> Contact Support
                         </a>
                     </div>
                 </div>
