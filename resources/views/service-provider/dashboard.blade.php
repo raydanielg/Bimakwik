@@ -72,12 +72,13 @@
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm p-4 h-100">
                 <h6 class="fw-bold mb-4"><i class="bi bi-person-vcard me-2 text-primary"></i> Quick Customer Verification</h6>
-                <form>
+                <form action="{{ route('service-provider.customer.verify.submit') }}" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label class="form-label small fw-bold">Policy Number</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Enter policy number to verify">
-                            <button class="btn btn-primary" type="button">Verify</button>
+                            <input type="text" name="policy_number" class="form-control" placeholder="Enter policy number to verify">
+                            <button class="btn btn-primary" type="submit">Verify</button>
                         </div>
                     </div>
                     <div class="p-3 bg-light rounded-3 border border-dashed text-center small text-muted">
@@ -90,7 +91,7 @@
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm p-4 h-100">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h6 class="fw-bold mb-0">Recent Bill Submissions</h6>
+                    <h6 class{{ route('service-provider.claims.index') }}"fw-bold mb-0">Recent Bill Submissions</h6>
                     <a href="#" class="btn btn-sm btn-link text-decoration-none">View All</a>
                 </div>
                 @if($recentBills->count() > 0)
@@ -108,14 +109,14 @@
                                 @foreach($recentBills as $bill)
                                     <tr>
                                         <td>{{ $bill->customer->name ?? 'N/A' }}</td>
-                                        <td>#{{ $bill->bill_number ?? $bill->id }}</td>
+                                        <td>#{{ $bill->claim_number ?? $bill->id ?? 'N/A' }}</td>
                                         <td>TZS {{ number_format($bill->amount ?? 0, 0) }}</td>
                                         <td>
-                                            @if($bill->status === 'pending')
+                                            @if(($bill->status ?? '') === 'pending')
                                                 <span class="badge bg-warning">Pending</span>
-                                            @elseif($bill->status === 'paid')
+                                            @elseif(($bill->status ?? '') === 'approved')
                                                 <span class="badge bg-success">Approved</span>
-                                            @elseif($bill->status === 'rejected')
+                                            @elseif(($bill->status ?? '') === 'rejected')
                                                 <span class="badge bg-danger">Rejected</span>
                                             @else
                                                 <span class="badge bg-secondary">{{ $bill->status ?? 'Unknown' }}</span>
