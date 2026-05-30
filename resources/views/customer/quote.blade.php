@@ -121,7 +121,7 @@
                         <a href="{{ route('customer.buy') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-2"></i> {{ __('customer.back') }}
                         </a>
-                        <button type="submit" class="btn btn-primary ms-auto">
+                        <button type="button" id="getPriceBtn" class="btn btn-primary ms-auto">
                             <i class="bi bi-check-circle me-2"></i> {{ __('customer.get_price') }}
                         </button>
                     </div>
@@ -166,7 +166,7 @@
                     <strong>{{ __('customer.remember') }}:</strong> {{ __('customer.quote_estimate_notice') }}
                 </div>
 
-                <button class="btn btn-primary w-100" disabled>
+                <button id="continueBtn" class="btn btn-primary w-100" disabled>
                     <i class="bi bi-lock me-2"></i> {{ __('customer.fill_form_to_continue') }}
                 </button>
             </div>
@@ -176,13 +176,14 @@
 
 <script>
     // Update summary based on form input
-    document.querySelectorAll('input[name="product"], select[name="coverage_level"]').forEach(el => {
+    document.querySelectorAll('input[name="product"], select[name="coverage_level"], select[name="coverage_period"]').forEach(el => {
         el.addEventListener('change', updateSummary);
     });
 
     function updateSummary() {
         const product = document.querySelector('input[name="product"]:checked')?.value || '-';
         const coverage = document.querySelector('select[name="coverage_level"]')?.value || '-';
+        const period = document.querySelector('select[name="coverage_period"]')?.value || '-';
         
         // Update display
         const productNames = {
@@ -192,17 +193,77 @@
             'travel': '{{ __('customer.travel_insurance') }}'
         };
         
-        const coveragePrices = {
-            'basic': 'TZS 50,000',
-            'standard': 'TZS 100,000',
-            'premium': 'TZS 200,000',
-            'elite': 'TZS 500,000'
+        const coverageNames = {
+            'basic': '{{ __('customer.plan_basic') }}',
+            'standard': '{{ __('customer.plan_standard') }}',
+            'premium': '{{ __('customer.plan_premium') }}',
+            'elite': '{{ __('customer.plan_elite') }}'
+        };
+        
+        const periodNames = {
+            'monthly': '{{ __('customer.monthly') }}',
+            'quarterly': '{{ __('customer.quarterly') }}',
+            'semi_annual': '{{ __('customer.semi_annual') }}',
+            'annual': '{{ __('customer.annual') }}'
         };
         
         document.getElementById('summaryProduct').textContent = productNames[product] || '-';
-        document.getElementById('summaryCoverage').textContent = coverage || '-';
-        document.getElementById('summaryPrice').textContent = coveragePrices[coverage] || 'TZS 0';
+        document.getElementById('summaryCoverage').textContent = coverageNames[coverage] || '-';
+        document.getElementById('summaryPeriod').textContent = periodNames[period] || '-';
     }
+
+    // Get Price button AJAX
+    document.getElementById('getPriceBtn').addEventListener('click', function() {
+        const product = document.querySelector('input[name="product"]:checked')?.value;
+        const coverage = document.querySelector('select[name="coverage_level"]')?.value;
+        const period = document.querySelector('select[name="coverage_period"]')?.value;
+        const phone = document.querySelector('input[name="phone"]')?.value;
+        const dob = document.querySelector('input[name="date_of_birth"]')?.value;
+
+        if (!product || !coverage || !period || !phone || !dob) {
+            alert('Please fill in all required fields');
+            return;
+        }
+
+        const btn = this;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i> Calculating...';
+
+        // Calculate price based on coverage level
+        const coveragePrices = {
+            'basic': 50000,
+            'standard': 100000,
+            'premium': 200000,
+            'elite': 500000
+        };
+
+        const periodMultipliers = {
+            'monthly': 1,
+            'quarterly': 3,
+            'semi_annual': 6,
+            'annual': 12
+        };
+
+        const basePrice = coveragePrices[coverage] || 0;
+        const multiplier = periodMultipliers[period] || 1;
+        const totalPrice = basePrice * multiplier;
+
+        // Simulate API call delay
+        setTimeout(() => {
+            document.getElementById('summaryPrice').textContent = 'TZS ' + totalPrice.toLocaleString();
+            
+            // Enable continue button
+            const continueBtn = document.getElementById('continueBtn');
+            continueBtn.disabled = false;
+            continueBtn.innerHTML = '<i class="bi bi-arrow-right me-2"></i> Continue to Purchase';
+            continueBtn.onclick = function() {
+                window.location.href = '{{ route('customer.buy') }}?product=' + product + '&coverage=' + coverage + '&period=' + period + '&price=' + totalPrice;
+            };
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="bi bi-check-circle me-2"></i> {{ __('customer.get_price') }}';
+        }, 500);
+    });
 
     // Initialize summary
     updateSummary();
