@@ -893,44 +893,6 @@
                 </a>
             </div>
 
-            @elseif(auth()->user()->hasRole('service_provider'))
-            <!-- Service Provider Menu -->
-            <div class="sidebar-heading">Service Operations</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="{{ route('service-provider.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.dashboard') ? 'active' : '' }}">
-                    <i class="bi bi-speedometer2"></i> Dashboard
-                </a>
-                <a href="{{ route('service-provider.customer.verify') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.customer.*') ? 'active' : '' }}">
-                    <i class="bi bi-person-badge"></i> Verify Customer
-                </a>
-                <a href="{{ route('service-provider.claims.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.claims.*') ? 'active' : '' }}">
-                    <i class="bi bi-file-earmark-medical"></i> Claims & Bills
-                </a>
-            </div>
-
-            <div class="sidebar-heading mt-3">Financials</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="{{ route('service-provider.payments.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.payments.*') ? 'active' : '' }}">
-                    <i class="bi bi-cash-stack"></i> Payments
-                </a>
-                <a href="{{ route('service-provider.bank.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.bank.*') ? 'active' : '' }}">
-                    <i class="bi bi-bank"></i> Bank Details
-                </a>
-            </div>
-
-            <div class="sidebar-heading mt-3">Management</div>
-            <div class="list-group list-group-flush px-2">
-                <a href="{{ route('service-provider.agreements.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.agreements.*') ? 'active' : '' }}">
-                    <i class="bi bi-file-earmark-text"></i> Agreements (SLAs)
-                </a>
-                <a href="{{ route('service-provider.performance.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.performance.*') ? 'active' : '' }}">
-                    <i class="bi bi-bar-chart-line"></i> Performance
-                </a>
-                <a href="{{ route('service-provider.support.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('service-provider.support.*') ? 'active' : '' }}">
-                    <i class="bi bi-question-circle"></i> Help & Support
-                </a>
-            </div>
-
             @elseif(auth()->user()->hasRole('regulator'))
             <!-- Regulator Menu -->
             <div class="sidebar-heading">Market Oversight</div>
