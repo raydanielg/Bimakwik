@@ -53,9 +53,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/quote', [App\Http\Controllers\Customer\PortalController::class, 'quoteSubmit'])->name('quote.submit');
         
         // Insurance
-        Route::get('/policies', [App\Http\Controllers\Customer\PortalController::class, 'policies'])->name('policies.index');
-        Route::get('/renewals', [App\Http\Controllers\Customer\PortalController::class, 'renewals'])->name('policies.renewals');
-        Route::get('/documents', [App\Http\Controllers\Customer\PortalController::class, 'documents'])->name('policies.documents');
+        Route::get('/policies', [App\Http\Controllers\Customer\CustomerPolicyController::class, 'index'])->name('policies.index');
+        Route::get('/policies/{id}', [App\Http\Controllers\Customer\CustomerPolicyController::class, 'show'])->name('policies.show');
+        Route::get('/renewals', [App\Http\Controllers\Customer\CustomerRenewalController::class, 'index'])->name('policies.renewals');
+        Route::get('/documents', [App\Http\Controllers\Customer\CustomerDocumentController::class, 'index'])->name('policies.documents');
         
         // Claims
         Route::get('/claims/create', [App\Http\Controllers\Customer\PortalController::class, 'claimsCreate'])->name('claims.create');

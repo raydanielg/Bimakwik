@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CustomerPolicy;
+use Illuminate\Support\Facades\DB;
 
 class CustomerPolicyController extends Controller
 {
@@ -12,10 +13,15 @@ class CustomerPolicyController extends Controller
     {
         $policies = collect();
         try {
-            $policies = CustomerPolicy::where('customer_id', auth()->id())
-                ->with('product')
-                ->latest()
-                ->paginate(10);
+            $userId = auth()->id();
+            $customerId = DB::table('customers')->where('user_id', $userId)->value('id');
+            
+            if ($customerId) {
+                $policies = CustomerPolicy::where('customer_id', $customerId)
+                    ->with(['product', 'insurer'])
+                    ->latest()
+                    ->paginate(10);
+            }
         } catch (\Exception $e) {}
         return view('customer.policies.index', compact('policies'));
     }
@@ -24,9 +30,15 @@ class CustomerPolicyController extends Controller
     {
         $policy = null;
         try {
-            $policy = CustomerPolicy::where('customer_id', auth()->id())
-                ->with('product')
-                ->findOrFail($id);
+            $userId = auth()->id();
+            $customerId = DB::table('customers')->where('user_id', $userId)->value('id');
+            
+            if ($customerId) {
+                $policy = CustomerPolicy::where('customer_id', $customerId)
+                    ->where('id', $id)
+                    ->with(['product', 'insurer'])
+                    ->first();
+            }
         } catch (\Exception $e) {}
         return view('customer.policies.show', compact('policy'));
     }
