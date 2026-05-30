@@ -40,8 +40,10 @@ Route::middleware(['auth'])->group(function () {
     // Customer Dashboard
     Route::middleware(['role:customer'])->prefix('customer')->name('customer.')->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Customer\PortalController::class, 'dashboard'])->name('dashboard');
-        Route::get('/profile', [App\Http\Controllers\Customer\PortalController::class, 'profile'])->name('profile');
-        Route::get('/support', [App\Http\Controllers\Customer\PortalController::class, 'support'])->name('support');
+        Route::get('/profile', [App\Http\Controllers\Customer\CustomerProfileController::class, 'index'])->name('profile');
+        Route::post('/profile', [App\Http\Controllers\Customer\CustomerProfileController::class, 'update'])->name('profile.update');
+        Route::get('/support', [App\Http\Controllers\Customer\CustomerSupportController::class, 'index'])->name('support');
+        Route::post('/support', [App\Http\Controllers\Customer\CustomerSupportController::class, 'store'])->name('support.store');
         
         // AI & Marketplace
         Route::get('/ai-recommendations', [App\Http\Controllers\Customer\PortalController::class, 'aiRecommendations'])->name('ai-recommendations');
