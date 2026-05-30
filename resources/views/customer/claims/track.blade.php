@@ -2,7 +2,7 @@
 
 @section('dashboard_title', __('customer.dashboard_title_track_claims'))
 
-@section('dashboard_content')
+@section('content')
 @php
     $claims = collect($customerClaims ?? []);
     $pick = function ($row, $keys, $default = null) {

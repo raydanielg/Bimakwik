@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_content')
+@section('content')
 @php
     $policies = collect($customerPolicies ?? []);
     $pick = function ($row, $keys, $default = '-') {

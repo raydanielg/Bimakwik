@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_content')
+@section('content')
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 d-flex justify-content-between align-items-center">

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_content')
+@section('content')
 @php
     $documents = collect($customerDocuments ?? []);
     $pick = function ($row, $keys, $default = '-') {

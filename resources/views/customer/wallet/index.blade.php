@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_content')
+@section('content')
 @php
     $transactions = collect($walletTransactions ?? []);
     $pick = function ($row, $keys, $default = null) {

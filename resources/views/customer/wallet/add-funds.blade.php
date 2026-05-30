@@ -2,7 +2,7 @@
 
 @section('dashboard_title', __('customer.add_funds_title'))
 
-@section('dashboard_content')
+@section('content')
 <!-- Page Header -->
 <div class="row mb-4">
     <div class="col-12">
