@@ -3,14 +3,18 @@
 @section('dashboard_title', __('customer.create_claim_title'))
 
 @section('content')
+@php
+    $policies = $policies ?? collect();
+    $selectedPolicyId = $selectedPolicyId ?? null;
+@endphp
 <!-- Page Header -->
 <div class="row mb-4">
     <div class="col-12">
         <h2 class="fw-bold mb-2">
             <i class="bi bi-file-earmark-plus me-2"></i>
-            {{ __('customer.create_claim_header') }}
+            Submit New Claim
         </h2>
-        <p class="text-muted">{{ __('customer.create_claim_subtitle') }}</p>
+        <p class="text-muted">File a claim for your insurance policy</p>
     </div>
 </div>
 
@@ -19,27 +23,25 @@
     <div class="col-lg-8">
         <div class="card border-0 shadow-sm">
             <div class="card-body p-4">
-                <form id="claimForm" method="POST" action="#" enctype="multipart/form-data">
+                <form id="claimForm" method="POST" action="{{ route('customer.claims.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Policy Selection -->
                     <h5 class="fw-bold mb-3">
-                        <i class="bi bi-1-circle me-2"></i> {{ __('customer.select_policy') }}
+                        <i class="bi bi-1-circle me-2"></i> Select Policy
                     </h5>
 
                     <div class="mb-4">
-                        <label class="form-label">{{ __('customer.insurance_policy') }}</label>
+                        <label class="form-label">Insurance Policy</label>
                         <select class="form-select" name="policy_id" required>
-                            <option value="">{{ __('customer.choose_policy') }}</option>
-                            <option value="1">
-                                Policy #POL-2024-001 - Motor Insurance (Active)
-                            </option>
-                            <option value="2">
-                                Policy #POL-2024-002 - Health Insurance (Active)
-                            </option>
-                            <option value="3">
-                                Policy #POL-2024-003 - Property Insurance (Active)
-                            </option>
+                            <option value="">Choose Policy</option>
+                            @forelse($policies as $policy)
+                                <option value="{{ $policy->id }}" {{ $selectedPolicyId == $policy->id ? 'selected' : '' }}>
+                                    {{ $policy->policy_number }} - {{ $policy->product->product_name ?? 'Unknown' }} ({{ ucfirst($policy->status ?? 'Active') }})
+                                </option>
+                            @empty
+                                <option value="" disabled>No active policies found</option>
+                            @endforelse
                         </select>
                     </div>
 
@@ -47,43 +49,43 @@
 
                     <!-- Claim Details -->
                     <h5 class="fw-bold mb-3">
-                        <i class="bi bi-2-circle me-2"></i> {{ __('customer.claim_details') }}
+                        <i class="bi bi-2-circle me-2"></i> Claim Details
                     </h5>
 
                     <div class="mb-3">
-                        <label class="form-label">{{ __('customer.claim_type_label') }}</label>
+                        <label class="form-label">Claim Type</label>
                         <select class="form-select" name="claim_type" required>
-                            <option value="">{{ __('customer.choose_type') }}</option>
-                            <option value="accident">{{ __('customer.accident_or_collision') }}</option>
-                            <option value="theft">{{ __('customer.theft_or_loss') }}</option>
-                            <option value="damage">{{ __('customer.damage') }}</option>
-                            <option value="medical">{{ __('customer.medical_expenses') }}</option>
-                            <option value="other">{{ __('customer.other') }}</option>
+                            <option value="">Choose Type</option>
+                            <option value="accident">Accident or Collision</option>
+                            <option value="theft">Theft or Loss</option>
+                            <option value="damage">Damage</option>
+                            <option value="medical">Medical Expenses</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">{{ __('customer.incident_date_label') }}</label>
+                        <label class="form-label">Incident Date</label>
                         <input type="date" class="form-control" name="incident_date" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">{{ __('customer.incident_description') }}</label>
-                        <textarea class="form-control" name="description" rows="5" placeholder="{{ __('customer.incident_description_ph') }}" required></textarea>
-                        <small class="text-muted">{{ __('customer.incident_description_hint') }}</small>
+                        <label class="form-label">Incident Description</label>
+                        <textarea class="form-control" name="description" rows="5" placeholder="Describe what happened in detail" required></textarea>
+                        <small class="text-muted">Please provide as much detail as possible</small>
                     </div>
 
                     <div class="row g-3 mb-4">
                         <div class="col-md-6">
-                            <label class="form-label">{{ __('customer.claim_amount_label') }}</label>
+                            <label class="form-label">Claim Amount</label>
                             <div class="input-group">
                                 <span class="input-group-text">TZS</span>
-                                <input type="number" class="form-control" name="claim_amount" placeholder="0.00" required>
+                                <input type="number" class="form-control" name="amount" placeholder="0.00" required>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">{{ __('customer.incident_location') }}</label>
-                            <input type="text" class="form-control" name="incident_location" placeholder="{{ __('customer.incident_location_ph') }}" required>
+                            <label class="form-label">Incident Location</label>
+                            <input type="text" class="form-control" name="location" placeholder="Where did it happen?" required>
                         </div>
                     </div>
 
@@ -91,15 +93,15 @@
 
                     <!-- Supporting Documents -->
                     <h5 class="fw-bold mb-3">
-                        <i class="bi bi-3-circle me-2"></i> {{ __('customer.supporting_documents') }}
+                        <i class="bi bi-3-circle me-2"></i> Supporting Documents
                     </h5>
 
                     <div class="mb-3">
-                        <label class="form-label">{{ __('customer.upload_documents_optional') }}</label>
+                        <label class="form-label">Upload Documents (Optional)</label>
                         <div class="border-2 border-dashed rounded p-4 text-center" style="border-color: #dee2e6; cursor: pointer;" id="dropZone">
                             <i class="bi bi-cloud-arrow-up" style="font-size: 2rem; color: #6c757d;"></i>
                             <p class="mt-2 mb-0">
-                                <strong>{{ __('customer.drag_files_prompt') }}</strong>
+                                <strong>Drag & drop files here or click to upload</strong>
                             </p>
                             <small class="text-muted">PNG, JPG, PDF (Max 5MB)</small>
                             <input type="file" id="fileInput" name="documents[]" multiple accept=".png,.jpg,.jpeg,.pdf" style="display: none;">
@@ -111,28 +113,28 @@
 
                     <!-- Additional Information -->
                     <h5 class="fw-bold mb-3">
-                        <i class="bi bi-4-circle me-2"></i> {{ __('customer.additional_info') }}
+                        <i class="bi bi-4-circle me-2"></i> Additional Information
                     </h5>
 
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="third_party" id="thirdParty">
                             <label class="form-check-label" for="thirdParty">
-                                {{ __('customer.third_party_involved') }}
+                                Third party involved?
                             </label>
                         </div>
                     </div>
 
                     <div id="thirdPartyInfo" style="display: none;" class="mb-3 p-3 bg-light rounded">
-                        <input type="text" class="form-control" name="third_party_name" placeholder="{{ __('customer.third_party_name') }}">
-                        <input type="text" class="form-control mt-2" name="third_party_contact" placeholder="{{ __('customer.third_party_contact') }}">
+                        <input type="text" class="form-control" name="third_party_name" placeholder="Third party name">
+                        <input type="text" class="form-control mt-2" name="third_party_contact" placeholder="Third party contact">
                     </div>
 
                     <div class="mb-4">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="police_report" id="policeReport">
                             <label class="form-check-label" for="policeReport">
-                                {{ __('customer.police_report_question') }}
+                                Police report filed?
                             </label>
                         </div>
                     </div>
@@ -140,15 +142,15 @@
                     <!-- Terms and Submit -->
                     <div class="alert alert-info small">
                         <i class="bi bi-info-circle me-2"></i>
-                        {{ __('customer.claim_terms_agree') }}
+                        By submitting this claim, you confirm that all information provided is accurate and complete.
                     </div>
 
                     <div class="d-flex gap-2 pt-3">
                         <a href="{{ route('customer.claims.track') }}" class="btn btn-secondary">
-                            <i class="bi bi-arrow-left me-2"></i> {{ __('customer.back') }}
+                            <i class="bi bi-arrow-left me-2"></i> Back
                         </a>
                         <button type="submit" class="btn btn-primary ms-auto">
-                            <i class="bi bi-send me-2"></i> {{ __('customer.submit_claim_form') }}
+                            <i class="bi bi-send me-2"></i> Submit Claim
                         </button>
                     </div>
                 </form>
@@ -161,28 +163,28 @@
         <div class="card border-0 shadow-sm sticky-top" style="top: 20px;">
             <div class="card-header bg-light border-0 p-4">
                 <h5 class="fw-bold mb-0">
-                    <i class="bi bi-info-circle me-2"></i> {{ __('customer.important_info') }}
+                    <i class="bi bi-info-circle me-2"></i> Important Information
                 </h5>
             </div>
             <div class="card-body p-4">
                 <div class="mb-4">
-                    <h6 class="fw-bold mb-2">{{ __('customer.what_you_need') }}</h6>
+                    <h6 class="fw-bold mb-2">What You Need</h6>
                     <ul class="small list-unstyled">
                         <li class="mb-2">
                             <i class="bi bi-check-circle text-success me-2"></i>
-                            Namba ya sera
+                            Policy number
                         </li>
                         <li class="mb-2">
                             <i class="bi bi-check-circle text-success me-2"></i>
-                            {{ __('customer.incident_details_item') }}
+                            Incident details
                         </li>
                         <li class="mb-2">
                             <i class="bi bi-check-circle text-success me-2"></i>
-                            {{ __('customer.claim_amount_item') }}
+                            Claim amount
                         </li>
                         <li class="mb-2">
                             <i class="bi bi-check-circle text-success me-2"></i>
-                            {{ __('customer.photos_or_docs') }}
+                            Photos or documents
                         </li>
                     </ul>
                 </div>
@@ -190,16 +192,16 @@
                 <hr>
 
                 <div class="mb-4">
-                    <h6 class="fw-bold mb-2">{{ __('customer.accepted_documents') }}</h6>
+                    <h6 class="fw-bold mb-2">Accepted Documents</h6>
                     <ul class="small list-unstyled">
                         <li class="mb-1">
-                            <i class="bi bi-file-image me-2"></i> Picha (PNG, JPG)
+                            <i class="bi bi-file-image me-2"></i> Images (PNG, JPG)
                         </li>
                         <li class="mb-1">
-                            <i class="bi bi-file-pdf me-2"></i> Hati (PDF)
+                            <i class="bi bi-file-pdf me-2"></i> Documents (PDF)
                         </li>
                         <li>
-                            <small class="text-muted">Max 5MB kwa faili</small>
+                            <small class="text-muted">Max 5MB per file</small>
                         </li>
                     </ul>
                 </div>
@@ -207,9 +209,9 @@
                 <hr>
 
                 <div>
-                    <h6 class="fw-bold mb-2">{{ __('customer.response_time') }}</h6>
+                    <h6 class="fw-bold mb-2">Response Time</h6>
                     <p class="small mb-0">
-                        {{ __('customer.response_time_text') }}
+                        We typically respond to claims within 2-3 business days. You will receive updates via email and in your claims tracking page.
                     </p>
                 </div>
             </div>
