@@ -2,7 +2,7 @@
 
 @section('dashboard_title', __('customer.my_insurance_dashboard'))
 
-@section('dashboard_content')
+@section('content')
 <!-- Customer Welcome Banner -->
 <div class="row mb-4">
     <div class="col-12">
