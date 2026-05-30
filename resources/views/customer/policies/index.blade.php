@@ -2,7 +2,7 @@
 
 @section('content')
 @php
-    $policies = collect($customerPolicies ?? []);
+    $policies = isset($policies) ? $policies : collect($customerPolicies ?? []);
     $pick = function ($row, $keys, $default = '-') {
         foreach ($keys as $key) {
             if (isset($row[$key]) && $row[$key] !== null && $row[$key] !== '') {

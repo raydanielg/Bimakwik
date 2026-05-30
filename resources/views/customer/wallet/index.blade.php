@@ -2,29 +2,34 @@
 
 @section('content')
 @php
-    $transactions = collect($walletTransactions ?? []);
-    $pick = function ($row, $keys, $default = null) {
-        foreach ($keys as $key) {
-            if (isset($row[$key]) && $row[$key] !== null && $row[$key] !== '') {
-                return $row[$key];
+    $wallet = $wallet ?? null;
+    $transactions = isset($transactions) ? $transactions : collect($walletTransactions ?? []);
+    $balance = $wallet ? $wallet->balance : 0;
+    
+    if ($balance == 0 && $transactions->count() > 0) {
+        $pick = function ($row, $keys, $default = null) {
+            foreach ($keys as $key) {
+                if (isset($row[$key]) && $row[$key] !== null && $row[$key] !== '') {
+                    return $row[$key];
+                }
             }
-        }
-        return $default;
-    };
+            return $default;
+        };
 
-    $balance = $transactions->reduce(function ($carry, $item) use ($pick) {
-        $amount = (float) $pick($item, ['amount', 'transaction_amount', 'value'], 0);
-        $type = strtolower((string) $pick($item, ['type', 'transaction_type'], ''));
-        $direction = strtolower((string) $pick($item, ['direction', 'entry_type'], ''));
+        $balance = $transactions->reduce(function ($carry, $item) use ($pick) {
+            $amount = (float) $pick($item, ['amount', 'transaction_amount', 'value'], 0);
+            $type = strtolower((string) $pick($item, ['type', 'transaction_type'], ''));
+            $direction = strtolower((string) $pick($item, ['direction', 'entry_type'], ''));
 
-        $isCredit = in_array($direction, ['credit', 'in'], true)
-            || str_contains($type, 'deposit')
-            || str_contains($type, 'refund')
-            || str_contains($type, 'bonus')
-            || str_contains($type, 'credit');
+            $isCredit = in_array($direction, ['credit', 'in'], true)
+                || str_contains($type, 'deposit')
+                || str_contains($type, 'refund')
+                || str_contains($type, 'bonus')
+                || str_contains($type, 'credit');
 
-        return $isCredit ? $carry + $amount : $carry - $amount;
-    }, 0);
+            return $isCredit ? $carry + $amount : $carry - $amount;
+        }, 0);
+    }
 
     $recentTransactions = $transactions->take(5);
 @endphp

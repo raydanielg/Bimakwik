@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    $claims = collect($customerClaims ?? []);
+    $claims = isset($claims) ? $claims : collect($customerClaims ?? []);
     $pick = function ($row, $keys, $default = null) {
         foreach ($keys as $key) {
             if (isset($row[$key]) && $row[$key] !== null && $row[$key] !== '') {

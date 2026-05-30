@@ -1,6 +1,9 @@
 @extends('layouts.dashboard')
 
 @section('content')
+@php
+    $tickets = isset($tickets) ? $tickets : collect();
+@endphp
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 text-center py-4 bg-white rounded-4 shadow-sm mb-4">

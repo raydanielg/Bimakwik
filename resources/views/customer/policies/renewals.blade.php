@@ -2,7 +2,7 @@
 
 @section('content')
 @php
-    $renewals = collect($customerRenewals ?? []);
+    $renewals = isset($renewals) ? $renewals : collect($customerRenewals ?? []);
     $pick = function ($row, $keys, $default = '-') {
         foreach ($keys as $key) {
             if (isset($row[$key]) && $row[$key] !== null && $row[$key] !== '') {

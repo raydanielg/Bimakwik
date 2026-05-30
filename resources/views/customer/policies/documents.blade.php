@@ -2,7 +2,7 @@
 
 @section('content')
 @php
-    $documents = collect($customerDocuments ?? []);
+    $documents = isset($documents) ? $documents : collect($customerDocuments ?? []);
     $pick = function ($row, $keys, $default = '-') {
         foreach ($keys as $key) {
             if (isset($row[$key]) && $row[$key] !== null && $row[$key] !== '') {

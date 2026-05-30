@@ -1,6 +1,10 @@
 @extends('layouts.dashboard')
 
 @section('content')
+@php
+    $customer = $customer ?? null;
+    $kycDocuments = $kycDocuments ?? collect();
+@endphp
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12">
