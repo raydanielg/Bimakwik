@@ -15,7 +15,7 @@
                 <div class="card-body p-4 text-center">
                     <i class="bi bi-bank fs-1 mb-2 opacity-75"></i>
                     <h6 class="text-uppercase small fw-bold opacity-75 mb-1">Total Premiums Written</h6>
-                    <h3 class="fw-bold mb-0">TZS {{ number_format($totalPremiums ?? 0, 0) }}</h3>
+                    <h3 class="fw-bold mb-0 stat-count">TZS {{ number_format($totalPremiums ?? 0, 0) }}</h3>
                     <div class="mt-2 small"><i class="bi bi-graph-up"></i> Market Total</div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         <i class="bi bi-shield-check fs-3"></i>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Active Policies</h6>
-                    <h3 class="fw-bold mb-0">{{ $activePolicies ?? 0 }}</h3>
+                    <h3 class="fw-bold mb-0 stat-count">{{ $activePolicies ?? 0 }}</h3>
                     <div class="mt-1 small text-success">Market Wide</div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                         <i class="bi bi-exclamation-triangle fs-3"></i>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Compliance Alerts</h6>
-                    <h3 class="fw-bold mb-0">{{ $complianceAlerts ?? 0 }}</h3>
+                    <h3 class="fw-bold mb-0 stat-count">{{ $complianceAlerts ?? 0 }}</h3>
                     <div class="mt-1 small text-danger">Action Required</div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         <i class="bi bi-search fs-3"></i>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Fraud Investigations</h6>
-                    <h3 class="fw-bold mb-0">{{ $fraudCases ?? 0 }}</h3>
+                    <h3 class="fw-bold mb-0 stat-count">{{ $fraudCases ?? 0 }}</h3>
                     <div class="mt-1 small text-warning">Under Review</div>
                 </div>
             </div>
