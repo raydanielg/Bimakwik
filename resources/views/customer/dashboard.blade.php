@@ -40,7 +40,7 @@
                         <i class="bi bi-shield-fill fs-4"></i>
                     </div>
                 </div>
-                <h3 class="fw-bold mb-0">{{ $stats['active_policies'] ?? 0 }}</h3>
+                <h3 class="fw-bold mb-0 stat-count">{{ $stats['active_policies'] ?? 0 }}</h3>
                 <p class="x-small text-muted mb-0 mt-1">Active Policies</p>
             </div>
         </div>

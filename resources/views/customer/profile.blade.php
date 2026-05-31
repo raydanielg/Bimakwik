@@ -23,7 +23,6 @@
                           data-ajax="true"
                           data-success-msg="Profile updated successfully!">
                         @csrf
-                        @method('PUT')
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold">Full Name</label>
