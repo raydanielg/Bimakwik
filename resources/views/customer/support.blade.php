@@ -52,29 +52,33 @@
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body p-4">
                     <h5 class="fw-bold mb-4 border-bottom pb-2">{{ __('customer.open_support_ticket') }}</h5>
-                    <form action="#" method="POST">
+                    <form action="{{ route('customer.support.store') }}" method="POST"
+                          data-ajax="true"
+                          data-success-msg="Ticket submitted! Our team will respond within 2 hours.">
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold">{{ __('customer.subject') }}</label>
-                                <input type="text" class="form-control rounded-3" placeholder="{{ __('customer.subject_ph') }}">
+                                <label class="form-label small fw-bold">Subject</label>
+                                <input type="text" name="subject" class="form-control rounded-3" placeholder="Brief description of your issue" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold">{{ __('customer.issue_category') }}</label>
-                                <select class="form-select rounded-3">
-                                    <option value="billing">{{ __('customer.billing_wallet') }}</option>
-                                    <option value="policy">{{ __('customer.policy_issues') }}</option>
-                                    <option value="claims">{{ __('customer.claim_issues') }}</option>
-                                    <option value="technical">{{ __('customer.technical_app') }}</option>
+                                <label class="form-label small fw-bold">Issue Category</label>
+                                <select name="category" class="form-select rounded-3" required>
+                                    <option value="billing">Billing & Wallet</option>
+                                    <option value="policy">Policy Issues</option>
+                                    <option value="claims">Claim Issues</option>
+                                    <option value="technical">Technical / App</option>
                                 </select>
                             </div>
                             <div class="col-12">
-                                <label class="form-label small fw-bold">{{ __('customer.message') }}</label>
-                                <textarea class="form-control rounded-3" rows="5" placeholder="{{ __('customer.message_ph') }}"></textarea>
+                                <label class="form-label small fw-bold">Message</label>
+                                <textarea name="message" class="form-control rounded-3" rows="5" placeholder="Describe your issue in detail..." required></textarea>
                             </div>
                         </div>
                         <div class="mt-4">
-                            <button type="submit" class="btn btn-primary px-5 rounded-pill">{{ __('customer.submit_ticket') }}</button>
+                            <button type="submit" class="btn btn-primary px-5 rounded-pill">
+                                <i class="bi bi-send me-2"></i>Submit Ticket
+                            </button>
                         </div>
                     </form>
                 </div>
