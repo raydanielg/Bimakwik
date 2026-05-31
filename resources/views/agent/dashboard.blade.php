@@ -20,7 +20,7 @@
                         <div class="text-success small fw-bold"><i class="bi bi-graph-up"></i> +12%</div>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Total Policies</h6>
-                    <h4 class="fw-bold mb-0">{{ $totalPolicies }}</h4>
+                    <h4 class="fw-bold mb-0 stat-count">{{ $totalPolicies }}</h4>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                         <div class="text-success small fw-bold"><i class="bi bi-arrow-up"></i> +8%</div>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Total Commission</h6>
-                    <h4 class="fw-bold mb-0">TZS {{ number_format($totalCommission, 0) }}</h4>
+                    <h4 class="fw-bold mb-0 stat-count">TZS {{ number_format($totalCommission, 0) }}</h4>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                         <div class="text-primary small fw-bold">+{{ $totalCustomers }}</div>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Total Customers</h6>
-                    <h4 class="fw-bold mb-0">{{ $totalCustomers }}</h4>
+                    <h4 class="fw-bold mb-0 stat-count">{{ $totalCustomers }}</h4>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                         <div class="text-warning small fw-bold">Pending</div>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Pending Commission</h6>
-                    <h4 class="fw-bold mb-0">TZS {{ number_format($pendingCommission, 0) }}</h4>
+                    <h4 class="fw-bold mb-0 stat-count">TZS {{ number_format($pendingCommission, 0) }}</h4>
                 </div>
             </div>
         </div>
