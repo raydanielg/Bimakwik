@@ -9,7 +9,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Total Users</p>
-                        <h3 class="fw-bold mb-0">{{ number_format($totalUsers) }}</h3>
+                        <h3 class="fw-bold mb-0 stat-count">{{ number_format($totalUsers) }}</h3>
                     </div>
                     <div class="bg-primary bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-people text-primary fs-4"></i>
