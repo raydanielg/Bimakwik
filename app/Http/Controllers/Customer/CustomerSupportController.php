@@ -22,21 +22,30 @@ class CustomerSupportController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'subject' => 'required|string',
+            'subject'  => 'required|string|max:255',
             'category' => 'required|string',
-            'description' => 'required|string',
+            'message'  => 'required|string',
         ]);
 
         try {
             SupportTicket::create([
-                ...$validated,
-                'user_id' => auth()->id(),
-                'status' => 'open',
-                'priority' => 'medium',
+                'user_id'     => auth()->id(),
+                'subject'     => $validated['subject'],
+                'category'    => $validated['category'],
+                'description' => $validated['message'],
+                'status'      => 'open',
+                'priority'    => 'medium',
             ]);
-            return back()->with('success', 'Support request submitted');
+
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Ticket submitted! We will respond within 2 hours.']);
+            }
+            return back()->with('success', 'Support ticket submitted successfully.');
         } catch (\Exception $e) {
-            return back()->with('error', 'Failed to submit request');
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Failed to submit ticket: ' . $e->getMessage()], 422);
+            }
+            return back()->with('error', 'Failed to submit ticket.');
         }
     }
 }
