@@ -32,45 +32,55 @@
 
 <!-- Main Stats -->
 <div class="row g-3 mb-4">
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-3">
         <div class="card border-0 shadow-sm h-100" style="border-radius: 15px;">
             <div class="card-body p-3 p-md-4">
                 <div class="d-flex align-items-center mb-3">
                     <div class="bg-primary bg-opacity-10 p-2 rounded-3 text-primary me-2">
                         <i class="bi bi-shield-fill fs-4"></i>
                     </div>
-                    <span class="small fw-bold text-muted d-none d-md-inline">{{ __('customer.stat_my_policies') }}</span>
                 </div>
-                <h3 class="fw-bold mb-0">2</h3>
-                <p class="x-small text-muted mb-0 mt-1">{{ __('customer.stat_active_policies') }}</p>
+                <h3 class="fw-bold mb-0">{{ $stats['active_policies'] ?? 0 }}</h3>
+                <p class="x-small text-muted mb-0 mt-1">Active Policies</p>
             </div>
         </div>
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-3">
         <div class="card border-0 shadow-sm h-100" style="border-radius: 15px;">
             <div class="card-body p-3 p-md-4">
                 <div class="d-flex align-items-center mb-3">
-                    <div class="bg-warning bg-opacity-10 p-2 rounded-3 text-warning me-2">
-                        <i class="bi bi-clock-history fs-4"></i>
+                    <div class="bg-success bg-opacity-10 p-2 rounded-3 text-success me-2">
+                        <i class="bi bi-wallet2 fs-4"></i>
                     </div>
-                    <span class="small fw-bold text-muted d-none d-md-inline">{{ __('customer.stat_expiry_window') }}</span>
                 </div>
-                <h3 class="fw-bold mb-0">12</h3>
-                <p class="x-small text-muted mb-0 mt-1">{{ __('customer.stat_days_left') }}</p>
+                <h3 class="fw-bold mb-0">TZS {{ number_format($stats['wallet_balance'] ?? 0, 0) }}</h3>
+                <p class="x-small text-muted mb-0 mt-1">Wallet Balance</p>
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
+    <div class="col-6 col-md-3">
         <div class="card border-0 shadow-sm h-100" style="border-radius: 15px;">
             <div class="card-body p-3 p-md-4">
                 <div class="d-flex align-items-center mb-3">
                     <div class="bg-info bg-opacity-10 p-2 rounded-3 text-info me-2">
-                        <i class="bi bi-graph-up-arrow"></i>
+                        <i class="bi bi-clipboard2-check fs-4"></i>
                     </div>
-                    <span class="small fw-bold text-muted">{{ __('customer.stat_traffic_leads') }}</span>
                 </div>
                 <h3 class="fw-bold mb-0">{{ $stats['total_claims'] ?? 0 }}</h3>
-                <p class="x-small text-muted mb-0 mt-1">{{ __('customer.stat_total_claims') }}</p>
+                <p class="x-small text-muted mb-0 mt-1">Total Claims</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-sm h-100" style="border-radius: 15px;">
+            <div class="card-body p-3 p-md-4">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-warning bg-opacity-10 p-2 rounded-3 text-warning me-2">
+                        <i class="bi bi-hourglass-split fs-4"></i>
+                    </div>
+                </div>
+                <h3 class="fw-bold mb-0">{{ $stats['pending_claims'] ?? 0 }}</h3>
+                <p class="x-small text-muted mb-0 mt-1">Pending Claims</p>
             </div>
         </div>
     </div>
