@@ -33,19 +33,15 @@
                 <div class="list-group list-group-flush">
                     @forelse($recentTransactions as $transaction)
                         @php
-                            $amount = (float) $pick($transaction, ['amount', 'transaction_amount', 'value'], 0);
-                            $type = strtolower((string) $pick($transaction, ['type', 'transaction_type'], 'transaction'));
-                            $direction = strtolower((string) $pick($transaction, ['direction', 'entry_type'], ''));
-                            $isCredit = in_array($direction, ['credit', 'in'], true)
-                                || str_contains($type, 'deposit')
-                                || str_contains($type, 'refund')
-                                || str_contains($type, 'bonus')
-                                || str_contains($type, 'credit');
+                            $txArr = is_array($transaction) ? $transaction : (method_exists($transaction, 'toArray') ? $transaction->toArray() : (array)$transaction);
+                            $amount = (float) ($txArr['amount'] ?? 0);
+                            $type = strtolower($txArr['type'] ?? 'transaction');
+                            $isCredit = $type === 'credit';
                             $icon = $isCredit ? 'bi-arrow-down-left text-success' : 'bi-arrow-up-right text-danger';
                             $bg = $isCredit ? 'bg-success' : 'bg-danger';
                             $textColor = $isCredit ? 'text-success' : 'text-danger';
                             $signedAmount = ($isCredit ? '+' : '-') . 'TZS ' . number_format($amount, 0);
-                            $dateRaw = $pick($transaction, ['created_at', 'updated_at', 'transaction_date'], null);
+                            $dateRaw = $txArr['created_at'] ?? null;
                             try {
                                 $dateLabel = $dateRaw ? \Carbon\Carbon::parse($dateRaw)->format('d M Y • h:i A') : '-';
                             } catch (\Throwable $e) {
@@ -58,16 +54,7 @@
                                     <i class="bi {{ $icon }}"></i>
                                 </div>
                                 <div>
-                                    @php
-                                        $localizedType = match ($type) {
-                                            'deposit' => __('customer.type_deposit'),
-                                            'payment' => __('customer.type_payment'),
-                                            'refund' => __('customer.type_refund'),
-                                            'bonus' => __('customer.type_bonus'),
-                                            default => str_replace('_', ' ', $type),
-                                        };
-                                    @endphp
-                                    <h6 class="fw-bold mb-0 text-capitalize">{{ $localizedType }}</h6>
+                                    <h6 class="fw-bold mb-0 text-capitalize">{{ $txArr['description'] ?? str_replace('_', ' ', $type) }}</h6>
                                     <small class="text-muted">{{ $dateLabel }}</small>
                                 </div>
                             </div>

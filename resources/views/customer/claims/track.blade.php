@@ -5,14 +5,6 @@
 @section('content')
 @php
     $claims = isset($claims) ? $claims : collect($customerClaims ?? []);
-    $pick = function ($row, $keys, $default = null) {
-        foreach ($keys as $key) {
-            if (isset($row[$key]) && $row[$key] !== null && $row[$key] !== '') {
-                return $row[$key];
-            }
-        }
-        return $default;
-    };
 @endphp
 <!-- Page Header -->
 <div class="row mb-4">
