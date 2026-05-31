@@ -1079,6 +1079,7 @@
 
             <div class="container-fluid px-4 py-2">
                 @yield('content')
+                @yield('dashboard_content')
             </div>
         </div>
     </div>
