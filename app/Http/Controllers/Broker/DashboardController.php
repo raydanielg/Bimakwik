@@ -38,8 +38,8 @@ class DashboardController extends Controller
 
             $totalCustomers = User::role('customer')->count() ?? 0;
 
-            $totalCommission = BrokerCommission::sum('amount') ?? 0;
-            $pendingCommission = BrokerCommission::where('status', 'pending')->sum('amount') ?? 0;
+            $totalCommission = BrokerCommission::sum('commission_amount') ?? 0;
+            $pendingCommission = BrokerCommission::where('status', 'pending')->sum('commission_amount') ?? 0;
 
             $totalClaims = Claim::count() ?? 0;
 
