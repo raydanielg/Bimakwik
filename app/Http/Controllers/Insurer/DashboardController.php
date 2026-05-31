@@ -83,8 +83,9 @@ class DashboardController extends Controller
         // Monthly revenue chart data
         try {
             $monthlyRevenue = PaymentTransaction::where('created_at', '>=', Carbon::now()->subMonths(6))
-                ->select(DB::raw('DATE_FORMAT(created_at, "%b") as month'), DB::raw('SUM(amount) as total'))
+                ->select(DB::raw("strftime('%Y-%m', created_at) as month"), DB::raw('COALESCE(SUM(amount), 0) as total'))
                 ->groupBy('month')
+                ->orderBy('month')
                 ->get();
         } catch (\Exception $e) {
             $monthlyRevenue = collect();

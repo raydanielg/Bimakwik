@@ -44,7 +44,7 @@ class DashboardController extends Controller
             $totalClaims = Claim::count() ?? 0;
 
             $monthlyRevenue = PaymentTransaction::where('created_at', '>=', Carbon::now()->subMonths(12))
-                ->select(DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'), DB::raw('COALESCE(SUM(amount), 0) as total'))
+                ->select(DB::raw("strftime('%Y-%m', created_at) as month"), DB::raw('COALESCE(SUM(amount), 0) as total'))
                 ->groupBy('month')
                 ->orderBy('month')
                 ->get() ?? collect();
