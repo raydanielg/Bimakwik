@@ -66,7 +66,7 @@
                             </div>
                             <div class="bg-light rounded p-3 mb-3">
                                 <small class="text-muted d-block mb-1">Product</small>
-                                <strong>{{ $policy->product->name ?? 'N/A' }}</strong>
+                                <strong>{{ $policy->product->product_name ?? 'N/A' }}</strong>
                             </div>
                             <div class="bg-light rounded p-3">
                                 <small class="text-muted d-block mb-1">Status</small>

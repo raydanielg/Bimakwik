@@ -31,7 +31,7 @@
                     @forelse($products as $product)
                     <tr>
                         <td class="ps-4">
-                            <div class="fw-bold">{{ $product->name }}</div>
+                            <div class="fw-bold">{{ $product->product_name }}</div>
                             <small class="text-muted">{{ Str::limit($product->description ?? '', 50) }}</small>
                         </td>
                         <td>{{ optional($product->productCategory)->name ?? 'General' }}</td>

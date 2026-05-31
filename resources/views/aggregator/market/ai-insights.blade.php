@@ -46,7 +46,7 @@
                     <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-2 me-3 flex-shrink-0" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;"><i class="bi bi-shield-fill small"></i></div>
                     <div class="flex-grow-1">
                         <div class="d-flex justify-content-between mb-1">
-                            <span class="fw-bold small">{{ $product->name }}</span>
+                            <span class="fw-bold small">{{ $product->product_name }}</span>
                             <span class="small text-muted">{{ $product->policies_count }} policies</span>
                         </div>
                         <div class="progress" style="height:6px;">

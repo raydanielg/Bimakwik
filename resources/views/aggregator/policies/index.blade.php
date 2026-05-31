@@ -1,4 +1,4 @@
-﻿@extends('layouts.dashboard')
+@extends('layouts.dashboard')
 
 @section('dashboard_content')
 <div class="container-fluid py-4">
@@ -101,7 +101,7 @@
                                 <tr>
                                     <td><span class="fw-bold">{{ $policy->policy_number ?? 'POL-' . $policy->id }}</span></td>
                                     <td>{{ $policy->customer->name ?? 'N/A' }}</td>
-                                    <td>{{ $policy->product->name ?? 'N/A' }}</td>
+                                    <td>{{ $policy->product->product_name ?? 'N/A' }}</td>
                                     <td>{{ $policy->broker_name ?? 'N/A' }}</td>
                                     <td class="fw-bold">TZS {{ number_format($policy->premium ?? 0, 0) }}</td>
                                     <td>

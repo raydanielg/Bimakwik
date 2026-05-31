@@ -18,7 +18,7 @@
                         <i class="bi bi-shield-check fs-4"></i>
                     </div>
                     <div>
-                        <h6 class="fw-bold mb-0">{{ $product->name }}</h6>
+                        <h6 class="fw-bold mb-0">{{ $product->product_name }}</h6>
                         <small class="text-muted">{{ $product->category ?? 'Insurance' }}</small>
                     </div>
                 </div>

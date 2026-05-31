@@ -1,4 +1,4 @@
-﻿@extends('layouts.dashboard')
+@extends('layouts.dashboard')
 
 @section('dashboard_content')
 <div class="container-fluid py-4">
@@ -94,7 +94,7 @@
                                     @foreach($recentPolicies as $policy)
                                         <tr>
                                             <td>{{ $policy->customer->name ?? 'N/A' }}</td>
-                                            <td>{{ $policy->product->name ?? 'N/A' }}</td>
+                                            <td>{{ $policy->product->product_name ?? 'N/A' }}</td>
                                             <td class="fw-bold">TZS {{ number_format($policy->premium ?? 0, 0) }}</td>
                                             <td>
                                                 @if($policy->status === 'active')

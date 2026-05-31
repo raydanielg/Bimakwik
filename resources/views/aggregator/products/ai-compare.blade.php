@@ -53,7 +53,7 @@
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-start mb-3">
-                    <h6 class="fw-bold mb-0">{{ $product->name }}</h6>
+                    <h6 class="fw-bold mb-0">{{ $product->product_name }}</h6>
                     @if($product->productBenefits->count() >= 3)
                     <span class="badge bg-warning-subtle text-warning small">Top Pick</span>
                     @endif

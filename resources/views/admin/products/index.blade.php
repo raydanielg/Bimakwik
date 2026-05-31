@@ -103,7 +103,7 @@
                                         <i class="bi bi-box-seam text-primary"></i>
                                     </div>
                                     <div>
-                                        <h6 class="mb-0">{{ $product->name }}</h6>
+                                        <h6 class="mb-0">{{ $product->product_name }}</h6>
                                         <small class="text-muted">ID: #PRD{{ str_pad($product->id, 5, '0', STR_PAD_LEFT) }}</small>
                                     </div>
                                 </div>

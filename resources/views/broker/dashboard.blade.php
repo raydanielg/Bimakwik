@@ -94,7 +94,7 @@
                                     @foreach($recentPolicies as $policy)
                                         <tr>
                                             <td>{{ $policy->customer->name ?? 'N/A' }}</td>
-                                            <td>{{ $policy->product->name ?? 'N/A' }}</td>
+                                            <td>{{ $policy->product->product_name ?? 'N/A' }}</td>
                                             <td class="fw-bold">TZS {{ number_format($policy->premium ?? 0, 0) }}</td>
                                             <td>
                                                 @if($policy->status === 'active')
@@ -132,7 +132,7 @@
                                     <i class="bi bi-shield-fill text-muted"></i>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold">{{ $product->name ?? 'N/A' }}</div>
+                                    <div class="fw-bold">{{ $product->product_name ?? 'N/A' }}</div>
                                     <small class="text-muted">{{ $product->policies_count ?? 0 }} policies</small>
                                 </div>
                             </div>

@@ -17,7 +17,7 @@
     <div class="col-md-4">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-header bg-primary text-white py-3 text-center">
-                <h6 class="fw-bold mb-0">{{ $product->name }}</h6>
+                <h6 class="fw-bold mb-0">{{ $product->product_name }}</h6>
                 <small class="opacity-75">{{ optional($product->productCategory)->name ?? 'Insurance' }}</small>
             </div>
             <div class="card-body p-4">

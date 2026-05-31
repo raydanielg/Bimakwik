@@ -78,7 +78,7 @@
                                 @foreach($policies as $policy)
                                     <tr>
                                         <td class="fw-bold">{{ $policy->policy_number ?? 'N/A' }}</td>
-                                        <td>{{ $policy->product->name ?? 'N/A' }}</td>
+                                        <td>{{ $policy->product->product_name ?? 'N/A' }}</td>
                                         <td>{{ $policy->start_date?->format('M d, Y') ?? 'N/A' }}</td>
                                         <td>{{ $policy->end_date?->format('M d, Y') ?? 'N/A' }}</td>
                                         <td>TZS {{ number_format($policy->premium ?? 0, 0) }}</td>

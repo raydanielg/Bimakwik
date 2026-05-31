@@ -23,7 +23,7 @@
         <div class="col-md-6 col-lg-4">
             <div class="card border-0 shadow-sm p-4 h-100">
                 <div class="d-flex justify-content-between align-items-start mb-3">
-                    <h6 class="fw-bold mb-0">{{ $product->name }}</h6>
+                    <h6 class="fw-bold mb-0">{{ $product->product_name }}</h6>
                     <span class="badge bg-success-soft text-success">{{ __('sfe.active') }}</span>
                 </div>
                 <p class="text-muted small mb-3">{{ \Illuminate\Support\Str::limit($product->description, 120) }}</p>

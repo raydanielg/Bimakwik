@@ -6,7 +6,7 @@
         @if($pending->count() > 0)
         <div class="table-responsive"><table class="table table-hover mb-0"><thead class="table-light"><tr><th>Product</th><th>Submitted</th><th>Status</th><th>Action</th></tr></thead><tbody>
             @foreach($pending as $product)
-            <tr><td class="fw-semibold">{{ $product->name }}</td><td class="small text-muted">{{ $product->created_at->diffForHumans() }}</td><td><span class="badge bg-warning bg-opacity-10 text-warning">Pending TIRA</span></td><td><button class="btn btn-sm btn-outline-info"><i class="bi bi-arrow-right"></i> Resubmit</button></td></tr>
+            <tr><td class="fw-semibold">{{ $product->product_name }}</td><td class="small text-muted">{{ $product->created_at->diffForHumans() }}</td><td><span class="badge bg-warning bg-opacity-10 text-warning">Pending TIRA</span></td><td><button class="btn btn-sm btn-outline-info"><i class="bi bi-arrow-right"></i> Resubmit</button></td></tr>
             @endforeach
         </tbody></table></div>
         <div class="p-3">{{ $pending->links() }}</div>

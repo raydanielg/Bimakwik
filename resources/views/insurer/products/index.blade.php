@@ -32,7 +32,7 @@
                 <tbody>
                     @foreach($products as $product)
                     <tr>
-                        <td class="fw-semibold">{{ $product->name ?? 'Untitled' }}</td>
+                        <td class="fw-semibold">{{ $product->product_name ?? 'Untitled' }}</td>
                         <td><span class="badge bg-secondary bg-opacity-10 text-secondary">{{ $product->category ?? 'General' }}</span></td>
                         <td>TZS {{ number_format($product->premium ?? 0) }}</td>
                         <td><span class="badge bg-{{ ($product->status ?? 'active') == 'active' ? 'success' : 'warning' }} bg-opacity-10 text-{{ ($product->status ?? 'active') == 'active' ? 'success' : 'warning' }}">{{ ucfirst($product->status ?? 'active') }}</span></td>

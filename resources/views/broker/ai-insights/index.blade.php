@@ -22,7 +22,7 @@
                     </div>
                     <div class="flex-grow-1">
                         <div class="d-flex justify-content-between mb-1">
-                            <span class="fw-bold small">{{ $product->name }}</span>
+                            <span class="fw-bold small">{{ $product->product_name }}</span>
                             <span class="small text-muted">{{ $product->policies_count }} policies</span>
                         </div>
                         @php $maxCount = $topProducts->first()->policies_count ?: 1; @endphp
