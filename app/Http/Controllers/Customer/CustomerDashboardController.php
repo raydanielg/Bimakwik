@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\CustomerPolicy;
 use App\Models\Claim;
 use App\Models\Wallet;
+use Illuminate\Support\Facades\DB;
 
 class CustomerDashboardController extends Controller
 {
