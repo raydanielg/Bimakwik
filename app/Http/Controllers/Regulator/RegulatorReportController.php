@@ -14,7 +14,7 @@ class RegulatorReportController extends Controller
     public function insurers()
     {
         $insurers = collect();
-        try { $insurers = User::role('insurer')->withCount('policies')->paginate(15); } catch (\Exception $e) {}
+        try { $insurers = User::role('insurer')->paginate(15); } catch (\Exception $e) {}
         return view('regulator.insurers.index', compact('insurers'));
     }
 
