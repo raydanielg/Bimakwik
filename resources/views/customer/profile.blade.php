@@ -35,7 +35,7 @@
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold">Phone Number</label>
                                 <input type="text" name="phone_number" class="form-control rounded-3"
-                                    value="{{ $customer->phone_number ?? '' }}" placeholder="+255 000 000 000">
+                                    value="{{ $customer->emergency_contact_phone ?? '' }}" placeholder="+255 000 000 000">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label small fw-bold">Gender</label>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-12">
                                 <label class="form-label small fw-bold">Residential Address</label>
-                                <textarea name="address" class="form-control rounded-3" rows="3">{{ $customer->address ?? '' }}</textarea>
+                                <textarea name="address" class="form-control rounded-3" rows="3">{{ $customer->residential_address ?? '' }}</textarea>
                             </div>
                         </div>
                         <div class="mt-4 text-end">

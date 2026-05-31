@@ -28,7 +28,7 @@ class CustomerProfileController extends Controller
 
     public function update(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'name'          => 'nullable|string|max:255',
             'phone_number'  => 'nullable|string|max:20',
             'gender'        => 'nullable|in:male,female,other',
@@ -40,7 +40,16 @@ class CustomerProfileController extends Controller
         try {
             $customer = Customer::where('user_id', auth()->id())->first();
             if ($customer) {
-                $customer->update(array_filter($validated, fn($v) => $v !== null));
+                $updates = array_filter([
+                    'gender'             => $request->gender,
+                    'date_of_birth'      => $request->date_of_birth,
+                    'residential_address'=> $request->address,
+                    'emergency_contact_phone' => $request->phone_number,
+                ], fn($v) => $v !== null && $v !== '');
+                if ($updates) $customer->update($updates);
+            }
+            if ($request->name) {
+                auth()->user()->update(['name' => $request->name]);
             }
             if ($request->expectsJson()) {
                 return response()->json(['message' => 'Profile updated successfully!']);
