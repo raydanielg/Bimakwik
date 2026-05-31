@@ -39,7 +39,7 @@ Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController:
 Route::middleware(['auth'])->group(function () {
     // Customer Dashboard
     Route::middleware(['role:customer'])->prefix('customer')->name('customer.')->group(function () {
-        Route::get('/dashboard', [App\Http\Controllers\Customer\PortalController::class, 'dashboard'])->name('dashboard');
+        Route::get('/dashboard', [App\Http\Controllers\Customer\CustomerDashboardController::class, 'index'])->name('dashboard');
         Route::get('/profile', [App\Http\Controllers\Customer\CustomerProfileController::class, 'index'])->name('profile');
         Route::post('/profile', [App\Http\Controllers\Customer\CustomerProfileController::class, 'update'])->name('profile.update');
         Route::get('/support', [App\Http\Controllers\Customer\CustomerSupportController::class, 'index'])->name('support');
@@ -66,9 +66,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/claims/track', [App\Http\Controllers\Customer\CustomerClaimController::class, 'index'])->name('claims.track');
         
         // Wallet
-        Route::get('/wallet', [App\Http\Controllers\Customer\PortalController::class, 'wallet'])->name('wallet.index');
-        Route::get('/wallet/add-funds', [App\Http\Controllers\Customer\PortalController::class, 'walletAddFunds'])->name('wallet.add-funds');
-        Route::get('/wallet/history', [App\Http\Controllers\Customer\PortalController::class, 'walletHistory'])->name('wallet.history');
+        Route::get('/wallet', [App\Http\Controllers\Customer\CustomerWalletController::class, 'index'])->name('wallet.index');
+        Route::get('/wallet/add-funds', [App\Http\Controllers\Customer\CustomerWalletController::class, 'addFundsPage'])->name('wallet.add-funds');
+        Route::post('/wallet/add-funds', [App\Http\Controllers\Customer\CustomerWalletController::class, 'addFunds'])->name('wallet.add-funds.post');
+        Route::get('/wallet/history', [App\Http\Controllers\Customer\CustomerWalletController::class, 'history'])->name('wallet.history');
     });
 
     // Admin Dashboard Routes
