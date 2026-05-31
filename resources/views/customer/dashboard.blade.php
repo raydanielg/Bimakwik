@@ -180,9 +180,9 @@
                         <i class="bi bi-download me-3 text-success"></i>
                         <span class="small fw-bold">{{ __('customer.download_certificates') }}</span>
                     </a>
-                    <a href="#" class="btn btn-light text-start border-0 py-3 px-3 d-flex align-items-center">
-                        <i class="bi bi-geo-alt me-3 text-danger"></i>
-                        <span class="small fw-bold">{{ __('customer.nearby_hospitals') }}</span>
+                    <a href="{{ route('customer.wallet.add-funds') }}" class="btn btn-light text-start border-0 py-3 px-3 d-flex align-items-center">
+                        <i class="bi bi-wallet-plus me-3 text-warning"></i>
+                        <span class="small fw-bold">Top Up Wallet</span>
                     </a>
                 </div>
             </div>

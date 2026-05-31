@@ -21,7 +21,9 @@
                 </div>
                 <h5 class="fw-bold">{{ __('customer.live_chat') }}</h5>
                 <p class="small text-muted mb-4">{{ __('customer.chat_agent_now') }}</p>
-                <button class="btn btn-success w-100 rounded-pill">{{ __('customer.start_chat') }}</button>
+                <button class="btn btn-success w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#liveChatModal">
+                    <i class="bi bi-chat-dots me-2"></i>Start Live Chat
+                </button>
             </div>
         </div>
 
