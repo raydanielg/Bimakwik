@@ -68,9 +68,10 @@ class BrokerHubController extends Controller
             $totalPolicies = CustomerPolicy::count();
             $totalClaims = Claim::count();
             $totalCommission = BrokerCommission::sum('commission_amount');
-            $monthlyData = BrokerCommission::selectRaw('DATE_FORMAT(created_at, "%b") as month, SUM(commission_amount) as total')
+            $monthlyData = BrokerCommission::selectRaw("strftime('%Y-%m', created_at) as month, SUM(commission_amount) as total")
                 ->where('created_at', '>=', Carbon::now()->subMonths(6))
                 ->groupBy('month')
+                ->orderBy('month')
                 ->get();
         } catch (\Exception $e) {}
         return view('broker.reports.index', compact('totalPolicies', 'totalClaims', 'totalCommission', 'monthlyData'));
@@ -118,10 +119,10 @@ class BrokerHubController extends Controller
         $topProducts = collect(); $monthlyCommissions = []; $labels = [];
         try {
             $topProducts = InsuranceProduct::withCount(['customerPolicies as policies_count'])->orderByDesc('policies_count')->take(5)->get();
-            $commData = BrokerCommission::selectRaw('DATE_FORMAT(created_at, "%b %Y") as month, SUM(commission_amount) as total')
+            $commData = BrokerCommission::selectRaw("strftime('%Y-%m', created_at) as month, SUM(commission_amount) as total")
                 ->where('created_at', '>=', Carbon::now()->subMonths(6))
-                ->groupByRaw('DATE_FORMAT(created_at, "%b %Y")')
-                ->orderBy('created_at')
+                ->groupBy('month')
+                ->orderBy('month')
                 ->get();
             $labels = $commData->pluck('month')->toArray();
             $monthlyCommissions = $commData->pluck('total')->toArray();
