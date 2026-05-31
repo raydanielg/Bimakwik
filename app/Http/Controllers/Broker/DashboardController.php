@@ -57,8 +57,8 @@ class DashboardController extends Controller
                 ->limit(5)
                 ->get() ?? collect();
 
-            $topProducts = \App\Models\InsuranceProduct::withCount('policies')
-                ->orderBy('policies_count', 'desc')
+            $topProducts = \App\Models\InsuranceProduct::withCount('customerPolicies')
+                ->orderBy('customer_policies_count', 'desc')
                 ->limit(5)
                 ->get() ?? collect();
 

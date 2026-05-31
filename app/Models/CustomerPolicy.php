@@ -75,6 +75,6 @@ class CustomerPolicy extends Model
 
     public function claims(): HasMany
     {
-        return $this->hasMany(Claim::class);
+        return $this->hasMany(Claim::class, 'customer_policy_id');
     }
 }
