@@ -64,26 +64,27 @@
         <div id="claimsContainer">
             @foreach($claims as $claim)
                 @php
-                    $status = strtolower((string) $pick($claim, ['status', 'claim_status'], 'pending'));
-                    $dateRaw = $pick($claim, ['created_at', 'incident_date', 'claim_date'], null);
+                    $clArr = is_array($claim) ? $claim : (method_exists($claim, 'toArray') ? $claim->toArray() : (array)$claim);
+                    $status = strtolower($clArr['status'] ?? 'submitted');
+                    $dateRaw = $clArr['accident_date'] ?? $clArr['created_at'] ?? null;
                     try {
                         $date = $dateRaw ? \Carbon\Carbon::parse($dateRaw)->format('d M Y') : '-';
                     } catch (\Throwable $e) {
                         $date = $dateRaw ?: '-';
                     }
-                    $amount = (float) $pick($claim, ['claim_amount', 'amount', 'estimated_amount'], 0);
-                    $badgeClass = $status === 'approved' ? 'success' : ($status === 'paid' ? 'info' : ($status === 'rejected' ? 'danger' : 'warning text-dark'));
-                    $progress = $status === 'paid' ? 100 : ($status === 'approved' ? 75 : ($status === 'rejected' ? 25 : 50));
+                    $amount = (float) ($clArr['claimed_amount'] ?? 0);
+                    $badgeClass = $status === 'approved' ? 'success' : ($status === 'paid' || $status === 'settled' ? 'info' : ($status === 'rejected' ? 'danger' : 'warning text-dark'));
+                    $progress = $status === 'settled' ? 100 : ($status === 'approved' ? 75 : ($status === 'rejected' ? 25 : 50));
                 @endphp
                 <div class="card border-0 shadow-sm mb-3 claim-card" data-status="{{ $status }}">
                     <div class="card-body p-4">
                         <div class="row align-items-center">
                             <div class="col-md-8">
                                 <h5 class="fw-bold mb-1">
-                                    {{ __('customer.claim_number_label') }}: <span class="text-primary">{{ $pick($claim, ['claim_number', 'reference', 'id'], '-') }}</span>
+                                    Claim: <span class="text-primary">{{ $clArr['claim_number'] ?? '#' . ($clArr['id'] ?? '-') }}</span>
                                 </h5>
-                                <p class="text-muted mb-2"><i class="bi bi-calendar me-2"></i>{{ __('customer.claim_date') }}: <strong>{{ $date }}</strong></p>
-                                <p class="text-muted mb-0"><i class="bi bi-briefcase me-2"></i>{{ __('customer.claim_type') }}: <strong>{{ $pick($claim, ['claim_type', 'type', 'category'], __('customer.generic_claim')) }}</strong></p>
+                                <p class="text-muted mb-2"><i class="bi bi-calendar me-2"></i>Date: <strong>{{ $date }}</strong></p>
+                                <p class="text-muted mb-0"><i class="bi bi-briefcase me-2"></i>Type: <strong>{{ ucfirst($clArr['claim_type'] ?? 'General') }}</strong></p>
                             </div>
                             <div class="col-md-4 text-md-end mt-3 mt-md-0">
                                 <div class="mb-2"><span class="badge bg-{{ $badgeClass }} text-capitalize">{{ $status }}</span></div>
