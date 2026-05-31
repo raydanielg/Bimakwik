@@ -163,7 +163,7 @@
                 </div>
                 <h6 class="fw-bold mb-2">{{ __('customer.ai_recommendation_title') }}</h6>
                 <p class="x-small text-muted mb-3">{{ __('customer.ai_recommendation_text') }}</p>
-                <button class="btn btn-sm btn-primary w-100 rounded-pill py-2 small">{{ __('customer.view_offer') }}</button>
+                <a href="{{ route('customer.ai-recommendations') }}" class="btn btn-sm btn-primary w-100 rounded-pill py-2 small">{{ __('customer.view_offer') }}</a>
             </div>
         </div>
 
