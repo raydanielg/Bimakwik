@@ -19,36 +19,52 @@
             <div class="card border-0 shadow-sm rounded-4">
                 <div class="card-body p-4">
                     <h5 class="fw-bold mb-4 border-bottom pb-2">{{ __('customer.personal_info') }}</h5>
-                    <form action="#" method="POST">
+                    <form action="{{ route('customer.profile.update') }}" method="POST"
+                          data-ajax="true"
+                          data-success-msg="Profile updated successfully!">
                         @csrf
+                        @method('PUT')
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold">{{ __('customer.full_name') }}</label>
-                                <input type="text" class="form-control rounded-3" value="{{ auth()->user()->name }}" readonly>
+                                <label class="form-label small fw-bold">Full Name</label>
+                                <input type="text" name="name" class="form-control rounded-3" value="{{ $customer->full_name ?? auth()->user()->name }}">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold">{{ __('customer.email_address') }}</label>
+                                <label class="form-label small fw-bold">Email Address</label>
                                 <input type="email" class="form-control rounded-3" value="{{ auth()->user()->email }}" readonly>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold">{{ __('customer.phone_number') }}</label>
-                                <input type="text" class="form-control rounded-3" placeholder="+255 000 000 000">
+                                <label class="form-label small fw-bold">Phone Number</label>
+                                <input type="text" name="phone_number" class="form-control rounded-3"
+                                    value="{{ $customer->phone_number ?? '' }}" placeholder="+255 000 000 000">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label small fw-bold">{{ __('customer.gender') }}</label>
-                                <select class="form-select rounded-3">
-                                    <option selected>{{ __('customer.select') }}</option>
-                                    <option value="male">{{ __('customer.male') }}</option>
-                                    <option value="female">{{ __('customer.female') }}</option>
+                                <label class="form-label small fw-bold">Gender</label>
+                                <select name="gender" class="form-select rounded-3">
+                                    <option value="">Select</option>
+                                    <option value="male"   {{ ($customer->gender ?? '') == 'male'   ? 'selected' : '' }}>Male</option>
+                                    <option value="female" {{ ($customer->gender ?? '') == 'female' ? 'selected' : '' }}>Female</option>
                                 </select>
                             </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold">Date of Birth</label>
+                                <input type="date" name="date_of_birth" class="form-control rounded-3"
+                                    value="{{ $customer->date_of_birth ?? '' }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold">ID / NIDA Number</label>
+                                <input type="text" name="id_number" class="form-control rounded-3"
+                                    value="{{ $customer->id_number ?? '' }}" placeholder="e.g. 12345678901234567890">
+                            </div>
                             <div class="col-12">
-                                <label class="form-label small fw-bold">{{ __('customer.address') }}</label>
-                                <textarea class="form-control rounded-3" rows="3"></textarea>
+                                <label class="form-label small fw-bold">Residential Address</label>
+                                <textarea name="address" class="form-control rounded-3" rows="3">{{ $customer->address ?? '' }}</textarea>
                             </div>
                         </div>
                         <div class="mt-4 text-end">
-                            <button type="submit" class="btn btn-primary px-4 rounded-pill">{{ __('customer.save_changes') }}</button>
+                            <button type="submit" class="btn btn-primary px-4 rounded-pill">
+                                <i class="bi bi-check2 me-1"></i>Save Changes
+                            </button>
                         </div>
                     </form>
                 </div>
