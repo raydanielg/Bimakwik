@@ -36,6 +36,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
+        'b4e3f29b106af37a2bb239f73cdf68c7' => __DIR__ . '/../..' . '/app/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -613,6 +614,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Http\\Controllers\\Agent\\AgentCommissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/AgentCommissionController.php',
         'App\\Http\\Controllers\\Agent\\AgentCustomerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/AgentCustomerController.php',
         'App\\Http\\Controllers\\Agent\\AgentDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/AgentDashboardController.php',
+        'App\\Http\\Controllers\\Agent\\AgentHubController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/AgentHubController.php',
         'App\\Http\\Controllers\\Agent\\AgentPolicyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/AgentPolicyController.php',
         'App\\Http\\Controllers\\Agent\\AgentProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/AgentProfileController.php',
         'App\\Http\\Controllers\\Agent\\AgentWalletController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/AgentWalletController.php',
@@ -628,6 +630,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Http\\Controllers\\Agent\\TrainingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/TrainingController.php',
         'App\\Http\\Controllers\\Aggregator\\AggregatorCommissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Aggregator/AggregatorCommissionController.php',
         'App\\Http\\Controllers\\Aggregator\\AggregatorDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Aggregator/AggregatorDashboardController.php',
+        'App\\Http\\Controllers\\Aggregator\\AggregatorHubController' => __DIR__ . '/../..' . '/app/Http/Controllers/Aggregator/AggregatorHubController.php',
         'App\\Http\\Controllers\\Aggregator\\AggregatorProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Aggregator/AggregatorProfileController.php',
         'App\\Http\\Controllers\\Aggregator\\AggregatorReferralController' => __DIR__ . '/../..' . '/app/Http/Controllers/Aggregator/AggregatorReferralController.php',
         'App\\Http\\Controllers\\Aggregator\\AggregatorReportController' => __DIR__ . '/../..' . '/app/Http/Controllers/Aggregator/AggregatorReportController.php',
@@ -681,6 +684,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Http\\Controllers\\Broker\\BrokerCommissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Broker/BrokerCommissionController.php',
         'App\\Http\\Controllers\\Broker\\BrokerCustomerController' => __DIR__ . '/../..' . '/app/Http/Controllers/Broker/BrokerCustomerController.php',
         'App\\Http\\Controllers\\Broker\\BrokerDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Broker/BrokerDashboardController.php',
+        'App\\Http\\Controllers\\Broker\\BrokerHubController' => __DIR__ . '/../..' . '/app/Http/Controllers/Broker/BrokerHubController.php',
         'App\\Http\\Controllers\\Broker\\BrokerPolicyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Broker/BrokerPolicyController.php',
         'App\\Http\\Controllers\\Broker\\BrokerProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Broker/BrokerProfileController.php',
         'App\\Http\\Controllers\\Broker\\BrokerReportController' => __DIR__ . '/../..' . '/app/Http/Controllers/Broker/BrokerReportController.php',
@@ -753,6 +757,7 @@ class ComposerStaticInitc61ff82cbf0142a401a48a8161e1595a
         'App\\Http\\Controllers\\Insurer\\InsurerBranchController' => __DIR__ . '/../..' . '/app/Http/Controllers/Insurer/InsurerBranchController.php',
         'App\\Http\\Controllers\\Insurer\\InsurerContractController' => __DIR__ . '/../..' . '/app/Http/Controllers/Insurer/InsurerContractController.php',
         'App\\Http\\Controllers\\Insurer\\InsurerDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Insurer/InsurerDashboardController.php',
+        'App\\Http\\Controllers\\Insurer\\InsurerHubController' => __DIR__ . '/../..' . '/app/Http/Controllers/Insurer/InsurerHubController.php',
         'App\\Http\\Controllers\\Insurer\\InsurerProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Insurer/InsurerProfileController.php',
         'App\\Http\\Controllers\\NewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/NewsController.php',
         'App\\Http\\Controllers\\NewsletterController' => __DIR__ . '/../..' . '/app/Http/Controllers/NewsletterController.php',
