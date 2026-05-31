@@ -136,9 +136,9 @@ class AggregatorHubController extends Controller
             $totalPolicies = \App\Models\CustomerPolicy::count();
             $totalBrokers = \App\Models\User::role('broker')->count();
             $monthly = AggregatorCommission::where('created_at', '>=', Carbon::now()->subMonths(6))
-                ->selectRaw('DATE_FORMAT(created_at, "%b %Y") as month, SUM(amount) as total')
-                ->groupByRaw('DATE_FORMAT(created_at, "%b %Y")')
-                ->orderBy('created_at')->get();
+                ->selectRaw("strftime('%Y-%m', created_at) as month, SUM(amount) as total")
+                ->groupBy('month')
+                ->orderBy('month')->get();
             $labels = $monthly->pluck('month')->toArray();
             $monthlyData = $monthly->pluck('total')->toArray();
         } catch (\Exception $e) {}
