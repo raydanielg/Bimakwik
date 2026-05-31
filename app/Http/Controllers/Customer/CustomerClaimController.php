@@ -75,18 +75,13 @@ class CustomerClaimController extends Controller
             // Create claim
             Claim::create([
                 'customer_id' => $customerId,
-                'policy_id' => $validated['policy_id'],
+                'customer_policy_id' => $validated['policy_id'],
                 'claim_number' => $claimNumber,
                 'claim_type' => $validated['claim_type'],
-                'incident_date' => $validated['incident_date'],
+                'accident_date' => $validated['incident_date'],
                 'description' => $validated['description'],
-                'amount' => $validated['amount'],
-                'location' => $validated['location'],
-                'status' => 'pending',
-                'third_party_involved' => $validated['third_party'] ?? false,
-                'third_party_name' => $validated['third_party_name'] ?? null,
-                'third_party_contact' => $validated['third_party_contact'] ?? null,
-                'police_report_filed' => $validated['police_report'] ?? false,
+                'claimed_amount' => $validated['amount'],
+                'status' => 'submitted',
             ]);
 
             return redirect()->route('customer.claims.track')->with('success', 'Claim submitted successfully! Claim Number: ' . $claimNumber);
