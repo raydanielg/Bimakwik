@@ -1208,66 +1208,117 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script>
+        /* ── Global Toast Utility ─────────────────────────── */
+        function bkToast(message, type = 'success', duration = 3500) {
+            const icons = { success: 'bi-check-circle-fill', error: 'bi-x-circle-fill', info: 'bi-info-circle-fill', warning: 'bi-exclamation-triangle-fill' };
+            const el = $(`<div class="bk-toast ${type}"><i class="bi ${icons[type] || icons.info}"></i><span>${message}</span></div>`);
+            $('#toast-container').append(el);
+            setTimeout(() => { el.css({opacity:0, transform:'translateX(20px)', transition:'all .3s ease'}); setTimeout(()=>el.remove(), 300); }, duration);
+        }
+
+        /* ── Button Loading State ─────────────────────────── */
+        function btnLoad(btn, text = 'Processing...') {
+            const $b = $(btn);
+            $b.data('orig-text', $b.html()).prop('disabled', true).addClass('btn-loading').html(`<span>${text}</span>`);
+        }
+        function btnReset(btn) {
+            const $b = $(btn);
+            $b.prop('disabled', false).removeClass('btn-loading').html($b.data('orig-text'));
+        }
+
+        /* ── Animated Counter ─────────────────────────────── */
+        function animateCounter(el) {
+            const target = parseFloat($(el).data('target') || $(el).text().replace(/[^0-9.]/g,''));
+            const isDecimal = target % 1 !== 0;
+            const duration = 1200;
+            const start = performance.now();
+            function step(now) {
+                const p = Math.min((now - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - p, 3);
+                const cur = isDecimal ? (target * ease).toFixed(2) : Math.floor(target * ease);
+                $(el).text(cur);
+                if (p < 1) requestAnimationFrame(step);
+                else $(el).text(isDecimal ? target.toFixed(2) : target);
+            }
+            requestAnimationFrame(step);
+        }
+
         $(document).ready(function() {
-            // Universal Sidebar toggle (Works for both desktop and mobile)
+
+            /* Page loader hide */
+            setTimeout(() => { $('#page-loader').addClass('hidden'); setTimeout(()=>$('#page-loader').hide(),350); }, 250);
+
+            /* Sidebar toggle */
             $("#menu-toggle, #menu-toggle-mobile, #sidebar-overlay").on('click touchstart', function(e) {
                 e.preventDefault();
-                console.log("Menu toggled!"); // Debugging
                 $("#sidebar-wrapper").toggleClass("toggled");
                 $("#sidebar-overlay").toggleClass("active");
-                
-                // Toggle body scroll
-                if ($("#sidebar-wrapper").hasClass("toggled") && window.innerWidth < 992) {
-                    $("body").css("overflow", "hidden");
-                } else {
-                    $("body").css("overflow", "auto");
-                }
+                $("body").css("overflow", ($("#sidebar-wrapper").hasClass("toggled") && window.innerWidth < 992) ? "hidden" : "auto");
             });
-            
-            // SweetAlert Success Messages
+
+            /* Animate all .stat-count elements on page load */
+            $('.stat-count').each(function() { animateCounter(this); });
+
+            /* Add hover-lift to all cards automatically */
+            $('.card').addClass('hover-lift');
+
+            /* Global form submit → button loading state */
+            $(document).on('submit', 'form:not([data-no-loader])', function() {
+                const btn = $(this).find('[type=submit]').first();
+                if (btn.length) btnLoad(btn, 'Please wait...');
+            });
+
+            /* AJAX forms: <form data-ajax="true" data-success-msg="Done!"> */
+            $(document).on('submit', 'form[data-ajax="true"]', function(e) {
+                e.preventDefault();
+                const $form = $(this);
+                const btn = $form.find('[type=submit]').first();
+                const successMsg = $form.data('success-msg') || 'Done!';
+                const redirectTo = $form.data('redirect') || null;
+                btnLoad(btn);
+                $.ajax({
+                    url: $form.attr('action'),
+                    method: $form.attr('method') || 'POST',
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    success: function(res) {
+                        bkToast(res.message || successMsg, 'success');
+                        btnReset(btn);
+                        if (redirectTo) setTimeout(() => { window.location = redirectTo; }, 1200);
+                        else if (res.redirect) setTimeout(() => { window.location = res.redirect; }, 1200);
+                        else $form[0].reset();
+                    },
+                    error: function(xhr) {
+                        btnReset(btn);
+                        const data = xhr.responseJSON || {};
+                        if (data.errors) {
+                            const first = Object.values(data.errors)[0];
+                            bkToast(Array.isArray(first) ? first[0] : first, 'error');
+                        } else {
+                            bkToast(data.message || 'Something went wrong.', 'error');
+                        }
+                    }
+                });
+            });
+
+            /* Session flash messages */
             @if(session('success'))
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: '{{ session('success') }}',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    toast: true,
-                    position: 'top-end'
-                });
+                bkToast('{{ addslashes(session('success')) }}', 'success');
             @endif
-            
-            // SweetAlert Error Messages
             @if(session('error'))
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: '{{ session('error') }}',
-                    showConfirmButton: true
-                });
+                Swal.fire({ icon:'error', title:'Error', text:'{{ addslashes(session('error')) }}', confirmButtonColor:'#d946ef' });
             @endif
-            
-            // SweetAlert Warning Messages
             @if(session('warning'))
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Warning!',
-                    text: '{{ session('warning') }}',
-                    showConfirmButton: true
-                });
+                bkToast('{{ addslashes(session('warning')) }}', 'warning', 5000);
             @endif
-            
-            // SweetAlert Info Messages
             @if(session('info'))
-                Swal.fire({
-                    icon: 'info',
-                    title: 'Info',
-                    text: '{{ session('info') }}',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    toast: true,
-                    position: 'top-end'
-                });
+                bkToast('{{ addslashes(session('info')) }}', 'info');
+            @endif
+
+            /* Validation errors → toast */
+            @if($errors->any())
+                bkToast('{{ addslashes($errors->first()) }}', 'error', 6000);
             @endif
         });
         
