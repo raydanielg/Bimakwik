@@ -87,7 +87,7 @@
                 <div class="row g-2 mb-3">
                     <div class="col-6 border-end">
                         <small class="text-muted d-block">Policies</small>
-                        <strong>{{ $country->policies_count ?? ($st == 'active' ? '12,456' : '—') }}</strong>
+                        <strong>{{ $country->customer_policies_count ?? ($st == 'active' ? '12,456' : '—') }}</strong>
                     </div>
                     <div class="col-6">
                         <small class="text-muted d-block">Revenue</small>

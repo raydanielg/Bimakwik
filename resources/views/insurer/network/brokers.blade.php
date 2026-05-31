@@ -114,7 +114,7 @@
                                     <td>{{ $broker->email ?? 'N/A' }}</td>
                                     <td>{{ $broker->phone ?? 'N/A' }}</td>
                                     <td>{{ $broker->brokerProfile->region ?? 'N/A' }}</td>
-                                    <td>{{ $broker->policies_count ?? 0 }}</td>
+                                    <td>{{ $broker->customer_policies_count ?? 0 }}</td>
                                     <td>
                                         @if($broker->status === 'active')
                                             <span class="badge bg-success">Active</span>

@@ -61,7 +61,7 @@
                 <p class="small text-muted mb-3">{{ Str::limit($product->description ?? 'No description.', 80) }}</p>
                 <div class="d-flex justify-content-between mb-2">
                     <span class="small text-muted">Premium</span>
-                    <span class="fw-bold text-primary">TZS {{ number_format($product->min_premium ?? $product->premium ?? 0, 0) }}</span>
+                    <span class="fw-bold text-primary">TZS {{ number_format($product->min_premium ?? product->premium_amount ?? 0, 0) }}</span>
                 </div>
                 <div class="d-flex justify-content-between mb-3">
                     <span class="small text-muted">Benefits</span>

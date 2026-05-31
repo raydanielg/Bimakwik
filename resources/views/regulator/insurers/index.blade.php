@@ -109,7 +109,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $insurer->email ?? 'N/A' }}</td>
-                                    <td>{{ $insurer->policies_count ?? 0 }}</td>
+                                    <td>{{ $insurer->customer_policies_count ?? 0 }}</td>
                                     <td>{{ $insurer->created_at?->format('M d, Y') ?? 'N/A' }}</td>
                                     <td>
                                         <span class="badge bg-success">Active</span>

@@ -41,16 +41,16 @@
             </div>
             <div class="card-body">
                 @forelse($topProducts as $product)
-                @php $maxCount = $topProducts->first()->policies_count ?: 1; @endphp
+                @php $maxCount = $topProducts->first()->customer_policies_count ?: 1; @endphp
                 <div class="d-flex align-items-center mb-3">
                     <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-2 me-3 flex-shrink-0" style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;"><i class="bi bi-shield-fill small"></i></div>
                     <div class="flex-grow-1">
                         <div class="d-flex justify-content-between mb-1">
                             <span class="fw-bold small">{{ $product->product_name }}</span>
-                            <span class="small text-muted">{{ $product->policies_count }} policies</span>
+                            <span class="small text-muted">{{ $product->customer_policies_count }} policies</span>
                         </div>
                         <div class="progress" style="height:6px;">
-                            <div class="progress-bar bg-primary" style="width:{{ ($product->policies_count / $maxCount) * 100 }}%"></div>
+                            <div class="progress-bar bg-primary" style="width:{{ ($product->customer_policies_count / $maxCount) * 100 }}%"></div>
                         </div>
                     </div>
                 </div>

@@ -122,7 +122,7 @@
                                     <td>{{ $agent->email ?? 'N/A' }}</td>
                                     <td>{{ $agent->phone ?? 'N/A' }}</td>
                                     <td>{{ $agent->agentProfile->region ?? 'N/A' }}</td>
-                                    <td>{{ $agent->policies_count ?? 0 }}</td>
+                                    <td>{{ $agent->customer_policies_count ?? 0 }}</td>
                                     <td>
                                         @if($agent->status === 'active')
                                             <span class="badge bg-success">Active</span>

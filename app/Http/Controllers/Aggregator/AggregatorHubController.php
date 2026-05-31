@@ -132,7 +132,7 @@ class AggregatorHubController extends Controller
     {
         $topProducts = collect(); $labels = []; $monthlyData = []; $totalPolicies = 0; $totalBrokers = 0;
         try {
-            $topProducts = InsuranceProduct::withCount(['customerPolicies as policies_count'])->orderByDesc('policies_count')->take(6)->get();
+            $topProducts = InsuranceProduct::withCount(['customerPolicies as customer_policies_count'])->orderByDesc('customer_policies_count')->take(6)->get();
             $totalPolicies = \App\Models\CustomerPolicy::count();
             $totalBrokers = \App\Models\User::role('broker')->count();
             $monthly = AggregatorCommission::where('created_at', '>=', Carbon::now()->subMonths(6))

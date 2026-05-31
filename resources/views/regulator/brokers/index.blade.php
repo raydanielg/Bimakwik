@@ -109,7 +109,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $broker->email ?? 'N/A' }}</td>
-                                    <td>{{ $broker->policies_count ?? 0 }}</td>
+                                    <td>{{ $broker->customer_policies_count ?? 0 }}</td>
                                     <td>{{ $broker->created_at?->format('M d, Y') ?? 'N/A' }}</td>
                                     <td>
                                         <span class="badge bg-success">Active</span>

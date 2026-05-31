@@ -26,7 +26,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <div class="small text-muted">Premium from</div>
-                        <div class="fw-bold text-primary">TZS {{ number_format($product->min_premium ?? $product->premium ?? 0, 0) }}</div>
+                        <div class="fw-bold text-primary">TZS {{ number_format($product->min_premium ?? product->premium_amount ?? 0, 0) }}</div>
                     </div>
                     <span class="badge bg-success-subtle text-success">Recommended</span>
                 </div>

@@ -35,7 +35,7 @@
                             <small class="text-muted">{{ Str::limit($product->description ?? '', 50) }}</small>
                         </td>
                         <td>{{ optional($product->productCategory)->name ?? 'General' }}</td>
-                        <td class="fw-bold">TZS {{ number_format($product->min_premium ?? $product->premium ?? 0, 0) }}</td>
+                        <td class="fw-bold">TZS {{ number_format($product->min_premium ?? product->premium_amount ?? 0, 0) }}</td>
                         <td>TZS {{ number_format($product->coverage_amount ?? 0, 0) }}</td>
                         <td>
                             @foreach($product->productBenefits->take(3) as $b)
@@ -45,7 +45,7 @@
                                 <span class="badge bg-secondary small">+{{ $product->productBenefits->count() - 3 }}</span>
                             @endif
                         </td>
-                        <td><span class="fw-bold">{{ $product->customerPolicies_count ?? $product->policies_count ?? '—' }}</span></td>
+                        <td><span class="fw-bold">{{ $product->customerPolicies_count ?? $product->customer_policies_count ?? '—' }}</span></td>
                         <td><span class="badge bg-success-subtle text-success">Active</span></td>
                     </tr>
                     @empty

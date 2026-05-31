@@ -31,7 +31,7 @@
                             <small class="text-muted">{{ Str::limit($product->description ?? '', 60) }}</small>
                         </td>
                         <td>{{ optional($product->productCategory)->name ?? 'General' }}</td>
-                        <td class="fw-bold">TZS {{ number_format($product->min_premium ?? $product->premium ?? 0, 0) }}</td>
+                        <td class="fw-bold">TZS {{ number_format($product->min_premium ?? product->premium_amount ?? 0, 0) }}</td>
                         <td>TZS {{ number_format($product->coverage_amount ?? 0, 0) }}</td>
                         <td>
                             @if($product->productBenefits && $product->productBenefits->count())

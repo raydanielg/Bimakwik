@@ -118,7 +118,7 @@ class BrokerHubController extends Controller
     {
         $topProducts = collect(); $monthlyCommissions = []; $labels = [];
         try {
-            $topProducts = InsuranceProduct::withCount(['customerPolicies as policies_count'])->orderByDesc('policies_count')->take(5)->get();
+            $topProducts = InsuranceProduct::withCount(['customerPolicies as customer_policies_count'])->orderByDesc('customer_policies_count')->take(5)->get();
             $commData = BrokerCommission::selectRaw("strftime('%Y-%m', created_at) as month, SUM(commission_amount) as total")
                 ->where('created_at', '>=', Carbon::now()->subMonths(6))
                 ->groupBy('month')

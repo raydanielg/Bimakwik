@@ -6,7 +6,7 @@
 <div class="row g-4 mb-4">
     <div class="col-md-4">
         <div class="card border-0 shadow-sm p-4 h-100">
-            <div class="text-muted small text-uppercase">{{ __('sfe.policies_count') }}</div>
+            <div class="text-muted small text-uppercase">{{ __('sfe.customer_policies_count') }}</div>
             <div class="fs-3 fw-bold">{{ $policies->count() }}</div>
         </div>
     </div>

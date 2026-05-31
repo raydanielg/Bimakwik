@@ -23,7 +23,7 @@
             <div class="card-body p-4">
                 <div class="text-center mb-4">
                     <div class="small text-muted">Starting From</div>
-                    <div class="fw-bold fs-4 text-primary">TZS {{ number_format($product->min_premium ?? $product->premium ?? 0, 0) }}</div>
+                    <div class="fw-bold fs-4 text-primary">TZS {{ number_format($product->min_premium ?? product->premium_amount ?? 0, 0) }}</div>
                     <div class="small text-muted">per year</div>
                 </div>
 

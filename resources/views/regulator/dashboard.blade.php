@@ -83,12 +83,12 @@
                                 @foreach(($marketShare ?? collect()) as $insurer)
                                     <tr>
                                         <td>{{ $insurer->name ?? 'N/A' }}</td>
-                                        <td>{{ $insurer->policies_count ?? 0 }}</td>
+                                        <td>{{ $insurer->customer_policies_count ?? 0 }}</td>
                                         <td>
                                             <div class="progress" style="height: 5px; width: 100px;">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ min(($insurer->policies_count ?? 0) / ($activePolicies ?? 1) * 100, 100) }}%"></div>
+                                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ min(($insurer->customer_policies_count ?? 0) / ($activePolicies ?? 1) * 100, 100) }}%"></div>
                                             </div>
-                                            <span class="x-small">{{ number_format(($insurer->policies_count ?? 0) / ($activePolicies ?? 1) * 100, 1) }}%</span>
+                                            <span class="x-small">{{ number_format(($insurer->customer_policies_count ?? 0) / ($activePolicies ?? 1) * 100, 1) }}%</span>
                                         </td>
                                         <td><span class="badge bg-success">Compliant</span></td>
                                     </tr>

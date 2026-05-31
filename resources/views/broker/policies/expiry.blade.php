@@ -64,7 +64,7 @@
                                 <span class="badge bg-info-subtle text-info">{{ $daysLeft }}d left</span>
                             @endif
                         </td>
-                        <td class="fw-bold">TZS {{ number_format($policy->premium ?? 0, 0) }}</td>
+                        <td class="fw-bold">TZS {{ number_format(policy->premium_amount ?? 0, 0) }}</td>
                     </tr>
                     @empty
                     <tr>

@@ -111,7 +111,7 @@
                                     </td>
                                     <td>{{ $agent->roles->first()->name ?? 'N/A' }}</td>
                                     <td>{{ $agent->email ?? 'N/A' }}</td>
-                                    <td>{{ $agent->policies_count ?? 0 }}</td>
+                                    <td>{{ $agent->customer_policies_count ?? 0 }}</td>
                                     <td>{{ $agent->created_at?->format('M d, Y') ?? 'N/A' }}</td>
                                     <td>
                                         <span class="badge bg-success">Active</span>
