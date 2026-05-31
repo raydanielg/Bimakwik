@@ -335,6 +335,12 @@
     </style>
 </head>
 <body>
+    <!-- Page loader -->
+    <div id="page-loader">
+        <div class="loader-logo"><span class="text-primary">BIMA</span>KWIK</div>
+    </div>
+    <!-- Toast container -->
+    <div id="toast-container"></div>
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
     <div id="wrapper">
         <!-- Sidebar -->
@@ -1186,7 +1192,7 @@
                 </div>
             </nav>
 
-            <div class="container-fluid px-4 py-2">
+            <div class="container-fluid px-4 py-2 page-enter">
                 @yield('content')
                 @yield('dashboard_content')
             </div>
