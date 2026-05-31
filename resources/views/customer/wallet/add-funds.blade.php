@@ -19,7 +19,7 @@
     <div class="col-lg-8">
         <div class="card border-0 shadow-sm">
             <div class="card-body p-4">
-                <form id="addFundsForm" method="POST" action="#" novalidate>
+                <form id="addFundsForm" method="POST" action="{{ route('customer.wallet.add-funds.post') }}" novalidate>
                     @csrf
 
                     <!-- Amount Selection -->

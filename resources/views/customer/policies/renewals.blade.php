@@ -3,14 +3,6 @@
 @section('content')
 @php
     $renewals = isset($renewals) ? $renewals : collect($customerRenewals ?? []);
-    $pick = function ($row, $keys, $default = '-') {
-        foreach ($keys as $key) {
-            if (isset($row[$key]) && $row[$key] !== null && $row[$key] !== '') {
-                return $row[$key];
-            }
-        }
-        return $default;
-    };
 @endphp
 <div class="container-fluid">
     <div class="row mb-4">
