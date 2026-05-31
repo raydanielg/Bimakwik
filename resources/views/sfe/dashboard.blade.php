@@ -33,7 +33,7 @@
                     <div class="text-success small fw-bold">{{ __('sfe.live') }}</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('sfe.sales_achievement') }}</h6>
-                <h4 class="fw-bold mb-0">TZS {{ number_format($totalPremiums, 2) }}</h4>
+                <h4 class="fw-bold mb-0">TZS <span class="stat-count">{{ number_format($totalPremiums, 2) }}</span></h4>
                 <div class="progress mt-3" style="height: 6px;">
                     <div class="progress-bar bg-primary" role="progressbar" style="width: {{ min(100, max(10, $activePoliciesCount * 10)) }}%" aria-valuenow="{{ min(100, max(10, $activePoliciesCount * 10)) }}" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
@@ -52,7 +52,7 @@
                     <div class="text-success small fw-bold"><i class="bi bi-arrow-up"></i> Live</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('sfe.total_commission') }}</h6>
-                <h4 class="fw-bold mb-0">TZS {{ number_format($approvedClaimsTotal, 2) }}</h4>
+                <h4 class="fw-bold mb-0">TZS <span class="stat-count">{{ number_format($approvedClaimsTotal, 2) }}</span></h4>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
                     <div class="badge bg-warning text-dark">{{ $activePoliciesCount }} active</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('sfe.leaderboard_rank') }}</h6>
-                <h4 class="fw-bold mb-0">{{ $openClaimsCount }} claims</h4>
+                <h4 class="fw-bold mb-0"><span class="stat-count">{{ $openClaimsCount }} claims</h4>
             </div>
         </div>
     </div>
@@ -84,7 +84,7 @@
                     <div class="text-primary small fw-bold">{{ $recentPolicies->count() }} recent</div>
                 </div>
                 <h6 class="text-uppercase small fw-bold text-muted mb-1">{{ __('sfe.active_customers') }}</h6>
-                <h4 class="fw-bold mb-0">{{ $activePoliciesCount }}</h4>
+                <h4 class="fw-bold mb-0"><span class="stat-count">{{ $activePoliciesCount }}</span></h4>
             </div>
         </div>
     </div>

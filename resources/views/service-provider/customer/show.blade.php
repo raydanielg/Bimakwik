@@ -81,7 +81,7 @@
                                         <td>{{ $policy->product->product_name ?? 'N/A' }}</td>
                                         <td>{{ $policy->start_date?->format('M d, Y') ?? 'N/A' }}</td>
                                         <td>{{ $policy->end_date?->format('M d, Y') ?? 'N/A' }}</td>
-                                        <td>TZS {{ number_format(policy->premium_amount ?? 0, 0) }}</td>
+                                        <td>TZS {{ number_format($policy->premium_amount ?? 0, 0) }}</td>
                                         <td>
                                             @if($policy->status === 'active')
                                                 <span class="badge bg-success">Active</span>

@@ -15,7 +15,7 @@
                     </div>
                     <span class="x-small fw-bold text-muted">Total Premiums</span>
                 </div>
-                <h4 class="fw-bold mb-0">TZS {{ number_format($totalPremiums / 1000000, 1) }}M</h4>
+                <h4 class="fw-bold mb-0">TZS <span class="stat-count">{{ number_format($totalPremiums / 1000000, 1) }}M</h4>
                 <p class="x-small text-success mb-0 mt-1"><i class="bi bi-arrow-up"></i> {{ number_format($premiumGrowth, 1) }}%</p>
             </div>
         </div>
@@ -30,7 +30,7 @@
                     </div>
                     <span class="x-small fw-bold text-muted">Active Policies</span>
                 </div>
-                <h4 class="fw-bold mb-0">{{ number_format($activePolicies) }}</h4>
+                <h4 class="fw-bold mb-0"><span class="stat-count">{{ number_format($activePolicies) }}</span></h4>
                 <p class="x-small text-success mb-0 mt-1"><i class="bi bi-arrow-up"></i> {{ number_format($policiesGrowth, 1) }}%</p>
             </div>
         </div>
@@ -45,7 +45,7 @@
                     </div>
                     <span class="x-small fw-bold text-muted">Pending Claims</span>
                 </div>
-                <h4 class="fw-bold mb-0">{{ number_format($pendingClaims) }}</h4>
+                <h4 class="fw-bold mb-0"><span class="stat-count">{{ number_format($pendingClaims) }}</span></h4>
                 <p class="x-small text-danger mb-0 mt-1"><i class="bi bi-clock"></i> {{ $pendingClaims > 0 ? 'Action Needed' : 'All Clear' }}</p>
             </div>
         </div>
@@ -60,7 +60,7 @@
                     </div>
                     <span class="x-small fw-bold text-muted">Settlement Ratio</span>
                 </div>
-                <h4 class="fw-bold mb-0">{{ $settlementRatio }}%</h4>
+                <h4 class="fw-bold mb-0"><span class="stat-count">{{ $settlementRatio }}%</h4>
                 <p class="x-small text-primary mb-0 mt-1">{{ $settlementRatio >= 90 ? 'Excellent' : ($settlementRatio >= 75 ? 'Good' : 'Needs Improvement') }}</p>
             </div>
         </div>
@@ -75,7 +75,7 @@
                     </div>
                     <span class="x-small fw-bold text-muted">Traffic & Leads</span>
                 </div>
-                <h4 class="fw-bold mb-0">{{ number_format($totalCustomers) }} / {{ number_format($newCustomersMonth) }}</h4>
+                <h4 class="fw-bold mb-0"><span class="stat-count">{{ number_format($totalCustomers) }} / {{ number_format($newCustomersMonth) }}</h4>
                 <p class="x-small text-success mb-0 mt-1"><i class="bi bi-arrow-up"></i> {{ $newCustomersMonth }} new this month</p>
             </div>
         </div>

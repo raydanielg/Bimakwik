@@ -20,7 +20,7 @@
                         <div class="text-success small fw-bold"><i class="bi bi-graph-up"></i> +12%</div>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Bills Submitted</h6>
-                    <h4 class="fw-bold mb-0">{{ $totalBills }}</h4>
+                    <h4 class="fw-bold mb-0"><span class="stat-count">{{ $totalBills }}</span></h4>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                         <div class="text-warning small fw-bold">Pending</div>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Pending Approval</h6>
-                    <h4 class="fw-bold mb-0">{{ $pendingBills }}</h4>
+                    <h4 class="fw-bold mb-0"><span class="stat-count">{{ $pendingBills }}</span></h4>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                         <div class="text-success small fw-bold"><i class="bi bi-arrow-up"></i> +8%</div>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Paid Amount</h6>
-                    <h4 class="fw-bold mb-0">TZS {{ number_format($paidAmount, 0) }}</h4>
+                    <h4 class="fw-bold mb-0">TZS <span class="stat-count">{{ number_format($paidAmount, 0) }}</span></h4>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
                         <div class="text-danger small fw-bold">Rejected</div>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Rejected Bills</h6>
-                    <h4 class="fw-bold mb-0">{{ $rejectedBills }}</h4>
+                    <h4 class="fw-bold mb-0"><span class="stat-count">{{ $rejectedBills }}</span></h4>
                 </div>
             </div>
         </div>

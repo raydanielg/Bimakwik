@@ -20,7 +20,7 @@
                         <div class="text-success small fw-bold"><i class="bi bi-graph-up"></i> +12%</div>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Total Policies</h6>
-                    <h4 class="fw-bold mb-0 stat-count">{{ $totalPolicies }}</h4>
+                    <h4 class="fw-bold mb-0 stat-count">{{ $totalPolicies }}</span></h4>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                         <div class="text-primary small fw-bold">+{{ $totalCustomers }}</div>
                     </div>
                     <h6 class="text-uppercase small fw-bold text-muted mb-1">Total Customers</h6>
-                    <h4 class="fw-bold mb-0 stat-count">{{ $totalCustomers }}</h4>
+                    <h4 class="fw-bold mb-0 stat-count">{{ $totalCustomers }}</span></h4>
                 </div>
             </div>
         </div>

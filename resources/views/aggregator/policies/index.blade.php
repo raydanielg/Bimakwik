@@ -103,7 +103,7 @@
                                     <td>{{ $policy->customer->name ?? 'N/A' }}</td>
                                     <td>{{ $policy->product->product_name ?? 'N/A' }}</td>
                                     <td>{{ $policy->broker_name ?? 'N/A' }}</td>
-                                    <td class="fw-bold">TZS {{ number_format(policy->premium_amount ?? 0, 0) }}</td>
+                                    <td class="fw-bold">TZS {{ number_format($policy->premium_amount ?? 0, 0) }}</td>
                                     <td>
                                         @if($policy->status === 'active')
                                             <span class="badge bg-success">Active</span>
