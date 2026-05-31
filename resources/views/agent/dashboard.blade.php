@@ -132,8 +132,8 @@
                                     <i class="bi bi-shield-fill text-muted"></i>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <div class="fw-bold">{{ $product->name ?? 'N/A' }}</div>
-                                    <small class="text-muted">{{ $product->policies_count ?? 0 }} policies</small>
+                                    <div class="fw-bold">{{ $product->product_name ?? 'N/A' }}</div>
+                                    <small class="text-muted">{{ $product->customer_policies_count ?? 0 }} policies</small>
                                 </div>
                             </div>
                         @endforeach
