@@ -29,20 +29,28 @@ class CustomerProfileController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string',
-            'phone' => 'required|string',
-            'address' => 'nullable|string',
-            'dob' => 'nullable|date',
+            'name'          => 'nullable|string|max:255',
+            'phone_number'  => 'nullable|string|max:20',
+            'gender'        => 'nullable|in:male,female,other',
+            'date_of_birth' => 'nullable|date',
+            'id_number'     => 'nullable|string|max:30',
+            'address'       => 'nullable|string|max:500',
         ]);
 
         try {
             $customer = Customer::where('user_id', auth()->id())->first();
             if ($customer) {
-                $customer->update($validated);
+                $customer->update(array_filter($validated, fn($v) => $v !== null));
             }
-            return back()->with('success', 'Profile updated');
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Profile updated successfully!']);
+            }
+            return back()->with('success', 'Profile updated successfully!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Failed to update profile');
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Failed to update profile.'], 422);
+            }
+            return back()->with('error', 'Failed to update profile.');
         }
     }
 }
