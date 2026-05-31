@@ -209,6 +209,115 @@
         
         #sidebar-wrapper.toggled { margin-left: -250px; }
 
+        /* ── Global Animations & Effects ─────────────────── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulse-ring {
+            0%   { box-shadow: 0 0 0 0 rgba(217,70,239,.35); }
+            70%  { box-shadow: 0 0 0 10px rgba(217,70,239,0); }
+            100% { box-shadow: 0 0 0 0 rgba(217,70,239,0); }
+        }
+        @keyframes shimmer {
+            0%   { background-position: -468px 0; }
+            100% { background-position: 468px 0; }
+        }
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.8); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* Page entrance */
+        .page-enter { animation: fadeInUp 0.45s cubic-bezier(.22,.61,.36,1) both; }
+
+        /* Staggered cards */
+        .card { animation: fadeInUp 0.4s ease both; }
+        .card:nth-child(1) { animation-delay: .05s; }
+        .card:nth-child(2) { animation-delay: .10s; }
+        .card:nth-child(3) { animation-delay: .15s; }
+        .card:nth-child(4) { animation-delay: .20s; }
+
+        /* Hover lift */
+        .hover-lift { transition: transform .25s ease, box-shadow .25s ease !important; }
+        .hover-lift:hover { transform: translateY(-4px) !important; box-shadow: 0 12px 30px rgba(0,0,0,.10) !important; }
+
+        /* Stat number count-up animation */
+        .stat-count { animation: countUp 0.5s ease both; display: inline-block; }
+
+        /* Button loading state */
+        .btn-loading { position: relative; pointer-events: none; opacity: .75; }
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 14px; height: 14px;
+            top: 50%; right: 12px;
+            margin-top: -7px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin .6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Page transition overlay */
+        #page-loader {
+            position: fixed; inset: 0;
+            background: #fff;
+            z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity .3s ease;
+        }
+        #page-loader.hidden { opacity: 0; pointer-events: none; }
+        .loader-logo {
+            font-size: 1.5rem; font-weight: 800;
+            color: #1e293b;
+            animation: pulse-ring 1.2s infinite;
+        }
+
+        /* Notification badge pulse */
+        .badge-pulse { animation: pulse-ring 1.5s infinite; }
+
+        /* Smooth form controls */
+        .form-control, .form-select {
+            transition: border-color .2s ease, box-shadow .2s ease;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #d946ef !important;
+            box-shadow: 0 0 0 3px rgba(217,70,239,.15) !important;
+        }
+
+        /* Toast container */
+        #toast-container {
+            position: fixed; top: 20px; right: 20px;
+            z-index: 10000; display: flex; flex-direction: column; gap: 8px;
+        }
+        .bk-toast {
+            padding: 12px 20px; border-radius: 12px;
+            font-size: .875rem; font-weight: 500;
+            color: #fff; min-width: 280px;
+            display: flex; align-items: center; gap: 10px;
+            animation: slideInLeft .3s ease both;
+            box-shadow: 0 4px 20px rgba(0,0,0,.15);
+        }
+        .bk-toast.success { background: linear-gradient(135deg,#10b981,#059669); }
+        .bk-toast.error   { background: linear-gradient(135deg,#ef4444,#dc2626); }
+        .bk-toast.info    { background: linear-gradient(135deg,#3b82f6,#2563eb); }
+        .bk-toast.warning { background: linear-gradient(135deg,#f59e0b,#d97706); }
+
+        /* Sidebar item animation */
+        .list-group-item { transition: all .2s ease, background .2s ease; }
+        .list-group-item:hover { transform: translateX(4px); }
+        .list-group-item.active { transform: none; }
+
         /* Overlay for mobile when sidebar is open */
         .sidebar-overlay {
             display: none;
