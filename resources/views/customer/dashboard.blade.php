@@ -53,7 +53,7 @@
                         <i class="bi bi-wallet2 fs-4"></i>
                     </div>
                 </div>
-                <h3 class="fw-bold mb-0">TZS {{ number_format($stats['wallet_balance'] ?? 0, 0) }}</h3>
+                <h3 class="fw-bold mb-0"><span class="stat-count" data-target="{{ $stats['wallet_balance'] ?? 0 }}">{{ number_format($stats['wallet_balance'] ?? 0, 0) }}</span></h3>
                 <p class="x-small text-muted mb-0 mt-1">Wallet Balance</p>
             </div>
         </div>
@@ -66,7 +66,7 @@
                         <i class="bi bi-clipboard2-check fs-4"></i>
                     </div>
                 </div>
-                <h3 class="fw-bold mb-0">{{ $stats['total_claims'] ?? 0 }}</h3>
+                <h3 class="fw-bold mb-0 stat-count">{{ $stats['total_claims'] ?? 0 }}</h3>
                 <p class="x-small text-muted mb-0 mt-1">Total Claims</p>
             </div>
         </div>
@@ -79,7 +79,7 @@
                         <i class="bi bi-hourglass-split fs-4"></i>
                     </div>
                 </div>
-                <h3 class="fw-bold mb-0">{{ $stats['pending_claims'] ?? 0 }}</h3>
+                <h3 class="fw-bold mb-0 stat-count">{{ $stats['pending_claims'] ?? 0 }}</h3>
                 <p class="x-small text-muted mb-0 mt-1">Pending Claims</p>
             </div>
         </div>
