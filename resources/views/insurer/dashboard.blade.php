@@ -91,8 +91,8 @@
                 <div class="dropdown">
                     <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">Last 6 Months</button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Last 30 Days</a></li>
-                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                        <li><a class="dropdown-item" href="{{ route('insurer.dashboard') }}?period=30">Last 30 Days</a></li>
+                        <li><a class="dropdown-item" href="{{ route('insurer.dashboard') }}?period=year">This Year</a></li>
                     </ul>
                 </div>
             </div>

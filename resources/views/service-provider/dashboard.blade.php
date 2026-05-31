@@ -91,8 +91,8 @@
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm p-4 h-100">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h6 class{{ route('service-provider.claims.index') }}"fw-bold mb-0">Recent Bill Submissions</h6>
-                    <a href="#" class="btn btn-sm btn-link text-decoration-none">View All</a>
+                    <h6 class="fw-bold mb-0">Recent Bill Submissions</h6>
+                    <a href="{{ route('service-provider.claims.index') }}" class="btn btn-sm btn-link text-decoration-none">View All</a>
                 </div>
                 @if($recentBills->count() > 0)
                     <div class="table-responsive">
