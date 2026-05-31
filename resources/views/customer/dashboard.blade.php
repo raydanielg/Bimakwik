@@ -109,52 +109,43 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php $recentPolicies = $recentPolicies ?? collect(); @endphp
+                            @forelse($recentPolicies as $pol)
+                            @php
+                                $polStatus = $pol->status ?? 'active';
+                                $badgeCol = $polStatus === 'active' ? 'success' : ($polStatus === 'expired' ? 'danger' : 'warning');
+                                $expiry = $pol->end_date ? \Carbon\Carbon::parse($pol->end_date)->format('d M') : '-';
+                            @endphp
                             <tr>
                                 <td class="px-4 py-3">
                                     <div class="d-flex align-items-center">
-                                        <div class="bg-info bg-opacity-10 p-2 rounded-3 text-info me-3">
-                                            <i class="bi bi-car-front fs-5"></i>
+                                        <div class="bg-primary bg-opacity-10 p-2 rounded-3 text-primary me-3">
+                                            <i class="bi bi-shield-check fs-5"></i>
                                         </div>
                                         <div>
-                                            <div class="fw-bold small">Motor Insurance</div>
-                                            <div class="x-small text-muted">Toyota Hilux</div>
+                                            <div class="fw-bold small">{{ $pol->product->product_name ?? 'Insurance Policy' }}</div>
+                                            <div class="x-small text-muted">{{ $pol->insurer->insurer_name ?? 'Provider' }}</div>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="py-3 d-none d-md-table-cell">
-                                    <span class="x-small">BK-MOT-2024-001</span>
+                                    <span class="x-small">{{ $pol->policy_number }}</span>
                                 </td>
                                 <td class="py-3">
-                                    <span class="badge bg-success-subtle text-success px-2 py-1" style="font-size: 0.65rem;">{{ __('customer.status_active') }}</span>
+                                    <span class="badge bg-{{ $badgeCol }}-subtle text-{{ $badgeCol }} px-2 py-1" style="font-size: 0.65rem;">{{ ucfirst($polStatus) }}</span>
                                 </td>
-                                <td class="py-3 text-danger fw-bold small">15 Jun</td>
+                                <td class="py-3 fw-bold small {{ $polStatus === 'active' ? 'text-danger' : 'text-muted' }}">{{ $expiry }}</td>
                                 <td class="px-4 py-3 text-end">
-                                    <button class="btn btn-sm btn-light rounded-circle"><i class="bi bi-chevron-right"></i></button>
+                                    <a href="{{ route('customer.policies.show', $pol->id) }}" class="btn btn-sm btn-light rounded-circle"><i class="bi bi-chevron-right"></i></a>
                                 </td>
                             </tr>
+                            @empty
                             <tr>
-                                <td class="px-4 py-3 border-0">
-                                    <div class="d-flex align-items-center">
-                                        <div class="bg-danger bg-opacity-10 p-2 rounded-3 text-danger me-3">
-                                            <i class="bi bi-heart-pulse fs-5"></i>
-                                        </div>
-                                        <div>
-                                            <div class="fw-bold small">Health Insurance</div>
-                                            <div class="x-small text-muted">Aga Khan Network</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="py-3 border-0 d-none d-md-table-cell">
-                                    <span class="x-small">BK-HEA-2024-052</span>
-                                </td>
-                                <td class="py-3 border-0">
-                                    <span class="badge bg-success-subtle text-success px-2 py-1" style="font-size: 0.65rem;">{{ __('customer.status_active') }}</span>
-                                </td>
-                                <td class="py-3 border-0 small text-muted">10 Jan</td>
-                                <td class="px-4 py-3 border-0 text-end">
-                                    <button class="btn btn-sm btn-light rounded-circle"><i class="bi bi-chevron-right"></i></button>
+                                <td colspan="5" class="px-4 py-4 text-center text-muted small">
+                                    No policies yet. <a href="{{ route('customer.buy') }}">Buy your first policy</a>
                                 </td>
                             </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
