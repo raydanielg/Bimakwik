@@ -14,10 +14,13 @@ class CustomerClaimController extends Controller
     {
         $claims = collect();
         try {
-            $claims = Claim::where('customer_id', auth()->id())
-                ->with('policy', 'product')
-                ->latest()
-                ->paginate(15);
+            $customerId = DB::table('customers')->where('user_id', auth()->id())->value('id');
+            if ($customerId) {
+                $claims = Claim::where('customer_id', $customerId)
+                    ->with('policy')
+                    ->latest()
+                    ->paginate(15);
+            }
         } catch (\Exception $e) {}
         return view('customer.claims.track', compact('claims'));
     }
