@@ -121,7 +121,7 @@
                         <p class="x-small text-muted mb-0">Motor insurance loss ratio is improving in the Northern region.</p>
                     </div>
                 </div>
-                <button class="btn btn-sm btn-primary w-100 rounded-pill mt-3 py-2 small">Full Analysis</button>
+                <a href="{{ route('insurer.ai-insights') }}" class="btn btn-sm btn-primary w-100 rounded-pill mt-3 py-2 small">Full Analysis</a>
             </div>
         </div>
 

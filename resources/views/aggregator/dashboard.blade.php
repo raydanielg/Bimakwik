@@ -157,11 +157,11 @@
                 <div class="card-body">
                     <div class="row text-center">
                         <div class="col-6 mb-3">
-                            <h3 class="fw-bold text-primary">{{ $totalBrokers }}</h3>
+                            <h3 class="fw-bold text-primary stat-count">{{ $totalBrokers }}</h3>
                             <small class="text-muted">Brokers</small>
                         </div>
                         <div class="col-6 mb-3">
-                            <h3 class="fw-bold text-info">{{ $totalAgents }}</h3>
+                            <h3 class="fw-bold text-info stat-count">{{ $totalAgents }}</h3>
                             <small class="text-muted">Agents</small>
                         </div>
                     </div>
@@ -177,11 +177,11 @@
                 <div class="card-body">
                     <div class="row text-center">
                         <div class="col-6 mb-3">
-                            <h3 class="fw-bold text-warning">{{ $totalClaims }}</h3>
+                            <h3 class="fw-bold text-warning stat-count">{{ $totalClaims }}</h3>
                             <small class="text-muted">Total Claims</small>
                         </div>
                         <div class="col-6 mb-3">
-                            <h3 class="fw-bold text-success">{{ $activePolicies }}</h3>
+                            <h3 class="fw-bold text-success stat-count">{{ $activePolicies }}</h3>
                             <small class="text-muted">Active Policies</small>
                         </div>
                     </div>
