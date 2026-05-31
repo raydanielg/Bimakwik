@@ -21,14 +21,14 @@ class RegulatorReportController extends Controller
     public function brokers()
     {
         $brokers = collect();
-        try { $brokers = User::role('broker')->withCount('policies')->paginate(15); } catch (\Exception $e) {}
+        try { $brokers = User::role('broker')->paginate(15); } catch (\Exception $e) {}
         return view('regulator.brokers.index', compact('brokers'));
     }
 
     public function agents()
     {
         $agents = collect();
-        try { $agents = User::role(['sfe', 'bancassurance'])->withCount('policies')->paginate(15); } catch (\Exception $e) {}
+        try { $agents = User::role(['sfe', 'bancassurance'])->paginate(15); } catch (\Exception $e) {}
         return view('regulator.agents.index', compact('agents'));
     }
 
