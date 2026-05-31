@@ -10,22 +10,19 @@ class InsuranceProduct extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
         'policy_category_id',
         'insurer_id',
-        'premium',
-        'min_age',
-        'max_age',
-        'benefits',
-        'exclusions',
+        'product_code',
+        'product_name',
+        'description',
+        'base_premium',
+        'currency',
         'is_active',
     ];
 
     protected $casts = [
-        'benefits' => 'array',
-        'exclusions' => 'array',
         'is_active' => 'boolean',
+        'base_premium' => 'decimal:2',
     ];
 
     public function policyCategory()
@@ -35,7 +32,12 @@ class InsuranceProduct extends Model
 
     public function insurer()
     {
-        return $this->belongsTo(User::class, 'insurer_id');
+        return $this->belongsTo(Insurer::class, 'insurer_id');
+    }
+
+    public function customerPolicies()
+    {
+        return $this->hasMany(CustomerPolicy::class, 'insurance_product_id');
     }
 
     public function productBenefits()
