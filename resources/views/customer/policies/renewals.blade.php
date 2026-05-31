@@ -31,25 +31,31 @@
                             <tbody>
                                 @forelse($renewals as $renewal)
                                     @php
-                                        $status = strtolower((string) $pick($renewal, ['status', 'renewal_status'], 'upcoming'));
-                                        $expiryRaw = $pick($renewal, ['due_date', 'renewal_date', 'expiry_date'], null);
-                                        $expiry = $expiryRaw;
+                                        $r = is_array($renewal) ? $renewal : $renewal->toArray();
+                                        $status = $r['status'] ?? 'active';
+                                        $endDate = $r['end_date'] ?? null;
                                         try {
-                                            $expiry = $expiryRaw ? \Carbon\Carbon::parse($expiryRaw)->format('d M Y') : '-';
+                                            $expiry = $endDate ? \Carbon\Carbon::parse($endDate)->format('d M Y') : '-';
                                         } catch (\Throwable $e) {
-                                            $expiry = $expiryRaw ?: '-';
+                                            $expiry = $endDate ?: '-';
                                         }
-                                        $premium = (float) $pick($renewal, ['premium', 'renewal_amount', 'amount_due'], 0);
-                                        $badgeClass = $status === 'due soon' || $status === 'pending' ? 'warning text-dark' : ($status === 'completed' ? 'success' : 'info text-dark');
+                                        $premium = (float) ($r['premium_amount'] ?? 0);
+                                        $daysLeft = $endDate ? \Carbon\Carbon::parse($endDate)->diffInDays(now(), false) : null;
+                                        $badgeClass = ($daysLeft !== null && $daysLeft >= 0) ? 'danger' : 'warning text-dark';
+                                        $productName = isset($r['product']) ? ($r['product']['product_name'] ?? 'Policy') : 'Insurance Policy';
+                                        $insurerName = isset($r['insurer']) ? ($r['insurer']['insurer_name'] ?? 'Provider') : 'Provider';
                                     @endphp
                                     <tr>
-                                        <td>{{ $pick($renewal, ['policy_name', 'name', 'product_name']) }}</td>
-                                        <td>{{ $pick($renewal, ['provider_name', 'insurer_name', 'company_name']) }}</td>
-                                        <td>{{ $expiry }}</td>
+                                        <td>
+                                            <div class="fw-bold small">{{ $productName }}</div>
+                                            <div class="x-small text-muted">{{ $r['policy_number'] ?? '' }}</div>
+                                        </td>
+                                        <td>{{ $insurerName }}</td>
+                                        <td class="fw-bold text-danger">{{ $expiry }}</td>
                                         <td>TZS {{ number_format($premium, 0) }}</td>
                                         <td><span class="badge bg-{{ $badgeClass }}">{{ ucfirst($status) }}</span></td>
                                         <td class="text-end">
-                                            <a href="{{ route('customer.buy') }}" class="btn btn-sm btn-primary">{{ __('customer.renew_now') }}</a>
+                                            <a href="{{ route('customer.buy') }}" class="btn btn-sm btn-primary">Renew Now</a>
                                         </td>
                                     </tr>
                                 @empty
