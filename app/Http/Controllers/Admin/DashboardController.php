@@ -94,14 +94,13 @@ class DashboardController extends Controller
         try {
             $monthlyRevenue = PaymentTransaction::where('created_at', '>=', Carbon::now()->subMonths(12))
                 ->select(
-                    DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'),
+                    DB::raw("strftime('%Y-%m', created_at) as month"),
                     DB::raw('COALESCE(SUM(amount), 0) as total')
                 )
                 ->groupBy('month')
                 ->orderBy('month')
                 ->get();
         } catch (\Exception $e) {
-            // Fallback: Empty collection if table doesn't exist
             $monthlyRevenue = collect();
         }
         
@@ -109,14 +108,13 @@ class DashboardController extends Controller
         try {
             $monthlyUsers = User::where('created_at', '>=', Carbon::now()->subMonths(12))
                 ->select(
-                    DB::raw('DATE_FORMAT(created_at, "%Y-%m") as month'),
+                    DB::raw("strftime('%Y-%m', created_at) as month"),
                     DB::raw('COUNT(*) as total')
                 )
                 ->groupBy('month')
                 ->orderBy('month')
                 ->get();
         } catch (\Exception $e) {
-            // Fallback: Empty collection
             $monthlyUsers = collect();
         }
         
