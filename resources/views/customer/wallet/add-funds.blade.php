@@ -224,78 +224,52 @@
     const paymentMethods = document.querySelectorAll('input[name="payment_method"]');
     const form = document.getElementById('addFundsForm');
 
-    // Update summary when quick amount is selected
+    function getAmount() {
+        const quick = document.querySelector('input[name="quick-amount"]:checked');
+        return quick ? parseFloat(quick.value) : (parseFloat(customAmountInput.value) || 0);
+    }
+
+    function updateSummary() {
+        const amount = getAmount();
+        const selectedMethod = document.querySelector('input[name="payment_method"]:checked')?.value || 'mpesa';
+        const methodLabels = { mpesa:'M-Pesa', bank:'Bank Transfer', airtel:'Airtel Money', tigo:'Tigo Pesa' };
+        const feeRates  = { mpesa:0.02, bank:0, airtel:0.015, tigo:0.02 };
+        const fixedFees = { bank:5000 };
+        const fee = amount > 0 ? (fixedFees[selectedMethod] ?? (amount * (feeRates[selectedMethod] ?? 0))) : 0;
+
+        document.getElementById('summaryAmount').textContent = `TZS ${amount.toLocaleString('en-US', {minimumFractionDigits:2})}`;
+        document.getElementById('summaryMethod').textContent  = methodLabels[selectedMethod] || selectedMethod;
+        document.getElementById('summaryFee').textContent     = `TZS ${fee.toLocaleString('en-US', {minimumFractionDigits:2})}`;
+        document.getElementById('summaryTotal').textContent   = `TZS ${(amount+fee).toLocaleString('en-US', {minimumFractionDigits:2})}`;
+    }
+
+    /* Quick-amount → fill hidden custom_amount field */
     quickAmountButtons.forEach(btn => {
-        btn.addEventListener('change', updateSummary);
+        btn.addEventListener('change', function() {
+            customAmountInput.value = '';
+            updateSummary();
+        });
     });
 
-    // Update summary when custom amount changes
     customAmountInput.addEventListener('input', function() {
-        // Uncheck all quick amount buttons
-        quickAmountButtons.forEach(btn => btn.checked = false);
+        quickAmountButtons.forEach(b => b.checked = false);
         updateSummary();
     });
 
-    // Update summary when payment method changes
-    paymentMethods.forEach(method => {
-        method.addEventListener('change', updateSummary);
-    });
+    paymentMethods.forEach(m => m.addEventListener('change', updateSummary));
 
-    function updateSummary() {
-        // Get selected amount
-        let amount = 0;
-        const checkedQuick = document.querySelector('input[name="quick-amount"]:checked');
-        if (checkedQuick) {
-            amount = parseFloat(checkedQuick.value);
-        } else if (customAmountInput.value) {
-            amount = parseFloat(customAmountInput.value);
-        }
-
-        // Get selected payment method
-        const selectedMethod = document.querySelector('input[name="payment_method"]:checked').value;
-        const methodLabels = {
-            'mpesa': 'M-Pesa',
-            'bank': '{{ __('customer.bank_transfer') }}',
-            'airtel': 'Airtel Money',
-            'tigo': 'Tigo Pesa'
-        };
-
-        // Calculate fee (varies by method)
-        let fee = 0;
-        if (amount > 0) {
-            if (selectedMethod === 'mpesa') {
-                fee = amount * 0.02; // 2% fee
-            } else if (selectedMethod === 'bank') {
-                fee = 5000; // Fixed fee
-            } else if (selectedMethod === 'airtel') {
-                fee = amount * 0.015; // 1.5% fee
-            } else if (selectedMethod === 'tigo') {
-                fee = amount * 0.02; // 2% fee
-            }
-        }
-
-        // Update display
-        document.getElementById('summaryAmount').textContent = `TZS ${amount.toLocaleString('en-TZ', {minimumFractionDigits: 2})}`;
-        document.getElementById('summaryMethod').textContent = methodLabels[selectedMethod];
-        document.getElementById('summaryFee').textContent = `TZS ${fee.toLocaleString('en-TZ', {minimumFractionDigits: 2})}`;
-        document.getElementById('summaryTotal').textContent = `TZS ${(amount + fee).toLocaleString('en-TZ', {minimumFractionDigits: 2})}`;
-    }
-
-    // Form submission
+    /* Override form submit — populate custom_amount before submitting */
     form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const amount = customAmountInput.value || document.querySelector('input[name="quick-amount"]:checked')?.value;
-        const method = document.querySelector('input[name="payment_method"]:checked').value;
-        
-        if (!amount || parseFloat(amount) <= 0) {
-            alert('{{ __('customer.enter_valid_amount') }}');
+        const amount = getAmount();
+        if (!amount || amount < 1000) {
+            e.preventDefault();
+            bkToast('Please enter a valid amount (minimum TZS 1,000)', 'error');
             return;
         }
-        
-        alert(`{{ __('customer.payment_instructions_alert') }} ${method}.`);
+        /* Put resolved amount into custom_amount so controller picks it up */
+        customAmountInput.value = amount;
     });
 
-    // Initialize summary
     updateSummary();
 </script>
 @endsection
