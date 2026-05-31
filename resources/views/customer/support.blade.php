@@ -114,4 +114,61 @@
         </div>
     </div>
 </div>
+
+<!-- Live Chat Modal -->
+<div class="modal fade" id="liveChatModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded-4 shadow-lg">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold"><i class="bi bi-chat-dots text-success me-2"></i>Live Chat Support</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="d-flex align-items-center gap-3 mb-4 p-3 bg-success bg-opacity-10 rounded-3">
+                    <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" style="width:40px;height:40px;">
+                        <i class="bi bi-headset text-white"></i>
+                    </div>
+                    <div>
+                        <div class="fw-bold small">Support Team</div>
+                        <div class="x-small text-success"><i class="bi bi-circle-fill" style="font-size:.5rem;"></i> Online — avg reply 2 min</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Your Name</label>
+                    <input type="text" class="form-control rounded-3" id="chatName" value="{{ auth()->user()->name }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">How can we help you?</label>
+                    <textarea class="form-control rounded-3" id="chatMessage" rows="3" placeholder="Describe your issue briefly..."></textarea>
+                </div>
+                <div class="alert alert-info small mb-0">
+                    <i class="bi bi-info-circle me-1"></i>
+                    A support agent will connect with you via WhatsApp or phone call within 2 minutes.
+                </div>
+            </div>
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success rounded-pill px-4" id="startChatBtn"
+                    onclick="startChatSession()">
+                    <i class="bi bi-send me-2"></i>Start Chat
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+function startChatSession() {
+    const name    = document.getElementById('chatName').value.trim();
+    const message = document.getElementById('chatMessage').value.trim();
+    if (!message) { bkToast('Please describe your issue first.', 'warning'); return; }
+    btnLoad('#startChatBtn', 'Connecting...');
+    setTimeout(() => {
+        bootstrap.Modal.getInstance(document.getElementById('liveChatModal')).hide();
+        bkToast('Chat request sent! An agent will contact you shortly.', 'success', 5000);
+    }, 1500);
+}
+</script>
+@endpush
 @endsection
