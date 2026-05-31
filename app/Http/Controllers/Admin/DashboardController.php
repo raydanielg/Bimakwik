@@ -10,18 +10,15 @@ use App\Models\InsuranceProduct;
 use App\Models\Claim;
 use App\Models\PaymentTransaction;
 use App\Models\Wallet;
-use App\Models\WalletTransaction;
 use App\Models\BrokerCommission;
 use App\Models\AgentCommission;
 use App\Models\AggregatorCommission;
 use App\Models\CustomerPolicy;
-use App\Models\Product;
 use App\Models\PolicyRenewal;
 use App\Models\PolicyCancellation;
 use App\Models\KycSubmission;
 use App\Models\SupportTicket;
 use App\Models\Notification;
-use App\Models\SystemLog;
 use App\Models\LoginAttempt;
 use App\Models\FinancingLoan;
 use App\Models\PremiumFinancingRequest;
@@ -45,62 +42,60 @@ class DashboardController extends Controller
         $endDate = $range[1];
         $prevRange = [$startDate->copy()->subDays($startDate->diffInDays($endDate)), $startDate->copy()];
 
-        $today = Carbon::today();
-        $lastMonth = Carbon::now()->subMonth();
-
         $totalUsers = User::count();
-        $newUsersPeriod = User::whereBetween('created_at', [$startDate, $endDate])->count();
-        $usersGrowth = $this->growthRate(
-            User::whereBetween('created_at', [$prevRange[0], $prevRange[1]])->count(),
+        $newUsersPeriod = safe_count(User::whereBetween('created_at', [$startDate, $endDate]));
+        $usersGrowth = growth_rate(
+            safe_count(User::whereBetween('created_at', [$prevRange[0], $prevRange[1]])),
             $newUsersPeriod
         );
 
-        $totalPolicies = CustomerPolicy::count();
-        $activePolicies = CustomerPolicy::where('status', 'active')->count();
-        $policiesSoldPeriod = CustomerPolicy::whereBetween('created_at', [$startDate, $endDate])->count();
+        $totalPolicies = safe_count(CustomerPolicy::query());
+        $activePolicies = safe_count(CustomerPolicy::where('status', 'active'));
+        $policiesSoldPeriod = safe_count(CustomerPolicy::whereBetween('created_at', [$startDate, $endDate]));
 
-        $totalRevenue = PaymentTransaction::where('status', 'completed')->sum('amount') ?? 0;
-        $revenuePeriod = PaymentTransaction::where('status', 'completed')->whereBetween('created_at', [$startDate, $endDate])->sum('amount') ?? 0;
-        $revenueGrowth = $this->growthRate(
-            PaymentTransaction::where('status', 'completed')->whereBetween('created_at', [$prevRange[0], $prevRange[1]])->sum('amount') ?? 0,
+        $totalRevenue = safe_sum(PaymentTransaction::where('status', 'completed'), 'amount');
+        $revenuePeriod = safe_sum(PaymentTransaction::where('status', 'completed')->whereBetween('created_at', [$startDate, $endDate]), 'amount');
+        $revenueGrowth = growth_rate(
+            safe_sum(PaymentTransaction::where('status', 'completed')->whereBetween('created_at', [$prevRange[0], $prevRange[1]]), 'amount'),
             $revenuePeriod
         );
 
-        $totalClaims = Claim::count();
-        $pendingClaims = Claim::where('status', 'pending')->count();
-        $approvedClaims = Claim::where('status', 'approved')->count();
-        $rejectedClaims = Claim::where('status', 'rejected')->count();
-        $claimsPeriod = Claim::whereBetween('created_at', [$startDate, $endDate])->count();
-        $claimsGrowth = $this->growthRate(
-            Claim::whereBetween('created_at', [$prevRange[0], $prevRange[1]])->count(),
+        $totalClaims = safe_count(Claim::query());
+        $pendingClaims = safe_count(Claim::where('status', 'pending'));
+        $approvedClaims = safe_count(Claim::where('status', 'approved'));
+        $rejectedClaims = safe_count(Claim::where('status', 'rejected'));
+        $claimsPeriod = safe_count(Claim::whereBetween('created_at', [$startDate, $endDate]));
+        $claimsGrowth = growth_rate(
+            safe_count(Claim::whereBetween('created_at', [$prevRange[0], $prevRange[1]])),
             $claimsPeriod
         );
 
-        $totalProducts = InsuranceProduct::count();
-        $activeProducts = InsuranceProduct::where('is_active', true)->count();
+        $totalProducts = safe_count(InsuranceProduct::query());
+        $activeProducts = safe_count(InsuranceProduct::where('is_active', true));
 
-        $totalWallets = Wallet::count();
-        $totalWalletBalance = Wallet::sum('balance') ?? 0;
-        $activeWallets = Wallet::where('is_active', true)->count();
+        $totalWallets = safe_count(Wallet::query());
+        $totalWalletBalance = safe_sum(Wallet::query(), 'balance');
+        $activeWallets = safe_count(Wallet::where('is_active', true));
 
-        $brokerComm = BrokerCommission::sum('commission_amount') ?? 0;
-        $agentComm = AgentCommission::sum('commission_amount') ?? 0;
-        $aggregatorComm = AggregatorCommission::sum('amount') ?? 0;
+        $brokerComm = safe_sum(BrokerCommission::query(), 'commission_amount');
+        $agentComm = safe_sum(AgentCommission::query(), 'commission_amount');
+        $aggregatorComm = safe_sum(AggregatorCommission::query(), 'amount');
         $totalCommissions = $brokerComm + $agentComm + $aggregatorComm;
-        $pendingCommissions = BrokerCommission::where('status', 'pending')->sum('commission_amount')
-            + AgentCommission::where('status', 'pending')->sum('commission_amount')
-            + AggregatorCommission::where('status', 'pending')->sum('amount');
-        $paidCommissions = $totalCommissions - $pendingCommissions;
+        $pendingCommissions = safe_sum(BrokerCommission::where('status', 'pending'), 'commission_amount')
+            + safe_sum(AgentCommission::where('status', 'pending'), 'commission_amount')
+            + safe_sum(AggregatorCommission::where('status', 'pending'), 'amount');
+        $paidCommissions = max(0, $totalCommissions - $pendingCommissions);
 
-        $totalKyc = KycSubmission::count();
-        $pendingKyc = KycSubmission::where('status', 'pending')->count();
-        $approvedKyc = KycSubmission::where('status', 'approved')->count();
+        $totalKyc = safe_count(KycSubmission::query());
+        $pendingKyc = safe_count(KycSubmission::where('status', 'pending'));
+        $approvedKyc = safe_count(KycSubmission::where('status', 'approved'));
 
-        $totalSupportTickets = SupportTicket::count();
-        $openTickets = SupportTicket::whereIn('status', ['open', 'pending'])->count();
+        $totalSupportTickets = safe_count(SupportTicket::query());
+        $openTickets = safe_count(SupportTicket::whereIn('status', ['open', 'pending']));
 
-        $totalNotifications = Notification::count();
-        $unreadNotifications = Notification::where('is_read', false)->count();
+        $totalNotifications = safe_count(Notification::query());
+        $unreadNotifications = 0;
+        try { $unreadNotifications = Notification::where('is_read', false)->count(); } catch (\Exception $e) {}
 
         $monthLabels = [];
         $revenueData = [];
@@ -112,20 +107,20 @@ class DashboardController extends Controller
             $monthLabels[] = $m->format('M Y');
             $mStart = $m->copy()->startOfMonth();
             $mEnd = $m->copy()->endOfMonth();
-            $revenueData[] = (float) (PaymentTransaction::where('status', 'completed')->whereBetween('created_at', [$mStart, $mEnd])->sum('amount') ?? 0);
-            $userData[] = (int) User::whereBetween('created_at', [$mStart, $mEnd])->count();
-            $policyData[] = (int) CustomerPolicy::whereBetween('created_at', [$mStart, $mEnd])->count();
-            $claimData[] = (int) Claim::whereBetween('created_at', [$mStart, $mEnd])->count();
+            $revenueData[] = safe_sum(PaymentTransaction::where('status', 'completed')->whereBetween('created_at', [$mStart, $mEnd]), 'amount');
+            $userData[] = safe_count(User::whereBetween('created_at', [$mStart, $mEnd]));
+            $policyData[] = safe_count(CustomerPolicy::whereBetween('created_at', [$mStart, $mEnd]));
+            $claimData[] = safe_count(Claim::whereBetween('created_at', [$mStart, $mEnd]));
         }
 
         $roleNames = ['customer', 'broker', 'agent', 'insurer', 'aggregator', 'sfe', 'bancassurance', 'service-provider', 'regulator', 'financing-partner', 'developer', 'super-admin', 'sub-admin'];
         $usersByRole = collect();
         foreach ($roleNames as $r) {
-            $role = Role::where('name', $r)->first();
-            $cnt = $role ? $role->users()->count() : 0;
-            if ($cnt > 0) {
-                $usersByRole->push((object)['name' => $r, 'count' => $cnt]);
-            }
+            try {
+                $role = Role::where('name', $r)->first();
+                $cnt = $role ? $role->users()->count() : 0;
+                if ($cnt > 0) $usersByRole->push((object)['name' => $r, 'count' => $cnt]);
+            } catch (\Exception $e) {}
         }
         if ($usersByRole->isEmpty()) {
             $usersByRole = collect([
@@ -138,38 +133,47 @@ class DashboardController extends Controller
 
         $pieColors = ['#0d6efd','#198754','#ffc107','#dc3545','#0dcaf0','#6f42c1','#fd7e14','#20c997','#e83e8c','#6610f2','#d63384','#0d6efd','#198754'];
 
-        $recentUsers = User::latest()->take(7)->get();
-        $recentClaims = Claim::with('customer')->latest()->take(5)->get();
-        $recentTransactions = PaymentTransaction::with('user')->latest()->take(5)->get();
-        $recentPolicies = CustomerPolicy::latest()->take(5)->get();
-        $recentTickets = SupportTicket::latest()->take(5)->get();
+        $recentUsers = safe_get(User::latest(), 7);
+        $recentClaims = safe_get(Claim::with('customer')->latest(), 5);
+        $recentTransactions = safe_get(PaymentTransaction::with('user')->latest(), 5);
+        $recentPolicies = safe_get(CustomerPolicy::latest(), 5);
+        $recentTickets = safe_get(SupportTicket::latest(), 5);
 
-        $paymentMethods = PaymentTransaction::where('status', 'completed')
-            ->select('payment_method', DB::raw('COUNT(*) as count'), DB::raw('COALESCE(SUM(amount),0) as total'))
-            ->groupBy('payment_method')
-            ->get();
+        $paymentMethods = collect();
+        try {
+            $paymentMethods = PaymentTransaction::where('status', 'completed')
+                ->select('payment_method', DB::raw('COUNT(*) as count'), DB::raw('COALESCE(SUM(amount),0) as total'))
+                ->groupBy('payment_method')
+                ->get();
+        } catch (\Exception $e) {}
 
-        $paymentStatuses = PaymentTransaction::select('status', DB::raw('COUNT(*) as count'))
-            ->groupBy('status')
-            ->get();
+        $paymentStatuses = collect();
+        try {
+            $paymentStatuses = PaymentTransaction::select('status', DB::raw('COUNT(*) as count'))
+                ->groupBy('status')->get();
+        } catch (\Exception $e) {}
 
-        $topInsurers = CustomerPolicy::select('insurer_id', DB::raw('COUNT(*) as total_policies'), DB::raw('COALESCE(SUM(premium_amount),0) as total_premium'))
-            ->groupBy('insurer_id')
-            ->orderByDesc('total_policies')
-            ->take(5)
-            ->get();
+        $topInsurers = collect();
+        try {
+            $topInsurers = CustomerPolicy::select('insurer_id', DB::raw('COUNT(*) as total_policies'), DB::raw('COALESCE(SUM(premium_amount),0) as total_premium'))
+                ->groupBy('insurer_id')
+                ->orderByDesc('total_policies')
+                ->take(5)
+                ->get();
+        } catch (\Exception $e) {}
 
-        $renewalsCount = PolicyRenewal::whereBetween('created_at', [$startDate, $endDate])->count();
-        $cancellationsCount = PolicyCancellation::whereBetween('created_at', [$startDate, $endDate])->count();
+        $renewalsCount = safe_count(PolicyRenewal::whereBetween('created_at', [$startDate, $endDate]));
+        $cancellationsCount = safe_count(PolicyCancellation::whereBetween('created_at', [$startDate, $endDate]));
 
-        $financingRequests = PremiumFinancingRequest::count();
-        $pendingFinancing = PremiumFinancingRequest::where('status', 'pending')->count();
-        $activeLoans = FinancingLoan::where('status', 'active')->count();
+        $financingRequests = safe_count(PremiumFinancingRequest::query());
+        $pendingFinancing = safe_count(PremiumFinancingRequest::where('status', 'pending'));
+        $activeLoans = safe_count(FinancingLoan::where('status', 'active'));
 
-        $loginAttempts = LoginAttempt::where('created_at', '>=', $today->copy()->subDays(7))->count();
-        $failedLogins = LoginAttempt::where('created_at', '>=', $today->copy()->subDays(7))->where('success', false)->count();
+        $loginAttempts = safe_count(LoginAttempt::where('created_at', '>=', Carbon::today()->subDays(7)));
+        $failedLogins = 0;
+        try { $failedLogins = LoginAttempt::where('created_at', '>=', Carbon::today()->subDays(7))->where('success', false)->count(); } catch (\Exception $e) {}
 
-        $workflowsRunning = WorkflowExecution::where('status', 'running')->count();
+        $workflowsRunning = safe_count(WorkflowExecution::where('status', 'running'));
 
         return view('admin.dashboard', compact(
             'totalUsers', 'newUsersPeriod', 'usersGrowth',
@@ -194,16 +198,24 @@ class DashboardController extends Controller
         ));
     }
 
-    private function growthRate($previous, $current): float
-    {
-        if ($previous > 0) {
-            return round((($current - $previous) / $previous) * 100, 1);
-        }
-        return $current > 0 ? 100 : 0;
-    }
-
     public function aiInsights()
     {
         return view('admin.ai-insights');
+    }
+}
+
+if (!function_exists('safe_count')) {
+    function safe_count($query) { try { return (int) $query->count(); } catch (\Exception $e) { return 0; } }
+}
+if (!function_exists('safe_sum')) {
+    function safe_sum($query, $col) { try { return (float) $query->sum($col); } catch (\Exception $e) { return 0; } }
+}
+if (!function_exists('safe_get')) {
+    function safe_get($query, $limit = 5) { try { return $query->take($limit)->get(); } catch (\Exception $e) { return collect(); } }
+}
+if (!function_exists('growth_rate')) {
+    function growth_rate($previous, $current): float {
+        if ($previous > 0) return round((($current - $previous) / $previous) * 100, 1);
+        return $current > 0 ? 100 : 0;
     }
 }
