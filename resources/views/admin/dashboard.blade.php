@@ -31,7 +31,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Total Revenue</p>
-                        <h3 class="fw-bold mb-0">TZS {{ number_format($totalRevenue / 1000000, 1) }}M</h3>
+                        <h3 class="fw-bold mb-0 stat-count">TZS {{ number_format($totalRevenue / 1000000, 1) }}M</h3>
                     </div>
                     <div class="bg-success bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-cash-stack text-success fs-4"></i>
@@ -53,7 +53,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Active Policies</p>
-                        <h3 class="fw-bold mb-0">{{ number_format($activePolicies) }}</h3>
+                        <h3 class="fw-bold mb-0 stat-count">{{ number_format($activePolicies) }}</h3>
                     </div>
                     <div class="bg-info bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-shield-check text-info fs-4"></i>
@@ -72,7 +72,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Pending Claims</p>
-                        <h3 class="fw-bold mb-0">{{ number_format($pendingClaims) }}</h3>
+                        <h3 class="fw-bold mb-0 stat-count">{{ number_format($pendingClaims) }}</h3>
                     </div>
                     <div class="bg-warning bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-exclamation-octagon text-warning fs-4"></i>
