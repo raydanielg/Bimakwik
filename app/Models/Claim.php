@@ -12,19 +12,26 @@ class Claim extends Model
 
     protected $fillable = [
         'customer_id',
-        'policy_id',
-        'product_id',
+        'customer_policy_id',
         'claim_number',
-        'amount',
-        'claim_date',
+        'claim_type',
+        'accident_date',
         'description',
+        'claimed_amount',
+        'approved_amount',
         'status',
-        'notes',
+        'fraud_score',
+        'fraud_alert',
+        'rejection_reason',
+        'settled_at',
     ];
 
     protected $casts = [
-        'claim_date' => 'datetime',
-        'amount' => 'decimal:2',
+        'accident_date' => 'date',
+        'claimed_amount' => 'decimal:2',
+        'approved_amount' => 'decimal:2',
+        'fraud_alert' => 'boolean',
+        'settled_at' => 'datetime',
     ];
 
     public function customer(): BelongsTo
@@ -34,12 +41,7 @@ class Claim extends Model
 
     public function policy(): BelongsTo
     {
-        return $this->belongsTo(CustomerPolicy::class, 'policy_id');
-    }
-
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(InsuranceProduct::class, 'product_id');
+        return $this->belongsTo(CustomerPolicy::class, 'customer_policy_id');
     }
 
     public function documents()
