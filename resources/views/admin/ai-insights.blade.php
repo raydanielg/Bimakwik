@@ -15,13 +15,13 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Fraud Detection</p>
-                        <h3 class="fw-bold mb-0">3</h3>
+                        <h3 class="fw-bold mb-0">{{ $fraudDetections }}</h3>
                     </div>
                     <div class="bg-danger bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-shield-exclamation text-danger fs-4"></i>
                     </div>
                 </div>
-                <small class="text-danger">Suspicious activities detected</small>
+                <small class="text-danger">Live flagged/rejected claims</small>
             </div>
         </div>
     </div>
@@ -31,13 +31,13 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Risk Score</p>
-                        <h3 class="fw-bold mb-0">Low</h3>
+                        <h3 class="fw-bold mb-0">{{ $riskScoreLabel }}</h3>
                     </div>
-                    <div class="bg-success bg-opacity-10 rounded-circle p-3">
-                        <i class="bi bi-graph-down text-success fs-4"></i>
+                    <div class="bg-{{ $riskScoreClass }} bg-opacity-10 rounded-circle p-3">
+                        <i class="bi bi-graph-down text-{{ $riskScoreClass }} fs-4"></i>
                     </div>
                 </div>
-                <small class="text-success">Portfolio health is good</small>
+                <small class="text-{{ $riskScoreClass }}">Derived from claim queue and outcomes</small>
             </div>
         </div>
     </div>
@@ -47,13 +47,13 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Churn Prediction</p>
-                        <h3 class="fw-bold mb-0">12%</h3>
+                        <h3 class="fw-bold mb-0">{{ $churnRate }}%</h3>
                     </div>
                     <div class="bg-warning bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-person-dash text-warning fs-4"></i>
                     </div>
                 </div>
-                <small class="text-warning">156 customers at risk</small>
+                <small class="text-warning">{{ $atRiskCustomers }} customers at risk</small>
             </div>
         </div>
     </div>
@@ -63,13 +63,13 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Revenue Forecast</p>
-                        <h3 class="fw-bold mb-0">+18%</h3>
+                        <h3 class="fw-bold mb-0">{{ $revenueForecast >= 0 ? '+' : '' }}{{ $revenueForecast }}%</h3>
                     </div>
                     <div class="bg-primary bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-graph-up-arrow text-primary fs-4"></i>
                     </div>
                 </div>
-                <small class="text-primary">Next quarter projection</small>
+                <small class="text-primary">Compared to previous 30 days</small>
             </div>
         </div>
     </div>
@@ -85,11 +85,7 @@
             </div>
             <div class="card-body">
                 <div class="list-group list-group-flush">
-                    @foreach([
-                        ['icon' => 'lightbulb', 'color' => 'warning', 'title' => 'Optimize Premium Pricing', 'desc' => 'Motor insurance premiums could be adjusted by 5-8% based on market analysis'],
-                        ['icon' => 'people', 'color' => 'info', 'title' => 'Target High-Value Customers', 'desc' => '234 customers show potential for upselling additional coverage'],
-                        ['icon' => 'shield-check', 'color' => 'success', 'title' => 'Improve Claim Processing', 'desc' => 'Automate 45% of claims using AI document verification'],
-                    ] as $recommendation)
+                    @forelse($recommendations as $recommendation)
                     <div class="list-group-item border-0 px-0 py-3">
                         <div class="d-flex">
                             <div class="bg-{{ $recommendation['color'] }} bg-opacity-10 rounded-circle p-2 me-3" style="height: fit-content;">
@@ -101,7 +97,9 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="list-group-item border-0 px-0 py-3 text-muted">No recommendations available.</div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -115,11 +113,7 @@
             </div>
             <div class="card-body">
                 <div class="list-group list-group-flush">
-                    @foreach([
-                        ['severity' => 'high', 'title' => 'Unusual Claim Pattern', 'desc' => 'Policy #12345 has 3 claims in 2 weeks', 'time' => '2 hours ago'],
-                        ['severity' => 'medium', 'title' => 'Payment Anomaly', 'desc' => 'Large premium payment from new customer', 'time' => '5 hours ago'],
-                        ['severity' => 'low', 'title' => 'Document Mismatch', 'desc' => 'ID verification needs manual review', 'time' => '1 day ago'],
-                    ] as $alert)
+                    @forelse($alerts as $alert)
                     <div class="list-group-item border-0 px-0 py-3">
                         <div class="d-flex justify-content-between align-items-start">
                             <div>
@@ -137,7 +131,9 @@
                             </button>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="list-group-item border-0 px-0 py-3 text-muted">No alerts detected.</div>
+                    @endforelse
                 </div>
             </div>
         </div>

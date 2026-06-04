@@ -87,9 +87,13 @@
                                 <h6 class="mb-0 fw-bold">Sales Report</h6>
                             </div>
                             <p class="text-muted small mb-3">Summary of all policies sold and premiums collected.</p>
-                            <button class="btn btn-sm btn-primary w-100">
-                                <i class="bi bi-download me-1"></i> Generate
-                            </button>
+                            <form method="POST" action="{{ route('agent.reports.generate') }}">
+                                @csrf
+                                <input type="hidden" name="report_type" value="Sales Report">
+                                <button class="btn btn-sm btn-primary w-100" type="submit">
+                                    <i class="bi bi-download me-1"></i> Generate
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -103,9 +107,13 @@
                                 <h6 class="mb-0 fw-bold">Commission Report</h6>
                             </div>
                             <p class="text-muted small mb-3">Detailed breakdown of earned and pending commissions.</p>
-                            <button class="btn btn-sm btn-primary w-100">
-                                <i class="bi bi-download me-1"></i> Generate
-                            </button>
+                            <form method="POST" action="{{ route('agent.reports.generate') }}">
+                                @csrf
+                                <input type="hidden" name="report_type" value="Commission Report">
+                                <button class="btn btn-sm btn-primary w-100" type="submit">
+                                    <i class="bi bi-download me-1"></i> Generate
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -119,9 +127,13 @@
                                 <h6 class="mb-0 fw-bold">Customer Report</h6>
                             </div>
                             <p class="text-muted small mb-3">Customer acquisition, retention, and activity analysis.</p>
-                            <button class="btn btn-sm btn-primary w-100">
-                                <i class="bi bi-download me-1"></i> Generate
-                            </button>
+                            <form method="POST" action="{{ route('agent.reports.generate') }}">
+                                @csrf
+                                <input type="hidden" name="report_type" value="Customer Report">
+                                <button class="btn btn-sm btn-primary w-100" type="submit">
+                                    <i class="bi bi-download me-1"></i> Generate
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -134,7 +146,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Generated Reports History</h5>
                 <div class="btn-group btn-group-sm">
-                    <button class="btn btn-outline-primary"><i class="bi bi-download me-1"></i> Export All</button>
+                    <a href="{{ route('agent.reports.export') }}" class="btn btn-outline-primary"><i class="bi bi-download me-1"></i> Export All</a>
                 </div>
             </div>
         </div>
@@ -154,14 +166,14 @@
                         <tbody>
                             @foreach($reports as $report)
                                 <tr>
-                                    <td class="fw-bold">{{ $report->name ?? 'N/A' }}</td>
-                                    <td>{{ $report->type ?? 'N/A' }}</td>
-                                    <td>{{ $report->period ?? 'N/A' }}</td>
-                                    <td>{{ $report->generated_at?->format('M d, Y H:i') ?? 'N/A' }}</td>
+                                    <td class="fw-bold">{{ $report->report_name ?? 'N/A' }}</td>
+                                    <td>{{ $report->report_type ?? 'N/A' }}</td>
+                                    <td>{{ $report->parameters['period'] ?? 'Current Month' }}</td>
+                                    <td>{{ $report->created_at?->format('M d, Y H:i') ?? 'N/A' }}</td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <button class="btn btn-outline-primary"><i class="bi bi-download"></i></button>
-                                            <button class="btn btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                                            <a href="{{ route('agent.reports.download', $report) }}" class="btn btn-outline-primary" title="Download"><i class="bi bi-download"></i></a>
+                                            <a href="{{ route('agent.reports.view', $report) }}" class="btn btn-outline-secondary" title="View"><i class="bi bi-eye"></i></a>
                                         </div>
                                     </td>
                                 </tr>

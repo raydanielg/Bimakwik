@@ -35,21 +35,21 @@
                                     <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Mwongozo wa Mtumiaji' : 'Customer User Guide' }}</h6>
                                     <small class="text-muted">PDF • 2.5 MB</small>
                                 </div>
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                                <a href="{{ route('guidelines.claim-process') }}" class="btn btn-outline-primary btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
                             </div>
                             <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center py-3">
                                 <div>
                                     <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Orodha ya Kukagua Madai' : 'Claims Checklist' }}</h6>
                                     <small class="text-muted">PDF • 0.9 MB</small>
                                 </div>
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                                <a href="{{ route('guidelines.claim-process') }}" class="btn btn-outline-primary btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
                             </div>
                             <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center py-3 border-0">
                                 <div>
                                     <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Mwongozo wa Upya' : 'Renewal Guide' }}</h6>
                                     <small class="text-muted">PDF • 1.0 MB</small>
                                 </div>
-                                <a href="#" class="btn btn-outline-primary btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                                <a href="{{ route('guidelines.policy-management') }}" class="btn btn-outline-primary btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
                             </div>
                         </div>
                     </div>
@@ -72,21 +72,21 @@
                                     <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Mwongozo wa Kujiunga' : 'Broker Onboarding Guide' }}</h6>
                                     <small class="text-muted">PDF • 3.2 MB</small>
                                 </div>
-                                <a href="#" class="btn btn-outline-success btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                                <a href="{{ route('guidelines.policy-management') }}" class="btn btn-outline-success btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
                             </div>
                             <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center py-3">
                                 <div>
                                     <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Vifaa vya Masoko' : 'Marketing Materials Kit' }}</h6>
                                     <small class="text-muted">ZIP • 15 MB</small>
                                 </div>
-                                <a href="#" class="btn btn-outline-success btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                                <a href="{{ route('guidelines.kyc-verification') }}" class="btn btn-outline-success btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
                             </div>
                             <div class="list-group-item bg-transparent d-flex justify-content-between align-items-center py-3 border-0">
                                 <div>
                                     <h6 class="fw-bold mb-0">{{ app()->getLocale() == 'sw' ? 'Nyaraka za API' : 'API Documentation' }}</h6>
                                     <small class="text-muted">PDF • 4.5 MB</small>
                                 </div>
-                                <a href="#" class="btn btn-outline-success btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
+                                <a href="{{ route('guidelines.kyc-verification') }}" class="btn btn-outline-success btn-sm rounded-pill px-3"><i class="bi bi-download me-1"></i> {{ app()->getLocale() == 'sw' ? 'Pakua' : 'Download' }}</a>
                             </div>
                         </div>
                     </div>
@@ -102,21 +102,21 @@
                     <div class="p-3 border border-secondary rounded-4 h-100">
                         <h6 class="fw-bold mb-2">{{ app()->getLocale() == 'sw' ? 'Sheria na Masharti' : 'Terms of Service' }}</h6>
                         <p class="small opacity-75">{{ app()->getLocale() == 'sw' ? 'Ilirekebishwa: Jan 2026' : 'Last updated: Jan 2026' }}</p>
-                        <a href="#" class="btn btn-link text-warning p-0 text-decoration-none fw-bold small">{{ app()->getLocale() == 'sw' ? 'Pakua PDF' : 'Download PDF' }} <i class="bi bi-arrow-right"></i></a>
+                        <a href="{{ route('legal.terms') }}" class="btn btn-link text-warning p-0 text-decoration-none fw-bold small">{{ app()->getLocale() == 'sw' ? 'Pakua PDF' : 'Download PDF' }} <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="p-3 border border-secondary rounded-4 h-100">
                         <h6 class="fw-bold mb-2">{{ app()->getLocale() == 'sw' ? 'Sera ya Faragha' : 'Privacy Policy' }}</h6>
                         <p class="small opacity-75">{{ app()->getLocale() == 'sw' ? 'Ilirekebishwa: Jan 2026' : 'Last updated: Jan 2026' }}</p>
-                        <a href="#" class="btn btn-link text-warning p-0 text-decoration-none fw-bold small">{{ app()->getLocale() == 'sw' ? 'Pakua PDF' : 'Download PDF' }} <i class="bi bi-arrow-right"></i></a>
+                        <a href="{{ route('legal.privacy') }}" class="btn btn-link text-warning p-0 text-decoration-none fw-bold small">{{ app()->getLocale() == 'sw' ? 'Pakua PDF' : 'Download PDF' }} <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="p-3 border border-secondary rounded-4 h-100">
                         <h6 class="fw-bold mb-2">{{ app()->getLocale() == 'sw' ? 'Utaratibu wa Malalamiko' : 'Complaints Procedure' }}</h6>
                         <p class="small opacity-75">{{ app()->getLocale() == 'sw' ? 'Ilirekebishwa: Jan 2026' : 'Last updated: Jan 2026' }}</p>
-                        <a href="#" class="btn btn-link text-warning p-0 text-decoration-none fw-bold small">{{ app()->getLocale() == 'sw' ? 'Pakua PDF' : 'Download PDF' }} <i class="bi bi-arrow-right"></i></a>
+                        <a href="{{ route('support.help') }}" class="btn btn-link text-warning p-0 text-decoration-none fw-bold small">{{ app()->getLocale() == 'sw' ? 'Pakua PDF' : 'Download PDF' }} <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>

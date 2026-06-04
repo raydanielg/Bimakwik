@@ -75,10 +75,10 @@
                         {{ app()->getLocale() == 'sw' ? 'Pata huduma zote za bima moja kwa moja kwenye simu yako. Rahisi, Salama, na Haraka.' : 'Get all insurance services directly on your phone. Simple, Secure, and Fast.' }}
                     </p>
                     <div class="d-flex flex-wrap gap-3">
-                        <a href="#" class="btn btn-light btn-lg px-4 rounded-pill fw-bold">
+                        <a href="{{ route('pages.contact') }}" class="btn btn-light btn-lg px-4 rounded-pill fw-bold">
                             <i class="bi bi-apple me-2"></i> App Store
                         </a>
-                        <a href="#" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-bold">
+                        <a href="{{ route('pages.contact') }}" class="btn btn-outline-light btn-lg px-4 rounded-pill fw-bold">
                             <i class="bi bi-google-play me-2"></i> Google Play
                         </a>
                     </div>

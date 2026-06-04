@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-body">
-        <form method="POST" action="{{ route('admin.users.update', $user) }}">
+        <form method="POST" action="{{ route('admin.users.update', $user) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -27,6 +27,29 @@
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $user->email) }}" required>
                     @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="company_id" class="form-label">Company ID</label>
+                    <input type="text" class="form-control @error('company_id') is-invalid @enderror" id="company_id" name="company_id" value="{{ old('company_id', $user->company_id) }}">
+                    @error('company_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="sales_id" class="form-label">Sales ID</label>
+                    <input type="text" class="form-control @error('sales_id') is-invalid @enderror" id="sales_id" name="sales_id" value="{{ old('sales_id', $user->sales_id) }}">
+                    @error('sales_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="logo" class="form-label">Logo</label>
+                    <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" name="logo" accept="image/*">
+                    @error('logo')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    @if($user->logo)
+                        <div class="mt-2">
+                            <img src="{{ asset('storage/' . $user->logo) }}" alt="User Logo" class="rounded" style="width: 56px; height: 56px; object-fit: cover;">
+                        </div>
+                    @endif
                 </div>
 
                 <div class="col-md-6">

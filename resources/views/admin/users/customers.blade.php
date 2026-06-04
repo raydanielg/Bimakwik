@@ -87,6 +87,9 @@
                     <tr>
                         <th>Customer Name</th>
                         <th>Email</th>
+                        <th>Logo</th>
+                        <th>Company ID</th>
+                        <th>Sales ID</th>
                         <th>Phone</th>
                         <th>Location</th>
                         <th>KYC Status</th>
@@ -110,6 +113,15 @@
                                 </div>
                             </td>
                             <td>{{ $customer->email }}</td>
+                            <td>
+                                @if($customer->logo)
+                                    <img src="{{ asset('storage/' . $customer->logo) }}" alt="User Logo" class="rounded" style="width: 40px; height: 40px; object-fit: cover;">
+                                @else
+                                    <span class="text-muted">N/A</span>
+                                @endif
+                            </td>
+                            <td>{{ $customer->company_id ?? 'N/A' }}</td>
+                            <td>{{ $customer->sales_id ?? 'N/A' }}</td>
                             <td>{{ $customer->phone ?? 'N/A' }}</td>
                             <td>{{ $customer->customerProfile->location ?? 'N/A' }}</td>
                             <td>
@@ -134,19 +146,34 @@
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View Profile</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-shield-check me-2"></i>KYC Details</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-file-text me-2"></i>View Policies</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.users.show', $customer) }}"><i class="bi bi-eye me-2"></i>View Profile</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.users.edit', $customer) }}"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('admin.users.language.update', $customer) }}">
+                                                @csrf
+                                                <input type="hidden" name="preferred_language" value="{{ ($customer->preferred_language ?? 'en') === 'en' ? 'sw' : 'en' }}">
+                                                <button type="submit" class="dropdown-item">
+                                                    <i class="bi bi-translate me-2"></i>Switch to {{ ($customer->preferred_language ?? 'en') === 'en' ? 'Kiswahili' : 'English' }}
+                                                </button>
+                                            </form>
+                                        </li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('admin.users.destroy', $customer) }}" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="dropdown-item text-danger">
+                                                    <i class="bi bi-trash me-2"></i>Delete
+                                                </button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center py-4">
+                            <td colspan="11" class="text-center py-4">
                                 <div class="text-muted">
                                     <i class="bi bi-inbox fs-1 d-block mb-3"></i>
                                     No customers found

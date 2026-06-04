@@ -126,7 +126,11 @@
                                         <div class="btn-group btn-group-sm">
                                             <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                            <form id="delete-staff-{{ $member->id }}" method="POST" action="{{ route('insurer.settings.staff.delete', $member->id) }}" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-outline-danger" onclick="confirmDelete('delete-staff-{{ $member->id }}')"><i class="bi bi-trash"></i></button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

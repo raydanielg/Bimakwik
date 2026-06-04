@@ -97,10 +97,10 @@
                         </div>
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-primary flex-grow-1">
+                        <button type="button" class="btn btn-sm btn-primary flex-grow-1" onclick="comingSoonPredictive('Run Churn Prediction')">
                             <i class="bi bi-play-fill me-1"></i> Run Prediction
                         </button>
-                        <button class="btn btn-sm btn-outline-secondary">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="comingSoonPredictive('View Churn Results')">
                             <i class="bi bi-graph-up"></i> View Results
                         </button>
                     </div>
@@ -132,10 +132,10 @@
                         </div>
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-primary flex-grow-1">
+                        <button type="button" class="btn btn-sm btn-primary flex-grow-1" onclick="comingSoonPredictive('Run Claims Prediction')">
                             <i class="bi bi-play-fill me-1"></i> Run Prediction
                         </button>
-                        <button class="btn btn-sm btn-outline-secondary">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="comingSoonPredictive('View Claims Results')">
                             <i class="bi bi-graph-up"></i> View Results
                         </button>
                     </div>
@@ -167,10 +167,10 @@
                         </div>
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-primary flex-grow-1">
+                        <button type="button" class="btn btn-sm btn-primary flex-grow-1" onclick="comingSoonPredictive('Run Fraud Prediction')">
                             <i class="bi bi-play-fill me-1"></i> Run Prediction
                         </button>
-                        <button class="btn btn-sm btn-outline-secondary">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="comingSoonPredictive('View Fraud Results')">
                             <i class="bi bi-graph-up"></i> View Results
                         </button>
                     </div>
@@ -202,10 +202,10 @@
                         </div>
                     </div>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-primary flex-grow-1">
+                        <button type="button" class="btn btn-sm btn-primary flex-grow-1" onclick="comingSoonPredictive('Run Premium Optimization')">
                             <i class="bi bi-play-fill me-1"></i> Run Prediction
                         </button>
-                        <button class="btn btn-sm btn-outline-secondary">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="comingSoonPredictive('View Premium Optimization Results')">
                             <i class="bi bi-graph-up"></i> View Results
                         </button>
                     </div>
@@ -219,7 +219,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Prediction History</h5>
                 <div class="btn-group btn-group-sm">
-                    <button class="btn btn-outline-primary"><i class="bi bi-download me-1"></i> Export</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="comingSoonPredictive('Export Prediction History')"><i class="bi bi-download me-1"></i> Export</button>
                 </div>
             </div>
         </div>
@@ -247,8 +247,8 @@
                                     <td>{{ $report->accuracy ?? 0 }}%</td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-outline-secondary"><i class="bi bi-download"></i></button>
+                                            <button type="button" class="btn btn-outline-primary" onclick="comingSoonPredictive('View Prediction Details')"><i class="bi bi-eye"></i></button>
+                                            <button type="button" class="btn btn-outline-secondary" onclick="comingSoonPredictive('Download Prediction Output')"><i class="bi bi-download"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -268,3 +268,20 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+function comingSoonPredictive(action) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            icon: 'info',
+            title: action,
+            text: 'This predictive analytics action is not yet implemented.',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+    alert(action + ': This predictive analytics action is not yet implemented.');
+}
+</script>
+@endpush

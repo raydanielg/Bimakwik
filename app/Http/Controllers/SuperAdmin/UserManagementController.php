@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class UserManagementController extends Controller
@@ -30,13 +31,24 @@ class UserManagementController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|exists:roles,id',
+            'company_id' => 'nullable|string|max:100|unique:users,company_id',
+            'sales_id' => 'nullable|string|max:100|unique:users,sales_id',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'phone' => 'nullable|string|max:20',
             'status' => 'required|in:active,inactive,suspended',
         ]);
 
+        $logoPath = null;
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logos/users', 'public');
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'company_id' => $request->company_id,
+            'sales_id' => $request->sales_id,
+            'logo' => $logoPath,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'status' => $request->status,
@@ -54,19 +66,39 @@ class UserManagementController extends Controller
         return view('admin.users.edit', compact('user', 'roles'));
     }
 
+    public function show(User $user)
+    {
+        $user->load('roles');
+        return view('admin.users.show', compact('user'));
+    }
+
     public function update(Request $request, User $user)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'role' => 'required|exists:roles,id',
+            'company_id' => ['nullable', 'string', 'max:100', Rule::unique('users', 'company_id')->ignore($user->id)],
+            'sales_id' => ['nullable', 'string', 'max:100', Rule::unique('users', 'sales_id')->ignore($user->id)],
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'phone' => 'nullable|string|max:20',
             'status' => 'required|in:active,inactive,suspended',
         ]);
 
+        $logoPath = $user->logo;
+        if ($request->hasFile('logo')) {
+            if (!empty($user->logo)) {
+                Storage::disk('public')->delete($user->logo);
+            }
+            $logoPath = $request->file('logo')->store('logos/users', 'public');
+        }
+
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'company_id' => $request->company_id,
+            'sales_id' => $request->sales_id,
+            'logo' => $logoPath,
             'phone' => $request->phone,
             'status' => $request->status,
         ]);
@@ -87,6 +119,19 @@ class UserManagementController extends Controller
         $user->delete();
         return redirect()->route('admin.users.index')
             ->with('success', 'User deleted successfully');
+    }
+
+    public function updateLanguage(Request $request, User $user)
+    {
+        $request->validate([
+            'preferred_language' => 'required|in:en,sw',
+        ]);
+
+        $user->update([
+            'preferred_language' => $request->preferred_language,
+        ]);
+
+        return back()->with('success', 'User language updated successfully');
     }
 
     // Aggregator specific methods
@@ -164,10 +209,43 @@ class UserManagementController extends Controller
 
     public function agents()
     {
-        $agents = User::role(['sfe', 'bancassurance'])->with('agentProfile')->paginate(20);
-        $bancassuranceCount = User::role('bancassurance')->count();
-        $sfeCount = User::role('sfe')->count();
-        return view('admin.users.agents', compact('agents', 'bancassuranceCount', 'sfeCount'));
+        return redirect()->route('admin.users.sfe-agents');
+    }
+
+    public function sfeAgents()
+    {
+        $agents = User::role('sfe')->with('agentProfile', 'roles')->paginate(20);
+        $activeCount = User::role('sfe')->where('status', 'active')->count();
+        $monthlySales = $agents->sum(function($agent) { return $agent->agentProfile?->monthly_sales ?? 0; });
+
+        return view('admin.users.agents-by-role', [
+            'agents' => $agents,
+            'pageTitle' => 'SFE Management',
+            'heading' => 'SFE Agent Management',
+            'addLabel' => 'Add New SFE Agent',
+            'roleBadge' => 'SFE',
+            'roleBadgeClass' => 'info',
+            'activeCount' => $activeCount,
+            'monthlySales' => $monthlySales,
+        ]);
+    }
+
+    public function bancassuranceAgents()
+    {
+        $agents = User::role('bancassurance')->with('agentProfile', 'roles')->paginate(20);
+        $activeCount = User::role('bancassurance')->where('status', 'active')->count();
+        $monthlySales = $agents->sum(function($agent) { return $agent->agentProfile?->monthly_sales ?? 0; });
+
+        return view('admin.users.agents-by-role', [
+            'agents' => $agents,
+            'pageTitle' => 'Bancassurance Management',
+            'heading' => 'Bancassurance Agent Management',
+            'addLabel' => 'Add New Bancassurance Agent',
+            'roleBadge' => 'Bancassurance',
+            'roleBadgeClass' => 'success',
+            'activeCount' => $activeCount,
+            'monthlySales' => $monthlySales,
+        ]);
     }
 
     public function customers()

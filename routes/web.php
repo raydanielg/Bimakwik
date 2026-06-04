@@ -81,9 +81,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'index'])->name('index');
             Route::get('/create', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'create'])->name('create');
             Route::post('/', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'store'])->name('store');
-            Route::get('/{user}/edit', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'edit'])->name('edit');
-            Route::put('/{user}', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'update'])->name('update');
-            Route::delete('/{user}', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'destroy'])->name('destroy');
             
             // Specific user type routes
             Route::get('/admins', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'admins'])->name('admins');
@@ -93,12 +90,21 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/aggregators', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'storeAggregator'])->name('aggregators.store');
             Route::get('/brokers', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'brokers'])->name('brokers');
             Route::get('/agents', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'agents'])->name('agents');
+            Route::get('/agents/sfe', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'sfeAgents'])->name('sfe-agents');
+            Route::get('/agents/bancassurance', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'bancassuranceAgents'])->name('bancassurance-agents');
             Route::get('/customers', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'customers'])->name('customers');
             Route::get('/service-providers', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'serviceProviders'])->name('service-providers');
             Route::get('/rbac', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'rbacSettings'])->name('rbac');
+
+            Route::get('/{user}', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'show'])->name('show');
+            Route::get('/{user}/edit', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'edit'])->name('edit');
+            Route::post('/{user}/language', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'updateLanguage'])->name('language.update');
+            Route::put('/{user}', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'update'])->name('update');
+            Route::delete('/{user}', [App\Http\Controllers\SuperAdmin\UserManagementController::class, 'destroy'])->name('destroy');
         });
 
         // Product Management Routes
+        Route::get('/products/builder', [App\Http\Controllers\Product\InsuranceProductController::class, 'builder'])->name('products.builder');
         Route::resource('products', App\Http\Controllers\Product\InsuranceProductController::class);
         Route::get('/products/compare/matrix', [App\Http\Controllers\Product\InsuranceProductController::class, 'compare'])->name('products.compare');
         
@@ -108,14 +114,15 @@ Route::middleware(['auth'])->group(function () {
         // Finance Routes
         Route::prefix('finance')->name('finance.')->group(function () {
             Route::get('/wallets', [App\Http\Controllers\Admin\FinanceController::class, 'wallets'])->name('wallets');
-            Route::post('/wallets/seed-demo', [App\Http\Controllers\Admin\FinanceController::class, 'seedDemoData'])->name('wallets.seed-demo');
             Route::get('/wallets/{id}', [App\Http\Controllers\Admin\FinanceController::class, 'viewWallet'])->name('wallets.view');
+            Route::get('/wallets/{id}/transactions', [App\Http\Controllers\Admin\FinanceController::class, 'walletTransactions'])->name('wallets.transactions');
             Route::post('/wallets/{id}/add-funds', [App\Http\Controllers\Admin\FinanceController::class, 'addFunds'])->name('wallets.add-funds');
             Route::post('/wallets/{id}/freeze', [App\Http\Controllers\Admin\FinanceController::class, 'freezeWallet'])->name('wallets.freeze');
             Route::post('/wallets/{id}/activate', [App\Http\Controllers\Admin\FinanceController::class, 'activateWallet'])->name('wallets.activate');
             Route::get('/premiums', [App\Http\Controllers\Admin\FinanceController::class, 'premiums'])->name('premiums');
             Route::get('/premiums/export', [App\Http\Controllers\Admin\FinanceController::class, 'exportPremiums'])->name('premiums.export');
             Route::get('/commissions', [App\Http\Controllers\Admin\FinanceController::class, 'commissions'])->name('commissions');
+            Route::post('/commissions/{id}/approve', [App\Http\Controllers\Admin\FinanceController::class, 'approveCommission'])->name('commissions.approve');
             Route::get('/payouts', [App\Http\Controllers\Admin\FinanceController::class, 'payouts'])->name('payouts');
             Route::post('/payouts/{id}/approve', [App\Http\Controllers\Admin\FinanceController::class, 'approvePayout'])->name('payouts.approve');
             Route::post('/payouts/{id}/reject', [App\Http\Controllers\Admin\FinanceController::class, 'rejectPayout'])->name('payouts.reject');
@@ -124,10 +131,11 @@ Route::middleware(['auth'])->group(function () {
         // Operations Routes
         Route::prefix('operations')->name('operations.')->group(function () {
             Route::get('/claims', [App\Http\Controllers\Admin\OperationsController::class, 'claims'])->name('claims');
-            Route::get('/claims/{id}', [App\Http\Controllers\Admin\OperationsController::class, 'claimDetails'])->name('claims.show');
+            Route::get('/claims/{id}', [App\Http\Controllers\Admin\OperationsController::class, 'show'])->name('claims.show');
             Route::post('/claims/{id}/approve', [App\Http\Controllers\Admin\OperationsController::class, 'approveClaim'])->name('claims.approve');
             Route::post('/claims/{id}/reject', [App\Http\Controllers\Admin\OperationsController::class, 'rejectClaim'])->name('claims.reject');
             Route::get('/workflows', [App\Http\Controllers\Admin\OperationsController::class, 'workflows'])->name('workflows');
+            Route::delete('/workflows/{id}', [App\Http\Controllers\Admin\OperationsController::class, 'deleteWorkflow'])->name('workflows.delete');
             Route::get('/documents', [App\Http\Controllers\Admin\OperationsController::class, 'documents'])->name('documents');
         });
         
@@ -208,6 +216,10 @@ Route::middleware(['auth'])->group(function () {
         // Reports
         Route::prefix('reports')->name('reports.')->group(function () {
             Route::get('/standard', [App\Http\Controllers\Insurer\InsurerHubController::class, 'reportsStandard'])->name('standard');
+            Route::post('/generate', [App\Http\Controllers\Insurer\InsurerHubController::class, 'generateStandardReport'])->name('generate');
+            Route::get('/export', [App\Http\Controllers\Insurer\InsurerHubController::class, 'exportStandardReports'])->name('export');
+            Route::get('/{report}', [App\Http\Controllers\Insurer\InsurerHubController::class, 'viewStandardReport'])->name('view');
+            Route::get('/{report}/download', [App\Http\Controllers\Insurer\InsurerHubController::class, 'downloadStandardReport'])->name('download');
             Route::get('/custom', [App\Http\Controllers\Insurer\InsurerHubController::class, 'reportsCustom'])->name('custom');
             Route::get('/predictive', [App\Http\Controllers\Insurer\InsurerHubController::class, 'reportsPredictive'])->name('predictive');
         });
@@ -216,8 +228,12 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('settings')->name('settings.')->group(function () {
             Route::get('/company', [App\Http\Controllers\Insurer\InsurerHubController::class, 'companyProfile'])->name('company');
             Route::get('/branches', [App\Http\Controllers\Insurer\InsurerHubController::class, 'branches'])->name('branches');
+            Route::delete('/branches/{id}', [App\Http\Controllers\Insurer\InsurerHubController::class, 'deleteBranch'])->name('branches.delete');
             Route::get('/staff', [App\Http\Controllers\Insurer\InsurerHubController::class, 'staffRoles'])->name('staff');
+            Route::delete('/staff/{id}', [App\Http\Controllers\Insurer\InsurerHubController::class, 'deleteStaff'])->name('staff.delete');
             Route::get('/api', [App\Http\Controllers\Insurer\InsurerHubController::class, 'apiWebhooks'])->name('api');
+            Route::delete('/api/keys/{id}', [App\Http\Controllers\Insurer\InsurerHubController::class, 'deleteApiKey'])->name('api.keys.delete');
+            Route::delete('/api/webhooks/{id}', [App\Http\Controllers\Insurer\InsurerHubController::class, 'deleteWebhook'])->name('api.webhooks.delete');
         });
     });
 
@@ -256,6 +272,10 @@ Route::middleware(['auth'])->group(function () {
 
         // Reports & Communication
         Route::get('/reports', [App\Http\Controllers\Broker\BrokerHubController::class, 'reports'])->name('reports');
+        Route::post('/reports/generate', [App\Http\Controllers\Broker\BrokerHubController::class, 'generateReport'])->name('reports.generate');
+        Route::get('/reports/export', [App\Http\Controllers\Broker\BrokerHubController::class, 'exportReports'])->name('reports.export');
+        Route::get('/reports/{report}', [App\Http\Controllers\Broker\BrokerHubController::class, 'viewReport'])->name('reports.view');
+        Route::get('/reports/{report}/download', [App\Http\Controllers\Broker\BrokerHubController::class, 'downloadReport'])->name('reports.download');
         Route::get('/messaging', [App\Http\Controllers\Broker\BrokerHubController::class, 'messaging'])->name('messaging');
 
         // Compliance & Settings
@@ -272,6 +292,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/customers', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'customers'])->name('customers');
         Route::get('/commissions', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'commissions'])->name('commissions');
         Route::get('/reports', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'reports'])->name('reports');
+        Route::post('/reports/generate', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'generateReport'])->name('reports.generate');
+        Route::get('/reports/export', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'exportReports'])->name('reports.export');
+        Route::get('/reports/{report}', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'viewReport'])->name('reports.view');
+        Route::get('/reports/{report}/download', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'downloadReport'])->name('reports.download');
         Route::get('/brokers', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'brokers'])->name('brokers');
         Route::get('/agents', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'agents'])->name('agents');
         Route::get('/products', [App\Http\Controllers\Aggregator\AggregatorHubController::class, 'products'])->name('products');
@@ -291,6 +315,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/customers', [App\Http\Controllers\Agent\AgentHubController::class, 'customers'])->name('customers');
         Route::get('/commissions', [App\Http\Controllers\Agent\AgentHubController::class, 'commissions'])->name('commissions');
         Route::get('/reports', [App\Http\Controllers\Agent\AgentHubController::class, 'reports'])->name('reports');
+        Route::post('/reports/generate', [App\Http\Controllers\Agent\AgentHubController::class, 'generateReport'])->name('reports.generate');
+        Route::get('/reports/export', [App\Http\Controllers\Agent\AgentHubController::class, 'exportReports'])->name('reports.export');
+        Route::get('/reports/{report}', [App\Http\Controllers\Agent\AgentHubController::class, 'viewReport'])->name('reports.view');
+        Route::get('/reports/{report}/download', [App\Http\Controllers\Agent\AgentHubController::class, 'downloadReport'])->name('reports.download');
         Route::get('/products', [App\Http\Controllers\Agent\AgentHubController::class, 'products'])->name('products');
         Route::get('/claims', [App\Http\Controllers\Agent\AgentHubController::class, 'claims'])->name('claims');
     });
@@ -350,6 +378,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/compliance', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'compliance'])->name('compliance');
         Route::get('/oversight', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'oversight'])->name('oversight');
         Route::get('/reports', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'reports'])->name('reports');
+        Route::post('/reports/generate', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'generateReport'])->name('reports.generate');
+        Route::get('/reports/export', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'exportReports'])->name('reports.export');
+        Route::get('/reports/{report}', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'viewReport'])->name('reports.view');
+        Route::get('/reports/{report}/download', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'downloadReport'])->name('reports.download');
         Route::get('/analytics', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'analytics'])->name('analytics');
     });
 

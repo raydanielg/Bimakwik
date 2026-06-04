@@ -3,6 +3,13 @@
 @section('dashboard_content')
 <div class="row mb-4">
     <div class="col-12">
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        @endif
+
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <h2 class="fw-bold mb-1">Communications</h2>
@@ -59,23 +66,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse([
-                        ['subject' => 'Policy Renewal Reminder', 'recipients' => '1,234', 'channel' => 'Email', 'status' => 'sent', 'date' => '2 hours ago'],
-                        ['subject' => 'Payment Confirmation', 'recipients' => '89', 'channel' => 'SMS', 'status' => 'sent', 'date' => '5 hours ago'],
-                        ['subject' => 'Claim Update', 'recipients' => '45', 'channel' => 'Push', 'status' => 'delivered', 'date' => '1 day ago'],
-                    ] as $msg)
+                    @forelse($communications as $msg)
                     <tr>
-                        <td class="py-3"><span class="fw-semibold">{{ $msg['subject'] }}</span></td>
-                        <td class="py-3">{{ $msg['recipients'] }} users</td>
+                        <td class="py-3"><span class="fw-semibold">{{ $msg->subject ?? 'Communication' }}</span></td>
+                        <td class="py-3">{{ $msg->recipients ?? '-' }} users</td>
                         <td class="py-3">
-                            <span class="badge bg-primary bg-opacity-10 text-primary">{{ $msg['channel'] }}</span>
+                            <span class="badge bg-primary bg-opacity-10 text-primary">{{ $msg->channel ?? '-' }}</span>
                         </td>
                         <td class="py-3">
                             <span class="badge bg-success bg-opacity-10 text-success">
-                                <i class="bi bi-check-circle"></i> {{ ucfirst($msg['status']) }}
+                                <i class="bi bi-check-circle"></i> {{ ucfirst($msg->status ?? 'sent') }}
                             </span>
                         </td>
-                        <td class="py-3"><small class="text-muted">{{ $msg['date'] }}</small></td>
+                        <td class="py-3"><small class="text-muted">{{ optional($msg->created_at)->diffForHumans() ?? '-' }}</small></td>
                     </tr>
                     @empty
                     <tr>
@@ -100,43 +103,43 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="{{ route('admin.governance.communications.send') }}">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Recipients</label>
-                        <select class="form-select" required>
+                        <select class="form-select" name="recipients" required>
                             <option value="">Select audience...</option>
-                            <option>All Users</option>
-                            <option>Active Policy Holders</option>
-                            <option>Pending Renewals</option>
-                            <option>Custom Segment</option>
+                            <option value="all_users">All Users</option>
+                            <option value="active_policy_holders">Active Policy Holders</option>
+                            <option value="pending_renewals">Pending Renewals</option>
+                            <option value="custom_segment">Custom Segment</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Channel</label>
-                        <select class="form-select" required>
+                        <select class="form-select" name="channel" required>
                             <option value="">Select channel...</option>
-                            <option>Email</option>
-                            <option>SMS</option>
-                            <option>Push Notification</option>
-                            <option>In-App Message</option>
+                            <option value="email">Email</option>
+                            <option value="sms">SMS</option>
+                            <option value="push_notification">Push Notification</option>
+                            <option value="in_app_message">In-App Message</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Subject</label>
-                        <input type="text" class="form-control" placeholder="Message subject" required>
+                        <input type="text" class="form-control" name="subject" placeholder="Message subject" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Message</label>
-                        <textarea class="form-control" rows="4" placeholder="Type your message..." required></textarea>
+                        <textarea class="form-control" name="message" rows="4" placeholder="Type your message..." required></textarea>
+                    </div>
+                    <div class="modal-footer border-top">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-send me-2"></i>Send Now
+                        </button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer border-top">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="Swal.fire('Sent!', 'Message sent successfully', 'success')">
-                    <i class="bi bi-send me-2"></i>Send Now
-                </button>
             </div>
         </div>
     </div>

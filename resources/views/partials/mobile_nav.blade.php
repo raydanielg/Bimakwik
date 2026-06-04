@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="col">
-                <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.policies.index') : '#' }}" class="mobile-nav-link {{ request()->routeIs('customer.policies.*') ? 'active' : '' }}">
+                <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.policies.index') : route('login') }}" class="mobile-nav-link {{ request()->routeIs('customer.policies.*') ? 'active' : '' }}">
                     <i class="bi bi-shield-check fs-4 d-block"></i>
                     <span class="x-small fw-bold">Policies</span>
                 </a>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="col">
-                <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.claims.create') : '#' }}" class="mobile-nav-link {{ request()->routeIs('customer.claims.*') ? 'active' : '' }}">
+                <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.claims.create') : route('login') }}" class="mobile-nav-link {{ request()->routeIs('customer.claims.*') ? 'active' : '' }}">
                     <i class="bi bi-exclamation-octagon fs-4 d-block"></i>
                     <span class="x-small fw-bold">Claims</span>
                 </a>
@@ -62,31 +62,31 @@
     </div>
     <div class="offcanvas-body p-0">
         <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
+            <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.wallet.index') : route('login') }}" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
                 <i class="bi bi-wallet2 text-primary me-3 fs-5"></i> My Wallet
             </a>
-            <a href="#" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
+            <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.policies.renewals') : route('login') }}" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
                 <i class="bi bi-arrow-repeat text-primary me-3 fs-5"></i> Renewals
             </a>
-            <a href="#" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
+            <a href="{{ route('pages.branches') }}" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
                 <i class="bi bi-geo-alt text-primary me-3 fs-5"></i> Service Providers Near Me
             </a>
             <hr class="my-2 opacity-10">
-            <a href="#" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
+            <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.profile') : route('login') }}" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
                 <i class="bi bi-bell text-primary me-3 fs-5"></i> Notifications
                 <span class="badge bg-danger rounded-pill ms-auto">3</span>
             </a>
-            <a href="#" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
+            <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.profile') : route('login') }}" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
                 <i class="bi bi-gear text-primary me-3 fs-5"></i> Settings
             </a>
-            <a href="#" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
+            <a href="{{ auth()->check() && auth()->user()->hasRole('customer') ? route('customer.support') : route('support.help') }}" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
                 <i class="bi bi-headset text-primary me-3 fs-5"></i> Support & Help
             </a>
             <hr class="my-2 opacity-10">
-            <a href="#" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
+            <a href="{{ route('pages.contact') }}" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
                 <i class="bi bi-share text-primary me-3 fs-5"></i> Share App
             </a>
-            <a href="#" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
+            <a href="{{ route('pages.contact') }}" class="list-group-item list-group-item-action py-3 px-4 border-0 d-flex align-items-center">
                 <i class="bi bi-star text-primary me-3 fs-5"></i> Rate App
             </a>
             @auth

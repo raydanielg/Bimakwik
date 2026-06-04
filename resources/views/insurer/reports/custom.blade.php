@@ -168,7 +168,7 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-primary" onclick="comingSoonCustom('Save Report Template')">
                         <i class="bi bi-save me-1"></i> Save Report Template
                     </button>
                 </div>
@@ -180,7 +180,7 @@
         <div class="card-header bg-white border-0 py-3">
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Saved Custom Reports</h5>
-                <button class="btn btn-primary btn-sm">
+                <button type="button" class="btn btn-primary btn-sm" onclick="comingSoonCustom('New Report')">
                     <i class="bi bi-plus-lg me-1"></i> New Report
                 </button>
             </div>
@@ -209,9 +209,9 @@
                                     <td>{{ $report->schedule ?? 'Manual' }}</td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <button class="btn btn-outline-primary"><i class="bi bi-play-fill"></i></button>
-                                            <button class="btn btn-outline-secondary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                            <button type="button" class="btn btn-outline-primary" onclick="comingSoonCustom('Run Custom Report')"><i class="bi bi-play-fill"></i></button>
+                                            <button type="button" class="btn btn-outline-secondary" onclick="comingSoonCustom('Edit Custom Report')"><i class="bi bi-pencil"></i></button>
+                                            <button type="button" class="btn btn-outline-danger" onclick="comingSoonCustom('Delete Custom Report')"><i class="bi bi-trash"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -231,3 +231,20 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+function comingSoonCustom(action) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            icon: 'info',
+            title: action,
+            text: 'This custom report action is not yet implemented.',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+    alert(action + ': This custom report action is not yet implemented.');
+}
+</script>
+@endpush

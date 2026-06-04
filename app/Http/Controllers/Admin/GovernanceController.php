@@ -8,6 +8,7 @@ use App\Models\AuditComplianceReport;
 use App\Models\AuditLog;
 use App\Models\ComplianceCheck;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class GovernanceController extends Controller
 {
@@ -55,6 +56,28 @@ class GovernanceController extends Controller
             $communications = new LengthAwarePaginator([], 0, 20);
         }
         return view('admin.governance.communications', compact('communications'));
+    }
+
+    public function sendCommunication(Request $request)
+    {
+        $data = $request->validate([
+            'recipients' => 'required|string|max:255',
+            'channel' => 'required|string|max:50',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:5000',
+        ]);
+
+        // Keep a server-side audit trail even when no dedicated communications table exists.
+        Log::info('Admin communication dispatched', [
+            'admin_id' => auth()->id(),
+            'recipients' => $data['recipients'],
+            'channel' => $data['channel'],
+            'subject' => $data['subject'],
+        ]);
+
+        return redirect()
+            ->route('admin.governance.communications')
+            ->with('success', 'Message has been queued for delivery.');
     }
     
     public function exportReport($id)

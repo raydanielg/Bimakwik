@@ -35,7 +35,7 @@
                         <p class="text-muted mb-4">
                             {{ app()->getLocale() == 'sw' ? 'Tunafurahi kutangaza kwamba Msaidizi wa Madai wa AI sasa anapatikana. Chombo hiki kinakusaidia kuwasilisha madai ndani ya dakika 3.' : 'We are excited to announce that the Bima Kwik AI Claims Assistant is now available to all customers. This smart tool helps you file claims in under 3 minutes.' }}
                         </p>
-                        <a href="#" class="btn btn-outline-primary rounded-pill px-4">{{ app()->getLocale() == 'sw' ? 'Soma Zaidi' : 'Read More' }} →</a>
+                        <a href="{{ route('resources.news') }}" class="btn btn-outline-primary rounded-pill px-4">{{ app()->getLocale() == 'sw' ? 'Soma Zaidi' : 'Read More' }} →</a>
                     </div>
                 </div>
             </div>
@@ -45,16 +45,16 @@
                 <div class="bg-light p-4 rounded-5 shadow-sm h-100">
                     <h4 class="fw-bold mb-4">{{ app()->getLocale() == 'sw' ? 'Kategoria' : 'Categories' }}</h4>
                     <div class="list-group list-group-flush bg-transparent">
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent border-bottom d-flex justify-content-between align-items-center">
+                        <a href="{{ route('resources.news') }}" class="list-group-item list-group-item-action bg-transparent border-bottom d-flex justify-content-between align-items-center">
                             {{ app()->getLocale() == 'sw' ? 'Sasisho za Jukwaa' : 'Platform Updates' }} <span class="badge bg-white text-primary border">12</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent border-bottom d-flex justify-content-between align-items-center">
+                        <a href="{{ route('resources.news') }}" class="list-group-item list-group-item-action bg-transparent border-bottom d-flex justify-content-between align-items-center">
                             {{ app()->getLocale() == 'sw' ? 'Habari za Bima' : 'Insurance News' }} <span class="badge bg-white text-primary border">24</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent border-bottom d-flex justify-content-between align-items-center">
+                        <a href="{{ route('resources.news') }}" class="list-group-item list-group-item-action bg-transparent border-bottom d-flex justify-content-between align-items-center">
                             {{ app()->getLocale() == 'sw' ? 'Vidokezo kwa Wateja' : 'Customer Tips' }} <span class="badge bg-white text-primary border">18</span>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action bg-transparent border-bottom d-flex justify-content-between align-items-center">
+                        <a href="{{ route('resources.news') }}" class="list-group-item list-group-item-action bg-transparent border-bottom d-flex justify-content-between align-items-center">
                             {{ app()->getLocale() == 'sw' ? 'Mafanikio ya Washirika' : 'Partner Success' }} <span class="badge bg-white text-primary border">9</span>
                         </a>
                     </div>
@@ -78,7 +78,7 @@
                         <small class="text-primary fw-bold text-uppercase">{{ app()->getLocale() == 'sw' ? 'Habari za Bima' : 'Insurance News' }}</small>
                         <h5 class="fw-bold mt-2 mb-3">{{ app()->getLocale() == 'sw' ? 'Urekebishaji wa Malipo ya Bima ya Gari' : 'Motor Insurance Premiums Adjustment' }}</h5>
                         <p class="small text-muted mb-4">{{ app()->getLocale() == 'sw' ? 'Mamlaka ya Bima imetangaza urekebishaji wa asilimia 5–8 ya malipo ya bima.' : 'The Insurance Regulator of Tanzania has announced a 5–8% adjustment in premiums.' }}</p>
-                        <a href="#" class="text-primary fw-bold text-decoration-none">{{ app()->getLocale() == 'sw' ? 'Soma Makala Kamili' : 'Read Full Post' }} <i class="bi bi-arrow-right ms-1"></i></a>
+                        <a href="{{ route('resources.news') }}" class="text-primary fw-bold text-decoration-none">{{ app()->getLocale() == 'sw' ? 'Soma Makala Kamili' : 'Read Full Post' }} <i class="bi bi-arrow-right ms-1"></i></a>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                         <small class="text-primary fw-bold text-uppercase">{{ app()->getLocale() == 'sw' ? 'Mafanikio ya Washirika' : 'Partner Success' }}</small>
                         <h5 class="fw-bold mt-2 mb-3">{{ app()->getLocale() == 'sw' ? 'Jinsi Broker Mmoja Alivyokuza Biashara kwa 300%' : 'How One Broker Grew His Business by 300%' }}</h5>
                         <p class="small text-muted mb-4">{{ app()->getLocale() == 'sw' ? 'James Mwita, broker wa Dar es Salaam, alikuza biashara yake akitumia zana za AI.' : 'James Mwita, a broker in Dar es Salaam, grew his base using Bima Kwik AI tools.' }}</p>
-                        <a href="#" class="text-primary fw-bold text-decoration-none">{{ app()->getLocale() == 'sw' ? 'Soma Makala Kamili' : 'Read Full Post' }} <i class="bi bi-arrow-right ms-1"></i></a>
+                        <a href="{{ route('resources.news') }}" class="text-primary fw-bold text-decoration-none">{{ app()->getLocale() == 'sw' ? 'Soma Makala Kamili' : 'Read Full Post' }} <i class="bi bi-arrow-right ms-1"></i></a>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                         <small class="text-primary fw-bold text-uppercase">{{ app()->getLocale() == 'sw' ? 'Vidokezo kwa Wateja' : 'Customer Tips' }}</small>
                         <h5 class="fw-bold mt-2 mb-3">{{ app()->getLocale() == 'sw' ? 'Makosa 5 ya Kawaida Unapowasilisha Dai' : '5 Common Mistakes When Filing a Claim' }}</h5>
                         <p class="small text-muted mb-4">{{ app()->getLocale() == 'sw' ? 'Epuka makosa rahisi yanayoweza kuchelewesha malipo yako ya bima.' : 'Avoid simple mistakes that delay your insurance claim payments.' }}</p>
-                        <a href="#" class="text-primary fw-bold text-decoration-none">{{ app()->getLocale() == 'sw' ? 'Soma Makala Kamili' : 'Read Full Post' }} <i class="bi bi-arrow-right ms-1"></i></a>
+                        <a href="{{ route('resources.news') }}" class="text-primary fw-bold text-decoration-none">{{ app()->getLocale() == 'sw' ? 'Soma Makala Kamili' : 'Read Full Post' }} <i class="bi bi-arrow-right ms-1"></i></a>
                     </div>
                 </div>
             </div>

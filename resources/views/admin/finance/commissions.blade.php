@@ -23,7 +23,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Total Commissions</p>
-                        <h3 class="fw-bold mb-0">TZS 18.4M</h3>
+                        <h3 class="fw-bold mb-0">TZS {{ number_format($totalCommissions, 2) }}</h3>
                     </div>
                     <div class="bg-primary bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-percent text-primary fs-4"></i>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="mt-3">
                     <span class="badge bg-primary bg-opacity-10 text-primary">
-                        This month
+                        Across all commission records
                     </span>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Pending Payouts</p>
-                        <h3 class="fw-bold mb-0">TZS 6.2M</h3>
+                        <h3 class="fw-bold mb-0">TZS {{ number_format($pendingCommissions, 2) }}</h3>
                     </div>
                     <div class="bg-warning bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-hourglass-split text-warning fs-4"></i>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="mt-3">
                     <span class="badge bg-warning bg-opacity-10 text-warning">
-                        124 partners waiting
+                        Awaiting payment processing
                     </span>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Paid This Month</p>
-                        <h3 class="fw-bold mb-0">TZS 12.2M</h3>
+                        <h3 class="fw-bold mb-0">TZS {{ number_format($paidCommissions, 2) }}</h3>
                     </div>
                     <div class="bg-success bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-check-circle text-success fs-4"></i>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="mt-3">
                     <span class="badge bg-success bg-opacity-10 text-success">
-                        <i class="bi bi-arrow-up"></i> On schedule
+                        Completed payouts
                     </span>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Avg. Commission Rate</p>
-                        <h3 class="fw-bold mb-0">12.5%</h3>
+                        <h3 class="fw-bold mb-0">{{ $totalCommissions > 0 ? number_format(($paidCommissions / $totalCommissions) * 100, 1) : 0 }}%</h3>
                     </div>
                     <div class="bg-info bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-graph-up text-info fs-4"></i>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="mt-3">
                     <span class="badge bg-info bg-opacity-10 text-info">
-                        Across all partners
+                        Paid ratio
                     </span>
                 </div>
             </div>
@@ -143,13 +143,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse([
-                        ['partner' => 'Broker Network Ltd', 'type' => 'Broker', 'policy' => 'POL-001234', 'premium' => '450,000', 'rate' => '15%', 'commission' => '67,500', 'status' => 'pending'],
-                        ['partner' => 'Agent John Doe', 'type' => 'Agent', 'policy' => 'POL-001235', 'premium' => '280,000', 'rate' => '10%', 'commission' => '28,000', 'status' => 'paid'],
-                        ['partner' => 'Aggregator Hub', 'type' => 'Aggregator', 'policy' => 'POL-001236', 'premium' => '120,000', 'rate' => '12%', 'commission' => '14,400', 'status' => 'pending'],
-                        ['partner' => 'Broker Network Ltd', 'type' => 'Broker', 'policy' => 'POL-001237', 'premium' => '380,000', 'rate' => '15%', 'commission' => '57,000', 'status' => 'paid'],
-                        ['partner' => 'Agent Sarah K', 'type' => 'Agent', 'policy' => 'POL-001238', 'premium' => '650,000', 'rate' => '10%', 'commission' => '65,000', 'status' => 'approved'],
-                    ] as $commission)
+                    @forelse($commissions as $commission)
+                    @php
+                        $commissionType = class_basename($commission);
+                        $typeLabel = str_contains(strtolower($commissionType), 'broker') ? 'Broker' : (str_contains(strtolower($commissionType), 'agent') ? 'Agent' : 'Aggregator');
+                        $partnerName = $commission->broker->name ?? $commission->agent->name ?? $commission->aggregator->name ?? 'N/A';
+                        $policyCode = 'POL-' . str_pad((string) ($commission->customer_policy_id ?? $commission->customerPolicy?->id ?? 0), 6, '0', STR_PAD_LEFT);
+                        $premiumAmount = (float) ($commission->premium_amount ?? 0);
+                        $commissionAmount = (float) ($commission->commission_amount ?? $commission->amount ?? 0);
+                        $rate = $premiumAmount > 0 ? number_format(($commissionAmount / $premiumAmount) * 100, 1) . '%' : 'N/A';
+                        $status = strtolower((string) ($commission->status ?? 'pending'));
+                    @endphp
                     <tr>
                         <td class="py-3">
                             <div class="d-flex align-items-center">
@@ -157,34 +161,34 @@
                                     <i class="bi bi-person-badge text-primary"></i>
                                 </div>
                                 <div>
-                                    <div class="fw-semibold">{{ $commission['partner'] }}</div>
-                                    <small class="text-muted">ID: PTR-{{ rand(1000, 9999) }}</small>
+                                    <div class="fw-semibold">{{ $partnerName }}</div>
+                                    <small class="text-muted">ID: {{ $commission->id }}</small>
                                 </div>
                             </div>
                         </td>
                         <td class="py-3">
-                            <span class="badge bg-{{ $commission['type'] == 'Broker' ? 'primary' : ($commission['type'] == 'Agent' ? 'success' : 'info') }} bg-opacity-10 text-{{ $commission['type'] == 'Broker' ? 'primary' : ($commission['type'] == 'Agent' ? 'success' : 'info') }}">
-                                {{ $commission['type'] }}
+                            <span class="badge bg-{{ $typeLabel == 'Broker' ? 'primary' : ($typeLabel == 'Agent' ? 'success' : 'info') }} bg-opacity-10 text-{{ $typeLabel == 'Broker' ? 'primary' : ($typeLabel == 'Agent' ? 'success' : 'info') }}">
+                                {{ $typeLabel }}
                             </span>
                         </td>
                         <td class="py-3">
-                            <span class="text-primary fw-semibold">{{ $commission['policy'] }}</span>
+                            <span class="text-primary fw-semibold">{{ $policyCode }}</span>
                         </td>
-                        <td class="py-3">TZS {{ $commission['premium'] }}</td>
+                        <td class="py-3">TZS {{ number_format($premiumAmount, 2) }}</td>
                         <td class="py-3">
                             <span class="badge bg-secondary bg-opacity-10 text-secondary">
-                                {{ $commission['rate'] }}
+                                {{ $rate }}
                             </span>
                         </td>
                         <td class="py-3">
-                            <span class="fw-bold text-success">TZS {{ $commission['commission'] }}</span>
+                            <span class="fw-bold text-success">TZS {{ number_format($commissionAmount, 2) }}</span>
                         </td>
                         <td class="py-3">
-                            @if($commission['status'] == 'paid')
+                            @if($status == 'paid')
                                 <span class="badge bg-success bg-opacity-10 text-success">
                                     <i class="bi bi-check-circle"></i> Paid
                                 </span>
-                            @elseif($commission['status'] == 'approved')
+                            @elseif($status == 'approved')
                                 <span class="badge bg-info bg-opacity-10 text-info">
                                     <i class="bi bi-check2-circle"></i> Approved
                                 </span>
@@ -195,8 +199,8 @@
                             @endif
                         </td>
                         <td class="py-3 text-end">
-                            @if($commission['status'] == 'pending')
-                            <button class="btn btn-sm btn-success" onclick="confirmApprove('#', 'Approve commission payment?')">
+                            @if($status == 'pending')
+                            <button class="btn btn-sm btn-success" onclick="confirmApprove('{{ route('admin.finance.commissions.approve', $commission->id) }}', 'Approve commission payment?')">
                                 <i class="bi bi-check-lg"></i>
                             </button>
                             @else
@@ -220,13 +224,13 @@
     </div>
     <div class="card-footer bg-white border-top py-3">
         <div class="d-flex justify-content-between align-items-center">
-            <small class="text-muted">Showing 1 to 5 of 89 commissions</small>
+            <small class="text-muted">Showing {{ $commissions->count() }} commission record(s)</small>
             <nav>
                 <ul class="pagination pagination-sm mb-0">
-                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                    <li class="page-item active"><span class="page-link">1</span></li>
+                    <li class="page-item"><span class="page-link">2</span></li>
+                    <li class="page-item"><span class="page-link">Next</span></li>
                 </ul>
             </nav>
         </div>
@@ -246,7 +250,7 @@
             <div class="modal-body">
                 <div class="alert alert-info border-0">
                     <i class="bi bi-info-circle me-2"></i>
-                    <strong>124 partners</strong> have pending commissions totaling <strong>TZS 6.2M</strong>
+                    Pending commissions totaling <strong>TZS {{ number_format($pendingCommissions, 2) }}</strong> are ready for processing.
                 </div>
                 <form id="payCommissionsForm">
                     @csrf

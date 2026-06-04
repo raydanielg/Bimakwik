@@ -15,6 +15,8 @@ use App\Models\AgentCommissionWithdrawal;
 use App\Models\AggregatorCommissionWithdrawal;
 use App\Models\Wallet;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Schema;
 
 class FinanceController extends Controller
 {
@@ -22,7 +24,7 @@ class FinanceController extends Controller
     {
         try {
             // Get wallets with user relationship
-            $wallets = Wallet::latest()->paginate(20);
+            $wallets = Wallet::with('user.roles')->latest()->paginate(20);
             
             // Calculate statistics
             $totalBalance = Wallet::sum('balance') ?? 0;
@@ -45,99 +47,19 @@ class FinanceController extends Controller
             $paymentTx = PaymentTransaction::latest()->limit(5)->get();
             $walletTx = WalletTransaction::latest()->limit(5)->get();
             $recentTransactions = $paymentTx->merge($walletTx)->sortByDesc('created_at')->take(10);
-            
-            // Calculate growth (simplified - 5% estimate)
-            $balanceGrowth = 5.0;
-            
-            // If no data, use mock data for demo
-            if ($wallets->isEmpty()) {
-                $mockWallets = collect([
-                    (object)[
-                        'id' => 1,
-                        'balance' => 12450000,
-                        'is_active' => true,
-                        'updated_at' => now()->subHours(2),
-                        'user' => (object)['name' => 'Jubilee Insurance', 'role' => 'insurer']
-                    ],
-                    (object)[
-                        'id' => 2,
-                        'balance' => 8230000,
-                        'is_active' => true,
-                        'updated_at' => now()->subHours(5),
-                        'user' => (object)['name' => 'AAR Insurance', 'role' => 'insurer']
-                    ],
-                    (object)[
-                        'id' => 3,
-                        'balance' => 3120000,
-                        'is_active' => true,
-                        'updated_at' => now()->subDay(),
-                        'user' => (object)['name' => 'Broker Network Ltd', 'role' => 'broker']
-                    ],
-                    (object)[
-                        'id' => 4,
-                        'balance' => 1890000,
-                        'is_active' => false,
-                        'updated_at' => now()->subDays(3),
-                        'user' => (object)['name' => 'Aggregator Hub', 'role' => 'aggregator']
-                    ],
-                    (object)[
-                        'id' => 5,
-                        'balance' => 560000,
-                        'is_active' => true,
-                        'updated_at' => now()->subHours(12),
-                        'user' => (object)['name' => 'Service Provider Co', 'role' => 'agent']
-                    ],
-                ]);
-                
-                $wallets = new LengthAwarePaginator($mockWallets, 5, 20, 1);
-                $totalBalance = 26250000;
-                $activeWallets = 5;
-                $todayTransactions = 156;
-                $todayVolume = 8400000;
-                $pendingWithdrawals = 12;
-                $pendingAmount = 2100000;
-                $balanceGrowth = 12.5;
-                
-                // Mock recent transactions
-                $recentTransactions = collect([
-                    (object)['id' => 1, 'amount' => 450000, 'type' => 'credit', 'description' => 'Premium payment', 'created_at' => now()->subMinutes(30)],
-                    (object)['id' => 2, 'amount' => 230000, 'type' => 'debit', 'description' => 'Commission payout', 'created_at' => now()->subHour()],
-                    (object)['id' => 3, 'amount' => 890000, 'type' => 'credit', 'description' => 'Policy renewal', 'created_at' => now()->subHours(2)],
-                    (object)['id' => 4, 'amount' => 120000, 'type' => 'debit', 'description' => 'Withdrawal', 'created_at' => now()->subHours(4)],
-                    (object)['id' => 5, 'amount' => 670000, 'type' => 'credit', 'description' => 'New policy', 'created_at' => now()->subHours(6)],
-                ]);
-            }
+            $balanceGrowth = 0;
             
         } catch (\Exception $e) {
-            // Fallback mock data on error
-            $mockWallets = collect([
-                (object)[
-                    'id' => 1,
-                    'balance' => 12450000,
-                    'is_active' => true,
-                    'updated_at' => now()->subHours(2),
-                    'user' => (object)['name' => 'Jubilee Insurance', 'role' => 'insurer']
-                ],
-                (object)[
-                    'id' => 2,
-                    'balance' => 8230000,
-                    'is_active' => true,
-                    'updated_at' => now()->subHours(5),
-                    'user' => (object)['name' => 'AAR Insurance', 'role' => 'insurer']
-                ],
-            ]);
-            
-            $wallets = new LengthAwarePaginator($mockWallets, 2, 20, 1);
-            $totalBalance = 45200000;
-            $activeWallets = 24;
-            $todayTransactions = 156;
-            $todayVolume = 8400000;
-            $pendingWithdrawals = 12;
-            $pendingAmount = 2100000;
-            $recentTransactions = collect([
-                (object)['id' => 1, 'amount' => 450000, 'type' => 'credit', 'description' => 'Premium payment', 'created_at' => now()],
-            ]);
-            $balanceGrowth = 12.5;
+            // Fallback empty data on error to avoid broken actions on fake IDs
+            $wallets = Wallet::whereRaw('1 = 0')->paginate(20);
+            $totalBalance = 0;
+            $activeWallets = 0;
+            $todayTransactions = 0;
+            $todayVolume = 0;
+            $pendingWithdrawals = 0;
+            $pendingAmount = 0;
+            $recentTransactions = collect();
+            $balanceGrowth = 0;
         }
         
         return view('admin.finance.wallets', compact(
@@ -165,19 +87,30 @@ class FinanceController extends Controller
     {
         try {
             $wallet = Wallet::findOrFail($id);
-            $amount = $request->input('amount');
+            $amount = (float) $request->input('amount');
+            if ($amount <= 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Amount must be greater than zero'
+                ], 422);
+            }
             
             // Update wallet balance
+            $before = (float) $wallet->balance;
             $wallet->balance += $amount;
+            $wallet->last_transaction_at = now();
             $wallet->save();
             
             // Create transaction record
             WalletTransaction::create([
                 'wallet_id' => $id,
+                'transaction_reference' => 'WAL-' . strtoupper(Str::random(10)),
+                'transaction_type' => 'credit',
                 'amount' => $amount,
-                'type' => 'credit',
+                'balance_before' => $before,
+                'balance_after' => (float) $wallet->balance,
                 'description' => 'Funds added by admin',
-                'created_at' => now()
+                'status' => 'completed',
             ]);
             
             return response()->json([
@@ -206,7 +139,7 @@ class FinanceController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to freeze wallet'
+                'message' => 'Failed to freeze wallet: ' . $e->getMessage()
             ], 500);
         }
     }
@@ -224,91 +157,41 @@ class FinanceController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to activate wallet'
-            ], 500);
-        }
-    }
-    
-    public function seedDemoData(Request $request)
-    {
-        try {
-            // Create demo users if they don't exist
-            $demoUsers = [
-                ['name' => 'Jubilee Insurance', 'email' => 'jubilee@demo.com', 'role' => 'insurer', 'balance' => 12450000],
-                ['name' => 'AAR Insurance', 'email' => 'aar@demo.com', 'role' => 'insurer', 'balance' => 8230000],
-                ['name' => 'Broker Network Ltd', 'email' => 'broker@demo.com', 'role' => 'broker', 'balance' => 3120000],
-                ['name' => 'Aggregator Hub', 'email' => 'aggregator@demo.com', 'role' => 'aggregator', 'balance' => 1890000],
-                ['name' => 'Service Provider Co', 'email' => 'provider@demo.com', 'role' => 'agent', 'balance' => 560000],
-            ];
-            
-            $createdWallets = 0;
-            $createdTransactions = 0;
-            
-            foreach ($demoUsers as $userData) {
-                // Create or get user
-                $user = \App\Models\User::firstOrCreate(
-                    ['email' => $userData['email']],
-                    [
-                        'name' => $userData['name'],
-                        'role' => $userData['role'],
-                        'password' => bcrypt('password123'),
-                        'email_verified_at' => now()
-                    ]
-                );
-                
-                // Create wallet for user
-                $wallet = Wallet::firstOrCreate(
-                    ['user_id' => $user->id],
-                    [
-                        'balance' => $userData['balance'],
-                        'currency' => 'TZS',
-                        'is_active' => $userData['role'] !== 'aggregator', // Aggregator frozen for demo
-                        'created_at' => now(),
-                        'updated_at' => now()
-                    ]
-                );
-                
-                if ($wallet->wasRecentlyCreated) {
-                    $createdWallets++;
-                    
-                    // Create sample transactions for each wallet
-                    WalletTransaction::create([
-                        'wallet_id' => $wallet->id,
-                        'amount' => $userData['balance'] * 0.3,
-                        'type' => 'credit',
-                        'description' => 'Initial deposit',
-                        'created_at' => now()->subDays(7)
-                    ]);
-                    
-                    WalletTransaction::create([
-                        'wallet_id' => $wallet->id,
-                        'amount' => $userData['balance'] * 0.1,
-                        'type' => 'debit',
-                        'description' => 'Commission payout',
-                        'created_at' => now()->subDays(3)
-                    ]);
-                    
-                    $createdTransactions += 2;
-                }
-            }
-            
-            return response()->json([
-                'success' => true,
-                'message' => 'Demo data created successfully',
-                'data' => [
-                    'wallets' => $createdWallets,
-                    'transactions' => $createdTransactions
-                ]
-            ]);
-            
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to create demo data: ' . $e->getMessage()
+                'message' => 'Failed to activate wallet: ' . $e->getMessage()
             ], 500);
         }
     }
 
+    public function walletTransactions($id)
+    {
+        try {
+            $wallet = Wallet::findOrFail($id);
+
+            $transactions = WalletTransaction::where('wallet_id', $wallet->id)
+                ->latest()
+                ->limit(20)
+                ->get()
+                ->map(function ($tx) {
+                    return [
+                        'date' => optional($tx->created_at)->format('M d, Y H:i') ?? 'N/A',
+                        'type' => $tx->transaction_type ?? 'N/A',
+                        'amount' => number_format((float) ($tx->amount ?? 0), 2),
+                        'description' => $tx->description ?? 'No description',
+                    ];
+                });
+
+            return response()->json([
+                'success' => true,
+                'transactions' => $transactions,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch transactions: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+    
     public function premiums()
     {
         try {
@@ -321,12 +204,17 @@ class FinanceController extends Controller
             $todayCount = PaymentTransaction::whereDate('created_at', today())->count();
             $monthCollections = PaymentTransaction::whereMonth('created_at', now()->month)->sum('amount') ?? 0;
             
-            // Calculate pending (estimate if no status column)
-            $pendingAmount = $totalCollected * 0.1; // 10% estimate
-            $pendingCount = 45; // Estimate
-            
-            // Calculate collection rate
-            $collectionRate = $totalCollected > 0 ? 94.2 : 0;
+            if (Schema::hasColumn('payment_transactions', 'status')) {
+                $pendingAmount = PaymentTransaction::where('status', 'pending')->sum('amount') ?? 0;
+                $pendingCount = PaymentTransaction::where('status', 'pending')->count();
+                $successfulCount = PaymentTransaction::where('status', 'completed')->count();
+                $totalCount = PaymentTransaction::count();
+                $collectionRate = $totalCount > 0 ? round(($successfulCount / $totalCount) * 100, 1) : 0;
+            } else {
+                $pendingAmount = 0;
+                $pendingCount = 0;
+                $collectionRate = 0;
+            }
             
             // Monthly growth
             $lastMonthCollections = PaymentTransaction::whereMonth('created_at', now()->subMonth()->month)->sum('amount') ?? 0;
@@ -392,8 +280,14 @@ class FinanceController extends Controller
             $commissions = $brokerCommissions->merge($agentCommissions)->merge($aggregatorCommissions);
             
             // Calculate totals
-            $totalCommissions = $brokerCommissions->sum('amount') + $agentCommissions->sum('amount') + $aggregatorCommissions->sum('amount');
-            $paidCommissions = $totalCommissions * 0.6; // Estimate 60% paid
+            $brokerTotal = $brokerCommissions->sum('commission_amount');
+            $agentTotal = $agentCommissions->sum('commission_amount');
+            $aggregatorTotal = $aggregatorCommissions->sum('commission_amount');
+            $totalCommissions = $brokerTotal + $agentTotal + $aggregatorTotal;
+            $paidCommissions = $brokerCommissions->where('status', 'paid')->sum('commission_amount')
+                + $agentCommissions->where('status', 'paid')->sum('commission_amount')
+                + $aggregatorCommissions->where('status', 'paid')->sum('commission_amount');
+            $pendingCommissions = max(0, $totalCommissions - $paidCommissions);
             
             // Paginate manually
             $page = request()->get('page', 1);
@@ -404,29 +298,57 @@ class FinanceController extends Controller
             $commissions = collect();
             $totalCommissions = 0;
             $paidCommissions = 0;
+            $pendingCommissions = 0;
         }
-        
-        return view('admin.finance.commissions', compact('commissions', 'totalCommissions', 'paidCommissions'));
+
+        return view('admin.finance.commissions', compact('commissions', 'totalCommissions', 'paidCommissions', 'pendingCommissions'));
     }
 
     public function payouts()
     {
         try {
             // Combine all withdrawal types
-            $walletWithdrawals = WalletWithdrawal::latest()->get();
-            $brokerWithdrawals = BrokerCommissionWithdrawal::latest()->get();
-            $agentWithdrawals = AgentCommissionWithdrawal::latest()->get();
-            $aggregatorWithdrawals = AggregatorCommissionWithdrawal::latest()->get();
+            $walletWithdrawals = WalletWithdrawal::latest()->get()->each(function ($item) {
+                $item->setAttribute('_source', 'wallet');
+            });
+            $brokerWithdrawals = BrokerCommissionWithdrawal::latest()->get()->each(function ($item) {
+                $item->setAttribute('_source', 'broker');
+            });
+            $agentWithdrawals = AgentCommissionWithdrawal::latest()->get()->each(function ($item) {
+                $item->setAttribute('_source', 'agent');
+            });
+            $aggregatorWithdrawals = AggregatorCommissionWithdrawal::latest()->get()->each(function ($item) {
+                $item->setAttribute('_source', 'aggregator');
+            });
             
             // Merge all withdrawals
             $allPayouts = $walletWithdrawals
                 ->merge($brokerWithdrawals)
                 ->merge($agentWithdrawals)
-                ->merge($aggregatorWithdrawals);
+                ->merge($aggregatorWithdrawals)
+                ->sortByDesc('created_at')
+                ->values();
             
-            // Calculate pending (estimate 30%)
-            $totalAmount = $allPayouts->sum('amount');
-            $pendingPayouts = $totalAmount * 0.3;
+            $pendingPayouts = $allPayouts
+                ->filter(function ($item) {
+                    return strtolower((string) ($item->status ?? 'pending')) === 'pending';
+                })
+                ->sum('amount');
+
+            $approvedToday = $allPayouts
+                ->filter(function ($item) {
+                    return strtolower((string) ($item->status ?? '')) === 'approved'
+                        && !empty($item->processed_at)
+                        && \Illuminate\Support\Carbon::parse($item->processed_at)->isToday();
+                })
+                ->sum('amount');
+
+            $totalThisMonth = $allPayouts
+                ->filter(function ($item) {
+                    return !empty($item->created_at)
+                        && \Illuminate\Support\Carbon::parse($item->created_at)->isCurrentMonth();
+                })
+                ->sum('amount');
             
             // Paginate manually
             $page = request()->get('page', 1);
@@ -437,18 +359,67 @@ class FinanceController extends Controller
         } catch (\Exception $e) {
             $payouts = collect();
             $pendingPayouts = 0;
+            $approvedToday = 0;
+            $totalThisMonth = 0;
         }
-        return view('admin.finance.payouts', compact('payouts', 'pendingPayouts'));
+        return view('admin.finance.payouts', compact('payouts', 'pendingPayouts', 'approvedToday', 'totalThisMonth'));
+    }
+
+    public function approveCommission(Request $request, $id)
+    {
+        try {
+            $commission = BrokerCommission::find($id)
+                ?? AgentCommission::find($id)
+                ?? AggregatorCommission::find($id);
+
+            if (!$commission) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Commission record not found'
+                ], 404);
+            }
+
+            $commission->status = 'approved';
+            if (Schema::hasColumn($commission->getTable(), 'approved_at')) {
+                $commission->approved_at = now();
+            }
+            $commission->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Commission approved successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to approve commission: ' . $e->getMessage()
+            ], 500);
+        }
     }
     
     public function approvePayout(Request $request, $id)
     {
         try {
-            // Try to find in any withdrawal table
-            $payout = WalletWithdrawal::find($id) 
-                ?? BrokerCommissionWithdrawal::find($id)
-                ?? AgentCommissionWithdrawal::find($id)
-                ?? AggregatorCommissionWithdrawal::find($id);
+            $type = strtolower((string) $request->input('type', $request->query('type')));
+            $payout = null;
+
+            if ($type === 'wallet') {
+                $payout = WalletWithdrawal::find($id);
+            } elseif ($type === 'broker') {
+                $payout = BrokerCommissionWithdrawal::find($id);
+            } elseif ($type === 'agent') {
+                $payout = AgentCommissionWithdrawal::find($id);
+            } elseif ($type === 'aggregator') {
+                $payout = AggregatorCommissionWithdrawal::find($id);
+            }
+
+            if (!$payout) {
+                // Fallback if type was not provided
+                $payout = WalletWithdrawal::find($id)
+                    ?? BrokerCommissionWithdrawal::find($id)
+                    ?? AgentCommissionWithdrawal::find($id)
+                    ?? AggregatorCommissionWithdrawal::find($id);
+            }
             
             if (!$payout) {
                 return response()->json([
@@ -457,10 +428,19 @@ class FinanceController extends Controller
                 ], 404);
             }
             
-            // Update if status column exists
-            if (method_exists($payout, 'getAttribute')) {
-                $payout->update(['approved_at' => now()]);
+            if (Schema::hasColumn($payout->getTable(), 'status')) {
+                $payout->status = 'approved';
             }
+            if (Schema::hasColumn($payout->getTable(), 'processed_at')) {
+                $payout->processed_at = now();
+            }
+            if (Schema::hasColumn($payout->getTable(), 'processed_by')) {
+                $payout->processed_by = auth()->id();
+            }
+            if (Schema::hasColumn($payout->getTable(), 'rejection_reason')) {
+                $payout->rejection_reason = null;
+            }
+            $payout->save();
             
             return response()->json([
                 'success' => true,
@@ -477,11 +457,26 @@ class FinanceController extends Controller
     public function rejectPayout(Request $request, $id)
     {
         try {
-            // Try to find in any withdrawal table
-            $payout = WalletWithdrawal::find($id) 
-                ?? BrokerCommissionWithdrawal::find($id)
-                ?? AgentCommissionWithdrawal::find($id)
-                ?? AggregatorCommissionWithdrawal::find($id);
+            $type = strtolower((string) $request->input('type', $request->query('type')));
+            $payout = null;
+
+            if ($type === 'wallet') {
+                $payout = WalletWithdrawal::find($id);
+            } elseif ($type === 'broker') {
+                $payout = BrokerCommissionWithdrawal::find($id);
+            } elseif ($type === 'agent') {
+                $payout = AgentCommissionWithdrawal::find($id);
+            } elseif ($type === 'aggregator') {
+                $payout = AggregatorCommissionWithdrawal::find($id);
+            }
+
+            if (!$payout) {
+                // Fallback if type was not provided
+                $payout = WalletWithdrawal::find($id)
+                    ?? BrokerCommissionWithdrawal::find($id)
+                    ?? AgentCommissionWithdrawal::find($id)
+                    ?? AggregatorCommissionWithdrawal::find($id);
+            }
             
             if (!$payout) {
                 return response()->json([
@@ -489,6 +484,20 @@ class FinanceController extends Controller
                     'message' => 'Payout not found'
                 ], 404);
             }
+
+            if (Schema::hasColumn($payout->getTable(), 'status')) {
+                $payout->status = 'rejected';
+            }
+            if (Schema::hasColumn($payout->getTable(), 'processed_at')) {
+                $payout->processed_at = now();
+            }
+            if (Schema::hasColumn($payout->getTable(), 'processed_by')) {
+                $payout->processed_by = auth()->id();
+            }
+            if (Schema::hasColumn($payout->getTable(), 'rejection_reason')) {
+                $payout->rejection_reason = $request->input('reason');
+            }
+            $payout->save();
             
             return response()->json([
                 'success' => true,

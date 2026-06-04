@@ -96,13 +96,13 @@
                         <i class="bi bi-calendar me-2"></i><span id="currentPeriod">This Month</span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" onclick="changePeriod('This Month')">This Month</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changePeriod('Last Month')">Last Month</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changePeriod('Last 3 Months')">Last 3 Months</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changePeriod('Last 6 Months')">Last 6 Months</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="changePeriod('This Year')">This Year</a></li>
+                        <li><button type="button" class="dropdown-item" onclick="changePeriod('This Month')">This Month</button></li>
+                        <li><button type="button" class="dropdown-item" onclick="changePeriod('Last Month')">Last Month</button></li>
+                        <li><button type="button" class="dropdown-item" onclick="changePeriod('Last 3 Months')">Last 3 Months</button></li>
+                        <li><button type="button" class="dropdown-item" onclick="changePeriod('Last 6 Months')">Last 6 Months</button></li>
+                        <li><button type="button" class="dropdown-item" onclick="changePeriod('This Year')">This Year</button></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#" onclick="changePeriod('Custom Range')">Custom Range</a></li>
+                        <li><button type="button" class="dropdown-item" onclick="changePeriod('Custom Range')">Custom Range</button></li>
                     </ul>
                 </div>
             </div>

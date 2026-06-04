@@ -83,6 +83,9 @@
                         <th>Broker Name</th>
                         <th>Company</th>
                         <th>Email</th>
+                        <th>Logo</th>
+                        <th>Company ID</th>
+                        <th>Sales ID</th>
                         <th>Phone</th>
                         <th>License</th>
                         <th>Status</th>
@@ -105,6 +108,15 @@
                             </td>
                             <td>{{ $broker->brokerProfile->company_name ?? 'Individual' }}</td>
                             <td>{{ $broker->email }}</td>
+                            <td>
+                                @if($broker->logo)
+                                    <img src="{{ asset('storage/' . $broker->logo) }}" alt="User Logo" class="rounded" style="width: 40px; height: 40px; object-fit: cover;">
+                                @else
+                                    <span class="text-muted">N/A</span>
+                                @endif
+                            </td>
+                            <td>{{ $broker->company_id ?? 'N/A' }}</td>
+                            <td>{{ $broker->sales_id ?? 'N/A' }}</td>
                             <td>{{ $broker->phone ?? 'N/A' }}</td>
                             <td>
                                 <span class="badge bg-info">{{ $broker->brokerProfile->license_number ?? 'N/A' }}</span>
@@ -124,19 +136,34 @@
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View Details</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up me-2"></i>Performance</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-wallet2 me-2"></i>Commissions</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.users.show', $broker) }}"><i class="bi bi-eye me-2"></i>View Details</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.users.edit', $broker) }}"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('admin.users.language.update', $broker) }}">
+                                                @csrf
+                                                <input type="hidden" name="preferred_language" value="{{ ($broker->preferred_language ?? 'en') === 'en' ? 'sw' : 'en' }}">
+                                                <button type="submit" class="dropdown-item">
+                                                    <i class="bi bi-translate me-2"></i>Switch to {{ ($broker->preferred_language ?? 'en') === 'en' ? 'Kiswahili' : 'English' }}
+                                                </button>
+                                            </form>
+                                        </li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('admin.users.destroy', $broker) }}" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="dropdown-item text-danger">
+                                                    <i class="bi bi-trash me-2"></i>Delete
+                                                </button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center py-4">
+                            <td colspan="10" class="text-center py-4">
                                 <div class="text-muted">
                                     <i class="bi bi-inbox fs-1 d-block mb-3"></i>
                                     No brokers found

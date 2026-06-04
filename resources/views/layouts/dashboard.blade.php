@@ -373,7 +373,8 @@
                     <a href="{{ route('admin.users.insurers') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.insurers') ? 'active' : '' }}">Insurers</a>
                     <a href="{{ route('admin.users.aggregators') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.aggregators') ? 'active' : '' }}">Aggregators</a>
                     <a href="{{ route('admin.users.brokers') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.brokers') ? 'active' : '' }}">Brokers</a>
-                    <a href="{{ route('admin.users.agents') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.agents') ? 'active' : '' }}">Agents (SFE/Banc)</a>
+                    <a href="{{ route('admin.users.sfe-agents') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.sfe-agents') ? 'active' : '' }}">SFE Agents</a>
+                    <a href="{{ route('admin.users.bancassurance-agents') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.bancassurance-agents') ? 'active' : '' }}">Bancassurance Agents</a>
                     <a href="{{ route('admin.users.customers') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.customers') ? 'active' : '' }}">Customers</a>
                     <a href="{{ route('admin.users.service-providers') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.service-providers') ? 'active' : '' }}">Service Providers</a>
                     <a href="{{ route('admin.users.rbac') }}" class="list-group-item list-group-item-action py-2 small {{ request()->routeIs('admin.users.rbac') ? 'active' : '' }}">RBAC Settings</a>
@@ -385,7 +386,7 @@
                 <a href="{{ route('admin.products.index') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-box-seam"></i> Product List
                 </a>
-                <a href="{{ route('admin.products.create') }}" class="list-group-item list-group-item-action">
+                <a href="{{ route('admin.products.builder') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-hammer"></i> Low-Code Builder
                 </a>
                 <a href="{{ route('admin.products.compare') }}" class="list-group-item list-group-item-action">
@@ -458,7 +459,7 @@
                 <a href="{{ route('insurer.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('insurer.dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i> Main Dashboard
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('insurer.ai-insights') }}" class="list-group-item list-group-item-action {{ request()->routeIs('insurer.ai-insights') ? 'active' : '' }}">
                     <i class="bi bi-robot"></i> AI Market Insights
                 </a>
             </div>
@@ -607,10 +608,10 @@
                 <a href="{{ route('agent.products') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.products') ? 'active' : '' }}">
                     <i class="bi bi-box-seam"></i> Product Catalog
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('sfe.training.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.training.*') ? 'active' : '' }}">
                     <i class="bi bi-book"></i> Training & Guides
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('sfe.support.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('sfe.support.*') ? 'active' : '' }}">
                     <i class="bi bi-question-circle"></i> Help & Support
                 </a>
             </div>
@@ -884,10 +885,10 @@
                 <a href="{{ route('agent.customers') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.customers') ? 'active' : '' }}">
                     <i class="bi bi-people-fill"></i> All Customers
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('agent.customers') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.customers') ? 'active' : '' }}">
                     <i class="bi bi-person-plus"></i> Add New Customer
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('agent.customers') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.customers') ? 'active' : '' }}">
                     <i class="bi bi-file-earmark-person"></i> Customer KYC
                 </a>
             </div>
@@ -897,10 +898,10 @@
                 <a href="{{ route('agent.policies') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.policies') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i> My Policies
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('agent.policies') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.policies') ? 'active' : '' }}">
                     <i class="bi bi-cart-plus"></i> Buy New Policy
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('agent.policies') }}" class="list-group-item list-group-item-action {{ request()->routeIs('agent.policies') ? 'active' : '' }}">
                     <i class="bi bi-clock-history"></i> Renewals
                 </a>
             </div>
@@ -1028,10 +1029,10 @@
 
             <div class="sidebar-heading mt-3">Monitoring</div>
             <div class="list-group list-group-flush px-2">
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('regulator.compliance') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.compliance') ? 'active' : '' }}">
                     <i class="bi bi-activity"></i> Claims Monitoring
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('regulator.reports') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.reports') ? 'active' : '' }}">
                     <i class="bi bi-check-circle"></i> Product Approvals
                 </a>
                 <a href="{{ route('regulator.compliance') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.compliance') ? 'active' : '' }}">
@@ -1044,7 +1045,7 @@
                 <a href="{{ route('regulator.analytics') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.analytics') ? 'active' : '' }}">
                     <i class="bi bi-graph-up"></i> Market Stats
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="{{ route('regulator.oversight') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.oversight') ? 'active' : '' }}">
                     <i class="bi bi-shield-lock"></i> Consumer Protection
                 </a>
                 <a href="{{ route('regulator.oversight') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.oversight') ? 'active' : '' }}">
@@ -1141,7 +1142,7 @@
             @endif
 
             <div class="logout-section mt-4 mb-4">
-                <a href="#" class="logout-btn mx-2" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a href="{{ route('logout') }}" class="logout-btn mx-2" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="bi bi-power me-2"></i> {{ auth()->user()->hasRole('super-admin') ? 'Shutdown System' : 'Sign Out' }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -1180,12 +1181,12 @@
                         </div>
                         <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
                             <li><a class="dropdown-item py-2" href="/profile"><i class="bi bi-person me-2"></i> My Profile</a></li>
-                            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
+                            <li><a class="dropdown-item py-2" href="/profile"><i class="bi bi-gear me-2"></i> Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item py-2 text-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <button type="button" class="dropdown-item py-2 text-danger" onclick="document.getElementById('logout-form').submit();">
                                     <i class="bi bi-box-arrow-left me-2"></i> Sign Out
-                                </a>
+                                </button>
                             </li>
                         </ul>
                     </div>
@@ -1200,6 +1201,21 @@
     </div>
 
     @include('partials.mobile_nav')
+
+    <div class="modal fade" id="globalRowDetailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Row Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="globalRowDetailsBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1300,6 +1316,54 @@
                         }
                     }
                 });
+            });
+
+            // Global fallback: make plain table View buttons show row details modal.
+            $(document).on('click', 'table tbody button', function (e) {
+                const $btn = $(this);
+                const hasEyeIcon = $btn.find('i.bi-eye').length > 0;
+                const hasTrashIcon = $btn.find('i.bi-trash').length > 0;
+                const hasCustomHandler = $btn.attr('onclick') || $btn.attr('data-bs-toggle') || $btn.closest('form').length > 0;
+
+                if (hasEyeIcon && !hasCustomHandler) {
+                    e.preventDefault();
+                    const $row = $btn.closest('tr');
+                    const headers = $row.closest('table').find('thead th');
+                    const cells = $row.children('td');
+                    let html = '<div class="table-responsive"><table class="table table-sm align-middle mb-0"><tbody>';
+
+                    cells.each(function (i) {
+                        if (i >= headers.length) return;
+                        const headerText = $(headers[i]).text().trim() || `Column ${i + 1}`;
+                        const cellText = $(this).text().replace(/\s+/g, ' ').trim() || 'N/A';
+                        if (headerText.toLowerCase().includes('action')) return;
+                        html += `<tr><th class="text-muted" style="width: 220px;">${headerText}</th><td>${cellText}</td></tr>`;
+                    });
+
+                    html += '</tbody></table></div>';
+                    $('#globalRowDetailsBody').html(html);
+                    bootstrap.Modal.getOrCreateInstance(document.getElementById('globalRowDetailsModal')).show();
+                    return;
+                }
+
+                // Global fallback: make plain table Delete buttons remove the row with confirmation.
+                if (hasTrashIcon && !hasCustomHandler) {
+                    e.preventDefault();
+                    const $row = $btn.closest('tr');
+                    Swal.fire({
+                        title: 'Delete this row?',
+                        text: 'This action will remove the item from the current list view.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, remove it',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $row.remove();
+                            bkToast('Row removed from list.', 'success');
+                        }
+                    });
+                }
             });
 
             /* Session flash messages */

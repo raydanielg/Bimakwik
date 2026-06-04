@@ -22,7 +22,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Total Documents</p>
-                        <h3 class="fw-bold mb-0">2,456</h3>
+                        <h3 class="fw-bold mb-0">{{ $documents->total() ?? 0 }}</h3>
                     </div>
                     <div class="bg-primary bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-file-earmark-pdf text-primary fs-4"></i>
@@ -37,7 +37,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Storage Used</p>
-                        <h3 class="fw-bold mb-0">45.2 GB</h3>
+                        <h3 class="fw-bold mb-0">0 GB</h3>
                     </div>
                     <div class="bg-info bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-hdd text-info fs-4"></i>
@@ -52,7 +52,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Uploaded Today</p>
-                        <h3 class="fw-bold mb-0">89</h3>
+                        <h3 class="fw-bold mb-0">0</h3>
                     </div>
                     <div class="bg-success bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-upload text-success fs-4"></i>
@@ -67,7 +67,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Pending Review</p>
-                        <h3 class="fw-bold mb-0">24</h3>
+                        <h3 class="fw-bold mb-0">0</h3>
                     </div>
                     <div class="bg-warning bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-clock-history text-warning fs-4"></i>
@@ -108,24 +108,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse([
-                        ['name' => 'Policy_Document_001234.pdf', 'type' => 'Policy', 'size' => '2.4 MB', 'user' => 'Admin User', 'date' => '2 hours ago'],
-                        ['name' => 'Claim_Evidence_002.jpg', 'type' => 'Claim', 'size' => '1.8 MB', 'user' => 'John Doe', 'date' => '5 hours ago'],
-                        ['name' => 'ID_Verification_123.pdf', 'type' => 'KYC', 'size' => '890 KB', 'user' => 'Sarah K', 'date' => '1 day ago'],
-                    ] as $doc)
+                    @forelse($documents as $doc)
                     <tr>
                         <td class="py-3">
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-file-earmark-pdf text-danger fs-4 me-2"></i>
-                                <span class="fw-semibold">{{ $doc['name'] }}</span>
+                                <span class="fw-semibold">{{ $doc->name ?? ('Document #' . $doc->id) }}</span>
                             </div>
                         </td>
                         <td class="py-3">
-                            <span class="badge bg-primary bg-opacity-10 text-primary">{{ $doc['type'] }}</span>
+                            <span class="badge bg-primary bg-opacity-10 text-primary">{{ $doc->type ?? 'Document' }}</span>
                         </td>
-                        <td class="py-3">{{ $doc['size'] }}</td>
-                        <td class="py-3">{{ $doc['user'] }}</td>
-                        <td class="py-3"><small class="text-muted">{{ $doc['date'] }}</small></td>
+                        <td class="py-3">{{ $doc->size ?? 'N/A' }}</td>
+                        <td class="py-3">{{ $doc->user->name ?? 'N/A' }}</td>
+                        <td class="py-3"><small class="text-muted">{{ optional($doc->created_at)->diffForHumans() ?? 'N/A' }}</small></td>
                         <td class="py-3 text-end">
                             <div class="btn-group btn-group-sm">
                                 <button class="btn btn-outline-primary" title="View">

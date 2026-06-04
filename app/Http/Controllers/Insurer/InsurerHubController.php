@@ -16,6 +16,7 @@ use App\Models\InsurerContract;
 use App\Models\PolicyEndorsement;
 use App\Models\PolicyCancellation;
 use App\Models\PolicyRenewal;
+use App\Models\Report;
 use Illuminate\Support\Facades\DB;
 
 class InsurerHubController extends Controller
@@ -228,10 +229,73 @@ class InsurerHubController extends Controller
     public function reportsStandard()
     {
         $reports = collect();
-        try { $reports = \App\Models\Report::latest()->paginate(15); } catch (\Exception $e) {}
+        try { $reports = Report::where('created_by', auth()->id())->latest()->paginate(15); } catch (\Exception $e) {}
         return view('insurer.reports.standard', compact('reports'));
     }
 
+    public function generateStandardReport(Request $request)
+    {
+        $validated = $request->validate([
+            'report_type' => 'required|string|max:100',
+            'period' => 'nullable|string|max:100',
+        ]);
+
+        Report::create([
+            'report_name' => $validated['report_type'] . ' - ' . now()->format('Y-m-d H:i'),
+            'report_type' => $validated['report_type'],
+            'parameters' => ['period' => $validated['period'] ?? 'Current Month'],
+            'is_system' => false,
+            'is_active' => true,
+            'created_by' => auth()->id(),
+        ]);
+
+        return back()->with('success', 'Report generated successfully');
+    }
+
+    public function viewStandardReport(Report $report)
+    {
+        abort_unless((int) $report->created_by === (int) auth()->id(), 403);
+
+        return view('shared.reports.show', [
+            'report' => $report,
+            'backRoute' => 'insurer.reports.standard',
+        ]);
+    }
+
+    public function downloadStandardReport(Report $report)
+    {
+        abort_unless((int) $report->created_by === (int) auth()->id(), 403);
+
+        $content = "Report Name: " . ($report->report_name ?? 'N/A') . "\n"
+            . "Report Type: " . ($report->report_type ?? 'N/A') . "\n"
+            . "Generated At: " . (optional($report->created_at)->format('Y-m-d H:i:s') ?? 'N/A') . "\n"
+            . "Parameters: " . json_encode($report->parameters ?? [], JSON_PRETTY_PRINT) . "\n";
+
+        return response()->streamDownload(function () use ($content) {
+            echo $content;
+        }, 'report-' . $report->id . '.txt', ['Content-Type' => 'text/plain']);
+    }
+
+    public function exportStandardReports()
+    {
+        $reports = Report::where('created_by', auth()->id())->latest()->get();
+
+        return response()->streamDownload(function () use ($reports) {
+            $out = fopen('php://output', 'w');
+            fputcsv($out, ['Report Name', 'Type', 'Period', 'Generated At']);
+
+            foreach ($reports as $report) {
+                fputcsv($out, [
+                    $report->report_name,
+                    $report->report_type,
+                    $report->parameters['period'] ?? 'Current Month',
+                    optional($report->created_at)->format('Y-m-d H:i:s'),
+                ]);
+            }
+
+            fclose($out);
+        }, 'insurer-standard-reports.csv', ['Content-Type' => 'text/csv']);
+    }
     public function reportsCustom()
     {
         $reports = collect();
@@ -275,6 +339,46 @@ class InsurerHubController extends Controller
             $webhooks = \App\Models\Webhook::latest()->limit(10)->get();
         } catch (\Exception $e) {}
         return view('insurer.settings.api', compact('apiKeys', 'webhooks'));
+    }
+
+    public function deleteBranch($id)
+    {
+        try {
+            InsurerBranch::findOrFail($id)->delete();
+            return back()->with('success', 'Branch deleted successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to delete branch: ' . $e->getMessage());
+        }
+    }
+
+    public function deleteStaff($id)
+    {
+        try {
+            \App\Models\InsurerAdmin::findOrFail($id)->delete();
+            return back()->with('success', 'Staff member deleted successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to delete staff member: ' . $e->getMessage());
+        }
+    }
+
+    public function deleteApiKey($id)
+    {
+        try {
+            \App\Models\ApiKey::findOrFail($id)->delete();
+            return back()->with('success', 'API key deleted successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to delete API key: ' . $e->getMessage());
+        }
+    }
+
+    public function deleteWebhook($id)
+    {
+        try {
+            \App\Models\Webhook::findOrFail($id)->delete();
+            return back()->with('success', 'Webhook deleted successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to delete webhook: ' . $e->getMessage());
+        }
     }
 
     public function aiInsights()

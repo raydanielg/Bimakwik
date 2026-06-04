@@ -47,6 +47,7 @@
         
         <h1 class="auth-title">Log in</h1>
 
+        @if(config('app.demo_quick_login'))
         <!-- Demo Accounts Quick Login Section -->
         <div class="mb-4 p-3 bg-light rounded-3 border text-center">
             <div class="small text-muted fw-bold mb-2"><i class="bi bi-lightning-charge-fill text-warning me-1"></i>DEMO QUICK LOGIN</div>
@@ -67,6 +68,7 @@
                 <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('developer@bimakwik.com')">Developer</button>
             </div>
         </div>
+        @endif
 
         <form method="POST" action="{{ route('login') }}" id="loginForm">
             @csrf
@@ -114,6 +116,7 @@
                 password.setAttribute('type', type);
             });
 
+            @if(config('app.demo_quick_login'))
             function quickLogin(email) {
                 document.getElementById('email').value = email;
                 document.getElementById('password').value = 'password';
@@ -126,6 +129,7 @@
                     document.getElementById('loginForm').submit();
                 }, 300);
             }
+            @endif
 
             document.getElementById('loginForm').addEventListener('submit', function(e) {
                 const btn = document.getElementById('loginSubmit');

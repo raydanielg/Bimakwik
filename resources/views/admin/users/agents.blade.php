@@ -83,6 +83,9 @@
                         <th>Agent Name</th>
                         <th>Type</th>
                         <th>Email</th>
+                        <th>Logo</th>
+                        <th>Company ID</th>
+                        <th>Sales ID</th>
                         <th>Phone</th>
                         <th>Branch/Bank</th>
                         <th>Status</th>
@@ -111,6 +114,15 @@
                                 @endforeach
                             </td>
                             <td>{{ $agent->email }}</td>
+                            <td>
+                                @if($agent->logo)
+                                    <img src="{{ asset('storage/' . $agent->logo) }}" alt="User Logo" class="rounded" style="width: 40px; height: 40px; object-fit: cover;">
+                                @else
+                                    <span class="text-muted">N/A</span>
+                                @endif
+                            </td>
+                            <td>{{ $agent->company_id ?? 'N/A' }}</td>
+                            <td>{{ $agent->sales_id ?? 'N/A' }}</td>
                             <td>{{ $agent->phone ?? 'N/A' }}</td>
                             <td>{{ $agent->agentProfile->branch_name ?? $agent->agentProfile->bank_name ?? 'N/A' }}</td>
                             <td>
@@ -128,19 +140,34 @@
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View Details</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up me-2"></i>Performance</a></li>
-                                        <li><a class="dropdown-item" href="#"><i class="bi bi-wallet2 me-2"></i>Commissions</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.users.show', $agent) }}"><i class="bi bi-eye me-2"></i>View Details</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.users.edit', $agent) }}"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('admin.users.language.update', $agent) }}">
+                                                @csrf
+                                                <input type="hidden" name="preferred_language" value="{{ ($agent->preferred_language ?? 'en') === 'en' ? 'sw' : 'en' }}">
+                                                <button type="submit" class="dropdown-item">
+                                                    <i class="bi bi-translate me-2"></i>Switch to {{ ($agent->preferred_language ?? 'en') === 'en' ? 'Kiswahili' : 'English' }}
+                                                </button>
+                                            </form>
+                                        </li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('admin.users.destroy', $agent) }}" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="dropdown-item text-danger">
+                                                    <i class="bi bi-trash me-2"></i>Delete
+                                                </button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center py-4">
+                            <td colspan="10" class="text-center py-4">
                                 <div class="text-muted">
                                     <i class="bi bi-inbox fs-1 d-block mb-3"></i>
                                     No agents found

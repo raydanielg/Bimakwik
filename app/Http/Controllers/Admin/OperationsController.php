@@ -14,18 +14,20 @@ class OperationsController extends Controller
     {
         try {
             $claims = Claim::latest()->paginate(20);
+            $pendingClaims = Claim::whereIn('status', ['submitted', 'pending'])->count();
+            $processingClaims = Claim::where('status', 'processing')->count();
+            $approvedClaims = Claim::where('status', 'approved')->count();
+            $rejectedClaims = Claim::where('status', 'rejected')->count();
             $totalClaims = Claim::count();
-            $pendingClaims = (int)($totalClaims * 0.3); // Estimate 30% pending
-            $processingClaims = (int)($totalClaims * 0.1); // Estimate 10% processing
-            $approvedClaims = (int)($totalClaims * 0.6); // Estimate 60% approved
         } catch (\Exception $e) {
             $claims = new LengthAwarePaginator([], 0, 20);
-            $totalClaims = 0;
             $pendingClaims = 0;
             $processingClaims = 0;
             $approvedClaims = 0;
+            $rejectedClaims = 0;
+            $totalClaims = 0;
         }
-        return view('admin.operations.claims', compact('claims', 'pendingClaims', 'processingClaims', 'approvedClaims'));
+        return view('admin.operations.claims', compact('claims', 'pendingClaims', 'processingClaims', 'approvedClaims', 'rejectedClaims', 'totalClaims'));
     }
     
     public function show($id)
@@ -42,7 +44,14 @@ class OperationsController extends Controller
     {
         try {
             $claim = Claim::findOrFail($id);
-            // Update claim if possible
+            $claim->status = 'approved';
+            if (is_null($claim->approved_amount)) {
+                $claim->approved_amount = $claim->claimed_amount;
+            }
+            $claim->rejection_reason = null;
+            $claim->settled_at = now();
+            $claim->save();
+
             return response()->json([
                 'success' => true,
                 'message' => 'Claim approved successfully'
@@ -59,7 +68,12 @@ class OperationsController extends Controller
     {
         try {
             $claim = Claim::findOrFail($id);
-            // Update claim if possible
+            $claim->status = 'rejected';
+            $claim->rejection_reason = $request->input('reason');
+            $claim->approved_amount = null;
+            $claim->settled_at = null;
+            $claim->save();
+
             return response()->json([
                 'success' => true,
                 'message' => 'Claim rejected successfully'
@@ -80,6 +94,16 @@ class OperationsController extends Controller
             $workflows = new LengthAwarePaginator([], 0, 20);
         }
         return view('admin.operations.workflows', compact('workflows'));
+    }
+
+    public function deleteWorkflow($id)
+    {
+        try {
+            Workflow::findOrFail($id)->delete();
+            return back()->with('success', 'Workflow deleted successfully');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to delete workflow: ' . $e->getMessage());
+        }
     }
 
     public function documents()

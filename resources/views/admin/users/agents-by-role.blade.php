@@ -1,73 +1,60 @@
 @extends('layouts.dashboard')
 
-@section('dashboard_title', 'Service Provider Management')
+@section('dashboard_title', $pageTitle)
 
 @section('dashboard_content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="mb-0">Service Provider Management</h4>
+    <h4 class="mb-0">{{ $heading }}</h4>
     <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
-        <i class="bi bi-plus-circle me-2"></i>Add New Provider
+        <i class="bi bi-plus-circle me-2"></i>{{ $addLabel }}
     </a>
 </div>
 
-<!-- Stats Cards -->
 <div class="row g-4 mb-4">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="card stat-card">
             <div class="stat-icon-box bg-primary bg-opacity-10 text-primary">
-                <i class="bi bi-hospital"></i>
+                <i class="bi bi-person-workspace"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $providers->total() }}</span>
-                <span class="label">Total Providers</span>
+                <span class="value">{{ $agents->total() }}</span>
+                <span class="label">Total {{ $roleBadge }} Agents</span>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="card stat-card">
             <div class="stat-icon-box bg-success bg-opacity-10 text-success">
                 <i class="bi bi-check-circle"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $providers->where('status', 'active')->count() }}</span>
+                <span class="value">{{ $activeCount }}</span>
                 <span class="label">Active</span>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="card stat-card">
             <div class="stat-icon-box bg-warning bg-opacity-10 text-warning">
-                <i class="bi bi-geo-alt"></i>
+                <i class="bi bi-graph-up"></i>
             </div>
             <div class="stat-info">
-                <span class="value">{{ $hospitalCount }}</span>
-                <span class="label">Hospitals</span>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card stat-card">
-            <div class="stat-icon-box bg-info bg-opacity-10 text-info">
-                <i class="bi bi-tools"></i>
-            </div>
-            <div class="stat-info">
-                <span class="value">{{ $garageCount }}</span>
-                <span class="label">Garages</span>
+                <span class="value">{{ $monthlySales }}</span>
+                <span class="label">Monthly Sales</span>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Service Providers Table -->
 <div class="card">
     <div class="card-header bg-white py-3">
         <div class="row align-items-center">
             <div class="col">
-                <h6 class="mb-0">All Service Providers</h6>
+                <h6 class="mb-0">All {{ $roleBadge }} Agents</h6>
             </div>
             <div class="col-auto">
                 <div class="input-group input-group-sm" style="width: 250px;">
-                    <input type="text" class="form-control" placeholder="Search providers..." id="searchInput">
+                    <input type="text" class="form-control" placeholder="Search agents..." id="searchInput">
                     <button class="btn btn-outline-secondary" type="button">
                         <i class="bi bi-search"></i>
                     </button>
@@ -80,56 +67,51 @@
             <table class="table table-hover">
                 <thead class="table-light">
                     <tr>
-                        <th>Provider Name</th>
+                        <th>Agent Name</th>
                         <th>Type</th>
                         <th>Email</th>
                         <th>Logo</th>
                         <th>Company ID</th>
                         <th>Sales ID</th>
                         <th>Phone</th>
-                        <th>Location</th>
+                        <th>Branch/Bank</th>
                         <th>Status</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($providers as $provider)
+                    @forelse($agents as $agent)
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3">
-                                        <i class="bi bi-hospital text-primary"></i>
+                                        <i class="bi bi-person-workspace text-primary"></i>
                                     </div>
                                     <div>
-                                        <h6 class="mb-0">{{ $provider->providerProfile->company_name ?? $provider->name }}</h6>
-                                        <small class="text-muted">ID: #SP{{ str_pad($provider->id, 5, '0', STR_PAD_LEFT) }}</small>
+                                        <h6 class="mb-0">{{ $agent->name }}</h6>
+                                        <small class="text-muted">ID: #AGT{{ str_pad($agent->id, 5, '0', STR_PAD_LEFT) }}</small>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                @php
-                                    $providerType = $provider->providerProfile->provider_type ?? 'general';
-                                @endphp
-                                <span class="badge bg-{{ $providerType == 'hospital' ? 'danger' : ($providerType == 'garage' ? 'warning' : 'info') }}">
-                                    {{ ucfirst($providerType) }}
-                                </span>
+                                <span class="badge bg-{{ $roleBadgeClass }}">{{ $roleBadge }}</span>
                             </td>
-                            <td>{{ $provider->email }}</td>
+                            <td>{{ $agent->email }}</td>
                             <td>
-                                @if($provider->logo)
-                                    <img src="{{ asset('storage/' . $provider->logo) }}" alt="User Logo" class="rounded" style="width: 40px; height: 40px; object-fit: cover;">
+                                @if($agent->logo)
+                                    <img src="{{ asset('storage/' . $agent->logo) }}" alt="User Logo" class="rounded" style="width: 40px; height: 40px; object-fit: cover;">
                                 @else
                                     <span class="text-muted">N/A</span>
                                 @endif
                             </td>
-                            <td>{{ $provider->company_id ?? 'N/A' }}</td>
-                            <td>{{ $provider->sales_id ?? 'N/A' }}</td>
-                            <td>{{ $provider->phone ?? 'N/A' }}</td>
-                            <td>{{ $provider->providerProfile->location ?? 'N/A' }}</td>
+                            <td>{{ $agent->company_id ?? 'N/A' }}</td>
+                            <td>{{ $agent->sales_id ?? 'N/A' }}</td>
+                            <td>{{ $agent->phone ?? 'N/A' }}</td>
+                            <td>{{ $agent->agentProfile->branch_name ?? $agent->agentProfile->bank_name ?? 'N/A' }}</td>
                             <td>
-                                @if($provider->status == 'active')
+                                @if($agent->status == 'active')
                                     <span class="badge bg-success">Active</span>
-                                @elseif($provider->status == 'inactive')
+                                @elseif($agent->status == 'inactive')
                                     <span class="badge bg-warning">Inactive</span>
                                 @else
                                     <span class="badge bg-danger">Suspended</span>
@@ -141,20 +123,20 @@
                                         <i class="bi bi-three-dots-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{ route('admin.users.show', $provider) }}"><i class="bi bi-eye me-2"></i>View Details</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('admin.users.edit', $provider) }}"><i class="bi bi-pencil me-2"></i>Edit</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.users.show', $agent) }}"><i class="bi bi-eye me-2"></i>View Details</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('admin.users.edit', $agent) }}"><i class="bi bi-pencil me-2"></i>Edit</a></li>
                                         <li>
-                                            <form method="POST" action="{{ route('admin.users.language.update', $provider) }}">
+                                            <form method="POST" action="{{ route('admin.users.language.update', $agent) }}">
                                                 @csrf
-                                                <input type="hidden" name="preferred_language" value="{{ ($provider->preferred_language ?? 'en') === 'en' ? 'sw' : 'en' }}">
+                                                <input type="hidden" name="preferred_language" value="{{ ($agent->preferred_language ?? 'en') === 'en' ? 'sw' : 'en' }}">
                                                 <button type="submit" class="dropdown-item">
-                                                    <i class="bi bi-translate me-2"></i>Switch to {{ ($provider->preferred_language ?? 'en') === 'en' ? 'Kiswahili' : 'English' }}
+                                                    <i class="bi bi-translate me-2"></i>Switch to {{ ($agent->preferred_language ?? 'en') === 'en' ? 'Kiswahili' : 'English' }}
                                                 </button>
                                             </form>
                                         </li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li>
-                                            <form method="POST" action="{{ route('admin.users.destroy', $provider) }}" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                            <form method="POST" action="{{ route('admin.users.destroy', $agent) }}" onsubmit="return confirm('Are you sure you want to delete this user?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="dropdown-item text-danger">
@@ -171,7 +153,7 @@
                             <td colspan="10" class="text-center py-4">
                                 <div class="text-muted">
                                     <i class="bi bi-inbox fs-1 d-block mb-3"></i>
-                                    No service providers found
+                                    No agents found
                                 </div>
                             </td>
                         </tr>
@@ -179,14 +161,13 @@
                 </tbody>
             </table>
         </div>
-        
-        <!-- Pagination -->
-        @if($providers->hasPages())
+
+        @if($agents->hasPages())
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <div class="text-muted">
-                    Showing {{ $providers->firstItem() }} to {{ $providers->lastItem() }} of {{ $providers->total() }} results
+                    Showing {{ $agents->firstItem() }} to {{ $agents->lastItem() }} of {{ $agents->total() }} results
                 </div>
-                {{ $providers->links() }}
+                {{ $agents->links() }}
             </div>
         @endif
     </div>
@@ -195,11 +176,10 @@
 
 @push('scripts')
 <script>
-// Search functionality
 document.getElementById('searchInput')?.addEventListener('input', function(e) {
     const searchTerm = e.target.value.toLowerCase();
     const rows = document.querySelectorAll('tbody tr');
-    
+
     rows.forEach(row => {
         const text = row.textContent.toLowerCase();
         row.style.display = text.includes(searchTerm) ? '' : 'none';

@@ -15,7 +15,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Total Claims</p>
-                        <h3 class="fw-bold mb-0">342</h3>
+                        <h3 class="fw-bold mb-0">{{ number_format($totalClaims) }}</h3>
                     </div>
                     <div class="bg-primary bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-exclamation-octagon text-primary fs-4"></i>
@@ -30,7 +30,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Pending Review</p>
-                        <h3 class="fw-bold mb-0">45</h3>
+                        <h3 class="fw-bold mb-0">{{ number_format($pendingClaims) }}</h3>
                     </div>
                     <div class="bg-warning bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-clock-history text-warning fs-4"></i>
@@ -45,7 +45,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Approved</p>
-                        <h3 class="fw-bold mb-0">278</h3>
+                        <h3 class="fw-bold mb-0">{{ number_format($approvedClaims) }}</h3>
                     </div>
                     <div class="bg-success bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-check-circle text-success fs-4"></i>
@@ -60,7 +60,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <p class="text-muted small mb-1">Rejected</p>
-                        <h3 class="fw-bold mb-0">19</h3>
+                        <h3 class="fw-bold mb-0">{{ number_format($rejectedClaims) }}</h3>
                     </div>
                     <div class="bg-danger bg-opacity-10 rounded-circle p-3">
                         <i class="bi bi-x-circle text-danger fs-4"></i>
@@ -102,47 +102,59 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse([
-                        ['id' => 'CLM-2024-001', 'holder' => 'John Mwangi', 'type' => 'Motor Accident', 'amount' => '1,200,000', 'status' => 'pending', 'date' => '2 hours ago'],
-                        ['id' => 'CLM-2024-002', 'holder' => 'Sarah Kimani', 'type' => 'Health', 'amount' => '450,000', 'status' => 'approved', 'date' => '5 hours ago'],
-                        ['id' => 'CLM-2024-003', 'holder' => 'David Omondi', 'type' => 'Property Damage', 'amount' => '2,800,000', 'status' => 'pending', 'date' => '1 day ago'],
-                    ] as $claim)
+                    @forelse($claims as $claim)
+                    @php
+                        $status = strtolower((string) ($claim->status ?? 'pending'));
+                        $isActionable = in_array($status, ['submitted', 'pending', 'processing'], true);
+                        $claimCode = $claim->claim_number ?? ('CLM-' . str_pad((string) $claim->id, 6, '0', STR_PAD_LEFT));
+                        $claimType = $claim->claim_type ?? 'General';
+                        $holder = $claim->customer->name ?? ('Customer #' . ($claim->customer_id ?? 'N/A'));
+                        $amount = (float) ($claim->claimed_amount ?? 0);
+                    @endphp
                     <tr>
-                        <td class="py-3"><span class="fw-semibold text-primary">{{ $claim['id'] }}</span></td>
-                        <td class="py-3">{{ $claim['holder'] }}</td>
+                        <td class="py-3"><span class="fw-semibold text-primary">{{ $claimCode }}</span></td>
+                        <td class="py-3">{{ $holder }}</td>
                         <td class="py-3">
-                            <span class="badge bg-info bg-opacity-10 text-info">{{ $claim['type'] }}</span>
+                            <span class="badge bg-info bg-opacity-10 text-info">{{ $claimType }}</span>
                         </td>
-                        <td class="py-3"><span class="fw-bold">TZS {{ $claim['amount'] }}</span></td>
+                        <td class="py-3"><span class="fw-bold">TZS {{ number_format($amount, 2) }}</span></td>
                         <td class="py-3">
-                            @if($claim['status'] == 'pending')
-                                <span class="badge bg-warning bg-opacity-10 text-warning">
-                                    <i class="bi bi-clock"></i> Pending
-                                </span>
-                            @else
+                            @if($status === 'approved')
                                 <span class="badge bg-success bg-opacity-10 text-success">
                                     <i class="bi bi-check-circle"></i> Approved
                                 </span>
+                            @elseif($status === 'rejected')
+                                <span class="badge bg-danger bg-opacity-10 text-danger">
+                                    <i class="bi bi-x-circle"></i> Rejected
+                                </span>
+                            @elseif($status === 'processing')
+                                <span class="badge bg-info bg-opacity-10 text-info">
+                                    <i class="bi bi-arrow-repeat"></i> Processing
+                                </span>
+                            @else
+                                <span class="badge bg-warning bg-opacity-10 text-warning">
+                                    <i class="bi bi-clock"></i> Pending
+                                </span>
                             @endif
                         </td>
-                        <td class="py-3"><small class="text-muted">{{ $claim['date'] }}</small></td>
+                        <td class="py-3"><small class="text-muted">{{ optional($claim->created_at)->diffForHumans() ?? '-' }}</small></td>
                         <td class="py-3 text-end">
-                            @if($claim['status'] == 'pending')
+                            @if($isActionable)
                             <div class="btn-group btn-group-sm">
-                                <button class="btn btn-success" onclick="confirmApprove('#', 'Approve this claim?')">
+                                <button class="btn btn-success" onclick="confirmApprove('{{ route('admin.operations.claims.approve', $claim->id) }}', 'Approve this claim?')">
                                     <i class="bi bi-check-lg"></i>
                                 </button>
-                                <button class="btn btn-danger" onclick="confirmReject('#', 'Reject this claim?')">
+                                <button class="btn btn-danger" onclick="confirmReject('{{ route('admin.operations.claims.reject', $claim->id) }}', 'Reject this claim?')">
                                     <i class="bi bi-x-lg"></i>
                                 </button>
-                                <button class="btn btn-outline-primary" title="View Details">
+                                <a href="{{ route('admin.operations.claims.show', $claim->id) }}" class="btn btn-outline-primary" title="View Details">
                                     <i class="bi bi-eye"></i>
-                                </button>
+                                </a>
                             </div>
                             @else
-                            <button class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('admin.operations.claims.show', $claim->id) }}" class="btn btn-sm btn-outline-primary">
                                 <i class="bi bi-eye"></i>
-                            </button>
+                            </a>
                             @endif
                         </td>
                     </tr>

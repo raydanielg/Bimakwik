@@ -12,8 +12,8 @@
                             <h1 class="display-5 fw-bold mb-4">Hello, {{ Auth::user()->name }}!</h1>
                             <p class="lead text-secondary mb-4">You have successfully logged into the {{ config('app.name', 'BimaKwik') }} system. Start managing your insurance policies easily.</p>
                             <div class="d-grid d-md-flex gap-2">
-                                <a href="#" class="btn btn-primary btn-lg px-4 rounded-pill text-white">View My Policies</a>
-                                <a href="#" class="btn btn-outline-secondary btn-lg px-4 rounded-pill">My Profile</a>
+                                <a href="{{ Auth::user()->hasRole('customer') ? route('customer.policies.index') : route('home') }}" class="btn btn-primary btn-lg px-4 rounded-pill text-white">View My Policies</a>
+                                <a href="{{ Auth::user()->hasRole('customer') ? route('customer.profile') : route('home') }}" class="btn btn-outline-secondary btn-lg px-4 rounded-pill">My Profile</a>
                             </div>
                         </div>
                         <div class="col-lg-6 d-none d-lg-block animate__animated animate__fadeInRight text-center">

@@ -49,7 +49,7 @@
         <div class="card p-4 h-100">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h6 class="fw-bold mb-0">Recent Financing Requests</h6>
-                <a href="#" class="btn btn-sm btn-link text-decoration-none">View All</a>
+                <a href="{{ route('financing-partner.requests.index') }}" class="btn btn-sm btn-link text-decoration-none">View All</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover align-middle small">

@@ -84,7 +84,7 @@
                     <div class="col-lg-8">
                         <h1 class="display-3 fw-bold mb-4">{{ __('site.hero_slide2_title') }} <span class="text-warning">{{ __('site.hero_slide2_title_highlight') }}</span></h1>
                         <p class="lead mb-5">{{ __('site.hero_slide2_desc') }}</p>
-                        <a href="#" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">{{ __('site.view_business_plans') }}</a>
+                        <a href="{{ route('platform.businesses') }}" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">{{ __('site.view_business_plans') }}</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                     <div class="col-lg-7">
                         <h1 class="display-3 fw-bold mb-4">{{ __('site.hero_slide3_title') }} <span class="text-warning">{{ __('site.hero_slide3_title_highlight') }}</span></h1>
                         <p class="lead mb-5">{{ __('site.hero_slide3_desc') }}</p>
-                        <a href="#" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">{{ __('site.claim_now') }}</a>
+                        <a href="{{ route('pages.claims') }}" class="btn btn-warning btn-lg px-5 rounded-pill fw-bold shadow">{{ __('site.claim_now') }}</a>
                     </div>
                 </div>
             </div>
@@ -148,7 +148,7 @@
                                 <h3 class="text-white fw-bold mb-3">{{ __('site.motor_insurance') }}</h3>
                                 <div class="package-details animate__animated">
                                     <p class="text-white-50 small mb-4">{{ __('site.motor_coverage_desc') }}</p>
-                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
+                                    <a href="{{ route('products.general') }}" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
                                 <h3 class="text-white fw-bold mb-3">{{ __('site.general_insurance') }}</h3>
                                 <div class="package-details animate__animated">
                                     <p class="text-white-50 small mb-4">{{ __('site.property_coverage_desc') }}</p>
-                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
+                                    <a href="{{ route('products.general') }}" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                                 <h3 class="text-white fw-bold mb-3">{{ __('site.health_insurance') }}</h3>
                                 <div class="package-details animate__animated">
                                     <p class="text-white-50 small mb-4">{{ __('site.health_coverage_desc') }}</p>
-                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
+                                    <a href="{{ route('products.health') }}" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -199,7 +199,7 @@
                                 <h3 class="text-white fw-bold mb-3">{{ __('site.general_insurance') }}</h3>
                                 <div class="package-details animate__animated">
                                     <p class="text-white-50 small mb-4">{{ __('site.travel_coverage_desc') }}</p>
-                                    <a href="#" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
+                                    <a href="{{ route('products.general') }}" class="btn btn-warning btn-sm px-4 rounded-pill fw-bold">{{ __('site.learn_more') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -449,7 +449,7 @@
                             </div>
                             <h4 class="fw-bold mb-3 h5">How Digital Insurance is Changing Tanzania</h4>
                             <p class="text-secondary small mb-4">Discover the impact of technology on making insurance more accessible to every Tanzanian...</p>
-                            <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-arrow-right ms-1"></i></a>
+                            <a href="{{ route('resources.news') }}" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
@@ -467,7 +467,7 @@
                             </div>
                             <h4 class="fw-bold mb-3 h5">Top 5 Reasons You Need Travel Insurance</h4>
                             <p class="text-secondary small mb-4">Planning your next trip? Here is why having insurance should be your top priority...</p>
-                            <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-arrow-right ms-1"></i></a>
+                            <a href="{{ route('resources.news') }}" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
@@ -485,7 +485,7 @@
                             </div>
                             <h4 class="fw-bold mb-3 h5">Protecting Your Home: A Simple Guide</h4>
                             <p class="text-secondary small mb-4">Learn the basics of home insurance and how it can safeguard your most valuable asset...</p>
-                            <a href="#" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-arrow-right ms-1"></i></a>
+                            <a href="{{ route('resources.news') }}" class="text-primary fw-bold text-decoration-none small">Read More <i class="bi bi-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>

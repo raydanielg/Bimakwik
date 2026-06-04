@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-body">
-        <form method="POST" action="{{ route('admin.users.store') }}">
+        <form method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="row g-3">
@@ -26,6 +26,24 @@
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
                     @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="company_id" class="form-label">Company ID</label>
+                    <input type="text" class="form-control @error('company_id') is-invalid @enderror" id="company_id" name="company_id" value="{{ old('company_id') }}">
+                    @error('company_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="sales_id" class="form-label">Sales ID</label>
+                    <input type="text" class="form-control @error('sales_id') is-invalid @enderror" id="sales_id" name="sales_id" value="{{ old('sales_id') }}">
+                    @error('sales_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="logo" class="form-label">Logo</label>
+                    <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" name="logo" accept="image/*">
+                    @error('logo')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
 
                 <div class="col-md-6">

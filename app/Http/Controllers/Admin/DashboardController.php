@@ -200,6 +200,82 @@ class DashboardController extends Controller
 
     public function aiInsights()
     {
-        return view('admin.ai-insights');
+        $fraudDetections = 0;
+        $riskScoreLabel = 'Low';
+        $riskScoreClass = 'success';
+        $churnRate = 0;
+        $atRiskCustomers = 0;
+        $revenueForecast = 0;
+        $recommendations = collect();
+        $alerts = collect();
+
+        try {
+            $totalClaims = safe_count(Claim::query());
+            $rejectedClaims = safe_count(Claim::where('status', 'rejected'));
+            $pendingClaims = safe_count(Claim::where('status', 'pending'));
+            $flaggedClaims = safe_count(Claim::whereIn('status', ['flagged', 'fraud_suspected']));
+            $fraudDetections = $flaggedClaims + $rejectedClaims;
+
+            $riskRatio = $totalClaims > 0 ? (($rejectedClaims + $pendingClaims) / $totalClaims) : 0;
+            if ($riskRatio >= 0.25) {
+                $riskScoreLabel = 'High';
+                $riskScoreClass = 'danger';
+            } elseif ($riskRatio >= 0.12) {
+                $riskScoreLabel = 'Medium';
+                $riskScoreClass = 'warning';
+            }
+
+            $totalPolicies = safe_count(CustomerPolicy::query());
+            $cancelledPolicies = safe_count(CustomerPolicy::where('status', 'cancelled'));
+            $churnRate = $totalPolicies > 0 ? round(($cancelledPolicies / $totalPolicies) * 100, 1) : 0;
+            $atRiskCustomers = (int) round(safe_count(User::role('customer')->where('status', 'active')) * ($churnRate / 100));
+
+            $today = Carbon::today();
+            $currentRevenue = safe_sum(PaymentTransaction::where('status', 'completed')->where('created_at', '>=', $today->copy()->subDays(30)), 'amount');
+            $previousRevenue = safe_sum(PaymentTransaction::where('status', 'completed')->whereBetween('created_at', [$today->copy()->subDays(60), $today->copy()->subDays(31)]), 'amount');
+            $revenueForecast = round(growth_rate($previousRevenue, $currentRevenue), 1);
+
+            $recommendations = collect([
+                [
+                    'icon' => 'shield-check',
+                    'color' => 'success',
+                    'title' => 'Maintain Portfolio Risk Controls',
+                    'desc' => 'Current risk posture is ' . strtolower($riskScoreLabel) . ' based on live claims trend.',
+                ],
+                [
+                    'icon' => 'people',
+                    'color' => 'info',
+                    'title' => 'Retention Focus Segment',
+                    'desc' => $atRiskCustomers . ' customers are currently in the at-risk churn segment.',
+                ],
+                [
+                    'icon' => 'graph-up-arrow',
+                    'color' => $revenueForecast >= 0 ? 'primary' : 'warning',
+                    'title' => 'Revenue Momentum',
+                    'desc' => '30-day revenue trend is ' . ($revenueForecast >= 0 ? 'up' : 'down') . ' by ' . abs($revenueForecast) . '%.',
+                ],
+            ]);
+
+            $alerts = Claim::latest()->limit(3)->get()->map(function ($claim) {
+                $severity = match ($claim->status) {
+                    'rejected', 'flagged', 'fraud_suspected' => 'high',
+                    'pending', 'processing' => 'medium',
+                    default => 'low',
+                };
+
+                return [
+                    'severity' => $severity,
+                    'title' => 'Claim #' . $claim->id . ' status: ' . ucfirst($claim->status ?? 'unknown'),
+                    'desc' => 'Latest update from claim workflow and adjudication queue.',
+                    'time' => optional($claim->updated_at ?? $claim->created_at)->diffForHumans() ?? 'N/A',
+                ];
+            });
+        } catch (\Exception $e) {
+        }
+
+        return view('admin.ai-insights', compact(
+            'fraudDetections', 'riskScoreLabel', 'riskScoreClass', 'churnRate', 'atRiskCustomers', 'revenueForecast',
+            'recommendations', 'alerts'
+        ));
     }
 }

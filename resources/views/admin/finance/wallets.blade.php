@@ -9,12 +9,7 @@
                 <p class="text-muted small mb-0">Manage platform wallets and financial balances</p>
             </div>
             <div class="d-flex gap-2">
-                @if($wallets->isEmpty() || $wallets->count() < 3)
-                <button class="btn btn-success rounded-pill px-4" onclick="loadDemoData()">
-                    <i class="bi bi-database-add me-2"></i>Load Demo Data
-                </button>
-                @endif
-                <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#addWalletModal">
+                <button class="btn btn-primary rounded-pill px-4" onclick="showAddWalletModal()">
                     <i class="bi bi-plus-circle me-2"></i>Add Wallet
                 </button>
             </div>
@@ -155,12 +150,13 @@
                         </td>
                         <td class="py-3">
                             @php
-                                $userRole = $wallet->user->role ?? 'system';
+                                $userRole = optional(optional($wallet->user)->roles->first())->name ?? $wallet->user_type ?? 'system';
                                 $roleColors = [
                                     'insurer' => 'primary',
                                     'broker' => 'success',
                                     'aggregator' => 'info',
                                     'agent' => 'warning',
+                                    'service_provider' => 'secondary',
                                     'customer' => 'secondary',
                                     'system' => 'dark'
                                 ];
@@ -192,7 +188,7 @@
                                 <button class="btn btn-outline-primary" onclick="viewWallet({{ $wallet->id }})" title="View Details">
                                     <i class="bi bi-eye"></i>
                                 </button>
-                                <button class="btn btn-outline-success" onclick="showAddFundsModal({{ $wallet->id }}, '{{ $wallet->user->name ?? 'Wallet' }}')" title="Add Funds">
+                                <button class="btn btn-outline-success" onclick="showAddFundsModal({{ $wallet->id }}, @js($wallet->user->name ?? 'Wallet'))" title="Add Funds">
                                     <i class="bi bi-plus-circle"></i>
                                 </button>
                                 <button class="btn btn-outline-info" onclick="viewTransactions({{ $wallet->id }})" title="Transactions">
@@ -355,75 +351,38 @@
 
 @push('scripts')
 <script>
-function loadDemoData() {
-    Swal.fire({
-        title: 'Load Demo Data?',
-        html: `
-            <p>This will create sample wallets with realistic data:</p>
-            <ul class="text-start">
-                <li>5 Demo Wallets (Insurers, Brokers, Agents)</li>
-                <li>Sample Transactions</li>
-                <li>Realistic Balances</li>
-            </ul>
-            <p class="text-muted small">Perfect for testing and demonstration!</p>
-        `,
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#28a745',
-        cancelButtonColor: '#6c757d',
-        confirmButtonText: '<i class="bi bi-check-circle me-2"></i>Yes, Load Demo Data!',
-        cancelButtonText: 'Cancel'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: 'Creating Demo Data...',
-                html: `
-                    <div class="mb-3">
-                        <div class="spinner-border text-success" role="status"></div>
-                    </div>
-                    <p>Setting up wallets and transactions...</p>
-                `,
-                allowOutsideClick: false,
-                showConfirmButton: false,
-                didOpen: () => {
-                    // Simulate API call to seed data
-                    $.ajax({
-                        url: '/admin/finance/wallets/seed-demo',
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}'
-                        },
-                        success: function(response) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Demo Data Loaded!',
-                                html: `
-                                    <p class="mb-3">Successfully created:</p>
-                                    <div class="text-start">
-                                        <p class="mb-2"><i class="bi bi-check-circle text-success me-2"></i><strong>5 Wallets</strong> with different roles</p>
-                                        <p class="mb-2"><i class="bi bi-check-circle text-success me-2"></i><strong>10 Transactions</strong> across wallets</p>
-                                        <p class="mb-2"><i class="bi bi-check-circle text-success me-2"></i><strong>TZS 26.25M</strong> total balance</p>
-                                    </div>
-                                `,
-                                showConfirmButton: true,
-                                confirmButtonText: 'View Wallets'
-                            }).then(() => {
-                                location.reload();
-                            });
-                        },
-                        error: function() {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Failed to Load Demo Data',
-                                text: 'Please try again or contact support.',
-                                confirmButtonText: 'OK'
-                            });
-                        }
-                    });
-                }
-            });
+function getOrCreateBsModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return null;
+    return bootstrap.Modal.getOrCreateInstance(el);
+}
+
+function cleanupModalBackdrops() {
+    if (document.querySelectorAll('.modal.show').length === 0) {
+        document.body.classList.remove('modal-open');
+        document.body.style.removeProperty('padding-right');
+        document.querySelectorAll('.modal-backdrop').forEach((el) => el.remove());
+        document.querySelectorAll('.modal').forEach((el) => {
+            el.classList.remove('show');
+            el.setAttribute('aria-hidden', 'true');
+            el.style.display = 'none';
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    ['addWalletModal', 'addFundsModal', 'transactionsModal'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('hidden.bs.modal', cleanupModalBackdrops);
         }
     });
+});
+
+function showAddWalletModal() {
+    cleanupModalBackdrops();
+    const addWalletModal = getOrCreateBsModal('addWalletModal');
+    addWalletModal?.show();
 }
 
 function submitWalletForm() {
@@ -444,22 +403,25 @@ function submitWalletForm() {
             showConfirmButton: false,
             timer: 2000
         }).then(() => {
-            $('#addWalletModal').modal('hide');
+            const addWalletModal = getOrCreateBsModal('addWalletModal');
+            addWalletModal?.hide();
+            cleanupModalBackdrops();
             location.reload();
         });
     }, 1500);
 }
 
 function showAddFundsModal(walletId, ownerName) {
-    $('#walletId').val(walletId);
-    $('#walletOwnerName').text(ownerName);
-    $('#fundAmount').val('');
-    $('#addFundsModal').modal('show');
+    document.getElementById('walletId').value = walletId;
+    document.getElementById('walletOwnerName').textContent = ownerName;
+    document.getElementById('fundAmount').value = '';
+    const addFundsModal = getOrCreateBsModal('addFundsModal');
+    addFundsModal?.show();
 }
 
 function submitAddFunds() {
-    const walletId = $('#walletId').val();
-    const amount = $('#fundAmount').val();
+    const walletId = document.getElementById('walletId').value;
+    const amount = document.getElementById('fundAmount').value;
     
     if (!amount || amount <= 0) {
         Swal.fire({
@@ -494,7 +456,9 @@ function submitAddFunds() {
                 showConfirmButton: false,
                 timer: 2000
             }).then(() => {
-                $('#addFundsModal').modal('hide');
+                const addFundsModal = getOrCreateBsModal('addFundsModal');
+                addFundsModal?.hide();
+                cleanupModalBackdrops();
                 location.reload();
             });
         },
@@ -513,25 +477,47 @@ function viewWallet(walletId) {
 }
 
 function viewTransactions(walletId) {
-    $('#transactionsModal').modal('show');
-    
-    // Simulate loading transactions
-    setTimeout(() => {
-        $('#transactionsList').html(`
-            @forelse($recentTransactions->take(5) as $tx)
-            <tr>
-                <td><small>{{ $tx->created_at ? $tx->created_at->format('M d, Y') : 'N/A' }}</small></td>
-                <td><span class="badge bg-{{ $tx->type == 'credit' ? 'success' : 'danger' }} bg-opacity-10 text-{{ $tx->type == 'credit' ? 'success' : 'danger' }}">{{ $tx->type ?? 'N/A' }}</span></td>
-                <td><strong>TZS {{ number_format($tx->amount ?? 0, 2) }}</strong></td>
-                <td><small>{{ $tx->description ?? 'No description' }}</small></td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="4" class="text-center py-3 text-muted">No transactions found</td>
-            </tr>
-            @endforelse
-        `);
-    }, 500);
+    const transactionsModal = getOrCreateBsModal('transactionsModal');
+    transactionsModal?.show();
+
+    const txList = document.getElementById('transactionsList');
+    txList.innerHTML = `
+        <tr>
+            <td colspan="4" class="text-center py-3">
+                <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+                <span class="ms-2">Loading...</span>
+            </td>
+        </tr>
+    `;
+
+    $.ajax({
+        url: `/admin/finance/wallets/${walletId}/transactions`,
+        method: 'GET',
+        success: function(response) {
+            if (!response.success || !Array.isArray(response.transactions) || response.transactions.length === 0) {
+                txList.innerHTML = '<tr><td colspan="4" class="text-center py-3 text-muted">No transactions found</td></tr>';
+                return;
+            }
+
+            txList.innerHTML = response.transactions.map((tx) => {
+                const isCredit = String(tx.type).toLowerCase() === 'credit';
+                const badgeClass = isCredit ? 'success' : 'danger';
+                const label = tx.type ? tx.type.charAt(0).toUpperCase() + tx.type.slice(1) : 'N/A';
+                return `
+                    <tr>
+                        <td><small>${tx.date}</small></td>
+                        <td><span class="badge bg-${badgeClass} bg-opacity-10 text-${badgeClass}">${label}</span></td>
+                        <td><strong>TZS ${tx.amount}</strong></td>
+                        <td><small>${tx.description}</small></td>
+                    </tr>
+                `;
+            }).join('');
+        },
+        error: function(xhr) {
+            const msg = xhr.responseJSON?.message || 'Failed to load transactions';
+            txList.innerHTML = `<tr><td colspan="4" class="text-center py-3 text-danger">${msg}</td></tr>`;
+        }
+    });
 }
 
 function freezeWallet(walletId) {
@@ -560,7 +546,8 @@ function freezeWallet(walletId) {
                     }).then(() => location.reload());
                 },
                 error: function() {
-                    Swal.fire('Error', 'Failed to freeze wallet', 'error');
+                    const message = arguments[0]?.responseJSON?.message || 'Failed to freeze wallet';
+                    Swal.fire('Error', message, 'error');
                 }
             });
         }
@@ -593,7 +580,8 @@ function activateWallet(walletId) {
                     }).then(() => location.reload());
                 },
                 error: function() {
-                    Swal.fire('Error', 'Failed to activate wallet', 'error');
+                    const message = arguments[0]?.responseJSON?.message || 'Failed to activate wallet';
+                    Swal.fire('Error', message, 'error');
                 }
             });
         }

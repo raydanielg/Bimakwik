@@ -80,7 +80,7 @@
         <div class="card border-0 shadow-sm p-4 h-100">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h6 class="fw-bold mb-0"><i class="bi bi-book me-2 text-primary"></i>{{ __('developer.quick_documentation') }}</h6>
-                <a href="#" class="btn btn-sm btn-outline-primary">{{ __('developer.view_full_api_docs') }}</a>
+                <a href="{{ route('developer.docs.index') }}" class="btn btn-sm btn-outline-primary">{{ __('developer.view_full_api_docs') }}</a>
             </div>
             
             <div class="row g-3 mb-4">

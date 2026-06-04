@@ -56,6 +56,9 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    // Feature flag: enable demo quick-login shortcuts on auth page.
+    'demo_quick_login' => env('DEMO_QUICK_LOGIN', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

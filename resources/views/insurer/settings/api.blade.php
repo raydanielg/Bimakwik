@@ -112,7 +112,11 @@
                                                 <div class="btn-group btn-group-sm">
                                                     <button class="btn btn-outline-primary"><i class="bi bi-eye"></i></button>
                                                     <button class="btn btn-outline-secondary"><i class="bi bi-arrow-repeat"></i></button>
-                                                    <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                                    <form id="delete-api-key-{{ $key->id }}" method="POST" action="{{ route('insurer.settings.api.keys.delete', $key->id) }}" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button" class="btn btn-outline-danger" onclick="confirmDelete('delete-api-key-{{ $key->id }}')"><i class="bi bi-trash"></i></button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -165,7 +169,11 @@
                                             <td>
                                                 <div class="btn-group btn-group-sm">
                                                     <button class="btn btn-outline-primary"><i class="bi bi-pencil"></i></button>
-                                                    <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                                    <form id="delete-webhook-{{ $webhook->id }}" method="POST" action="{{ route('insurer.settings.api.webhooks.delete', $webhook->id) }}" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button" class="btn btn-outline-danger" onclick="confirmDelete('delete-webhook-{{ $webhook->id }}')"><i class="bi bi-trash"></i></button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -201,7 +209,7 @@
                                 <h6 class="mb-0 fw-bold">Getting Started</h6>
                             </div>
                             <p class="text-muted small mb-2">Learn how to authenticate and make your first API call.</p>
-                            <a href="#" class="btn btn-sm btn-outline-primary">View Docs</a>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="comingSoonDocs('Getting Started')">View Docs</button>
                         </div>
                     </div>
                 </div>
@@ -215,7 +223,7 @@
                                 <h6 class="mb-0 fw-bold">API Reference</h6>
                             </div>
                             <p class="text-muted small mb-2">Complete reference for all available API endpoints.</p>
-                            <a href="#" class="btn btn-sm btn-outline-primary">View Docs</a>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="comingSoonDocs('API Reference')">View Docs</button>
                         </div>
                     </div>
                 </div>
@@ -229,7 +237,7 @@
                                 <h6 class="mb-0 fw-bold">Webhooks Guide</h6>
                             </div>
                             <p class="text-muted small mb-2">Learn how to set up and configure webhooks for real-time events.</p>
-                            <a href="#" class="btn btn-sm btn-outline-primary">View Docs</a>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="comingSoonDocs('Webhooks Guide')">View Docs</button>
                         </div>
                     </div>
                 </div>
@@ -238,3 +246,20 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+function comingSoonDocs(section) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            icon: 'info',
+            title: section,
+            text: 'Documentation link will be available soon.',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+    alert(section + ': Documentation link will be available soon.');
+}
+</script>
+@endpush

@@ -135,7 +135,7 @@
                                         <li><a class="dropdown-item" href="{{ route('admin.products.edit', $product->id) }}"><i class="bi bi-pencil me-2"></i>Edit</a></li>
                                         <li><a class="dropdown-item" href="{{ route('admin.products.compare') }}"><i class="bi bi-diagram-3 me-2"></i>Add to Comparison</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-danger" href="#" onclick="if(confirm('Are you sure?')) { document.getElementById('delete-form-{{ $product->id }}').submit(); }"><i class="bi bi-trash me-2"></i>Delete</a></li>
+                                        <li><button type="button" class="dropdown-item text-danger" onclick="if(confirm('Are you sure?')) { document.getElementById('delete-form-{{ $product->id }}').submit(); }"><i class="bi bi-trash me-2"></i>Delete</button></li>
                                     </ul>
                                     <form id="delete-form-{{ $product->id }}" action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display:none;">
                                         @csrf @method('DELETE')

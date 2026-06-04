@@ -16,10 +16,10 @@
                     </p>
                 </div>
                 <div class="d-flex gap-2">
-                    <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
-                    <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-                    <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                    <a href="{{ route('pages.contact') }}" class="social-icon"><i class="bi bi-facebook"></i></a>
+                    <a href="{{ route('pages.contact') }}" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+                    <a href="{{ route('pages.contact') }}" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                    <a href="{{ route('pages.contact') }}" class="social-icon"><i class="bi bi-instagram"></i></a>
                 </div>
             </div>
 

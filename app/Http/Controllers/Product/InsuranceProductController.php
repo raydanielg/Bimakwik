@@ -25,6 +25,14 @@ class InsuranceProductController extends Controller
         return view('admin.products.create', compact('categories', 'insurers', 'currencies'));
     }
 
+    public function builder()
+    {
+        $categories = \App\Models\PolicyCategory::all();
+        $insurers = \App\Models\User::role('insurer')->get();
+        $currencies = ['TZS', 'USD', 'EUR', 'GBP', 'KES', 'UGX'];
+        return view('admin.products.builder', compact('categories', 'insurers', 'currencies'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

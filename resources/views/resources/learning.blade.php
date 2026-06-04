@@ -136,7 +136,7 @@
                 </table>
             </div>
             <div class="mt-5">
-                <a href="#" class="btn btn-primary btn-lg px-5 rounded-pill fw-bold shadow hover-lift-sm">
+                <a href="{{ route('pages.contact') }}" class="btn btn-primary btn-lg px-5 rounded-pill fw-bold shadow hover-lift-sm">
                     {{ app()->getLocale() == 'sw' ? 'Jisajili kwa Toamıza Inayofuata' : 'Register for Next Webinar' }}
                 </a>
             </div>

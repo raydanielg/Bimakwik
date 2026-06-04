@@ -127,45 +127,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span class="badge bg-primary">Broker</span></td>
-                            <td>All Products</td>
-                            <td>15%</td>
-                            <td>10%</td>
-                            <td>Jan 1, 2024</td>
-                            <td><span class="badge bg-success">Active</span></td>
-                            <td>
-                                <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-outline-primary"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge bg-success">SFE</span></td>
-                            <td>All Products</td>
-                            <td>10%</td>
-                            <td>8%</td>
-                            <td>Jan 1, 2024</td>
-                            <td><span class="badge bg-success">Active</span></td>
-                            <td>
-                                <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-outline-primary"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge bg-info">Bancassurance</span></td>
-                            <td>All Products</td>
-                            <td>12%</td>
-                            <td>9%</td>
-                            <td>Jan 1, 2024</td>
-                            <td><span class="badge bg-success">Active</span></td>
-                            <td>
-                                <div class="btn-group btn-group-sm">
-                                    <button class="btn btn-outline-primary"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
-                                </div>
+                            <td colspan="7" class="text-center py-5">
+                                <i class="bi bi-inbox fs-1 text-muted d-block mb-3"></i>
+                                <p class="text-muted mb-0">No commission rates configured yet.</p>
                             </td>
                         </tr>
                     </tbody>

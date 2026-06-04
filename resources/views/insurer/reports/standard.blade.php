@@ -87,9 +87,13 @@
                                 <h6 class="mb-0 fw-bold">Monthly Premium Report</h6>
                             </div>
                             <p class="text-muted small mb-3">Summary of premium collections by month and product category.</p>
-                            <button class="btn btn-sm btn-primary w-100">
-                                <i class="bi bi-download me-1"></i> Generate
-                            </button>
+                            <form method="POST" action="{{ route('insurer.reports.generate') }}">
+                                @csrf
+                                <input type="hidden" name="report_type" value="Monthly Premium Report">
+                                <button type="submit" class="btn btn-sm btn-primary w-100">
+                                    <i class="bi bi-download me-1"></i> Generate
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -103,9 +107,13 @@
                                 <h6 class="mb-0 fw-bold">Claims Analysis Report</h6>
                             </div>
                             <p class="text-muted small mb-3">Detailed analysis of claims by type, status, and payout amounts.</p>
-                            <button class="btn btn-sm btn-primary w-100">
-                                <i class="bi bi-download me-1"></i> Generate
-                            </button>
+                            <form method="POST" action="{{ route('insurer.reports.generate') }}">
+                                @csrf
+                                <input type="hidden" name="report_type" value="Claims Analysis Report">
+                                <button type="submit" class="btn btn-sm btn-primary w-100">
+                                    <i class="bi bi-download me-1"></i> Generate
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -119,9 +127,13 @@
                                 <h6 class="mb-0 fw-bold">Customer Retention Report</h6>
                             </div>
                             <p class="text-muted small mb-3">Customer acquisition, retention rates, and churn analysis.</p>
-                            <button class="btn btn-sm btn-primary w-100">
-                                <i class="bi bi-download me-1"></i> Generate
-                            </button>
+                            <form method="POST" action="{{ route('insurer.reports.generate') }}">
+                                @csrf
+                                <input type="hidden" name="report_type" value="Customer Retention Report">
+                                <button type="submit" class="btn btn-sm btn-primary w-100">
+                                    <i class="bi bi-download me-1"></i> Generate
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -135,9 +147,13 @@
                                 <h6 class="mb-0 fw-bold">Partner Performance Report</h6>
                             </div>
                             <p class="text-muted small mb-3">Broker and agent performance metrics and commission summary.</p>
-                            <button class="btn btn-sm btn-primary w-100">
-                                <i class="bi bi-download me-1"></i> Generate
-                            </button>
+                            <form method="POST" action="{{ route('insurer.reports.generate') }}">
+                                @csrf
+                                <input type="hidden" name="report_type" value="Partner Performance Report">
+                                <button type="submit" class="btn btn-sm btn-primary w-100">
+                                    <i class="bi bi-download me-1"></i> Generate
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -151,9 +167,13 @@
                                 <h6 class="mb-0 fw-bold">Fraud Detection Report</h6>
                             </div>
                             <p class="text-muted small mb-3">Summary of fraud alerts, investigations, and confirmed cases.</p>
-                            <button class="btn btn-sm btn-primary w-100">
-                                <i class="bi bi-download me-1"></i> Generate
-                            </button>
+                            <form method="POST" action="{{ route('insurer.reports.generate') }}">
+                                @csrf
+                                <input type="hidden" name="report_type" value="Fraud Detection Report">
+                                <button type="submit" class="btn btn-sm btn-primary w-100">
+                                    <i class="bi bi-download me-1"></i> Generate
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -167,9 +187,13 @@
                                 <h6 class="mb-0 fw-bold">Regulatory Compliance Report</h6>
                             </div>
                             <p class="text-muted small mb-3">TIR-AMIS submissions and regulatory compliance status.</p>
-                            <button class="btn btn-sm btn-primary w-100">
-                                <i class="bi bi-download me-1"></i> Generate
-                            </button>
+                            <form method="POST" action="{{ route('insurer.reports.generate') }}">
+                                @csrf
+                                <input type="hidden" name="report_type" value="Regulatory Compliance Report">
+                                <button type="submit" class="btn btn-sm btn-primary w-100">
+                                    <i class="bi bi-download me-1"></i> Generate
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -182,7 +206,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Generated Reports History</h5>
                 <div class="btn-group btn-group-sm">
-                    <button class="btn btn-outline-primary"><i class="bi bi-download me-1"></i> Export All</button>
+                    <a href="{{ route('insurer.reports.export') }}" class="btn btn-outline-primary"><i class="bi bi-download me-1"></i> Export All</a>
                 </div>
             </div>
         </div>
@@ -203,15 +227,15 @@
                         <tbody>
                             @foreach($reports as $report)
                                 <tr>
-                                    <td class="fw-bold">{{ $report->name ?? 'N/A' }}</td>
-                                    <td>{{ $report->type ?? 'N/A' }}</td>
-                                    <td>{{ $report->period ?? 'N/A' }}</td>
-                                    <td>{{ $report->generated_at?->format('M d, Y H:i') ?? 'N/A' }}</td>
-                                    <td>{{ $report->generated_by ?? 'N/A' }}</td>
+                                    <td class="fw-bold">{{ $report->report_name ?? 'N/A' }}</td>
+                                    <td>{{ $report->report_type ?? 'N/A' }}</td>
+                                    <td>{{ $report->parameters['period'] ?? 'Current Month' }}</td>
+                                    <td>{{ $report->created_at?->format('M d, Y H:i') ?? 'N/A' }}</td>
+                                    <td>{{ $report->creator->name ?? 'N/A' }}</td>
                                     <td>
                                         <div class="btn-group btn-group-sm">
-                                            <button class="btn btn-outline-primary"><i class="bi bi-download"></i></button>
-                                            <button class="btn btn-outline-secondary"><i class="bi bi-eye"></i></button>
+                                            <a href="{{ route('insurer.reports.download', $report) }}" class="btn btn-outline-primary" title="Download"><i class="bi bi-download"></i></a>
+                                            <a href="{{ route('insurer.reports.view', $report) }}" class="btn btn-outline-secondary" title="View"><i class="bi bi-eye"></i></a>
                                         </div>
                                     </td>
                                 </tr>

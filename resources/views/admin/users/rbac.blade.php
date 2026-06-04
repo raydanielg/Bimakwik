@@ -74,12 +74,12 @@
                                 <i class="bi bi-three-dots-vertical"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit Role</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-people me-2"></i>Assign Users</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-key me-2"></i>Manage Permissions</a></li>
+                                <li><button type="button" class="dropdown-item" onclick="comingSoon('Edit Role')"><i class="bi bi-pencil me-2"></i>Edit Role</button></li>
+                                <li><button type="button" class="dropdown-item" onclick="comingSoon('Assign Users')"><i class="bi bi-people me-2"></i>Assign Users</button></li>
+                                <li><button type="button" class="dropdown-item" onclick="comingSoon('Manage Permissions')"><i class="bi bi-key me-2"></i>Manage Permissions</button></li>
                                 @if(!$role->is_system)
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete Role</a></li>
+                                    <li><button type="button" class="dropdown-item text-danger" onclick="comingSoon('Delete Role')"><i class="bi bi-trash me-2"></i>Delete Role</button></li>
                                 @endif
                             </ul>
                         </div>
@@ -225,3 +225,20 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+function comingSoon(action) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            icon: 'info',
+            title: action,
+            text: 'This RBAC action is not yet implemented.',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+    alert(action + ': This RBAC action is not yet implemented.');
+}
+</script>
+@endpush
