@@ -166,25 +166,184 @@
 <script>
 function generateApiKey() {
     Swal.fire({
-        title: 'Generate API Key',
-        html: '<input id="keyName" class="swal2-input" placeholder="Key name (e.g. Production API)"><select id="keyEnv" class="swal2-input"><option value="production">Production</option><option value="sandbox">Sandbox</option></select>',
+        title: 'Generate New API Key',
+        html: `
+            <div class="mb-3">
+                <label class="swal2-label text-start d-block mb-2">Key Name</label>
+                <input id="keyName" class="swal2-input" placeholder="e.g., Production API, Mobile App">
+            </div>
+            <div class="mb-3">
+                <label class="swal2-label text-start d-block mb-2">Environment</label>
+                <select id="keyEnv" class="swal2-input">
+                    <option value="production">Production</option>
+                    <option value="sandbox">Sandbox</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="swal2-label text-start d-block mb-2">Rate Limit (per minute)</label>
+                <input id="keyRate" type="number" class="swal2-input" placeholder="e.g., 100" value="100">
+            </div>
+        `,
         showCancelButton: true,
         confirmButtonText: 'Generate',
         confirmButtonColor: '#0d6efd',
+        cancelButtonColor: '#6c757d',
         preConfirm: () => {
             const name = document.getElementById('keyName').value;
-            if (!name) Swal.showValidationMessage('Name required');
-            return { name, env: document.getElementById('keyEnv').value };
+            const env = document.getElementById('keyEnv').value;
+            const rate = document.getElementById('keyRate').value;
+            
+            if (!name) {
+                Swal.showValidationMessage('Key name is required');
+                return false;
+            }
+            if (!rate || parseInt(rate) < 1) {
+                Swal.showValidationMessage('Rate limit must be at least 1');
+                return false;
+            }
+            return { name, env, rate };
         }
-    }).then((r) => {
-        if (r.isConfirmed) {
-            Swal.fire({ icon: 'success', title: 'API Key Generated', html: '<code>sk_'+Math.random().toString(36).substr(2,32)+'</code><br><small class="text-muted">Copy this key now - it won\'t be shown again</small>', confirmButtonColor: '#0d6efd' });
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const data = result.value;
+            
+            Swal.fire({
+                title: 'Creating API Key...',
+                icon: 'info',
+                allowOutsideClick: false,
+                didOpen: () => Swal.showLoading()
+            });
+
+            fetch('{{ route("admin.system.api-keys.generate") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    environment: data.env,
+                    rate_limit: parseInt(data.rate),
+                })
+            })
+            .then(r => r.json())
+            .then(response => {
+                if (response.success) {
+                    const apiKey = response.key;
+                    Swal.fire({
+                        title: '✓ API Key Generated!',
+                        html: `
+                            <div class="text-start">
+                                <p class="mb-2"><strong>Key Name:</strong> ${apiKey.name}</p>
+                                <p class="mb-3">
+                                    <strong>API Key:</strong><br>
+                                    <code class="d-block p-2 bg-light rounded text-danger fw-bold" id="apiKeyDisplay">${apiKey.api_key}</code>
+                                </p>
+                                <p class="mb-3">
+                                    <strong>API Secret:</strong><br>
+                                    <code class="d-block p-2 bg-light rounded text-danger fw-bold" id="apiSecretDisplay">${apiKey.api_secret}</code>
+                                </p>
+                                <div class="alert alert-warning small">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>
+                                    Copy both keys now - they won't be shown again!
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="copyToClipboard('apiKeyDisplay')">
+                                        <i class="bi bi-clipboard me-1"></i>Copy Key
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="copyToClipboard('apiSecretDisplay')">
+                                        <i class="bi bi-clipboard me-1"></i>Copy Secret
+                                    </button>
+                                </div>
+                            </div>
+                        `,
+                        confirmButtonColor: '#0d6efd',
+                        confirmButtonText: 'Done',
+                    }).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to Generate Key',
+                        text: response.message || 'An error occurred',
+                        confirmButtonColor: '#0d6efd',
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to generate API key: ' + error.message,
+                    confirmButtonColor: '#0d6efd',
+                });
+            });
         }
     });
 }
+
 function revokeKey(id) {
-    Swal.fire({ title: 'Revoke API Key?', text: 'This action cannot be undone', icon: 'warning', showCancelButton: true, confirmButtonText: 'Revoke', confirmButtonColor: '#dc3545' })
-        .then(r => { if (r.isConfirmed) Swal.fire('Revoked!', 'API key has been revoked.', 'success'); });
+    Swal.fire({
+        title: 'Revoke API Key?',
+        text: 'This action cannot be undone. Any applications using this key will stop working.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Revoke',
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`{{ route('admin.system.api-keys.revoke', ':id') }}`.replace(':id', id), {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                }
+            })
+            .then(r => r.json())
+            .then(response => {
+                if (response.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Revoked!',
+                        text: 'API key has been revoked successfully',
+                        confirmButtonColor: '#0d6efd',
+                    }).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to Revoke',
+                        text: response.message || 'An error occurred',
+                        confirmButtonColor: '#0d6efd',
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to revoke API key: ' + error.message,
+                    confirmButtonColor: '#0d6efd',
+                });
+            });
+        }
+    });
+}
+
+function copyToClipboard(elementId) {
+    const element = document.getElementById(elementId);
+    const text = element.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Copied!',
+            text: 'Copied to clipboard',
+            timer: 2000,
+            showConfirmButton: false,
+        });
+    });
 }
 </script>
 <style>.hover-lift { transition: all .2s; cursor:pointer; } .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,.08); }</style>

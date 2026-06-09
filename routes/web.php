@@ -153,6 +153,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/configurations', [App\Http\Controllers\Admin\SystemTechController::class, 'configurations'])->name('configurations');
             Route::post('/configurations', [App\Http\Controllers\Admin\SystemTechController::class, 'saveConfigurations'])->name('configurations.save');
             Route::get('/developer-portal', [App\Http\Controllers\Admin\SystemTechController::class, 'developerPortal'])->name('developer-portal');
+            Route::post('/api-keys/generate', [App\Http\Controllers\Admin\SystemTechController::class, 'generateApiKey'])->name('api-keys.generate');
+            Route::delete('/api-keys/{id}/revoke', [App\Http\Controllers\Admin\SystemTechController::class, 'revokeApiKey'])->name('api-keys.revoke');
+            Route::get('/export-report', [App\Http\Controllers\Admin\SystemTechController::class, 'exportSystemReport'])->name('export-report');
+            Route::post('/upload-document', [App\Http\Controllers\Admin\SystemTechController::class, 'uploadDocument'])->name('upload-document');
             Route::get('/multi-country', [App\Http\Controllers\Admin\SystemTechController::class, 'multiCountry'])->name('multi-country');
             Route::get('/audit-logs', [App\Http\Controllers\Admin\SystemTechController::class, 'auditLogs'])->name('audit-logs');
         });

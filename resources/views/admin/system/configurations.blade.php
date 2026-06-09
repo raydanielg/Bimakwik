@@ -148,6 +148,71 @@
     </div>
 </form>
 
+<!-- System Documents & Exports Section -->
+<div class="row g-3 mt-2">
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom py-3">
+                <h5 class="mb-0 fw-bold"><i class="bi bi-file-earmark-arrow-up me-2 text-primary"></i>Upload System Documents</h5>
+            </div>
+            <div class="card-body">
+                <form id="documentUploadForm" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Document Type</label>
+                        <select name="document_type" class="form-select" required>
+                            <option value="">Select Type...</option>
+                            <option value="policy">Insurance Policy</option>
+                            <option value="agreement">Legal Agreement</option>
+                            <option value="report">System Report</option>
+                            <option value="compliance">Compliance Document</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Select File</label>
+                        <input type="file" name="document" class="form-control" accept=".pdf,.docx,.xlsx,.doc,.xls" required>
+                        <small class="text-muted">PDF, Word, or Excel (Max 10MB)</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Description</label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Add any notes or context..." style="resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-cloud-upload me-1"></i>Upload Document
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom py-3">
+                <h5 class="mb-0 fw-bold"><i class="bi bi-file-earmark-arrow-down me-2 text-primary"></i>Export System Data</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted small mb-3">Export platform data for backups, reporting, or compliance.</p>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-outline-primary" onclick="exportSystemData('summary')">
+                        <i class="bi bi-download me-1"></i>Summary Report
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" onclick="exportSystemData('detailed')">
+                        <i class="bi bi-download me-1"></i>Detailed Report
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" onclick="exportSystemData('audit')">
+                        <i class="bi bi-download me-1"></i>Audit Log Export
+                    </button>
+                </div>
+                <div class="alert alert-info small mt-3 mb-0">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Exports are provided in JSON format for easy integration with other systems.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
@@ -173,6 +238,90 @@ document.getElementById('configForm').addEventListener('submit', function(e) {
     })
     .catch(err => Swal.fire({ icon: 'error', title: 'Error', text: 'Failed to save settings', confirmButtonColor: '#dc3545' }));
 });
+
+// Document Upload Handler
+document.getElementById('documentUploadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    Swal.fire({ title: 'Uploading...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+
+    fetch("{{ route('admin.system.upload-document') }}", {
+        method: 'POST',
+        headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content },
+        body: formData
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Uploaded!',
+                text: data.message,
+                confirmButtonColor: '#0d6efd'
+            });
+            form.reset();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Upload Failed',
+                text: data.message,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    })
+    .catch(err => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to upload document: ' + err.message,
+            confirmButtonColor: '#dc3545'
+        });
+    });
+});
+
+// Export System Data Handler
+function exportSystemData(type) {
+    Swal.fire({
+        title: 'Exporting ' + type.charAt(0).toUpperCase() + type.slice(1) + ' Report...',
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+    });
+
+    fetch(`{{ route('admin.system.export-report') }}?type=${type}`, {
+        method: 'GET',
+        headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content }
+    })
+    .then(r => r.json())
+    .then(data => {
+        // Download as JSON file
+        const dataStr = JSON.stringify(data, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `system-report-${type}-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Exported!',
+            text: 'Report downloaded successfully',
+            confirmButtonColor: '#0d6efd'
+        });
+    })
+    .catch(err => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Export Failed',
+            text: 'Failed to export report: ' + err.message,
+            confirmButtonColor: '#dc3545'
+        });
+    });
+}
 </script>
 @endpush
-@endsection

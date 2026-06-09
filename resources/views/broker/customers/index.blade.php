@@ -112,12 +112,12 @@
                                     </td>
                                     <td>{{ $customer->email ?? 'N/A' }}</td>
                                     <td>{{ $customer->phone ?? 'N/A' }}</td>
-                                    <td>{{ $customer->customerProfile->region ?? 'N/A' }}</td>
+                                    <td>{{ $customer->customerProfile?->region ?? 'N/A' }}</td>
                                     <td>{{ $customer->customer_policies_count ?? 0 }}</td>
                                     <td>
-                                        @if($customer->customerProfile->kyc_status === 'verified')
+                                        @if($customer->customerProfile?->kyc_status === 'verified')
                                             <span class="badge bg-success">Verified</span>
-                                        @elseif($customer->customerProfile->kyc_status === 'pending')
+                                        @elseif($customer->customerProfile?->kyc_status === 'pending')
                                             <span class="badge bg-warning">Pending</span>
                                         @else
                                             <span class="badge bg-secondary">Not Started</span>

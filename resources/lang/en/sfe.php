@@ -106,4 +106,4 @@ return [
     'wire_models' => 'Wire model queries and filters',
     'add_validation' => 'Add form validation and actions',
     'attach_permissions' => 'Attach permission checks',
-};
+];

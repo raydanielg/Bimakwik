@@ -123,10 +123,10 @@
                             <td>{{ $customer->company_id ?? 'N/A' }}</td>
                             <td>{{ $customer->sales_id ?? 'N/A' }}</td>
                             <td>{{ $customer->phone ?? 'N/A' }}</td>
-                            <td>{{ $customer->customerProfile->location ?? 'N/A' }}</td>
+                            <td>{{ $customer->customerProfile?->location ?? 'N/A' }}</td>
                             <td>
                                 @php
-                                    $kycStatus = $customer->customerProfile->kyc_status ?? 'pending';
+                                    $kycStatus = $customer->customerProfile?->kyc_status ?? 'pending';
                                 @endphp
                                 @if($kycStatus == 'verified')
                                     <span class="badge bg-success">Verified</span>

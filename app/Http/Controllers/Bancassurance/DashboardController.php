@@ -27,8 +27,10 @@ class DashboardController extends Controller
                 'policiesSold' => 0,
                 'pendingRenewals' => 0,
                 'recentPolicies' => collect(),
-                'monthlySalesData' => [],
-                'monthLabels' => [],
+                'weeklyLabels' => [],
+                'weeklySales' => [],
+                'monthlyLabels' => [],
+                'monthlySales' => [],
             ]);
         }
 
