@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\CustomerPolicy;
-use App\Models\Product;
+use App\Models\InsuranceProduct;
+use App\Services\CommissionService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -29,15 +30,14 @@ class PolicyController extends Controller
     public function create()
     {
         return view('sfe.policies.create', [
-            'products' => Product::where('is_active', true)->orderBy('name')->get(),
+            'products' => InsuranceProduct::where('is_active', true)->orderBy('product_name')->get(),
         ]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'coverage' => 'required|string',
+            'product_id' => 'required|exists:insurance_products,id',
             'premium_amount' => 'required|numeric|min:0',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
@@ -50,23 +50,31 @@ class PolicyController extends Controller
             ['name' => Auth::user()->name, 'email' => Auth::user()->email]
         );
 
-        $product = Product::findOrFail($validated['product_id']);
+        $product = InsuranceProduct::findOrFail($validated['product_id']);
 
         $policy = CustomerPolicy::create([
             'customer_id' => $customer->id,
             'policy_number' => 'POL-' . strtoupper(Str::random(8)),
-            'product_id' => $product->id,
-            'product_name' => $product->product_name,
-            'premium_amount' => $validated['premium_amount'],
-            'coverage_level' => $validated['coverage'],
+            'insurance_product_id' => $product->id,
             'insurer_id' => $product->insurer_id,
             'agent_id' => Auth::user()->agent?->id,
+            'premium_amount' => $validated['premium_amount'],
+            'sum_assured' => $validated['premium_amount'],
             'start_date' => $validated['start_date'],
             'end_date' => $validated['end_date'],
             'status' => 'active',
+            'premium_frequency' => 'annual',
+            'policy_details' => [],
+            'payment_method' => 'manual',
             'company_code' => $validated['company_code'] ?? null,
             'sale_point_code' => $validated['sale_point_code'] ?? null,
         ]);
+
+        try {
+            app(CommissionService::class)->calculateAndCreate($policy);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::warning('Commission calculation skipped for SFE policy: ' . $e->getMessage());
+        }
 
         return redirect()->route('sfe.policies.index')
             ->with('success', 'Policy created successfully.');

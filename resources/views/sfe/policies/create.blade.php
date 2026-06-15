@@ -26,19 +26,12 @@
                             <option value="">Select product</option>
                             @foreach($products as $product)
                                 <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
-                                    {{ $product->product_name }} (TZS {{ number_format($product->price ?? 0, 0) }})
+                                    {{ $product->product_name }} (TZS {{ number_format($product->base_premium ?? 0, 0) }})
                                 </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Coverage Level *</label>
-                        <select name="coverage" class="form-select" required>
-                            <option value="">Select coverage</option>
-                            <option value="basic" {{ old('coverage') == 'basic' ? 'selected' : '' }}>Basic</option>
-                            <option value="standard" {{ old('coverage') == 'standard' ? 'selected' : '' }}>Standard</option>
-                            <option value="premium" {{ old('coverage') == 'premium' ? 'selected' : '' }}>Premium</option>
-                        </select>
                     </div>
                 </div>
 
