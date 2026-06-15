@@ -81,7 +81,7 @@
             </div>
         </div>
         <div class="card-body">
-            @if($exports->count() > 0)
+            @if($reports->count() > 0)
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
                         <thead class="table-light">
