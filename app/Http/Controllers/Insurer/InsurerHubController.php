@@ -134,9 +134,17 @@ class InsurerHubController extends Controller
 
     public function tiramis()
     {
-        $exports = collect();
-        try { $exports = \App\Models\TirAmisIntegrationLog::latest()->paginate(15); } catch (\Exception $e) {}
-        return view('insurer.claims.tiramis', compact('exports'));
+        $reports = \App\Models\TirAmisReport::where('company_code', auth()->user()->insurer?->company_code)
+            ->orWhere('submitted_by_id', auth()->id())
+            ->latest()
+            ->paginate(15);
+        $stats = [
+            'total' => \App\Models\TirAmisReport::count(),
+            'sent' => \App\Models\TirAmisReport::where('status', 'sent')->count(),
+            'failed' => \App\Models\TirAmisReport::where('status', 'failed')->count(),
+            'pending' => \App\Models\TirAmisReport::whereIn('status', ['pending', 'simulated'])->count(),
+        ];
+        return view('insurer.claims.tiramis', compact('reports', 'stats'));
     }
 
     /* ============== NETWORK / PROVIDERS / BROKERS ============== */

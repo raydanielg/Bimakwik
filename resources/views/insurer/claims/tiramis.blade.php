@@ -18,7 +18,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 text-muted">Total Exports</h6>
-                            <h4 class="mb-0 fw-bold">{{ $exports->total() ?? 0 }}</h4>
+                            <h4 class="mb-0 fw-bold">{{ $stats['total'] ?? $reports->total() ?? 0 }}</h4>
                         </div>
                     </div>
                 </div>
