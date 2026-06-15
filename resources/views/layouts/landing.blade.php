@@ -100,6 +100,8 @@
         @include('partials.footer')
     </div>
 
+    @include('partials.mobile_nav')
+
     <!-- Cookie Consent Banner -->
     <div id="cookie-consent-banner" class="p-4 animate__animated animate__fadeInUp">
         <div class="d-flex align-items-start">
