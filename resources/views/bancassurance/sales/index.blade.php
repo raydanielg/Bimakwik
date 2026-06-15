@@ -262,10 +262,9 @@
                             <label for="product" class="form-label">Insurance Product *</label>
                             <select class="form-select" id="product" required>
                                 <option value="">Select Product</option>
-                                <option value="Motor Insurance">Motor Insurance</option>
-                                <option value="Life Insurance">Life Insurance</option>
-                                <option value="Health Insurance">Health Insurance</option>
-                                <option value="Travel Insurance">Travel Insurance</option>
+                                @foreach($products as $p)
+                                <option value="{{ $p->id }}">{{ $p->product_name }} (TZS {{ number_format($p->base_premium, 0) }})</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -381,10 +380,9 @@
                             <label for="editProduct" class="form-label">Insurance Product *</label>
                             <select class="form-select" id="editProduct" required>
                                 <option value="">Select Product</option>
-                                <option value="Motor Insurance">Motor Insurance</option>
-                                <option value="Life Insurance">Life Insurance</option>
-                                <option value="Health Insurance">Health Insurance</option>
-                                <option value="Travel Insurance">Travel Insurance</option>
+                                @foreach($products as $p)
+                                <option value="{{ $p->id }}">{{ $p->product_name }} (TZS {{ number_format($p->base_premium, 0) }})</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -478,17 +476,21 @@ function addSale() {
         }
     });
 
-    // AJAX call
+    const companyCode = document.getElementById('companyCode').value;
+    const salePointCode = document.getElementById('salePointCode').value;
+
     const formData = new FormData();
     formData.append('customer_name', customerName);
     formData.append('customer_email', customerEmail);
     formData.append('customer_phone', customerPhone);
-    formData.append('product', product);
+    formData.append('product_id', product);
     formData.append('premium', premium);
     formData.append('branch', branch);
     formData.append('sold_by', soldBy);
     formData.append('policy_start_date', policyStartDate);
     formData.append('policy_end_date', policyEndDate);
+    formData.append('company_code', companyCode);
+    formData.append('sale_point_code', salePointCode);
 
     fetch('/bancassurance/sales', {
         method: 'POST',

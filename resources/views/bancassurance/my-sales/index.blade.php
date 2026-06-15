@@ -267,10 +267,9 @@
                             <label for="myProduct" class="form-label">Insurance Product *</label>
                             <select class="form-select" id="myProduct" required>
                                 <option value="">Select Product</option>
-                                <option value="Motor Insurance">Motor Insurance</option>
-                                <option value="Life Insurance">Life Insurance</option>
-                                <option value="Health Insurance">Health Insurance</option>
-                                <option value="Travel Insurance">Travel Insurance</option>
+                                @foreach($products as $p)
+                                <option value="{{ $p->id }}">{{ $p->product_name }} (TZS {{ number_format($p->base_premium, 0) }})</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
