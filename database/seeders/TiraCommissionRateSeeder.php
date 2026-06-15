@@ -24,7 +24,7 @@ class TiraCommissionRateSeeder extends Seeder
             ['code' => 'HEALTH',             'name' => 'Health Insurance',             'max_rate' => 17.50, 'tanre' => 20.00],
             ['code' => 'LIABILITY',          'name' => 'Liability Insurance',          'max_rate' => 17.50, 'tanre' => 20.00],
             ['code' => 'PUBLIC_LIABILITY',   'name' => 'Public Liability Insurance',   'max_rate' => 17.50, 'tanre' => 20.00],
-            ['code' => 'WCOMPENSATION',      "name' => "Workmen's Compensation",       'max_rate' => 17.50, 'tanre' => 20.00],
+            ['code' => 'WCOMPENSATION',      'name' => "Workmen's Compensation",        'max_rate' => 17.50, 'tanre' => 20.00],
             ['code' => 'BOND',               'name' => 'Bond Insurance',               'max_rate' => 17.50, 'tanre' => 20.00],
             ['code' => 'THEFT',              'name' => 'Theft Insurance',              'max_rate' => 17.50, 'tanre' => 20.00],
             ['code' => 'PROF_INDEMNITY',     'name' => 'Professional Indemnity',       'max_rate' => 15.00, 'tanre' => 17.50],
