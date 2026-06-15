@@ -8,7 +8,6 @@
         'icon' => 'bi-percent'
     ])
 
-    <!-- Stats -->
     <div class="row g-3 mb-4">
         <div class="col-md-3">
             <div class="card border-0 shadow-sm">
@@ -62,7 +61,6 @@
         </div>
     </div>
 
-    <!-- Rates Table -->
     <div class="card border-0 shadow-sm">
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -74,6 +72,7 @@
                             <th>Type</th>
                             <th>Rate</th>
                             <th>Premium Range</th>
+                            <th>Effective</th>
                             <th>Status</th>
                             <th class="text-end">Actions</th>
                         </tr>
@@ -82,20 +81,19 @@
                         @forelse($rates as $rate)
                         <tr>
                             <td><span class="badge bg-info">{{ $rate->channel_type }}</span></td>
-                            <td class="small">
-                                {{ $rate->product?->product_name ?? $rate->category?->category_name ?? 'All Products' }}
-                            </td>
+                            <td class="small">{{ $rate->product?->product_name ?? $rate->category?->category_name ?? 'All Products' }}</td>
                             <td>{{ $rate->rate_type }}</td>
-                            <td class="fw-semibold">
-                                {{ $rate->rate_type === 'percentage' ? $rate->rate_value . '%' : 'TZS ' . number_format($rate->rate_value, 0) }}
-                            </td>
+                            <td class="fw-semibold">{{ $rate->rate_type === 'percentage' ? $rate->rate_value . '%' : 'TZS ' . number_format($rate->rate_value, 0) }}</td>
                             <td class="small">
                                 @if($rate->min_premium_amount || $rate->max_premium_amount)
-                                    TZS {{ number_format($rate->min_premium_amount ?? 0, 0) }}
-                                    - TZS {{ number_format($rate->max_premium_amount ?? 0, 0) }}
+                                    TZS {{ number_format($rate->min_premium_amount ?? 0, 0) }} - TZS {{ number_format($rate->max_premium_amount ?? 0, 0) }}
                                 @else
                                     All
                                 @endif
+                            </td>
+                            <td class="small">
+                                {{ $rate->effective_from ? $rate->effective_from->format('d/m/Y') : '∞' }}
+                                → {{ $rate->effective_to ? $rate->effective_to->format('d/m/Y') : '∞' }}
                             </td>
                             <td>
                                 <span class="badge bg-{{ $rate->is_active ? 'success' : 'secondary' }}">
@@ -104,10 +102,12 @@
                             </td>
                             <td class="text-end">
                                 <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-primary" onclick="editRate({{ $rate->id }})" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
                                     <form action="{{ route('insurer.network.commission-rates.toggle', $rate) }}" method="POST" class="d-inline">
                                         @csrf
-                                        <button class="btn btn-outline-{{ $rate->is_active ? 'warning' : 'success' }}"
-                                                title="{{ $rate->is_active ? 'Deactivate' : 'Activate' }}">
+                                        <button class="btn btn-outline-{{ $rate->is_active ? 'warning' : 'success' }}" title="{{ $rate->is_active ? 'Deactivate' : 'Activate' }}">
                                             <i class="bi bi-{{ $rate->is_active ? 'pause' : 'play' }}"></i>
                                         </button>
                                     </form>
@@ -120,7 +120,7 @@
                             </td>
                         </tr>
                         @empty
-                        <tr><td colspan="7" class="text-center py-5 text-muted">No rates configured. Click "Add Rate" to create one.</td></tr>
+                        <tr><td colspan="8" class="text-center py-5 text-muted">No rates configured.</td></tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -203,4 +203,82 @@
         </form>
     </div>
 </div>
+
+<!-- Edit Rate Modal -->
+<div class="modal fade" id="editRateModal" tabindex="-1">
+    <div class="modal-dialog">
+        <form method="POST" id="editRateForm">
+            @csrf @method('PUT')
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-pencil me-1"></i> Edit Commission Rate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Channel *</label>
+                        <select name="channel_type" id="edit_channel_type" class="form-select" required>
+                            <option value="agent">Agent</option>
+                            <option value="broker">Broker</option>
+                            <option value="bancassurance">Bancassurance</option>
+                            <option value="sfe">SFE</option>
+                            <option value="direct">Direct</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Rate Type *</label>
+                        <select name="rate_type" id="edit_rate_type" class="form-select" required>
+                            <option value="percentage">Percentage (%)</option>
+                            <option value="fixed">Fixed Amount (TZS)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Rate Value *</label>
+                        <input type="number" name="rate_value" id="edit_rate_value" class="form-control" step="0.0001" min="0" max="999.9999" required>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <label class="form-label">Min Premium</label>
+                            <input type="number" name="min_premium_amount" id="edit_min_premium" class="form-control" min="0" placeholder="TZS">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Max Premium</label>
+                            <input type="number" name="max_premium_amount" id="edit_max_premium" class="form-control" min="0" placeholder="TZS">
+                        </div>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input type="checkbox" name="is_active" id="edit_is_active" class="form-check-input" value="1">
+                        <label class="form-check-label" for="edit_is_active">Active</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
+
+@push('scripts')
+<script>
+const ratesData = @json($rates->items());
+
+function editRate(id) {
+    const rate = ratesData.find(r => r.id === id);
+    if (!rate) { alert('Rate not found'); return; }
+
+    document.getElementById('edit_channel_type').value = rate.channel_type;
+    document.getElementById('edit_rate_type').value = rate.rate_type;
+    document.getElementById('edit_rate_value').value = rate.rate_value;
+    document.getElementById('edit_min_premium').value = rate.min_premium_amount || '';
+    document.getElementById('edit_max_premium').value = rate.max_premium_amount || '';
+    document.getElementById('edit_is_active').checked = rate.is_active;
+
+    document.getElementById('editRateForm').action = '{{ url('insurer/network/commission-rates') }}/' + id;
+
+    new bootstrap.Modal(document.getElementById('editRateModal')).show();
+}
+</script>
+@endpush
