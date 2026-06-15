@@ -449,6 +449,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/status/{orderId}', [App\Http\Controllers\Payment\SelcomController::class, 'status'])->name('status');
         });
 
+        Route::post('/{transaction}/refund', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'refund'])->name('refund');
     });
 
     // Selcom Webhooks (no auth - signature verified)
@@ -466,7 +467,6 @@ Route::post('/tiramis/callback', function (\Illuminate\Http\Request $request) {
     return response('<?xml version="1.0"?><TiraMsg><Error>Invalid</Error></TiraMsg>', 400)
         ->header('Content-Type', 'application/xml');
 })->name('tiramis.callback');
-            Route::post('/{transaction}/refund', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'refund'])->name('refund');
             Route::delete('/{transaction}', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'destroy'])->name('destroy');
             Route::get('/my', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'myTransactions'])->name('my');
         });
