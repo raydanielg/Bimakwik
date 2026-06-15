@@ -248,8 +248,8 @@
                             @forelse($providers as $sp)
                             <tr>
                                 <td class="ps-3">{{ $sp->id }}</td>
-                                <td class="fw-semibold">{{ $sp->company_name }}</td>
-                                <td><code>{{ $sp->provider_number }}</code></td>
+                                <td class="fw-semibold">{{ $sp->provider_name }}</td>
+                                <td><code>{{ $sp->provider_code }}</code></td>
                                 <td>
                                     @if($sp->company_code)
                                         <span class="badge bg-primary bg-opacity-10 text-primary">{{ $sp->company_code }}</span>
