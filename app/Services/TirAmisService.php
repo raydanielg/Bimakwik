@@ -551,6 +551,41 @@ class TirAmisService
         }
     }
 
+    // ==================== SUBMIT POLICY COVER NOTE TO TIRA ====================
+
+    public function submitPolicyCoverNote(\App\Models\CustomerPolicy $policy): array
+    {
+        $companyCode = $policy->company_code ?? $this->companyCode;
+        $salePointCode = $policy->sale_point_code ?? 'SP001';
+        $insurer = $policy->insurer;
+
+        $data = [
+            'cover_note_type' => '1',
+            'cover_note_number' => $policy->policy_number ?? 'POL-' . $policy->id,
+            'sale_point_code' => $salePointCode,
+            'start_date' => $policy->start_date?->format('Y-m-d\TH:i:s') ?? now()->format('Y-m-d\TH:i:s'),
+            'end_date' => $policy->end_date?->format('Y-m-d\T23:59:59') ?? now()->addYear()->format('Y-m-d\T23:59:59'),
+            'description' => 'Policy cover note for ' . ($policy->product?->product_name ?? 'Insurance'),
+            'operative_clause' => 'Standard cover',
+            'payment_mode' => '1',
+            'currency' => 'TZS',
+            'exchange_rate' => '1.00',
+            'premium_excl_tax' => (string) ($policy->premium_amount ?? 0),
+            'premium_incl_tax' => (string) ($policy->premium_amount ?? 0),
+            'commission_paid' => '0.00',
+            'commission_rate' => '0.00',
+            'officer_name' => 'System',
+            'officer_title' => 'System',
+            'product_code' => $policy->product?->product_code ?? '',
+            'insurer_company_code' => $insurer?->company_code ?? $companyCode,
+            'tran_company_code' => $companyCode,
+        ];
+
+        $salesCode = $policy->agent?->sales_code ?? $policy->broker?->sales_code ?? null;
+
+        return $this->submitCoverNote($data, $companyCode, $salesCode);
+    }
+
     // ==================== BACKWARD COMPAT: Submit Claim ====================
 
     public function submitClaim(Claim $claim, string $companyCode, ?string $salesCode = null): array
