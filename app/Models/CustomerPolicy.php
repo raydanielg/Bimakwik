@@ -79,4 +79,9 @@ class CustomerPolicy extends Model
     {
         return $this->hasMany(Claim::class, 'customer_policy_id');
     }
+
+    public function commissionTransactions(): HasMany
+    {
+        return $this->hasMany(CommissionTransaction::class, 'customer_policy_id');
+    }
 }

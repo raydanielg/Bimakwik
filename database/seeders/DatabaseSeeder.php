@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             DefaultSystemDataSeeder::class,
             UserSeeder::class,
             AccessControlSeeder::class,
+            CommissionRateSeeder::class,
         ]);
 
         // Seed Branches

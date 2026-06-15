@@ -54,4 +54,9 @@ class InsuranceProduct extends Model
     {
         return $this->hasMany(ProductRisk::class);
     }
+
+    public function commissionRates()
+    {
+        return $this->hasMany(CommissionRate::class);
+    }
 }
