@@ -9,7 +9,7 @@ class PolicyCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'slug'];
+    protected $fillable = ['category_code', 'category_name', 'category_name_sw', 'description', 'icon_url', 'display_order', 'is_active'];
 
     public function products()
     {

@@ -40,6 +40,7 @@ class ImportProductData extends Command
             $cat = PolicyCategory::firstOrCreate(
                 ['category_code' => $code],
                 [
+                    'category_code' => $code,
                     'category_name' => $name,
                     'description' => $name . ' category',
                     'is_active' => true,
