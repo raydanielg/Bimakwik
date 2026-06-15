@@ -547,6 +547,7 @@ Route::middleware(['auth'])->group(function () {
         // Policy Management
         Route::get('/policies', [App\Http\Controllers\Sfe\PolicyController::class, 'index'])->name('policies.index');
         Route::get('/policies/buy', [App\Http\Controllers\Sfe\PolicyController::class, 'create'])->name('policies.buy');
+        Route::post('/policies', [App\Http\Controllers\Sfe\PolicyController::class, 'store'])->name('policies.store');
         
         // Product Catalog
         Route::get('/products', [App\Http\Controllers\Sfe\ProductController::class, 'index'])->name('products.index');
