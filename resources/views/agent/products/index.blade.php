@@ -8,69 +8,6 @@
         'icon' => 'bi-shield-fill'
     ])
 
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-shield-fill text-primary fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Total Products</h6>
-                            <h4 class="mb-0 fw-bold">{{ $products->total() ?? 0 }}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-success bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-check-circle-fill text-success fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Active</h6>
-                            <h4 class="mb-0 fw-bold">{{ $products->total() ?? 0 }}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-info bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-tag-fill text-info fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Categories</h6>
-                            <h4 class="mb-0 fw-bold">0</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-warning bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-percent text-warning fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Avg Commission</h6>
-                            <h4 class="mb-0 fw-bold">10%</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white border-0 py-3">
             <div class="d-flex justify-content-between align-items-center">

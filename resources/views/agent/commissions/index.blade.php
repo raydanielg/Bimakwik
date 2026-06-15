@@ -8,69 +8,6 @@
         'icon' => 'bi-cash-coin'
     ])
 
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-success bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-check-circle-fill text-success fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Total Earned</h6>
-                            <h4 class="mb-0 fw-bold">TZS {{ number_format($totalEarned, 0) }}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-warning bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-clock-fill text-warning fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Pending</h6>
-                            <h4 class="mb-0 fw-bold">TZS {{ number_format($pendingAmount, 0) }}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-receipt-fill text-primary fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">This Month</h6>
-                            <h4 class="mb-0 fw-bold">TZS 0</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-info bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-graph-up-arrow text-info fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Growth</h6>
-                            <h4 class="mb-0 fw-bold">0%</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white border-0 py-3">
             <div class="d-flex justify-content-between align-items-center">

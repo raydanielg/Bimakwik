@@ -8,69 +8,6 @@
         'icon' => 'bi-file-earmark-bar-graph'
     ])
 
-    <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-file-earmark-text-fill text-primary fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Total Reports</h6>
-                            <h4 class="mb-0 fw-bold">{{ $reports->total() ?? 0 }}</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-success bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-download-fill text-success fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Downloads</h6>
-                            <h4 class="mb-0 fw-bold">0</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-warning bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-clock-fill text-warning fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Scheduled</h6>
-                            <h4 class="mb-0 fw-bold">0</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-info bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="bi bi-calendar-check-fill text-info fs-4"></i>
-                        </div>
-                        <div>
-                            <h6 class="mb-0 text-muted">Last Generated</h6>
-                            <h4 class="mb-0 fw-bold">-</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="card border-0 shadow-sm mb-4">
         <div class="card-header bg-white border-0 py-3">
             <h5 class="mb-0">Available Reports</h5>
