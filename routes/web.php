@@ -230,6 +230,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/brokers', [App\Http\Controllers\Insurer\InsurerHubController::class, 'brokers'])->name('brokers');
             Route::get('/agents', [App\Http\Controllers\Insurer\InsurerHubController::class, 'agents'])->name('agents');
             Route::get('/commission-rates', [App\Http\Controllers\Insurer\InsurerHubController::class, 'commissionRates'])->name('commission-rates');
+            Route::post('/commission-rates', [App\Http\Controllers\Insurer\InsurerHubController::class, 'storeCommissionRate'])->name('commission-rates.store');
+            Route::put('/commission-rates/{rate}', [App\Http\Controllers\Insurer\InsurerHubController::class, 'updateCommissionRate'])->name('commission-rates.update');
+            Route::delete('/commission-rates/{rate}', [App\Http\Controllers\Insurer\InsurerHubController::class, 'deleteCommissionRate'])->name('commission-rates.destroy');
+            Route::post('/commission-rates/{rate}/toggle', [App\Http\Controllers\Insurer\InsurerHubController::class, 'toggleCommissionRate'])->name('commission-rates.toggle');
             Route::get('/performance', [App\Http\Controllers\Insurer\InsurerHubController::class, 'partnerPerformance'])->name('performance');
         });
 
