@@ -205,6 +205,69 @@ class InsurerHubController extends Controller
         return view('insurer.network.commission-rates', compact('rates', 'products', 'categories', 'insurer'));
     }
 
+    public function storeCommissionRate(Request $request)
+    {
+        $insurer = auth()->user()->insurer;
+        if (!$insurer) return back()->with('error', 'Insurer profile not found.');
+
+        $validated = $request->validate([
+            'insurance_product_id' => 'nullable|exists:insurance_products,id',
+            'policy_category_id' => 'nullable|exists:policy_categories,id',
+            'channel_type' => 'required|string|max:50',
+            'rate_type' => 'required|in:percentage,fixed',
+            'rate_value' => 'required|numeric|min:0|max:999.9999',
+            'min_premium_amount' => 'nullable|numeric|min:0',
+            'max_premium_amount' => 'nullable|numeric|min:0',
+        ]);
+
+        $validated['insurer_id'] = $insurer->id;
+        $validated['created_by'] = auth()->id();
+
+        CommissionRate::create($validated);
+
+        return back()->with('success', 'Commission rate added.');
+    }
+
+    public function updateCommissionRate(Request $request, CommissionRate $rate)
+    {
+        $insurer = auth()->user()->insurer;
+        if (!$insurer || (int) $rate->insurer_id !== (int) $insurer->id) {
+            return back()->with('error', 'Unauthorized.');
+        }
+
+        $validated = $request->validate([
+            'channel_type' => 'required|string|max:50',
+            'rate_type' => 'required|in:percentage,fixed',
+            'rate_value' => 'required|numeric|min:0|max:999.9999',
+            'min_premium_amount' => 'nullable|numeric|min:0',
+            'max_premium_amount' => 'nullable|numeric|min:0',
+            'is_active' => 'boolean',
+        ]);
+
+        $rate->update($validated);
+        return back()->with('success', 'Rate updated.');
+    }
+
+    public function deleteCommissionRate(CommissionRate $rate)
+    {
+        $insurer = auth()->user()->insurer;
+        if (!$insurer || (int) $rate->insurer_id !== (int) $insurer->id) {
+            return back()->with('error', 'Unauthorized.');
+        }
+        $rate->delete();
+        return back()->with('success', 'Rate deleted.');
+    }
+
+    public function toggleCommissionRate(CommissionRate $rate)
+    {
+        $insurer = auth()->user()->insurer;
+        if (!$insurer || (int) $rate->insurer_id !== (int) $insurer->id) {
+            return back()->with('error', 'Unauthorized.');
+        }
+        $rate->update(['is_active' => !$rate->is_active]);
+        return back()->with('success', 'Rate ' . ($rate->is_active ? 'activated' : 'deactivated') . '.');
+    }
+
     public function partnerPerformance()
     {
         return view('insurer.network.performance');
@@ -238,12 +301,21 @@ class InsurerHubController extends Controller
 
     public function commissionPayable()
     {
-        $brokerComm = collect(); $agentComm = collect();
-        try {
-            $brokerComm = BrokerCommission::latest()->paginate(15);
-            $agentComm = AgentCommission::latest()->paginate(15);
-        } catch (\Exception $e) {}
-        return view('insurer.finance.commissions', compact('brokerComm', 'agentComm'));
+        $insurer = auth()->user()->insurer;
+        $transactions = collect();
+        $totalPending = 0;
+        $totalPaid = 0;
+        if ($insurer) {
+            $policyIds = \App\Models\CustomerPolicy::where('insurer_id', $insurer->id)->pluck('id');
+            $transactions = CommissionTransaction::with(['policy', 'rate'])
+                ->whereIn('customer_policy_id', $policyIds)
+                ->latest()->paginate(50);
+            $totalPending = CommissionTransaction::whereIn('customer_policy_id', $policyIds)
+                ->where('status', 'pending')->sum('commission_amount');
+            $totalPaid = CommissionTransaction::whereIn('customer_policy_id', $policyIds)
+                ->where('status', 'paid')->sum('commission_amount');
+        }
+        return view('insurer.finance.commissions', compact('transactions', 'totalPending', 'totalPaid'));
     }
 
     public function taxStatements()
