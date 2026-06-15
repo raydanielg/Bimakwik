@@ -12,7 +12,6 @@ use App\Models\AgentPolicy;
 use App\Models\AgentProfile;
 use App\Models\Claim;
 use App\Models\CommissionTransaction;
-use App\Models\CustomerPolicy;
 use App\Models\Report;
 use Illuminate\Support\Facades\Auth;
 
