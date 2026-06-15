@@ -49,4 +49,9 @@ class InsuranceProduct extends Model
     {
         return $this->hasMany(ProductExclusion::class);
     }
+
+    public function risks()
+    {
+        return $this->hasMany(ProductRisk::class);
+    }
 }
