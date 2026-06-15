@@ -627,6 +627,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/compliance/checks/{id}', [App\Http\Controllers\Bancassurance\ComplianceController::class, 'updateCheck']);
         Route::get('/performance', [App\Http\Controllers\Bancassurance\PerformanceController::class, 'index'])->name('performance');
         Route::get('/policies', [App\Http\Controllers\Bancassurance\PolicyController::class, 'index'])->name('policies.index');
+        Route::get('/commissions', [App\Http\Controllers\Bancassurance\CommissionController::class, 'index'])->name('commissions');
     });
 
     Route::get('/agent/dashboard', [App\Http\Controllers\Agent\DashboardController::class, 'index'])
