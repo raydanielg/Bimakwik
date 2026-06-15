@@ -97,7 +97,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($exports as $export)
+                            @foreach($reports as $export)
                                 <tr>
                                     <td><span class="fw-bold">#{{ $export->id ?? '-' }}</span></td>
                                     <td>{{ $export->report_type ?? 'N/A' }}</td>
@@ -128,7 +128,7 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $exports->links() }}
+                {{ $reports->links() }}
             @else
                 @include('insurer._partials.empty-state', [
                     'icon' => 'bi-file-earmark-spreadsheet',
