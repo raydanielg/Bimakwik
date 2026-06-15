@@ -290,9 +290,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
+                            <label for="myPolicyStartDate" class="form-label">Policy Start Date *</label>
+                            <input type="date" class="form-control" id="myPolicyStartDate" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label for="myPolicyEndDate" class="form-label">Policy End Date *</label>
                             <input type="date" class="form-control" id="myPolicyEndDate" required>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="myCompanyCode" class="form-label">Company Code</label>
                             <input type="text" class="form-control" id="myCompanyCode" placeholder="e.g. ICC113">
