@@ -30,4 +30,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    // Selcom Payment Gateway
+    'selcom' => [
+        'vendor' => env('SELCOM_BIMAKWIK_VENDOR', ''),
+        'api_key' => env('SELCOM_BIMAKWIK_API_KEY', ''),
+        'api_secret' => env('SELCOM_BIMAKWIK_API_SECRET', ''),
+        'environment' => env('SELCOM_ENV', 'sandbox'),
+        'enabled' => env('SELCOM_ENABLED', false),
+    ],
+
 ];
