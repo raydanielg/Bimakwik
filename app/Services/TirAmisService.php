@@ -6,6 +6,7 @@ use App\Models\TirAmisReport;
 use App\Models\TirAmisIntegrationLog;
 use App\Models\Claim;
 use App\Models\Policy;
+use App\Services\CommissionService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -559,6 +560,13 @@ class TirAmisService
         $salePointCode = $policy->sale_point_code ?? 'SP001';
         $insurer = $policy->insurer;
 
+        // Calculate commission from policy's commission transactions
+        $totalCommission = $policy->commissionTransactions->sum('commission_amount');
+        $commissionRate = 0;
+        if ($policy->premium_amount > 0 && $totalCommission > 0) {
+            $commissionRate = ($totalCommission / $policy->premium_amount) * 100;
+        }
+
         $data = [
             'cover_note_type' => '1',
             'cover_note_number' => $policy->policy_number ?? 'POL-' . $policy->id,
@@ -572,8 +580,8 @@ class TirAmisService
             'exchange_rate' => '1.00',
             'premium_excl_tax' => (string) ($policy->premium_amount ?? 0),
             'premium_incl_tax' => (string) ($policy->premium_amount ?? 0),
-            'commission_paid' => '0.00',
-            'commission_rate' => '0.00',
+            'commission_paid' => number_format($totalCommission, 2, '.', ''),
+            'commission_rate' => number_format($commissionRate, 2, '.', ''),
             'officer_name' => 'System',
             'officer_title' => 'System',
             'product_code' => $policy->product?->product_code ?? '',
