@@ -1,0 +1,3 @@
+Company Code	Company Name	Client Code	Client Key	System Code	System Name
+OC1014	I LINK LIMITED T/A BIMA KWIK	OC1014	1Xr@Jnq74&cYaSl2	LSYS_BIMAKWIK_001	BIMAKWIK System
+
