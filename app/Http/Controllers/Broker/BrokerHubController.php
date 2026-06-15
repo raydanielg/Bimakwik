@@ -55,12 +55,24 @@ class BrokerHubController extends Controller
     public function commissions()
     {
         $commissions = collect(); $totalEarned = 0; $pendingAmount = 0;
+        $newCommissions = collect();
         try {
             $commissions = BrokerCommission::with(['customerPolicy.insuranceProduct'])->latest()->paginate(15);
             $totalEarned = BrokerCommission::where('status', 'paid')->sum('commission_amount') ?? 0;
             $pendingAmount = BrokerCommission::where('status', 'pending')->sum('commission_amount') ?? 0;
+
+            $broker = Broker::where('user_id', Auth::id())->first();
+            if ($broker) {
+                $newCommissions = CommissionTransaction::where('recipient_type', 'broker')
+                    ->where('recipient_id', $broker->id)
+                    ->with(['customerPolicy.customer', 'customerPolicy.product'])
+                    ->latest()->take(10)->get();
+
+                $totalEarned += $newCommissions->where('status', 'paid')->sum('commission_amount');
+                $pendingAmount += $newCommissions->where('status', 'pending')->sum('commission_amount');
+            }
         } catch (\Exception $e) {}
-        return view('broker.commissions.index', compact('commissions', 'totalEarned', 'pendingAmount'));
+        return view('broker.commissions.index', compact('commissions', 'totalEarned', 'pendingAmount', 'newCommissions'));
     }
 
     public function reports()
