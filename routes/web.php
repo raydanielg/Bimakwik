@@ -442,6 +442,19 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'store'])->name('store');
             Route::get('/{transaction}', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'show'])->name('show');
             Route::post('/{transaction}/status', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'updateStatus'])->name('update-status');
+
+        // Selcom Payment Routes
+        Route::prefix('selcom')->name('selcom.')->group(function () {
+            Route::post('/pay', [App\Http\Controllers\Payment\SelcomController::class, 'pay'])->name('pay');
+            Route::get('/status/{orderId}', [App\Http\Controllers\Payment\SelcomController::class, 'status'])->name('status');
+        });
+
+    });
+
+    // Selcom Webhooks (no auth - signature verified)
+    Route::post('/payment/selcom/webhook', [App\Http\Controllers\Payment\SelcomController::class, 'webhook'])->name('payment.selcom.webhook');
+    Route::get('/payment/selcom/success', [App\Http\Controllers\Payment\SelcomController::class, 'success'])->name('payment.selcom.success');
+    Route::get('/payment/selcom/cancel', [App\Http\Controllers\Payment\SelcomController::class, 'cancel'])->name('payment.selcom.cancel');
             Route::post('/{transaction}/refund', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'refund'])->name('refund');
             Route::delete('/{transaction}', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'destroy'])->name('destroy');
             Route::get('/my', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'myTransactions'])->name('my');
