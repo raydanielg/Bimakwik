@@ -55,6 +55,8 @@ class PortalController extends Controller
             'coverage' => 'required|string',
             'period' => 'required|string',
             'price' => 'required|numeric',
+            'company_code' => 'nullable|string|max:50',
+            'sale_point_code' => 'nullable|string|max:50',
         ]);
 
         try {
