@@ -450,6 +450,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::post('/{transaction}/refund', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'refund'])->name('refund');
+        });
     });
 
     // Selcom Webhooks (no auth - signature verified)
