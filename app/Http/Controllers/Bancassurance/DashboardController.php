@@ -37,51 +37,62 @@ class DashboardController extends Controller
 
         $agentId = $agent->id;
 
-        // Total sales (premium amount from commissions)
-        $totalSales = AgentCommission::where('agent_id', $agentId)->sum('premium_amount');
+        // Total sales (premium amount from commissions - both old and new)
+        $totalSales = AgentCommission::where('agent_id', $agentId)->sum('premium_amount')
+            + CommissionTransaction::where('recipient_type', 'bancassurance_user')
+                ->where('recipient_id', $agentId)
+                ->sum('premium_amount');
 
         // Total commission earned
-        $totalCommission = AgentCommission::where('agent_id', $agentId)
-            ->where('status', 'paid')
-            ->sum('commission_amount');
+        $oldPaid = AgentCommission::where('agent_id', $agentId)->where('status', 'paid')->sum('commission_amount');
+        $newPaid = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)->where('status', 'paid')->sum('commission_amount');
+        $totalCommission = $oldPaid + $newPaid;
 
         // Policies sold count
-        $policiesSold = AgentCommission::where('agent_id', $agentId)->distinct('customer_policy_id')->count('customer_policy_id');
+        $oldPolicies = AgentCommission::where('agent_id', $agentId)->distinct('customer_policy_id')->count('customer_policy_id');
+        $newPolicies = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)->distinct('customer_policy_id')->count('customer_policy_id');
+        $policiesSold = $oldPolicies + $newPolicies;
 
-        // Pending renewals for customers this agent sold to
-        $agentPolicyIds = AgentCommission::where('agent_id', $agentId)->pluck('customer_policy_id');
+        // Policy IDs from both systems
+        $agentPolicyIds = AgentCommission::where('agent_id', $agentId)->pluck('customer_policy_id')
+            ->merge(CommissionTransaction::where('recipient_type', 'bancassurance_user')
+                ->where('recipient_id', $agentId)->pluck('customer_policy_id'));
         $pendingRenewals = PolicyRenewal::whereIn('customer_policy_id', $agentPolicyIds)
             ->where('status', 'pending')
             ->count();
 
-        // Recent policies sold by this agent (via commissions)
-        $recentPolicies = AgentCommission::where('agent_id', $agentId)
-            ->with(['customerPolicy.customer.user', 'insuranceProduct'])
+        // Recent policies from new system
+        $recentPolicies = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)
+            ->with(['customerPolicy.customer.user', 'customerPolicy.product'])
             ->latest()
             ->take(10)
             ->get();
 
-        // Monthly sales data for chart (last 7 days for weekly view)
+        // Weekly and monthly chart data from new system
         $weekDays = [];
         $weekSales = [];
         for ($i = 6; $i >= 0; $i--) {
             $date = Carbon::now()->subDays($i);
             $weekDays[] = $date->format('D');
-            $weekSales[] = round(AgentCommission::where('agent_id', $agentId)
-                ->whereDate('created_at', $date->toDateString())
-                ->sum('premium_amount') / 1000000, 2);
+            $oldSum = AgentCommission::where('agent_id', $agentId)->whereDate('created_at', $date->toDateString())->sum('premium_amount');
+            $newSum = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+                ->where('recipient_id', $agentId)->whereDate('created_at', $date->toDateString())->sum('premium_amount');
+            $weekSales[] = round(($oldSum + $newSum) / 1000000, 2);
         }
 
-        // Monthly labels and data for the monthly chart
         $monthLabels = [];
         $monthSales = [];
         for ($i = 3; $i >= 0; $i--) {
             $weekStart = Carbon::now()->subWeeks($i)->startOfWeek();
             $weekEnd = Carbon::now()->subWeeks($i)->endOfWeek();
             $monthLabels[] = 'Week ' . (4 - $i);
-            $monthSales[] = round(AgentCommission::where('agent_id', $agentId)
-                ->whereBetween('created_at', [$weekStart, $weekEnd])
-                ->sum('premium_amount') / 1000000, 2);
+            $oldSum = AgentCommission::where('agent_id', $agentId)->whereBetween('created_at', [$weekStart, $weekEnd])->sum('premium_amount');
+            $newSum = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+                ->where('recipient_id', $agentId)->whereBetween('created_at', [$weekStart, $weekEnd])->sum('premium_amount');
+            $monthSales[] = round(($oldSum + $newSum) / 1000000, 2);
         }
 
         return view('bancassurance.dashboard', [
