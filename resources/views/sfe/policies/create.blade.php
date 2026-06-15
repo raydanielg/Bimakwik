@@ -20,7 +20,7 @@
                 @csrf
 
                 <div class="row g-3 mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label class="form-label">Product *</label>
                         <select name="product_id" class="form-select" required>
                             <option value="">Select product</option>
@@ -30,8 +30,6 @@
                                 </option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="col-md-6">
                     </div>
                 </div>
 
