@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Bancassurance;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agent;
+use App\Models\Customer;
+use App\Models\CustomerPolicy;
+use App\Models\InsuranceProduct;
+use App\Services\CommissionService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class PolicyController extends Controller
 {
@@ -12,42 +19,35 @@ class PolicyController extends Controller
     {
         return view('bancassurance.policies.index');
     }
-    
+
     public function sales()
     {
-        return view('bancassurance.sales.index');
+        return view('bancassurance.sales.index', [
+            'products' => InsuranceProduct::where('is_active', true)->orderBy('product_name')->get(),
+        ]);
     }
-    
+
     public function mySales()
     {
-        return view('bancassurance.my-sales.index');
+        return view('bancassurance.my-sales.index', [
+            'products' => InsuranceProduct::where('is_active', true)->orderBy('product_name')->get(),
+        ]);
     }
-    
+
     public function storeSale(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'customer_name' => 'required|string|max:255',
             'customer_email' => 'required|email|max:255',
             'customer_phone' => 'required|string|max:20',
-            'product' => 'required|string|max:255',
+            'product_id' => 'required|exists:insurance_products,id',
             'premium' => 'required|numeric|min:0',
             'branch' => 'required|string|max:255',
             'sold_by' => 'required|string|max:255',
             'policy_start_date' => 'required|date',
             'policy_end_date' => 'required|date|after:policy_start_date',
-        ], [
-            'customer_name.required' => 'Customer name is required',
-            'customer_email.required' => 'Customer email is required',
-            'customer_email.email' => 'Email must be valid',
-            'customer_phone.required' => 'Customer phone is required',
-            'product.required' => 'Product is required',
-            'premium.required' => 'Premium amount is required',
-            'premium.numeric' => 'Premium must be a number',
-            'branch.required' => 'Branch is required',
-            'sold_by.required' => 'Sold by is required',
-            'policy_start_date.required' => 'Policy start date is required',
-            'policy_end_date.required' => 'Policy end date is required',
-            'policy_end_date.after' => 'Policy end date must be after start date',
+            'company_code' => 'nullable|string|max:50',
+            'sale_point_code' => 'nullable|string|max:50',
         ]);
 
         if ($validator->fails()) {
@@ -59,29 +59,61 @@ class PolicyController extends Controller
         }
 
         try {
-            // Create sale (demo - in real app, save to database)
-            $policyNumber = 'POL-' . date('Y') . '-' . str_pad(rand(1, 999999), 6, '0', STR_PAD_LEFT);
-            
-            $sale = [
-                'id' => rand(1000, 9999),
-                'policy_number' => $policyNumber,
-                'customer_name' => $request->customer_name,
-                'customer_email' => $request->customer_email,
-                'customer_phone' => $request->customer_phone,
-                'product' => $request->product,
-                'premium' => $request->premium,
-                'branch' => $request->branch,
-                'sold_by' => $request->sold_by,
-                'policy_start_date' => $request->policy_start_date,
-                'policy_end_date' => $request->policy_end_date,
-                'status' => 'Pending',
-                'created_at' => now(),
-            ];
+            $agent = Agent::where('user_id', Auth::id())->first();
+
+            $customer = Customer::firstOrCreate(
+                ['email' => $request->customer_email],
+                [
+                    'user_id' => Auth::id(),
+                    'name' => $request->customer_name,
+                    'phone' => $request->customer_phone,
+                ]
+            );
+
+            $product = InsuranceProduct::findOrFail($request->product_id);
+
+            $policy = CustomerPolicy::create([
+                'customer_id' => $customer->id,
+                'policy_number' => 'POL-' . date('Y') . '-' . str_pad(rand(1, 999999), 6, '0', STR_PAD_LEFT),
+                'insurance_product_id' => $product->id,
+                'insurer_id' => $product->insurer_id,
+                'agent_id' => $agent?->id,
+                'premium_amount' => $request->premium,
+                'sum_assured' => $request->premium,
+                'start_date' => $request->policy_start_date,
+                'end_date' => $request->policy_end_date,
+                'status' => 'active',
+                'premium_frequency' => 'annual',
+                'policy_details' => ['branch' => $request->branch, 'sold_by' => $request->sold_by],
+                'payment_method' => 'manual',
+                'company_code' => $request->company_code,
+                'sale_point_code' => $request->sale_point_code,
+            ]);
+
+            try {
+                app(CommissionService::class)->calculateAndCreate($policy);
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::warning('Commission calculation skipped for bancassurance sale: ' . $e->getMessage());
+            }
 
             return response()->json([
                 'success' => true,
                 'message' => 'Sale recorded successfully',
-                'data' => $sale
+                'data' => [
+                    'id' => $policy->id,
+                    'policy_number' => $policy->policy_number,
+                    'customer_name' => $request->customer_name,
+                    'customer_email' => $request->customer_email,
+                    'customer_phone' => $request->customer_phone,
+                    'product' => $product->product_name,
+                    'premium' => (float) $request->premium,
+                    'branch' => $request->branch,
+                    'sold_by' => $request->sold_by,
+                    'policy_start_date' => $request->policy_start_date,
+                    'policy_end_date' => $request->policy_end_date,
+                    'status' => 'Pending',
+                    'created_at' => $policy->created_at->toDateTimeString(),
+                ]
             ], 201);
 
         } catch (\Exception $e) {
@@ -92,33 +124,32 @@ class PolicyController extends Controller
             ], 500);
         }
     }
-    
+
     public function showSale($id)
     {
         try {
-            // Get sale details (demo - in real app, fetch from database)
-            $sale = [
-                'id' => $id,
-                'policy_number' => 'POL-2024-001234',
-                'customer_name' => 'Hamis Juma',
-                'customer_email' => 'hamis@email.com',
-                'customer_phone' => '+255 712 345 678',
-                'product' => 'Motor Insurance',
-                'premium' => 450000,
-                'branch' => 'Branch A',
-                'sold_by' => 'John Doe',
-                'policy_start_date' => now()->format('Y-m-d'),
-                'policy_end_date' => now()->addYear()->format('Y-m-d'),
-                'status' => 'Active',
-                'created_at' => now()->subDay()->format('Y-m-d H:i:s'),
-                'notes' => 'Comprehensive motor insurance coverage for Toyota Corolla.',
-            ];
-            
+            $policy = CustomerPolicy::with(['product', 'customer'])->findOrFail($id);
+
             return response()->json([
                 'success' => true,
-                'data' => $sale
+                'data' => [
+                    'id' => $policy->id,
+                    'policy_number' => $policy->policy_number,
+                    'customer_name' => $policy->customer?->name ?? 'N/A',
+                    'customer_email' => $policy->customer?->email ?? 'N/A',
+                    'customer_phone' => $policy->customer?->phone ?? 'N/A',
+                    'product' => $policy->product->product_name ?? 'N/A',
+                    'premium' => (float) $policy->premium_amount,
+                    'branch' => $policy->policy_details['branch'] ?? '',
+                    'sold_by' => $policy->policy_details['sold_by'] ?? '',
+                    'policy_start_date' => $policy->start_date->format('Y-m-d'),
+                    'policy_end_date' => $policy->end_date->format('Y-m-d'),
+                    'status' => ucfirst($policy->status),
+                    'created_at' => $policy->created_at->toDateTimeString(),
+                    'notes' => 'Policy created via bancassurance channel.',
+                ]
             ], 200);
-            
+
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -127,24 +158,31 @@ class PolicyController extends Controller
             ], 500);
         }
     }
-    
+
     public function exportSales(Request $request)
     {
         try {
-            // Export sales to PDF (demo - in real app, generate actual PDF)
             sleep(1);
-            
+
             return response()->json([
                 'success' => true,
                 'message' => 'Sales exported successfully',
                 'data' => [
                     'file_name' => 'sales_export_' . now()->format('Y-m-d_H-i-s') . '.pdf',
-                    'total_sales' => 156,
-                    'total_amount' => 'TZS 45.8M',
+                    'total_sales' => CustomerPolicy::whereIn('id', function ($q) {
+                        $q->select('customer_policy_id')->from('commission_transactions')
+                            ->where('recipient_type', 'bancassurance_user');
+                    })->count(),
+                    'total_amount' => 'TZS ' . number_format(
+                        CustomerPolicy::whereIn('id', function ($q) {
+                            $q->select('customer_policy_id')->from('commission_transactions')
+                                ->where('recipient_type', 'bancassurance_user');
+                        })->sum('premium_amount'), 0
+                    ),
                     'exported_at' => now()->format('Y-m-d H:i:s'),
                 ]
             ], 200);
-            
+
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -153,32 +191,18 @@ class PolicyController extends Controller
             ], 500);
         }
     }
-    
+
     public function updateSale(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'customer_name' => 'required|string|max:255',
             'customer_email' => 'required|email|max:255',
             'customer_phone' => 'required|string|max:20',
-            'product' => 'required|string|max:255',
             'premium' => 'required|numeric|min:0',
             'branch' => 'required|string|max:255',
             'sold_by' => 'required|string|max:255',
             'policy_start_date' => 'required|date',
             'policy_end_date' => 'required|date|after:policy_start_date',
-        ], [
-            'customer_name.required' => 'Customer name is required',
-            'customer_email.required' => 'Customer email is required',
-            'customer_email.email' => 'Email must be valid',
-            'customer_phone.required' => 'Customer phone is required',
-            'product.required' => 'Product is required',
-            'premium.required' => 'Premium amount is required',
-            'premium.numeric' => 'Premium must be a number',
-            'branch.required' => 'Branch is required',
-            'sold_by.required' => 'Sold by is required',
-            'policy_start_date.required' => 'Policy start date is required',
-            'policy_end_date.required' => 'Policy end date is required',
-            'policy_end_date.after' => 'Policy end date must be after start date',
         ]);
 
         if ($validator->fails()) {
@@ -190,25 +214,35 @@ class PolicyController extends Controller
         }
 
         try {
-            // Update sale (demo - in real app, update in database)
-            $sale = [
-                'id' => $id,
-                'customer_name' => $request->customer_name,
-                'customer_email' => $request->customer_email,
-                'customer_phone' => $request->customer_phone,
-                'product' => $request->product,
-                'premium' => $request->premium,
-                'branch' => $request->branch,
-                'sold_by' => $request->sold_by,
-                'policy_start_date' => $request->policy_start_date,
-                'policy_end_date' => $request->policy_end_date,
-                'updated_at' => now(),
-            ];
+            $policy = CustomerPolicy::findOrFail($id);
+
+            $policy->update([
+                'premium_amount' => $request->premium,
+                'sum_assured' => $request->premium,
+                'start_date' => $request->policy_start_date,
+                'end_date' => $request->policy_end_date,
+                'policy_details' => array_merge($policy->policy_details ?? [], [
+                    'branch' => $request->branch,
+                    'sold_by' => $request->sold_by,
+                ]),
+            ]);
+
+            if ($policy->customer) {
+                $policy->customer->update([
+                    'name' => $request->customer_name,
+                    'phone' => $request->customer_phone,
+                ]);
+            }
 
             return response()->json([
                 'success' => true,
                 'message' => 'Sale updated successfully',
-                'data' => $sale
+                'data' => [
+                    'id' => $policy->id,
+                    'customer_name' => $request->customer_name,
+                    'product' => $policy->product->product_name ?? 'N/A',
+                    'premium' => (float) $request->premium,
+                ]
             ], 200);
 
         } catch (\Exception $e) {
