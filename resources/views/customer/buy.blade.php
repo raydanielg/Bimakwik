@@ -69,6 +69,40 @@
 </div>
 @endif
 
+<!-- TIRAMIS Codes -->
+@if($quoteProduct && $quotePrice)
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
+                <h6 class="fw-semibold mb-0"><i class="bi bi-building me-1"></i> TIRAMIS Codes</h6>
+                <small class="text-muted">Optional — for TIRA compliance</small>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label small">Company Code</label>
+                        <input type="text" name="company_code" form="buyForm"
+                               class="form-control form-control-sm"
+                               placeholder="e.g. ICC113"
+                               value="{{ request('company_code', old('company_code')) }}">
+                        <div class="form-text">TIRA-assigned insurer company code</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small">Sale Point Code</label>
+                        <input type="text" name="sale_point_code" form="buyForm"
+                               class="form-control form-control-sm"
+                               placeholder="e.g. SP677"
+                               value="{{ request('sale_point_code', old('sale_point_code')) }}">
+                        <div class="form-text">TIRA-assigned sale point identifier</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
 <!-- Available Insurance Products -->
 @if(!($quoteProduct && $quotePrice))
 <div class="row g-4">
