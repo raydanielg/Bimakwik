@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Bancassurance;
 use App\Http\Controllers\Controller;
 use App\Models\Agent;
 use App\Models\AgentCommission;
+use App\Models\CommissionTransaction;
 use App\Models\CustomerPolicy;
 use App\Models\PolicyRenewal;
 use App\Models\InsuranceProduct;
