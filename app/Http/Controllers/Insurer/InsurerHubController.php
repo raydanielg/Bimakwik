@@ -11,6 +11,8 @@ use App\Models\InsurerBranch;
 use App\Models\ServiceProvider;
 use App\Models\BrokerCommission;
 use App\Models\AgentCommission;
+use App\Models\CommissionRate;
+use App\Models\CommissionTransaction;
 use App\Models\PaymentTransaction;
 use App\Models\InsurerContract;
 use App\Models\PolicyEndorsement;
@@ -185,7 +187,22 @@ class InsurerHubController extends Controller
 
     public function commissionRates()
     {
-        return view('insurer.network.commission-rates');
+        $insurer = auth()->user()->insurer;
+        $rates = collect();
+        $products = collect();
+        $categories = collect();
+        if ($insurer) {
+            $rates = CommissionRate::with(['product', 'category'])
+                ->where(function ($q) use ($insurer) {
+                    $q->where('insurer_id', $insurer->id)
+                      ->orWhereNull('insurer_id');
+                })
+                ->latest()->paginate(50);
+            $products = InsuranceProduct::where('insurer_id', $insurer->id)
+                ->where('is_active', true)->orderBy('product_name')->get();
+            $categories = \App\Models\PolicyCategory::where('is_active', true)->orderBy('category_name')->get();
+        }
+        return view('insurer.network.commission-rates', compact('rates', 'products', 'categories', 'insurer'));
     }
 
     public function partnerPerformance()
