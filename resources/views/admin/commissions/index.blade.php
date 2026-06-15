@@ -177,13 +177,95 @@
         </form>
     </div>
 </div>
+
+<!-- Edit Rate Modal -->
+<div class="modal fade" id="editRateModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <form method="POST" id="editRateForm">
+            @csrf @method('PUT')
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-pencil me-1"></i> Edit Commission Rate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Channel *</label>
+                            <select name="channel_type" id="edit_channel_type" class="form-select" required>
+                                <option value="agent">Agent</option>
+                                <option value="broker">Broker</option>
+                                <option value="bancassurance">Bancassurance</option>
+                                <option value="sfe">SFE</option>
+                                <option value="direct">Direct</option>
+                                <option value="partner">Partner</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Rate Type *</label>
+                            <select name="rate_type" id="edit_rate_type" class="form-select" required>
+                                <option value="percentage">Percentage (%)</option>
+                                <option value="fixed">Fixed Amount (TZS)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Rate Value *</label>
+                            <input type="number" name="rate_value" id="edit_rate_value" class="form-control" step="0.0001" min="0" max="999.9999" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Min Premium</label>
+                            <input type="number" name="min_premium_amount" id="edit_min_premium" class="form-control" min="0">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Max Premium</label>
+                            <input type="number" name="max_premium_amount" id="edit_max_premium" class="form-control" min="0">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Effective From</label>
+                            <input type="date" name="effective_from" id="edit_effective_from" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Effective To</label>
+                            <input type="date" name="effective_to" id="edit_effective_to" class="form-control">
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input type="checkbox" name="is_active" id="edit_is_active" class="form-check-input" value="1">
+                                <label class="form-check-label" for="edit_is_active">Active</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Update Rate</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
 <script>
+const ratesData = @json($rates->items());
+
 function editRate(id) {
-    // For now, redirect to a simple form. Full AJAX edit can be added later.
-    alert('Edit functionality - click row to edit (future enhancement)');
+    const rate = ratesData.find(r => r.id === id);
+    if (!rate) { alert('Rate not found'); return; }
+
+    document.getElementById('edit_channel_type').value = rate.channel_type;
+    document.getElementById('edit_rate_type').value = rate.rate_type;
+    document.getElementById('edit_rate_value').value = rate.rate_value;
+    document.getElementById('edit_min_premium').value = rate.min_premium_amount || '';
+    document.getElementById('edit_max_premium').value = rate.max_premium_amount || '';
+    document.getElementById('edit_effective_from').value = rate.effective_from || '';
+    document.getElementById('edit_effective_to').value = rate.effective_to || '';
+    document.getElementById('edit_is_active').checked = rate.is_active;
+
+    document.getElementById('editRateForm').action = '{{ url('admin/commissions') }}/' + id;
+
+    new bootstrap.Modal(document.getElementById('editRateModal')).show();
 }
 </script>
 @endpush
