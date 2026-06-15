@@ -63,13 +63,18 @@ class PolicyController extends Controller
         try {
             $agent = Agent::where('user_id', Auth::id())->first();
 
-            $customer = Customer::firstOrCreate(
+            $user = User::firstOrCreate(
                 ['email' => $request->customer_email],
                 [
-                    'user_id' => Auth::id(),
                     'name' => $request->customer_name,
-                    'phone' => $request->customer_phone,
+                    'phone_number' => $request->customer_phone,
+                    'password' => Hash::make(Str::random(16)),
                 ]
+            );
+
+            $customer = Customer::firstOrCreate(
+                ['user_id' => $user->id],
+                ['customer_number' => 'CUST-' . strtoupper(Str::random(8))]
             );
 
             $product = InsuranceProduct::findOrFail($request->product_id);
@@ -229,10 +234,10 @@ class PolicyController extends Controller
                 ]),
             ]);
 
-            if ($policy->customer) {
-                $policy->customer->update([
+            if ($policy->customer && $policy->customer->user) {
+                $policy->customer->user->update([
                     'name' => $request->customer_name,
-                    'phone' => $request->customer_phone,
+                    'phone_number' => $request->customer_phone,
                 ]);
             }
 
