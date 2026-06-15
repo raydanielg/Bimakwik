@@ -8,6 +8,7 @@ use App\Models\CustomerPolicy;
 use App\Models\User;
 use App\Models\BrokerCommission;
 use App\Models\BrokerCommissionWithdrawal;
+use App\Models\CommissionTransaction;
 use App\Models\Claim;
 use App\Models\ClaimFraudAlert;
 use App\Models\InsuranceProduct;

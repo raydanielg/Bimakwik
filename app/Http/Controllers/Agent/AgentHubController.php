@@ -40,12 +40,26 @@ class AgentHubController extends Controller
     public function commissions()
     {
         $commissions = collect(); $totalEarned = 0; $pendingAmount = 0;
+        $newCommissions = collect();
         try {
             $commissions = AgentCommission::latest()->paginate(15);
             $totalEarned = AgentCommission::where('status', 'paid')->sum('amount') ?? 0;
             $pendingAmount = AgentCommission::where('status', 'pending')->sum('amount') ?? 0;
+
+            $agent = \App\Models\Agent::where('user_id', Auth::id())->first();
+            if ($agent) {
+                $newCommissions = CommissionTransaction::where(function ($q) use ($agent) {
+                    $q->where('recipient_type', 'agent')->where('recipient_id', $agent->id);
+                })->orWhere(function ($q) use ($agent) {
+                    $q->whereIn('recipient_type', ['sfe_user', 'bancassurance_user'])
+                      ->where('recipient_id', $agent->id);
+                })->with(['customerPolicy.customer', 'customerPolicy.product'])->latest()->take(10)->get();
+
+                $totalEarned += $newCommissions->where('status', 'paid')->sum('commission_amount');
+                $pendingAmount += $newCommissions->where('status', 'pending')->sum('commission_amount');
+            }
         } catch (\Exception $e) {}
-        return view('agent.commissions.index', compact('commissions', 'totalEarned', 'pendingAmount'));
+        return view('agent.commissions.index', compact('commissions', 'totalEarned', 'pendingAmount', 'newCommissions'));
     }
 
     public function reports()
