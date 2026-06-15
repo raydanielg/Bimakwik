@@ -63,13 +63,13 @@
 
 <!-- Sales Stats -->
 <div class="row g-3 mb-4">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body p-3">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <small class="text-muted">Total Sales</small>
-                        <h5 class="fw-bold mb-0">TZS 45.8M</h5>
+                        <h5 class="fw-bold mb-0">TZS {{ number_format($totalSales / 1000000, 1) }}M</h5>
                     </div>
                     <div class="bg-primary bg-opacity-10 rounded-circle p-2">
                         <i class="bi bi-cash-stack text-primary"></i>
@@ -78,13 +78,13 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body p-3">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <small class="text-muted">Policies Sold</small>
-                        <h5 class="fw-bold mb-0">156</h5>
+                        <h5 class="fw-bold mb-0">{{ $policiesSold }}</h5>
                     </div>
                     <div class="bg-success bg-opacity-10 rounded-circle p-2">
                         <i class="bi bi-file-earmark-text text-success"></i>
@@ -93,31 +93,16 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body p-3">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <small class="text-muted">This Month</small>
-                        <h5 class="fw-bold mb-0">TZS 12.3M</h5>
+                        <h5 class="fw-bold mb-0">TZS {{ number_format($monthSales / 1000000, 1) }}M</h5>
                     </div>
                     <div class="bg-info bg-opacity-10 rounded-circle p-2">
                         <i class="bi bi-calendar text-info"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card border-0 shadow-sm h-100">
-            <div class="card-body p-3">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <small class="text-muted">Target</small>
-                        <h5 class="fw-bold mb-0">92%</h5>
-                    </div>
-                    <div class="bg-warning bg-opacity-10 rounded-circle p-2">
-                        <i class="bi bi-graph-up text-warning"></i>
                     </div>
                 </div>
             </div>
@@ -130,12 +115,6 @@
     <div class="card-body p-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="fw-bold mb-0">Recent Sales</h6>
-            <div class="input-group" style="width: 250px;">
-                <span class="input-group-text bg-light border-0">
-                    <i class="bi bi-search"></i>
-                </span>
-                <input type="text" class="form-control border-0 bg-light" placeholder="Search sales...">
-            </div>
         </div>
         <div class="table-responsive">
             <table class="table table-hover">
@@ -153,82 +132,41 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse($policies as $txn)
                     <tr>
-                        <td><span class="fw-semibold text-primary">POL-2024-001234</span></td>
-                        <td>Hamis Juma</td>
-                        <td>Motor Insurance</td>
-                        <td>TZS 450,000</td>
-                        <td>Branch A</td>
-                        <td>John Doe</td>
-                        <td>Today</td>
+                        <td><span class="fw-semibold text-primary">{{ $txn->customerPolicy?->policy_number ?? 'N/A' }}</span></td>
+                        <td>{{ $txn->customerPolicy?->customer?->user?->name ?? $txn->customerPolicy?->customer?->name ?? 'N/A' }}</td>
+                        <td>{{ $txn->customerPolicy?->product?->product_name ?? 'N/A' }}</td>
+                        <td>TZS {{ number_format($txn->premium_amount, 0) }}</td>
+                        <td>{{ $txn->customerPolicy?->policy_details['branch'] ?? 'N/A' }}</td>
+                        <td>{{ $txn->customerPolicy?->policy_details['sold_by'] ?? 'N/A' }}</td>
+                        <td>{{ $txn->created_at->diffForHumans() }}</td>
                         <td>
-                            <span class="badge bg-success d-inline-flex align-items-center">
-                                <i class="bi bi-check-circle-fill me-1"></i>Active
+                            <span class="badge bg-{{ $txn->customerPolicy?->status === 'active' ? 'success' : 'warning' }} d-inline-flex align-items-center">
+                                <i class="bi bi-{{ $txn->customerPolicy?->status === 'active' ? 'check-circle-fill' : 'clock-fill' }} me-1"></i>{{ ucfirst($txn->customerPolicy?->status ?? 'pending') }}
                             </span>
                         </td>
                         <td>
                             <div class="btn-group btn-group-sm">
-                                <button class="btn btn-outline-primary view-sale-btn" data-id="1" data-policy="POL-2024-001234" title="View">
+                                <button class="btn btn-outline-primary view-sale-btn" data-id="{{ $txn->customer_policy_id }}" data-policy="{{ $txn->customerPolicy?->policy_number }}" title="View">
                                     <i class="bi bi-eye"></i>
                                 </button>
-                                <button class="btn btn-outline-secondary edit-sale-btn" data-id="1" data-policy="POL-2024-001234" title="Edit">
+                                <button class="btn btn-outline-secondary edit-sale-btn" data-id="{{ $txn->customer_policy_id }}" data-policy="{{ $txn->customerPolicy?->policy_number }}" title="Edit">
                                     <i class="bi bi-pencil"></i>
                                 </button>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td><span class="fw-semibold text-primary">POL-2024-001235</span></td>
-                        <td>Sarah Peter</td>
-                        <td>Life Insurance</td>
-                        <td>TZS 280,000</td>
-                        <td>Branch B</td>
-                        <td>Jane Smith</td>
-                        <td>Yesterday</td>
-                        <td>
-                            <span class="badge bg-success d-inline-flex align-items-center">
-                                <i class="bi bi-check-circle-fill me-1"></i>Active
-                            </span>
-                        </td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <button class="btn btn-outline-primary view-sale-btn" data-id="2" data-policy="POL-2024-001235" title="View">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-                                <button class="btn btn-outline-secondary edit-sale-btn" data-id="2" data-policy="POL-2024-001235" title="Edit">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="fw-semibold text-primary">POL-2024-001236</span></td>
-                        <td>David Omondi</td>
-                        <td>Health Insurance</td>
-                        <td>TZS 120,000</td>
-                        <td>Branch A</td>
-                        <td>John Doe</td>
-                        <td>2 days ago</td>
-                        <td>
-                            <span class="badge bg-warning d-inline-flex align-items-center">
-                                <i class="bi bi-clock-fill me-1"></i>Pending
-                            </span>
-                        </td>
-                        <td>
-                            <div class="btn-group btn-group-sm">
-                                <button class="btn btn-outline-primary view-sale-btn" data-id="3" data-policy="POL-2024-001236" title="View">
-                                    <i class="bi bi-eye"></i>
-                                </button>
-                                <button class="btn btn-outline-secondary edit-sale-btn" data-id="3" data-policy="POL-2024-001236" title="Edit">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    @empty
+                    <tr><td colspan="9" class="text-center text-muted py-4">No sales recorded yet.</td></tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
     </div>
+    @if(method_exists($policies, 'hasPages') && $policies->hasPages())
+    <div class="card-footer bg-white">{{ $policies->links() }}</div>
+    @endif
 </div>
 
 <!-- Add Sale Modal -->
