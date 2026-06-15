@@ -442,34 +442,15 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'store'])->name('store');
             Route::get('/{transaction}', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'show'])->name('show');
             Route::post('/{transaction}/status', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'updateStatus'])->name('update-status');
+            Route::post('/{transaction}/refund', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'refund'])->name('refund');
+            Route::delete('/{transaction}', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'destroy'])->name('destroy');
+            Route::get('/my', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'myTransactions'])->name('my');
 
-        // Selcom Payment Routes
-        Route::prefix('selcom')->name('selcom.')->group(function () {
-            Route::post('/pay', [App\Http\Controllers\Payment\SelcomController::class, 'pay'])->name('pay');
-            Route::get('/status/{orderId}', [App\Http\Controllers\Payment\SelcomController::class, 'status'])->name('status');
-        });
-
-        Route::post('/{transaction}/refund', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'refund'])->name('refund');
-
-            // Selcom Payment Routes (inside transactions)
+            // Selcom Payment (authenticated)
             Route::prefix('selcom')->name('selcom.')->group(function () {
                 Route::post('/pay', [App\Http\Controllers\Payment\SelcomController::class, 'pay'])->name('pay');
                 Route::get('/status/{orderId}', [App\Http\Controllers\Payment\SelcomController::class, 'status'])->name('status');
             });
-        });
-
-// TIRAMIS Callback (receives final async response from TIRA)
-Route::post('/tiramis/callback', function (\Illuminate\Http\Request $request) {
-    $service = app(\App\Services\TirAmisService::class);
-    $result = $service->handleCallback($request->getContent());
-    if ($result['success'] && isset($result['ack_xml'])) {
-        return response($result['ack_xml'], 200)->header('Content-Type', 'application/xml');
-    }
-    return response('<?xml version="1.0"?><TiraMsg><Error>Invalid</Error></TiraMsg>', 400)
-        ->header('Content-Type', 'application/xml');
-})->name('tiramis.callback');
-            Route::delete('/{transaction}', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'destroy'])->name('destroy');
-            Route::get('/my', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'myTransactions'])->name('my');
         });
 
         // Payment Webhooks
@@ -502,6 +483,22 @@ Route::post('/tiramis/callback', function (\Illuminate\Http\Request $request) {
             Route::get('/{transaction}/schedule', [App\Http\Controllers\Payment\PremiumFinancingController::class, 'schedule'])->name('schedule');
         });
     });
+
+    // Selcom Webhook (no auth - called by Selcom)
+    Route::post('/payment/selcom/webhook', [App\Http\Controllers\Payment\SelcomController::class, 'webhook'])->name('payment.selcom.webhook');
+    Route::get('/payment/selcom/success', [App\Http\Controllers\Payment\SelcomController::class, 'success'])->name('payment.selcom.success');
+    Route::get('/payment/selcom/cancel', [App\Http\Controllers\Payment\SelcomController::class, 'cancel'])->name('payment.selcom.cancel');
+
+    // TIRAMIS Callback (receives final async response from TIRA)
+    Route::post('/tiramis/callback', function (\Illuminate\Http\Request $request) {
+        $service = app(\App\Services\TirAmisService::class);
+        $result = $service->handleCallback($request->getContent());
+        if ($result['success'] && isset($result['ack_xml'])) {
+            return response($result['ack_xml'], 200)->header('Content-Type', 'application/xml');
+        }
+        return response('<?xml version="1.0"?><TiraMsg><Error>Invalid</Error></TiraMsg>', 400)
+            ->header('Content-Type', 'application/xml');
+    })->name('tiramis.callback');
 
     // Premium Financing Partner Dashboard Routes
     Route::prefix('financing-partner')->name('financing-partner.')->middleware(['auth', 'role:financing_partner'])->group(function () {
