@@ -215,18 +215,14 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Phone Number</label>
-                        <p class="mb-0 text-dark">+255 000 000 000</p>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Role</label>
-                        <p class="mb-0 text-dark">{{ auth()->user()->roles->first()->name ?? 'N/A' }}</p>
+                        <p class="mb-0 text-dark">{{ auth()->user()->phone_number ?? '+255 000 000 000' }}</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Security Settings -->
-        <div class="card border-0 shadow-sm">
+        <div class="card border-0 shadow-sm" id="security-settings">
             <div class="card-body p-4">
                 <h5 class="fw-bold mb-4">
                     <i class="bi bi-shield-lock me-2"></i>Security Settings
