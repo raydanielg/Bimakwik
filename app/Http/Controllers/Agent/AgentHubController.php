@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\CustomerPolicy;
 use App\Models\User;
 use App\Models\AgentCommission;
+use App\Models\AgentCustomer;
+use App\Models\AgentPolicy;
+use App\Models\AgentProfile;
 use App\Models\Claim;
-use App\Models\InsuranceProduct;
+use App\Models\CommissionTransaction;
+use App\Models\CustomerPolicy;
 use App\Models\Report;
 use Illuminate\Support\Facades\Auth;
 
