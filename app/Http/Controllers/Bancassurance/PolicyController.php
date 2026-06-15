@@ -24,15 +24,56 @@ class PolicyController extends Controller
 
     public function sales()
     {
+        $agent = Agent::where('user_id', Auth::id())->first();
+        $agentId = $agent?->id;
+
+        $policies = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)
+            ->with(['customerPolicy.customer.user', 'customerPolicy.product'])
+            ->latest()
+            ->paginate(20);
+
+        $totalSales = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)->sum('premium_amount');
+        $policiesSold = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)->distinct('customer_policy_id')->count('customer_policy_id');
+        $monthSales = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)
+            ->whereMonth('created_at', now()->month)->sum('premium_amount');
+
         return view('bancassurance.sales.index', [
             'products' => InsuranceProduct::where('is_active', true)->orderBy('product_name')->get(),
+            'policies' => $policies,
+            'totalSales' => $totalSales,
+            'policiesSold' => $policiesSold,
+            'monthSales' => $monthSales,
         ]);
     }
 
     public function mySales()
     {
+        $agent = Agent::where('user_id', Auth::id())->first();
+        $agentId = $agent?->id;
+
+        $policies = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)
+            ->with(['customerPolicy.customer.user', 'customerPolicy.product'])
+            ->latest()
+            ->paginate(20);
+
+        $totalSales = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)->sum('premium_amount');
+        $totalCommission = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)->sum('commission_amount');
+        $policiesSold = CommissionTransaction::where('recipient_type', 'bancassurance_user')
+            ->where('recipient_id', $agentId)->distinct('customer_policy_id')->count('customer_policy_id');
+
         return view('bancassurance.my-sales.index', [
             'products' => InsuranceProduct::where('is_active', true)->orderBy('product_name')->get(),
+            'policies' => $policies,
+            'totalSales' => $totalSales,
+            'totalCommission' => $totalCommission,
+            'policiesSold' => $policiesSold,
         ]);
     }
 
