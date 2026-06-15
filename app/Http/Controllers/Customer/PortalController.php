@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\CustomerPolicy;
 use App\Models\Wallet;
 use App\Models\WalletTransaction;
+use App\Services\CommissionService;
 
 class PortalController extends Controller
 {
@@ -146,6 +147,13 @@ class PortalController extends Controller
                     'product_type' => $validated['product'],
                 ],
             ]);
+
+            // Auto-calculate commissions
+            try {
+                app(CommissionService::class)->calculateAndCreate($policy);
+            } catch (\Exception $e) {
+                \Log::warning('Commission calculation failed: ' . $e->getMessage());
+            }
 
             // Deduct from wallet if balance exists
             $wallet = Wallet::where('user_id', auth()->id())->first();
