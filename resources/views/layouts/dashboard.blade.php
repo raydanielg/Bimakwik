@@ -428,6 +428,9 @@
                 <a href="{{ route('admin.governance.compliance') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.governance.compliance') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i> Compliance (TIRA)
                 </a>
+                <a href="{{ route('admin.commissions.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.commissions.*') ? 'active' : '' }}">
+                    <i class="bi bi-percent"></i> Commission Rates
+                </a>
                 <a href="#tiramisAdminSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action {{ request()->routeIs('admin.tiramis.*') ? 'active' : '' }}">
                     <span><i class="bi bi-diagram-3"></i> TIRAMIS Integration</span>
                     <i class="bi bi-chevron-down small float-end mt-1"></i>
