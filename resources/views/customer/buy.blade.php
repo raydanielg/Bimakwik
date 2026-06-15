@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 text-end">
-                        <form action="{{ route('customer.buy.submit') }}" method="POST">
+                        <form id="buyForm" action="{{ route('customer.buy.submit') }}" method="POST">
                             @csrf
                             <input type="hidden" name="product" value="{{ $quoteProduct }}">
                             <input type="hidden" name="coverage" value="{{ $quoteCoverage }}">
