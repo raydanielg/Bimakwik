@@ -37,6 +37,19 @@
         border: 1px solid transparent;
         transition: all 0.2s ease-in-out;
     }
+
+    /* Sweet alert demo toast */
+    .demo-toast-popup {
+        border-radius: 14px !important;
+        border: 1px solid rgba(16,185,129,0.35) !important;
+        box-shadow: 0 8px 32px rgba(16,185,129,0.18), 0 2px 12px rgba(0,0,0,0.35) !important;
+        min-width: 320px !important;
+        max-width: 480px !important;
+    }
+    .demo-toast-progress {
+        background: linear-gradient(90deg, #10b981, #059669) !important;
+        height: 3px !important;
+    }
 </style>
 
 <div class="auth-page">
@@ -49,22 +62,25 @@
 
         <!-- Demo Accounts Quick Login Section -->
         <div class="mb-4 p-3 bg-light rounded-3 border text-center">
-            <div class="small text-muted fw-bold mb-2"><i class="bi bi-lightning-charge-fill text-warning me-1"></i>DEMO QUICK LOGIN</div>
+            <div class="small text-muted fw-bold mb-2"><i class="bi bi-lightning-charge-fill text-warning me-1"></i>DEMO — Chagua Role</div>
             <div class="d-flex flex-wrap justify-content-center gap-2">
-                <button type="button" class="text-white bg-brand box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('super-admin@bimakwik.com')">Super Admin</button>
-                <button type="button" class="text-white bg-brand box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('admin@bimakwik.com')">Admin</button>
-                <button type="button" class="text-white bg-brand box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('sub-admin@bimakwik.com')">Sub Admin</button>
-                <button type="button" class="text-white bg-success box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('insurer@bimakwik.com')">Insurer</button>
-                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('broker@bimakwik.com')">Broker</button>
-                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('aggregator@bimakwik.com')">Aggregator</button>
-                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('agent@bimakwik.com')">Agent</button>
-                <button type="button" class="text-white bg-warning box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('sfe@bimakwik.com')">SFE</button>
-                <button type="button" class="text-white bg-warning box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('bancassurance@bimakwik.com')">Bancassurance</button>
-                <button type="button" class="text-body bg-neutral-secondary-medium box-border border shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('customer@bimakwik.com')">Customer</button>
-                <button type="button" class="text-white bg-success box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('service-provider@bimakwik.com')">Service Provider</button>
-                <button type="button" class="text-white bg-danger box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('regulator@bimakwik.com')">Regulator</button>
-                <button type="button" class="text-body bg-neutral-primary-soft border shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('financing-partner@bimakwik.com')">Financing Partner</button>
-                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="quickLogin('developer@bimakwik.com')">Developer</button>
+                <button type="button" class="text-white bg-brand box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('super-admin@bimakwik.com', this)">Super Admin</button>
+                <button type="button" class="text-white bg-brand box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('admin@bimakwik.com', this)">Admin</button>
+                <button type="button" class="text-white bg-brand box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('sub-admin@bimakwik.com', this)">Sub Admin</button>
+                <button type="button" class="text-white bg-success box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('insurer@bimakwik.com', this)">Insurer</button>
+                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('broker@bimakwik.com', this)">Broker</button>
+                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('aggregator@bimakwik.com', this)">Aggregator</button>
+                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('agent@bimakwik.com', this)">Agent</button>
+                <button type="button" class="text-white bg-warning box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('sfe@bimakwik.com', this)">SFE</button>
+                <button type="button" class="text-white bg-warning box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('bancassurance@bimakwik.com', this)">Bancassurance</button>
+                <button type="button" class="text-body bg-neutral-secondary-medium box-border border shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('customer@bimakwik.com', this)">Customer</button>
+                <button type="button" class="text-white bg-success box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('service-provider@bimakwik.com', this)">Service Provider</button>
+                <button type="button" class="text-white bg-danger box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('regulator@bimakwik.com', this)">Regulator</button>
+                <button type="button" class="text-body bg-neutral-primary-soft border shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('financing-partner@bimakwik.com', this)">Financing Partner</button>
+                <button type="button" class="text-white bg-dark box-border border border-transparent shadow-xs font-medium leading-5 rounded-base demo-btn focus:outline-none" onclick="fillCredentials('developer@bimakwik.com', this)">Developer</button>
+            </div>
+            <div id="demo-hint" class="mt-2 small text-success fw-semibold" style="display:none;">
+                <i class="bi bi-check-circle-fill me-1"></i>Credentials zimejaza — bonyeza <strong>Log in</strong> kuendelea.
             </div>
         </div>
 
@@ -114,17 +130,47 @@
                 password.setAttribute('type', type);
             });
 
-            function quickLogin(email) {
+            function fillCredentials(email, clickedBtn) {
                 document.getElementById('email').value = email;
                 document.getElementById('password').value = 'password';
-                
-                // Trigger submit loading state & submit form
-                const btn = document.getElementById('loginSubmit');
-                btn.classList.add('loading');
-                
-                setTimeout(() => {
-                    document.getElementById('loginForm').submit();
-                }, 300);
+
+                // Reset all demo buttons highlight, then highlight selected
+                document.querySelectorAll('.demo-btn').forEach(function(b) {
+                    b.style.outline = '';
+                    b.style.boxShadow = '';
+                });
+                clickedBtn.style.outline = '2px solid #10b981';
+                clickedBtn.style.boxShadow = '0 0 0 3px rgba(16,185,129,0.3)';
+
+                // Show hint message
+                document.getElementById('demo-hint').style.display = 'block';
+
+                // Sweet alert toast - top banner
+                const roleName = clickedBtn.textContent.trim();
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    icon: 'success',
+                    html: `<span style="font-size:0.95rem;"><strong>${roleName}</strong> — credentials zimejaza! Bonyeza <strong>Log in</strong> kuendelea.</span>`,
+                    showConfirmButton: false,
+                    timer: 3500,
+                    timerProgressBar: true,
+                    background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+                    color: '#f1f5f9',
+                    iconColor: '#10b981',
+                    padding: '0.75rem 1.25rem',
+                    customClass: {
+                        popup: 'demo-toast-popup',
+                        timerProgressBar: 'demo-toast-progress',
+                    },
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer);
+                        toast.addEventListener('mouseleave', Swal.resumeTimer);
+                    }
+                });
+
+                // Scroll login button into view
+                document.getElementById('loginSubmit').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
 
             document.getElementById('loginForm').addEventListener('submit', function(e) {
