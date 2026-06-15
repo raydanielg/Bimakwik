@@ -11,7 +11,8 @@ class ServiceProvider extends Model
 
     protected $fillable = [
         'user_id', 'service_provider_type_id', 'provider_name', 'provider_code',
-        'registration_number', 'phone', 'email', 'address', 'status',
+        'registration_number', 'company_code', 'sales_code',
+        'phone', 'email', 'address', 'status',
     ];
 
     public function user()
