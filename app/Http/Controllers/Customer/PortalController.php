@@ -139,6 +139,8 @@ class PortalController extends Controller
                 'end_date' => now()->addMonths($this->getMonthsFromPeriod($validated['period'])),
                 'status' => 'active',
                 'payment_method' => 'wallet',
+                'company_code' => $validated['company_code'] ?? null,
+                'sale_point_code' => $validated['sale_point_code'] ?? null,
                 'policy_details' => [
                     'coverage_level' => $validated['coverage'],
                     'product_type' => $validated['product'],

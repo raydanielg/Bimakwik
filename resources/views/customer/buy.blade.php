@@ -55,6 +55,8 @@
                             <input type="hidden" name="coverage" value="{{ $quoteCoverage }}">
                             <input type="hidden" name="period" value="{{ $quotePeriod }}">
                             <input type="hidden" name="price" value="{{ $quotePrice }}">
+                            <input type="hidden" name="company_code" value="{{ request('company_code', old('company_code')) }}">
+                            <input type="hidden" name="sale_point_code" value="{{ request('sale_point_code', old('sale_point_code')) }}">
                             <button type="submit" class="btn btn-light btn-lg fw-bold">
                                 <i class="bi bi-cart-check me-2"></i> Buy Now
                             </button>
