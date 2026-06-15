@@ -1012,6 +1012,9 @@
                 <a href="/bancassurance/products" class="list-group-item list-group-item-action {{ request()->is('bancassurance/products*') ? 'active' : '' }}">
                     <i class="bi bi-box-seam"></i> Bancassurance Products
                 </a>
+                <a href="/bancassurance/commissions" class="list-group-item list-group-item-action {{ request()->is('bancassurance/commissions') ? 'active' : '' }}">
+                    <i class="bi bi-percent"></i> Commissions
+                </a>
             </div>
 
             <div class="sidebar-heading mt-3">Compliance & Reports</div>
