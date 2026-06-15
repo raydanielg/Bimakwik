@@ -407,6 +407,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reports/{report}', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'viewReport'])->name('reports.view');
         Route::get('/reports/{report}/download', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'downloadReport'])->name('reports.download');
         Route::get('/analytics', [App\Http\Controllers\Regulator\RegulatorReportController::class, 'analytics'])->name('analytics');
+
+        // TIRAMIS Integration (Regulator)
+        Route::prefix('tiramis')->name('tiramis.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Regulator\TirAmisIntegrationController::class, 'dashboard'])->name('dashboard');
+            Route::get('/companies', [App\Http\Controllers\Regulator\TirAmisIntegrationController::class, 'companies'])->name('companies');
+            Route::get('/reports', [App\Http\Controllers\Regulator\TirAmisIntegrationController::class, 'reports'])->name('reports');
+            Route::get('/reports/{report}', [App\Http\Controllers\Regulator\TirAmisIntegrationController::class, 'showReport'])->name('reports.show');
+            Route::get('/company/{companyCode}', [App\Http\Controllers\Regulator\TirAmisIntegrationController::class, 'companyReports'])->name('company-reports');
+            Route::get('/logs', [App\Http\Controllers\Regulator\TirAmisIntegrationController::class, 'logs'])->name('logs');
+            Route::get('/market-overview', [App\Http\Controllers\Regulator\TirAmisIntegrationController::class, 'marketOverview'])->name('market');
+        });
     });
 
     // Payment Management Routes (Admin)
