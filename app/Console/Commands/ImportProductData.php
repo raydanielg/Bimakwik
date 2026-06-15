@@ -17,16 +17,28 @@ class ImportProductData extends Command
     {
         $this->info('Importing product data from internal reference...');
 
-        // Categories from sheets / classes
+        // Categories from sheets / classes (TIRA-aligned)
         $categories = [
             'MOTOR' => 'Motor Insurance',
             'FIRE' => 'Fire Insurance',
-            'MARINE' => 'Marine Insurance',
+            'FIRE_COMMERCIAL' => 'Fire Commercial',
             'ENGINEERING' => 'Engineering Insurance',
-            'GOODS IN TRANSIT' => 'Goods In Transit Insurance',
-            'MISCELLANEOUS AND ACCIDENTS' => 'Miscellaneous & Accidents Insurance',
+            'MARINE' => 'Marine Insurance',
+            'GOODS_IN_TRANSIT' => 'Goods in Transit',
             'AVIATION' => 'Aviation Insurance',
             'AGRICULTURE' => 'Agriculture Insurance',
+            'MISC' => 'Miscellaneous & Other General',
+            'BOND' => 'Bond Insurance',
+            'LIABILITY' => 'Liability Insurance',
+            'PUBLIC_LIABILITY' => 'Public Liability Insurance',
+            'THEFT' => 'Theft Insurance',
+            'MONEY' => 'Money Insurance',
+            'PROF_INDEMNITY' => 'Professional Indemnity',
+            'PA_INDIVIDUAL' => 'Individual Personal Accident',
+            'HEALTH' => 'Health Insurance',
+            'WCOMPENSATION' => "Workmen's Compensation",
+            'LIFE_INDIVIDUAL' => 'Individual Life Assurance',
+            'LIFE_GROUP' => 'Group Life Assurance',
         ];
 
         $insurer = Insurer::first();
@@ -97,22 +109,42 @@ class ImportProductData extends Command
     {
         $map = [
             'Motor' => 'MOTOR',
-            'Misc' => 'MISCELLANEOUS AND ACCIDENTS',
+            'Misc' => 'MISC',
             'Fire' => 'FIRE',
+            'Fire Domestic' => 'FIRE',
+            'Fire Industrial' => 'FIRE_COMMERCIAL',
             'Marine' => 'MARINE',
+            'Marine Cargo' => 'MARINE',
             'Engineering' => 'ENGINEERING',
-            'Goods in Transit' => 'GOODS IN TRANSIT',
-            'Aviation' => 'AVIATION',
-            'Agriculture' => 'AGRICULTURE',
-            'Bond' => 'MISCELLANEOUS AND ACCIDENTS',
-            'Liability' => 'MISCELLANEOUS AND ACCIDENTS',
             'Machinery breakdown' => 'ENGINEERING',
             'Contractors All Risk' => 'ENGINEERING',
+            'Goods in Transit' => 'GOODS_IN_TRANSIT',
+            'Aviation' => 'AVIATION',
+            'Agriculture' => 'AGRICULTURE',
+            'Bond' => 'BOND',
+            'Liability' => 'LIABILITY',
+            'Public Liability' => 'PUBLIC_LIABILITY',
             'Cargo' => 'MARINE',
-            'Fire Domestic' => 'FIRE',
-            'Fire Industrial' => 'FIRE',
+            'Personal Accident' => 'PA_INDIVIDUAL',
+            'Theft' => 'THEFT',
+            'Burglary' => 'THEFT',
+            'Money' => 'MONEY',
+            'Professional Indemnity' => 'PROF_INDEMNITY',
+            'Health' => 'HEALTH',
+            'Credit' => 'MISC',
+            'Trade Credit' => 'MISC',
+            'Cyber' => 'MISC',
+            'Travel' => 'MISC',
+            'Plate Glass' => 'MISC',
+            'Fidelity' => 'BOND',
+            'Kidnap' => 'MISC',
+            'Political Violence' => 'MISC',
+            'Accidental Damage' => 'MISC',
+            'Hoteliers' => 'LIABILITY',
+            'Golfers' => 'PA_INDIVIDUAL',
+            'Workmen' => 'WCOMPENSATION',
         ];
-        return $map[$class] ?? 'MISCELLANEOUS AND ACCIDENTS';
+        return $map[$class] ?? 'MISC';
     }
 
     private function getProductData()
