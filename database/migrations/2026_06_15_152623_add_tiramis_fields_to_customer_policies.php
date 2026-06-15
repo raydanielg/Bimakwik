@@ -6,27 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 class AddTiramisFieldsToCustomerPolicies extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::table('customer_policies', function (Blueprint $table) {
-            //
+            $table->string('company_code', 50)->nullable()->after('insurer_id');
+            $table->string('sale_point_code', 50)->nullable()->after('company_code');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::table('customer_policies', function (Blueprint $table) {
-            //
+            $table->dropColumn(['company_code', 'sale_point_code']);
         });
     }
 }
