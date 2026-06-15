@@ -184,6 +184,12 @@
 
         {{-- ── BANCASSURANCE ── --}}
         @elseif($role === 'bancassurance')
+        @php
+            $bancMoreActive = request()->is(
+                'bancassurance/integration*','bancassurance/products*',
+                'bancassurance/reports*','bancassurance/compliance*','bancassurance/performance*'
+            );
+        @endphp
         <div class="col">
             <a href="{{ route('bancassurance.dashboard') }}" class="mobile-nav-link {{ request()->routeIs('bancassurance.dashboard') ? 'active' : '' }}">
                 <i class="bi bi-speedometer2 fs-5 d-block"></i><span class="x-small fw-semibold">Home</span>
@@ -196,10 +202,10 @@
         </div>
         <div class="col">
             <div style="position:relative; top:-14px;">
-                <a href="{{ route('bancassurance.sales') }}" class="mobile-fab-btn d-flex align-items-center justify-content-center mx-auto">
+                <a href="{{ route('bancassurance.sales') }}" class="mobile-fab-btn d-flex align-items-center justify-content-center mx-auto {{ request()->is('bancassurance/sales*') ? 'ring-active' : '' }}">
                     <i class="bi bi-plus-lg text-white fs-5"></i>
                 </a>
-                <span class="x-small fw-semibold d-block mt-1 text-muted">Sell</span>
+                <span class="x-small fw-semibold d-block mt-1 {{ request()->is('bancassurance/sales*') ? '' : 'text-muted' }}" style="{{ request()->is('bancassurance/sales*') ? 'color:#d946ef;' : '' }}">Sell</span>
             </div>
         </div>
         <div class="col">
@@ -208,7 +214,7 @@
             </a>
         </div>
         <div class="col">
-            <a href="#" class="mobile-nav-link" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuDrawer">
+            <a href="#" class="mobile-nav-link {{ $bancMoreActive ? 'active' : '' }}" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuDrawer">
                 <i class="bi bi-grid-3x3-gap fs-5 d-block"></i><span class="x-small fw-semibold">More</span>
             </a>
         </div>
