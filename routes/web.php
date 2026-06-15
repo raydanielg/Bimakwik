@@ -450,13 +450,13 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::post('/{transaction}/refund', [App\Http\Controllers\Payment\PaymentTransactionController::class, 'refund'])->name('refund');
-        });
-    });
 
-    // Selcom Webhooks (no auth - signature verified)
-    Route::post('/payment/selcom/webhook', [App\Http\Controllers\Payment\SelcomController::class, 'webhook'])->name('payment.selcom.webhook');
-    Route::get('/payment/selcom/success', [App\Http\Controllers\Payment\SelcomController::class, 'success'])->name('payment.selcom.success');
-    Route::get('/payment/selcom/cancel', [App\Http\Controllers\Payment\SelcomController::class, 'cancel'])->name('payment.selcom.cancel');
+            // Selcom Payment Routes (inside transactions)
+            Route::prefix('selcom')->name('selcom.')->group(function () {
+                Route::post('/pay', [App\Http\Controllers\Payment\SelcomController::class, 'pay'])->name('pay');
+                Route::get('/status/{orderId}', [App\Http\Controllers\Payment\SelcomController::class, 'status'])->name('status');
+            });
+        });
 
 // TIRAMIS Callback (receives final async response from TIRA)
 Route::post('/tiramis/callback', function (\Illuminate\Http\Request $request) {
