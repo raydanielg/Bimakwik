@@ -7,9 +7,11 @@ use App\Models\Agent;
 use App\Models\Customer;
 use App\Models\CustomerPolicy;
 use App\Models\InsuranceProduct;
+use App\Models\User;
 use App\Services\CommissionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 

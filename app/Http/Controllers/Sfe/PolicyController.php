@@ -47,7 +47,7 @@ class PolicyController extends Controller
 
         $customer = Customer::firstOrCreate(
             ['user_id' => Auth::id()],
-            ['name' => Auth::user()->name, 'email' => Auth::user()->email]
+            ['customer_number' => 'CUST-' . strtoupper(Str::random(8))]
         );
 
         $product = InsuranceProduct::findOrFail($validated['product_id']);
