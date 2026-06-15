@@ -114,7 +114,7 @@ class TiramisCodeController extends Controller
             $rows[] = ['Agent', $e->first_name . ' ' . $e->last_name, $e->agent_number, $e->company_code ?? '', $e->sales_code ?? '', $e->tiramis_enabled ? 'Yes' : 'No'];
         }
         foreach (ServiceProvider::all() as $e) {
-            $rows[] = ['Service Provider', $e->company_name, $e->provider_number, $e->company_code ?? '', $e->sales_code ?? '', 'N/A'];
+            $rows[] = ['Service Provider', $e->provider_name, $e->provider_code, $e->company_code ?? '', $e->sales_code ?? '', 'N/A'];
         }
 
         $callback = function () use ($headers, $rows) {
