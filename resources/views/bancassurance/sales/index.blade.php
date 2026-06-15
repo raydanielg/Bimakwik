@@ -418,6 +418,18 @@
                             <label for="editPolicyEndDate" class="form-label">Policy End Date *</label>
                             <input type="date" class="form-control" id="editPolicyEndDate" required>
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="editCompanyCode" class="form-label">Company Code</label>
+                            <input type="text" class="form-control" id="editCompanyCode" placeholder="e.g. ICC113">
+                            <div class="form-text">TIRA insurer company code</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="editSalePointCode" class="form-label">Sale Point Code</label>
+                            <input type="text" class="form-control" id="editSalePointCode" placeholder="e.g. SP677">
+                            <div class="form-text">TIRA sale point identifier</div>
+                        </div>
                     </div>
                 </form>
             </div>
