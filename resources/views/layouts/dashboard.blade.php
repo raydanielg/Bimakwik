@@ -1181,7 +1181,7 @@
                         </div>
                         <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2">
                             <li><a class="dropdown-item py-2" href="/profile"><i class="bi bi-person me-2"></i> My Profile</a></li>
-                            <li><a class="dropdown-item py-2" href="/profile"><i class="bi bi-gear me-2"></i> Settings</a></li>
+                            <li><a class="dropdown-item py-2" href="/profile#security-settings"><i class="bi bi-gear me-2"></i> Settings</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <button type="button" class="dropdown-item py-2 text-danger" onclick="document.getElementById('logout-form').submit();">
