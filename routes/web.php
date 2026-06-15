@@ -313,7 +313,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Agent Routes
-    Route::prefix('agent')->name('agent.')->middleware('role:sfe,bancassurance')->group(function () {
+    Route::prefix('agent')->name('agent.')->middleware('role:sfe,bancassurance,agent')->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Agent\AgentDashboardController::class, 'index'])->name('dashboard');
         Route::get('/policies', [App\Http\Controllers\Agent\AgentHubController::class, 'policies'])->name('policies');
         Route::get('/customers', [App\Http\Controllers\Agent\AgentHubController::class, 'customers'])->name('customers');
