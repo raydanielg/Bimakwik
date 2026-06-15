@@ -149,6 +149,40 @@ Bima Kwik is a Tanzanian insurance technology platform that connects insurers, b
 
 ## 4. Commission Rate Structure
 
+### 4.0 Regulatory Framework — TIRA Circular No. 029/2015 (Revised v02)
+Effective **1st January 2025**, the Tanzania Insurance Regulatory Authority mandates the following **maximum** commission rates under Section 37(1) of the Insurance Act, 2009:
+
+| Class of Business | Max Commission (Direct) | TanRe Mandatory Cession |
+|---|---|---|
+| Fire Insurance | **20.00%** | 22.50% |
+| Fire Commercial | **20.00%** | 22.50% |
+| Engineering Insurance | **20.00%** | 22.50% |
+| Motor Insurance | **12.50%** | 15.00% |
+| Individual Personal Accident | **17.50%** | 20.00% |
+| Group Personal Accident | **17.50%** | 20.00% |
+| Aviation Insurance | **15.00%** | 17.50% |
+| Marine Insurance | **17.50%** | 20.00% |
+| Health Insurance | **17.50%** | 20.00% |
+| Liability Insurance | **17.50%** | 20.00% |
+| Public Liability Insurance | **17.50%** | 20.00% |
+| Workmen's Compensation | **17.50%** | 20.00% |
+| Bond Insurance | **17.50%** | 20.00% |
+| Theft Insurance | **17.50%** | 20.00% |
+| Professional Indemnity | **15.00%** | 17.50% |
+| Money Insurance | **15.00%** | 17.50% |
+| Goods in Transit | **15.00%** | 17.50% |
+| Agriculture Insurance | **17.50%** | 20.00% |
+| Miscellaneous & Other General | **17.50%** | 20.00% |
+| Individual Life Assurance | **30.00%** | 32.50% |
+| Group Life Assurance | **15.00%** | 17.50% |
+| Annuities and Pensions | **30.00%** | 32.50% |
+
+**Key Notes from Circular:**
+- These are **maximum** caps. Companies may pay lower rates based on risk, performance, claims experience, and profitability (Section 4).
+- TanRe mandatory cession rates include a 2.5% over-rider.
+- The circular supersedes all previous versions (Section 6).
+- Issued by Dr. Baghayo A. Saqware, Commissioner of Insurance.
+
 ### 4.1 Rate Resolution Priority
 The system resolves commission rates using the following priority order:
 
@@ -163,18 +197,28 @@ The system resolves commission rates using the following priority order:
 - Current date must fall within effective_from/effective_to (if set)
 - Only active rates are considered
 
-### 4.3 Default Commission Rates (seeded)
+### 4.3 Default Commission Rates (seeded per TIRA Circular)
 
-| Category | Agent | Broker | Bancassurance | SFE |
-|----------|-------|--------|---------------|-----|
-| Motor | 10% | 5% | 8% | 12% |
-| Fire | 12% | 6% | 10% | 15% |
-| Marine | 10% | 5% | 8% | 12% |
-| Engineering | 8% | 4% | 6% | 10% |
-| Misc & Accidents | 12% | 6% | 10% | 15% |
-| Goods in Transit | 10% | 5% | 8% | 12% |
-| Aviation | 7% | 3.5% | 5% | 9% |
-| Agriculture | 10% | 5% | 8% | 12% |
+The system seeds all rates at the **TIRA maximum**. Insurers/Admin can lower them as needed.
+
+| TIRA Class | Agent | Broker | Bancassurance | SFE | TanRe |
+|---|---|---|---|---|---|
+| Motor Insurance | 12.50% | 12.50% | 12.50% | 12.50% | 15.00% |
+| Fire Insurance | 20.00% | 20.00% | 20.00% | 20.00% | 22.50% |
+| Engineering | 20.00% | 20.00% | 20.00% | 20.00% | 22.50% |
+| Marine | 17.50% | 17.50% | 17.50% | 17.50% | 20.00% |
+| Aviation | 15.00% | 15.00% | 15.00% | 15.00% | 17.50% |
+| Goods in Transit | 15.00% | 15.00% | 15.00% | 15.00% | 17.50% |
+| Agriculture | 17.50% | 17.50% | 17.50% | 17.50% | 20.00% |
+| Misc & Other General | 17.50% | 17.50% | 17.50% | 17.50% | 20.00% |
+| Personal Accident | 17.50% | 17.50% | 17.50% | 17.50% | 20.00% |
+| Professional Indemnity | 15.00% | 15.00% | 15.00% | 15.00% | 17.50% |
+| Money Insurance | 15.00% | 15.00% | 15.00% | 15.00% | 17.50% |
+| Liability | 17.50% | 17.50% | 17.50% | 17.50% | 20.00% |
+| Bond | 17.50% | 17.50% | 17.50% | 17.50% | 20.00% |
+| Theft | 17.50% | 17.50% | 17.50% | 17.50% | 20.00% |
+| Life Individual | 30.00% | 30.00% | 30.00% | 30.00% | 32.50% |
+| Life Group | 15.00% | 15.00% | 15.00% | 15.00% | 17.50% |
 
 ---
 
