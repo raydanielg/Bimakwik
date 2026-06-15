@@ -68,6 +68,7 @@
 @endif
 
 <!-- Available Insurance Products -->
+@if(!($quoteProduct && $quotePrice))
 <div class="row g-4">
     <!-- Motor Insurance -->
     <div class="col-md-6 col-lg-4">
@@ -213,6 +214,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <!-- Why Choose Bima Kwik -->
 <div class="row mt-5">

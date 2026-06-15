@@ -58,6 +58,22 @@
                                     <br>
                                     <small class="text-muted">{{ __('customer.for_travel') }}</small>
                                 </label>
+
+                                <input type="radio" class="btn-check" name="product" id="product_business" value="business" {{ request('product') == 'business' ? 'checked' : '' }}>
+                                <label class="btn btn-outline-primary text-start" for="product_business">
+                                    <i class="bi bi-briefcase-fill me-2"></i>
+                                    <strong>{{ __('customer.business_insurance') }}</strong>
+                                    <br>
+                                    <small class="text-muted">{{ __('customer.business_desc') }}</small>
+                                </label>
+
+                                <input type="radio" class="btn-check" name="product" id="product_life" value="life" {{ request('product') == 'life' ? 'checked' : '' }}>
+                                <label class="btn btn-outline-primary text-start" for="product_life">
+                                    <i class="bi bi-shield-heart-fill me-2"></i>
+                                    <strong>{{ __('customer.life_insurance') }}</strong>
+                                    <br>
+                                    <small class="text-muted">{{ __('customer.life_desc') }}</small>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -190,7 +206,9 @@
             'motor': '{{ __('customer.motor_insurance') }}',
             'health': '{{ __('customer.health_insurance') }}',
             'property': '{{ __('customer.property_insurance') }}',
-            'travel': '{{ __('customer.travel_insurance') }}'
+            'travel': '{{ __('customer.travel_insurance') }}',
+            'business': '{{ __('customer.business_insurance') }}',
+            'life': '{{ __('customer.life_insurance') }}'
         };
         
         const coverageNames = {
