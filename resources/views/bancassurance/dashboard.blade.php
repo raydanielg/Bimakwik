@@ -111,8 +111,8 @@
                         <tbody>
                             @forelse($recentPolicies as $sale)
                             <tr>
-                                <td>{{ optional(optional($sale->insuranceProduct)->product_name) ?? 'Insurance Sale' }}</td>
-                                <td>{{ optional(optional(optional($sale->customerPolicy)->customer)->user)->name ?? 'N/A' }}</td>
+                                <td>{{ $sale->customerPolicy?->product?->product_name ?? $sale->insuranceProduct?->product_name ?? 'Insurance Sale' }}</td>
+                                <td>{{ $sale->customerPolicy?->customer?->user?->name ?? $sale->customerPolicy?->customer?->name ?? 'N/A' }}</td>
                                 <td>TZS {{ number_format($sale->premium_amount) }}</td>
                                 <td>{{ $sale->created_at->diffForHumans() }}</td>
                                 <td>
