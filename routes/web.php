@@ -163,6 +163,15 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/audit-logs', [App\Http\Controllers\Admin\SystemTechController::class, 'auditLogs'])->name('audit-logs');
         });
 
+        // Commission Rates Management (Admin)
+        Route::prefix('commissions')->name('commissions.')->group(function () {
+            Route::get('/', [App\Http\Controllers\Admin\CommissionRateController::class, 'index'])->name('index');
+            Route::post('/', [App\Http\Controllers\Admin\CommissionRateController::class, 'store'])->name('store');
+            Route::put('/{commission}', [App\Http\Controllers\Admin\CommissionRateController::class, 'update'])->name('update');
+            Route::delete('/{commission}', [App\Http\Controllers\Admin\CommissionRateController::class, 'destroy'])->name('destroy');
+            Route::post('/{commission}/toggle', [App\Http\Controllers\Admin\CommissionRateController::class, 'toggle'])->name('toggle');
+        });
+
         // TIRAMIS Codes Management (Admin)
         Route::prefix('tiramis')->name('tiramis.')->group(function () {
             Route::get('/codes', [App\Http\Controllers\Admin\TiramisCodeController::class, 'index'])->name('codes.index');

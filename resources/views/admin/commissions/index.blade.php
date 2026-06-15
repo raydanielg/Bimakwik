@@ -1,0 +1,189 @@
+@extends('layouts.dashboard')
+
+@section('dashboard_title', 'Commission Rates')
+
+@section('content')
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <h4 class="fw-bold mb-0"><i class="bi bi-percent me-2"></i>Commission Rates</h4>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addRateModal">
+            <i class="bi bi-plus-lg me-1"></i> Add Rate
+        </button>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Channel</th>
+                        <th>Category</th>
+                        <th>Product</th>
+                        <th>Insurer</th>
+                        <th>Type</th>
+                        <th>Rate</th>
+                        <th>Premium Range</th>
+                        <th>Effective</th>
+                        <th>Status</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($rates as $rate)
+                    <tr>
+                        <td><span class="badge bg-info">{{ $rate->channel_type }}</span></td>
+                        <td>{{ $rate->category?->category_name ?? '-' }}</td>
+                        <td class="small">{{ $rate->product?->product_name ?? '-' }}</td>
+                        <td class="small">{{ $rate->insurer?->insurer_name ?? 'All' }}</td>
+                        <td>{{ $rate->rate_type }}</td>
+                        <td class="fw-semibold">{{ $rate->rate_type === 'percentage' ? $rate->rate_value . '%' : 'TZS ' . number_format($rate->rate_value, 0) }}</td>
+                        <td class="small">
+                            @if($rate->min_premium_amount || $rate->max_premium_amount)
+                                {{ $rate->min_premium_amount ? 'TZS '.number_format($rate->min_premium_amount,0) : '0' }}
+                                - {{ $rate->max_premium_amount ? 'TZS '.number_format($rate->max_premium_amount,0) : '∞' }}
+                            @else
+                                All
+                            @endif
+                        </td>
+                        <td class="small">
+                            {{ $rate->effective_from ? $rate->effective_from->format('d/m/Y') : '∞' }}
+                            → {{ $rate->effective_to ? $rate->effective_to->format('d/m/Y') : '∞' }}
+                        </td>
+                        <td>
+                            <span class="badge bg-{{ $rate->is_active ? 'success' : 'secondary' }}">
+                                {{ $rate->is_active ? 'Active' : 'Inactive' }}
+                            </span>
+                        </td>
+                        <td class="text-end">
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary" onclick="editRate({{ $rate->id }})" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <form action="{{ route('admin.commissions.toggle', $rate) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button class="btn btn-outline-{{ $rate->is_active ? 'warning' : 'success' }}" title="{{ $rate->is_active ? 'Deactivate' : 'Activate' }}">
+                                        <i class="bi bi-{{ $rate->is_active ? 'pause' : 'play' }}"></i>
+                                    </button>
+                                </form>
+                                <form action="{{ route('admin.commissions.destroy', $rate) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this rate?')">
+                                    @csrf @method('DELETE')
+                                    <button class="btn btn-outline-danger" title="Delete"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr><td colspan="10" class="text-center py-4 text-muted">No commission rates configured yet.</td></tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @if($rates->hasPages())
+    <div class="card-footer bg-white">
+        {{ $rates->links() }}
+    </div>
+    @endif
+</div>
+
+<!-- Add Rate Modal -->
+<div class="modal fade" id="addRateModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <form method="POST" action="{{ route('admin.commissions.store') }}">
+            @csrf
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-plus-circle me-1"></i> Add Commission Rate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Channel *</label>
+                            <select name="channel_type" class="form-select" required>
+                                <option value="">Select channel</option>
+                                <option value="agent">Agent</option>
+                                <option value="broker">Broker</option>
+                                <option value="bancassurance">Bancassurance</option>
+                                <option value="sfe">SFE</option>
+                                <option value="direct">Direct</option>
+                                <option value="partner">Partner</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Rate Type *</label>
+                            <select name="rate_type" class="form-select" required>
+                                <option value="percentage">Percentage (%)</option>
+                                <option value="fixed">Fixed Amount (TZS)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Rate Value *</label>
+                            <input type="number" name="rate_value" class="form-control" step="0.0001" min="0" max="999.9999" required
+                                   placeholder="e.g. 10 for 10% or 50000 for TZS">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Policy Category</label>
+                            <select name="policy_category_id" class="form-select">
+                                <option value="">All categories</option>
+                                @foreach($categories as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Product (specific)</label>
+                            <select name="insurance_product_id" class="form-select">
+                                <option value="">All products</option>
+                                @foreach($products as $p)
+                                    <option value="{{ $p->id }}">{{ $p->product_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Insurer</label>
+                            <select name="insurer_id" class="form-select">
+                                <option value="">All insurers</option>
+                                @foreach($insurers as $ins)
+                                    <option value="{{ $ins->id }}">{{ $ins->insurer_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Min Premium (TZS)</label>
+                            <input type="number" name="min_premium_amount" class="form-control" min="0">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Max Premium (TZS)</label>
+                            <input type="number" name="max_premium_amount" class="form-control" min="0">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Effective From</label>
+                            <input type="date" name="effective_from" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Effective To</label>
+                            <input type="date" name="effective_to" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save Rate</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
+
+@push('scripts')
+<script>
+function editRate(id) {
+    // For now, redirect to a simple form. Full AJAX edit can be added later.
+    alert('Edit functionality - click row to edit (future enhancement)');
+}
+</script>
+@endpush
