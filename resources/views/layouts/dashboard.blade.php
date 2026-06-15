@@ -428,9 +428,14 @@
                 <a href="{{ route('admin.governance.compliance') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.governance.compliance') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i> Compliance (TIRA)
                 </a>
-                <a href="{{ route('admin.commissions.index') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.commissions.*') ? 'active' : '' }}">
-                    <i class="bi bi-percent"></i> Commission Rates
+                <a href="#commissionsSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action {{ request()->routeIs('admin.commissions.*') ? 'active' : '' }}">
+                    <span><i class="bi bi-percent"></i> Commissions</span>
+                    <i class="bi bi-chevron-down small float-end mt-1"></i>
                 </a>
+                <div class="collapse ps-3 {{ request()->routeIs('admin.commissions.*') ? 'show' : '' }}" id="commissionsSubmenu">
+                    <a href="{{ route('admin.commissions.index') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('admin.commissions.index') ? 'active' : '' }}">Rate Config</a>
+                    <a href="{{ route('admin.commissions.report') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('admin.commissions.report') ? 'active' : '' }}">Report & Payouts</a>
+                </div>
                 <a href="#tiramisAdminSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action {{ request()->routeIs('admin.tiramis.*') ? 'active' : '' }}">
                     <span><i class="bi bi-diagram-3"></i> TIRAMIS Integration</span>
                     <i class="bi bi-chevron-down small float-end mt-1"></i>

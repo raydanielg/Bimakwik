@@ -170,6 +170,11 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/{commission}', [App\Http\Controllers\Admin\CommissionRateController::class, 'update'])->name('update');
             Route::delete('/{commission}', [App\Http\Controllers\Admin\CommissionRateController::class, 'destroy'])->name('destroy');
             Route::post('/{commission}/toggle', [App\Http\Controllers\Admin\CommissionRateController::class, 'toggle'])->name('toggle');
+
+            // Commission Reports
+            Route::get('/report', [App\Http\Controllers\Admin\CommissionReportController::class, 'index'])->name('report');
+            Route::post('/report/{transaction}/pay', [App\Http\Controllers\Admin\CommissionReportController::class, 'pay'])->name('report.pay');
+            Route::post('/report/bulk-pay', [App\Http\Controllers\Admin\CommissionReportController::class, 'payBulk'])->name('report.bulk-pay');
         });
 
         // TIRAMIS Codes Management (Admin)
