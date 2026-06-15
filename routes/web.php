@@ -134,6 +134,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/claims/{id}', [App\Http\Controllers\Admin\OperationsController::class, 'show'])->name('claims.show');
             Route::post('/claims/{id}/approve', [App\Http\Controllers\Admin\OperationsController::class, 'approveClaim'])->name('claims.approve');
             Route::post('/claims/{id}/reject', [App\Http\Controllers\Admin\OperationsController::class, 'rejectClaim'])->name('claims.reject');
+            Route::post('/claims/{claim}/tiramis', [App\Http\Controllers\Claim\TirAmisController::class, 'submitClaim'])->name('claims.tiramis');
+            Route::post('/claims/tiramis/batch', [App\Http\Controllers\Claim\TirAmisController::class, 'batchSubmit'])->name('claims.tiramis.batch');
             Route::get('/workflows', [App\Http\Controllers\Admin\OperationsController::class, 'workflows'])->name('workflows');
             Route::delete('/workflows/{id}', [App\Http\Controllers\Admin\OperationsController::class, 'deleteWorkflow'])->name('workflows.delete');
             Route::get('/documents', [App\Http\Controllers\Admin\OperationsController::class, 'documents'])->name('documents');
