@@ -160,6 +160,24 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/multi-country', [App\Http\Controllers\Admin\SystemTechController::class, 'multiCountry'])->name('multi-country');
             Route::get('/audit-logs', [App\Http\Controllers\Admin\SystemTechController::class, 'auditLogs'])->name('audit-logs');
         });
+
+        // TIRAMIS Codes Management (Admin)
+        Route::prefix('tiramis')->name('tiramis.')->group(function () {
+            Route::get('/codes', [App\Http\Controllers\Admin\TiramisCodeController::class, 'index'])->name('codes.index');
+            Route::get('/codes/assign', [App\Http\Controllers\Admin\TiramisCodeController::class, 'assignForm'])->name('codes.assign');
+            Route::post('/codes/assign', [App\Http\Controllers\Admin\TiramisCodeController::class, 'assign']);
+            Route::put('/codes/{type}/{id}', [App\Http\Controllers\Admin\TiramisCodeController::class, 'update'])->name('codes.update');
+            Route::post('/codes/{type}/{id}/toggle', [App\Http\Controllers\Admin\TiramisCodeController::class, 'toggle'])->name('codes.toggle');
+            Route::get('/codes/export', [App\Http\Controllers\Admin\TiramisCodeController::class, 'export'])->name('codes.export');
+
+            // TIRAMIS Reports & Logs
+            Route::get('/reports', [App\Http\Controllers\Claim\TirAmisController::class, 'index'])->name('reports');
+            Route::get('/reports/pending', [App\Http\Controllers\Claim\TirAmisController::class, 'pendingClaims'])->name('reports.pending');
+            Route::get('/reports/{report}', [App\Http\Controllers\Claim\TirAmisController::class, 'showReport'])->name('reports.show');
+            Route::post('/reports/{report}/retry', [App\Http\Controllers\Claim\TirAmisController::class, 'retryReport'])->name('reports.retry');
+            Route::post('/reports/{report}/check-status', [App\Http\Controllers\Claim\TirAmisController::class, 'statusCheck'])->name('reports.status-check');
+            Route::get('/logs', [App\Http\Controllers\Claim\TirAmisController::class, 'logs'])->name('logs');
+        });
     });
         
     // Insurer Dashboard & Hub Routes
