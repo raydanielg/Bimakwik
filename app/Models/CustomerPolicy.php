@@ -33,6 +33,8 @@ class CustomerPolicy extends Model
         'last_renewed_at',
         'cancelled_at',
         'cancellation_reason',
+        'company_code',
+        'sale_point_code',
     ];
 
     protected $casts = [
