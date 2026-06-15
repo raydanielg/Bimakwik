@@ -78,9 +78,23 @@ class CommissionService
         $channels = [];
 
         if ($policy->agent_id) {
+            $agentType = $policy->agent?->agent_type;
+
+            $recipientType = match ($agentType) {
+                'sfe' => 'sfe_user',
+                'bancassurance' => 'bancassurance_user',
+                default => 'agent',
+            };
+
+            $channelType = match ($agentType) {
+                'sfe' => 'sfe',
+                'bancassurance' => 'bancassurance',
+                default => 'agent',
+            };
+
             $channels[] = [
-                'type' => 'agent',
-                'recipient_type' => 'agent',
+                'type' => $channelType,
+                'recipient_type' => $recipientType,
                 'recipient_id' => $policy->agent_id,
             ];
         }
