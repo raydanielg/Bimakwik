@@ -428,6 +428,16 @@
                 <a href="{{ route('admin.governance.compliance') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.governance.compliance') ? 'active' : '' }}">
                     <i class="bi bi-shield-check"></i> Compliance (TIRA)
                 </a>
+                <a href="#tiramisAdminSubmenu" data-bs-toggle="collapse" class="list-group-item list-group-item-action {{ request()->routeIs('admin.tiramis.*') ? 'active' : '' }}">
+                    <span><i class="bi bi-diagram-3"></i> TIRAMIS Integration</span>
+                    <i class="bi bi-chevron-down small float-end mt-1"></i>
+                </a>
+                <div class="collapse ps-3 {{ request()->routeIs('admin.tiramis.*') ? 'show' : '' }}" id="tiramisAdminSubmenu">
+                    <a href="{{ route('admin.tiramis.codes.index') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('admin.tiramis.codes.*') ? 'active' : '' }}">TIRA Codes</a>
+                    <a href="{{ route('admin.tiramis.reports') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('admin.tiramis.reports') && !request()->routeIs('admin.tiramis.reports.pending') ? 'active' : '' }}">Reports</a>
+                    <a href="{{ route('admin.tiramis.reports.pending') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('admin.tiramis.reports.pending') ? 'active' : '' }}">Pending</a>
+                    <a href="{{ route('admin.tiramis.logs') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('admin.tiramis.logs') ? 'active' : '' }}">Integration Logs</a>
+                </div>
                 <a href="{{ route('admin.governance.analytics') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.governance.analytics') ? 'active' : '' }}">
                     <i class="bi bi-bar-chart-line"></i> Advanced Analytics
                 </a>
@@ -1037,6 +1047,25 @@
                 </a>
                 <a href="{{ route('regulator.compliance') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.compliance') ? 'active' : '' }}">
                     <i class="bi bi-exclamation-triangle"></i> Compliance
+                </a>
+            </div>
+
+            <div class="sidebar-heading mt-3">TIRAMIS</div>
+            <div class="list-group list-group-flush px-2">
+                <a href="{{ route('regulator.tiramis.dashboard') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.tiramis.dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-speedometer2"></i> TIRA Dashboard
+                </a>
+                <a href="{{ route('regulator.tiramis.companies') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.tiramis.companies') ? 'active' : '' }}">
+                    <i class="bi bi-building"></i> Companies
+                </a>
+                <a href="{{ route('regulator.tiramis.reports') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.tiramis.reports') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-text"></i> Reports
+                </a>
+                <a href="{{ route('regulator.tiramis.logs') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.tiramis.logs') ? 'active' : '' }}">
+                    <i class="bi bi-journal-text"></i> Integration Logs
+                </a>
+                <a href="{{ route('regulator.tiramis.market') }}" class="list-group-item list-group-item-action {{ request()->routeIs('regulator.tiramis.market') ? 'active' : '' }}">
+                    <i class="bi bi-globe"></i> Market Overview
                 </a>
             </div>
 
