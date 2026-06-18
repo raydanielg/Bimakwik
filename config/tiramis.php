@@ -42,6 +42,43 @@ return [
 
     'sales_code_prefix' => env('TIRAMIS_SALES_PREFIX', 'SL'),
 
+    // ==================== KYC & NIDA VERIFICATION ====================
+
+    'kyc' => [
+        'enabled' => env('TIRAMIS_KYC_ENABLED', true),
+        'nida_base_url' => env('TIRAMIS_NIDA_URL', ''),
+        'nida_api_key' => env('TIRAMIS_NIDA_API_KEY', ''),
+        'verify_endpoint' => '/kyc/verify',
+        'lookup_endpoint' => '/kyc/lookup',
+        'cache_ttl' => env('TIRAMIS_KYC_CACHE_TTL', 3600),
+    ],
+
+    // ==================== VEHICLE LOOKUP ====================
+
+    'vehicle' => [
+        'enabled' => env('TIRAMIS_VEHICLE_ENABLED', true),
+        'lookup_endpoint' => '/vehicle/lookup',
+        'verify_endpoint' => '/vehicle/verify',
+    ],
+
+    // ==================== TUNNEL / LOCAL SERVER ====================
+
+    'tunnel' => [
+        'enabled' => env('TIRAMIS_TUNNEL_ENABLED', false),
+        'host' => env('TIRAMIS_TUNNEL_HOST', ''),
+        'port' => env('TIRAMIS_TUNNEL_PORT', ''),
+        'base_url' => env('TIRAMIS_TUNNEL_URL', ''),
+        'auth_token' => env('TIRAMIS_TUNNEL_AUTH_TOKEN', ''),
+    ],
+
+    // ==================== PAYMENT INTEGRATION ====================
+
+    'payment' => [
+        'enabled' => env('TIRAMIS_PAYMENT_ENABLED', true),
+        'submit_endpoint' => '/payment/submit',
+        'verify_endpoint' => '/payment/verify',
+    ],
+
     // TIRAMIS response codes (TIRA001 - TIRA234)
     'response_codes' => [
         'TIRA001' => 'Successful',
