@@ -14,8 +14,6 @@ class TirAmisKycService
     protected string $clientCode;
     protected string $clientKey;
     protected string $systemCode;
-    protected string $nidaBaseUrl;
-    protected string $nidaApiKey;
     protected bool $kycEnabled;
     protected bool $vehicleEnabled;
     protected bool $tunnelEnabled;
@@ -35,8 +33,6 @@ class TirAmisKycService
         $this->systemCode = $config['client']['system_code'] ?? '';
 
         $this->kycEnabled = $config['kyc']['enabled'] ?? false;
-        $this->nidaBaseUrl = $config['kyc']['nida_base_url'] ?? '';
-        $this->nidaApiKey = $config['kyc']['nida_api_key'] ?? '';
         $this->cacheTtl = (int) ($config['kyc']['cache_ttl'] ?? 3600);
 
         $this->vehicleEnabled = $config['vehicle']['enabled'] ?? false;
