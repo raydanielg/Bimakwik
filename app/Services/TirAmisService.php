@@ -406,7 +406,7 @@ class TirAmisService
         return $xml;
     }
 
-    protected function buildPolicyReq(string $requestId, Policy $policy, array $coverNoteRefs): string
+    protected function buildPolicyReq(string $requestId, CustomerPolicy $policy, array $coverNoteRefs): string
     {
         $xml = "  <PolicyReq>\n";
         $xml .= "    <PolicyHdr>\n";
