@@ -422,6 +422,107 @@ class TirAmisKycService
         }
     }
 
+    // ==================== XML BUILDERS ====================
+
+    protected function buildKycVerifyXml(string $requestId, string $identityType, string $identityNumber): string
+    {
+        $xml = "  <KycVerifyReq>\n";
+        $xml .= "    <KycVerifyHdr>\n";
+        $xml .= "      <RequestId>$requestId</RequestId>\n";
+        $xml .= '      <CompanyCode>' . htmlspecialchars($this->clientCode) . "</CompanyCode>\n";
+        $xml .= '      <SystemCode>' . htmlspecialchars($this->systemCode) . "</SystemCode>\n";
+        $xml .= '      <CallBackUrl>' . htmlspecialchars(config('tiramis.client.callback_url', route('tiramis.callback'))) . "</CallBackUrl>\n";
+        $xml .= "    </KycVerifyHdr>\n";
+        $xml .= "    <KycVerifyDtl>\n";
+        $xml .= '      <IdentityType>' . htmlspecialchars($identityType) . "</IdentityType>\n";
+        $xml .= '      <IdentityNumber>' . htmlspecialchars($identityNumber) . "</IdentityNumber>\n";
+        $xml .= "    </KycVerifyDtl>\n";
+        $xml .= "  </KycVerifyReq>\n";
+        return $xml;
+    }
+
+    protected function buildKycLookupXml(string $requestId, string $identityType, string $identityNumber): string
+    {
+        $xml = "  <KycLookupReq>\n";
+        $xml .= "    <KycLookupHdr>\n";
+        $xml .= "      <RequestId>$requestId</RequestId>\n";
+        $xml .= '      <CompanyCode>' . htmlspecialchars($this->clientCode) . "</CompanyCode>\n";
+        $xml .= '      <SystemCode>' . htmlspecialchars($this->systemCode) . "</SystemCode>\n";
+        $xml .= '      <CallBackUrl>' . htmlspecialchars(config('tiramis.client.callback_url', route('tiramis.callback'))) . "</CallBackUrl>\n";
+        $xml .= "    </KycLookupHdr>\n";
+        $xml .= "    <KycLookupDtl>\n";
+        $xml .= '      <IdentityType>' . htmlspecialchars($identityType) . "</IdentityType>\n";
+        $xml .= '      <IdentityNumber>' . htmlspecialchars($identityNumber) . "</IdentityNumber>\n";
+        $xml .= "    </KycLookupDtl>\n";
+        $xml .= "  </KycLookupReq>\n";
+        return $xml;
+    }
+
+    protected function buildVehicleLookupXml(string $requestId, string $registrationNumber): string
+    {
+        $xml = "  <VehicleLookupReq>\n";
+        $xml .= "    <VehicleLookupHdr>\n";
+        $xml .= "      <RequestId>$requestId</RequestId>\n";
+        $xml .= '      <CompanyCode>' . htmlspecialchars($this->clientCode) . "</CompanyCode>\n";
+        $xml .= '      <SystemCode>' . htmlspecialchars($this->systemCode) . "</SystemCode>\n";
+        $xml .= "    </VehicleLookupHdr>\n";
+        $xml .= "    <VehicleLookupDtl>\n";
+        $xml .= '      <RegistrationNumber>' . htmlspecialchars(strtoupper($registrationNumber)) . "</RegistrationNumber>\n";
+        $xml .= "    </VehicleLookupDtl>\n";
+        $xml .= "  </VehicleLookupReq>\n";
+        return $xml;
+    }
+
+    protected function buildVehicleVerifyXml(string $requestId, string $registrationNumber, string $chassisNumber): string
+    {
+        $xml = "  <VehicleVerifyReq>\n";
+        $xml .= "    <VehicleVerifyHdr>\n";
+        $xml .= "      <RequestId>$requestId</RequestId>\n";
+        $xml .= '      <CompanyCode>' . htmlspecialchars($this->clientCode) . "</CompanyCode>\n";
+        $xml .= '      <SystemCode>' . htmlspecialchars($this->systemCode) . "</SystemCode>\n";
+        $xml .= "    </VehicleVerifyHdr>\n";
+        $xml .= "    <VehicleVerifyDtl>\n";
+        $xml .= '      <RegistrationNumber>' . htmlspecialchars(strtoupper($registrationNumber)) . "</RegistrationNumber>\n";
+        $xml .= '      <ChassisNumber>' . htmlspecialchars(strtoupper($chassisNumber)) . "</ChassisNumber>\n";
+        $xml .= "    </VehicleVerifyDtl>\n";
+        $xml .= "  </VehicleVerifyReq>\n";
+        return $xml;
+    }
+
+    protected function buildPaymentSubmitXml(string $requestId, array $data): string
+    {
+        $xml = "  <PaymentSubmitReq>\n";
+        $xml .= "    <PaymentSubmitHdr>\n";
+        $xml .= "      <RequestId>$requestId</RequestId>\n";
+        $xml .= '      <CompanyCode>' . htmlspecialchars($this->clientCode) . "</CompanyCode>\n";
+        $xml .= '      <SystemCode>' . htmlspecialchars($this->systemCode) . "</SystemCode>\n";
+        $xml .= "    </PaymentSubmitHdr>\n";
+        $xml .= "    <PaymentSubmitDtl>\n";
+        $xml .= '      <TransactionId>' . htmlspecialchars($data['transaction_id'] ?? '') . "</TransactionId>\n";
+        $xml .= '      <Amount>' . ($data['amount'] ?? '0.00') . "</Amount>\n";
+        $xml .= '      <CurrencyCode>' . htmlspecialchars($data['currency'] ?? 'TZS') . "</CurrencyCode>\n";
+        $xml .= '      <PaymentMode>' . ($data['payment_mode'] ?? '1') . "</PaymentMode>\n";
+        $xml .= '      <Reference>' . htmlspecialchars($data['reference'] ?? '') . "</Reference>\n";
+        $xml .= "    </PaymentSubmitDtl>\n";
+        $xml .= "  </PaymentSubmitReq>\n";
+        return $xml;
+    }
+
+    protected function buildPaymentVerifyXml(string $requestId, string $transactionId): string
+    {
+        $xml = "  <PaymentVerifyReq>\n";
+        $xml .= "    <PaymentVerifyHdr>\n";
+        $xml .= "      <RequestId>$requestId</RequestId>\n";
+        $xml .= '      <CompanyCode>' . htmlspecialchars($this->clientCode) . "</CompanyCode>\n";
+        $xml .= '      <SystemCode>' . htmlspecialchars($this->systemCode) . "</SystemCode>\n";
+        $xml .= "    </PaymentVerifyHdr>\n";
+        $xml .= "    <PaymentVerifyDtl>\n";
+        $xml .= '      <TransactionId>' . htmlspecialchars($transactionId) . "</TransactionId>\n";
+        $xml .= "    </PaymentVerifyDtl>\n";
+        $xml .= "  </PaymentVerifyReq>\n";
+        return $xml;
+    }
+
     // ==================== DATA NORMALIZATION ====================
 
     protected function normalizeCustomerData(array $raw): array
