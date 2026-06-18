@@ -193,6 +193,26 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/reports/{report}/retry', [App\Http\Controllers\Claim\TirAmisController::class, 'retryReport'])->name('reports.retry');
             Route::post('/reports/{report}/check-status', [App\Http\Controllers\Claim\TirAmisController::class, 'statusCheck'])->name('reports.status-check');
             Route::get('/logs', [App\Http\Controllers\Claim\TirAmisController::class, 'logs'])->name('logs');
+
+            // TIRAMIS KYC & Verification
+            Route::prefix('kyc')->name('kyc.')->group(function () {
+                Route::get('/', [App\Http\Controllers\Admin\TirAmisKycController::class, 'index'])->name('index');
+                Route::get('/health', [App\Http\Controllers\Admin\TirAmisKycController::class, 'health'])->name('health');
+                Route::post('/cache/clear', [App\Http\Controllers\Admin\TirAmisKycController::class, 'clearCache'])->name('cache.clear');
+
+                // NIDA Verification
+                Route::get('/nida', [App\Http\Controllers\Admin\TirAmisKycController::class, 'verifyNidaForm'])->name('nida.form');
+                Route::post('/nida', [App\Http\Controllers\Admin\TirAmisKycController::class, 'verifyNida'])->name('nida.verify');
+
+                // Customer Lookup
+                Route::get('/customer', [App\Http\Controllers\Admin\TirAmisKycController::class, 'customerLookupForm'])->name('customer.form');
+                Route::post('/customer', [App\Http\Controllers\Admin\TirAmisKycController::class, 'customerLookup'])->name('customer.lookup');
+
+                // Vehicle Lookup
+                Route::get('/vehicle', [App\Http\Controllers\Admin\TirAmisKycController::class, 'vehicleLookupForm'])->name('vehicle.form');
+                Route::post('/vehicle', [App\Http\Controllers\Admin\TirAmisKycController::class, 'vehicleLookup'])->name('vehicle.lookup');
+                Route::post('/vehicle/verify', [App\Http\Controllers\Admin\TirAmisKycController::class, 'vehicleVerify'])->name('vehicle.verify');
+            });
         });
     });
         
