@@ -261,22 +261,24 @@ class TirAmisKycService
         try {
             $endpoint = $this->resolveBaseUrl() . config('tiramis.vehicle.lookup_endpoint', '/vehicle/lookup');
 
+            $requestId = 'VEH-' . strtoupper(Str::random(12));
+            $xmlContent = $this->buildVehicleLookupXml($requestId, $registrationNumber);
+            $finalXml = $this->buildTiraMsg($xmlContent);
+
             $response = Http::timeout($this->timeout)
                 ->withHeaders($this->getHeaders())
-                ->post($endpoint, [
-                    'request_id' => 'VEH-' . strtoupper(Str::random(12)),
-                    'registration_number' => $registrationNumber,
-                ]);
+                ->withBody($finalXml, 'application/xml')
+                ->post($endpoint);
 
-            $body = $response->json() ?? [];
+            $body = $this->parseXmlResponse($response->body());
             $statusCode = $response->status();
 
             $this->log('vehicle_lookup', 'vehicle', $registrationNumber, 'success', ['reg' => $registrationNumber], $body, $statusCode);
 
-            if ($response->successful() && ($body['status_code'] ?? '') === 'TIRA001') {
+            if ($response->successful() && ($body['AcknowledgementStatusCode'] ?? $body['status_code'] ?? '') === 'TIRA001') {
                 $result = [
                     'success' => true,
-                    'data' => $this->normalizeVehicleData($body['data'] ?? $body),
+                    'data' => $this->normalizeVehicleData($body['Vehicle'] ?? $body['Data'] ?? $body),
                 ];
                 if ($this->cacheTtl > 0) {
                     Cache::put($cacheKey, $result, $this->cacheTtl);
@@ -286,8 +288,8 @@ class TirAmisKycService
 
             return [
                 'success' => false,
-                'error' => $body['status_desc'] ?? $body['message'] ?? 'Vehicle lookup failed',
-                'status_code' => $body['status_code'] ?? 'TIRA002',
+                'error' => $body['AcknowledgementStatusDesc'] ?? $body['status_desc'] ?? 'Vehicle lookup failed',
+                'status_code' => $body['AcknowledgementStatusCode'] ?? $body['status_code'] ?? 'TIRA002',
             ];
 
         } catch (\Exception $e) {
@@ -308,31 +310,32 @@ class TirAmisKycService
         try {
             $endpoint = $this->resolveBaseUrl() . config('tiramis.vehicle.verify_endpoint', '/vehicle/verify');
 
+            $requestId = 'VEH-' . strtoupper(Str::random(12));
+            $xmlContent = $this->buildVehicleVerifyXml($requestId, $registrationNumber, $chassisNumber);
+            $finalXml = $this->buildTiraMsg($xmlContent);
+
             $response = Http::timeout($this->timeout)
                 ->withHeaders($this->getHeaders())
-                ->post($endpoint, [
-                    'request_id' => 'VEH-' . strtoupper(Str::random(12)),
-                    'registration_number' => $registrationNumber,
-                    'chassis_number' => $chassisNumber,
-                ]);
+                ->withBody($finalXml, 'application/xml')
+                ->post($endpoint);
 
-            $body = $response->json() ?? [];
+            $body = $this->parseXmlResponse($response->body());
             $statusCode = $response->status();
 
             $this->log('vehicle_verify', 'vehicle', $registrationNumber, 'success', compact('registrationNumber', 'chassisNumber'), $body, $statusCode);
 
-            if ($response->successful() && ($body['status_code'] ?? '') === 'TIRA001') {
+            if ($response->successful() && ($body['AcknowledgementStatusCode'] ?? $body['status_code'] ?? '') === 'TIRA001') {
                 return [
                     'success' => true,
                     'verified' => true,
-                    'data' => $this->normalizeVehicleData($body['data'] ?? $body),
+                    'data' => $this->normalizeVehicleData($body['Vehicle'] ?? $body['Data'] ?? $body),
                 ];
             }
 
             return [
                 'success' => false,
                 'verified' => false,
-                'error' => $body['status_desc'] ?? $body['message'] ?? 'Vehicle verification failed',
+                'error' => $body['AcknowledgementStatusDesc'] ?? $body['status_desc'] ?? 'Vehicle verification failed',
             ];
 
         } catch (\Exception $e) {
