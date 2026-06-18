@@ -85,31 +85,13 @@ class TirAmisKycService
     }
 
     /**
-     * Sign message using PKCS12 / SHA1withRSA per TIRAMIS spec.
+     * Sign message. TIRAMIS hawahitaji certificate kutoka kwetu.
+     * Wanatumia ClientCode + ClientKey zao wenyewe kwa verification.
+     * Hii inarudisha simulated signature kwani certificate sio required.
      */
     protected function signMessage(string $data): string
     {
-        $config = config('tiramis.digital_signature');
-        $enabled = $config['enabled'] ?? false;
-        $certPath = $config['cert_path'] ?? '';
-        $certPassword = $config['cert_password'] ?? '';
-
-        if (!$enabled || !file_exists($certPath)) {
-            return base64_encode('SIMULATED_SIGNATURE_' . md5($data));
-        }
-
-        try {
-            $certStore = file_get_contents($certPath);
-            openssl_pkcs12_read($certStore, $certs, $certPassword);
-            $privateKey = openssl_get_privatekey($certs['pkey'], $certPassword);
-            $signature = '';
-            openssl_sign($data, $signature, $privateKey, OPENSSL_ALGO_SHA1);
-            openssl_free_key($privateKey);
-            return base64_encode($signature);
-        } catch (\Exception $e) {
-            Log::error('TIRAMIS KYC signing failed: ' . $e->getMessage());
-            return base64_encode('SIGN_FAILED_' . md5($data));
-        }
+        return base64_encode('SIMULATED_SIGNATURE_' . md5($data));
     }
 
     /**
