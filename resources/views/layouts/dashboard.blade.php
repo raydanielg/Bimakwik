@@ -445,6 +445,7 @@
                     <a href="{{ route('admin.tiramis.reports') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('admin.tiramis.reports') && !request()->routeIs('admin.tiramis.reports.pending') ? 'active' : '' }}">Reports</a>
                     <a href="{{ route('admin.tiramis.reports.pending') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('admin.tiramis.reports.pending') ? 'active' : '' }}">Pending</a>
                     <a href="{{ route('admin.tiramis.logs') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('admin.tiramis.logs') ? 'active' : '' }}">Integration Logs</a>
+                    <a href="{{ route('admin.tiramis.kyc.index') }}" class="list-group-item list-group-item-action py-1 small {{ request()->routeIs('admin.tiramis.kyc.*') ? 'active' : '' }}">KYC & Verification</a>
                 </div>
                 <a href="{{ route('admin.governance.analytics') }}" class="list-group-item list-group-item-action {{ request()->routeIs('admin.governance.analytics') ? 'active' : '' }}">
                     <i class="bi bi-bar-chart-line"></i> Advanced Analytics
