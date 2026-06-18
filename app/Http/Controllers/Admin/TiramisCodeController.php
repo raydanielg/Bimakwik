@@ -48,6 +48,7 @@ class TiramisCodeController extends Controller
             'insurer' => Insurer::findOrFail($id),
             'broker' => Broker::findOrFail($id),
             'agent' => Agent::findOrFail($id),
+            'provider' => ServiceProvider::findOrFail($id),
             default => abort(404),
         };
 

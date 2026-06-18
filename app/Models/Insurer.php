@@ -10,7 +10,7 @@ class Insurer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'insurer_code', 'company_code', 'sales_code', 'insurer_name',
+        'user_id', 'insurer_code', 'company_code', 'sales_code', 'insurer_name',
         'registration_number', 'license_number', 'tin', 'address', 'city',
         'phone', 'email', 'website', 'logo_url', 'is_active',
         'tiramis_api_key', 'tiramis_enabled', 'tiramis_last_sync_at',

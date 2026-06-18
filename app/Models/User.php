@@ -227,6 +227,26 @@ class User extends Authenticatable
         return $this->hasOne(Customer::class, 'user_id');
     }
 
+    public function insurer()
+    {
+        return $this->hasOne(Insurer::class, 'user_id');
+    }
+
+    public function broker()
+    {
+        return $this->hasOne(Broker::class, 'user_id');
+    }
+
+    public function agent()
+    {
+        return $this->hasOne(Agent::class, 'user_id');
+    }
+
+    public function aggregator()
+    {
+        return $this->hasOne(Aggregator::class, 'user_id');
+    }
+
     public function serviceProvider()
     {
         return $this->hasOne(ServiceProvider::class, 'user_id');

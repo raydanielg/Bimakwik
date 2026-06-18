@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\TirAmisReport;
 use App\Models\TirAmisIntegrationLog;
 use App\Models\Claim;
-use App\Models\Policy;
+use App\Models\CustomerPolicy;
 use App\Services\CommissionService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -71,7 +71,7 @@ class TirAmisService
     {
         $requestId = 'REQ-' . strtoupper(Str::random(12));
         $xml = $this->buildClaimNotificationRefReq($requestId, $claim);
-        return $this->send($requestId, 'ClaimNotificationRefReq', $xml, $companyCode, $salesCode, 'claim_notification');
+        return $this->send($requestId, 'ClaimNotificationRefReq', $xml, $companyCode, $salesCode, 'claim_notification', $claim);
     }
 
     // ==================== CLAIM INTIMATION ====================
@@ -81,12 +81,12 @@ class TirAmisService
         $requestId = 'REQ-' . strtoupper(Str::random(12));
         $xml = $this->buildClaimIntimationReq($requestId, $claim, $extra);
         $companyCode = $claim->policy?->insurer?->company_code ?? $this->companyCode;
-        return $this->send($requestId, 'ClaimIntimationReq', $xml, $companyCode, null, 'claim_intimation');
+        return $this->send($requestId, 'ClaimIntimationReq', $xml, $companyCode, null, 'claim_intimation', $claim);
     }
 
     // ==================== POLICY SUBMISSION ====================
 
-    public function submitPolicy(Policy $policy, array $coverNoteRefs): array
+    public function submitPolicy(CustomerPolicy $policy, array $coverNoteRefs): array
     {
         $requestId = 'REQ-' . strtoupper(Str::random(12));
         $xml = $this->buildPolicyReq($requestId, $policy, $coverNoteRefs);
@@ -96,12 +96,12 @@ class TirAmisService
 
     // ==================== GENERIC SEND ====================
 
-    protected function send(string $requestId, string $messageType, string $xmlContent, string $companyCode, ?string $salesCode, string $reportType): array
+    protected function send(string $requestId, string $messageType, string $xmlContent, string $companyCode, ?string $salesCode, string $reportType, ?Claim $claim = null): array
     {
         $reportNumber = 'TIR-' . strtoupper(Str::random(16));
 
         $report = TirAmisReport::create([
-            'claim_id' => null,
+            'claim_id' => $claim?->id,
             'company_code' => $companyCode,
             'sales_code' => $salesCode,
             'report_number' => $reportNumber,

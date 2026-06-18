@@ -33,7 +33,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 text-muted">Successful</h6>
-                            <h4 class="mb-0 fw-bold">0</h4>
+                            <h4 class="mb-0 fw-bold">{{ $stats['sent'] ?? 0 }}</h4>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 text-muted">Failed</h6>
-                            <h4 class="mb-0 fw-bold">0</h4>
+                            <h4 class="mb-0 fw-bold">{{ $stats['failed'] ?? 0 }}</h4>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                         </div>
                         <div>
                             <h6 class="mb-0 text-muted">Pending</h6>
-                            <h4 class="mb-0 fw-bold">0</h4>
+                            <h4 class="mb-0 fw-bold">{{ $stats['pending'] ?? 0 }}</h4>
                         </div>
                     </div>
                 </div>

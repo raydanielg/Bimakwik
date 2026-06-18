@@ -48,4 +48,9 @@ class Claim extends Model
     {
         return $this->hasMany(ClaimDocument::class);
     }
+
+    public function tiramisReports()
+    {
+        return $this->hasMany(TirAmisReport::class);
+    }
 }

@@ -12,7 +12,11 @@ class ServiceProvider extends Model
     protected $fillable = [
         'user_id', 'service_provider_type_id', 'provider_name', 'provider_code',
         'registration_number', 'company_code', 'sales_code',
-        'phone', 'email', 'address', 'status',
+        'phone', 'email', 'address', 'status', 'tiramis_enabled',
+    ];
+
+    protected $casts = [
+        'tiramis_enabled' => 'boolean',
     ];
 
     public function user()

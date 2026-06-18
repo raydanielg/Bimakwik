@@ -15,6 +15,7 @@ class CustomerWalletController extends Controller
         if (!$wallet) {
             $wallet = Wallet::create([
                 'user_id' => auth()->id(),
+                'user_type' => 'customer',
                 'balance' => 0,
                 'currency' => 'TZS',
                 'status' => 'active',
@@ -72,16 +73,19 @@ class CustomerWalletController extends Controller
 
         try {
             $wallet = $this->getOrCreateWallet();
+            $balanceBefore = (float) $wallet->balance;
             $wallet->balance += $validated['amount'];
             $wallet->save();
-            
+
             WalletTransaction::create([
                 'wallet_id' => $wallet->id,
-                'type' => 'credit',
+                'transaction_reference' => 'ADD-' . strtoupper(substr(uniqid(), -8)),
+                'transaction_type' => 'credit',
                 'amount' => $validated['amount'],
+                'balance_before' => $balanceBefore,
+                'balance_after' => (float) $wallet->balance,
                 'description' => 'Funds added via ' . $validated['payment_method'],
                 'status' => 'completed',
-                'reference' => 'ADD-' . strtoupper(substr(uniqid(), -8)),
             ]);
 
             return redirect()->route('customer.wallet.index')->with('success', 'TZS ' . number_format($validated['amount'], 0) . ' added to your wallet successfully!');
