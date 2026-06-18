@@ -46,8 +46,6 @@ return [
 
     'kyc' => [
         'enabled' => env('TIRAMIS_KYC_ENABLED', true),
-        'nida_base_url' => env('TIRAMIS_NIDA_URL', ''),
-        'nida_api_key' => env('TIRAMIS_NIDA_API_KEY', ''),
         'verify_endpoint' => '/kyc/verify',
         'lookup_endpoint' => '/kyc/lookup',
         'cache_ttl' => env('TIRAMIS_KYC_CACHE_TTL', 3600),
