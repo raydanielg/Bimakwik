@@ -146,26 +146,27 @@ class TirAmisKycService
         }
 
         try {
+            $requestId = 'KYC-' . strtoupper(Str::random(12));
             $endpoint = $this->resolveBaseUrl() . config('tiramis.kyc.verify_endpoint', '/kyc/verify');
+
+            $xmlContent = $this->buildKycVerifyXml($requestId, 'NIDA', $nidaNumber);
+            $finalXml = $this->buildTiraMsg($xmlContent);
 
             $response = Http::timeout($this->timeout)
                 ->withHeaders($this->getHeaders())
-                ->post($endpoint, [
-                    'request_id' => 'KYC-' . strtoupper(Str::random(12)),
-                    'identity_type' => 'NIDA',
-                    'identity_number' => $nidaNumber,
-                ]);
+                ->withBody($finalXml, 'application/xml')
+                ->post($endpoint);
 
-            $body = $response->json() ?? [];
+            $body = $this->parseXmlResponse($response->body());
             $statusCode = $response->status();
 
             $this->log('nida_verify', 'customer', $nidaNumber, 'success', ['nida' => $nidaNumber], $body, $statusCode);
 
-            if ($response->successful() && ($body['status_code'] ?? '') === 'TIRA001') {
+            if ($response->successful() && ($body['AcknowledgementStatusCode'] ?? $body['status_code'] ?? '') === 'TIRA001') {
                 $result = [
                     'success' => true,
                     'verified' => true,
-                    'data' => $this->normalizeCustomerData($body['data'] ?? $body),
+                    'data' => $this->normalizeCustomerData($body['Customer'] ?? $body['Data'] ?? $body),
                 ];
                 if ($this->cacheTtl > 0) {
                     Cache::put($cacheKey, $result, $this->cacheTtl);
@@ -173,13 +174,12 @@ class TirAmisKycService
                 return $result;
             }
 
-            $result = [
+            return [
                 'success' => false,
                 'verified' => false,
-                'error' => $body['status_desc'] ?? $body['message'] ?? 'NIDA verification failed',
-                'status_code' => $body['status_code'] ?? 'TIRA002',
+                'error' => $body['AcknowledgementStatusDesc'] ?? $body['status_desc'] ?? 'NIDA verification failed',
+                'status_code' => $body['AcknowledgementStatusCode'] ?? $body['status_code'] ?? 'TIRA002',
             ];
-            return $result;
 
         } catch (\Exception $e) {
             Log::error('TIRAMIS NIDA verification failed: ' . $e->getMessage());
