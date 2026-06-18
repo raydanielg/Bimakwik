@@ -203,25 +203,26 @@ class TirAmisKycService
         }
 
         try {
+            $requestId = 'LKP-' . strtoupper(Str::random(12));
             $endpoint = $this->resolveBaseUrl() . config('tiramis.kyc.lookup_endpoint', '/kyc/lookup');
+
+            $xmlContent = $this->buildKycLookupXml($requestId, $identityType, $identityNumber);
+            $finalXml = $this->buildTiraMsg($xmlContent);
 
             $response = Http::timeout($this->timeout)
                 ->withHeaders($this->getHeaders())
-                ->post($endpoint, [
-                    'request_id' => 'LKP-' . strtoupper(Str::random(12)),
-                    'identity_type' => $identityType,
-                    'identity_number' => $identityNumber,
-                ]);
+                ->withBody($finalXml, 'application/xml')
+                ->post($endpoint);
 
-            $body = $response->json() ?? [];
+            $body = $this->parseXmlResponse($response->body());
             $statusCode = $response->status();
 
             $this->log('customer_lookup', 'customer', $identityNumber, 'success', compact('identityType', 'identityNumber'), $body, $statusCode);
 
-            if ($response->successful() && ($body['status_code'] ?? '') === 'TIRA001') {
+            if ($response->successful() && ($body['AcknowledgementStatusCode'] ?? $body['status_code'] ?? '') === 'TIRA001') {
                 $result = [
                     'success' => true,
-                    'data' => $this->normalizeCustomerData($body['data'] ?? $body),
+                    'data' => $this->normalizeCustomerData($body['Customer'] ?? $body['Data'] ?? $body),
                 ];
                 if ($this->cacheTtl > 0) {
                     Cache::put($cacheKey, $result, $this->cacheTtl);
@@ -231,8 +232,8 @@ class TirAmisKycService
 
             return [
                 'success' => false,
-                'error' => $body['status_desc'] ?? $body['message'] ?? 'Customer lookup failed',
-                'status_code' => $body['status_code'] ?? 'TIRA002',
+                'error' => $body['AcknowledgementStatusDesc'] ?? $body['status_desc'] ?? 'Customer lookup failed',
+                'status_code' => $body['AcknowledgementStatusCode'] ?? $body['status_code'] ?? 'TIRA002',
             ];
 
         } catch (\Exception $e) {
