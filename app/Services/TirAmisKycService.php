@@ -359,22 +359,25 @@ class TirAmisKycService
         try {
             $endpoint = $this->resolveBaseUrl() . config('tiramis.payment.submit_endpoint', '/payment/submit');
 
+            $requestId = 'PAY-' . strtoupper(Str::random(12));
+            $xmlContent = $this->buildPaymentSubmitXml($requestId, $paymentData);
+            $finalXml = $this->buildTiraMsg($xmlContent);
+
             $response = Http::timeout($this->timeout)
                 ->withHeaders($this->getHeaders())
-                ->post($endpoint, array_merge($paymentData, [
-                    'request_id' => 'PAY-' . strtoupper(Str::random(12)),
-                ]));
+                ->withBody($finalXml, 'application/xml')
+                ->post($endpoint);
 
-            $body = $response->json() ?? [];
+            $body = $this->parseXmlResponse($response->body());
             $statusCode = $response->status();
 
             $this->log('payment_submit', 'payment', $paymentData['transaction_id'] ?? '', 'success', $paymentData, $body, $statusCode);
 
-            if ($response->successful() && ($body['status_code'] ?? '') === 'TIRA001') {
+            if ($response->successful() && ($body['AcknowledgementStatusCode'] ?? $body['status_code'] ?? '') === 'TIRA001') {
                 return ['success' => true, 'data' => $body];
             }
 
-            return ['success' => false, 'error' => $body['status_desc'] ?? 'Payment submission failed'];
+            return ['success' => false, 'error' => $body['AcknowledgementStatusDesc'] ?? $body['status_desc'] ?? 'Payment submission failed'];
 
         } catch (\Exception $e) {
             Log::error('TIRAMIS payment submission failed: ' . $e->getMessage());
@@ -395,21 +398,23 @@ class TirAmisKycService
         try {
             $endpoint = $this->resolveBaseUrl() . config('tiramis.payment.verify_endpoint', '/payment/verify');
 
+            $requestId = 'PAY-' . strtoupper(Str::random(12));
+            $xmlContent = $this->buildPaymentVerifyXml($requestId, $transactionId);
+            $finalXml = $this->buildTiraMsg($xmlContent);
+
             $response = Http::timeout($this->timeout)
                 ->withHeaders($this->getHeaders())
-                ->post($endpoint, [
-                    'request_id' => 'PAY-' . strtoupper(Str::random(12)),
-                    'transaction_id' => $transactionId,
-                ]);
+                ->withBody($finalXml, 'application/xml')
+                ->post($endpoint);
 
-            $body = $response->json() ?? [];
+            $body = $this->parseXmlResponse($response->body());
             $statusCode = $response->status();
 
-            if ($response->successful() && ($body['status_code'] ?? '') === 'TIRA001') {
-                return ['success' => true, 'verified' => true, 'status' => $body['payment_status'] ?? 'completed', 'data' => $body];
+            if ($response->successful() && ($body['AcknowledgementStatusCode'] ?? $body['status_code'] ?? '') === 'TIRA001') {
+                return ['success' => true, 'verified' => true, 'status' => $body['PaymentStatus'] ?? $body['payment_status'] ?? 'completed', 'data' => $body];
             }
 
-            return ['success' => false, 'verified' => false, 'error' => $body['status_desc'] ?? 'Payment verification failed'];
+            return ['success' => false, 'verified' => false, 'error' => $body['AcknowledgementStatusDesc'] ?? $body['status_desc'] ?? 'Payment verification failed'];
 
         } catch (\Exception $e) {
             Log::error('TIRAMIS payment verification failed: ' . $e->getMessage());
