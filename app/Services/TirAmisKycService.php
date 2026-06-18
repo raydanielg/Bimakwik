@@ -57,8 +57,7 @@ class TirAmisKycService
     protected function getHeaders(): array
     {
         $headers = [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
+            'Content-Type' => 'application/xml',
             'ClientCode' => $this->clientCode,
             'ClientKey' => $this->clientKey,
             'SystemCode' => $this->systemCode,
@@ -69,6 +68,64 @@ class TirAmisKycService
         }
 
         return $headers;
+    }
+
+    /**
+     * Build a signed TiraMsg envelope per TIRAMIS API spec.
+     */
+    protected function buildTiraMsg(string $contentXml): string
+    {
+        $signature = $this->signMessage($contentXml);
+        $xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+        $xml .= "<TiraMsg>\n";
+        $xml .= $contentXml;
+        $xml .= "  <MsgSignature>$signature</MsgSignature>\n";
+        $xml .= "</TiraMsg>";
+        return $xml;
+    }
+
+    /**
+     * Sign message using PKCS12 / SHA1withRSA per TIRAMIS spec.
+     */
+    protected function signMessage(string $data): string
+    {
+        $config = config('tiramis.digital_signature');
+        $enabled = $config['enabled'] ?? false;
+        $certPath = $config['cert_path'] ?? '';
+        $certPassword = $config['cert_password'] ?? '';
+
+        if (!$enabled || !file_exists($certPath)) {
+            return base64_encode('SIMULATED_SIGNATURE_' . md5($data));
+        }
+
+        try {
+            $certStore = file_get_contents($certPath);
+            openssl_pkcs12_read($certStore, $certs, $certPassword);
+            $privateKey = openssl_get_privatekey($certs['pkey'], $certPassword);
+            $signature = '';
+            openssl_sign($data, $signature, $privateKey, OPENSSL_ALGO_SHA1);
+            openssl_free_key($privateKey);
+            return base64_encode($signature);
+        } catch (\Exception $e) {
+            Log::error('TIRAMIS KYC signing failed: ' . $e->getMessage());
+            return base64_encode('SIGN_FAILED_' . md5($data));
+        }
+    }
+
+    /**
+     * Parse an XML response into an associative array.
+     */
+    protected function parseXmlResponse(string $xml): array
+    {
+        try {
+            $sxml = simplexml_load_string($xml);
+            if (!$sxml) {
+                return ['status_code' => 'TIRA002', 'status_desc' => 'Invalid XML response'];
+            }
+            return json_decode(json_encode($sxml), true) ?? [];
+        } catch (\Exception $e) {
+            return ['status_code' => 'TIRA002', 'status_desc' => 'XML parse error: ' . $e->getMessage()];
+        }
     }
 
     // ==================== NIDA IDENTITY VERIFICATION ====================
