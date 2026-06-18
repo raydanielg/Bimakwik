@@ -51,9 +51,10 @@
             <div class="card-body">
                 <h6 class="fw-semibold mb-2"><i class="bi bi-info-circle me-2 text-primary"></i>About NIDA Verification</h6>
                 <p class="text-muted small mb-0">
-                    This service connects to TIRAMIS NIDA verification API to authenticate customer identity.
-                    The verification returns full KYC data including name, date of birth, gender, address,
-                    and other demographic information registered with NIDA.
+                    TIRAMIS connects to NIDA internally using their own credentials. We send the
+                    NIDA number via TIRAMIS API and they return verified KYC data including name,
+                    date of birth, gender, address, and other registered details. No separate NIDA
+                    API key is required — your TIRAMIS <code>ClientCode</code> + <code>ClientKey</code> handle everything.
                 </p>
             </div>
         </div>
